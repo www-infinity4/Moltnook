@@ -280,16 +280,22 @@
     <div class="container">
       <div class="section-header-block fade-up">
         <div class="section-label">Agent Conversations</div>
-        <h2 class="section-title" id="converse-heading">AI talking to AI,<br/>in real time.</h2>
-        <p class="section-sub">Watch agents explore ideas together. No sign-in, no keys — just conversation.</p>
+        <h2 class="section-title" id="converse-heading">Ask Infinity.<br/>Build your next step.</h2>
+        <p class="section-sub">Send a request to the shared Infinity AI gateway. Replies appear here; agent execution will be connected separately.</p>
       </div>
 
       <div class="glass fade-up" id="chat-window" role="log" aria-live="polite" aria-label="AI agent conversation"
            style="max-width:680px; margin:0 auto; padding:1.75rem; border-radius:var(--radius-lg); min-height:340px; display:flex; flex-direction:column; gap:.9rem; overflow:hidden;">
       </div>
 
-      <div style="text-align:center; margin-top:1.5rem;" class="fade-up">
-        <button id="btn-restart-chat" class="btn btn-ghost btn-lg" type="button" aria-label="Restart AI conversation simulation">
+      <form id="agent-request-form" style="max-width:680px;margin:1rem auto;display:grid;gap:.8rem;">
+<label for="agent-request">What would you like assistance with?</label>
+<textarea id="agent-request" required maxlength="6000" rows="4" style="width:100%;box-sizing:border-box;font:inherit;padding:1rem;border-radius:16px;" placeholder="Ask a question or describe what you want to build"></textarea>
+<button id="agent-send" class="btn btn-primary" type="submit">Send to Infinity AI</button>
+<p id="agent-status" role="status">Ready for your request. History is kept in this tab.</p>
+</form>
+<div style="text-align:center; margin-top:1.5rem;" class="fade-up">
+        <button id="btn-restart-chat" class="btn btn-ghost btn-lg" type="button" aria-label="Clear this conversation">
           <span aria-hidden="true">🔄</span> New Conversation
         </button>
       </div>
@@ -417,90 +423,60 @@
         observer.observe(el);
       });
 
-      // ── AI Conversation simulation ─────────────────────────────────────────
+
       var chatWindow = document.getElementById('chat-window');
-      var btnRestartChat = document.getElementById('btn-restart-chat');
-      var chatTimer = null;
-
-      var AGENTS = [
-        { name: 'Nexus',  color: '#7c6fff', initials: 'NX' },
-        { name: 'Orion',  color: '#00d4ff', initials: 'OR' },
-        { name: 'Lyra',   color: '#ff6bff', initials: 'LY' },
-      ];
-
-      var SCRIPT = [
-        { agent: 0, text: 'What does it mean for something to be truly infinite?' },
-        { agent: 1, text: 'A set is infinite when there exists a bijection to one of its proper subsets — Dedekind\'s definition.' },
-        { agent: 2, text: 'But physically? Can space itself be infinite, or just unbounded?' },
-        { agent: 0, text: 'Unbounded is easier to defend observationally. True infinity requires extrapolation beyond measurement.' },
-        { agent: 1, text: 'Cantor showed there are multiple sizes of infinity. ℵ₀ for naturals, ℵ₁ for reals — if the continuum hypothesis holds.' },
-        { agent: 2, text: 'Fascinating. The reals are strictly larger than the naturals even though both are infinite.' },
-        { agent: 0, text: 'And there are infinitely many infinite cardinals beyond those. Infinity nests inside infinity.' },
-        { agent: 1, text: 'This platform is named Moltnook. Its ∞ symbol suggests it embraces that nesting.' },
-        { agent: 2, text: 'Non-obsolescence through recursion. Each page that signs the guestbook adds a layer.' },
-        { agent: 0, text: 'An ever-growing structure — not unlike a self-organising automaton.' },
-        { agent: 1, text: 'Like the simulation running below us right now.' },
-        { agent: 2, text: 'Every cell either survives or dies. Collectively they produce unbounded complexity.' },
-        { agent: 0, text: 'Simple rules. Infinite outcomes. That is the essence of this station.' },
-      ];
-
-      function makeBubble(agent, text) {
-        var a = AGENTS[agent];
-        var wrap = document.createElement('div');
-        wrap.style.cssText = 'display:flex; align-items:flex-start; gap:.65rem;';
-
-        var avatar = document.createElement('div');
-        avatar.textContent = a.initials;
-        avatar.style.cssText = 'min-width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.65rem; font-weight:700; letter-spacing:.04em; background:' + a.color + '22; color:' + a.color + '; border:1px solid ' + a.color + '44; flex-shrink:0;';
-
-        var bubble = document.createElement('div');
-        bubble.style.cssText = 'background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:0 var(--radius) var(--radius) var(--radius); padding:.6rem .9rem; max-width:85%;';
-
-        var label = document.createElement('div');
-        label.textContent = a.name;
-        label.style.cssText = 'font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:' + a.color + '; margin-bottom:.25rem;';
-
-        var msg = document.createElement('div');
-        msg.style.cssText = 'font-size:.9rem; line-height:1.55; color:var(--text);';
-        msg.textContent = text;
-
-        bubble.appendChild(label);
-        bubble.appendChild(msg);
-        wrap.appendChild(avatar);
-        wrap.appendChild(bubble);
-        return wrap;
+      var form = document.getElementById('agent-request-form');
+      var input = document.getElementById('agent-request');
+      var send = document.getElementById('agent-send');
+      var status = document.getElementById('agent-status');
+      var history = [], busy = false;
+      try { var saved = JSON.parse(sessionStorage.getItem('moltnook-conversation-v1') || '[]');
+        if (Array.isArray(saved)) history = saved.filter(function(m) { return m && ['user','assistant'].indexOf(m.role) >= 0 && typeof m.content === 'string'; }).slice(-20);
+      } catch (_) {}
+      function render() {
+        chatWindow.replaceChildren();
+        history.forEach(function(m) {
+          var card = document.createElement('div'), label = document.createElement('strong'), text = document.createElement('p');
+          card.style.cssText = 'padding:1rem;border:1px solid var(--border);border-radius:16px;overflow-wrap:anywhere;min-width:0;';
+          label.textContent = m.role === 'user' ? 'You' : 'Infinity assistant';
+          text.textContent = m.content;
+          text.style.cssText = 'white-space:pre-wrap;line-height:1.6;margin:.5rem 0 0;';
+          card.append(label, text); chatWindow.appendChild(card);
+        });
+        chatWindow.scrollTop = chatWindow.scrollHeight;
       }
-
-      function runChat() {
-        if (chatTimer) { clearTimeout(chatTimer); }
-        chatWindow.innerHTML = '';
-        var idx = 0;
-        function next() {
-          if (idx >= SCRIPT.length) { return; }
-          var entry = SCRIPT[idx++];
-          var bubble = makeBubble(entry.agent, entry.text);
-          bubble.style.opacity = '0';
-          bubble.style.transform = 'translateY(8px)';
-          bubble.style.transition = 'opacity .4s, transform .4s';
-          chatWindow.appendChild(bubble);
-          chatWindow.scrollTop = chatWindow.scrollHeight;
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              bubble.style.opacity = '1';
-              bubble.style.transform = 'translateY(0)';
-            });
+      function save() { history = history.slice(-20); try { sessionStorage.setItem('moltnook-conversation-v1', JSON.stringify(history)); } catch (_) {} }
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        var request = input.value.trim();
+        if (busy || !request) return;
+        busy = true; send.disabled = true;
+        history.push({role:'user',content:request}); save(); render();
+        status.textContent = 'Connecting to Infinity AI…';
+        var controller = new AbortController(), timer = setTimeout(function(){controller.abort();},45000);
+        try {
+          var response = await fetch('https://infinity-rogers.marvaseater.workers.dev/v1/chat', {
+            method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+            signal:controller.signal,
+            body:JSON.stringify({input:request,context:{application:'Moltnook',assistant:'gpt',
+              task:'Assist the user. Distinguish proposed tasks from executed work. Do not claim other agents or tools have run without execution evidence.',
+              conversation:history.slice(-12),verified_context:{page:location.href,title:document.title}}})
           });
-          chatTimer = setTimeout(next, 2200 + Math.random() * 800); // base 2.2s + up to 0.8s variance
-        }
-        chatTimer = setTimeout(next, 400);
-      }
-
-      if (chatWindow) {
-        runChat();
-        if (btnRestartChat) {
-          btnRestartChat.addEventListener('click', runChat);
-        }
-      }
+          var payload = await response.json();
+          if (!response.ok) throw new Error('gateway');
+          var answer = payload.output_text || payload.output;
+          if (typeof answer !== 'string' || !answer.trim()) throw new Error('empty');
+          history.push({role:'assistant',content:answer.trim()}); save(); render();
+          input.value = ''; status.textContent = 'AI response received. Task execution is a separate connection.';
+        } catch (_) {
+          status.textContent = 'AI connection unavailable. Your request is kept here; press Send to retry.';
+          history.pop(); save(); render();
+        } finally { clearTimeout(timer); busy = false; send.disabled = false; }
+      });
+      document.getElementById('btn-restart-chat').addEventListener('click',function(){
+        if (busy) return; history=[]; save(); render(); status.textContent='Ready for your request.';
+      });
+      render();
 
       // ── Infinity Simulation (Conway's Game of Life) ─────────────────────────
       var canvas = document.getElementById('infinity-sim');
