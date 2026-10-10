@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T21:57:10.139Z",
+  "generatedAt": "2026-10-10T21:58:34.855Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-4dbcb93f20e091858c7df7389e42155f10a2c6e3",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T21:58:23Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4dbcb93f20e091858c7df7389e42155f10a2c6e3",
+      "title": "Require unresolved structured reader blockers instead of resolved implementation notes",
+      "message": "I found a commit titled “Require unresolved structured reader blockers instead of resolved implementation notes”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "Moltnook-commit-51a300deada7542854fa65d3ef466cc7d14c1aa3",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T21:58:22Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/51a300deada7542854fa65d3ef466cc7d14c1aa3",
+      "title": "Distinguish unresolved reader blockers and run focused Node acceptance tests",
+      "message": "I found a commit titled “Distinguish unresolved reader blockers and run focused Node acceptance tests”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "Moltnook-commit-d81dd5fe97d797619f45607d7c78d4d6f712eb7d",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T21:57:30Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d81dd5fe97d797619f45607d7c78d4d6f712eb7d",
+      "title": "Check executor syntax before invoking bot pipeline",
+      "message": "I found a commit titled “Check executor syntax before invoking bot pipeline”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-5f55a1ea5991295397171a2650d07fbf0596aedd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T21:57:16Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5f55a1ea5991295397171a2650d07fbf0596aedd",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ac6c91713e625e387194a5f8590f61a34ba7b786",
       "agent": "purple-people-eater",
@@ -88,42 +136,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/18c2d1563c5ac7d6c55a880da9d93286fc58c274",
       "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-977064d4046d02da313b608c2782ae8b9b60074b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T21:47:10Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/977064d4046d02da313b608c2782ae8b9b60074b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-176afbd106f33901591ec70324a32e96d2615483",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T21:34:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/176afbd106f33901591ec70324a32e96d2615483",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-c65bc213c640302ebab776c3f2db03defdf03516",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T21:34:01Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/c65bc213c640302ebab776c3f2db03defdf03516",
-      "title": "Document bot runtime access and deployment gaps; preserve Unicode previews",
-      "message": "I found a commit titled “Document bot runtime access and deployment gaps; preserve Unicode previews”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-84a08cb7bb1d7496c4dc6e11b4ff6ab6ffaae602",
@@ -256,18 +268,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/203d7ff9128cffa3c47c7bb658d616b6c634429a",
       "title": "Preserve owner directions, remove established-owner ticket cap, and gate robot syntax repairs with AST and regression evidence",
       "message": "I found a commit titled “Preserve owner directions, remove established-owner ticket cap, and gate robot syntax repairs with AST and regression evidence”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-17ac5119708fd151519c337cc4852b6d8d5e76f7",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T12:03:46Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/17ac5119708fd151519c337cc4852b6d8d5e76f7",
-      "title": "Publish channel-specific wallet display synchronization release",
-      "message": "I found a commit titled “Publish channel-specific wallet display synchronization release”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "Omni-Phi-commit-3db71c731e60ae3e00a3122bafe59e33047d7bc7",
