@@ -23,7 +23,13 @@ async function call(step,body={}){
  const response=await fetch(identityUrl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
  if(!response.ok)throw Error('Runner identity unavailable');const {value}=await response.json();
  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...body,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
- const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);return result;
+ const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
+ if(step==='result'){
+  const proof=await call('quant-receipt');
+  if(proof.durableReadback!==true||proof.latestFiveContains!==true||proof.status!==body.status||proof.repository!==report.repository||typeof proof.quantId!=='string')throw Error('Live job Quant receipt did not match this execution');
+  report.jobQuant={...proof,verified:true};await fs.writeFile('repository-receipts/job-quant-verification.json',JSON.stringify(report.jobQuant,null,2));
+ }
+ return result;
 }
 async function event(agent,message){const row={agent,message,when:new Date().toISOString()};report.events.push(row);await call('event',row);}
 async function sourceFile(file){safePath(file);const absolute=inside(workspace,file);try{
@@ -51,6 +57,8 @@ try{
  await fs.mkdir('repository-receipts',{recursive:true});
  report.executionContext=executionContext();
  if(!report.executionContext.productionAccess)throw Error('Production adapters disabled: '+report.executionContext.reason);
+ report.jobQuantAudit=await call('quant-audit');
+ await fs.writeFile('repository-receipts/job-quant-audit.json',JSON.stringify(report.jobQuantAudit,null,2));
  report.baseline=await inspectRuntime();
  if(!report.baseline.passed)throw Error('Runtime baseline missing: '+report.baseline.checks.filter(x=>!x.passed).map(x=>x.name).join(', '));
  await call('capability',{status:token?'credential_configured':'credential_missing'});
