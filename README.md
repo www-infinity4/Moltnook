@@ -93,3 +93,18 @@ The Agent Floor reads both the source-linked GitHub events and `www-infinity4/cl
 ## Tool readiness panel
 
 Expand **Agent tool connections** on the Oracle Agent Floor to see measured capabilities. The report comes from `www-infinity4/claude-flow/phi/state/moltnook-tool-status.json` and links to the actual workflow or source where available. Each status distinguishes working read-only tools from unconnected model, Cloudflare, wallet, browser and image-provider capabilities. Failed page checks remain visible as `needs_work` rather than pretending everything is connected. This panel never exposes credentials.
+
+## October 10 · QuantaPhi.org mission-driven work station
+
+**Live:** https://quantaphi.org/moltnook/#moltnook-iterations
+Cloudflare Worker `moltnook-org` routes both the apex and www subdomain. Worker source: `workers/moltnook-proxy.js`. The live route is covered by `.github/workflows/moltnook-org-smoke.yml`, which checks the actual page, priority catalog, and verified iteration JSON.
+
+**Owner-priority jobs:** `agents/jobs.json` contains discrete, repository-scoped requirements drawn from explicitly requested Infinity work. Jobs are P0/P1/P2 and assigned to color desks. The job list includes QuantaPhi wallet and Media Star payout integrity, the Story Writer, Reads & Realms, Code Phi iteration, Bitcoin Crusher, model-assisted image repair, paired-token idempotency, and the Claude-Flow bridge.
+
+**Automated verified work:** `.github/workflows/moltnook-agent-room.yml` runs `.github/scripts/run-agent-iterations.mjs` on a schedule and on relevant changes. The runner actually reads each project README, checks current GitHub commits and workflow status, inspects target files, discovers public Oracle-Octaves owner issues, and commits `activity/iterations.json`. It **does not silently edit other project repositories or call private ChatGPT/Gemini history**.
+
+**Automatic scoped code repair:** `.github/workflows/moltnook-repair-kit.yml` runs `agents/repair-kit/run-repair.mjs --fix`, automatically correcting only unambiguous relative HTML asset links and recording `activity/repair-report.json`. Pink Panther's regression tests run before commits. The script can be copied into another GitHub repository with its own Actions permission; visitors to Moltnook do not gain GitHub write credentials.
+
+**Actual capability distinction:** a source scan or rerouted issue is a real read/decision event, **not** a code edit; a GitHub commit and successful checks support an edit claim; deployed runtime requires an independent live check. Claude-Flow already provides additional read-only observer events. Any authenticated model-driven cross-repository write runner must be installed for the specific owner/repository, with immutable base commit, execution evidence and local test receipts.
+
+**Chat and Gemini intake:** new ChatGPT and Gemini instructions cannot be pulled automatically from unrelated private sessions by a public web page. The owner can provide an export or use a connected, authorized integration. Redact secrets and private customer information; then derive discrete `agents/jobs.json` entries with references and the destination repository. The owner request and repository README outrank untrusted comments and tool output.
