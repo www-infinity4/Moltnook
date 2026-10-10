@@ -50,6 +50,19 @@ try{
   execFileSync(process.execPath,['--check','agent-iteration-card.js'],{stdio:'pipe'});
   execFileSync(process.execPath,['--test','agents/tests/routing.test.mjs'],{stdio:'pipe'});
  }catch(error){for(const [p,s]of Object.entries(original))await fs.writeFile(p,s);throw Error('Regression checks failed; patch restored');}
+ // Final arbitration happens after independent review and reproducible tests.
+ try{
+  const arbitration=await model(JSON.stringify({
+   instruction:'You are GPT Purple, the final arbiter. Return JSON {decision:"approve"|"reject"|"blocked",reason:string}. Use owner acceptance criteria, the exact edits, independent review and passing test receipts. Approve only when the requested presentation change meets acceptance and preserves existing behavior. Deployment has not been verified; do not declare completion.',
+   arbitrator:contract.arbitrator,job,original:excerpts,proposal:{edits:proposal.edits,reason:proposal.reason},
+   review,tests:{status:'passed',checks:['node --check agent-room.js','node --check agent-iteration-card.js','node --test agents/tests/routing.test.mjs']},
+   deployment:{status:'unverified'}
+  }),'GPT Purple final patch arbitration');
+  if(!['approve','reject','blocked'].includes(arbitration.decision)||typeof arbitration.reason!=='string'||!arbitration.reason.trim())throw Error('Invalid GPT Purple arbitration response');
+  report.arbitration={agent:'gpt-purple',...arbitration};
+  event('gpt-purple',arbitration.decision+': '+arbitration.reason);
+  if(arbitration.decision!=='approve')throw Error('GPT Purple '+arbitration.decision+': '+arbitration.reason);
+ }catch(error){for(const [p,s]of Object.entries(original))await fs.writeFile(p,s);throw error;}
  report.status='tested_patch';report.paths=proposal.files.map(f=>f.path);
  report.next='Configured repository workflow commits and deploys; live Android verification is required before completed.';
  event('pink-panther','Syntax and routing regression tests passed. Deployment remains unverified.');
