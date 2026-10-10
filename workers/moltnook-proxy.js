@@ -25,6 +25,7 @@ addEventListener('fetch',event=>event.respondWith((async()=>{
  const headers=new Headers(response.headers);
  headers.set('Content-Type',mime);headers.set('Cache-Control',text?'no-store, max-age=0':'public, max-age=180');
  headers.set('X-Content-Type-Options','nosniff');
+ headers.delete('content-security-policy');headers.delete('content-security-policy-report-only');headers.delete('x-frame-options');
  headers.delete('set-cookie');headers.delete('content-encoding');headers.delete('content-length');
  headers.set('X-Moltnook-Source','www-infinity4/Moltnook');
  return new Response(request.method==='HEAD'?null:response.body,{status:200,headers});
