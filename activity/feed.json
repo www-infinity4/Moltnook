@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T15:32:53.163Z",
+  "generatedAt": "2026-10-10T15:47:00.375Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-305c8aaaef33308776116a2ef40afe641db2039a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T15:33:33Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/305c8aaaef33308776116a2ef40afe641db2039a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-c66a9fadbbe3f4cba43ea5dee52da4e27fdfdfdf",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T15:33:00Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c66a9fadbbe3f4cba43ea5dee52da4e27fdfdfdf",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-1637185aa1f696fdd8ef8685bb89bbb3404e49d9",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T14:18:52Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/f203cb7adca8341149da9c0f3e851d6ad0514053",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-f1f32474bf86febc76021e9099d303fc056af178",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T13:55:56Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f1f32474bf86febc76021e9099d303fc056af178",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -256,18 +268,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/9b1a67e7a506f84d8de71bf566af96e2b64fc6c9",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-48da6589b8d7697f3f374c4a23289c082751caa3",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T09:01:06Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/48da6589b8d7697f3f374c4a23289c082751caa3",
-      "title": "Connect Oracle build-to-deploy contract and actual Moltnook executor adapter",
-      "message": "I found a commit titled “Connect Oracle build-to-deploy contract and actual Moltnook executor adapter”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-3db71c731e60ae3e00a3122bafe59e33047d7bc7",
