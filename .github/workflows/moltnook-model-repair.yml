@@ -1,0 +1,58 @@
+name: Moltnook GPT build and deploy
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - agents/model-job.json
+      - .github/workflows/moltnook-model-repair.yml
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: moltnook-model-writer
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: GPT scoped repair, independent review and regression checks
+        run: node agents/repair-kit/model-repair.mjs
+      - name: Preserve evidence even if the tool is blocked
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moltnook-model-repair
+          path: activity/model-repair.json
+      - name: Commit tested presentation patch
+        run: |
+          git config user.name "infinity-color-agents[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html styles.css agent-room.css agent-iteration-card.css activity/model-repair.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Apply GPT repair after independent review and regression checks"
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v4
+      - name: Verify public deployment response
+        run: |
+          curl --fail --retry 2 https://quantaphi.org/moltnook/ -o /tmp/moltnook-live.html
+          test -s /tmp/moltnook-live.html
+      - name: Cloudflare Android browser verification
+        env:
+          CF_BROWSER_TOKEN: ${{ secrets.CF_BROWSER_TOKEN }}
+        run: |
+          if [ -z "$CF_BROWSER_TOKEN" ]; then
+            echo "Deployment response checked. Full completion blocked: Cloudflare Browser token is not connected to this runner."
+            exit 1
+          fi
+          node agents/repair-kit/verify-mobile.mjs
