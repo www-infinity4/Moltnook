@@ -29,7 +29,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Validate immutable patch and path policy
         run: |
-          node --test workers/bot-sandbox/worker.test.mjs
+          node --test workers/bot-sandbox/worker.test.mjs agents/repository-engine/rollout-gate.test.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/preview.mjs
           node --check agents/repository-engine/patch.mjs
