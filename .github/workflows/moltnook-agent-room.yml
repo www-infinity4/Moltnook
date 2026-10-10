@@ -1,7 +1,7 @@
 name: Moltnook verified agent room
 on:
   schedule:
-    - cron: "14 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
