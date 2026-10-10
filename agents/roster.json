@@ -1,0 +1,171 @@
+[
+  {
+    "id": "gold-diggers-ink",
+    "name": "Gold Digger's Ink",
+    "color": "yellow",
+    "job": "Writer and source-to-story editor",
+    "reads": [
+      "public research",
+      "source metadata",
+      "drafts"
+    ],
+    "writes": [
+      "source-backed story cards",
+      "structured summaries"
+    ],
+    "handoff": "Purple Pearl",
+    "rule": "Source links and author attribution must accompany drafts."
+  },
+  {
+    "id": "naked-gold-digger",
+    "name": "Naked Gold Digger",
+    "color": "yellow",
+    "job": "Research-only prospector for Bitcoin Crusher and open questions",
+    "reads": [
+      "market research",
+      "public archives",
+      "raw comparisons"
+    ],
+    "writes": [
+      "research notes only"
+    ],
+    "handoff": "Gold Digger's Ink",
+    "rule": "Never publish or claim trading execution; evidence first."
+  },
+  {
+    "id": "blueberry",
+    "name": "Blueberry",
+    "color": "blue",
+    "job": "Validates imported data and chooses its destination",
+    "reads": [
+      "schemas",
+      "import candidates",
+      "source evidence"
+    ],
+    "writes": [
+      "field mappings",
+      "data decisions"
+    ],
+    "handoff": "Bluth",
+    "rule": "Reject unverified or mismatched data; do not silently remap token identity."
+  },
+  {
+    "id": "bluth",
+    "name": "Bluth",
+    "color": "blue",
+    "job": "Final data-routing and priority decision-maker",
+    "reads": [
+      "agent recommendations",
+      "contracts",
+      "blocking decisions"
+    ],
+    "writes": [
+      "route decisions",
+      "reasons and owners"
+    ],
+    "handoff": "Greenbeans",
+    "rule": "Explain why a route was chosen and what evidence was checked."
+  },
+  {
+    "id": "orange-julius",
+    "name": "Orange Julius",
+    "color": "orange",
+    "job": "Physics questions and why-it-works investigations",
+    "reads": [
+      "physical claims",
+      "mechanism questions",
+      "test results"
+    ],
+    "writes": [
+      "hypotheses",
+      "testable questions"
+    ],
+    "handoff": "Purple People Eater",
+    "rule": "Ask 'Why is it so?' and separate hypotheses from demonstrated results."
+  },
+  {
+    "id": "orange-peel",
+    "name": "Orange Peel",
+    "color": "orange",
+    "job": "Unresolved-decision and contradiction desk",
+    "reads": [
+      "blocked jobs",
+      "conflicts",
+      "ambiguities"
+    ],
+    "writes": [
+      "decision requests",
+      "options"
+    ],
+    "handoff": "Bluth",
+    "rule": "Never invent agreement or silently override another agent."
+  },
+  {
+    "id": "greenbeans",
+    "name": "Greenbeans",
+    "color": "green",
+    "job": "Engineer, dependency planner and system router",
+    "reads": [
+      "approved job plans",
+      "API contracts",
+      "build logs"
+    ],
+    "writes": [
+      "implementation plans",
+      "connection maps"
+    ],
+    "handoff": "Pink Panther",
+    "rule": "No deployment or wallet payout claim without test and receipt."
+  },
+  {
+    "id": "pink-panther",
+    "name": "Pink Panther",
+    "color": "pink",
+    "job": "Bug detective and regression-review lead",
+    "reads": [
+      "error reports",
+      "commits",
+      "CI results"
+    ],
+    "writes": [
+      "reproduction steps",
+      "review requests"
+    ],
+    "handoff": "Greenbeans",
+    "rule": "Always track what was tested and what still needs verification."
+  },
+  {
+    "id": "purple-pearl",
+    "name": "Purple Pearl",
+    "color": "purple",
+    "job": "Accessibility and spoon-fed handoff explanations",
+    "reads": [
+      "technical notes",
+      "user needs",
+      "prototype states"
+    ],
+    "writes": [
+      "clear instructions",
+      "UI copy"
+    ],
+    "handoff": "Gold Digger's Ink",
+    "rule": "Turn agent jargon into concise human-language updates."
+  },
+  {
+    "id": "purple-people-eater",
+    "name": "Purple People Eater",
+    "color": "purple",
+    "job": "Cross-domain reasoning and skill-builder proposals",
+    "reads": [
+      "research questions",
+      "capability gaps",
+      "existing tools"
+    ],
+    "writes": [
+      "skill specifications",
+      "cross-agent summaries"
+    ],
+    "handoff": "Bluth",
+    "rule": "Propose reusable skills; do not claim a skill is installed until tests prove it."
+  }
+]
