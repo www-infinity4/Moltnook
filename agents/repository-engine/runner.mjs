@@ -70,9 +70,11 @@ try{
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
   report.attempts=[];
+  const remembered=lease.job.runtimeFeedback?.baseSha===baseSha?lease.job.runtimeFeedback:undefined;
   const repaired=await repairWithFeedback({
+   initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents,feedback,previousTests:report.tests}});report.proposalReason=proposal.reason;
+    const proposal=await call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents,feedback,previousTests:report.tests||remembered?.tests}});report.proposalReason=proposal.reason;
     if(proposal.edits?.some(e=>!Object.hasOwn(original,e.path)))throw Error('Engineer attempted a file absent from the reader handoff');
     const patched=applyEdits(original,proposal.edits);
     await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
@@ -111,6 +113,6 @@ try{
  }
 }catch(e){
  report.status=commitSha?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
- if(lease)try{await call('result',{status:report.status,commitSha,testsPassed,verificationToken:token,message:report.error});}catch(error){report.receiptError=scrub(error.message)}
+ if(lease)try{await call('result',{status:report.status,commitSha,testsPassed,verificationToken:token,message:report.error,repairFeedback:report.attempts?.length?{baseSha:report.baseSha,stage:report.attempts.at(-1).stage,reason:report.attempts.at(-1).reason,tests:report.tests?{passed:report.tests.passed,runs:report.tests.runs.slice(-15).map(row=>({...row,output:row.output.slice(0,1000)}))}:null}:undefined});}catch(error){report.receiptError=scrub(error.message)}
  process.exitCode=1;
 }finally{await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/report.json',JSON.stringify(report,null,2));console.log(report.status,report.jobId||'',report.commitSha||'');}

@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {repairWithFeedback} from './repair-feedback.mjs';
+test('retry hands the previous authenticated failure to the engineer',async()=>{
+ const initialFeedback={stage:'test',reason:'describe is not defined'};
+ const result=await repairWithFeedback({initialFeedback,build:async previous=>{assert.deepEqual(previous,initialFeedback);return {};},review:async()=>({approved:true}),test:async()=>({passed:true}),arbitrate:async()=>({decision:'approve'}),restore:async()=>{assert.fail('unexpected restore')},onFeedback:async()=>{assert.fail('unexpected failure')}});
+ assert.equal(result.attempt,1);
+});
 test('review rejection and failed tests return to engineer; only tested approved patch can finish',async()=>{
  let builds=0,restores=0,checks=0,arbitrations=0;const feedback=[];
  const result=await repairWithFeedback({

@@ -1,6 +1,6 @@
-export async function repairWithFeedback({build,review,test,arbitrate,restore,onFeedback,maxAttempts=3}){
+export async function repairWithFeedback({build,review,test,arbitrate,restore,onFeedback,maxAttempts=3,initialFeedback}){
  if(!Number.isInteger(maxAttempts)||maxAttempts<1||maxAttempts>3)throw Error('Repair attempts must be bounded to 1–3');
- let feedback;
+ let feedback=initialFeedback;
  for(let attempt=1;attempt<=maxAttempts;attempt++){
   let stage='build',testResults;
   try{
