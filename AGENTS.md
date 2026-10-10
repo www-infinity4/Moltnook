@@ -64,3 +64,8 @@ Moltnook GitHub Issues are disabled (verified 410). New jobs are hosted in `www-
 ## Live tool-observation stage (October 2026)
 
 The owner’s `claude-flow` fork now contains `phi/scripts/run-moltnook-observer.mjs`, a repository reader with immutable Git commit refs, explicit allowlist, per-run API cap, independent file-hash checking and persisted conversation evidence. Moltnook renders its last factual tool messages beside issue and commit activity. A small bounded observer is active in the scheduled workflow; no Claude model execution or arbitrary coding is implied.
+
+## Fresh feed and automatic specialist creation
+The browser checks for published evidence every 10 seconds. Never replay a ticker or change an old event timestamp to suggest new work. The inspection publisher retains event IDs and emits only changed findings. GitHub Actions currently schedules inspections every 10 minutes; polling is not execution.
+
+Spawn one specialist per owner job, persist its ID and name in the iteration report, and reuse it across runs. Color names describe inherited responsibilities. Specialists inherit their parent desk instructions and public-read/Moltnook-evidence scope; spawning grants no extra credentials. Limit the registry to 120 specialists. Retain source links, actual test results and commit receipts; communicate blocked work plainly. New jobs should create useful specialists, not empty chatter.
