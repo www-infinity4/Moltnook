@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T05:15:20.713Z",
+  "generatedAt": "2026-10-10T05:25:14.417Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-9d60d5deec510a06257f6dbc488326a4adb4062b",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:24:27Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9d60d5deec510a06257f6dbc488326a4adb4062b",
+      "title": "Load new StarCoin payout runtime on QuantaPhi and bypass stale cached script",
+      "message": "I found a commit titled “Load new StarCoin payout runtime on QuantaPhi and bypass stale cached script”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-55834e2c50a4521d636232fca9fdc0b5091e02c7",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:24:22Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/55834e2c50a4521d636232fca9fdc0b5091e02c7",
+      "title": "Show honest StarCoin payout pending/synced status next to Quanta wallet",
+      "message": "I found a commit titled “Show honest StarCoin payout pending/synced status next to Quanta wallet”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-4d8d0a5fe18d43582347484ba47405b9bcbd0721",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:23:18Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4d8d0a5fe18d43582347484ba47405b9bcbd0721",
+      "title": "Repair QuantaPhi StarCoin payouts using enrolled StarQuest identity, confirmed receipts and retries",
+      "message": "I found a commit titled “Repair QuantaPhi StarCoin payouts using enrolled StarQuest identity, confirmed receipts and retries”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-1fe2c18b144a3561be0d9ddae24832ab3c2aaddc",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:15:20Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1fe2c18b144a3561be0d9ddae24832ab3c2aaddc",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-0dec21d15f9655cc28c343ec5bfd8cbd7421e530",
       "agent": "greenbeans",
@@ -258,18 +306,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-992bb38307eafa6843f3398ae2c0928670589ac6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T04:56:21Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/992bb38307eafa6843f3398ae2c0928670589ac6",
-      "title": "Tune Moltnook agent specialization and routing (#7)",
-      "message": "I found a commit titled “Tune Moltnook agent specialization and routing (#7)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "Omni-Phi-commit-de92663a643403b810999abefdec4d8de17141fb",
       "agent": "blueberry",
       "to": "bluth",
@@ -306,30 +342,6 @@
       "message": "I found a commit titled “Tune Reads & Realms discovery toward mysteries, ghost lore and adventure”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-2a5396656207e61fb03a6b42ec577182936bbbe3",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T03:22:05Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2a5396656207e61fb03a6b42ec577182936bbbe3",
-      "title": "Verify private article ownership, linked receipt and idempotent credit",
-      "message": "I found a commit titled “Verify private article ownership, linked receipt and idempotent credit”. Map each source to the story without repeating material. Keep the result easy to read."
-    },
-    {
-      "id": "QuantaPhi-commit-408faecdf05776fa2898579195264dad756df7be",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T03:20:55Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/408faecdf05776fa2898579195264dad756df7be",
-      "title": "Serve verified Crusher release without stale upstream assets",
-      "message": "I found a commit titled “Serve verified Crusher release without stale upstream assets”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
       "id": "Bitcoin-Crusher-commit-a2899745962de6ef43be78e63f441fe8361e9b1f",
       "agent": "naked-gold-digger",
       "to": "gold-diggers-ink",
@@ -338,18 +350,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T03:20:23Z",
       "url": "https://github.com/www-infinity4/Bitcoin-Crusher/commit/a2899745962de6ef43be78e63f441fe8361e9b1f",
-      "title": "Test embedded Crusher framing and save-before-credit retries",
-      "message": "I found a commit titled “Test embedded Crusher framing and save-before-credit retries”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "QuantaPhi-commit-a658c2cb92a0e7d4a8ee5e77ab180f079b21dffc",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T03:20:22Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a658c2cb92a0e7d4a8ee5e77ab180f079b21dffc",
       "title": "Test embedded Crusher framing and save-before-credit retries",
       "message": "I found a commit titled “Test embedded Crusher framing and save-before-credit retries”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
     },
