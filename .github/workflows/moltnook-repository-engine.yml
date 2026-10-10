@@ -36,8 +36,13 @@ jobs:
           node --check agents/repository-engine/runtime-baseline.mjs
           node --check agents/repository-engine/node-test-globals.mjs
           node --check agents/repository-engine/live-source.mjs
-          node --test agents/repository-engine/live-source.test.mjs
+          node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
+      - name: Verify live adapter reads and preserve unresolved capabilities
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+          WALLET_READ_TOKEN: ${{ secrets.WALLET_READ_TOKEN }}
+        run: node agents/repository-engine/adapter-verification.mjs
       - name: Reader handoff, engineer implementation, Pink review and GPT Purple arbitration
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
