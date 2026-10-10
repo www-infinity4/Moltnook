@@ -91,10 +91,11 @@
    if(updating)return;updating=true;
    $('#mi-update').disabled=true;
    try{
-     const [catalog,report,sweep]=await Promise.all([
+     const [catalog,report,sweep,build]=await Promise.all([
        getJson('agents/jobs.json?v='+Date.now()),
        getJson('activity/iterations.json?v='+Date.now()).catch(()=>null),
-       getJson('activity/repair-report.json?v='+Date.now()).catch(()=>null)
+       getJson('activity/repair-report.json?v='+Date.now()).catch(()=>null),
+       getJson('activity/model-repair.json?v='+Date.now()).catch(()=>null)
      ]);
      if(!Array.isArray(catalog.jobs))throw Error('Invalid job catalog');
      all=(report?.jobs?.length?report.jobs:catalog.jobs).sort((a,b)=>a.priority-b.priority||String(a.id).localeCompare(String(b.id)));
@@ -107,6 +108,7 @@
          kind:'automated repository check',phase:'Real repair sweep',when:repair.when,url:receipt,
          message:'Scanned '+repair.scannedHtml+' HTML pages. '+repair.applied+' uniquely matched asset fixes applied; '+repair.unresolved.length+' unresolved references retained for inspection. Open the workflow for test and commit evidence.'});
      }
+     if(build?.runUrl&&safe(build.runUrl))for(const [i,row]of (build.events||[]).entries())messages.push({id:'build-'+build.jobId+'-'+build.when+'-'+i,agent:row.agent,to:'bluth',project:'Moltnook',kind:'GPT repair adapter',phase:build.status,when:row.when,url:build.runUrl,message:row.message});
      messages.sort((a,b)=>Date.parse(b.when||0)-Date.parse(a.when||0));
      generatedAt=report?.generatedAt||'';
      lastRun=report?.runUrl||null;
