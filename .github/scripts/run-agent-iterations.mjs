@@ -26,12 +26,16 @@ const evidence=new Map(),failed=[];
 for(const repo of repos){
  const base='https://api.github.com/repos/'+owner+'/'+encodeURIComponent(repo);
  try{
-  const [commits,runs]=await Promise.all([
+  const [commits,runs,readme]=await Promise.all([
    request(base+'/commits?per_page=1'),
-   request(base+'/actions/runs?per_page=8')
+   request(base+'/actions/runs?per_page=8'),
+   request(base+'/readme')
   ]);
+  const mission=readme.ok&&readme.value?.content?
+    Buffer.from(readme.value.content,'base64').toString('utf8').slice(0,40000):'';
+  const missionTitle=(mission.match(/^#\\s+(.+)$/m)?.[1]||'README title unavailable').slice(0,130);
   const commit=commits.value?.[0],actions=runs.value?.workflow_runs||[];
-  evidence.set(repo,{base,commit:commit?.sha?{sha:commit.sha,
+  evidence.set(repo,{base,mission:mission?{title:missionTitle,url:link(repo,'/blob/main/README.md')}:null,commit:commit?.sha?{sha:commit.sha,
     when:commit.commit?.committer?.date||commit.commit?.author?.date,
     title:commit.commit?.message?.split('\n')[0]||'Commit',
     url:commit.html_url}:null,
@@ -64,12 +68,14 @@ for(const job of ordered){
  const blocked=!head||found<checks.length||repo?.action?.status==='failure';
  const status=blocked?'needs_work':'scanned';
  jobRows.push({id:job.id,priority:job.priority,title:job.title,repo:job.repo,
-   agent:job.agent,next:job.next,status,source:job.source,sourceUrl:job.sourceUrl,
+   agent:job.agent,next:job.next,status,source:job.source,sourceUrl:job.sourceUrl,mission:repo?.mission||null,
    checkedAt:time,head,ci:repo?.action||null,checks,
    execution:'diagnostic-only: repository mutation NOT attempted'});
  if(!head)continue;
  say(job,'bluth',job.agent,'Prioritized','Priority '+job.priority+
    ' · Assigned: '+job.title+' · Owner-requested queue; no automatic completion claim.',link(job.repo), 'routing');
+ if(repo.mission) say(job,'gold-diggers-ink',job.agent,'Mission read',
+   'Read the current project README: '+repo.mission.title+'. Keep the owner priority and existing project purpose intact.',repo.mission.url,'readme');
  say(job,job.agent,job.next,'Inspected','Checked '+found+'/'+checks.length+
    ' expected files in '+job.repo+' at '+head.sha.slice(0,9)+'. Latest commit: '+head.title+
    (checks.some(c=>!c.found)?'. Missing: '+checks.filter(c=>!c.found).map(c=>c.path).join(', '):'.'),
