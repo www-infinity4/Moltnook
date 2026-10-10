@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "orchestrator": "Infinity / C13b0",
+  "ownerAuthorization": "Owner requested building, correcting and publishing existing Infinity projects.",
+  "design": "Oracle Octaves: Android first, parchment background, white cards, red Phi controls, 44px targets, readable text. New York means newly created work, not a location.",
+  "steps": ["read README and exact owner acceptance criteria", "claim one repository/file lease", "spawn useful color specialists for missing skills", "inspect actual deployed behavior with Cloudflare Browser at 360x800", "generate smallest source patch using Infinity GPT", "run repository checks", "independent model review of patch and test evidence", "commit source with base-SHA conflict check", "deploy through configured existing path", "inspect deployed Android behavior", "publish human-readable evidence or exact blocker", "create child jobs for remaining defects"],
+  "tools": ["GitHub source reader and scoped writer", "Infinity GPT gateway", "Node syntax and repository tests", "Cloudflare Browser Rendering", "existing GitHub Pages / Cloudflare deployment adapters", "read-only wallet and catalog adapters when authorized"],
+  "never": ["replay old messages as fresh", "claim a repair from a source read", "mark complete before deployed verification", "mint or transfer coins as a repair side effect", "invent tool connections"],
+  "limits": {"filesPerPatch": 4, "patchBytes": 100000, "iterationsPerJob": 3, "parallelWritersPerRepository": 1},
+  "missingTools": "Record the exact missing adapter or credential binding. Instructions alone do not connect a tool."
+}
