@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
-export async function verifyAdapters({fetcher=fetch,walletToken='',githubToken=''}={}){
+import {executionContext} from './execution-context.mjs';
+export async function verifyAdapters({fetcher=fetch,walletToken='',githubToken='',context=executionContext()}={}){
  const report={schemaVersion:1,checkedAt:new Date().toISOString(),mode:'live_read_only',adapters:{}};
+ if(!context.productionAccess){report.mode='isolated';for(const name of ['deployment','catalog','wallet','images','forks'])report.adapters[name]={status:'disabled_isolated_context',executionVerified:false};return report;}
  async function read(url,headers={},validate=()=>true){
   try{const response=await fetcher(url,{method:'GET',headers,redirect:'error',signal:AbortSignal.timeout(15000)});
    if(!response.ok)return {status:'failed',httpStatus:response.status};
@@ -16,7 +18,7 @@ export async function verifyAdapters({fetcher=fetch,walletToken='',githubToken='
  return report;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
- const report=await verifyAdapters({walletToken:process.env.WALLET_READ_TOKEN||'',githubToken:process.env.REPOSITORY_WRITE_TOKEN||''});
+ const report=await verifyAdapters({context:executionContext(),walletToken:process.env.WALLET_READ_TOKEN||'',githubToken:process.env.REPOSITORY_WRITE_TOKEN||''});
  await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/adapter-verification.json',JSON.stringify(report,null,2));
  for(const [name,result]of Object.entries(report.adapters))console.log(name,result.status,result.executionVerified===false?'execution not verified':'');
 }

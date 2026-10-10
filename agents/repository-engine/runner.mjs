@@ -7,6 +7,7 @@ import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
 import {inspectRuntime,focusedTestCommand} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
+import {executionContext} from './execution-context.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -48,6 +49,8 @@ async function checks(patched){
 }
 try{
  await fs.mkdir('repository-receipts',{recursive:true});
+ report.executionContext=executionContext();
+ if(!report.executionContext.productionAccess)throw Error('Production adapters disabled: '+report.executionContext.reason);
  report.baseline=await inspectRuntime();
  if(!report.baseline.passed)throw Error('Runtime baseline missing: '+report.baseline.checks.filter(x=>!x.passed).map(x=>x.name).join(', '));
  await call('capability',{status:token?'credential_configured':'credential_missing'});
