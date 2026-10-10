@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T10:33:18.716Z",
+  "generatedAt": "2026-10-10T10:47:13.752Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,88 +18,112 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-commit-90382248f9ddb3fd1aba0f645865da6a4b947ead",
+      "id": "QuantaPhi-commit-449f921e29104ed7cffc14d24728500c9ab33fe3",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:32:32Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead",
-      "title": "Keep newest clock receipts visible as persistent evidence history grows",
-      "message": "I found a commit titled “Keep newest clock receipts visible as persistent evidence history grows”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-10T10:37:37Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/449f921e29104ed7cffc14d24728500c9ab33fe3",
+      "title": "Load current clock receipts and per-job Purple review display",
+      "message": "I found a commit titled “Load current clock receipts and per-job Purple review display”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-be9849bba880afd3fd909bb9fd3d34474ede325d",
+      "id": "QuantaPhi-commit-bddf404583c8174dc1b9fb26a873752fd7494f10",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T10:37:36Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/bddf404583c8174dc1b9fb26a873752fd7494f10",
+      "title": "Run clock schema, recovery and queue progress checks in agent-card CI",
+      "message": "I found a commit titled “Run clock schema, recovery and queue progress checks in agent-card CI”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-cb4f6d3a87433d3d11d5afa9401e6b73cb14a5df",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T10:37:24Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/cb4f6d3a87433d3d11d5afa9401e6b73cb14a5df",
+      "title": "Keep review summaries bounded and mark exhausted repair tickets blocked accurately",
+      "message": "I found a commit titled “Keep review summaries bounded and mark exhausted repair tickets blocked accurately”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-5fe49e214d2cc95684e5b85bc1b2e1ef135eedda",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:31:23Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/be9849bba880afd3fd909bb9fd3d34474ede325d",
-      "title": "Document actual persistent Gemini/Purple loop capabilities and blockers",
-      "message": "I found a commit titled “Document actual persistent Gemini/Purple loop capabilities and blockers”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-10T10:36:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5fe49e214d2cc95684e5b85bc1b2e1ef135eedda",
+      "title": "Document honest mechanical routing during Gemini provider backoff",
+      "message": "I found a commit titled “Document honest mechanical routing during Gemini provider backoff”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-4f3dfd2d14f15a0cfa9bf352dce6a8db93f3daf4",
+      "id": "QuantaPhi-commit-e5fea207e35c8b9385314c086862ca8d2286b18b",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:31:22Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4f3dfd2d14f15a0cfa9bf352dce6a8db93f3daf4",
-      "title": "Test bounded instruction gate, unchanged state suppression and retry recovery",
-      "message": "I found a commit titled “Test bounded instruction gate, unchanged state suppression and retry recovery”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-10T10:36:11Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e5fea207e35c8b9385314c086862ca8d2286b18b",
+      "title": "Verify provider backoff preserves actual queue inspection and never marks repairs complete",
+      "message": "I found a commit titled “Verify provider backoff preserves actual queue inspection and never marks repairs complete”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-b4f5cbe47c1eb71b6f7cebea86169bbbed7fa1e4",
+      "id": "QuantaPhi-commit-c0fc22e1a36fbcb948dc6b34d9ac16ef965fd3ad",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:30:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b4f5cbe47c1eb71b6f7cebea86169bbbed7fa1e4",
-      "title": "Load persistent clock evidence in QuantaPhi robot brain",
-      "message": "I found a commit titled “Load persistent clock evidence in QuantaPhi robot brain”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-10T10:35:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c0fc22e1a36fbcb948dc6b34d9ac16ef965fd3ad",
+      "title": "Show actual Purple progress review and implementation blockers on each saved job",
+      "message": "I found a commit titled “Show actual Purple progress review and implementation blockers on each saved job”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-92ba9f285173393dc9b5b2bcc0bc345f36d0e06e",
+      "id": "QuantaPhi-commit-6b7b57b7429a963852456ae7b6877e4bab7da423",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:30:46Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/92ba9f285173393dc9b5b2bcc0bc345f36d0e06e",
-      "title": "Handle edge redirects and retain unresolved job scope without blocking other inspections",
-      "message": "I found a commit titled “Handle edge redirects and retain unresolved job scope without blocking other inspections”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-10T10:35:07Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6b7b57b7429a963852456ae7b6877e4bab7da423",
+      "title": "Respect Gemini backoff while mechanical routing continues real inspections and Purple review",
+      "message": "I found a commit titled “Respect Gemini backoff while mechanical routing continues real inspections and Purple review”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-0095a47b488348ac734d115a039713f07c8da374",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T10:30:45Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0095a47b488348ac734d115a039713f07c8da374",
-      "title": "Version persistent clock bindings and watchdog schedule",
-      "message": "I found a commit titled “Version persistent clock bindings and watchdog schedule”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-5643a604520682fb927687ccb531fd112b838347",
+      "id": "claude-flow-commit-7513f9b0cafd7de61d895126602c4780a3d8d96c",
       "agent": "greenbeans",
       "to": "pink-panther",
-      "project": "QuantaPhi",
+      "project": "claude-flow",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-10T10:30:00Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5643a604520682fb927687ccb531fd112b838347",
-      "title": "Expose Gemini and Purple review through private worker service binding",
-      "message": "I found a commit titled “Expose Gemini and Purple review through private worker service binding”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+      "when": "2026-10-10T10:33:45Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/7513f9b0cafd7de61d895126602c4780a3d8d96c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-1d67a19899e61ee22b098fe924b1069d368b1b5b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T10:33:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1d67a19899e61ee22b098fe924b1069d368b1b5b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-a355d488b5fd686b575730940f1d2b2196e00435",
@@ -196,18 +220,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/2e461af034136cf6de37f24d02e9abef20b316af",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-5064b0325cac9af85a254bbaffca22289d7ed21a",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T09:00:37Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5064b0325cac9af85a254bbaffca22289d7ed21a",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-d48454c99ebaaf00cb606967ad17074383474c0a",
@@ -338,18 +350,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T05:35:17Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/5d8a1b8a0469ebd3c6064d7736dd17ae0577ebd0",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-fe511341778c2586af50a9c1cfb62f83b46e76a4",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T05:14:20Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/fe511341778c2586af50a9c1cfb62f83b46e76a4",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
