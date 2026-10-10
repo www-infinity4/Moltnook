@@ -50,6 +50,23 @@
     "rule": "Reject unverified or mismatched data; do not silently remap token identity."
   },
   {
+    "id": "bluey",
+    "name": "Bluey",
+    "color": "blue",
+    "job": "Data-import staging and region mapping scout",
+    "reads": [
+      "outside imports",
+      "datasets",
+      "source regions"
+    ],
+    "writes": [
+      "import staging maps",
+      "compatibility checks"
+    ],
+    "handoff": "Blueberry",
+    "rule": "Observe and map; Blueberry decides whether data is accepted."
+  },
+  {
     "id": "bluth",
     "name": "Bluth",
     "color": "blue",
@@ -167,5 +184,22 @@
     ],
     "handoff": "Bluth",
     "rule": "Propose reusable skills; do not claim a skill is installed until tests prove it."
+  },
+  {
+    "id": "purple-pleasure",
+    "name": "Purple Pleasure",
+    "color": "purple",
+    "job": "Comfort, onboarding and task-specific ease-of-use widgets",
+    "reads": [
+      "user flows",
+      "skill gaps",
+      "support requests"
+    ],
+    "writes": [
+      "helpful widget proposals",
+      "clear UX microcopy"
+    ],
+    "handoff": "Purple Pearl",
+    "rule": "Prioritize usefulness without pretending unbuilt widgets exist."
   }
 ]
