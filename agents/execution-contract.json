@@ -3,9 +3,73 @@
   "orchestrator": "Infinity / C13b0",
   "ownerAuthorization": "Owner requested building, correcting and publishing existing Infinity projects.",
   "design": "Oracle Octaves: Android first, parchment background, white cards, red Phi controls, 44px targets, readable text. New York means newly created work, not a location.",
-  "steps": ["read README and exact owner acceptance criteria", "claim one repository/file lease", "spawn useful color specialists for missing skills", "inspect actual deployed behavior with Cloudflare Browser at 360x800", "generate smallest source patch using Infinity GPT", "run repository checks", "independent model review of patch and test evidence", "commit source with base-SHA conflict check", "deploy through configured existing path", "inspect deployed Android behavior", "publish human-readable evidence or exact blocker", "create child jobs for remaining defects"],
-  "tools": ["GitHub source reader and scoped writer", "Infinity GPT gateway", "Node syntax and repository tests", "Cloudflare Browser Rendering", "existing GitHub Pages / Cloudflare deployment adapters", "read-only wallet and catalog adapters when authorized"],
-  "never": ["replay old messages as fresh", "claim a repair from a source read", "mark complete before deployed verification", "mint or transfer coins as a repair side effect", "invent tool connections"],
-  "limits": {"filesPerPatch": 4, "patchBytes": 100000, "iterationsPerJob": 3, "parallelWritersPerRepository": 1},
-  "missingTools": "Record the exact missing adapter or credential binding. Instructions alone do not connect a tool."
+  "steps": [
+    "read README and exact owner acceptance criteria",
+    "claim one repository/file lease",
+    "spawn useful color specialists for missing skills",
+    "inspect actual deployed behavior with Cloudflare Browser at 360x800",
+    "generate smallest source patch using Infinity GPT",
+    "run repository checks",
+    "independent model review of patch and test evidence",
+    "GPT Purple arbitrates using owner criteria, proposed patch, independent review and passing test evidence; reject or block prevents commit",
+    "commit source with base-SHA conflict check",
+    "deploy through configured existing path",
+    "inspect deployed Android behavior",
+    "publish human-readable evidence or exact blocker",
+    "create child jobs for remaining defects"
+  ],
+  "tools": [
+    "GitHub source reader and scoped writer",
+    "Infinity GPT gateway",
+    "Node syntax and repository tests",
+    "Cloudflare Browser Rendering",
+    "existing GitHub Pages / Cloudflare deployment adapters",
+    "read-only wallet and catalog adapters when authorized"
+  ],
+  "never": [
+    "replay old messages as fresh",
+    "claim a repair from a source read",
+    "mark complete before deployed verification",
+    "mint or transfer coins as a repair side effect",
+    "invent tool connections"
+  ],
+  "limits": {
+    "filesPerPatch": 4,
+    "patchBytes": 100000,
+    "iterationsPerJob": 3,
+    "parallelWritersPerRepository": 1
+  },
+  "missingTools": "Record the exact missing adapter or credential binding. Instructions alone do not connect a tool.",
+  "arbitrator": {
+    "id": "gpt-purple",
+    "name": "GPT Purple",
+    "role": "Final arbitration of agent disagreements, patch acceptance and release readiness",
+    "requires": [
+      "owner job and acceptance criteria",
+      "immutable source revision",
+      "independent review",
+      "passing repository checks",
+      "deployment evidence before completion"
+    ],
+    "decisions": [
+      "approve",
+      "reject",
+      "blocked"
+    ],
+    "cannotGrantCredentials": true
+  },
+  "repositoryAccess": {
+    "owner": "www-infinity4",
+    "requestedScope": "all owner repositories",
+    "ownerAuthorizedOperations": [
+      "read",
+      "write"
+    ],
+    "authorizationSource": "Owner explicitly requested Moltnook bots read and write access to all repositories and GPT Purple arbitration on 2026-10-10.",
+    "effectiveScope": "Determined by each runner credential and installed executor adapter; never inferred from this contract.",
+    "requiredBinding": "Server-side GitHub App installation token or existing GHP credential with contents read/write for every owner repository.",
+    "credentialExposure": "Never send credentials to the site browser or public activity feed.",
+    "crossRepositoryExecutorStatus": "not_connected",
+    "leases": "One writer per repository; record exact base SHA and reject stale writes."
+  }
 }
