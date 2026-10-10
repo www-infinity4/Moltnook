@@ -16,7 +16,7 @@
    'purple-pleasure':['Purple Pleasure','purple'],
    'purple-people-eater':['Purple People Eater','purple']
  };
- let all=[],messages=[],generatedAt='',lastRun=null,repair=null,updating=false;
+ let all=[],messages=[],generatedAt='',lastRun=null,repair=null,updating=false,lastSnapshot='';
  const safe=url=>{try{const u=new URL(url);return u.protocol==='https:'&&u.hostname==='github.com'?u.href:null}catch{return null}};
  const link=(text,url)=>{const u=safe(url),a=make(u?'a':'span','mi-link',text);if(u){a.href=u;a.target='_blank';a.rel='noopener noreferrer'}return a};
  const pretty=id=>roles[id]?.[0]||String(id||'Agent');
@@ -32,7 +32,8 @@
      item.append(make('strong','',pretty(row.agent)+' → '+pretty(row.to)),make('span','',row.phase+' · '+row.project));
      mount.append(item);
    }
-   evidence.forEach(x=>add(x,false));evidence.forEach(x=>add(x,true));
+   evidence.forEach(x=>add(x,false));
+   mount.style.animation='none';
    mount.style.setProperty('--mi-scroll',String(evidence.length*220)+'px');
  }
  function renderJobs(){
@@ -80,7 +81,7 @@
  function render(){
    $('#mi-count').textContent=String(all.length);
    $('#mi-checked').textContent=String(all.filter(x=>x.head).length);
-   $('#mi-updated').textContent=generatedAt?'Last verified '+date(generatedAt):'Job catalog loaded; cycle not yet published';
+   $('#mi-updated').textContent=generatedAt?'Checked every 10 seconds · latest evidence '+date(generatedAt):'Job catalog loaded; cycle not yet published';
    $('#mi-mode').textContent=repair?('Repair sweep: '+repair.applied+' patches, '+repair.unresolved.length+' unresolved'):(lastRun?'Verified GitHub inspection and write receipts':'Queue ready · awaiting evidence run');
    const run=$('#mi-run-link');const url=safe(lastRun);if(url)run.href=url;
    renderJobs();renderTalk();renderTicker();
@@ -97,7 +98,8 @@
      ]);
      if(!Array.isArray(catalog.jobs))throw Error('Invalid job catalog');
      all=(report?.jobs?.length?report.jobs:catalog.jobs).sort((a,b)=>a.priority-b.priority||String(a.id).localeCompare(String(b.id)));
-     messages=report?.messages||[];
+     messages=[...new Map((report?.messages||[]).map(row=>[row.id||JSON.stringify(row),row])).values()];
+     for(const agent of report?.agents||[])roles[agent.id]=[agent.name,agent.color];
      repair=sweep?.schemaVersion===1&&Array.isArray(sweep.unresolved)?sweep:null;
      if(repair&&repair.runId){
        const receipt='https://github.com/www-infinity4/Moltnook/actions/runs/'+encodeURIComponent(repair.runId);
@@ -108,7 +110,8 @@
      messages.sort((a,b)=>Date.parse(b.when||0)-Date.parse(a.when||0));
      generatedAt=report?.generatedAt||'';
      lastRun=report?.runUrl||null;
-     render();
+     const snapshot=JSON.stringify([all,messages,generatedAt,repair]);
+     if(snapshot!==lastSnapshot){lastSnapshot=snapshot;render();}
    }catch(error){
      $('#mi-updated').textContent='Could not retrieve the job evidence. Recheck connection.';
      console.warn('Moltnook verified iteration temporarily unavailable',error);
@@ -116,6 +119,6 @@
  }
  $('#mi-filter').addEventListener('change',renderJobs);
  $('#mi-update').addEventListener('click',load);
- load();setInterval(()=>{if(!document.hidden)void load()},60000);
+ load();setInterval(()=>{if(!document.hidden)void load()},10000);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)void load()});
 })();
