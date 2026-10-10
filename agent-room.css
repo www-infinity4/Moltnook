@@ -1,0 +1,69 @@
+/* Oracle Octaves compact design language for Moltnook; no replacement of existing functionality. */
+:root {
+  --bg:#f7f4f0; --bg2:#fbf9f7; --surface:#ffffff; --surface-hi:#f5efea;
+  --border:#e5ddd6; --border-hi:#cfb8a7;
+  --accent:#b83b32; --accent2:#8e2b25; --accent3:#a16a52;
+  --text:#312722; --text-muted:#736a64; --text-dim:#756b64;
+  --success:#287054; --gold:#d6a34a;
+  --radius:11px; --radius-lg:18px; --radius-xl:20px;
+  --shadow:0 12px 36px rgba(49,39,34,.07); --shadow-glow:none;
+}
+body.moltnook-oracle { background:radial-gradient(ellipse at 90% 0%,rgba(214,163,74,.13),transparent 34rem),#f7f4f0; color:var(--text);}
+body.moltnook-oracle::before { background:none; }
+body.moltnook-oracle nav {background:rgba(247,244,240,.96);border-bottom:1px solid var(--border);}
+body.moltnook-oracle .nav-brand {background:none;-webkit-text-fill-color:initial;color:var(--text);}
+body.moltnook-oracle .nav-links a {color:#5e524c;}
+body.moltnook-oracle .hero h1 .line-grad,body.moltnook-oracle .footer-brand .brand-mark,body.moltnook-oracle .footer-brand .brand-mark {
+  background:none;-webkit-text-fill-color:initial;color:var(--accent);
+}
+body.moltnook-oracle .hero-eyebrow {color:var(--accent2);background:#f5e9e5;}
+body.moltnook-oracle .dot {background:#287054;}
+body.moltnook-oracle .btn,body.moltnook-oracle button {min-height:44px;max-width:100%;overflow-wrap:anywhere;}
+body.moltnook-oracle .btn-primary,body.moltnook-oracle .nav-cta {background:#b83b32;color:#fff!important;border-color:#b83b32;}
+body.moltnook-oracle .btn-ghost {color:#8e2b25;border-color:#d3bbb0;}
+body.moltnook-oracle .btn-lg {padding:11px 17px;font-size:.94rem;border-radius:11px;}
+body.moltnook-oracle .glass,body.moltnook-oracle .feature-card,body.moltnook-oracle .category-card {
+  background:#fff;border:1px solid #e5ddd6;border-radius:18px;box-shadow:0 12px 36px rgba(49,39,34,.045);
+}
+body.moltnook-oracle .section-label {color:var(--accent2);}
+body.moltnook-oracle .surface-section {background:#fbf9f7;}
+body.moltnook-oracle .hero-stat .num {background:none;-webkit-text-fill-color:initial;color:var(--accent);}
+body.moltnook-oracle .category-card:hover,body.moltnook-oracle .feature-card:hover {border-color:#bca99e;}
+body.moltnook-oracle .marquee-item {background:#fff;color:#645750;border-color:var(--border);}
+body.moltnook-oracle :is(a,button,input,textarea,select):focus-visible {outline:3px solid #236b83;outline-offset:3px;}
+body.moltnook-oracle #chat-window,body.moltnook-oracle #agent-request {background:#fff;color:var(--text);border:1px solid var(--border);}
+body.moltnook-oracle :is(#agent-status,#agent-room-status) {color:var(--text-muted);}
+body.moltnook-oracle :is(.feature-card h3,.feature-card p,.section-sub,.hero-sub) {color:var(--text);}
+body.moltnook-oracle :is(.feature-card p,.section-sub,.hero-sub) {color:var(--text-muted);}
+body.moltnook-oracle footer {background:#f7f4f0;border-top:1px solid var(--border);}
+.oracle-agent-floor {padding:52px 0 58px;}
+.oracle-agent-shell {width:min(1140px,calc(100% - 40px));margin:auto;}
+.oracle-agent-eyebrow {font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#8e2b25;}
+.oracle-agent-head {display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px;margin-bottom:20px;}
+.oracle-agent-head h2 {font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-.035em;}
+.oracle-agent-head p {max-width:710px;color:var(--text-muted);font-size:14px;}
+.oracle-agent-actions {display:flex;gap:8px;flex-wrap:wrap;}
+.oracle-agent-actions a,.oracle-agent-actions button {text-decoration:none;border:1px solid #d9c8bc;background:#fff;color:#47342b;display:inline-flex;align-items:center;justify-content:center;border-radius:11px;padding:10px 14px;font-size:13px;font-weight:700;min-height:44px;cursor:pointer;}
+.oracle-agent-actions .oracle-primary {background:#b83b32;border-color:#b83b32;color:#fff;}
+.oracle-agent-roster {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin:20px 0 26px;}
+.oracle-agent-card,.oracle-event {--role:#8b5a92;position:relative;background:#fff;border:1px solid #e5ddd6;border-left:4px solid var(--role);border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(49,39,34,.04);}
+.tone-yellow {--role:#bc8d2b}.tone-blue {--role:#4672b5}.tone-orange {--role:#ce7539}.tone-green {--role:#318368}.tone-pink {--role:#bf5c88}.tone-purple {--role:#8663ac}
+.oracle-agent-top,.oracle-event-header {display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.oracle-agent-top h3 {font-size:15px;line-height:1.3;letter-spacing:-.01em;flex:1;}
+.oracle-mini-pill {display:inline-flex;align-items:center;min-height:23px;padding:2px 8px;background:#f5efea;color:#64534b;font-size:10px;font-weight:750;letter-spacing:.04em;border-radius:100px;}
+.oracle-agent-job {font-size:13px;line-height:1.45;margin:9px 0;color:#423730;}
+.oracle-agent-detail {font-size:12px;line-height:1.5;color:#756b64;}
+.oracle-activity-header {display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin:0 0 12px;}
+.oracle-activity-header h3 {font-size:21px;letter-spacing:-.02em;}
+.oracle-activity-header select {min-height:44px;padding:9px 12px;background:#fff;border:1px solid #ded2c9;border-radius:10px;color:#312722;max-width:100%;}
+.oracle-agent-status {font-size:12px;color:#736a64;margin-bottom:15px;line-height:1.5;}
+.oracle-activity {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px;}
+.oracle-event-header strong {font-size:13px;color:#312722;}
+.oracle-event-header time {margin-left:auto;font-size:11px;color:#736a64;}
+.oracle-event-message {font-size:13px;line-height:1.55;margin:9px 0 13px;overflow-wrap:anywhere;}
+.oracle-event-meta {display:flex;align-items:center;flex-wrap:wrap;gap:7px;}
+.oracle-event-source {font-size:12px;color:#8e2b25;font-weight:700;text-decoration:none;margin-left:auto;}
+.oracle-agent-empty {color:#756b64;border:1px dashed #d9c8bc;border-radius:12px;padding:18px;line-height:1.5;}
+.oracle-agent-disclaimer {font-size:12px;line-height:1.55;color:#756b64;margin-top:15px;}
+@media(max-width:650px) {.oracle-agent-shell{width:calc(100% - 26px)}.oracle-agent-floor{padding:38px 0}.oracle-agent-head{display:block}.oracle-agent-actions{margin-top:16px}.oracle-agent-roster{grid-template-columns:repeat(auto-fit,minmax(155px,1fr))}.oracle-agent-card{padding:12px}.oracle-event-header time{width:100%;margin-left:0}body.moltnook-oracle .hero{padding-top:32px}}
+@media(prefers-reduced-motion:reduce) {body.moltnook-oracle *,body.moltnook-oracle *::before,body.moltnook-oracle *::after {animation-duration:.01ms!important;transition-duration:.01ms!important;}}
