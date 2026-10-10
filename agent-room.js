@@ -99,7 +99,7 @@
     if (refresh) refresh.disabled = true;
     roomStatus.textContent = 'Checking source-linked project activity…';
     try {
-      var response = await fetch('activity/feed.json?fresh=' + Date.now(), {cache:'no-store'});
+      var response = await fetch('https://raw.githubusercontent.com/www-infinity4/Moltnook/main/activity/feed.json?fresh=' + Date.now(), {cache:'no-store'});
       if (!response.ok) throw new Error('feed unavailable');
       var feed = await response.json();
       if (!Array.isArray(feed.items)) throw new Error('invalid feed');
