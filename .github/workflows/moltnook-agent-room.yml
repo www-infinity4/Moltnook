@@ -1,0 +1,58 @@
+name: Moltnook verified agent room
+on:
+  schedule:
+    - cron: "14 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "agent-room.js"
+      - "agent-room.css"
+      - "agents/**"
+      - ".github/scripts/**"
+      - ".github/workflows/moltnook-agent-room.yml"
+      - "index.html"
+  issues:
+    types: [opened, reopened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: moltnook-agent-room
+  cancel-in-progress: false
+
+jobs:
+  activity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify deterministic agent routing
+        run: node --test agents/tests/routing.test.mjs
+      - name: Comment on new agent job
+        if: github.event_name == 'issues'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/triage-agent.mjs
+      - name: Publish source-linked activity
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/build-agent-feed.mjs
+      - name: Commit updated evidence feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add activity/feed.json
+          if git diff --cached --quiet; then
+            echo "No new feed changes"
+          else
+            git commit -m "Refresh verified Moltnook agent activity [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
