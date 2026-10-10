@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "mission": "Owner requests first; read actual README, current code and CI before changing a file. Route work by color, preserve wallet ledgers and verify deployed work.",
+  "priorityPolicy": "0: owner-critical activation and wallet; 1: broken experiences; 2: continuity and research",
+  "autoExecute": {
+    "moltnook": "GitHub Actions can commit verified generated evidence to this repository",
+    "crossRepository": "Requires an installed write-capable runner on each owning repository; observation is not edit authority",
+    "externalChats": "ChatGPT/Gemini chat transcripts must be explicitly exported or connected with authorized integration; not read automatically"
+  },
+  "jobs": [
+    {
+      "id": "MN-001",
+      "priority": 0,
+      "title": "Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical",
+      "repo": "Moltnook",
+      "agent": "greenbeans",
+      "next": "pink-panther",
+      "checkPaths": [
+        "index.html",
+        "agent-room.js",
+        "agent-room.css"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "MN-002",
+      "priority": 0,
+      "title": "Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence",
+      "repo": "Moltnook",
+      "agent": "bluth",
+      "next": "greenbeans",
+      "checkPaths": [
+        "agents/roster.json",
+        ".github/workflows/moltnook-agent-room.yml"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-001",
+      "priority": 0,
+      "title": "Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity",
+      "repo": "QuantaPhi",
+      "agent": "blueberry",
+      "next": "pink-panther",
+      "checkPaths": [
+        "wallet-runtime.js",
+        "star-coin-cloud.js",
+        "fred-spaces-radio.js"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-002",
+      "priority": 0,
+      "title": "Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards",
+      "repo": "QuantaPhi",
+      "agent": "pink-panther",
+      "next": "greenbeans",
+      "checkPaths": [
+        "phi-story-writer.js",
+        "infinite-book.js",
+        "test/starcoin-wallet-modal-sync.test.cjs"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "C-001",
+      "priority": 1,
+      "title": "Restore Code Phi live iteration, reliable previews and website-builder search handoff",
+      "repo": "Omni-Phi",
+      "agent": "greenbeans",
+      "next": "pink-panther",
+      "checkPaths": [
+        "README.md"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-003",
+      "priority": 1,
+      "title": "Keep Reads and Realms infinite, original, mystery/adventure/ghost/invention stories",
+      "repo": "QuantaPhi",
+      "agent": "gold-diggers-ink",
+      "next": "purple-pearl",
+      "checkPaths": [
+        "infinite-book.js",
+        "infinite-book-discovery.js"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-004",
+      "priority": 1,
+      "title": "Keep Story Writer light blue; preserve fantasy keywords, story illustrations and paid actions",
+      "repo": "QuantaPhi",
+      "agent": "purple-pearl",
+      "next": "pink-panther",
+      "checkPaths": [
+        "phi-story-writer.css",
+        "phi-story-writer.js"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "B-001",
+      "priority": 1,
+      "title": "Repair Bitcoin Crusher foot button and in-page research/history viewer",
+      "repo": "Bitcoin-Crusher",
+      "agent": "naked-gold-digger",
+      "next": "greenbeans",
+      "checkPaths": [
+        "README.md"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-005",
+      "priority": 1,
+      "title": "Audit image generation caption spelling, fix-image source handoff and retries",
+      "repo": "QuantaPhi",
+      "agent": "pink-panther",
+      "next": "greenbeans",
+      "checkPaths": [
+        "phi-image-builder.js",
+        "phi-image-type-studio.js"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "CL-001",
+      "priority": 1,
+      "title": "Connect Claude-Flow source-verified job intake with scoped build and review receipts",
+      "repo": "claude-flow",
+      "agent": "greenbeans",
+      "next": "purple-people-eater",
+      "checkPaths": [
+        "phi/moltnook-agent-bridge.json",
+        "phi/scripts/run-moltnook-observer.mjs"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "Q-006",
+      "priority": 2,
+      "title": "Restore paired Quant + Infinity search commits and no mint on refresh",
+      "repo": "QuantaPhi",
+      "agent": "blueberry",
+      "next": "pink-panther",
+      "checkPaths": [
+        "search-wallet-sync.js",
+        "cloud-wallet-client.js"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "OR-001",
+      "priority": 2,
+      "title": "Check physics and hydrogen portal claims against measurable evidence",
+      "repo": "Oracle-Octaves",
+      "agent": "orange-julius",
+      "next": "purple-people-eater",
+      "checkPaths": [
+        "README.md"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "MN-003",
+      "priority": 2,
+      "title": "Make reusable per-repository read/repair dashboard without publishing any visitor's credentials",
+      "repo": "Moltnook",
+      "agent": "purple-pleasure",
+      "next": "greenbeans",
+      "checkPaths": [
+        "README.md",
+        "AGENTS.md"
+      ],
+      "status": "queued",
+      "source": "Owner-requested Infinity backlog, 2026-10-10",
+      "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
+      "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    }
+  ]
+}
