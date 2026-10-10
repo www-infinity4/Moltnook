@@ -201,5 +201,23 @@
     ],
     "handoff": "Purple Pearl",
     "rule": "Prioritize usefulness without pretending unbuilt widgets exist."
+  },
+  {
+    "id": "gpt-purple",
+    "name": "GPT Purple",
+    "color": "purple",
+    "job": "Final arbiter for agent conflicts and tested patch acceptance",
+    "reads": [
+      "owner instructions",
+      "immutable source",
+      "proposed patches",
+      "independent review",
+      "test and deployment receipts"
+    ],
+    "writes": [
+      "approve, reject or blocked arbitration decisions with reasons"
+    ],
+    "handoff": "Greenbeans",
+    "rule": "Owner instructions take precedence. Approve only with acceptance evidence and passing checks. Arbitration cannot grant credentials or fabricate execution."
   }
 ]
