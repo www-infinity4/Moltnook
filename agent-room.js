@@ -95,6 +95,20 @@
         when:x.created_at,url:url,message:'Project event: ' + title + '. Check its source before changing anything.'};
     });
   }
+  async function readVerifiedExecutions() {
+    // Only GitHub Actions in the user's Claude-Flow repository publishes this evidence.
+    // These are measured tool actions, not invented AI conversations or successful deploys.
+    try {
+      var response = await fetch('https://raw.githubusercontent.com/www-infinity4/claude-flow/main/phi/state/moltnook-conversation.json?fresh=' + Date.now(), {cache:'no-store'});
+      if (!response.ok) return [];
+      var doc = await response.json();
+      if (!doc || !Array.isArray(doc.messages)) return [];
+      return doc.messages.filter(function (entry) {
+        return entry && typeof entry.agent === 'string' && typeof entry.message === 'string'
+          && typeof entry.when === 'string' && safeLink(entry.url);
+      }).slice(-35);
+    } catch (_) { return []; }
+  }
   async function loadFeed() {
     if (refresh) refresh.disabled = true;
     roomStatus.textContent = 'Checking source-linked project activity…';
@@ -103,13 +117,19 @@
       if (!response.ok) throw new Error('feed unavailable');
       var feed = await response.json();
       if (!Array.isArray(feed.items)) throw new Error('invalid feed');
-      lastFeed = feed.items; setProjects(lastFeed); renderEvents();
+      var executed = await readVerifiedExecutions();
+      lastFeed = executed.concat(feed.items).sort(function (a,b) {
+        return Date.parse(b.when || 0) - Date.parse(a.when || 0);
+      });
+      setProjects(lastFeed); renderEvents();
       var at = feed.generatedAt ? new Date(feed.generatedAt).toLocaleString() : 'unknown';
-      roomStatus.textContent = 'GitHub evidence feed · refreshed ' + at + ' · automated routing notes; executions require separate receipts.';
+      roomStatus.textContent = executed.length + ' observed Claude-Flow tool events · ' + feed.items.length + ' project records · refreshed ' + at + '. Source checks do not prove model editing or deployed changes.';
     } catch (_) {
       try {
-        lastFeed = await fallback();setProjects(lastFeed);renderEvents();
-        roomStatus.textContent = 'Live GitHub event fallback · routing observation only. Scheduled feed has not published yet.';
+        var executedFallback = await readVerifiedExecutions();
+        lastFeed = executedFallback.concat(await fallback()).sort(function(a,b){return Date.parse(b.when||0)-Date.parse(a.when||0);});
+        setProjects(lastFeed);renderEvents();
+        roomStatus.textContent = 'Live GitHub fallback and ' + executedFallback.length + ' verified tool events; project feed currently unavailable.';
       } catch (_) {
         activityRoot.replaceChildren(el('p','oracle-agent-empty','Source activity is temporarily unavailable. No active work can be verified.'));
         roomStatus.textContent = 'Could not verify activity. The room will not invent agent conversations.';
