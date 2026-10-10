@@ -11,7 +11,7 @@ export async function captureSourceViews({workspace,repository,baseSha,commitSha
     const url=new URL(route.request().url());if(url.origin!=='https://preview.invalid'||route.request().method()!=='GET')return route.fulfill({status:503,body:'Service disconnected in immutable source preview'});
     let p;try{p=decodeURIComponent(url.pathname).slice(1)||entry;}catch{return route.fulfill({status:400,body:'Invalid path'})}
     if(p.includes('..')||p.startsWith('.git')||p.startsWith('.env'))return route.fulfill({status:404,body:''});
-    try{const body=read(ref,p);return route.fulfill({body,contentType:p.endsWith('.html')?'text/html':p.endsWith('.css')?'text/css':/\.(?:js|mjs)$/.test(p)?'application/javascript':'text/plain'});}catch{return route.fulfill({status:404,body:''})}
+    try{const body=read(ref,p);return route.fulfill({body,contentType:p.endsWith('.html')?'text/html; charset=utf-8':p.endsWith('.css')?'text/css; charset=utf-8':/\.(?:js|mjs)$/.test(p)?'application/javascript; charset=utf-8':'text/plain'});}catch{return route.fulfill({status:404,body:''})}
    });
    const page=await context.newPage();await page.goto('https://preview.invalid/'+entry,{waitUntil:'networkidle'});
    const text=(await page.locator('body').innerText()).trim();if(text.length<20)throw Error('Page needs its framework build-preview adapter; refusing to publish an empty view');
