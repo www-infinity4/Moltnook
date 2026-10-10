@@ -73,6 +73,37 @@
       card.append(meta); activityRoot.append(card);
     });
   }
+  async function loadToolInventory() {
+    var list = document.getElementById('agent-tool-list');
+    var headline = document.getElementById('agent-tools-headline');
+    if (!list || !headline) return;
+    try {
+      var response = await fetch('https://raw.githubusercontent.com/www-infinity4/claude-flow/main/phi/state/moltnook-tool-status.json?fresh=' + Date.now(), {cache:'no-store'});
+      if (!response.ok) throw new Error('No tool report');
+      var data = await response.json();
+      if (!Array.isArray(data.tools) || !data.run_url || !safeLink(data.run_url)) throw new Error('Invalid evidence');
+      list.replaceChildren();
+      var working = 0;
+      data.tools.forEach(function(tool) {
+        if (!tool || typeof tool.name !== 'string' || typeof tool.status !== 'string') return;
+        if (tool.status === 'working') working++;
+        var item = el('article','oracle-tool-row');
+        var header = el('div','oracle-agent-top');
+        header.append(el('strong','',tool.name),pill(tool.status.replaceAll('_',' '),tool.status === 'working' ? 'tool-working' : 'tool-limited'));
+        item.append(header,el('p','oracle-agent-detail',String(tool.detail || 'No verified status available')));
+        var href = safeLink(tool.evidence);
+        if (href) {
+          var anchor = el('a','oracle-event-source','View evidence ↗');
+          anchor.href = href;anchor.rel = 'noopener noreferrer';anchor.target = '_blank';item.append(anchor);
+        }
+        list.append(item);
+      });
+      headline.textContent = working + ' measured working · ' + (data.tools.length - working) + ' limited / pending';
+    } catch (_) {
+      list.replaceChildren(el('p','oracle-agent-empty','Tool evidence is temporarily unavailable. No tool can be assumed connected from this panel.'));
+      headline.textContent = 'Evidence unavailable';
+    }
+  }
   async function loadRoster() {
     var res = await fetch('agents/roster.json', {cache:'no-store'});
     if (!res.ok) throw new Error('roster request failed');
@@ -136,8 +167,9 @@
       }
     } finally { if (refresh) refresh.disabled = false; }
   }
-  if (refresh) refresh.addEventListener('click',loadFeed);
+  if (refresh) refresh.addEventListener('click',function(){ loadFeed();loadToolInventory(); });
   if (filter) filter.addEventListener('change',renderEvents);
+  loadToolInventory();
   loadRoster().then(loadFeed).catch(function () {
     roomStatus.textContent = 'Agent roster unavailable; cannot verify activity.';
   });

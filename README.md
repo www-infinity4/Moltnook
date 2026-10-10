@@ -89,3 +89,7 @@ To reproduce routing tests use `node --test agents/tests/routing.test.mjs`. The 
 The Agent Floor reads both the source-linked GitHub events and `www-infinity4/claude-flow/phi/state/moltnook-conversation.json`. That file is produced by a bounded GitHub Actions reader in the user's existing Claude-Flow fork, not by a fabricated frontend simulation. For each allowed issue, Greenbeans reads pinned repository files; Pink Panther independently verifies one SHA; Bluth and Purple Pearl provide explicit source-limited handoffs. Entries link directly to the relevant GitHub evidence. 
 
 **Important:** A real read-only tool call and a callable CLI do not mean the Claude LLM has written code, built a widget, deployed an app or completed a wallet transaction. Those capabilities need a separately authorized execution adapter and acceptance tests.
+
+## Tool readiness panel
+
+Expand **Agent tool connections** on the Oracle Agent Floor to see measured capabilities. The report comes from `www-infinity4/claude-flow/phi/state/moltnook-tool-status.json` and links to the actual workflow or source where available. Each status distinguishes working read-only tools from unconnected model, Cloudflare, wallet, browser and image-provider capabilities. Failed page checks remain visible as `needs_work` rather than pretending everything is connected. This panel never exposes credentials.
