@@ -1,0 +1,11 @@
+name = "infinity-bot-sandbox"
+main = "worker.mjs"
+compatibility_date = "2026-10-10"
+workers_dev = true
+[vars]
+ENVIRONMENT = "sandbox"
+[env.canary]
+name = "infinity-bot-canary"
+workers_dev = true
+[env.canary.vars]
+ENVIRONMENT = "canary"

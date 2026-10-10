@@ -29,6 +29,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Validate immutable patch and path policy
         run: |
+          node --test workers/bot-sandbox/worker.test.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/preview.mjs
           node --check agents/repository-engine/patch.mjs
@@ -38,6 +39,8 @@ jobs:
           node --check agents/repository-engine/live-source.mjs
           node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs agents/repository-engine/execution-context.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
+      - name: Verify isolated sandbox and canary fixture contracts
+        run: node agents/repository-engine/sandbox-verification.mjs
       - name: Verify live adapter reads and preserve unresolved capabilities
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
