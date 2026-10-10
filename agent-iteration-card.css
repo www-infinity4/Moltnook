@@ -1,0 +1,49 @@
+/* Moltnook Oracle agent iteration machine; truthful movement, accessible stop on reduced motion. */
+#moltnook-iterations{margin:16px 0 27px;background:#fff;border:2px solid #d3c6b7;border-radius:19px;box-shadow:0 12px 34px #4a332515;padding:17px;color:#312722;overflow:hidden}
+#moltnook-iterations *{box-sizing:border-box}
+#moltnook-iterations .mi-titlebar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#moltnook-iterations .mi-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:#9d342d}
+#moltnook-iterations h3{margin:5px 0;font-size:clamp(21px,4vw,27px);line-height:1.2;color:#32261f}
+#moltnook-iterations p{font-size:13px;line-height:1.55}
+#moltnook-iterations .mi-sub{max-width:760px;margin:7px 0;color:#62564f}
+#moltnook-iterations .mi-controls{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+#moltnook-iterations .mi-controls button,#moltnook-iterations .mi-controls a{font:700 12px/1.3 system-ui,sans-serif;min-height:42px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #cbbab0;border-radius:10px;color:#47342b;background:#fff}
+#moltnook-iterations .mi-controls button{cursor:pointer;background:#b83b32;color:#fff;border-color:#b83b32}
+#moltnook-iterations button:disabled{opacity:.65}
+#moltnook-iterations :is(button,a,summary,select):focus-visible{outline:3px solid #236b83;outline-offset:3px}
+#moltnook-iterations .mi-meta{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+#moltnook-iterations .mi-meta span{background:#f7f2ee;padding:6px 11px;border-radius:9px;border:1px solid #e4d9d0;font-size:11px;color:#58483f}
+#moltnook-iterations .mi-movement{overflow:hidden;background:#f6f2ed;border:1px solid #e6ddd3;border-radius:11px;padding:8px 0;margin:11px 0}
+#moltnook-iterations .mi-ticker-track{display:flex;align-items:center;gap:8px;white-space:nowrap;width:max-content;animation:moltnook-scroll 50s linear infinite}
+#moltnook-iterations .mi-movement:hover .mi-ticker-track{animation-play-state:paused}
+#moltnook-iterations .mi-ticker-item{border-left:4px solid var(--mi-accent,#537ac5);border-radius:6px;background:#fff;border-top:1px solid #e1d5ca;border-right:1px solid #e1d5ca;border-bottom:1px solid #e1d5ca;padding:7px 12px;display:inline-flex;gap:9px;align-items:center;font-size:11px}
+#moltnook-iterations .mi-ticker-item strong{color:#342821}
+#moltnook-iterations .mi-ticker-item span{color:#736057}
+@keyframes moltnook-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#moltnook-iterations .mi-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:15px}
+#moltnook-iterations .mi-panel{min-width:0}
+#moltnook-iterations .mi-panel-top{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:7px 0 10px}
+#moltnook-iterations h4{font-size:17px;line-height:1.2;color:#322820;margin:0}
+#moltnook-iterations select{min-height:41px;border-radius:10px;border:1px solid #cdbdb0;background:#fff;color:#3e3029;padding:7px;font-size:12px;max-width:100%}
+#moltnook-iterations .mi-agent-jobs{--mi-accent:#5286c6;border:1px solid #e4d8ce;border-left:4px solid var(--mi-accent);border-radius:12px;margin:8px 0;padding:0 10px;background:#fff}
+#moltnook-iterations .mi-agent-jobs summary{cursor:pointer;min-height:45px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;list-style-position:inside}
+#moltnook-iterations .mi-agent-jobs summary span{font-size:11px;color:#71645c}
+#moltnook-iterations .mi-task{padding:9px 4px 12px;border-top:1px solid #eee4db}
+#moltnook-iterations .mi-task p{margin:7px 0;color:#342b26;font-weight:650}
+#moltnook-iterations .mi-task small{display:block;color:#73665e;font-size:11px;line-height:1.4}
+#moltnook-iterations .mi-task-head{display:flex;justify-content:space-between;gap:9px;font-size:12px}
+#moltnook-iterations .mi-task-head b{color:#a23a31}
+#moltnook-iterations .mi-task-head small{background:#f3e9da;border-radius:6px;padding:3px 7px}
+#moltnook-iterations .mi-exchange{--mi-accent:#5286c6;background:#fcfaf8;border:1px solid #e5dbd0;border-left:4px solid var(--mi-accent);padding:11px;border-radius:12px;margin:7px 0}
+#moltnook-iterations .mi-exchange-top,#moltnook-iterations .mi-exchange-foot{display:flex;gap:10px;justify-content:space-between;align-items:start;flex-wrap:wrap}
+#moltnook-iterations .mi-exchange-top strong{font-size:12px}
+#moltnook-iterations .mi-exchange small{font-size:10px;color:#79695f}
+#moltnook-iterations .mi-exchange p{margin:6px 0 8px;overflow-wrap:anywhere}
+#moltnook-iterations .mi-link{font-size:11px;font-weight:750;color:#973830;text-decoration:underline;text-underline-offset:2px;margin-top:5px;display:inline-block}
+#moltnook-iterations .mi-empty{padding:11px;color:#79695f}
+#moltnook-iterations .mi-footer{margin:10px 0 0;padding-top:9px;border-top:1px solid #eaded3;color:#706055;font-size:11px!important}
+#moltnook-iterations .tone-yellow{--mi-accent:#e5b930}#moltnook-iterations .tone-blue{--mi-accent:#4c91d2}
+#moltnook-iterations .tone-orange{--mi-accent:#e6813c}#moltnook-iterations .tone-green{--mi-accent:#42a677}
+#moltnook-iterations .tone-pink{--mi-accent:#d96c9a}#moltnook-iterations .tone-purple{--mi-accent:#9d6bcb}
+@media(max-width:740px){#moltnook-iterations{padding:12px}#moltnook-iterations .mi-columns{grid-template-columns:1fr}#moltnook-iterations .mi-controls{width:100%}#moltnook-iterations .mi-controls>*{flex:1}}
+@media(prefers-reduced-motion:reduce){#moltnook-iterations .mi-ticker-track{animation:none;max-width:100%;overflow:auto}}
