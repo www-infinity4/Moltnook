@@ -5,6 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
+import {inspectRuntime,focusedTestCommand} from './runtime-baseline.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -31,18 +32,23 @@ async function checks(patched){
  const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name);}};
  const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
  const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
- if(focusedTests.length)run('Focused Node tests','node',['--test',...focusedTests]);
  let pkg;try{pkg=JSON.parse(await fs.readFile(path.join(workspace,'package.json'),'utf8'))}catch{}
  if(pkg){
   if(pkg.packageManager&&!pkg.packageManager.startsWith('npm@'))throw Error('Repository requires '+pkg.packageManager+' adapter');
-  if(!pkg.scripts?.test&&!pkg.scripts?.build)throw Error('Repository has no configured test/build acceptance command');
+  if(!pkg.scripts?.test&&!pkg.scripts?.build&&!focusedTests.length)throw Error('Repository has no configured test/build acceptance command');
   run('Install dependencies without lifecycle hooks','npm',['install','--ignore-scripts','--package-lock=false','--no-audit','--no-fund']);
-  if(pkg.scripts.test)run('Repository tests','npm',['run','test']);if(pkg.scripts.build)run('Repository build','npm',['run','build']);
+ }
+ const focusedArgs=focusedTestCommand(focusedTests,pkg);
+ if(focusedArgs)run('Focused Node tests with shared baseline','node',focusedArgs);
+ if(pkg){
+  if(pkg.scripts?.test)run('Repository tests','npm',['run','test']);if(pkg.scripts?.build)run('Repository build','npm',['run','build']);
  }else if(!runs.length)throw Error('Repository needs an acceptance adapter before committing this file type');
  report.tests={passed:true,runs};return report.tests;
 }
 try{
  await fs.mkdir('repository-receipts',{recursive:true});
+ report.baseline=await inspectRuntime();
+ if(!report.baseline.passed)throw Error('Runtime baseline missing: '+report.baseline.checks.filter(x=>!x.passed).map(x=>x.name).join(', '));
  await call('capability',{status:token?'credential_configured':'credential_missing'});
  if(token){let count=0,pushReported=0;for(let page=1;page<=20;page++){const repos=await github('user/repos?affiliation=owner&per_page=100&page='+page);for(const r of repos){if(r.owner.login!==OWNER)continue;count++;if(r.permissions?.push)pushReported++;}if(repos.length<100)break;}report.inventory={ownerRepositoriesVisible:count,reportedPushPermission:pushReported,note:'Reported account permissions; actual writes are proven by successful commits.'};await call('capability',{status:'credential_configured',repositoriesVisible:count});}
  lease=(await call('claim',{})).lease;
@@ -58,7 +64,7 @@ try{
   const baseSha=git('rev-parse','HEAD');report.baseSha=baseSha;
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
-  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused node --test for changed test files','existing npm test/build'],deployment:'not implemented for arbitrary repositories',forkCreation:'not implemented',adapterRegistry:'none'}}});
+  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused native Node tests with describe/it/test/hooks preloaded','existing npm test/build'],deployment:'not implemented for arbitrary repositories',forkCreation:'not implemented',adapterRegistry:'none'}}});
   report.plan=plan;
   if(!Array.isArray(plan.blockers))throw Error('Reader omitted unresolved blocker list');
   if(plan.blockers.length){
