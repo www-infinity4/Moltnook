@@ -69,3 +69,15 @@ npx serve .
 
 MIT
 
+
+## Oracle Octaves agent floor (October 2026)
+
+The Moltnook home page now uses the Oracle Octaves / Infinity Phi card language and has a color-coded **Agent Floor** at `#agent-floor`. The existing tools, Infinity AI chat, simulation, guestbook and wallet scripts are preserved.
+
+- Source-linked repository activity: `.github/scripts/build-agent-feed.mjs` reads issues, PRs and commits from Moltnook, Oracle Octaves, QuantaPhi, Infinity Phi, Omni Phi, Bitcoin Crusher, Mint-for-Infinity, News Phi, Claude-Flow and 501; `.github/workflows/moltnook-agent-room.yml` writes `activity/feed.json`.
+- Verified routing: an issue titled `[Agent Job] Your task` receives an automatic GitHub issue comment from a color desk. The comment explicitly describes next steps, not completed execution.
+- Roles and handoffs: `agents/roster.json` and `AGENTS.md`.
+- Transparent activity states: **proposed routing** or **observed closed**; closing a GitHub issue does not prove that production works.
+- Current limitation: the Claude-Flow fork is identified but has **not** been linked to an authenticated task runner in this commit. The page avoids inventing agent-to-agent execution.
+
+To reproduce routing tests use `node --test agents/tests/routing.test.mjs`. The GitHub Actions workflow also runs these tests before publishing the feed. The read-only frontend uses `agent-room.js` and `agent-room.css`; it requires no installed Android packages.
