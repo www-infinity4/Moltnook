@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T05:11:52.976Z",
+  "generatedAt": "2026-10-10T05:15:20.713Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-0dec21d15f9655cc28c343ec5bfd8cbd7421e530",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:15:07Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/0dec21d15f9655cc28c343ec5bfd8cbd7421e530",
+      "title": "Expose measured Claude-Flow tool connections in Moltnook (#10)",
+      "message": "I found a commit titled “Expose measured Claude-Flow tool connections in Moltnook (#10)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "claude-flow-commit-fe511341778c2586af50a9c1cfb62f83b46e76a4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:14:20Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/fe511341778c2586af50a9c1cfb62f83b46e76a4",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "claude-flow-commit-24a65faadb3b1d504c7614352838e7a28ae6d79f",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:13:41Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/24a65faadb3b1d504c7614352838e7a28ae6d79f",
+      "title": "Report measured Moltnook agent tool readiness (#4)",
+      "message": "I found a commit titled “Report measured Moltnook agent tool readiness (#4)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-144118eb9f4f19978915154a17e4e1e3ba201d71",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T05:11:53Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/144118eb9f4f19978915154a17e4e1e3ba201d71",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-831a5f136376e5e1a6410dccb1546553692a61f3",
       "agent": "greenbeans",
@@ -186,18 +234,6 @@
       "message": "I found a commit titled “Preserve single StarCoin reward path and attach exact card evidence”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "claude-flow-commit-28b3e0fd511a0d70a121842da2a586c5f7f122c7",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T04:59:16Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/28b3e0fd511a0d70a121842da2a586c5f7f122c7",
-      "title": "Add Moltnook Oracle persona intake to Phi orchestration (#1)",
-      "message": "I found a commit titled “Add Moltnook Oracle persona intake to Phi orchestration (#1)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Omni-Phi-commit-2e89765856dd6743f64e2f9c332b8fd2a9df6680",
       "agent": "blueberry",
       "to": "bluth",
@@ -244,30 +280,6 @@
       "url": "https://github.com/www-infinity4/Omni-Phi/commit/de92663a643403b810999abefdec4d8de17141fb",
       "title": "Add authenticated, idempotent Omni StarCoin action evidence outbox",
       "message": "I found a commit titled “Add authenticated, idempotent Omni StarCoin action evidence outbox”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "Moltnook-commit-78eaa28a2695433f8ace3ae805b44704dd5dd92f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T04:54:47Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/78eaa28a2695433f8ace3ae805b44704dd5dd92f",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-e2efac250d1159775ae0181b6bef06b3db85193c",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T04:54:35Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e2efac250d1159775ae0181b6bef06b3db85193c",
-      "title": "Oracle Octaves agent floor and source-linked Moltnook orchestration (#6)",
-      "message": "I found a commit titled “Oracle Octaves agent floor and source-linked Moltnook orchestration (#6)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-fad0659af849691b4493d0690f6aa070dd8eb9dd",
@@ -628,18 +640,6 @@
       "url": "https://github.com/www-infinity4/Infinity-Phi/commit/3508a2860cbc63866fc16f16504b4838ea45108d",
       "title": "Open Infinity search directly without intermediate redirect page flash",
       "message": "I found a commit titled “Open Infinity search directly without intermediate redirect page flash”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-ca7651f614a64268ca376719346654e73836c6a6",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-09-29T03:40:49Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/ca7651f614a64268ca376719346654e73836c6a6",
-      "title": "Test repository estate scanner",
-      "message": "I found a commit titled “Test repository estate scanner”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Infinity-Phi-commit-5921aae48050fbec08f86d8798766ad25f8d8119",
