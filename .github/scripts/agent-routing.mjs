@@ -15,7 +15,7 @@ const RULES = [
 export function routeEvent(event) {
   if (!event || typeof event.title !== 'string') throw new TypeError('Event title required');
   const title = event.title.replace(/\s+/g,' ').trim().slice(0,155);
-  const rule = RULES.find(r=>r.pattern.test(title + ' ' + (event.project || ''))) || {
+  const rule = RULES.find(r=>r.pattern.test(title)) || {
     agent:'purple-people-eater',to:'bluth',action:'Determine the real task and identify the tool or specialist it needs before changing anything.'
   };
   const kind = event.kind === 'PR' ? 'pull request' : event.kind === 'commit' ? 'commit' : 'issue';
