@@ -33,7 +33,7 @@ for(const repo of repos){
   ]);
   const mission=readme.ok&&readme.value?.content?
     Buffer.from(readme.value.content,'base64').toString('utf8').slice(0,40000):'';
-  const missionTitle=(mission.match(/^#\\s+(.+)$/m)?.[1]||'README title unavailable').slice(0,130);
+  const missionTitle=(mission.match(/^#\s+(.+)$/m)?.[1]||'README title unavailable').slice(0,130);
   const commit=commits.value?.[0],actions=runs.value?.workflow_runs||[];
   evidence.set(repo,{base,mission:mission?{title:missionTitle,url:link(repo,'/blob/main/README.md')}:null,commit:commit?.sha?{sha:commit.sha,
     when:commit.commit?.committer?.date||commit.commit?.author?.date,
