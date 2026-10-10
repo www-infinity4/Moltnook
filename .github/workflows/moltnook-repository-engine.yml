@@ -32,7 +32,8 @@ jobs:
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/preview.mjs
           node --check agents/repository-engine/patch.mjs
-          node --test agents/repository-engine/patch.test.mjs
+          node --check agents/repository-engine/repair-feedback.mjs
+          node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs
       - name: Reader handoff, engineer implementation, Pink review and GPT Purple arbitration
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}

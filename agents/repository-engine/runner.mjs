@@ -4,6 +4,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
 import {captureSourceViews} from './preview.mjs';
+import {repairWithFeedback} from './repair-feedback.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -27,7 +28,7 @@ async function sourceFile(file){safePath(file);const absolute=inside(workspace,f
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>180000)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function checks(patched){
- const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});throw Error('Repository check failed: '+name);}};
+ const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name);}};
  const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
  const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
  if(focusedTests.length)run('Focused Node tests','node',['--test',...focusedTests]);
@@ -68,18 +69,36 @@ try{
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
-  const proposal=await call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents}});report.proposalReason=proposal.reason;
-  if(proposal.edits?.some(e=>!Object.hasOwn(original,e.path)))throw Error('Engineer attempted a file absent from the reader handoff');
-  const patched=applyEdits(original,proposal.edits);
-  await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
-  const review=await call('engine-review',{evidence:{baseSha,plan,edits:proposal.edits,source:original}});report.review=review;
-  if(review.approved!==true)throw Error('Pink Panther rejected: '+review.reason);
-  for(const [file,content]of Object.entries(patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}
-  await checks(patched);testsPassed=true;
-  await event('pink-panther','Independent patch review approved; '+report.tests.runs.length+' actual repository checks passed. GPT Purple receives the outputs before any commit.');
-  const arbitration=await call('arbitrate',{evidence:{baseSha,plan,review,tests:report.tests,edits:proposal.edits,patched}});report.arbitration=arbitration;
-  await event('gpt-purple',arbitration.decision+': '+arbitration.reason);
-  if(arbitration.decision!=='approve')throw Error('GPT Purple '+arbitration.decision+': '+arbitration.reason);
+  report.attempts=[];
+  const repaired=await repairWithFeedback({
+   build:async feedback=>{
+    const proposal=await call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents,feedback,previousTests:report.tests}});report.proposalReason=proposal.reason;
+    if(proposal.edits?.some(e=>!Object.hasOwn(original,e.path)))throw Error('Engineer attempted a file absent from the reader handoff');
+    const patched=applyEdits(original,proposal.edits);
+    await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
+    report.proposal=proposal;
+    return {proposal,patched};
+   },
+   review:async candidate=>{
+    const review=await call('engine-review',{evidence:{baseSha,plan,edits:candidate.proposal.edits,source:original}});report.review=review;return review;
+   },
+   test:async candidate=>{
+    for(const [file,content]of Object.entries(candidate.patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}
+    await checks(candidate.patched);testsPassed=true;
+    await event('pink-panther','Independent patch review approved; '+report.tests.runs.length+' actual repository checks passed. GPT Purple receives the outputs before any commit.');
+    return report.tests;
+   },
+   arbitrate:async(candidate,review,tests)=>{
+    const arbitration=await call('arbitrate',{evidence:{baseSha,plan,review,tests,edits:candidate.proposal.edits,patched:candidate.patched}});report.arbitration=arbitration;
+    await event('gpt-purple',arbitration.decision+': '+arbitration.reason);return arbitration;
+   },
+   restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
+   onFeedback:async feedback=>{
+    feedback.reason=scrub(feedback.reason);report.attempts.push({...feedback,proposal:report.proposal,review:report.review,tests:report.tests,arbitration:report.arbitration});
+    await event(feedback.stage==='arbitration'?'gpt-purple':'pink-panther','Attempt '+feedback.attempt+' failed at '+feedback.stage+': '+feedback.reason.slice(0,240)+'. Exact feedback returns to Green; maximum three attempts.');
+   }
+  });
+  const {patched}=repaired.candidate;report.repairAttempt=repaired.attempt;
   // Prevent unrelated test/build output or concurrent edits from being included.
   for(const [file,content]of Object.entries(patched))if(await sourceFile(file)!==content)throw Error('Checks changed reviewed source: '+file);
   command('git',['fetch','origin',repo.default_branch],{env:credentialEnv()});if(git('rev-parse','origin/'+repo.default_branch)!==baseSha)throw Error('Repository head changed; retry reader against the new commit');
