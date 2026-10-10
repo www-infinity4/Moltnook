@@ -55,9 +55,10 @@ try{
   const baseSha=git('rev-parse','HEAD');report.baseSha=baseSha;
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
-  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400)}});
+  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','existing npm test/build'],deployment:'not implemented for arbitrary repositories',forkCreation:'not implemented',adapterRegistry:'none'}}}});
   if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
-  if(plan.blockers?.length)throw Error('Reader blocker: '+plan.blockers.join('; '));report.plan=plan;
+  report.plan=plan;
+  if(plan.blockers?.length)throw Error('Reader blocker: '+plan.blockers.join('; '));
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
