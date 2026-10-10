@@ -12,7 +12,7 @@ const RULES = [
  {pattern:/\b(simplify|ease|onboarding|plain language|help text|tutorial)\b/i,agent:'purple-pleasure',to:'purple-pearl',action:'Propose small supportive widgets and clear copy so the next step is obvious.'},
  {pattern:/\b(design|style|button|layout|oracle|card|accessibility|mobile|image)\b/i,agent:'purple-pearl',to:'greenbeans',action:'Use the Oracle Octaves controls consistently. Explain the user path before implementation.'},
  {pattern:/\b(story|writer|reader|article|book|content|episode)\b/i,agent:'gold-diggers-ink',to:'purple-pearl',action:'Map each source to the story without repeating material. Keep the result easy to read.'},
- {pattern:/\b(agent|skill|api|workflow|worker|deploy|integrat|build|claude|automation|git)\b/i,agent:'greenbeans',to:'pink-panther',action:'Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path.'};
+ {pattern:/\b(agent|skill|api|workflow|worker|deploy|integrat|build|claude|automation|git)\b/i,agent:'greenbeans',to:'pink-panther',action:'Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path.'}];
 export function routeEvent(event) {
   if (!event || typeof event.title !== 'string') throw new TypeError('Event title required');
   const title = event.title.replace(/\s+/g,' ').trim().slice(0,155);
