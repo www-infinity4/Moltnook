@@ -60,3 +60,7 @@ The room refreshes a public read-only feed from real repository metadata. The fe
 ### Working intake host
 
 Moltnook GitHub Issues are disabled (verified 410). New jobs are hosted in `www-infinity4/Oracle-Octaves` with the `[Agent Job]` prefix. The Oracle-host workflow posts a routed comment. The Claude-Flow fork polls those issues for its read-only queue; no backend privileges are granted to visitors by the form.
+
+## Live tool-observation stage (October 2026)
+
+The owner’s `claude-flow` fork now contains `phi/scripts/run-moltnook-observer.mjs`, a repository reader with immutable Git commit refs, explicit allowlist, per-run API cap, independent file-hash checking and persisted conversation evidence. Moltnook renders its last factual tool messages beside issue and commit activity. A small bounded observer is active in the scheduled workflow; no Claude model execution or arbitrary coding is implied.
