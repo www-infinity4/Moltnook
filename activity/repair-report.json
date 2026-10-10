@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "when": "2026-10-10T08:02:24.780Z",
+  "runner": "Greenbeans repair / Pink Panther verification",
+  "mode": "fix-and-report",
+  "scannedHtml": 4,
+  "scannedFiles": 17,
+  "applied": 0,
+  "repairCandidates": [],
+  "unresolved": [
+    {
+      "file": "guestbook/index.html",
+      "reference": "test-builder/index.html",
+      "reason": "ambiguous"
+    },
+    {
+      "file": "guestbook/index.html",
+      "reference": "test-user/index.html",
+      "reason": "ambiguous"
+    }
+  ],
+  "proof": "Only unique local file matches qualify for automatic repair.",
+  "sourceSha": "ef75035bd7e9c51755e7d8f48fcafbe77d13adce",
+  "runId": "38036491286"
+}
