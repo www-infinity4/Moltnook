@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T06:38:19.627Z",
+  "generatedAt": "2026-10-10T07:29:12.082Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,102 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-a004d833e040930be278733d48865a3b0202f8b4",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T07:17:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a004d833e040930be278733d48865a3b0202f8b4",
+      "title": "Verify masked StarCoin wallet sync and Story Writer payouts in CI",
+      "message": "I found a commit titled “Verify masked StarCoin wallet sync and Story Writer payouts in CI”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-c03966bfe4417279cb73dfa5b127a8879676bff6",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T07:13:29Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c03966bfe4417279cb73dfa5b127a8879676bff6",
+      "title": "Ship Story Writer, automatic image fixes, and StarCoin wallet reconciliation",
+      "message": "I found a commit titled “Ship Story Writer, automatic image fixes, and StarCoin wallet reconciliation”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "claude-flow-commit-571d663da9b79ed012bffddc4ae406c545fce747",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:49:34Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/571d663da9b79ed012bffddc4ae406c545fce747",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-d87be8bfd09376e109558bc168970cd03801d270",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:40:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d87be8bfd09376e109558bc168970cd03801d270",
+      "title": "Test live-authenticated wallet modal against cached StarCoin regression",
+      "message": "I found a commit titled “Test live-authenticated wallet modal against cached StarCoin regression”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-5cd2e97cbd623f69c059632984c4cf6149c9d800",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:40:47Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5cd2e97cbd623f69c059632984c4cf6149c9d800",
+      "title": "Regression tests: wallet modal reads authenticated StarQuest balance, not cached local count",
+      "message": "I found a commit titled “Regression tests: wallet modal reads authenticated StarQuest balance, not cached local count”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-cc3c3d8ec0f787d2aa11f793cc6b9b10c68342af",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:39:56Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/cc3c3d8ec0f787d2aa11f793cc6b9b10c68342af",
+      "title": "Load fixed StarQuest wallet modal refresh on QuantaPhi mobile",
+      "message": "I found a commit titled “Load fixed StarQuest wallet modal refresh on QuantaPhi mobile”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-14bad956080cc54d40465cc6acd44735a398c411",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:39:33Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/14bad956080cc54d40465cc6acd44735a398c411",
+      "title": "Refresh QuantaPhi wallet modal from verified StarQuest identity and label stale cached balances",
+      "message": "I found a commit titled “Refresh QuantaPhi wallet modal from verified StarQuest identity and label stale cached balances”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-9c30533001917e6f334e80689b2730925b67e442",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T06:38:19Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9c30533001917e6f334e80689b2730925b67e442",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Omni-Phi-commit-3db71c731e60ae3e00a3122bafe59e33047d7bc7",
       "agent": "blueberry",
@@ -112,78 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/db2d7052672c9365e82cb415b6c782a5293ada71",
       "title": "Activate automatic missing StarCoin receipt recovery and confirmed wallet display",
       "message": "I found a commit titled “Activate automatic missing StarCoin receipt recovery and confirmed wallet display”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-e76c58c439df708f2bd0d8192567dd10379affa6",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:18:04Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e76c58c439df708f2bd0d8192567dd10379affa6",
-      "title": "Stop treating Quanta action catalog totals as spendable StarQuest coins",
-      "message": "I found a commit titled “Stop treating Quanta action catalog totals as spendable StarQuest coins”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-20993b7150c49293457453ecd6b174d56e8047c6",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:17:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/20993b7150c49293457453ecd6b174d56e8047c6",
-      "title": "Show authoritative StarQuest wallet balance on Quanta even with legacy browser receipt queues",
-      "message": "I found a commit titled “Show authoritative StarQuest wallet balance on Quanta even with legacy browser receipt queues”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-b55ff1b81b06bdccee7c716ecf5d28394c206932",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:17:36Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b55ff1b81b06bdccee7c716ecf5d28394c206932",
-      "title": "Verify old Quanta action catalog receipts recover to StarQuest only once per account",
-      "message": "I found a commit titled “Verify old Quanta action catalog receipts recover to StarQuest only once per account”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-3503223596c409d1364da109ef73dcbe1e2d5ee6",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:17:10Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3503223596c409d1364da109ef73dcbe1e2d5ee6",
-      "title": "Recover missing StarCoin payouts on wallet reconnection and remove blocking device-token precheck",
-      "message": "I found a commit titled “Recover missing StarCoin payouts on wallet reconnection and remove blocking device-token precheck”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-78635271afbfccb719829b058da755fc0d395a28",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:16:52Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/78635271afbfccb719829b058da755fc0d395a28",
-      "title": "Reconcile recorded Quanta card actions missing StarQuest payouts with authenticated idempotent receipts",
-      "message": "I found a commit titled “Reconcile recorded Quanta card actions missing StarQuest payouts with authenticated idempotent receipts”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-1c74b305cfdcd3d26db30b66b536e99c9acb290c",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T06:10:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1c74b305cfdcd3d26db30b66b536e99c9acb290c",
-      "title": "Refresh Magoo card assets for verified guest recording shuffle",
-      "message": "I found a commit titled “Refresh Magoo card assets for verified guest recording shuffle”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "claude-flow-commit-5d8a1b8a0469ebd3c6064d7736dd17ae0577ebd0",
@@ -340,30 +364,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/46cd1b9290b0d0990914d955a62f870bc8058341",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-a4bbc8f8f18db0ad7adc21ba25b25d001fd9cd40",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T05:02:12Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a4bbc8f8f18db0ad7adc21ba25b25d001fd9cd40",
-      "title": "Route Claude-Flow Moltnook intake through Oracle Issues (#2)",
-      "message": "I found a commit titled “Route Claude-Flow Moltnook intake through Oracle Issues (#2)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-ca48534c70275c82ff3599a1c6f604ab93ca2138",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T05:02:08Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ca48534c70275c82ff3599a1c6f604ab93ca2138",
-      "title": "Fix Moltnook agent job submission through Oracle Octaves (#8)",
-      "message": "I found a commit titled “Fix Moltnook agent job submission through Oracle Octaves (#8)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-commit-ca28c16c7c649c9386a516d8c041760803d2195f",
