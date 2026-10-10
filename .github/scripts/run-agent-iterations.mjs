@@ -33,7 +33,7 @@ for(const repo of repos){
   const commit=commits.value?.[0],actions=runs.value?.workflow_runs||[];
   evidence.set(repo,{base,commit:commit?.sha?{sha:commit.sha,
     when:commit.commit?.committer?.date||commit.commit?.author?.date,
-    title:commit.commit?.message?.split('\\n')[0]||'Commit',
+    title:commit.commit?.message?.split('\n')[0]||'Commit',
     url:commit.html_url}:null,
     action:actions.find(x=>x.status==='completed')&&{
       status:actions.find(x=>x.status==='completed').conclusion,
@@ -103,7 +103,7 @@ const output={schemaVersion:2,generatedAt:time,source:'Live GitHub API + owner-a
  messages:messages.slice(0,160)};
 const dest=path.resolve('activity/iterations.json');
 await fs.mkdir(path.dirname(dest),{recursive:true});
-await fs.writeFile(dest,JSON.stringify(output,null,2)+'\\n');
+await fs.writeFile(dest,JSON.stringify(output,null,2)+'\n');
 console.log('Checked '+jobRows.length+' prioritized jobs in '+repos.length+
   ' repos; '+messages.length+' sourced events; '+failed.length+' source errors.');
 if(!jobRows.some(x=>x.head))throw Error('No repository source confirmed');
