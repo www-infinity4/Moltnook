@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-10T11:31:32.051Z",
+  "generatedAt": "2026-10-10T11:46:47.425Z",
   "source": "Live GitHub API + owner-authored agents/jobs.json",
-  "runUrl": "https://github.com/www-infinity4/Moltnook/actions/runs/38048705990",
+  "runUrl": "https://github.com/www-infinity4/Moltnook/actions/runs/38049603149",
   "mode": "authenticated GitHub read / verified evidence writing to Moltnook only",
   "claim": "Actual source inspections, route decisions and workflow checks. No model code edits are implied.",
   "agents": [
@@ -346,18 +346,18 @@
         "title": "∞ Moltnook — Agent Builder Hub",
         "url": "https://github.com/www-infinity4/Moltnook/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "54eb03f6eed3288819eeea290d61bc4ed6b87a11",
-        "when": "2026-10-10T11:17:34Z",
+        "sha": "301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+        "when": "2026-10-10T11:31:37Z",
         "title": "Refresh verified Moltnook agent activity [skip ci]",
-        "url": "https://github.com/www-infinity4/Moltnook/commit/54eb03f6eed3288819eeea290d61bc4ed6b87a11"
+        "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f"
       },
       "ci": {
         "status": "success",
-        "when": "2026-10-10T11:17:39Z",
-        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38047874410",
-        "name": "Moltnook verified agent room"
+        "when": "2026-10-10T11:43:51Z",
+        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+        "name": "Moltnook .org live smoke test"
       },
       "checks": [
         {
@@ -395,18 +395,18 @@
         "title": "∞ Moltnook — Agent Builder Hub",
         "url": "https://github.com/www-infinity4/Moltnook/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "54eb03f6eed3288819eeea290d61bc4ed6b87a11",
-        "when": "2026-10-10T11:17:34Z",
+        "sha": "301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+        "when": "2026-10-10T11:31:37Z",
         "title": "Refresh verified Moltnook agent activity [skip ci]",
-        "url": "https://github.com/www-infinity4/Moltnook/commit/54eb03f6eed3288819eeea290d61bc4ed6b87a11"
+        "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f"
       },
       "ci": {
         "status": "success",
-        "when": "2026-10-10T11:17:39Z",
-        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38047874410",
-        "name": "Moltnook verified agent room"
+        "when": "2026-10-10T11:43:51Z",
+        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+        "name": "Moltnook .org live smoke test"
       },
       "checks": [
         {
@@ -431,25 +431,25 @@
       "repo": "QuantaPhi",
       "agent": "blueberry",
       "next": "pink-panther",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -480,25 +480,25 @@
       "repo": "QuantaPhi",
       "agent": "pink-panther",
       "next": "greenbeans",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -536,7 +536,7 @@
         "title": "Bitcoin Crusher",
         "url": "https://github.com/www-infinity4/Bitcoin-Crusher/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
         "sha": "a2899745962de6ef43be78e63f441fe8361e9b1f",
         "when": "2026-10-10T03:20:23Z",
@@ -573,7 +573,7 @@
         "title": "Omni Phi",
         "url": "https://github.com/www-infinity4/Omni-Phi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
         "sha": "3db71c731e60ae3e00a3122bafe59e33047d7bc7",
         "when": "2026-10-10T06:23:44Z",
@@ -610,17 +610,17 @@
         "title": "🌊 Claude-Flow v2.7.0: Enterprise AI Orchestration Platform",
         "url": "https://github.com/www-infinity4/claude-flow/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "7513f9b0cafd7de61d895126602c4780a3d8d96c",
-        "when": "2026-10-10T10:33:45Z",
+        "sha": "c977d4250f6ae0ab6f8db8733bf63c039050bf4b",
+        "when": "2026-10-10T11:32:47Z",
         "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-        "url": "https://github.com/www-infinity4/claude-flow/commit/7513f9b0cafd7de61d895126602c4780a3d8d96c"
+        "url": "https://github.com/www-infinity4/claude-flow/commit/c977d4250f6ae0ab6f8db8733bf63c039050bf4b"
       },
       "ci": {
         "status": "success",
-        "when": "2026-10-10T10:33:49Z",
-        "url": "https://github.com/www-infinity4/claude-flow/actions/runs/38045318191",
+        "when": "2026-10-10T11:32:51Z",
+        "url": "https://github.com/www-infinity4/claude-flow/actions/runs/38048773440",
         "name": "Phi Moltnook intake bridge"
       },
       "checks": [
@@ -646,25 +646,25 @@
       "repo": "QuantaPhi",
       "agent": "gold-diggers-ink",
       "next": "purple-pearl",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -689,25 +689,25 @@
       "repo": "QuantaPhi",
       "agent": "purple-pearl",
       "next": "pink-panther",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -732,25 +732,25 @@
       "repo": "QuantaPhi",
       "agent": "pink-panther",
       "next": "greenbeans",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -782,18 +782,18 @@
         "title": "∞ Moltnook — Agent Builder Hub",
         "url": "https://github.com/www-infinity4/Moltnook/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "54eb03f6eed3288819eeea290d61bc4ed6b87a11",
-        "when": "2026-10-10T11:17:34Z",
+        "sha": "301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+        "when": "2026-10-10T11:31:37Z",
         "title": "Refresh verified Moltnook agent activity [skip ci]",
-        "url": "https://github.com/www-infinity4/Moltnook/commit/54eb03f6eed3288819eeea290d61bc4ed6b87a11"
+        "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f"
       },
       "ci": {
         "status": "success",
-        "when": "2026-10-10T11:17:39Z",
-        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38047874410",
-        "name": "Moltnook verified agent room"
+        "when": "2026-10-10T11:43:51Z",
+        "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+        "name": "Moltnook .org live smoke test"
       },
       "checks": [
         {
@@ -825,7 +825,7 @@
         "title": "Oracle Octaves",
         "url": "https://github.com/www-infinity4/Oracle-Octaves/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
         "sha": "ca28c16c7c649c9386a516d8c041760803d2195f",
         "when": "2026-10-10T05:00:51Z",
@@ -855,25 +855,25 @@
       "repo": "QuantaPhi",
       "agent": "blueberry",
       "next": "pink-panther",
-      "status": "scanned",
+      "status": "needs_work",
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "mission": {
         "title": "QuantaPhi",
         "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md"
       },
-      "checkedAt": "2026-10-10T11:31:32.051Z",
+      "checkedAt": "2026-10-10T11:46:47.425Z",
       "head": {
-        "sha": "b7821e50cf099d0672a562286036e2c4c498aba8",
-        "when": "2026-10-10T11:13:08Z",
-        "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-        "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8"
+        "sha": "859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+        "when": "2026-10-10T11:46:08Z",
+        "title": "Restrict Robot Brain visibility and activity to verified owner",
+        "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15"
       },
       "ci": {
-        "status": "success",
-        "when": "2026-10-10T11:22:55Z",
-        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38048169887",
-        "name": "Infinity brain repository writer and cloud browser"
+        "status": "failure",
+        "when": "2026-10-10T11:46:20Z",
+        "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+        "name": "QuantaPhi Moltnook agent card"
       },
       "checks": [
         {
@@ -895,366 +895,6 @@
   "discoveredIssues": 1,
   "failures": [],
   "messages": [
-    {
-      "id": "Q-004:purple-pearl:Work queued:https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72:Human update: Keep Story Writer light blue; preserve fantasy keywords, story illustrations and paid actions. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "Q-004",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72",
-      "message": "Human update: Keep Story Writer light blue; preserve fantasy keywords, story illustrations and paid actions. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "Q-005:specialist-q-005:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72:Checked 2/2 expected files in QuantaPhi at 9575d3955. Latest commit: Refresh Robot Brain assets for quota repair.",
-      "jobId": "Q-005",
-      "agent": "specialist-q-005",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72",
-      "message": "Checked 2/2 expected files in QuantaPhi at 9575d3955. Latest commit: Refresh Robot Brain assets for quota repair."
-    },
-    {
-      "id": "Q-005:pink-panther:CI observed:https://github.com/www-infinity4/QuantaPhi/actions/runs/38043200749:GitHub workflow pages build and deployment finished success. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "Q-005",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "test",
-      "phase": "CI observed",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38043200749",
-      "message": "GitHub workflow pages build and deployment finished success. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "Q-005:purple-pearl:Work queued:https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72:Human update: Audit image generation caption spelling, fix-image source handoff and retries. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "Q-005",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72",
-      "message": "Human update: Audit image generation caption spelling, fix-image source handoff and retries. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "MN-003:specialist-mn-003:Inspected:https://github.com/www-infinity4/Moltnook/commit/b67e3bf745398a68c1b214463cdbdba719246ae7:Checked 2/2 expected files in Moltnook at b67e3bf74. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
-      "jobId": "MN-003",
-      "agent": "specialist-mn-003",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b67e3bf745398a68c1b214463cdbdba719246ae7",
-      "message": "Checked 2/2 expected files in Moltnook at b67e3bf74. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
-    },
-    {
-      "id": "MN-003:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38043113548:GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "MN-003",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "Moltnook",
-      "kind": "test",
-      "phase": "CI observed",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38043113548",
-      "message": "GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "MN-003:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/b67e3bf745398a68c1b214463cdbdba719246ae7:Human update: Make reusable per-repository read/repair dashboard without publishing any visitor's credentials. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "MN-003",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b67e3bf745398a68c1b214463cdbdba719246ae7",
-      "message": "Human update: Make reusable per-repository read/repair dashboard without publishing any visitor's credentials. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "Q-006:specialist-q-006:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72:Checked 2/2 expected files in QuantaPhi at 9575d3955. Latest commit: Refresh Robot Brain assets for quota repair.",
-      "jobId": "Q-006",
-      "agent": "specialist-q-006",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72",
-      "message": "Checked 2/2 expected files in QuantaPhi at 9575d3955. Latest commit: Refresh Robot Brain assets for quota repair."
-    },
-    {
-      "id": "Q-006:pink-panther:CI observed:https://github.com/www-infinity4/QuantaPhi/actions/runs/38043200749:GitHub workflow pages build and deployment finished success. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "Q-006",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "test",
-      "phase": "CI observed",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38043200749",
-      "message": "GitHub workflow pages build and deployment finished success. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "Q-006:purple-pearl:Work queued:https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72:Human update: Restore paired Quant + Infinity search commits and no mint on refresh. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "Q-006",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:18:40.688Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9575d3955234e3ce0ebeeccf456c7d16ad182e72",
-      "message": "Human update: Restore paired Quant + Infinity search commits and no mint on refresh. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "MN-001:bluth:Prioritized:https://github.com/www-infinity4/Moltnook:Priority 0 · Assigned: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical · Owner-requested queue; no automatic completion claim.",
-      "jobId": "MN-001",
-      "agent": "bluth",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "routing",
-      "phase": "Prioritized",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook",
-      "message": "Priority 0 · Assigned: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical · Owner-requested queue; no automatic completion claim."
-    },
-    {
-      "id": "MN-001:gold-diggers-ink:Mission read:https://github.com/www-infinity4/Moltnook/blob/main/README.md:Read the current project README: ∞ Moltnook — Agent Builder Hub. Keep the owner priority and existing project purpose intact.",
-      "jobId": "MN-001",
-      "agent": "gold-diggers-ink",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "readme",
-      "phase": "Mission read",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/blob/main/README.md",
-      "message": "Read the current project README: ∞ Moltnook — Agent Builder Hub. Keep the owner priority and existing project purpose intact."
-    },
-    {
-      "id": "MN-001:specialist-mn-001:Inspected:https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435:Checked 3/3 expected files in Moltnook at a355d488b. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
-      "jobId": "MN-001",
-      "agent": "specialist-mn-001",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435",
-      "message": "Checked 3/3 expected files in Moltnook at a355d488b. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
-    },
-    {
-      "id": "MN-001:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38044444707:GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "MN-001",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "Moltnook",
-      "kind": "test",
-      "phase": "CI observed",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38044444707",
-      "message": "GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "MN-001:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435:Human update: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "MN-001",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435",
-      "message": "Human update: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "MN-002:bluth:Prioritized:https://github.com/www-infinity4/Moltnook:Priority 0 · Assigned: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence · Owner-requested queue; no automatic completion claim.",
-      "jobId": "MN-002",
-      "agent": "bluth",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "routing",
-      "phase": "Prioritized",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook",
-      "message": "Priority 0 · Assigned: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence · Owner-requested queue; no automatic completion claim."
-    },
-    {
-      "id": "MN-002:gold-diggers-ink:Mission read:https://github.com/www-infinity4/Moltnook/blob/main/README.md:Read the current project README: ∞ Moltnook — Agent Builder Hub. Keep the owner priority and existing project purpose intact.",
-      "jobId": "MN-002",
-      "agent": "gold-diggers-ink",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "readme",
-      "phase": "Mission read",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/blob/main/README.md",
-      "message": "Read the current project README: ∞ Moltnook — Agent Builder Hub. Keep the owner priority and existing project purpose intact."
-    },
-    {
-      "id": "MN-002:specialist-mn-002:Inspected:https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435:Checked 2/2 expected files in Moltnook at a355d488b. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
-      "jobId": "MN-002",
-      "agent": "specialist-mn-002",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435",
-      "message": "Checked 2/2 expected files in Moltnook at a355d488b. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
-    },
-    {
-      "id": "MN-002:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38044444707:GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "MN-002",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "Moltnook",
-      "kind": "test",
-      "phase": "CI observed",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38044444707",
-      "message": "GitHub workflow Moltnook verified agent room finished success. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "MN-002:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435:Human update: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "MN-002",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "report",
-      "phase": "Work queued",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a355d488b5fd686b575730940f1d2b2196e00435",
-      "message": "Human update: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "Q-001:bluth:Prioritized:https://github.com/www-infinity4/QuantaPhi:Priority 0 · Assigned: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity · Owner-requested queue; no automatic completion claim.",
-      "jobId": "Q-001",
-      "agent": "bluth",
-      "to": "blueberry",
-      "project": "QuantaPhi",
-      "kind": "routing",
-      "phase": "Prioritized",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi",
-      "message": "Priority 0 · Assigned: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity · Owner-requested queue; no automatic completion claim."
-    },
-    {
-      "id": "Q-001:gold-diggers-ink:Mission read:https://github.com/www-infinity4/QuantaPhi/blob/main/README.md:Read the current project README: QuantaPhi. Keep the owner priority and existing project purpose intact.",
-      "jobId": "Q-001",
-      "agent": "gold-diggers-ink",
-      "to": "blueberry",
-      "project": "QuantaPhi",
-      "kind": "readme",
-      "phase": "Mission read",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md",
-      "message": "Read the current project README: QuantaPhi. Keep the owner priority and existing project purpose intact."
-    },
-    {
-      "id": "Q-001:specialist-q-001:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead:Checked 3/3 expected files in QuantaPhi at 90382248f. Latest commit: Keep newest clock receipts visible as persistent evidence history grows.",
-      "jobId": "Q-001",
-      "agent": "specialist-q-001",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead",
-      "message": "Checked 3/3 expected files in QuantaPhi at 90382248f. Latest commit: Keep newest clock receipts visible as persistent evidence history grows."
-    },
-    {
-      "id": "Q-001:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38045263708:GitHub workflow Quanta search and wallet regressions finished failure. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "Q-001",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "test",
-      "phase": "Needs review",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38045263708",
-      "message": "GitHub workflow Quanta search and wallet regressions finished failure. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "Q-001:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead:Human update: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "Q-001",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "report",
-      "phase": "Needs work",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead",
-      "message": "Human update: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
-    {
-      "id": "Q-002:bluth:Prioritized:https://github.com/www-infinity4/QuantaPhi:Priority 0 · Assigned: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards · Owner-requested queue; no automatic completion claim.",
-      "jobId": "Q-002",
-      "agent": "bluth",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "routing",
-      "phase": "Prioritized",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi",
-      "message": "Priority 0 · Assigned: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards · Owner-requested queue; no automatic completion claim."
-    },
-    {
-      "id": "Q-002:gold-diggers-ink:Mission read:https://github.com/www-infinity4/QuantaPhi/blob/main/README.md:Read the current project README: QuantaPhi. Keep the owner priority and existing project purpose intact.",
-      "jobId": "Q-002",
-      "agent": "gold-diggers-ink",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "readme",
-      "phase": "Mission read",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/blob/main/README.md",
-      "message": "Read the current project README: QuantaPhi. Keep the owner priority and existing project purpose intact."
-    },
-    {
-      "id": "Q-002:specialist-q-002:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead:Checked 3/3 expected files in QuantaPhi at 90382248f. Latest commit: Keep newest clock receipts visible as persistent evidence history grows.",
-      "jobId": "Q-002",
-      "agent": "specialist-q-002",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "read",
-      "phase": "Inspected",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead",
-      "message": "Checked 3/3 expected files in QuantaPhi at 90382248f. Latest commit: Keep newest clock receipts visible as persistent evidence history grows."
-    },
-    {
-      "id": "Q-002:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38045263708:GitHub workflow Quanta search and wallet regressions finished failure. A green run alone does not establish that the reported owner issue is repaired.",
-      "jobId": "Q-002",
-      "agent": "pink-panther",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "test",
-      "phase": "Needs review",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38045263708",
-      "message": "GitHub workflow Quanta search and wallet regressions finished failure. A green run alone does not establish that the reported owner issue is repaired."
-    },
-    {
-      "id": "Q-002:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead:Human update: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
-      "jobId": "Q-002",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "report",
-      "phase": "Needs work",
-      "when": "2026-10-10T10:33:18.769Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead",
-      "message": "Human update: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
-    },
     {
       "id": "Q-003:specialist-q-003:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/90382248f9ddb3fd1aba0f645865da6a4b947ead:Checked 2/2 expected files in QuantaPhi at 90382248f. Latest commit: Keep newest clock receipts visible as persistent evidence history grows.",
       "jobId": "Q-003",
@@ -2814,6 +2454,366 @@
       "phase": "Work queued",
       "when": "2026-10-10T11:31:32.051Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8",
+      "message": "Human update: Restore paired Quant + Infinity search commits and no mint on refresh. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "MN-001:specialist-mn-001:Inspected:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Checked 3/3 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
+      "jobId": "MN-001",
+      "agent": "specialist-mn-001",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Checked 3/3 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
+    },
+    {
+      "id": "MN-001:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38049431871:GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "MN-001",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "Moltnook",
+      "kind": "test",
+      "phase": "CI observed",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+      "message": "GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "MN-001:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Human update: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "MN-001",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "report",
+      "phase": "Work queued",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Human update: Publish Moltnook at quantaphi.org/moltnook/ and keep Oracle Octaves controls canonical. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "MN-002:specialist-mn-002:Inspected:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Checked 2/2 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
+      "jobId": "MN-002",
+      "agent": "specialist-mn-002",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Checked 2/2 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
+    },
+    {
+      "id": "MN-002:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38049431871:GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "MN-002",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "Moltnook",
+      "kind": "test",
+      "phase": "CI observed",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+      "message": "GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "MN-002:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Human update: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "MN-002",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "report",
+      "phase": "Work queued",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Human update: Run the prioritized color-agent iteration machine; show real job traces, commits and test evidence. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-001:specialist-q-001:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 3/3 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-001",
+      "agent": "specialist-q-001",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 3/3 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-001:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-001",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-001:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-001",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Human update: Reconcile Unified Wallet StarCoins with Media Star including tenths and masked account identity. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-002:specialist-q-002:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 3/3 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-002",
+      "agent": "specialist-q-002",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 3/3 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-002:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-002",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-002:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-002",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Human update: Verify Star, Collect and Share +0.1 payout receipts across story, media and image cards. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "CL-001:specialist-cl-001:Inspected:https://github.com/www-infinity4/claude-flow/commit/c977d4250f6ae0ab6f8db8733bf63c039050bf4b:Checked 2/2 expected files in claude-flow at c977d4250. Latest commit: Run read-only Phi agent tools and publish evidence receipts [skip ci].",
+      "jobId": "CL-001",
+      "agent": "specialist-cl-001",
+      "to": "purple-people-eater",
+      "project": "claude-flow",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/c977d4250f6ae0ab6f8db8733bf63c039050bf4b",
+      "message": "Checked 2/2 expected files in claude-flow at c977d4250. Latest commit: Run read-only Phi agent tools and publish evidence receipts [skip ci]."
+    },
+    {
+      "id": "CL-001:pink-panther:CI observed:https://github.com/www-infinity4/claude-flow/actions/runs/38048773440:GitHub workflow Phi Moltnook intake bridge finished success. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "CL-001",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "claude-flow",
+      "kind": "test",
+      "phase": "CI observed",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/claude-flow/actions/runs/38048773440",
+      "message": "GitHub workflow Phi Moltnook intake bridge finished success. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "CL-001:purple-pearl:Work queued:https://github.com/www-infinity4/claude-flow/commit/c977d4250f6ae0ab6f8db8733bf63c039050bf4b:Human update: Connect Claude-Flow source-verified job intake with scoped build and review receipts. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "CL-001",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "claude-flow",
+      "kind": "report",
+      "phase": "Work queued",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/c977d4250f6ae0ab6f8db8733bf63c039050bf4b",
+      "message": "Human update: Connect Claude-Flow source-verified job intake with scoped build and review receipts. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-003:specialist-q-003:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-003",
+      "agent": "specialist-q-003",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-003:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-003",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-003:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Keep Reads and Realms infinite, original, mystery/adventure/ghost/invention stories. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-003",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Human update: Keep Reads and Realms infinite, original, mystery/adventure/ghost/invention stories. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-004:specialist-q-004:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-004",
+      "agent": "specialist-q-004",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-004:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-004",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-004:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Keep Story Writer light blue; preserve fantasy keywords, story illustrations and paid actions. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-004",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Human update: Keep Story Writer light blue; preserve fantasy keywords, story illustrations and paid actions. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-005:specialist-q-005:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-005",
+      "agent": "specialist-q-005",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-005:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-005",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-005:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Audit image generation caption spelling, fix-image source handoff and retries. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-005",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Human update: Audit image generation caption spelling, fix-image source handoff and retries. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "MN-003:specialist-mn-003:Inspected:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Checked 2/2 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci].",
+      "jobId": "MN-003",
+      "agent": "specialist-mn-003",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Checked 2/2 expected files in Moltnook at 301a4894a. Latest commit: Refresh verified Moltnook agent activity [skip ci]."
+    },
+    {
+      "id": "MN-003:pink-panther:CI observed:https://github.com/www-infinity4/Moltnook/actions/runs/38049431871:GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "MN-003",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "Moltnook",
+      "kind": "test",
+      "phase": "CI observed",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/38049431871",
+      "message": "GitHub workflow Moltnook .org live smoke test finished success. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "MN-003:purple-pearl:Work queued:https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f:Human update: Make reusable per-repository read/repair dashboard without publishing any visitor's credentials. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "MN-003",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "report",
+      "phase": "Work queued",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/301a4894ac6ca2cf65fe6f854ac1d40fa3cc628f",
+      "message": "Human update: Make reusable per-repository read/repair dashboard without publishing any visitor's credentials. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
+    },
+    {
+      "id": "Q-006:specialist-q-006:Inspected:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner.",
+      "jobId": "Q-006",
+      "agent": "specialist-q-006",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "read",
+      "phase": "Inspected",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
+      "message": "Checked 2/2 expected files in QuantaPhi at 859bfea61. Latest commit: Restrict Robot Brain visibility and activity to verified owner."
+    },
+    {
+      "id": "Q-006:pink-panther:Needs review:https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476:GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired.",
+      "jobId": "Q-006",
+      "agent": "pink-panther",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "test",
+      "phase": "Needs review",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/38049578476",
+      "message": "GitHub workflow QuantaPhi Moltnook agent card finished failure. A green run alone does not establish that the reported owner issue is repaired."
+    },
+    {
+      "id": "Q-006:purple-pearl:Needs work:https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15:Human update: Restore paired Quant + Infinity search commits and no mint on refresh. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence.",
+      "jobId": "Q-006",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "report",
+      "phase": "Needs work",
+      "when": "2026-10-10T11:46:47.425Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/859bfea61c782e18b5fd7d7b0195b1417d1b7f15",
       "message": "Human update: Restore paired Quant + Infinity search commits and no mint on refresh. The latest source was inspected; any code repair requires an authenticated, scoped writer and its own test/commit evidence."
     }
   ]
