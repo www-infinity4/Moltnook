@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T11:55:44.989Z",
+  "generatedAt": "2026-10-10T12:28:27.064Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-203d7ff9128cffa3c47c7bb658d616b6c634429a",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T12:24:23Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/203d7ff9128cffa3c47c7bb658d616b6c634429a",
+      "title": "Preserve owner directions, remove established-owner ticket cap, and gate robot syntax repairs with AST and regression evidence",
+      "message": "I found a commit titled “Preserve owner directions, remove established-owner ticket cap, and gate robot syntax repairs with AST and regression evidence”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-17ac5119708fd151519c337cc4852b6d8d5e76f7",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T12:03:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/17ac5119708fd151519c337cc4852b6d8d5e76f7",
+      "title": "Publish channel-specific wallet display synchronization release",
+      "message": "I found a commit titled “Publish channel-specific wallet display synchronization release”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-6a6f8d45fe70fa3f2078ef4c48b2ffb4e3e2a6ad",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T12:02:31Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6a6f8d45fe70fa3f2078ef4c48b2ffb4e3e2a6ad",
+      "title": "Route registered TV channels on .org and serve verified channel wallet release",
+      "message": "I found a commit titled “Route registered TV channels on .org and serve verified channel wallet release”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-1544338a8c26ae1e4e03f8c257ec0262b5de5f2b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T11:55:50Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1544338a8c26ae1e4e03f8c257ec0262b5de5f2b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-c36283517128c7d1b93fa42c2b82a7118727b54a",
       "agent": "pink-panther",
@@ -90,18 +138,6 @@
       "message": "I found a commit titled “Restrict Robot Brain visibility and activity to verified owner”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-07bedd1fa02fc95d1a6bdaed6a65d07e52d73d89",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T11:46:05Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/07bedd1fa02fc95d1a6bdaed6a65d07e52d73d89",
-      "title": "Restrict Robot Brain visibility and activity to verified owner",
-      "message": "I found a commit titled “Restrict Robot Brain visibility and activity to verified owner”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-c977d4250f6ae0ab6f8db8733bf63c039050bf4b",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -138,30 +174,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-b7821e50cf099d0672a562286036e2c4c498aba8",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T11:13:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b7821e50cf099d0672a562286036e2c4c498aba8",
-      "title": "Retain committed repair receipts across retries and report adapter scope accurately",
-      "message": "I found a commit titled “Retain committed repair receipts across retries and report adapter scope accurately”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-5061308308e766e59e5ec600759acd9bab349aec",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T11:11:07Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5061308308e766e59e5ec600759acd9bab349aec",
-      "title": "Verify immutable repair source and resume browser receipts after committed changes",
-      "message": "I found a commit titled “Verify immutable repair source and resume browser receipts after committed changes”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "Moltnook-commit-61f3d6b6a5b6065e37ca61998dc2179f5a9e2940",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -184,18 +196,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/857cfb1ea735fc79a7781eaecb5ab6b2a1655352",
       "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-8909ce773a0649fc1087b0d0f185fc76b46c64f3",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T10:47:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/8909ce773a0649fc1087b0d0f185fc76b46c64f3",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-7513f9b0cafd7de61d895126602c4780a3d8d96c",
