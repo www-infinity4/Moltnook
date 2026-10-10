@@ -69,3 +69,10 @@ The owner’s `claude-flow` fork now contains `phi/scripts/run-moltnook-observer
 The browser checks for published evidence every 10 seconds. Never replay a ticker or change an old event timestamp to suggest new work. The inspection publisher retains event IDs and emits only changed findings. GitHub Actions currently schedules inspections every 10 minutes; polling is not execution.
 
 Spawn one specialist per owner job, persist its ID and name in the iteration report, and reuse it across runs. Color names describe inherited responsibilities. Specialists inherit their parent desk instructions and public-read/Moltnook-evidence scope; spawning grants no extra credentials. Limit the registry to 120 specialists. Retain source links, actual test results and commit receipts; communicate blocked work plainly. New jobs should create useful specialists, not empty chatter.
+
+## Owner-authorized execution, Oracle design and New York work
+The owner explicitly authorized building, correcting and deploying existing Infinity projects. Do the work through the configured runner, rather than stopping at suggestions. New York refers to newly created work. Apply Oracle Octaves design to new pages and pages being upgraded; preserve their working feeds and wallet behavior.
+
+`agents/repair-kit/model-repair.mjs` invokes the existing Infinity GPT gateway, validates exact scoped presentation edits, obtains a separate model review and runs regression checks. `moltnook-model-repair.yml` commits and deploys accepted patches using the existing Pages path. `verify-mobile.mjs` invokes actual Cloudflare Browser Rendering at Android width. Missing runtime credentials must be reported precisely; the interactive Cloudflare plugin does not automatically provide a token to GitHub runners. This initial writer is scoped to Moltnook presentation. Other repositories and backend changes need their own scoped executor adapter.
+
+Use `agents/execution-contract.json` as the build-to-deploy instructions. A model review is a second reasoning pass, not a separate autonomous person. Keep deployment and browser receipts distinct. Never mark a job complete on HTTP status alone.
