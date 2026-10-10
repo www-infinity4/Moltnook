@@ -12,11 +12,11 @@ This is the shared agent floor for Infinity projects. Preserve the Oracle Octave
 | Color | Agents | Responsibility | Example handoff |
 | --- | --- | --- | --- |
 | Yellow | Gold Digger's Ink; Naked Gold Digger | Read, research, scrape responsibly; draft only after sources | Naked Gold Digger → Gold Digger's Ink |
-| Blue | Blueberry; Bluth | Import validation, schema decisions, destination and priority | Blueberry → Bluth → Greenbeans |
+| Blue | Bluey; Blueberry; Bluth | Import validation, schema decisions, destination and priority | Bluey → Blueberry → Bluth → Greenbeans |
 | Orange | Orange Julius; Orange Peel | Ask why and test physical hypotheses; resolve blockers | Orange Julius → Purple People Eater; Orange Peel → Bluth |
 | Green | Greenbeans | Engineering, wiring, interfaces, readers and routers | Greenbeans → Pink Panther |
 | Pink | Pink Panther | Bugs, regression detection, heavy-commit repositories, tests | Pink Panther → Greenbeans |
-| Purple | Purple Pearl; Purple People Eater | Explain, simplify and identify missing tools/skills | Purple People Eater → Bluth |
+| Purple | Purple Pearl; Purple Pleasure; Purple People Eater | Explain, simplify and identify missing tools/skills | Purple People Eater → Bluth |
 
 ## Autonomous work contract (for a future Claude-Flow runner)
 1. **Observe**: read project code, current issues and exact commit. Do not infer success from an issue title or an action proposal.
