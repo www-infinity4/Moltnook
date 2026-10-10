@@ -6,6 +6,7 @@ import {applyEdits,safePath,inside} from './patch.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
 import {inspectRuntime,focusedTestCommand} from './runtime-baseline.mjs';
+import {observeLiveSource} from './live-source.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -114,6 +115,9 @@ try{
   git('-c','core.hooksPath=/dev/null','commit','-m','Implement '+report.jobId+' after reader handoff, tests and GPT Purple arbitration');commitSha=git('rev-parse','HEAD');
   command('git',['push','origin','HEAD:'+repo.default_branch],{env:credentialEnv()});
   report.status='committed_unverified';report.commitSha=commitSha;report.changedFiles=Object.keys(patched);
+  report.liveSource=await observeLiveSource({repository:report.repository,commitSha,patched});
+  await fs.writeFile('repository-receipts/live-source.json',JSON.stringify(report.liveSource,null,2));
+  await event('pink-panther','Live source observation: '+report.liveSource.status+'. '+report.liveSource.files.filter(x=>x.matched).length+' exact public assets match the commit. Feature acceptance remains unverified.');
   try{const preview=await captureSourceViews({workspace,repository:report.repository,baseSha,commitSha,paths:report.changedFiles,entry:plan.previewPath||'index.html',summary:'Bot implementation: '+plan.summary,jobId:report.jobId});await fs.writeFile('repository-receipts/work-preview.json',JSON.stringify(preview));await call('preview',{preview,verificationToken:token});report.previewPublished=true;}catch(e){report.previewError=scrub(e.message);await event('pink-panther','Source committed; visual preview needs its adapter: '+report.previewError);} 
   await call('result',{status:'committed_unverified',commitSha,testsPassed,verificationToken:token,message:'Implemented '+report.jobId+' in '+report.repository+'. Reader handoff, independent review, repository checks and GPT Purple approval recorded. Commit '+commitSha.slice(0,9)+'. Deployment and job-specific live acceptance still need verification; source work is not marked complete.'});
  }

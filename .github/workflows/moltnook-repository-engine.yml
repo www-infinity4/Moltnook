@@ -35,6 +35,8 @@ jobs:
           node --check agents/repository-engine/repair-feedback.mjs
           node --check agents/repository-engine/runtime-baseline.mjs
           node --check agents/repository-engine/node-test-globals.mjs
+          node --check agents/repository-engine/live-source.mjs
+          node --test agents/repository-engine/live-source.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
       - name: Reader handoff, engineer implementation, Pink review and GPT Purple arbitration
         env:
