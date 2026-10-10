@@ -46,14 +46,35 @@ for(const repo of repos){
       name:actions.find(x=>x.status==='completed').name}});
  }catch(error){failed.push(repo+': '+String(error.message||error).slice(0,140))}
 }
-const messages=[],jobRows=[];
+let previous={};
+try{previous=JSON.parse(await fs.readFile('activity/iterations.json','utf8'))}catch{}
+const messages=[...(previous.messages||[])],jobRows=[];
+const agents=[...(previous.agents||[])];
+const roster=JSON.parse(await fs.readFile('agents/roster.json','utf8'));
+const names={yellow:'Golden Quill',blue:'Blue Comet',orange:'Orange Spark',green:'Green Sprout',pink:'Pink Lynx',purple:'Purple Prism'};
+function spawn(job){
+ let specialist=agents.find(a=>a.jobId===job.id);
+ if(!specialist && agents.length<120){
+  const parent=roster.find(a=>a.id===job.agent)||roster.find(a=>a.id==='greenbeans');
+  specialist={...parent,id:'specialist-'+job.id.toLowerCase().replace(/[^a-z0-9-]/g,'-'),
+   name:(names[parent.color]||'Phi Scout')+' · '+job.id,jobId:job.id,parent:parent.id,
+   job:job.title,createdAt:time,permissions:['read public repository','write Moltnook evidence'],
+   status:'assigned'};
+  agents.push(specialist);
+ }
+ return specialist;
+}
+const seen=new Set(messages.map(m=>m.id));
 const say=(job,agent,to,phase,message,url,kind='inspection')=>{
  if(!url||!url.startsWith('https://github.com/'))return;
- messages.push({id:job.id+':'+agent+':'+phase,jobId:job.id,
+ const id=job.id+':'+agent+':'+phase+':'+url+':'+message;
+ if(seen.has(id))return;seen.add(id);
+ messages.push({id,jobId:job.id,
  agent,to,project:job.repo,kind,phase,when:time,url,message});
 };
 const ordered=[...input.jobs].sort((a,b)=>a.priority-b.priority||a.id.localeCompare(b.id));
 for(const job of ordered){
+ const specialist=spawn(job);
  const repo=evidence.get(job.repo),head=repo?.commit;
  const checks=[];
  if(repo){
@@ -76,7 +97,7 @@ for(const job of ordered){
    ' · Assigned: '+job.title+' · Owner-requested queue; no automatic completion claim.',link(job.repo), 'routing');
  if(repo.mission) say(job,'gold-diggers-ink',job.agent,'Mission read',
    'Read the current project README: '+repo.mission.title+'. Keep the owner priority and existing project purpose intact.',repo.mission.url,'readme');
- say(job,job.agent,job.next,'Inspected','Checked '+found+'/'+checks.length+
+ say(job,specialist?.id||job.agent,job.next,'Inspected','Checked '+found+'/'+checks.length+
    ' expected files in '+job.repo+' at '+head.sha.slice(0,9)+'. Latest commit: '+head.title+
    (checks.some(c=>!c.found)?'. Missing: '+checks.filter(c=>!c.found).map(c=>c.path).join(', '):'.'),
    head.url,'read');
@@ -95,18 +116,19 @@ let discovered=0;
 try{
  const issues=await request('https://api.github.com/repos/'+owner+'/Oracle-Octaves/issues?state=open&sort=updated&per_page=30');
  for(const issue of issues.value||[]){
-  if(issue.pull_request||!/^\\[Agent Job\\]/i.test(issue.title||''))continue;
+  if(issue.pull_request||!/^\[Agent Job\]/i.test(issue.title||''))continue;
   const route=routeEvent({id:'intake-'+issue.number,title:issue.title,
     project:'Oracle-Octaves',kind:'issue',when:issue.updated_at,url:issue.html_url});
-  messages.push({...route,id:'issue-'+issue.number,phase:'Owner issue routed',jobId:'ORACLE-'+issue.number});
+  const intakeId='issue-'+issue.number+':'+issue.updated_at;
+  if(!seen.has(intakeId))messages.push({...route,id:intakeId,phase:'Owner issue routed',jobId:'ORACLE-'+issue.number});
   discovered++;
  }
 }catch(error){failed.push('Oracle issue intake: '+String(error.message||error))}
 const output={schemaVersion:2,generatedAt:time,source:'Live GitHub API + owner-authored agents/jobs.json',
  runUrl,mode:'authenticated GitHub read / verified evidence writing to Moltnook only',
  claim:'Actual source inspections, route decisions and workflow checks. No model code edits are implied.',
- jobs:jobRows,discoveredIssues:discovered,failures:failed,
- messages:messages.slice(0,160)};
+ agents,jobs:jobRows,discoveredIssues:discovered,failures:failed,
+ messages:messages.slice(-160)};
 const dest=path.resolve('activity/iterations.json');
 await fs.mkdir(path.dirname(dest),{recursive:true});
 await fs.writeFile(dest,JSON.stringify(output,null,2)+'\n');
