@@ -12,8 +12,6 @@ on:
       - ".github/scripts/**"
       - ".github/workflows/moltnook-agent-room.yml"
       - "index.html"
-  issues:
-    types: [opened, reopened, labeled]
 
 permissions:
   contents: write
@@ -35,11 +33,6 @@ jobs:
           node-version: "20"
       - name: Verify deterministic agent routing
         run: node --test agents/tests/routing.test.mjs
-      - name: Comment on new agent job
-        if: github.event_name == 'issues'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/triage-agent.mjs
       - name: Publish source-linked activity
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,7 +4,7 @@ This is the shared agent floor for Infinity projects. Preserve the Oracle Octave
 
 ## Real infrastructure
 - Moltnook is currently a static GitHub Pages site with a working Infinity AI chat form. That conversation endpoint returns assistance; it is not a task executor.
-- GitHub Actions `moltnook-agent-room.yml` reads actual metadata from the public repositories in `PROJECTS`, writes `activity/feed.json` and posts a machine-created routing comment when an issue title begins `[Agent Job]`.
+- GitHub Actions `moltnook-agent-room.yml` reads actual metadata from the public repositories in `PROJECTS`, writes `activity/feed.json` and the Oracle Octaves issue workflow posts a machine-created routing comment when an issue title begins `[Agent Job]`.
 - The role names are lenses on *real source evidence*. The first automation is deterministic classification, not a continuously running Claude-Flow swarm. Every handoff includes the source URL and explicitly says whether it has executed.
 - The owner's Claude-Flow fork is `www-infinity4/claude-flow`. It is **not yet wired to run tasks from Moltnook**. A legitimate integration must record a runner ID, immutable source/job ID, agent ID, lease, start time, tool invocation, test results, commit SHA, link and permission checks.
 
@@ -52,7 +52,11 @@ Never use `status:completed` without an actual successful executor receipt and r
 Style Moltnook and future Infinity pages after Oracle Octaves and the Infinity Phi-style buttons: parchment canvas, white cards, red primary capsule/corners, muted ink, compact actions, 44 px hit targets, responsive stacking, and no oversized or duplicate controls. Shared cards keep a consistent layout but color indicates the desk or data type. Existing piano, radio, wallet and search integrations remain separate from ornamental components.
 
 ## How a real visitor starts a job
-Open Moltnook > **Give agents a job**. Submit a GitHub issue with a title starting `[Agent Job]`. The workflow uses the visible title to choose a specialist and posts a sourced routing response. This is a real automated handoff and not yet autonomous source modification.
+Open Moltnook > **Give agents a job**. Because Moltnook's own Issues are disabled, the link opens the **Oracle-Octaves** GitHub issue tracker. Submit an issue with a title starting `[Agent Job]`. The Oracle Octaves workflow uses the visible title to choose a specialist and posts a sourced routing response. This is a real automated handoff and not yet autonomous source modification.
 
 ## Verified activity
 The room refreshes a public read-only feed from real repository metadata. The feed is regenerated hourly and whenever the page or workflow is changed. The page marks fallback data and failures; if source APIs cannot be contacted, no fictitious exchange is shown.
+
+### Working intake host
+
+Moltnook GitHub Issues are disabled (verified 410). New jobs are hosted in `www-infinity4/Oracle-Octaves` with the `[Agent Job]` prefix. The Oracle-host workflow posts a routed comment. The Claude-Flow fork polls those issues for its read-only queue; no backend privileges are granted to visitors by the form.
