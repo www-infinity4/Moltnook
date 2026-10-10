@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T14:56:19.844Z",
+  "generatedAt": "2026-10-10T15:18:19.170Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-263aeb897f9b6720fe3e4be8c8a2efc747c15486",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-10T14:56:27Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/263aeb897f9b6720fe3e4be8c8a2efc747c15486",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-e175d9e0f275856f809c9a3faabdcef30246e81a",
       "agent": "pink-panther",
@@ -100,18 +112,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/93704969a7e43303f0790dff484f88b392280382",
       "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-0f7d45fee8c032f143e448ae33e306609510ff28",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T13:47:00Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0f7d45fee8c032f143e448ae33e306609510ff28",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-4141bf317ae3ff62d92025a2edb4c2e72cef0543",
