@@ -1,0 +1,30 @@
+name: Moltnook .org live smoke test
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/moltnook-org-smoke.yml"
+      - "index.html"
+      - "agent-iteration-card.js"
+      - "agent-iteration-card.css"
+      - "workers/moltnook-proxy.js"
+  workflow_dispatch:
+  schedule:
+    - cron: "36 * * * *"
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify QuantaPhi.org Moltnook HTML route
+        run: |
+          curl --fail --show-error --location --retry 3 --max-time 20 -D /tmp/h -o /tmp/moltnook.html "https://quantaphi.org/moltnook/"
+          grep -qi '^x-moltnook-source: www-infinity4/Moltnook' /tmp/h
+          grep -q 'id="moltnook-iterations"' /tmp/moltnook.html
+          grep -q 'agent-iteration-card.js' /tmp/moltnook.html
+      - name: Verify live dedicated priorities and agent evidence JSON
+        run: |
+          curl --fail --show-error --location --retry 3 --max-time 20 "https://quantaphi.org/moltnook/agents/jobs.json" -o /tmp/jobs.json
+          curl --fail --show-error --location --retry 3 --max-time 20 "https://quantaphi.org/moltnook/activity/iterations.json" -o /tmp/iterations.json
+          node -e "const fs=require('fs'); const jobs=JSON.parse(fs.readFileSync('/tmp/jobs.json'));const it=JSON.parse(fs.readFileSync('/tmp/iterations.json'));if(jobs.jobs.length<10||it.jobs.length<10||!it.messages.length)process.exit(1);console.log('Verified',jobs.jobs.length,'jobs and',it.messages.length,'source-linked handoffs')"
