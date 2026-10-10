@@ -1,0 +1,41 @@
+name: Infinity cross-repository reader engineer and GPT Purple
+on:
+  push:
+    branches: [main]
+    paths: ['agents/repository-engine/**', '.github/workflows/moltnook-repository-engine.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: infinity-owner-repository-engine
+  cancel-in-progress: false
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated page renderer
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Validate immutable patch and path policy
+        run: node --test agents/repository-engine/patch.test.mjs
+      - name: Reader handoff, engineer implementation, Pink review and GPT Purple arbitration
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node agents/repository-engine/runner.mjs
+      - name: Preserve actual work and exact blockers
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: infinity-repository-work-receipts
+          path: repository-receipts/
