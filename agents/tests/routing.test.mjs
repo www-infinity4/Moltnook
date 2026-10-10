@@ -24,3 +24,20 @@ test('source evidence and closure are not represented as tests',()=>{
  const r=routeEvent({id:'one',project:'Moltnook',title:'Fix UI',kind:'PR',state:'closed',when:'2026-10-09T12:00:00Z',url:'https://github.com/example'});
  assert.equal(r.phase,'Observed closed');assert.match(r.message,/not inferred/);
 });
+
+test('a bug in Bitcoin Crusher goes to the debugger, not the market researcher',()=>{
+ const r=selectRoute('Bitcoin Crusher broken preview bug','Bitcoin-Crusher');
+ assert.equal(r.agent,'pink-panther');
+});
+test('a research-based StarCoin receipt goes to the ledger desk',()=>{
+ const r=selectRoute('Catalog completed research actions with StarCoin receipts','QuantaPhi');
+ assert.equal(r.agent,'blueberry');
+});
+test('outside data import goes Bluey to Blueberry',()=>{
+ const r=selectRoute('Import a new structured dataset','Moltnook');
+ assert.equal(r.agent,'bluey'); assert.equal(r.to,'blueberry');
+});
+test('Oracle interface tune goes to Purple Pearl',()=>{
+ const r=selectRoute('Oracle Octaves agent floor interface','Moltnook');
+ assert.equal(r.agent,'purple-pearl');
+});
