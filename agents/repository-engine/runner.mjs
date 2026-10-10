@@ -29,6 +29,8 @@ async function sourceFile(file){safePath(file);const absolute=inside(workspace,f
 async function checks(patched){
  const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});throw Error('Repository check failed: '+name);}};
  const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
+ const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
+ if(focusedTests.length)run('Focused Node tests','node',['--test',...focusedTests]);
  let pkg;try{pkg=JSON.parse(await fs.readFile(path.join(workspace,'package.json'),'utf8'))}catch{}
  if(pkg){
   if(pkg.packageManager&&!pkg.packageManager.startsWith('npm@'))throw Error('Repository requires '+pkg.packageManager+' adapter');
@@ -55,10 +57,14 @@ try{
   const baseSha=git('rev-parse','HEAD');report.baseSha=baseSha;
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
-  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','existing npm test/build'],deployment:'not implemented for arbitrary repositories',forkCreation:'not implemented',adapterRegistry:'none'}}});
-  if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
+  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused node --test for changed test files','existing npm test/build'],deployment:'not implemented for arbitrary repositories',forkCreation:'not implemented',adapterRegistry:'none'}}});
   report.plan=plan;
-  if(plan.blockers?.length)throw Error('Reader blocker: '+plan.blockers.join('; '));
+  if(!Array.isArray(plan.blockers))throw Error('Reader omitted unresolved blocker list');
+  if(plan.blockers.length){
+   if(plan.blockers.some(b=>!b||!['owner_input_required','excluded_path_required','unsupported_acceptance'].includes(b.code)||typeof b.reason!=='string'))throw Error('Reader returned unstructured blockers instead of unresolved conditions');
+   throw Error('Reader blocker: '+plan.blockers.map(b=>b.code+': '+b.reason).join('; '));
+  }
+  if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
