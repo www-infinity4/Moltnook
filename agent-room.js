@@ -149,7 +149,7 @@
       var feed = await response.json();
       if (!Array.isArray(feed.items)) throw new Error('invalid feed');
       var executed = await readVerifiedExecutions();
-      lastFeed = executed.concat(feed.items).sort(function (a,b) {
+      lastFeed = Array.from(new Map(executed.concat(feed.items).map(function(row){return [row.id || JSON.stringify(row),row];})).values()).sort(function (a,b) {
         return Date.parse(b.when || 0) - Date.parse(a.when || 0);
       });
       setProjects(lastFeed); renderEvents();
@@ -174,5 +174,5 @@
     roomStatus.textContent = 'Agent roster unavailable; cannot verify activity.';
   });
   document.addEventListener('visibilitychange',function () { if (!document.hidden) loadFeed(); });
-  setInterval(function () { if (!document.hidden) loadFeed(); },120000);
+  setInterval(function () { if (!document.hidden) loadFeed(); },10000);
 }());
