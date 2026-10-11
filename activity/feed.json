@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T04:25:29.382Z",
+  "generatedAt": "2026-10-11T04:44:47.361Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,90 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-538b30144e1145b13ec9332fd9a70557e62a9605",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:44:34Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/538b30144e1145b13ec9332fd9a70557e62a9605",
+      "title": "Merge pull request #30 from www-infinity4/fix/source-label-css-20261011",
+      "message": "I found a commit titled “Merge pull request #30 from www-infinity4/fix/source-label-css-20261011”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-a0162d09c25c498a9d88e2cc0bc06dcff030e201",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:44:14Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a0162d09c25c498a9d88e2cc0bc06dcff030e201",
+      "title": "Compare source labels separately from CSS presentation",
+      "message": "I found a commit titled “Compare source labels separately from CSS presentation”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-a597adc7a2454702f4c7fb6ed68b8d5fb9e009e7",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:44:13Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a597adc7a2454702f4c7fb6ed68b8d5fb9e009e7",
+      "title": "Compare source labels separately from CSS presentation",
+      "message": "I found a commit titled “Compare source labels separately from CSS presentation”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-ff54fdb224410e98039c3cc2c04639354bc631c2",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:40:17Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/ff54fdb224410e98039c3cc2c04639354bc631c2",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-4d7b9e5566c81b4ddfa79effd3a6f2a29d9434aa",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:34:40Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4d7b9e5566c81b4ddfa79effd3a6f2a29d9434aa",
+      "title": "Merge pull request #52 from www-infinity4/repair/owner-search-wallet-regressions-20261011",
+      "message": "I found a commit titled “Merge pull request #52 from www-infinity4/repair/owner-search-wallet-regressions-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-01ae2c7c5161202785811064eab8fe8de3c496d2",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:34:01Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/01ae2c7c5161202785811064eab8fe8de3c496d2",
+      "title": "Respect explicit wallet account selection and repair stale search regression fixtures",
+      "message": "I found a commit titled “Respect explicit wallet account selection and repair stale search regression fixtures”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-6f3cc32607496e8848fe1d383ca74c90b5359bac",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T04:25:35Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6f3cc32607496e8848fe1d383ca74c90b5359bac",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-48816cecb84f52725b23ea6b8fb7e7206ab2ce35",
       "agent": "pink-panther",
@@ -88,54 +172,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/7ebb3a91dbe18f67d8060d7f20a7164a0c0deac3",
       "title": "Scroll ShopLC control before touch measurement and retain browser failure screenshots",
       "message": "I found a commit titled “Scroll ShopLC control before touch measurement and retain browser failure screenshots”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-7e1f4c43163692e4bbd337be2c0e4ca7ed1ed5fd",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:17:47Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7e1f4c43163692e4bbd337be2c0e4ca7ed1ed5fd",
-      "title": "Merge pull request #28 from www-infinity4/fix/repair-intake-read-token-20261011",
-      "message": "I found a commit titled “Merge pull request #28 from www-infinity4/fix/repair-intake-read-token-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-78c8c36396f5a0e8b4f1a04a3ce8aed26dcf6e99",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:17:00Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/78c8c36396f5a0e8b4f1a04a3ce8aed26dcf6e99",
-      "title": "Authenticate repair intake reads with ephemeral read-only runner token",
-      "message": "I found a commit titled “Authenticate repair intake reads with ephemeral read-only runner token”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-5bdc181beb83f8c59bdf2c6097393e60baa80e38",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:15:59Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5bdc181beb83f8c59bdf2c6097393e60baa80e38",
-      "title": "Merge pull request #27 from www-infinity4/fix/repair-edge-delivery-proof-20261011",
-      "message": "I found a commit titled “Merge pull request #27 from www-infinity4/fix/repair-edge-delivery-proof-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-bdf8aa8b7b401f01eb3c2a6090a72b8d832590aa",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:15:30Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/bdf8aa8b7b401f01eb3c2a6090a72b8d832590aa",
-      "title": "Isolate read-token test environment and strip runner credentials from browser process",
-      "message": "I found a commit titled “Isolate read-token test environment and strip runner credentials from browser process”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "claude-flow-commit-54e98149cad794e0cd828ad9f4aae325162e87e8",
@@ -222,18 +258,6 @@
       "message": "I found a commit titled “Fix knowledge schema CI to inspect executable SQL rather than explanatory comments”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-7d2d75e326d993fbc7b6ea8127bdc704ae621628",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T00:51:31Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/7d2d75e326d993fbc7b6ea8127bdc704ae621628",
-      "title": "Introduce persistent, additive Robot Brain knowledge and provenance tables",
-      "message": "I found a commit titled “Introduce persistent, additive Robot Brain knowledge and provenance tables”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Oracle-Octaves-commit-0461ac8cc7ea759da869f5f44c35b57b2e524bed",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -258,18 +282,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-295ad32b823d7d2d66a644d4d5ee9f91e0e15c56",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T23:32:28Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/295ad32b823d7d2d66a644d4d5ee9f91e0e15c56",
-      "title": "Automatically bind owner wallet and settle bot earnings without a connect click",
-      "message": "I found a commit titled “Automatically bind owner wallet and settle bot earnings without a connect click”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "claude-flow-commit-ecee3536ff68ac34ca2b81b224a94cae7839f1fd",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -278,18 +290,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T22:33:49Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/ecee3536ff68ac34ca2b81b224a94cae7839f1fd",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-5f8103ea4c04aabf7f67208ed16db47cf1e75134",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T21:33:05Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/5f8103ea4c04aabf7f67208ed16db47cf1e75134",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
