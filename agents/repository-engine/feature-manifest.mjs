@@ -16,11 +16,13 @@ export function deriveFeatureManifest({repository,linkFacts=[],liveBrowser}={}){
   if(u.origin!=='https://quantaphi.org')continue;
   const browserTarget=Array.isArray(liveBrowser?.targets)?liveBrowser.targets.find(t=>t.url===u.origin+u.pathname):null;
   const checked=browserTarget&&Array.isArray(browserTarget.views)&&browserTarget.views.length>0&&browserTarget.views.every(x=>x.passed===true);
+  const dom=Array.isArray(liveBrowser?.readOnlyControlChecks)?liveBrowser.readOnlyControlChecks.filter(x=>Array.isArray(x.controls)&&x.controls.some(c=>c.id===row.id)):[];
+  const controlDOM=dom.length&&dom.every(x=>x.passed===true)?'passed':dom.length?'failed':'not_checked';
   items.push({id:'source-control-'+items.length,sourcePath:row.sourcePath||'index.html',selector:'#'+row.id,
     currentLabel:String(row.label||'').slice(0,140),sourceHref:row.href,
     browserPage:origin,targetURL:u.origin+u.pathname,
     expectedOutcome:'The source control keeps its current label and href; verify it is visible in the live DOM, resolves to the same-origin destination, and that destination renders.',
-    verified:{destinationPublicLoad:!!checked,controlDOM:'not_checked',deploymentVersion:'not_checked'},
+    verified:{destinationPublicLoad:!!checked,controlDOM,deploymentVersion:'not_checked'},
     evidence:{browserStatus:browserTarget?.views?.map(x=>x.httpStatus||null)||[],screenshots:browserTarget?.views?.map(x=>x.screenshotPath).filter(Boolean)||[]},
     excludes:['No click/checkout/mint','No login or wallet mutation','No claim that the current commit is deployed']});
  }
