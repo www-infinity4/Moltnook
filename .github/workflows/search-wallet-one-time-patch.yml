@@ -1,0 +1,44 @@
+name: One-time reviewed search wallet regression patch
+on:
+  push:
+    branches: [ops/search-wallet-regressions-20261011]
+    paths: [.github/workflows/search-wallet-one-time-patch.yml]
+permissions:
+  contents: read
+jobs:
+  bounded-patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: www-infinity4/QuantaPhi
+          ref: 48816cecb84f52725b23ea6b8fb7e7206ab2ce35
+          path: quanta-check
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test exact staged patch before acquiring write token
+        run: |
+          cp -R ops/quanta-regressions/. quanta-check/
+          cd quanta-check
+          node --check phi-assimilation.js
+          node --check cloud-wallet-client.js
+          node --test test/phi-assimilation.test.cjs test/account-recovery-flow.test.cjs test/search-isolation.test.cjs test/wallet-search-handoff.test.cjs test/cloud-connection.test.cjs test/search-commit.test.cjs test/overview-response.test.cjs test/domain-health.test.cjs test/suite-routing.test.cjs test/ai-origin.test.cjs test/wallet-recovery-routing.test.cjs test/wallet-assets.test.cjs test/star-coin-cloud.test.cjs test/social-share-preview.test.cjs
+      - uses: actions/create-github-app-token@v2
+        id: repair-app
+        with:
+          app-id: ${{ secrets.REPAIR_BOT_APP_ID }}
+          private-key: ${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}
+          owner: www-infinity4
+          repositories: QuantaPhi
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Open exact isolated App-authored pull request
+        env:
+          REPAIR_APP_TOKEN: ${{ steps.repair-app.outputs.token }}
+        run: node ops/search-wallet-apply.mjs
