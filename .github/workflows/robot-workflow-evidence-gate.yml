@@ -21,6 +21,9 @@ on:
       - 'agents/repository-engine/live-browser-smoke.mjs'
       - 'scripts/automated-repair-handler.mjs'
       - 'scripts/automated-repair-handler.test.mjs'
+      - 'scripts/repair-draft-dispatch.mjs'
+      - 'scripts/repair-draft-dispatch.test.mjs'
+      - '.github/workflows/browser-repair-draft-dispatch.yml'
       - '.github/workflows/infinity-live-browser.yml'
       - 'agents/repository-engine/*evidence.test.mjs'
       - '.github/workflows/robot-workflow-evidence-gate.yml'
@@ -55,4 +58,6 @@ jobs:
       - run: node --check agents/repository-engine/live-browser-smoke.mjs
       - run: node --check scripts/automated-repair-handler.mjs
       - run: node --test scripts/automated-repair-handler.test.mjs
+      - run: node --check scripts/repair-draft-dispatch.mjs
+      - run: node --test scripts/repair-draft-dispatch.test.mjs
       - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/source-links.test.mjs agents/repository-engine/scoped-capabilities.test.mjs agents/repository-engine/evidence-replan.test.mjs agents/repository-engine/feature-manifest.test.mjs agents/repository-engine/live-browser.test.mjs agents/repository-engine/browser-observation-gate.test.mjs agents/repository-engine/patch.test.mjs
