@@ -1,0 +1,45 @@
+name: Oracle cross-repository reuse radar
+on:
+  schedule:
+    - cron: '23 */2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/reuse-radar/**'
+      - '.github/workflows/oracle-reuse-radar.yml'
+  pull_request:
+    paths:
+      - 'agents/reuse-radar/**'
+      - '.github/workflows/oracle-reuse-radar.yml'
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: moltnook-oracle-reuse-radar
+  cancel-in-progress: false
+jobs:
+  reuse-scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bounded source matcher and exact LLM target checks
+        run: |
+          node --check agents/reuse-radar/runner.mjs
+          node --test agents/reuse-radar/engine.test.mjs
+      - name: Review recent cross-repository features with Oracle LLM
+        if: github.event_name != 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node agents/reuse-radar/runner.mjs
+      - name: Retain the model evidence and error report
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-reuse-radar-evidence
+          path: repository-receipts/oracle-reuse-radar.json
+          if-no-files-found: warn
