@@ -10,7 +10,7 @@ export const REGIONS={
  'www-infinity4/Web-Phi':'website preview and page publishing',
  'www-infinity4/Moltnook':'robot observers, patch review and agent routing'
 };
-const RULES={upload:/upload|dropzone|type=.file|readAsDataURL|image.?picker/i,button:/<button|createElement\(['"]button|aria-controls|click/i,image:/<img|thumbnail|object-fit|illustrat/i,viewer:/iframe|viewer|postMessage|embed/i,media:/audio|video|player|stream/i,card:/card|story|article|news/i,builder:/website|builder|template|generate.?page/i,observer:/watcher|observer|test|health.?check/i,search:/search|overview|indexer/i};
+const RULES={upload:/upload|dropzone|type=.file|readAsDataURL|image.?picker/i,button:/<button|createElement\(['"]button|aria-controls|click/i,image:/<img|createElement\(['"]img|\.src\s*=|thumbnail|object-fit|illustrat/i,viewer:/iframe|viewer|postMessage|embed/i,media:/audio|video|player|stream/i,card:/card|story|article|news/i,builder:/website|builder|template|generate.?page/i,observer:/watcher|observer|test|health.?check/i,search:/search|overview|indexer/i};
 const DISALLOWED=/^\.github\/|(^|\/)(?:node_modules|dist|build|coverage)\/|\.min\.js$|\.(?:png|webp|jpe?g|svg|gif|mp4|map)$/i;
 export function describeChange(file){
  const p=String(file.filename||'');
