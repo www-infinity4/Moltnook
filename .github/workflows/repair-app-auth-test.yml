@@ -10,12 +10,45 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
+      - name: Validate and normalize copied PEM without exposing it
+        env:
+          SAVED_KEY: ${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),crypto=require('crypto');
+          const raw=(process.env.SAVED_KEY||'').replace(/\\n/g,'\n').replace(/\r/g,'');
+          const blocks=[...raw.matchAll(/-----BEGIN (RSA PRIVATE KEY|PRIVATE KEY)-----([\s\S]*?)-----END \1-----/g)];
+          let valid;
+          for(const m of blocks){
+            const body=m[2].replace(/[\s\u200B-\u200D\uFEFF]/g,'');
+            if(!/^[A-Za-z0-9+/=]+$/.test(body))continue;
+            const der=Buffer.from(body,'base64');
+            for(const candidate of [der,trimDER(der)]){
+              if(!candidate)continue;
+              try{valid=crypto.createPrivateKey({key:candidate,format:'der',type:m[1]==='RSA PRIVATE KEY'?'pkcs1':'pkcs8'});break;}catch{}
+            }
+            if(valid)break;
+          }
+          function trimDER(b){
+            if(b[0]!==48||b.length<2)return null;
+            let n=b[1],off=2;
+            if(n&128){const k=n&127;if(k<1||k>4||b.length<2+k)return null;n=0;for(let i=0;i<k;i++)n=n*256+b[2+i];off+=k;}
+            return off+n<=b.length?b.subarray(0,off+n):null;
+          }
+          if(!valid){console.log('Saved secret does not contain a complete readable PEM private key; formatting normalization could not repair it.');process.exit(1);}
+          if(valid.asymmetricKeyType!=='rsa'){console.log('Key is not RSA.');process.exit(1);}
+          const pem=valid.export({format:'pem',type:'pkcs1'}).toString();
+          for(const line of pem.trim().split('\n'))console.log('::add-mask::'+line);
+          const delimiter='KEY_'+crypto.randomBytes(16).toString('hex');
+          fs.appendFileSync(process.env.GITHUB_ENV,'NORMALIZED_KEY<<'+delimiter+'\n'+pem+delimiter+'\n');
+          console.log('Saved PEM parses successfully; normalized safely for authentication.');
+          NODE
       - name: Authenticate installed QuantaPhi App
         id: app
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.REPAIR_BOT_APP_ID }}
-          private-key: ${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}
+          private-key: ${{ env.NORMALIZED_KEY }}
           owner: www-infinity4
           repositories: QuantaPhi
           permission-contents: read
