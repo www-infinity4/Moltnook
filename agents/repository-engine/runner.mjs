@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
-import {inspectRuntime,focusedTestCommand} from './runtime-baseline.mjs';
+import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
 import {verifyLiveBrowser} from './live-browser.mjs';
 import {executionContext} from './execution-context.mjs';
@@ -58,7 +58,7 @@ async function checks(patched){
  if(focusedArgs)run('Focused Node tests with shared baseline','node',focusedArgs);
  if(pkg){
   if(pkg.scripts?.test)run('Repository tests','npm',['run','test']);if(pkg.scripts?.build)run('Repository build','npm',['run','build']);
- }else if(!runs.length)throw Error('Repository needs an acceptance adapter before committing this file type');
+ }else if(!runs.length)throw Error(missingAcceptanceAdapterMessage(paths));
  report.tests={passed:true,runs};return report.tests;
 }
 try{
