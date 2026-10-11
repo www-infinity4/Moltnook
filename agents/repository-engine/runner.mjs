@@ -136,7 +136,14 @@ try{
     return {proposal,patched};
    },
    review:async candidate=>{
-    const review=await call('engine-review',{evidence:{baseSha,plan,edits:candidate.proposal.edits,source:original}});report.review=review;return review;
+    // Existing source and observed controls are evidence of baseline behavior,
+    // not invented owner requirements or independent acceptance.
+    const pinnedControls=(report.featureManifest?.checks||[]).slice(0,12).map(check=>({
+      sourcePath:check.sourcePath,selector:check.selector,
+      existingLabel:check.currentLabel,existingHref:check.sourceHref,
+      sourceEvidence:true,ownerSpecified:false
+    }));
+    const review=await call('engine-review',{evidence:{baseSha,plan,edits:candidate.proposal.edits,source:original,pinnedControls}});report.review=review;return review;
    },
    test:async candidate=>{
     for(const [file,content]of Object.entries(candidate.patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}

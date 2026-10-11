@@ -39,6 +39,7 @@ jobs:
           node --check agents/repository-engine/live-source.mjs
           node --check agents/repository-engine/source-evidence.mjs
           node --test agents/repository-engine/source-evidence.test.mjs
+          node --test agents/repository-engine/pinned-review.test.mjs
           node --check agents/repository-engine/source-links.mjs
           node --test agents/repository-engine/source-links.test.mjs
           node --check agents/repository-engine/scoped-capabilities.mjs
