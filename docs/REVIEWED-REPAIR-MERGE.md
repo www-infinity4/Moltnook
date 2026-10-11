@@ -12,4 +12,6 @@ The finalizer operates on a bounded recent PR scan and reports a blocked scan if
 
 When no eligible bot PR exists, apply runs still check protected main against live HTML and test the actual ShopLC click, embedded viewer and close button. This is recorded as `live_smoke_passed`, not as a completed repair. A smoke failure stops the run and produces a failure receipt.
 
+HTML delivery equality means exact bytes after the pinned Worker v46 suite-link transform, including preservation of the legacy wallet bridge. The deployed Worker was read through Cloudflare and matched against repository source before copying this deterministic transform. Both the transformed bytes and edge-version header must match. An unknown edge version or any additional HTML difference blocks verification; hashes are recorded for diagnosis. Preview uses the same known transform, and candidate Worker code is never imported or executed.
+
 This is not a general repair adapter. Backend, wallet, authentication, workflow changes and other controls are outside its supported scope. The preexisting QuantaPhi brain writer still attempts direct main writes; that separate adapter needs a protected-branch PR migration before it can complete new source changes. This finalizer does not relax protection to accommodate it.

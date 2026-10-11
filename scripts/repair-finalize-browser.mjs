@@ -1,17 +1,23 @@
 import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+import {rewriteDeployedHTML,expectedEdgeVersion} from './repair-finalize-edge.mjs';
 export async function browserCheck({content,sha,preview,prNumber}){
  const url='https://quantaphi.org/?repairCommit='+sha;
+ const delivered=rewriteDeployedHTML(content);
  // Distinguish deployed source from a staged page. Never call a staged page deployed.
  if(!preview){
-  let matched=false;
+  let matched=false,diagnostic={};
   for(let i=0;i<6&&!matched;i++){
    const r=await fetch(url+'&attempt='+i,{cache:'no-store',redirect:'error',signal:AbortSignal.timeout(20000)});
-   matched=r.ok&&(await r.text())===content;
+   const actual=await r.text();
+   diagnostic={status:r.status,edge:r.headers.get('x-quantaphi-edge'),expectedHash:crypto.createHash('sha256').update(delivered).digest('hex'),actualHash:crypto.createHash('sha256').update(actual).digest('hex')};
+   matched=r.ok&&diagnostic.edge===expectedEdgeVersion&&actual===delivered;
    if(!matched&&i<5)await new Promise(resolve=>setTimeout(resolve,10000));
   }
-  if(!matched)throw Error('Merged HTML has not reached quantaphi.org');
+  if(!matched)throw Error('Delivered HTML differs from pinned edge transform: '+JSON.stringify(diagnostic));
  }
- const {chromium}=await import('playwright'),browser=await chromium.launch({headless:true});
+ const childEnv=Object.fromEntries(['PATH','HOME','TMPDIR','XDG_RUNTIME_DIR','LD_LIBRARY_PATH'].filter(k=>process.env[k]).map(k=>[k,process.env[k]]));
+ const {chromium}=await import('playwright'),browser=await chromium.launch({headless:true,env:childEnv});
  const errors=[];let target;
  try{
   // No credentials, storage state, owner session, or runner tokens enter the browser.
@@ -21,7 +27,7 @@ export async function browserCheck({content,sha,preview,prNumber}){
   await context.route('**/*',async route=>{
    const request=route.request();
    if(!['GET','HEAD'].includes(request.method()))return route.abort();
-   if(preview&&request.isNavigationRequest()&&request.frame()===page.mainFrame()&&new URL(request.url()).pathname==='/')return route.fulfill({status:200,contentType:'text/html',body:content});
+   if(preview&&request.isNavigationRequest()&&request.frame()===page.mainFrame()&&new URL(request.url()).pathname==='/')return route.fulfill({status:200,contentType:'text/html',body:delivered});
    return route.continue();
   });
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
@@ -48,6 +54,6 @@ export async function browserCheck({content,sha,preview,prNumber}){
   const response=await context.request.get('https://quantaphi.org/shoplc/',{maxRedirects:0,timeout:20000});
   if(!response.ok())throw Error('ShopLC destination HTTP failed');
   if(errors.length)throw Error('Browser JavaScript errors: '+errors.slice(0,3).join('; ').slice(0,250));
-  return {passed:true,mode:preview?'staged_preview':'deployed',sha,viewport:'360x800',target,screenshot,checks:['canonical href','44px target','click opens correct viewer','viewer closes','destination loads','no page errors'],deployedFilesMatched:!preview};
+  return {passed:true,mode:preview?'staged_preview':'deployed',sha,edgeVersion:expectedEdgeVersion,viewport:'360x800',target,screenshot,checks:['canonical href','44px target','click opens correct viewer','viewer closes','destination loads','no page errors'],deployedFilesMatched:!preview};
  }finally{await browser.close();}
 }

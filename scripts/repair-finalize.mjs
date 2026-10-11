@@ -59,9 +59,9 @@ export async function finalize(pr,proposal,{token,fetchImpl=fetch,dryRun=true,br
  const reviews=await api('/pulls/'+pr.number+'/reviews?per_page=100',args);
  if(!reviewGate(reviews,pr.head.sha))return {status:'waiting_review',prNumber:pr.number,headSha:pr.head.sha,browser};
  // Public checks endpoint needs no extra App permission. Never send the App token.
- const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100',{fetchImpl});
+ const checks=await api('/commits/'+pr.head.sha+'/check-runs?per_page=100',{fetchImpl,token:process.env.REPAIR_READ_TOKEN});
  if(!checkGate(checks,pr.head.sha))return {status:'waiting_checks',prNumber:pr.number,headSha:pr.head.sha};
- const statuses=await api('/commits/'+pr.head.sha+'/status',{fetchImpl});
+ const statuses=await api('/commits/'+pr.head.sha+'/status',{fetchImpl,token:process.env.REPAIR_READ_TOKEN});
  if(!Array.isArray(statuses.statuses)||statuses.total_count!==statuses.statuses.length||(statuses.total_count>0&&statuses.state!=='success'))return {status:'waiting_checks',prNumber:pr.number,headSha:pr.head.sha};
  const latest=await api('/pulls/'+pr.number,args),main=await api('/branches/main',args);
  validateIdentity(latest,proposal);
@@ -75,7 +75,7 @@ export async function finalize(pr,proposal,{token,fetchImpl=fetch,dryRun=true,br
  }catch(e){return {status:'merged_unverified',prNumber:pr.number,commitSha:result.sha,reason:e.message};}
 }
 export async function main(){
- const apply=process.argv.includes('--apply'),token=apply?process.env.REPAIR_APP_TOKEN:undefined;
+ const apply=process.argv.includes('--apply'),token=apply?process.env.REPAIR_APP_TOKEN:process.env.REPAIR_READ_TOKEN;
  const receipt={schemaVersion:1,checkedAt:new Date().toISOString(),mode:apply?'apply':'dry_run',status:'idle',results:[]};
  await fs.mkdir('repository-receipts',{recursive:true});
  try{
@@ -87,7 +87,7 @@ export async function main(){
    try{
     const match=/Intake ticket: https:\/\/github\.com\/www-infinity4\/Oracle-Octaves\/issues\/([1-9][0-9]*)\b/.exec(row.body||'');
     if(!match)throw Error('Missing immutable intake reference');
-    const r=await fetch('https://api.github.com/repos/www-infinity4/Oracle-Octaves/issues/'+match[1],{redirect:'error',signal:AbortSignal.timeout(20000)});
+    const r=await fetch('https://api.github.com/repos/www-infinity4/Oracle-Octaves/issues/'+match[1],{headers:process.env.REPAIR_READ_TOKEN?{Authorization:'Bearer '+process.env.REPAIR_READ_TOKEN}:{},redirect:'error',signal:AbortSignal.timeout(20000)});
     if(!r.ok)throw Error('Intake unavailable');const proposal=parseTrustedTicket(await r.json());
     if(!proposal)throw Error('Intake no longer validates');
     const pr=await api('/pulls/'+row.number,{token});
