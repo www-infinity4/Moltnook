@@ -31,6 +31,7 @@ test('mock broken mobile ShopLC control becomes an evidence-linked draft PR with
  const fetchImpl=async(url,options)=>{
   const u=new URL(url),method=options.method||'GET',body=options.body?JSON.parse(options.body):null;
   calls.push({url:u.href,method,body});
+  if(u.pathname.endsWith('/branches/main'))return {ok:true,json:async()=>({protected:true})};
   if(u.pathname.endsWith('/git/ref/heads/main'))return {ok:true,json:async()=>({object:{sha}})};
   if(u.pathname.endsWith('/contents/index.html')&&method==='GET')return {ok:true,json:async()=>({sha:'blob',encoding:'base64',content:Buffer.from(source).toString('base64')})};
   if(u.pathname.endsWith('/pulls')&&method==='GET')return {ok:true,json:async()=>([])};
@@ -42,7 +43,7 @@ test('mock broken mobile ShopLC control becomes an evidence-linked draft PR with
  const result=await dispatchDraftRepair(candidate,{token:'fixture_scoped_app_token_123456',fetchImpl});
  assert.equal(result.status,'draft_pr_created');
  assert.equal(result.prNumber,33);
- assert.deepEqual(calls.map(x=>x.method),['GET','GET','GET','POST','PUT','POST']);
+ assert.deepEqual(calls.map(x=>x.method),['GET','GET','GET','GET','POST','PUT','POST']);
  const changes=calls.filter(x=>x.method==='POST'||x.method==='PUT');
  assert.equal(changes.length,3);
  assert.equal(changes[0].body.ref.startsWith('refs/heads/repair/browser-'),true);
