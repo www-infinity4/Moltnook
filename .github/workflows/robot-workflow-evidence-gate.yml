@@ -1,0 +1,31 @@
+name: Robot workflow evidence security gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/source-evidence.mjs'
+      - 'agents/repository-engine/workflow-evidence.mjs'
+      - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/*evidence.test.mjs'
+      - '.github/workflows/robot-workflow-evidence-gate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/source-evidence.mjs'
+      - 'agents/repository-engine/workflow-evidence.mjs'
+      - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/*evidence.test.mjs'
+      - '.github/workflows/robot-workflow-evidence-gate.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check agents/repository-engine/runner.mjs
+      - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/patch.test.mjs
