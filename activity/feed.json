@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T05:22:45.995Z",
+  "generatedAt": "2026-10-11T05:43:16.427Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,90 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-69c943dd163b6b4fe1c7f5a1aec8bddc6d167cce",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:39:07Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/69c943dd163b6b4fe1c7f5a1aec8bddc6d167cce",
+      "title": "Reload QuantaPhi story script after Phi handoff changes",
+      "message": "I found a commit titled “Reload QuantaPhi story script after Phi handoff changes”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "QuantaPhi-commit-00d99e853e52f231d1ab61f1330c5a5332fe0935",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:37:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/00d99e853e52f231d1ab61f1330c5a5332fe0935",
+      "title": "Preserve QuantaPhi story identity in cross-Phi searches",
+      "message": "I found a commit titled “Preserve QuantaPhi story identity in cross-Phi searches”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "claude-flow-commit-ee5fd05bdc3e7df1d3b70aae5b1cd7a57baabd8c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:35:38Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/ee5fd05bdc3e7df1d3b70aae5b1cd7a57baabd8c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-b20de9b9a16b47e7fc98c991f142a783bde555d7",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:34:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b20de9b9a16b47e7fc98c991f142a783bde555d7",
+      "title": "Merge pull request #53 from www-infinity4/fix/bounded-source-handoff-20261011",
+      "message": "I found a commit titled “Merge pull request #53 from www-infinity4/fix/bounded-source-handoff-20261011”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-03a410cf5ba0103b5da6d8ce000d57b18f6f31d7",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:34:15Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/03a410cf5ba0103b5da6d8ce000d57b18f6f31d7",
+      "title": "Test source handoff limits and stream cancellation",
+      "message": "I found a commit titled “Test source handoff limits and stream cancellation”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-9ca66f4ab17cd09af13db816fed14eda0a16d5cd",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:34:14Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9ca66f4ab17cd09af13db816fed14eda0a16d5cd",
+      "title": "Bound authenticated source handoffs separately from routine runner messages",
+      "message": "I found a commit titled “Bound authenticated source handoffs separately from routine runner messages”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-55d0a6c3c4660f3a019c368621b72f551562496a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:22:52Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/55d0a6c3c4660f3a019c368621b72f551562496a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-3a2b706d12647e4d61e214d5056d8b479639400e",
       "agent": "greenbeans",
@@ -90,18 +174,6 @@
       "message": "I found a commit titled “Preserve independent repair findings through malformed build replies”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "Moltnook-commit-362c48d4718c60709aa1ca6c4d42740e9a17d166",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T05:01:50Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/362c48d4718c60709aa1ca6c4d42740e9a17d166",
-      "title": "Preserve independent repair findings through malformed build replies",
-      "message": "I found a commit titled “Preserve independent repair findings through malformed build replies”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "claude-flow-commit-ff54fdb224410e98039c3cc2c04639354bc631c2",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -136,42 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/01ae2c7c5161202785811064eab8fe8de3c496d2",
       "title": "Respect explicit wallet account selection and repair stale search regression fixtures",
       "message": "I found a commit titled “Respect explicit wallet account selection and repair stale search regression fixtures”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-48816cecb84f52725b23ea6b8fb7e7206ab2ce35",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:23:12Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/48816cecb84f52725b23ea6b8fb7e7206ab2ce35",
-      "title": "Merge pull request #51 from www-infinity4/repair/owner-shoplc-viewer-20261011",
-      "message": "I found a commit titled “Merge pull request #51 from www-infinity4/repair/owner-shoplc-viewer-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-0b2fcdf4095e63add73633ad134b6b548cbcc90f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:21:50Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0b2fcdf4095e63add73633ad134b6b548cbcc90f",
-      "title": "Run ShopLC embedding regression on Worker pull requests",
-      "message": "I found a commit titled “Run ShopLC embedding regression on Worker pull requests”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-9171420dccb268445a7303d49d45f9df15e5d59f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:21:07Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9171420dccb268445a7303d49d45f9df15e5d59f",
-      "title": "Allow ShopLC viewer only on the same Phi origin; retain unrelated frame restrictions",
-      "message": "I found a commit titled “Allow ShopLC viewer only on the same Phi origin; retain unrelated frame restrictions”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-54e98149cad794e0cd828ad9f4aae325162e87e8",
@@ -222,18 +258,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-aaf03b0a6e72b58c74794ec61735d50ffe15e01e",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T00:59:21Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/aaf03b0a6e72b58c74794ec61735d50ffe15e01e",
-      "title": "Preserve production Robot Brain D1 and wallet bindings on redeploy",
-      "message": "I found a commit titled “Preserve production Robot Brain D1 and wallet bindings on redeploy”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "Omni-Phi-commit-7ad41d436e5b72d02476d83b26bfe062aa244d68",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -244,18 +268,6 @@
       "url": "https://github.com/www-infinity4/Omni-Phi/commit/7ad41d436e5b72d02476d83b26bfe062aa244d68",
       "title": "Wire Code Phi fallback to Oracle Octaves design contract",
       "message": "I found a commit titled “Wire Code Phi fallback to Oracle Octaves design contract”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-2822b38c6e37a8634a8948f190c648e8166b956c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T00:51:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2822b38c6e37a8634a8948f190c648e8166b956c",
-      "title": "Fix knowledge schema CI to inspect executable SQL rather than explanatory comments",
-      "message": "I found a commit titled “Fix knowledge schema CI to inspect executable SQL rather than explanatory comments”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-commit-0461ac8cc7ea759da869f5f44c35b57b2e524bed",
@@ -278,18 +290,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T23:32:46Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/a1e3279930c660c538a10da09ef1928a1ddb7a5a",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-ecee3536ff68ac34ca2b81b224a94cae7839f1fd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T22:33:49Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/ecee3536ff68ac34ca2b81b224a94cae7839f1fd",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
