@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T21:47:25.248Z",
+  "generatedAt": "2026-10-11T21:56:34.359Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-630dbc234cd06371a5bada44850dff27b344e943",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T21:50:52Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/630dbc234cd06371a5bada44850dff27b344e943",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-31c5acd4db894a2787e1b8da023f76e8bbcef893",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T21:47:30Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/31c5acd4db894a2787e1b8da023f76e8bbcef893",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Omni-Phi-commit-0bda209637eef332124418bd3332eb55a7cb1575",
       "agent": "purple-pearl",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Expose screenshot following roster and priority Aequitas/Cardone sources in Media Star”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-33a5efd7d55dfd651294a026174b9175697b36f1",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T20:34:04Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/33a5efd7d55dfd651294a026174b9175697b36f1",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-94",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -244,18 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/0bcf2318ea6033ca06e50216df38bd675800e32e",
       "title": "Create Media Star followed-Spaces radio, durable imports and two-stage draws",
       "message": "I found a commit titled “Create Media Star followed-Spaces radio, durable imports and two-stage draws”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-557ba33ef4303f831e02c28ce3b22aaaa26ccaff",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T20:17:34Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/557ba33ef4303f831e02c28ce3b22aaaa26ccaff",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-9ed122df2395ad76b48bbc2ba9551e37b5b38c6f",
