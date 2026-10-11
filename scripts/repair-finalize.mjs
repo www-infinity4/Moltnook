@@ -97,6 +97,13 @@ export async function main(){
    }catch(e){receipt.results.push({status:row.merged_at?'merged_unverified':'blocked',prNumber:row.number,reason:String(e.message).slice(0,220)});}
   }
   if(receipt.results.length)receipt.status=receipt.results.at(-1).status;
+  else if(apply){
+   const branch=await api('/branches/main',{token});
+   if(branch.protected!==true||!SHA.test(branch.commit?.sha||''))throw Error('Protected main required for live smoke check');
+   const content=await source(branch.commit.sha,{token});
+   receipt.liveSmoke=await browserCheck({content,sha:branch.commit.sha,preview:false,prNumber:'main'});
+   receipt.status='live_smoke_passed';
+  }
  }catch(e){receipt.status='blocked';receipt.error=String(e.message).slice(0,220);process.exitCode=1;}
  if(['blocked','merged_unverified'].includes(receipt.status))process.exitCode=1;
  await fs.writeFile('repository-receipts/repair-finalize.json',JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt));return receipt;

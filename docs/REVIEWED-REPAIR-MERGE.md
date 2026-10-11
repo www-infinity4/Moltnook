@@ -10,4 +10,6 @@ The existing quantaphi.org edge serves main. After merge the runner checks exact
 
 The finalizer operates on a bounded recent PR scan and reports a blocked scan if the API returns a full page, rather than silently treating an incomplete scan as complete. Open repairs are prioritized over deployment rechecks. Main changes require fresh observation; the runner never rebases a stale repair automatically. It never executes candidate source in the credential-bearing process. The browser receives no owner session or App token and blocks non-GET/HEAD requests.
 
+When no eligible bot PR exists, apply runs still check protected main against live HTML and test the actual ShopLC click, embedded viewer and close button. This is recorded as `live_smoke_passed`, not as a completed repair. A smoke failure stops the run and produces a failure receipt.
+
 This is not a general repair adapter. Backend, wallet, authentication, workflow changes and other controls are outside its supported scope. The preexisting QuantaPhi brain writer still attempts direct main writes; that separate adapter needs a protected-branch PR migration before it can complete new source changes. This finalizer does not relax protection to accommodate it.
