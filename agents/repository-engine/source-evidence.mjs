@@ -3,6 +3,7 @@
 const SKIP=/(^|\/)(?:\.git|\.github|node_modules|vendor|dist|build|coverage|\.next|__pycache__|secrets?|credentials?)(\/|$)|(?:^|\/)(?:\.env[^/]*|[^/]*\.min\.(?:js|css)|package-lock\.json|yarn\.lock|pnpm-lock\.yaml)$/i;
 const ALLOWED=/\.(?:html?|mjs|cjs|jsx?|tsx?|css|json|md|py)$/i;
 const SENSITIVE=/(?:BEGIN [A-Z ]*PRIVATE KEY|authorization\s*[:=]|(?:api[_-]?key|secret|password|private[_-]?key)\s*[:=]|bearer\s+\S+)/i;
+const GENERIC=new Set(['fix','broken','button','link','section','application','identify','replace','owner','correct','exact','destination','requested','text','label','code','repo','source']);
 const OMIT=new Set(['please','could','would','should','about','there','their','these','those','with','from','this','that','into','your','they','when','what','have','site','page','work','task','build','make','need','look','code']);
 export async function collectSourceEvidence({paths,task='',read,maxChars=16000}={}){
  if(!Array.isArray(paths)||typeof read!=='function')throw new TypeError('Paths and source reader required');
@@ -15,16 +16,25 @@ export async function collectSourceEvidence({paths,task='',read,maxChars=16000}=
   if(remaining<500)break;
   let source;try{source=await read(file)}catch{continue}
   if(typeof source!=='string'||!source.trim())continue;
-  const lines=source.split(/\r?\n/),hits=[];
+  const lines=source.split(/\r?\n/),ranked=[],specific=terms.filter(t=>!GENERIC.has(t));
+  // Prefer the owner's actual named subject and existing clickable URLs over
+  // generic early-page "link" or "button" text. Do not skip the whole file.
   for(let i=0;i<lines.length;i++){
    const line=lines[i].toLowerCase();
-   if(terms.some(t=>line.includes(t))||/href\s*=|https?:\/\/|fetch\s*\(|location\.href/i.test(line))hits.push(i);
-   if(hits.length>=32)break;
+   const exact=specific.filter(t=>line.includes(t)).length;
+   const other=terms.filter(t=>GENERIC.has(t)&&line.includes(t)).length;
+   const destination=/<a\b|href\s*=|data-site-url/i.test(line)?8:0;
+   if(exact||other||destination)ranked.push({i,score:exact*12+Math.min(other,3)+destination});
   }
+  ranked.sort((a,b)=>b.score-a.score||a.i-b.i);
   const chosen=new Set();
-  for(let i=0;i<Math.min(lines.length,8);i++)chosen.add(i);
-  for(const i of hits){for(let j=Math.max(0,i-1);j<=Math.min(lines.length-1,i+1);j++)chosen.add(j)}
-  const snippets=[...chosen].sort((a,b)=>a-b).map(i=>String(i+1)+': '+(SENSITIVE.test(lines[i])?'[credential-bearing line omitted]':lines[i].slice(0,350)));
+  for(const {i} of ranked.slice(0,10)){
+   chosen.add(i);
+   if(i>0)chosen.add(i-1);
+   if(i+1<lines.length)chosen.add(i+1);
+  }
+  for(let i=0;i<Math.min(lines.length,3);i++)chosen.add(i);
+  const snippets=[...chosen].map(i=>String(i+1)+': '+(SENSITIVE.test(lines[i])?'[credential-bearing line omitted]':lines[i].slice(0,500)));
   const excerpt=snippets.join('\n').slice(0,Math.min(3200,remaining));
   if(excerpt){result[file]=excerpt;remaining-=excerpt.length}
  }
