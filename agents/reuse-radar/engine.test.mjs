@@ -11,7 +11,7 @@ test('discovers a real image-upload control as a reusable capability',()=>{
  const issue=issueBody(reviewed);assert.match(issue,/source:|source\*\*/i);assert.match(issue,/No automatic|creates no payout/i);
 });
 test('rejects invented destinations or weak unstructured AI opinions',()=>{
- const f=describeChange({filename:'gallery.js',status:'added',additions:60,patch:'+const img=document.createElement("img"); img.src="data:sample"; document.body.append(img);'});
+ const f=describeChange({filename:'gallery.js',status:'added',additions:60,patch:'+const img=document.createElement("img"); img.src="data:sample"; document.body.append(img); img.alt="Portable image example for reuse across Phi project pages";'});
  assert.ok(f);
  const targets=candidates(source,f);
  assert.equal(acceptReview({decision:'reuse',targetRepo:'somebody/evil',confidence:.99,summary:'an unsafe target',reason:'imaginary changes would help',adaptation:'automatically copy all contents'},source,'a'.repeat(40),f,targets),null);
