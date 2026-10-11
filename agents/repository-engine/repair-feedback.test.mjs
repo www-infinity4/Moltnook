@@ -1,6 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {repairWithFeedback} from './repair-feedback.mjs';
+test('malformed build replies preserve earlier independent review findings',async()=>{
+ let calls=0;const receipts=[];
+ const result=await repairWithFeedback({
+  build:async f=>{calls++;if(calls===2)throw Error('Unexpected token in JSON');if(calls===3){assert.deepEqual(f.failures.map(x=>x.stage),['review','build']);assert.match(f.failures[0].reason,/SQLite/)}return {attempt:calls}},
+  review:async c=>({approved:c.attempt!==1,reason:'SQLite ADD COLUMN IF NOT EXISTS is invalid'}),
+  test:async()=>({passed:true}),arbitrate:async()=>({decision:'approve'}),restore:async()=>{},onFeedback:async f=>receipts.push(f)
+ });
+ assert.equal(result.attempt,3);assert.equal(receipts[0].failures.length,1,'older receipts must not mutate');
+});
 test('retry hands the previous authenticated failure to the engineer',async()=>{
  const initialFeedback={stage:'test',reason:'describe is not defined'};
  const result=await repairWithFeedback({initialFeedback,build:async previous=>{assert.deepEqual(previous,initialFeedback);return {};},review:async()=>({approved:true}),test:async()=>({passed:true}),arbitrate:async()=>({decision:'approve'}),restore:async()=>{assert.fail('unexpected restore')},onFeedback:async()=>{assert.fail('unexpected failure')}});
