@@ -3,7 +3,21 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {permittedLiveURL,selectLiveTargets,verifyLiveBrowser} from './live-browser.mjs';
+import {permittedLiveURL,selectLiveTargets,verifyLiveBrowser,inspectSourceControls} from './live-browser.mjs';
+test('CSS capitalization does not invent a changed label; real text and destination changes still fail',()=>{
+ const oldDocument=globalThis.document,oldStyle=globalThis.getComputedStyle;
+ let href='/shoplc/',label='Live channel';
+ const el={nodeType:1,get childNodes(){return [{nodeType:3,nodeValue:'🌺 ShopLC'},{nodeType:1,childNodes:[{nodeType:3,nodeValue:label}]}]},innerText:'🌺 SHOPLC LIVE CHANNEL',getAttribute:()=>href,getBoundingClientRect:()=>({width:100,height:50})};
+ globalThis.document={baseURI:'https://quantaphi.org/',getElementById:id=>id==='shoplcShirtButton'?el:null};
+ globalThis.getComputedStyle=()=>({visibility:'visible',display:'block'});
+ try{
+  const rows=[{id:'shoplcShirtButton',href:'/shoplc/',label:'🌺 ShopLC Live channel'}];
+  const result=inspectSourceControls(rows)[0];assert.equal(result.verified,true);assert.equal(result.renderedLabel,'🌺 SHOPLC LIVE CHANNEL');assert.equal(result.actualLabel,'🌺 ShopLC Live channel');
+  label='Wrong channel';assert.equal(inspectSourceControls(rows)[0].labelMatches,false);
+  label='Live channel';href='/wrong/';assert.equal(inspectSourceControls(rows)[0].hrefMatches,false);
+  assert.equal(inspectSourceControls([{id:'missing',href:'/shoplc/'}])[0].verified,false);
+ }finally{if(oldDocument===undefined)delete globalThis.document;else globalThis.document=oldDocument;if(oldStyle===undefined)delete globalThis.getComputedStyle;else globalThis.getComputedStyle=oldStyle}
+});
 test('browser navigation is restricted to anonymous first-party HTTPS',()=>{
  for(const url of ['http://quantaphi.org/','https://evil.com/','https://quantaphi.org.evil.com/','https://user:pass@quantaphi.org/','file:///etc/passwd','javascript:alert(1)','https://www.quantaphi.org/']){
   assert.equal(permittedLiveURL(url),'',url);

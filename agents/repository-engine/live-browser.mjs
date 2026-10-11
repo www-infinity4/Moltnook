@@ -35,6 +35,26 @@ export function selectLiveTargets({repository,linkFacts=[],task=''}={}){
  return [...unique].map((url,index)=>({url,kind:index?'source-linked':'landing',source:index?relevant.find(x=>permittedLiveURL(x.siteUrl||x.href||'')===url)?.sourcePath||'':'route-registry'}));
 }
 function safeError(e){return String(e?.message||e||'unknown').replace(/(?:Bearer|token|apikey)\s*[:=]?\s*\S+/gi,'[redacted]').slice(0,220)}
+// Runs unchanged in Chromium. CSS text-transform is presentation, not a source edit.
+export function inspectSourceControls(rows){
+ return rows.map(row=>{
+  const el=document.getElementById(row.id);
+  if(!el)return {id:row.id,status:'missing',verified:false};
+  const actual=el.getAttribute('href')||'';
+  const expected=new URL(row.href,document.baseURI).href;
+  const actualUrl=actual?new URL(actual,document.baseURI).href:'';
+  const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
+  const visible=rect.width>0&&rect.height>0&&style.visibility!=='hidden'&&style.display!=='none';
+  const texts=[];
+  const read=node=>{if(node.nodeType===3)texts.push(node.nodeValue||'');else for(const child of node.childNodes||[])read(child)};
+  read(el);
+  const actualLabel=texts.join(' ').replace(/\s+/g,' ').trim().slice(0,140);
+  const renderedLabel=(el.innerText||'').replace(/\s+/g,' ').trim().slice(0,140);
+  const expectedLabel=String(row.label||'').replace(/\s+/g,' ').trim();
+  const verified=visible&&actualUrl===expected&&(!expectedLabel||actualLabel===expectedLabel);
+  return {id:row.id,status:verified?'matched':'mismatch',verified,visible,hrefMatches:actualUrl===expected,labelMatches:!expectedLabel||actualLabel===expectedLabel,actualLabel,renderedLabel,actualHref:actual.slice(0,350)};
+ });
+}
 export async function verifyLiveBrowser({repository,linkFacts=[],task='',directory='repository-receipts/live-browser',launchBrowser}={}){
  const targets=selectLiveTargets({repository,linkFacts,task});
  const report={schemaVersion:1,repository,checkedAt:new Date().toISOString(),mode:'live-public-readonly',
@@ -78,19 +98,7 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
      const candidates=target.kind==='landing'?(Array.isArray(linkFacts)?linkFacts:[]).filter(x=>x&&/^[A-Za-z][\w:-]{0,79}$/.test(String(x.id||''))&&typeof x.href==='string').slice(0,6):[];
      let controls=[];
      if(candidates.length){
-      const observed=await page.evaluate(rows=>rows.map(row=>{
-       const el=document.getElementById(row.id);
-       if(!el)return {id:row.id,status:'missing',verified:false};
-       const actual=el.getAttribute('href')||'';
-       const expected=new URL(row.href,document.baseURI).href;
-       const actualUrl=actual?new URL(actual,document.baseURI).href:'';
-       const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
-       const visible=rect.width>0&&rect.height>0&&style.visibility!=='hidden'&&style.display!=='none';
-       const actualLabel=(el.innerText||'').replace(/\s+/g,' ').trim().slice(0,140);
-       const expectedLabel=String(row.label||'').replace(/\s+/g,' ').trim();
-       const verified=visible&&actualUrl===expected&&(!expectedLabel||actualLabel===expectedLabel);
-       return {id:row.id,status:verified?'matched':'mismatch',verified,visible,hrefMatches:actualUrl===expected,labelMatches:!expectedLabel||actualLabel===expectedLabel,actualLabel,actualHref:actual.slice(0,350)};
-      }),candidates.map(row=>({id:row.id,href:row.href,label:row.label||''})));
+      const observed=await page.evaluate(inspectSourceControls,candidates.map(row=>({id:row.id,href:row.href,label:row.label||''})));
       controls=Array.isArray(observed)?observed:[];
      }
      const screenshot=path.join(directory,(target.kind==='landing'?'landing':'linked-'+report.targets.length)+'-'+device+'.png');
