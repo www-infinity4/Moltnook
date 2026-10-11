@@ -1,0 +1,66 @@
+name: Infinity reviewed browser repair merge and verification
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Validate browser, prepare review, merge approved repairs and verify deployment
+        type: boolean
+        default: false
+  schedule:
+    - cron: '23,53 * * * *'
+  push:
+    branches: [main]
+    paths: ['scripts/repair-finalize*.mjs', '.github/workflows/browser-repair-finalize.yml']
+  pull_request:
+    paths: ['scripts/repair-finalize*.mjs', '.github/workflows/browser-repair-finalize.yml']
+permissions:
+  contents: read
+concurrency:
+  group: infinity-trusted-browser-draft-dispatch
+  cancel-in-progress: false
+jobs:
+  finalize:
+    if: github.event_name != 'schedule' || vars.REPAIR_DISPATCH_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test exact patch and merge gates
+        run: |
+          node --check scripts/repair-finalize.mjs
+          node --check scripts/repair-finalize-browser.mjs
+          node --test scripts/repair-finalize.test.mjs scripts/repair-draft-dispatch.test.mjs
+      - name: Read-only candidate scan
+        run: node scripts/repair-finalize.mjs --dry-run
+      - name: Install isolated browser
+        if: github.ref == 'refs/heads/main' && vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true)
+        run: |
+          npm install --no-save --package-lock=false --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Mint repository-scoped repair token
+        id: app-token
+        if: github.ref == 'refs/heads/main' && vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true)
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.REPAIR_BOT_APP_ID }}
+          private-key: ${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}
+          owner: www-infinity4
+          repositories: QuantaPhi
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Prepare review, merge approved patch and verify deployed source
+        if: steps.app-token.outputs.token != ''
+        env:
+          REPAIR_APP_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: node scripts/repair-finalize.mjs --apply
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-repair-merge-receipts
+          path: repository-receipts/
+          retention-days: 14
