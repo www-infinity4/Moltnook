@@ -34,9 +34,9 @@ async function call(step,body={}){
  return result;
 }
 async function event(agent,message){const row={agent,message,when:new Date().toISOString()};report.events.push(row);await call('event',row);}
-async function sourceFile(file){safePath(file);const absolute=inside(workspace,file);try{
+async function sourceFile(file,maxBytes=180000){safePath(file);const absolute=inside(workspace,file);try{
  const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Error('Writer refuses symlink source');}
- const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>180000)throw Error('Source requires a smaller task: '+file);return s;
+ const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function checks(patched){
  const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name);}};
@@ -79,7 +79,7 @@ try{
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
   // Read actual safe source snippets before declaring a link or target absent.
-  const sourceSamples=await collectSourceEvidence({paths:tracked,task:lease.job.instructions+' '+(lease.job.ownerRequest||''),read:sourceFile});
+  const sourceSamples=await collectSourceEvidence({paths:tracked,task:lease.job.instructions+' '+(lease.job.ownerRequest||''),read:file=>sourceFile(file,1250000)});
   const plan=await retryStructuredModelCall(()=>call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),sourceSamples,runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused native Node tests with describe/it/test/hooks preloaded','existing npm test/build'],deployment:'not implemented for arbitrary repositories',sourceOnlyCommit:'A passing independently reviewed patch can be recorded as committed_unverified; deployment and browser acceptance are separate',forkCreation:'not implemented',adapterRegistry:'none'}}}),{onRetry:({attempt})=>event('pink-panther','Model response contained invalid JSON on reader attempt '+attempt+'. Safely retrying the same pinned evidence. No source or wallet changes made.')});
   report.plan=plan;
   if(!Array.isArray(plan.blockers))throw Error('Reader omitted unresolved blocker list');

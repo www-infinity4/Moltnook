@@ -10,3 +10,12 @@ test('source evidence is bounded and redacts credential-bearing lines',async()=>
  const result=await collectSourceEvidence({paths:['index.html'],task:'Check shop',read:async()=>'<a href="/shop">Shop</a>\nAPI_KEY="very-private-secret"\n'+('shop content '.repeat(1000)),maxChars:1000});
  const s=JSON.stringify(result);assert.ok(s.length<1400);assert.ok(!s.includes('very-private-secret'));
 });
+
+test('ShopLC button near the end of a large QuantaPhi page is still inspectable',async()=>{
+  const big='Unrelated research cards. '.repeat(11000)+'\n<a class="shoplcShirtButton" id="shoplcShirtButton" href="https://quantaphi.org/shoplc/" aria-label="Open ShopLC channel inside QuantaPhi">ShopLC Live channel</a>';
+  assert.ok(big.length>180000);
+  const snippets=await collectSourceEvidence({paths:['index.html'],task:'Fix shoplc button on quantaphi',read:async()=>big,maxChars:4000});
+  assert.match(snippets['index.html'],/shoplcShirtButton/);
+  assert.match(snippets['index.html'],/https:\/\/quantaphi\.org\/shoplc\//);
+  assert.ok(snippets['index.html'].length<=3200);
+});
