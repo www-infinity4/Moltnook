@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T18:22:39.857Z",
+  "generatedAt": "2026-10-11T18:45:45.542Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-e3d98e2addca51472f0340ec288d7ebe40b23747",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T18:39:45Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/e3d98e2addca51472f0340ec288d7ebe40b23747",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-9f791af6ddef1e6cfb76ca76597e7b55471b0b61",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T18:22:46Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9f791af6ddef1e6cfb76ca76597e7b55471b0b61",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ce3b628206ca0ecd99ec64805cc674600889c773",
       "agent": "greenbeans",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/78364508d15db741b7f4b1d98f7f0833ea42b542",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-f4b6c27bf77063795915fbfb55b5db1a0bb5bd8e",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T16:51:59Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f4b6c27bf77063795915fbfb55b5db1a0bb5bd8e",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-312a415cd75c76f9ce7aac3c8ebb9caba32b7a73",
@@ -268,18 +280,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/79",
       "title": "[Agent Job] Oracle reuse: image → News-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: image → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-b699b4d4900056825d6d08b1feb083cbc116fbb8",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T11:33:02Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b699b4d4900056825d6d08b1feb083cbc116fbb8",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-78",
