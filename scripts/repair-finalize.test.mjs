@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {reviewGate,checkGate,finalize} from './repair-finalize.mjs';
+import {rewriteDeployedHTML} from './repair-finalize-edge.mjs';
 const base='a'.repeat(40),head='b'.repeat(40),merge='c'.repeat(40);
 const branch='repair/browser-'+ 'd'.repeat(24);
 const original='<a id="shoplcShirtButton" href="https://quantaphi.org/wrong/">Shop</a>';
@@ -57,4 +58,14 @@ test('approved checked exact patch merges with SHA guard, then verifies deployed
 test('merge success with stale deployment stays unverified and can be resumed',async()=>{
  const m=mock({deploymentFailure:true});assert.equal((await finalize(pr,proposal,m)).status,'merged_unverified');
  const next=mock();assert.equal((await finalize({...pr,state:'closed',merged_at:'now',merge_commit_sha:merge},proposal,next)).status,'deployed_verified');assert.equal(next.calls.some(c=>c.method!=='GET'),false);
+});
+test('delivery transform preserves legacy wallet bridge while rewriting suite links',()=>{
+ const bridge='https://www-infinity4.github.io/QuantaPhi/wallet-link.html';
+ assert.equal(rewriteDeployedHTML(bridge),bridge);
+ assert.equal(rewriteDeployedHTML('https://www-infinity4.github.io/ShopLC/'), 'https://quantaphi.org/shoplc/');
+ assert.equal(rewriteDeployedHTML('https://www-infinity4.github.io/QuantaPhi/'), 'https://quantaphi.org/');
+});
+test('delivery transform leaves the approved ShopLC correction and unrelated content intact',()=>{
+ assert.equal(rewriteDeployedHTML(fixed),fixed);
+ assert.notEqual(rewriteDeployedHTML(fixed+'unexpected'),rewriteDeployedHTML(fixed));
 });
