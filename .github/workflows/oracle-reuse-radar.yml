@@ -1,7 +1,7 @@
 name: Oracle cross-repository reuse radar
 on:
   schedule:
-    - cron: '23 */2 * * *'
+    - cron: '23 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -35,6 +35,7 @@ jobs:
         if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REUSE_RADAR_TOKEN: ${{ secrets.GHP }}
         run: node agents/reuse-radar/runner.mjs
       - name: Retain the model evidence and error report
         if: always() && github.event_name != 'pull_request'
