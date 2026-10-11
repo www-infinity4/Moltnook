@@ -15,6 +15,9 @@ on:
     paths: ['scripts/repair-finalize*.mjs', '.github/workflows/browser-repair-finalize.yml']
 permissions:
   contents: read
+  pull-requests: read
+  checks: read
+  statuses: read
 concurrency:
   group: infinity-trusted-browser-draft-dispatch
   cancel-in-progress: false
@@ -23,6 +26,8 @@ jobs:
     if: github.event_name != 'schedule' || vars.REPAIR_DISPATCH_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      REPAIR_READ_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
         with:
