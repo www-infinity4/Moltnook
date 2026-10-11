@@ -77,6 +77,8 @@ export async function dispatchDraftRepair(proposal,{token,fetchImpl=fetch,dryRun
  if(!proposal||!ID.test(proposal.ticket?.id||''))throw Error('Validated ticket required');
  if(!dryRun&&(!token||token.length<15))return {status:'blocked',reason:'Repository-scoped GitHub App token unavailable',issue:proposal.issueNumber};
  const args={token:dryRun?null:token,fetchImpl};
+ const protectedBranch=await github(API+'/branches/main',args);
+ if(protectedBranch?.protected!==true)return {status:'blocked',reason:'QuantaPhi main is unprotected; require enforced non-bypassable PR review branch protection before bot write access',issue:proposal.issueNumber};
  const ref=await github(API+'/git/ref/heads/main',args);
  const head=ref?.object?.sha;
  if(!SHA.test(head||'')||head!==proposal.baseSha)return {status:'blocked',reason:'Pinned source SHA no longer equals main; reobserve before repair',issue:proposal.issueNumber};
