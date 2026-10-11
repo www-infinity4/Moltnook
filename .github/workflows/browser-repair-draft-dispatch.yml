@@ -1,0 +1,66 @@
+name: Infinity branch-only browser repair dispatcher
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Allow draft PR creation when REPAIR_DISPATCH_ENABLED is true'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '13,43 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/repair-draft-dispatch.mjs'
+      - 'scripts/repair-draft-dispatch.test.mjs'
+      - '.github/workflows/browser-repair-draft-dispatch.yml'
+# OIDC alone does NOT grant GitHub repository writes. This workflow uses a
+# short-lived, downscoped GitHub App installation token instead of GHP/PAT.
+permissions:
+  contents: read
+concurrency:
+  group: infinity-trusted-browser-draft-dispatch
+  cancel-in-progress: false
+jobs:
+  dispatch:
+    if: "${{ github.event_name != 'schedule' || vars.REPAIR_DISPATCH_ENABLED == 'true' }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate pure patch rules and deny dangerous scopes
+        run: |
+          node --check scripts/repair-draft-dispatch.mjs
+          node --test scripts/repair-draft-dispatch.test.mjs
+      - name: Examine public intake without write credentials
+        run: node scripts/repair-draft-dispatch.mjs --dry-run
+      - name: Mint short-lived token for QuantaPhi only
+        id: bot-token
+        if: "${{ vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true) }}"
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: "${{ secrets.REPAIR_BOT_APP_ID }}"
+          private-key: "${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}"
+          owner: www-infinity4
+          repositories: QuantaPhi
+          permission-contents: write
+          permission-pull-requests: write
+      - name: Create only isolated branch and draft PR from pinned source
+        if: "${{ vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true) }}"
+        env:
+          REPAIR_APP_TOKEN: "${{ steps.bot-token.outputs.token }}"
+        run: node scripts/repair-draft-dispatch.mjs --apply
+      - name: Save honest intake, dry-run, or draft-PR receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-repair-draft-dispatch
+          path: repository-receipts/repair-draft-dispatch.json
+          retention-days: 14
+          if-no-files-found: warn
