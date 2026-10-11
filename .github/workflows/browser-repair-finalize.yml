@@ -10,9 +10,9 @@ on:
     - cron: '23,53 * * * *'
   push:
     branches: [main]
-    paths: ['scripts/repair-finalize*.mjs', '.github/workflows/browser-repair-finalize.yml']
+    paths: ['scripts/repair-finalize*.mjs', 'scripts/repair-draft-dispatch*.mjs', '.github/workflows/browser-repair-finalize.yml', '.github/workflows/browser-repair-draft-dispatch.yml']
   pull_request:
-    paths: ['scripts/repair-finalize*.mjs', '.github/workflows/browser-repair-finalize.yml']
+    paths: ['scripts/repair-finalize*.mjs', 'scripts/repair-draft-dispatch*.mjs', '.github/workflows/browser-repair-finalize.yml', '.github/workflows/browser-repair-draft-dispatch.yml']
 permissions:
   contents: read
   pull-requests: read
