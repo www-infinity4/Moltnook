@@ -40,7 +40,7 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
  const report={schemaVersion:1,repository,checkedAt:new Date().toISOString(),mode:'live-public-readonly',
   status:'unsupported_route',browserPassed:false,featureAcceptance:false,deploymentVerified:false,
   networkPolicy:'quantaphi.org GET/HEAD only; anonymous clean storage; no clicks, POST, wallet, checkout or account actions',
-  screenshots:[],targets:[],notes:['Public browser reachability does not prove a specific Git commit is deployed or validate authenticated transactions.']};
+  screenshots:[],targets:[],readOnlyControlChecks:[],notes:['Public browser reachability does not prove a specific Git commit is deployed or validate authenticated transactions.']};
  if(!targets.length)return report;
  let browser;
  try{
@@ -74,14 +74,34 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
        horizontalOverflow:html.scrollWidth>window.innerWidth+16,
        visibleImages:[...document.images].filter(x=>x.getBoundingClientRect().width>0).length};
      });
+     // Inspect source-grounded controls without invoking handlers or dispatching clicks.
+     const candidates=target.kind==='landing'?(Array.isArray(linkFacts)?linkFacts:[]).filter(x=>x&&/^[A-Za-z][\w:-]{0,79}$/.test(String(x.id||''))&&typeof x.href==='string').slice(0,6):[];
+     let controls=[];
+     if(candidates.length){
+      const observed=await page.evaluate(rows=>rows.map(row=>{
+       const el=document.getElementById(row.id);
+       if(!el)return {id:row.id,status:'missing',verified:false};
+       const actual=el.getAttribute('href')||'';
+       const expected=new URL(row.href,document.baseURI).href;
+       const actualUrl=actual?new URL(actual,document.baseURI).href:'';
+       const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
+       const visible=rect.width>0&&rect.height>0&&style.visibility!=='hidden'&&style.display!=='none';
+       const actualLabel=(el.innerText||'').replace(/\s+/g,' ').trim().slice(0,140);
+       const expectedLabel=String(row.label||'').replace(/\s+/g,' ').trim();
+       const verified=visible&&actualUrl===expected&&(!expectedLabel||actualLabel===expectedLabel);
+       return {id:row.id,status:verified?'matched':'mismatch',verified,visible,hrefMatches:actualUrl===expected,labelMatches:!expectedLabel||actualLabel===expectedLabel,actualLabel,actualHref:actual.slice(0,350)};
+      }),candidates.map(row=>({id:row.id,href:row.href,label:row.label||''})));
+      controls=Array.isArray(observed)?observed:[];
+     }
      const screenshot=path.join(directory,(target.kind==='landing'?'landing':'linked-'+report.targets.length)+'-'+device+'.png');
      await fs.mkdir(directory,{recursive:true});
      const buffer=await page.screenshot({path:screenshot,type:'png',fullPage:false,animations:'disabled',timeout:10000});
      const view={device,viewport:viewport.width+'x'+viewport.height,httpStatus:response?.status()||0,
       finalURL:permittedLiveURL(page.url())||'blocked-or-untrusted',...info,
-      screenshotPath:screenshot,screenshotBytes:buffer.length};
+      screenshotPath:screenshot,screenshotBytes:buffer.length,controlChecks:controls,controlsChecked:candidates.length,controlsMatched:controls.length===candidates.length&&controls.every(c=>c.verified===true)};
      view.passed=view.httpStatus>=200&&view.httpStatus<400&&view.finalURL===target.url&&view.bodyChars>=30&&buffer.length>2000;
      visit.views.push(view);report.screenshots.push(screenshot);
+     if(candidates.length)report.readOnlyControlChecks.push({page:target.url,device,passed:view.controlsMatched,controls:view.controlChecks});
     }catch(error){visit.views.push({device,passed:false,error:safeError(error)})}
     finally{await context.close()}
    }
