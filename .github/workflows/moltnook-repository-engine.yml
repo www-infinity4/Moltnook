@@ -49,6 +49,8 @@ jobs:
           node --test agents/repository-engine/feature-manifest.test.mjs
           node --check agents/repository-engine/live-browser.mjs
           node --test agents/repository-engine/live-browser.test.mjs
+          node --check agents/repository-engine/browser-observation-gate.mjs
+          node --test agents/repository-engine/browser-observation-gate.test.mjs
           node --check agents/repository-engine/workflow-evidence.mjs
           node --test agents/repository-engine/workflow-evidence.test.mjs
           node --check agents/repository-engine/model-format-retry.mjs
