@@ -10,7 +10,7 @@ export function assessBrowserObservations(checks,sites){
    for(const device of ['mobile','desktop']){
     const observations=(record.readOnlyControlChecks||[]).filter(x=>x.device===device);
     const found=observations.flatMap(x=>Array.isArray(x.controls)?x.controls:[]).find(x=>x.id===row.id);
-    if(!found||found.verified!==true)failures.push({repository:site.repository,selector:'#'+row.id,device,reason:found?'live control did not match pinned selector, label or href':'required live control observation missing'});
+    if(!found||found.verified!==true)failures.push({repository:site.repository,selector:'#'+row.id,device,expectedHref:row.href||null,actualHref:found?.actualHref||null,sourcePath:row.sourcePath||null,reason:found?'live control did not match pinned selector, label or href':'required live control observation missing'});
    }
   }
  }
