@@ -68,15 +68,15 @@ async function github(url,{token,fetchImpl=fetch,...options}={}){
  if(!response.ok)throw Error('GitHub API '+response.status+' for '+new URL(url).pathname);
  return response.json();
 }
-export async function findRepairIssues({fetchImpl=fetch}={}){
- const issues=await github(ISSUE_API+'?state=open&per_page=100',{fetchImpl});
+export async function findRepairIssues({fetchImpl=fetch,token=process.env.REPAIR_READ_TOKEN}={}){
+ const issues=await github(ISSUE_API+'?state=open&per_page=100',{fetchImpl,token});
  if(!Array.isArray(issues))throw Error('Issue intake response invalid');
  return issues.map(parseTrustedTicket).filter(Boolean).sort((a,b)=>a.issueNumber-b.issueNumber).slice(0,20);
 }
 export async function dispatchDraftRepair(proposal,{token,fetchImpl=fetch,dryRun=false}={}){
  if(!proposal||!ID.test(proposal.ticket?.id||''))throw Error('Validated ticket required');
  if(!dryRun&&(!token||token.length<15))return {status:'blocked',reason:'Repository-scoped GitHub App token unavailable',issue:proposal.issueNumber};
- const args={token:dryRun?null:token,fetchImpl};
+ const args={token:dryRun?process.env.REPAIR_READ_TOKEN:token,fetchImpl};
  const protectedBranch=await github(API+'/branches/main',args);
  if(protectedBranch?.protected!==true)return {status:'blocked',reason:'QuantaPhi main is unprotected; require enforced non-bypassable PR review branch protection before bot write access',issue:proposal.issueNumber};
  const ref=await github(API+'/git/ref/heads/main',args);
