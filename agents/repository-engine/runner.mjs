@@ -9,6 +9,7 @@ import {inspectRuntime,focusedTestCommand} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
 import {executionContext} from './execution-context.mjs';
 import {collectSourceEvidence} from './source-evidence.mjs';
+import {retryStructuredModelCall} from './model-format-retry.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -79,7 +80,7 @@ try{
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
   // Read actual safe source snippets before declaring a link or target absent.
   const sourceSamples=await collectSourceEvidence({paths:tracked,task:lease.job.instructions+' '+(lease.job.ownerRequest||''),read:sourceFile});
-  const plan=await call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),sourceSamples,runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused native Node tests with describe/it/test/hooks preloaded','existing npm test/build'],deployment:'not implemented for arbitrary repositories',sourceOnlyCommit:'A passing independently reviewed patch can be recorded as committed_unverified; deployment and browser acceptance are separate',forkCreation:'not implemented',adapterRegistry:'none'}}});
+  const plan=await retryStructuredModelCall(()=>call('plan',{evidence:{baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),sourceSamples,runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.github/','.env','credentials','secrets'],checks:['JavaScript parse','Python AST parse','HTML parse','focused native Node tests with describe/it/test/hooks preloaded','existing npm test/build'],deployment:'not implemented for arbitrary repositories',sourceOnlyCommit:'A passing independently reviewed patch can be recorded as committed_unverified; deployment and browser acceptance are separate',forkCreation:'not implemented',adapterRegistry:'none'}}}),{onRetry:({attempt})=>event('pink-panther','Model response contained invalid JSON on reader attempt '+attempt+'. Safely retrying the same pinned evidence. No source or wallet changes made.')});
   report.plan=plan;
   if(!Array.isArray(plan.blockers))throw Error('Reader omitted unresolved blocker list');
   if(plan.blockers.length){
