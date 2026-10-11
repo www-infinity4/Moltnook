@@ -9,6 +9,7 @@ on:
       - 'agents/repository-engine/live-browser.mjs'
       - 'agents/repository-engine/live-browser-smoke.mjs'
       - '.github/workflows/infinity-live-browser.yml'
+      - 'scripts/automated-repair-handler*'
 permissions:
   contents: read
 concurrency:
@@ -36,4 +37,35 @@ jobs:
           name: infinity-live-browser-observations
           path: repository-receipts/public-live-browser*
           retention-days: 7
+          if-no-files-found: warn
+
+  analyze-failure:
+    needs: observe
+    if: ${{ always() && needs.observe.result == 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test failure bridge and selector lookup
+        run: node --test scripts/automated-repair-handler.test.mjs
+      - uses: actions/download-artifact@v4
+        with:
+          name: infinity-live-browser-observations
+          path: artifacts
+      - name: Locate pinned source and persist deduplicated repair tickets
+        env:
+          REPAIR_INTAKE_TOKEN: ${{ secrets.GHP }}
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/automated-repair-handler.mjs artifacts
+      - name: Preserve actual dispatch receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: infinity-browser-repair-tickets
+          path: repository-receipts/browser-repair-tickets.json
           if-no-files-found: warn
