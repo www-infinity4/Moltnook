@@ -16,7 +16,8 @@ export async function browserCheck({content,sha,preview,prNumber}){
   }
   if(!matched)throw Error('Delivered HTML differs from pinned edge transform: '+JSON.stringify(diagnostic));
  }
- const {chromium}=await import('playwright'),browser=await chromium.launch({headless:true});
+ const childEnv=Object.fromEntries(['PATH','HOME','TMPDIR','XDG_RUNTIME_DIR','LD_LIBRARY_PATH'].filter(k=>process.env[k]).map(k=>[k,process.env[k]]));
+ const {chromium}=await import('playwright'),browser=await chromium.launch({headless:true,env:childEnv});
  const errors=[];let target;
  try{
   // No credentials, storage state, owner session, or runner tokens enter the browser.

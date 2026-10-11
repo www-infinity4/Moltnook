@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {reviewGate,checkGate,finalize} from './repair-finalize.mjs';
 import {rewriteDeployedHTML} from './repair-finalize-edge.mjs';
+process.env.REPAIR_READ_TOKEN='read-only-test-token';
 const base='a'.repeat(40),head='b'.repeat(40),merge='c'.repeat(40);
 const branch='repair/browser-'+ 'd'.repeat(24);
 const original='<a id="shoplcShirtButton" href="https://quantaphi.org/wrong/">Shop</a>';
@@ -53,7 +54,7 @@ test('pending checks or last-second SHA changes block merge',async()=>{
  for(const o of [{checks:{total_count:1,check_runs:[]}},{statuses:{total_count:1,statuses:[{}],state:'failure'}},{latest:{...pr,head:{...pr.head,sha:merge}}}]){const m=mock(o);const r=await finalize(pr,proposal,m);assert.ok(['waiting_checks','blocked'].includes(r.status));assert.equal(m.calls.some(c=>c.method==='PUT'),false);}
 });
 test('approved checked exact patch merges with SHA guard, then verifies deployed browser',async()=>{
- const m=mock();const r=await finalize(pr,proposal,m);assert.equal(r.status,'deployed_verified');assert.equal(r.commitSha,merge);const write=m.calls.find(c=>c.method==='PUT');assert.deepEqual(JSON.parse(write.body),{sha:head,merge_method:'merge'});assert.deepEqual(m.browserCalls.map(c=>c.preview),[true,false]);assert.ok(!m.calls.find(c=>c.p.includes('check-runs')).headers.Authorization);
+ const m=mock();const r=await finalize(pr,proposal,m);assert.equal(r.status,'deployed_verified');assert.equal(r.commitSha,merge);const write=m.calls.find(c=>c.method==='PUT');assert.deepEqual(JSON.parse(write.body),{sha:head,merge_method:'merge'});assert.deepEqual(m.browserCalls.map(c=>c.preview),[true,false]);assert.equal(m.calls.find(c=>c.p.includes('check-runs')).headers.Authorization,'Bearer read-only-test-token');
 });
 test('merge success with stale deployment stays unverified and can be resumed',async()=>{
  const m=mock({deploymentFailure:true});assert.equal((await finalize(pr,proposal,m)).status,'merged_unverified');
