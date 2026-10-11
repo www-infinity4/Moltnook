@@ -8,6 +8,8 @@ on:
       - 'agents/repository-engine/source-links.test.mjs'
       - 'agents/repository-engine/workflow-evidence.mjs'
       - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/live-browser.mjs'
+      - 'agents/repository-engine/live-browser.test.mjs'
       - 'agents/repository-engine/*evidence.test.mjs'
       - '.github/workflows/robot-workflow-evidence-gate.yml'
   push:
@@ -16,6 +18,8 @@ on:
       - 'agents/repository-engine/source-evidence.mjs'
       - 'agents/repository-engine/workflow-evidence.mjs'
       - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/live-browser.mjs'
+      - 'agents/repository-engine/live-browser.test.mjs'
       - 'agents/repository-engine/*evidence.test.mjs'
       - '.github/workflows/robot-workflow-evidence-gate.yml'
 permissions:
@@ -31,4 +35,5 @@ jobs:
           node-version: '22'
       - run: node --check agents/repository-engine/runner.mjs
       - run: node --check agents/repository-engine/source-links.mjs
-      - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/source-links.test.mjs agents/repository-engine/patch.test.mjs
+      - run: node --check agents/repository-engine/live-browser.mjs
+      - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/source-links.test.mjs agents/repository-engine/live-browser.test.mjs agents/repository-engine/patch.test.mjs
