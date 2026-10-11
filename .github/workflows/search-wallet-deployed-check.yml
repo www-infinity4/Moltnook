@@ -1,0 +1,36 @@
+name: One-time Quanta deployed wallet verification
+on:
+  push:
+    branches: [ops/search-wallet-regressions-20261011]
+    paths: [.github/workflows/search-wallet-deployed-check.yml]
+permissions:
+  contents: read
+jobs:
+  deployed-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify exact published client and main asset reference
+        run: |
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          const sha='4d7b9e5566c81b4ddfa79effd3a6f2a29d9434aa',expected='4b8c7810bf7f704a8151216c8932dc7943522c46c7929f249a92d9c819580768',version='20261011-account-selection1';
+          const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
+          let receipt;
+          for(let attempt=0;attempt<12;attempt++){
+            const js=await fetch('https://quantaphi.org/cloud-wallet-client.js?v='+version,{cache:'no-store',redirect:'error',signal:AbortSignal.timeout(20000)});
+            const body=await js.text();
+            const html=await fetch('https://quantaphi.org/',{cache:'no-store',redirect:'error',signal:AbortSignal.timeout(20000)}),page=await html.text();
+            const actual=hash(body);
+            if(js.ok&&html.ok&&actual===expected&&page.includes('cloud-wallet-client.js?v='+version)){
+              receipt={schemaVersion:1,status:'deployed_files_verified',sha,walletClientSha256:actual,assetVersion:version,edgeVersion:html.headers.get('x-quantaphi-edge'),readOnly:true};break;
+            }
+            console.log(JSON.stringify({attempt:attempt+1,scriptStatus:js.status,htmlStatus:html.status,scriptMatches:actual===expected,assetReferenced:page.includes('cloud-wallet-client.js?v='+version)}));
+            if(attempt<11)await new Promise(resolve=>setTimeout(resolve,5000));
+          }
+          if(!receipt)throw Error('Published files did not match merged repair');
+          console.log(JSON.stringify(receipt));
+          NODE
