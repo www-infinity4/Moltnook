@@ -44,7 +44,7 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
  if(!targets.length)return report;
  let browser;
  try{
-  const launch=launchBrowser||async()=>{const {chromium}=await import('playwright');return chromium.launch({headless:true})};
+  const launch=launchBrowser||(async()=>{const {chromium}=await import('playwright');return chromium.launch({headless:true})});
   browser=await launch();
   for(const target of targets){
    const visit={url:target.url,kind:target.kind,source:target.source,views:[],errors:[]};
