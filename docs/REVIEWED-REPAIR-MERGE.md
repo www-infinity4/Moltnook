@@ -1,0 +1,13 @@
+# Reviewed browser repair merge and deployment verification
+
+The existing dispatcher creates a draft QuantaPhi PR for one supported repair: the static `index.html` ShopLC link. The finalizer uses the same QuantaPhi-only GitHub App and `REPAIR_DISPATCH_ENABLED` switch. It does not need another key or broader App permissions.
+
+Every 30 minutes (GitHub schedules can be delayed), the finalizer scans actual bot PRs. It reconstructs the exact bounded patch from pinned source and the linked Oracle intake. Only one commit changing only `index.html` to that exact reconstructed content is eligible. The Android preview must show the correct link, a 44px touch target, a working canonical destination and no JavaScript page errors. It then marks a validated draft ready for review.
+
+A GitHub review from `www-infinity4` approving the current PR head is required. Later changes-requested or dismissed reviews block merging. Successful commit statuses and completed non-failing checks are required when present. The runner also performs mandatory browser acceptance itself. It rechecks protected main, original base and PR head, then asks GitHub to merge with the expected head SHA. GitHub's enforced branch protection remains authoritative. The App cannot bypass review or push directly to main.
+
+The existing quantaphi.org edge serves main. After merge the runner checks exact deployed HTML, then repeats Android browser acceptance. `deployed_verified` requires both source equality and browser success; a successful HTTP response alone is insufficient. A stale or failing deployment is `merged_unverified`, and subsequent runs retry verification of the merged PR. Receipts and screenshots are uploaded as workflow artifacts. No issue or feed claims completion without those receipts. Closed intake issues remain readable for recovery.
+
+The finalizer operates on a bounded recent PR scan and reports a blocked scan if the API returns a full page, rather than silently treating an incomplete scan as complete. Open repairs are prioritized over deployment rechecks. Main changes require fresh observation; the runner never rebases a stale repair automatically. It never executes candidate source in the credential-bearing process. The browser receives no owner session or App token and blocks non-GET/HEAD requests.
+
+This is not a general repair adapter. Backend, wallet, authentication, workflow changes and other controls are outside its supported scope. The preexisting QuantaPhi brain writer still attempts direct main writes; that separate adapter needs a protected-branch PR migration before it can complete new source changes. This finalizer does not relax protection to accommodate it.
