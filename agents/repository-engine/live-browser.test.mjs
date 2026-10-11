@@ -19,7 +19,7 @@ test('browser navigation is restricted to anonymous first-party HTTPS',()=>{
  assert.equal(targets[0].url,'https://quantaphi.org/');
  assert.equal(targets[1].url,'https://quantaphi.org/shoplc/');
 });
-function simulatedBrowser({status=200,short=false}={}){
+function simulatedBrowser({status=200,short=false,controlMatched=true}={}){
  const calls={routes:[],closed:0,contexts:0,requested:[]};
  const browser={
   async newContext(){
@@ -31,7 +31,7 @@ function simulatedBrowser({status=200,short=false}={}){
       on(){},
       async goto(url){currentURL=url;calls.requested.push(url);return {status:()=>status}},
       async waitForTimeout(){},
-      async evaluate(){return {title:'QuantaPhi',bodyChars:short?5:230,excerpt:'Public website',linkCount:5,buttonCount:3,horizontalOverflow:false,visibleImages:2}},
+      async evaluate(fn,rows){if(Array.isArray(rows))return rows.map(x=>({id:x.id,status:controlMatched?'matched':'mismatch',verified:controlMatched,visible:true,hrefMatches:controlMatched,labelMatches:controlMatched,actualLabel:x.label,actualHref:x.href}));return {title:'QuantaPhi',bodyChars:short?5:230,excerpt:'Public website',linkCount:5,buttonCount:3,horizontalOverflow:false,visibleImages:2}},
       async screenshot({path:file}){const data=Buffer.alloc(3500,7);await fs.writeFile(file,data);return data},
       url(){return currentURL}
      };
@@ -75,5 +75,22 @@ test('HTTP failure or weak body can never become browser verified',async()=>{
   assert.equal(report.browserPassed,false);
   assert.equal(report.deploymentVerified,false);
   await fs.rm(path.dirname(report.screenshots[0]),{recursive:true,force:true});
+ }
+});
+
+test('real DOM control evidence is separately tracked on both mobile and desktop without clicking',async()=>{
+ for(const match of [true,false]){
+  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'infinity-dom-control-'));
+  try{
+   const {browser}=simulatedBrowser({controlMatched:match});
+   const report=await verifyLiveBrowser({repository:'www-infinity4/QuantaPhi',linkFacts:[{id:'shoplcShirtButton',href:'https://quantaphi.org/shoplc/',label:'ShopLC Live channel',sourcePath:'index.html'}],directory,launchBrowser:async()=>browser});
+   assert.equal(report.browserPassed,true,'page health distinct from control verification');
+   assert.equal(report.readOnlyControlChecks.length,2);
+   assert.deepEqual(report.readOnlyControlChecks.map(x=>x.passed),[match,match]);
+   assert.equal(report.targets[0].views[0].controlsChecked,1);
+   assert.equal(report.targets[0].views[0].controlChecks[0].id,'shoplcShirtButton');
+   assert.equal(report.featureAcceptance,false);
+   assert.equal(report.deploymentVerified,false);
+  }finally{await fs.rm(directory,{recursive:true,force:true})}
  }
 });
