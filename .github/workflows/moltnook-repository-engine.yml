@@ -43,6 +43,8 @@ jobs:
           node --test agents/repository-engine/source-links.test.mjs
           node --check agents/repository-engine/scoped-capabilities.mjs
           node --test agents/repository-engine/scoped-capabilities.test.mjs
+          node --check agents/repository-engine/evidence-replan.mjs
+          node --test agents/repository-engine/evidence-replan.test.mjs
           node --check agents/repository-engine/live-browser.mjs
           node --test agents/repository-engine/live-browser.test.mjs
           node --check agents/repository-engine/workflow-evidence.mjs
