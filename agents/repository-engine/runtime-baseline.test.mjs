@@ -4,7 +4,7 @@ import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
-import {focusedTestCommand,inspectRuntime} from './runtime-baseline.mjs';
+import {focusedTestCommand,inspectRuntime,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 test('native test globals support CommonJS tests and preserve assertion failures',async()=>{
  const dir=await mkdtemp(path.join(os.tmpdir(),'infinity-baseline-'));
  try{
@@ -20,4 +20,11 @@ test('configured framework owns its tests; missing tools fail preflight',async()
  assert.equal(focusedTestCommand(['a.test.js'],{scripts:{test:'vitest run'}}),null);
  const report=await inspectRuntime({version:'22.0.0',execute:cmd=>{if(cmd==='python3')throw Error('missing');},renderer:async()=>{throw Error('missing browser')}});
  assert.equal(report.passed,false);assert.deepEqual(report.checks.filter(x=>!x.passed).map(x=>x.name),['Python','Playwright and installed Chromium']);
+});
+
+test('documentation-only proposals do not manufacture a passing verification receipt',()=>{
+ const msg=missingAcceptanceAdapterMessage(['docs/validation-decision-report.md']);
+ assert.match(msg,/Documentation-only patch has no executable acceptance check/);
+ assert.match(msg,/Do not claim test or browser results/);
+ assert.match(missingAcceptanceAdapterMessage(['assets/config.json']),/configured test or build acceptance adapter/);
 });
