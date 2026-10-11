@@ -75,7 +75,7 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
        visibleImages:[...document.images].filter(x=>x.getBoundingClientRect().width>0).length};
      });
      // Inspect source-grounded controls without invoking handlers or dispatching clicks.
-     const candidates=target.kind==='landing'?(Array.isArray(linkFacts)?linkFacts:[]).filter(x=>x&&/^[A-Za-z][\\w:-]{0,79}$/.test(String(x.id||''))&&typeof x.href==='string').slice(0,6):[];
+     const candidates=target.kind==='landing'?(Array.isArray(linkFacts)?linkFacts:[]).filter(x=>x&&/^[A-Za-z][\w:-]{0,79}$/.test(String(x.id||''))&&typeof x.href==='string').slice(0,6):[];
      let controls=[];
      if(candidates.length){
       const observed=await page.evaluate(rows=>rows.map(row=>{
@@ -86,8 +86,8 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
        const actualUrl=actual?new URL(actual,document.baseURI).href:'';
        const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
        const visible=rect.width>0&&rect.height>0&&style.visibility!=='hidden'&&style.display!=='none';
-       const actualLabel=(el.innerText||'').replace(/\\s+/g,' ').trim().slice(0,140);
-       const expectedLabel=String(row.label||'').replace(/\\s+/g,' ').trim();
+       const actualLabel=(el.innerText||'').replace(/\s+/g,' ').trim().slice(0,140);
+       const expectedLabel=String(row.label||'').replace(/\s+/g,' ').trim();
        const verified=visible&&actualUrl===expected&&(!expectedLabel||actualLabel===expectedLabel);
        return {id:row.id,status:verified?'matched':'mismatch',verified,visible,hrefMatches:actualUrl===expected,labelMatches:!expectedLabel||actualLabel===expectedLabel,actualLabel,actualHref:actual.slice(0,350)};
       }),candidates.map(row=>({id:row.id,href:row.href,label:row.label||''})));
