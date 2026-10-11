@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T07:35:13.485Z",
+  "generatedAt": "2026-10-11T07:50:11.505Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,78 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-7b4487d280c21c665725a00b816e85b7cc76c406",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:39:12Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/7b4487d280c21c665725a00b816e85b7cc76c406",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-17c3af897684dea72d2c7e83e138695556d5be38",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:38:40Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/17c3af897684dea72d2c7e83e138695556d5be38",
+      "title": "Display fresh owner-gated bot earnings audit in QuantaPhi",
+      "message": "I found a commit titled “Display fresh owner-gated bot earnings audit in QuantaPhi”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-acf5d85943224030ec30eb58c924fe06ae94e22c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:35:20Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/acf5d85943224030ec30eb58c924fe06ae94e22c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-63",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:35:17Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/63",
+      "title": "[Agent Job] Oracle reuse: builder → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: builder → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-62",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:35:17Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/62",
+      "title": "[Agent Job] Oracle reuse: button → News-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-61",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T07:35:15Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/61",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
     {
       "id": "Moltnook-commit-9dd232c5254a0a22d710c33ef947ad2ae2de048f",
       "agent": "purple-pearl",
@@ -114,18 +186,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-fdba5473f74c887c4bcaaf561f1763c631456d85",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T06:34:31Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/fdba5473f74c887c4bcaaf561f1763c631456d85",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-d06ad7f3613b96a14886bf47f8d9bad6e6cb7ec1",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -186,18 +246,6 @@
       "message": "I found a commit titled “Reload QuantaPhi story script after Phi handoff changes”. Map each source to the story without repeating material. Keep the result easy to read."
     },
     {
-      "id": "QuantaPhi-commit-00d99e853e52f231d1ab61f1330c5a5332fe0935",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T05:37:39Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/00d99e853e52f231d1ab61f1330c5a5332fe0935",
-      "title": "Preserve QuantaPhi story identity in cross-Phi searches",
-      "message": "I found a commit titled “Preserve QuantaPhi story identity in cross-Phi searches”. Map each source to the story without repeating material. Keep the result easy to read."
-    },
-    {
       "id": "claude-flow-commit-ee5fd05bdc3e7df1d3b70aae5b1cd7a57baabd8c",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -254,18 +302,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-11T01:53:03Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/02358fa35b50216b3c005f39f7a74a790d3169f4",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-4d4c08b6e9baeecfa48b4005a88cad59505a56fa",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T01:18:06Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/4d4c08b6e9baeecfa48b4005a88cad59505a56fa",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -880,42 +916,6 @@
       "url": "https://github.com/www-infinity4/Omni-Phi/issues/1",
       "title": "Channel catalog events → shared Phi index",
       "message": "I found a issue titled “Channel catalog events → shared Phi index”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Infinity-Phi-issue-1",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Infinity-Phi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T01:32:00Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/issues/1",
-      "title": "Search regression: readable researched cards from URLs and copied text",
-      "message": "I found a issue titled “Search regression: readable researched cards from URLs and copied text”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "News-Phi-issue-1",
-      "agent": "bluey",
-      "to": "blueberry",
-      "project": "News-Phi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T01:31:53Z",
-      "url": "https://github.com/www-infinity4/News-Phi/issues/1",
-      "title": "X/share ingest should expand content, not echo URLs",
-      "message": "I found a issue titled “X/share ingest should expand content, not echo URLs”. Stage the import and verify exact fields, licensing and provenance before deciding its final destination."
-    },
-    {
-      "id": "Mint-For-Infinity-commit-46564cedb5ab6545eaa97a18d2be53f889255844",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "Mint-For-Infinity",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-08-31T06:31:34Z",
-      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/46564cedb5ab6545eaa97a18d2be53f889255844",
-      "title": "Add social previews, explicit sharing rewards, and unified wallet controls",
-      "message": "I found a commit titled “Add social previews, explicit sharing rewards, and unified wallet controls”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     }
   ]
 }
