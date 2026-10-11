@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T14:34:14.317Z",
+  "generatedAt": "2026-10-11T14:48:05.271Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-ee052f82d1411ec90ea28f71a3dd580783848830",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T14:34:25Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/ee052f82d1411ec90ea28f71a3dd580783848830",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-16ee038ca4bc3d5ed4503f719ae937692e6c9cfb",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T14:34:19Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/16ee038ca4bc3d5ed4503f719ae937692e6c9cfb",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-84",
       "agent": "purple-pearl",
@@ -136,18 +160,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/57cee95e7f280fc5a072f1f2f51057ff1bf8cd59",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-1766b519569739e484dc71bc00b8208f7a6f7114",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T12:58:46Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/1766b519569739e484dc71bc00b8208f7a6f7114",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-12b1931d1030a1cc7129d1922f75ba178bd2056f",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/bd07ec364f6612c6fdd66852b5c8cdd36e886e40",
       "title": "Use pinned UI baselines in Pink bot review while retaining approvals",
       "message": "I found a commit titled “Use pinned UI baselines in Pink bot review while retaining approvals”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-7b4487d280c21c665725a00b816e85b7cc76c406",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T07:39:12Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/7b4487d280c21c665725a00b816e85b7cc76c406",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-17c3af897684dea72d2c7e83e138695556d5be38",
