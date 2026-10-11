@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T03:34:42.517Z",
+  "generatedAt": "2026-10-11T03:56:55.999Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-54e98149cad794e0cd828ad9f4aae325162e87e8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T03:45:20Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/54e98149cad794e0cd828ad9f4aae325162e87e8",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-2eed41ba7532996b47ab6fe286fe3107d4bb9b4e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T03:34:49Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/2eed41ba7532996b47ab6fe286fe3107d4bb9b4e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-8e63eb6153a8c7100f2f5369e43b0de28d0182f6",
       "agent": "greenbeans",
@@ -100,18 +124,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/be588d21856a91c3d24bd447998bcaf8121c81bd",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-73a785249809543c45bd7ebddc9011aa62bec3a9",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T02:49:18Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/73a785249809543c45bd7ebddc9011aa62bec3a9",
-      "title": "Bridge live browser failures to source-located deduplicated repair tickets",
-      "message": "I found a commit titled “Bridge live browser failures to source-located deduplicated repair tickets”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-02358fa35b50216b3c005f39f7a74a790d3169f4",
@@ -278,18 +290,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-10T21:33:05Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/5f8103ea4c04aabf7f67208ed16db47cf1e75134",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-232a993d66e8a1b7d3a15758ea1a998660e394a5",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T20:34:35Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/232a993d66e8a1b7d3a15758ea1a998660e394a5",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
