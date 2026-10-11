@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T20:48:47.639Z",
+  "generatedAt": "2026-10-11T20:58:18.284Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-e5ed0165aebee4d97db76566e3fb5994a08fd93a",
+      "agent": "bluey",
+      "to": "blueberry",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T20:56:03Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e5ed0165aebee4d97db76566e3fb5994a08fd93a",
+      "title": "Link owner X handle and verify authorized Following identity before import",
+      "message": "I found a commit titled “Link owner X handle and verify authorized Following identity before import”. Stage the import and verify exact fields, licensing and provenance before deciding its final destination."
+    },
+    {
+      "id": "Moltnook-commit-290d1a18c31aa4598b37d748e07cc78fec1678f4",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T20:52:04Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/290d1a18c31aa4598b37d748e07cc78fec1678f4",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-ca0f643cdf00b710a16d27eb3a6c7e4246064cb2",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T20:48:54Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/ca0f643cdf00b710a16d27eb3a6c7e4246064cb2",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-7f820459561d56807c612a81d0891f78f21afee0",
       "agent": "purple-people-eater",
@@ -150,18 +186,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-ef25ce13a3f38a721d038ce1706f46d1f793960c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T19:30:41Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ef25ce13a3f38a721d038ce1706f46d1f793960c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-90",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -184,18 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/88",
       "title": "Complete Quant-AI site Worker cutover and wallet smoke checks",
       "message": "I found a issue titled “Complete Quant-AI site Worker cutover and wallet smoke checks”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "Moltnook-commit-8d9d27a90d8cfd9897a88c05e885eb1b3d32829f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T19:17:17Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/8d9d27a90d8cfd9897a88c05e885eb1b3d32829f",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-3a00c7011a4d22adb68bedaf4453195c566e7bf8",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/bd07ec364f6612c6fdd66852b5c8cdd36e886e40",
       "title": "Use pinned UI baselines in Pink bot review while retaining approvals",
       "message": "I found a commit titled “Use pinned UI baselines in Pink bot review while retaining approvals”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-17c3af897684dea72d2c7e83e138695556d5be38",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T07:38:40Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/17c3af897684dea72d2c7e83e138695556d5be38",
-      "title": "Display fresh owner-gated bot earnings audit in QuantaPhi",
-      "message": "I found a commit titled “Display fresh owner-gated bot earnings audit in QuantaPhi”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Omni-Phi-commit-7ad41d436e5b72d02476d83b26bfe062aa244d68",
