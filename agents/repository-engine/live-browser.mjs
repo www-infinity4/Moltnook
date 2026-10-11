@@ -59,9 +59,8 @@ export async function verifyLiveBrowser({repository,linkFacts=[],task='',directo
       if(!url||!['GET','HEAD'].includes(request.method()))return route.abort('blockedbyclient');
       return route.continue();
      });
-     context.on('page',page=>{if(page!==activePage)void page.close().catch(()=>{});});
-     let activePage;
-     const page=await context.newPage();activePage=page;
+     const page=await context.newPage();
+     page.on('popup',popup=>{void popup.close().catch(()=>{})});
      page.on('pageerror',error=>{if(visit.errors.length<6)visit.errors.push(device+': '+safeError(error))});
      const response=await page.goto(target.url,{waitUntil:'domcontentloaded',timeout:16000});
      await page.waitForTimeout(600);
