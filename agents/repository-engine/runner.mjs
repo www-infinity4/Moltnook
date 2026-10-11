@@ -45,7 +45,7 @@ async function sourceFile(file,maxBytes=180000){safePath(file);const absolute=in
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function checks(patched){
- const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name);}};
+ const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name+': '+scrub(e.stderr||e.stdout||e.message).slice(0,900));}};
  const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
  const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
  let pkg;try{pkg=JSON.parse(await fs.readFile(path.join(workspace,'package.json'),'utf8'))}catch{}
@@ -123,6 +123,13 @@ try{
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
   report.attempts=[];
+  // These are pinned baseline facts, not new owner requirements or payment proof.
+  // Supply the same provenance to both independent reviewers.
+  const pinnedControls=(report.featureManifest?.checks||[]).slice(0,12).map(check=>({
+    sourcePath:check.sourcePath,selector:check.selector,
+    existingLabel:check.currentLabel,existingHref:check.sourceHref,
+    sourceEvidence:true,ownerSpecified:false
+  }));
   const remembered=lease.job.runtimeFeedback?.baseSha===baseSha?lease.job.runtimeFeedback:undefined;
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
@@ -136,13 +143,6 @@ try{
     return {proposal,patched};
    },
    review:async candidate=>{
-    // Existing source and observed controls are evidence of baseline behavior,
-    // not invented owner requirements or independent acceptance.
-    const pinnedControls=(report.featureManifest?.checks||[]).slice(0,12).map(check=>({
-      sourcePath:check.sourcePath,selector:check.selector,
-      existingLabel:check.currentLabel,existingHref:check.sourceHref,
-      sourceEvidence:true,ownerSpecified:false
-    }));
     const review=await call('engine-review',{evidence:{baseSha,plan,edits:candidate.proposal.edits,source:original,pinnedControls}});report.review=review;return review;
    },
    test:async candidate=>{
@@ -152,7 +152,7 @@ try{
     return report.tests;
    },
    arbitrate:async(candidate,review,tests)=>{
-    const arbitration=await call('arbitrate',{evidence:{baseSha,plan,review,tests,edits:candidate.proposal.edits,patched:candidate.patched}});report.arbitration=arbitration;
+    const arbitration=await call('arbitrate',{evidence:{baseSha,plan,review,tests,edits:candidate.proposal.edits,patched:candidate.patched,source:original,pinnedControls}});report.arbitration=arbitration;
     await event('gpt-purple',arbitration.decision+': '+arbitration.reason);return arbitration;
    },
    restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
