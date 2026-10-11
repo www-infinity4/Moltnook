@@ -19,3 +19,12 @@ test('ShopLC button near the end of a large QuantaPhi page is still inspectable'
   assert.match(snippets['index.html'],/https:\/\/quantaphi\.org\/shoplc\//);
   assert.ok(snippets['index.html'].length<=3200);
 });
+
+test('Robot chooses the actual ShopLC anchor after dozens of unrelated links',async()=>{
+ const links=Array.from({length:100},(_,i)=>'<a href="https://example.org/article-'+i+'">Research link '+i+'</a>').join('\n');
+ const page=links+'\n<a id="shoplcShirtButton" class="inPageSite" href="https://quantaphi.org/shoplc/" data-site-title="ShopLC Channel">ShopLC Live channel</a>';
+ const samples=await collectSourceEvidence({paths:['index.html'],task:'Fix broken shop link in QuantaPhi application',read:async()=>page});
+ assert.match(samples['index.html'],/shoplcShirtButton/);
+ assert.match(samples['index.html'],/quantaphi\.org\/shoplc/);
+ assert.ok(samples['index.html'].length<=3200);
+});
