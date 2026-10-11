@@ -1,0 +1,25 @@
+name: Robot pinned source review verification
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/pinned-review.test.mjs'
+      - '.github/workflows/pinned-review.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/pinned-review.test.mjs'
+      - '.github/workflows/pinned-review.yml'
+permissions:
+  contents: read
+jobs:
+  pinned-review-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check agents/repository-engine/runner.mjs
+      - run: node --test agents/repository-engine/pinned-review.test.mjs
