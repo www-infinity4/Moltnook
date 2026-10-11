@@ -28,3 +28,13 @@ test('failed browser response cannot be marked validated and protected scope is 
  const b=deriveFeatureManifest({repository:'www-infinity4/Unrelated',linkFacts:[link],liveBrowser:browser});
  assert.equal(b.checks.length,0);
 });
+
+test('actual live DOM observations, including failures, are carried into the manifest',()=>{
+ const row={id:'shoplcShirtButton',sourcePath:'index.html',label:'ShopLC Live channel',href:'https://quantaphi.org/shoplc/'};
+ const base={status:'public_browser_passed',targets:[{url:'https://quantaphi.org/shoplc/',views:[{passed:true,httpStatus:200}]}]};
+ const good=deriveFeatureManifest({repository:'www-infinity4/QuantaPhi',linkFacts:[row],liveBrowser:{...base,readOnlyControlChecks:[{page:'https://quantaphi.org/',device:'mobile',passed:true,controls:[{id:row.id,verified:true}]}]}});
+ assert.equal(good.checks[0].verified.controlDOM,'passed');
+ const bad=deriveFeatureManifest({repository:'www-infinity4/QuantaPhi',linkFacts:[row],liveBrowser:{...base,readOnlyControlChecks:[{page:'https://quantaphi.org/',device:'mobile',passed:false,controls:[{id:row.id,verified:false}]}]}});
+ assert.equal(bad.checks[0].verified.controlDOM,'failed');
+ assert.equal(bad.checks[0].verified.deploymentVersion,'not_checked');
+});
