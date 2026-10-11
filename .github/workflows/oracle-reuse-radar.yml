@@ -1,7 +1,7 @@
 name: Oracle cross-repository reuse radar
 on:
   schedule:
-    - cron: '23 */2 * * *'
+    - cron: '23 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -30,11 +30,12 @@ jobs:
       - name: Verify bounded source matcher and exact LLM target checks
         run: |
           node --check agents/reuse-radar/runner.mjs
-          node --test agents/reuse-radar/engine.test.mjs
+          node --test agents/reuse-radar/engine.test.mjs agents/reuse-radar/runner.test.mjs
       - name: Review recent cross-repository features with Oracle LLM
         if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REUSE_RADAR_TOKEN: ${{ secrets.GHP }}
         run: node agents/reuse-radar/runner.mjs
       - name: Retain the model evidence and error report
         if: always() && github.event_name != 'pull_request'

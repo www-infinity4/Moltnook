@@ -1,11 +1,15 @@
 import {REPOS,REGIONS,describeChange,candidates,acceptReview,issueBody} from './engine.mjs';
 import {writeFile,mkdir} from 'node:fs/promises';
 const TOKEN=process.env.GITHUB_TOKEN||'';
+const ISSUE_TOKEN=process.env.REUSE_RADAR_TOKEN||'';
+const ISSUE_REPO='www-infinity4/QuantaPhi';
 const API='https://api.github.com';
 const MODEL='https://infinity-rogers.marvaseater.workers.dev/v1/chat';
 const headers={Accept:'application/vnd.github+json','User-Agent':'oracle-reuse-radar',...(TOKEN?{Authorization:'Bearer '+TOKEN}:{})};
-async function gh(path,options={}){
- const res=await fetch(API+path,{headers:{...headers,...(options.body?{'Content-Type':'application/json'}:{})},...options,signal:AbortSignal.timeout(19000)});
+async function gh(path,options={},write=false){
+ const auth=write?ISSUE_TOKEN:TOKEN;
+ if(write&&!auth)throw Error('reuse_radar_issue_token_unavailable');
+ const res=await fetch(API+path,{...options,headers:{...headers,...(auth?{Authorization:'Bearer '+auth}:{Authorization:undefined}),...(options.body?{'Content-Type':'application/json'}:{})},signal:AbortSignal.timeout(19000)});
  if(!res.ok)throw Error('github_http_'+res.status+'_'+path.split('?')[0]);
  return res.json();
 }
@@ -23,8 +27,8 @@ function potential(files){
 }
 async function main(){
  if(!TOKEN)throw Error('github_action_token_missing');
- const report={when:new Date().toISOString(),model:'Cloudflare Oracle /v1/chat',reviewed:[],errors:[],opened:0};
- const oldIssues=await gh('/repos/www-infinity4/Moltnook/issues?state=all&per_page=100');
+ const report={when:new Date().toISOString(),model:'Cloudflare Oracle /v1/chat',issueRepository:ISSUE_REPO,issueWriteConfigured:Boolean(ISSUE_TOKEN),reviewed:[],errors:[],opened:0};
+ const oldIssues=await gh('/repos/'+ISSUE_REPO+'/issues?state=all&per_page=100',{},Boolean(ISSUE_TOKEN));
  const known=new Set(oldIssues.filter(i=>!i.pull_request).map(i=>String(i.body||'').split('\n')[0]));
  const recentHours=72*3600000,cutoff=Date.now()-recentHours;
  const treeCache={};
@@ -56,7 +60,7 @@ async function main(){
     if(known.has(marker))continue;
     const title='[Agent Job] Oracle reuse: '+feature.kinds[0]+' → '+review.target.split('/')[1];
     try{
-     const issue=await gh('/repos/www-infinity4/Moltnook/issues',{method:'POST',body:JSON.stringify({title,body})});
+     const issue=await gh('/repos/'+ISSUE_REPO+'/issues',{method:'POST',body:JSON.stringify({title,body})},true);
      known.add(marker);report.opened++;report.reviewed.at(-1).issue=issue.html_url;
     }catch(e){report.errors.push({source,target:review.target,error:String(e.message)})}
    }
