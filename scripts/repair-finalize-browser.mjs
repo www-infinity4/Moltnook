@@ -32,9 +32,22 @@ export async function browserCheck({content,sha,preview,prNumber}){
   await fs.mkdir('repository-receipts',{recursive:true});
   const screenshot='repository-receipts/shoplc-'+prNumber+'-'+(preview?'preview':'deployed')+'.png';
   await page.screenshot({path:screenshot,fullPage:true});
-  const response=await page.goto('https://quantaphi.org/shoplc/',{waitUntil:'domcontentloaded',timeout:60000});
-  target=page.url();if(!response?.ok()||new URL(target).origin!=='https://quantaphi.org'||new URL(target).pathname!=='/shoplc/')throw Error('ShopLC destination failed or redirected');
+  // Exercise the real in-page viewer, not just a direct destination GET.
+  await link.click();
+  const viewer=page.locator('#siteViewer');await viewer.waitFor({state:'visible',timeout:15000});
+  const frameElement=page.locator('#siteViewerFrame');
+  if(await frameElement.getAttribute('src')!=='https://quantaphi.org/shoplc/')throw Error('ShopLC click opened the wrong embedded source');
+  const handle=await frameElement.elementHandle();
+  const frame=await handle?.contentFrame();if(!frame)throw Error('ShopLC embedded frame unavailable');
+  await frame.waitForURL(u=>u.origin==='https://quantaphi.org'&&u.pathname==='/shoplc/',{waitUntil:'domcontentloaded',timeout:60000});
+  target=frame.url();
+  if(!await frame.locator('body').innerText())throw Error('ShopLC viewer is empty');
+  await page.screenshot({path:'repository-receipts/shoplc-'+prNumber+'-'+(preview?'preview':'deployed')+'-opened.png',fullPage:true});
+  await page.locator('#siteViewerClose').click();
+  if(await viewer.isVisible())throw Error('ShopLC viewer failed to close');
+  const response=await context.request.get('https://quantaphi.org/shoplc/',{maxRedirects:0,timeout:20000});
+  if(!response.ok())throw Error('ShopLC destination HTTP failed');
   if(errors.length)throw Error('Browser JavaScript errors: '+errors.slice(0,3).join('; ').slice(0,250));
-  return {passed:true,mode:preview?'staged_preview':'deployed',sha,viewport:'360x800',target,screenshot,checks:['canonical href','44px target','destination loads','no page errors'],deployedFilesMatched:!preview};
+  return {passed:true,mode:preview?'staged_preview':'deployed',sha,viewport:'360x800',target,screenshot,checks:['canonical href','44px target','click opens correct viewer','viewer closes','destination loads','no page errors'],deployedFilesMatched:!preview};
  }finally{await browser.close();}
 }
