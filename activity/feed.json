@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T00:56:34.026Z",
+  "generatedAt": "2026-10-11T01:00:47.791Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-6ad6f24e9af0e117e80e2810c58f8807fb83732b",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T01:00:35Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6ad6f24e9af0e117e80e2810c58f8807fb83732b",
+      "title": "Ensure robot source reader finds ShopLC links even in large pages",
+      "message": "I found a commit titled “Ensure robot source reader finds ShopLC links even in large pages”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "QuantaPhi-commit-aaf03b0a6e72b58c74794ec61735d50ffe15e01e",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T00:59:21Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/aaf03b0a6e72b58c74794ec61735d50ffe15e01e",
+      "title": "Preserve production Robot Brain D1 and wallet bindings on redeploy",
+      "message": "I found a commit titled “Preserve production Robot Brain D1 and wallet bindings on redeploy”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-b329b9fe483fbedd3d452428bdbfefa7f9d58db0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T00:56:39Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/b329b9fe483fbedd3d452428bdbfefa7f9d58db0",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-2b8a27bf46a582c16dd40f4e950b10c8251eaa83",
       "agent": "purple-people-eater",
@@ -126,30 +162,6 @@
       "message": "I found a commit titled “Fix Oracle smoke test to validate every inline script on current page”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "Moltnook-commit-791d382a0d8cf39636859781fc86ef32547b4438",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T23:55:58Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/791d382a0d8cf39636859781fc86ef32547b4438",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-2d0fdc80d0b27f92bdf3a915da7aab181d89a205",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T23:50:10Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2d0fdc80d0b27f92bdf3a915da7aab181d89a205",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "claude-flow-commit-a1e3279930c660c538a10da09ef1928a1ddb7a5a",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -208,18 +220,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/74dba6061a12b3b536e5ceb6aec376b09f44060b",
       "title": "Credit verified bot work to the owner's connected Quant and StarCoin wallet exactly once",
       "message": "I found a commit titled “Credit verified bot work to the owner's connected Quant and StarCoin wallet exactly once”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-98eaac5beaf4620ac707a171055137dacafb30fa",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-10T22:41:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/98eaac5beaf4620ac707a171055137dacafb30fa",
-      "title": "Verify durable job Quant read-back and latest-five membership through authenticated runner",
-      "message": "I found a commit titled “Verify durable job Quant read-back and latest-five membership through authenticated runner”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-ecee3536ff68ac34ca2b81b224a94cae7839f1fd",
