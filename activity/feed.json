@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T05:43:16.427Z",
+  "generatedAt": "2026-10-11T05:56:48.145Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-86c712b1fe9ee93563a8b22bb2b398442c8e553a",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:52:52Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/86c712b1fe9ee93563a8b22bb2b398442c8e553a",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-d951e36eb117b8a683c949404d346a8434aba40e",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:47:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d951e36eb117b8a683c949404d346a8434aba40e",
+      "title": "Protect QuantaPhi image builder and story illustrations with regression checks",
+      "message": "I found a commit titled “Protect QuantaPhi image builder and story illustrations with regression checks”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-c55b27948f4bea2b698f62d7678ebd652cf48e83",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T05:43:23Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c55b27948f4bea2b698f62d7678ebd652cf48e83",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-69c943dd163b6b4fe1c7f5a1aec8bddc6d167cce",
       "agent": "gold-diggers-ink",
@@ -150,30 +186,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-fd49628d226b72a319026830454045e293a789a3",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T05:02:21Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/fd49628d226b72a319026830454045e293a789a3",
-      "title": "Merge pull request #31 from www-infinity4/fix/preserve-repair-findings-20261011",
-      "message": "I found a commit titled “Merge pull request #31 from www-infinity4/fix/preserve-repair-findings-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-070220e648a11d81ee81dd07d748fcaf08aefba7",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T05:01:51Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/070220e648a11d81ee81dd07d748fcaf08aefba7",
-      "title": "Preserve independent repair findings through malformed build replies",
-      "message": "I found a commit titled “Preserve independent repair findings through malformed build replies”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "claude-flow-commit-ff54fdb224410e98039c3cc2c04639354bc631c2",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -196,18 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/4d7b9e5566c81b4ddfa79effd3a6f2a29d9434aa",
       "title": "Merge pull request #52 from www-infinity4/repair/owner-search-wallet-regressions-20261011",
       "message": "I found a commit titled “Merge pull request #52 from www-infinity4/repair/owner-search-wallet-regressions-20261011”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-01ae2c7c5161202785811064eab8fe8de3c496d2",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T04:34:01Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/01ae2c7c5161202785811064eab8fe8de3c496d2",
-      "title": "Respect explicit wallet account selection and repair stale search regression fixtures",
-      "message": "I found a commit titled “Respect explicit wallet account selection and repair stale search regression fixtures”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-54e98149cad794e0cd828ad9f4aae325162e87e8",
