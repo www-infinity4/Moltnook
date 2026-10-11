@@ -1,6 +1,6 @@
 // Pinned delivery transform from reviewed QuantaPhi aaf03b0a6e72b58c74794ec61735d50ffe15e01e.
 // Deployed Worker v46 was read and matched before copying this deterministic transform.
-const EDGE_VERSION = 'quantaphi-org-v46-channel-wallet';
+const EDGE_VERSION = 'quantaphi-org-v47-shoplc-same-origin';
 const CANONICAL_ORIGIN = 'https://quantaphi.org';
 const APPS = [
  { slug: '/infinity-phi/', aliases: ['/infinity/', '/InfinityPhi/', '/Infinity-Phi/'], repo: 'C13b0' },
