@@ -1,6 +1,8 @@
 export async function repairWithFeedback({build,review,test,arbitrate,restore,onFeedback,maxAttempts=3,initialFeedback}){
  if(!Number.isInteger(maxAttempts)||maxAttempts<1||maxAttempts>3)throw Error('Repair attempts must be bounded to 1–3');
  let feedback=initialFeedback;
+ const failures=Array.isArray(initialFeedback?.failures)?initialFeedback.failures.slice(-2):[];
+ if(initialFeedback?.reason&&!failures.length)failures.push({stage:initialFeedback.stage,reason:String(initialFeedback.reason).slice(0,2000)});
  for(let attempt=1;attempt<=maxAttempts;attempt++){
   let stage='build',testResults;
   try{
@@ -14,7 +16,8 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
    return {candidate,approval,testResults,decision,attempt};
   }catch(error){
    await restore();
-   feedback={attempt,stage,reason:String(error.message),...(testResults?{testResults}:{})};
+   failures.push({attempt,stage,reason:String(error.message).slice(0,2000)});
+   feedback={attempt,stage,reason:String(error.message),failures:failures.slice(-3).map(f=>({...f})),...(testResults?{testResults}:{})};
    await onFeedback(feedback);
   }
  }
