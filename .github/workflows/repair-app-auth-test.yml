@@ -1,0 +1,26 @@
+name: Repair App authentication test
+on:
+  push:
+    branches: [test/repair-app-auth-20261011]
+    paths: [.github/workflows/repair-app-auth-test.yml]
+permissions:
+  contents: read
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Authenticate installed QuantaPhi App
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.REPAIR_BOT_APP_ID }}
+          private-key: ${{ secrets.REPAIR_BOT_APP_PRIVATE_KEY }}
+          owner: www-infinity4
+          repositories: QuantaPhi
+          permission-contents: read
+      - name: Verify repository access without writes
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          gh api repos/www-infinity4/QuantaPhi --jq '"App authentication succeeded for " + .full_name'
