@@ -128,7 +128,8 @@ try{
    initialFeedback:remembered,
    build:async feedback=>{
     const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents,feedback,previousTests:report.tests||remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
-    if(proposal.edits?.some(e=>!Object.hasOwn(original,e.path)))throw Error('Engineer attempted a file absent from the reader handoff');
+    const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
+    if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     const patched=applyEdits(original,proposal.edits);
     await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
     report.proposal=proposal;
