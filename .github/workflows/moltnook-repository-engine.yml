@@ -39,6 +39,8 @@ jobs:
           node --check agents/repository-engine/live-source.mjs
           node --check agents/repository-engine/source-evidence.mjs
           node --test agents/repository-engine/source-evidence.test.mjs
+          node --check agents/repository-engine/model-format-retry.mjs
+          node --test agents/repository-engine/model-format-retry.test.mjs
           node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs agents/repository-engine/execution-context.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
       - name: Verify isolated sandbox and canary fixture contracts
