@@ -1,0 +1,81 @@
+name: One-time QuantaPhi main branch protection
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/secure-quantaphi-main.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: one-time-quantaphi-main-protection
+  cancel-in-progress: false
+jobs:
+  secure-main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Apply branch policy using existing owner-admin credential
+        env:
+          REPO_ADMIN_TOKEN: ${{ secrets.GHP }}
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs');
+          const token=process.env.REPO_ADMIN_TOKEN||'';
+          const receipt={checkedAt:new Date().toISOString(),repository:'www-infinity4/QuantaPhi',branch:'main',status:'not_started'};
+          const endpoint='https://api.github.com/repos/www-infinity4/QuantaPhi';
+          async function api(method,route,data){
+            const result=await fetch(endpoint+route,{method,headers:{accept:'application/vnd.github+json',authorization:'Bearer '+token,'x-github-api-version':'2022-11-28',...(data?{'content-type':'application/json'}:{})},body:data?JSON.stringify(data):undefined,signal:AbortSignal.timeout(20000)});
+            if(!result.ok)throw Error('GitHub '+method+' '+route.split('?')[0]+' denied HTTP '+result.status);
+            return result.json();
+          }
+          try{
+            if(token.length<12)throw Error('Existing GHP credential not available in this workflow');
+            const before=await api('GET','/branches/main');
+            receipt.protectedBefore=before.protected===true;
+            if(receipt.protectedBefore)throw Error('Existing branch protection detected; do not overwrite owner policy');
+            const policy={
+              required_status_checks:null,
+              enforce_admins:true,
+              required_pull_request_reviews:{
+                dismiss_stale_reviews:true,
+                require_code_owner_reviews:false,
+                required_approving_review_count:0,
+                require_last_push_approval:false
+              },
+              restrictions:null,
+              required_conversation_resolution:true,
+              required_linear_history:false,
+              allow_force_pushes:false,
+              allow_deletions:false,
+              block_creations:false
+            };
+            await api('PUT','/branches/main/protection',policy);
+            const after=await api('GET','/branches/main');
+            const protection=await api('GET','/branches/main/protection');
+            receipt.protectedAfter=after.protected===true;
+            receipt.pullRequestsRequired=!!protection.required_pull_request_reviews;
+            receipt.adminEnforced=protection.enforce_admins?.enabled===true;
+            receipt.forcePushesAllowed=protection.allow_force_pushes?.enabled===true;
+            receipt.deletionAllowed=protection.allow_deletions?.enabled===true;
+            receipt.approvalCount=protection.required_pull_request_reviews?.required_approving_review_count??null;
+            receipt.status=receipt.protectedAfter&&receipt.pullRequestsRequired&&receipt.adminEnforced&&!receipt.forcePushesAllowed&&!receipt.deletionAllowed?'verified_protected':'verification_failed';
+            if(receipt.status!=='verified_protected')throw Error('GitHub returned unexpected branch protection readback');
+          }catch(err){
+            receipt.error=String(err.message||err).replaceAll(token,'[redacted]').slice(0,200);
+            receipt.status=receipt.status==='verification_failed'?'verification_failed':'blocked';
+            process.exitCode=1;
+          }finally{
+            fs.mkdirSync('repository-receipts',{recursive:true});
+            fs.writeFileSync('repository-receipts/quantaphi-main-protection.json',JSON.stringify(receipt,null,2));
+            console.log(JSON.stringify(receipt));
+          }
+          NODE
+      - name: Save actual branch-protection readback
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quantaphi-main-protection-receipt
+          path: repository-receipts/quantaphi-main-protection.json
+          retention-days: 7
+          if-no-files-found: warn
