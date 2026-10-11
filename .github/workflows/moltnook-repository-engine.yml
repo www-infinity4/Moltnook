@@ -39,6 +39,8 @@ jobs:
           node --check agents/repository-engine/live-source.mjs
           node --check agents/repository-engine/source-evidence.mjs
           node --test agents/repository-engine/source-evidence.test.mjs
+          node --check agents/repository-engine/source-links.mjs
+          node --test agents/repository-engine/source-links.test.mjs
           node --check agents/repository-engine/workflow-evidence.mjs
           node --test agents/repository-engine/workflow-evidence.test.mjs
           node --check agents/repository-engine/model-format-retry.mjs
