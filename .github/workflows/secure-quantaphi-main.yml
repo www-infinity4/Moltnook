@@ -20,6 +20,7 @@ jobs:
           REPO_ADMIN_TOKEN: ${{ secrets.GHP }}
         run: |
           node <<'NODE'
+          (async()=>{
           const fs=require('node:fs');
           const token=process.env.REPO_ADMIN_TOKEN||'';
           const receipt={checkedAt:new Date().toISOString(),repository:'www-infinity4/QuantaPhi',branch:'main',status:'not_started'};
@@ -70,6 +71,7 @@ jobs:
             fs.writeFileSync('repository-receipts/quantaphi-main-protection.json',JSON.stringify(receipt,null,2));
             console.log(JSON.stringify(receipt));
           }
+          })().catch(error=>{console.error('Protection bootstrap script failed: '+String(error.message||error).slice(0,100));process.exitCode=1;});
           NODE
       - name: Save actual branch-protection readback
         if: always()
