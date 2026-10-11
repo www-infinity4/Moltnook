@@ -5,6 +5,8 @@ on:
     paths:
       - 'agents/repository-engine/source-evidence.mjs'
       - 'agents/repository-engine/scoped-capabilities.mjs'
+      - 'agents/repository-engine/evidence-replan.mjs'
+      - 'agents/repository-engine/evidence-replan.test.mjs'
       - 'agents/repository-engine/scoped-capabilities.test.mjs'
       - 'agents/repository-engine/source-links.mjs'
       - 'agents/repository-engine/source-links.test.mjs'
@@ -38,5 +40,6 @@ jobs:
       - run: node --check agents/repository-engine/runner.mjs
       - run: node --check agents/repository-engine/source-links.mjs
       - run: node --check agents/repository-engine/scoped-capabilities.mjs
+      - run: node --check agents/repository-engine/evidence-replan.mjs
       - run: node --check agents/repository-engine/live-browser.mjs
-      - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/source-links.test.mjs agents/repository-engine/scoped-capabilities.test.mjs agents/repository-engine/live-browser.test.mjs agents/repository-engine/patch.test.mjs
+      - run: node --test agents/repository-engine/source-evidence.test.mjs agents/repository-engine/workflow-evidence.test.mjs agents/repository-engine/source-links.test.mjs agents/repository-engine/scoped-capabilities.test.mjs agents/repository-engine/evidence-replan.test.mjs agents/repository-engine/live-browser.test.mjs agents/repository-engine/patch.test.mjs
