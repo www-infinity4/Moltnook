@@ -1,6 +1,7 @@
 // Scheduled public browser smoke; independent of any writer lease or wallet identity.
 import fs from 'node:fs/promises';
 import {verifyLiveBrowser} from './live-browser.mjs';
+import {assessBrowserObservations} from './browser-observation-gate.mjs';
 const sites=[
  {repository:'www-infinity4/QuantaPhi',linkFacts:[{id:'shoplcShirtButton',href:'https://quantaphi.org/shoplc/',sourcePath:'index.html'}]},
  {repository:'www-infinity4/Omni-Phi'},
@@ -13,7 +14,9 @@ for(const site of sites){
  checks.push(result);
  console.log(site.repository+': '+result.status+' ('+result.targets.map(t=>t.url).join(', ')+')');
 }
-const report={schemaVersion:1,when:new Date().toISOString(),status:checks.every(x=>x.browserPassed)?'public_browser_passed':'public_browser_failed',checks,
+const assessment=assessBrowserObservations(checks,sites);
+for(const problem of assessment.failures)console.error('Live observer failed: '+problem.repository+' '+(problem.selector||'page')+' '+(problem.device||'')+' '+problem.reason);
+const report={schemaVersion:1,when:new Date().toISOString(),status:assessment.status,assessment,checks,
  note:'Anonymous GET/HEAD-only browser checks. Source version, publisher identity, wallet transactions, AI responses and real user acceptance are not verified.'};
 await fs.mkdir('repository-receipts',{recursive:true});
 await fs.writeFile('repository-receipts/public-live-browser.json',JSON.stringify(report,null,2));
