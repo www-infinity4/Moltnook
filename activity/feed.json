@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T23:56:37.540Z",
+  "generatedAt": "2026-10-12T01:05:50.144Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-8ae9a6d686021b81e86442fe5f663a0589637782",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T00:01:45Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8ae9a6d686021b81e86442fe5f663a0589637782",
+      "title": "Connect daily Oracle failures to bounded robot repair PRs (#115)",
+      "message": "I found a commit titled “Connect daily Oracle failures to bounded robot repair PRs (#115)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-2e630d070e4ccbc60dba0ebb9885f2de357f614b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-11T23:56:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/2e630d070e4ccbc60dba0ebb9885f2de357f614b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-871f2f9311235ba519f8846709b948e1c706d361",
       "agent": "pink-panther",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "Moltnook-commit-fe65c5731caafb348a2b3441736fc24e11913104",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T22:48:15Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/fe65c5731caafb348a2b3441736fc24e11913104",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-f6e6ac5a5d96b5110a4e9530e2df93baf9205455",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -388,18 +400,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/7f820459561d56807c612a81d0891f78f21afee0",
       "title": "Expose screenshot following roster and priority Aequitas/Cardone sources in Media Star",
       "message": "I found a commit titled “Expose screenshot following roster and priority Aequitas/Cardone sources in Media Star”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-0bcf2318ea6033ca06e50216df38bd675800e32e",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-11T20:28:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0bcf2318ea6033ca06e50216df38bd675800e32e",
-      "title": "Create Media Star followed-Spaces radio, durable imports and two-stage draws",
-      "message": "I found a commit titled “Create Media Star followed-Spaces radio, durable imports and two-stage draws”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-f3dcb1b9ba2b9afa1d3cc96e336c3602c770c396",
