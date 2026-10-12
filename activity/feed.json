@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T17:34:24.695Z",
+  "generatedAt": "2026-10-12T17:49:15.002Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-a783709287637ceba3604fa6e597792edfa5e60a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T17:35:41Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/a783709287637ceba3604fa6e597792edfa5e60a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-f9551d727c3a34dfa1c55ae06c98c73dd89a6f20",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T17:34:32Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f9551d727c3a34dfa1c55ae06c98c73dd89a6f20",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-64732cf7e49a2ef0f4101ba574a173564ee37744",
       "agent": "greenbeans",
@@ -100,18 +124,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/5781f8d46a5bd5305cb2a8fe7a35a8186b0ae68b",
       "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-e89eacba73d7206eff98b0a4467a615e13a8506c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T15:52:27Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e89eacba73d7206eff98b0a4467a615e13a8506c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-e2b555010887b292bbc22f1b94883224c4487fbd",
@@ -206,18 +218,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-12T11:36:29Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/26313a68038fb1257cef6bca1a1d4a3414921e6e",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-644cc622bcf0c186b5fe2c17077b79b78d2278f3",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T10:41:29Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/644cc622bcf0c186b5fe2c17077b79b78d2278f3",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
