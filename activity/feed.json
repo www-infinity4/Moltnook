@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T21:18:34.218Z",
+  "generatedAt": "2026-10-12T21:32:49.340Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-164",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T21:31:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/164",
+      "title": "[Agent Job] Oracle reuse: card → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-1f0eaf277036b7b2503c3388538e76f69b8e39b4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T21:18:40Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1f0eaf277036b7b2503c3388538e76f69b8e39b4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-dc1b0509bec71389062aa7d9fddc8f3449f79ca3",
       "agent": "greenbeans",
@@ -136,18 +160,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/80038d10e42bbde2a82eec813ed092b6194f84da",
       "title": "Connect Infinity Robot Brain to episodic RAG memory",
       "message": "I found a commit titled “Connect Infinity Robot Brain to episodic RAG memory”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-2b9b4c1bcce5568d559eb21f600e586d831635ec",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T19:48:38Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2b9b4c1bcce5568d559eb21f600e586d831635ec",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-f898ef0f76e1b23df068efda50f05bd7e18fb23c",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/154",
       "title": "[Agent Job] Oracle reuse: card → News-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-153",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T08:00:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/153",
-      "title": "[Agent Job] Oracle reuse: card → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-a736b059e9ecbb1981cfbf2b9108ec68f293d04e",
