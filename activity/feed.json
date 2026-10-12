@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T18:27:30.244Z",
+  "generatedAt": "2026-10-12T18:51:25.527Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-50d88328bc03bcc2b94bfe8d32acb633a3e140db",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T18:42:38Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/50d88328bc03bcc2b94bfe8d32acb633a3e140db",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-50f5ec92eda0e9bc36fbdde5da3b4c3a821c614a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T18:27:37Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/50f5ec92eda0e9bc36fbdde5da3b4c3a821c614a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-fe90c53ed3fa0b3b9e1b5366ebf59d381df51685",
       "agent": "greenbeans",
@@ -100,18 +124,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/76de19472212e9cb0f8dd228be94489ea0f920ef",
       "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
       "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-7dcb99bc3c69663e0544437d6ec42b5faa72add9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T16:51:03Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7dcb99bc3c69663e0544437d6ec42b5faa72add9",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-4a7fa379ad90d9b4945e68a778c21f20ff55ed57",
@@ -208,18 +220,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/158",
       "title": "[Agent Job] Oracle reuse: button → QuantaPhi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-26313a68038fb1257cef6bca1a1d4a3414921e6e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T11:36:29Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/26313a68038fb1257cef6bca1a1d4a3414921e6e",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-157",
