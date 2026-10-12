@@ -215,6 +215,54 @@
       "source": "Owner-requested Infinity backlog, 2026-10-10",
       "sourceUrl": "https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json",
       "scope": "Repository diagnosis; write changes only through the owning repository's authenticated automation"
+    },
+    {
+      "id": "SHOP-001",
+      "priority": 0,
+      "title": "Complete Shop Phi seller camera media R2/D1 persistence with scoped owner receipts",
+      "repo": "WidgetPhi",
+      "agent": "greenbeans",
+      "next": "pink-panther",
+      "checkPaths": [
+        "cloudflare/shop-phi-api.mjs",
+        "cloudflare/shop-phi-schema.sql"
+      ],
+      "status": "queued",
+      "source": "Owner requested photo-first verified Shop Phi sales, 2026-10-12",
+      "sourceUrl": "https://github.com/www-infinity4/Oracle-Octaves/issues/5",
+      "scope": "Propose/implement only via authorized WidgetPhi branch. Authenticate seller, store private original media, D1 state, item digest, media scans; CI receipt before release. Frontend https://github.com/www-infinity4/QuantaPhi/tree/main and architecture doc docs/SHOP-PHI-MARKETPLACE-ARCHITECTURE.md."
+    },
+    {
+      "id": "SHOP-002",
+      "priority": 0,
+      "title": "Route specialized image/product robots for truthful descriptions, anti-fraud and sold-comps pricing",
+      "repo": "QuantaPhi",
+      "agent": "blueberry",
+      "next": "gold-diggers-ink",
+      "checkPaths": [
+        "shop-phi-seller.js",
+        "shop-phi-policy.js",
+        "shop-ad-phi.js"
+      ],
+      "status": "queued",
+      "source": "Owner requested robot-run Shop Phi listing verification and price assistance, 2026-10-12",
+      "sourceUrl": "https://github.com/www-infinity4/Oracle-Octaves/issues/6",
+      "scope": "Bluey import → Blueberry evidence checks → Gold Digger's Ink source-backed sold comparisons → Bluth moderation → Pink Panther independent verification. No fake authenticity, guessed coin grades or invented price, server blocks prohibited products."
+    },
+    {
+      "id": "SHOP-003",
+      "priority": 1,
+      "title": "Connect approved seller listings into organic Quant search and disclosed Ad Phi placement",
+      "repo": "Shop-Phi",
+      "agent": "bluth",
+      "next": "greenbeans",
+      "checkPaths": [
+        "index.html"
+      ],
+      "status": "queued",
+      "source": "Owner requested Shop Phi eBay-like marketplace and contextual Quant matching, 2026-10-12",
+      "sourceUrl": "https://github.com/www-infinity4/Oracle-Octaves/issues/7",
+      "scope": "Use real approved inventory and relevance to current search, not invented item cards or sensitive targeting; Ad Phi sponsorship separately labeled; no checkout claims until settlement."
     }
   ]
 }
