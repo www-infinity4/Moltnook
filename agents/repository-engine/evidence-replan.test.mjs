@@ -5,6 +5,14 @@ const links=[{id:'shoplcShirtButton',label:'ShopLC Live channel',href:'https://q
 const browser={browserPassed:true,targets:[{url:'https://quantaphi.org/',views:[{passed:true},{passed:true}]},{url:'https://quantaphi.org/shoplc/',views:[{passed:true}]}]};
 const capability={existingWorkflows:[{path:'.github/workflows/brain-writer.yml'}],testCommands:['node --test test/brain-writer.test.mjs']};
 const b=(code,reason)=>({code,reason});
+test('pinned Oracle rules justify one reconsideration while private backend blockers remain',()=>{
+ const plan={blockers:[b('owner_input_required','Owner must supply Oracle Octaves design assets and CSS guidelines'),b('owner_input_required','Owner must provide backend endpoint authentication credentials')]};
+ const r=evidenceReplanFeedback({plan,agentInstructions:'## Oracle design\nStyle uses parchment canvas and 44 px hit targets.\n\nOther rules.'});
+ assert.deepEqual(r.categories,['existing_oracle_design']);
+ assert.equal(r.originalBlockers.length,2);
+ assert.match(r.facts[0],/parchment/);
+ assert.equal(evidenceReplanFeedback({plan}).retry,false);
+});
 test('ShopLC source and public browser proof elicit one non-privileged reader reconsideration',()=>{
  const p={blockers:[
   b('owner_input_required','Exact button label text (main and sub) that the owner expects has not been provided.'),
@@ -54,3 +62,4 @@ test('unknown or actual inaccessible blockers are preserved for owner',()=>{
  assert.equal(r.retry,false);
  assert.equal(r.originalBlockers.length,2);
 });
+
