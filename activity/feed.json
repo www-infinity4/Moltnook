@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T07:44:53.497Z",
+  "generatedAt": "2026-10-12T08:13:01.059Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,78 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-847b06df7f65552a58380cebe29550e195753ef6",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T08:11:39Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/847b06df7f65552a58380cebe29550e195753ef6",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "claude-flow-commit-fa4cb99e0c264298a46d6c95217acd7db5c7964a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T08:01:43Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/fa4cb99e0c264298a46d6c95217acd7db5c7964a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-154",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T08:00:53Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/154",
+      "title": "[Agent Job] Oracle reuse: card → News-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-153",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T08:00:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/153",
+      "title": "[Agent Job] Oracle reuse: card → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-152",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T08:00:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/152",
+      "title": "[Agent Job] Oracle reuse: button → News-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-6b275958d3f27fad40fe5fc322259d9a395ac022",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-12T07:45:00Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6b275958d3f27fad40fe5fc322259d9a395ac022",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-c284949701d717f7c98c4f94a878cbc526402d86",
       "agent": "pink-panther",
@@ -174,30 +246,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-f9953dcb01cf5d12305bd5bb12ced7c75e9aa04a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T05:07:14Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f9953dcb01cf5d12305bd5bb12ced7c75e9aa04a",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-61d2fe250f459ee68b6cb82c602eacc64e7cc7a8",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T05:05:03Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/61d2fe250f459ee68b6cb82c602eacc64e7cc7a8",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "QuantaPhi-commit-a736b059e9ecbb1981cfbf2b9108ec68f293d04e",
       "agent": "orange-julius",
       "to": "purple-people-eater",
@@ -220,42 +268,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/7187dffe483ae83767d590417aff079a881710ac",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-144",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T04:49:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/144",
-      "title": "[Agent Job] Oracle reuse: upload → C13b0",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-143",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T04:49:39Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/143",
-      "title": "[Agent Job] Oracle reuse: card → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-142",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T04:49:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/142",
-      "title": "[Agent Job] Oracle reuse: image → Omni-Phi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: image → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-fcbd1f3bf4fac4744c51780d018658c7c0bdffb4",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-12T01:59:32Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/3b44127bd6f558c0908774214b4f5fad4edb7c8f",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-498ca1d27ff782827670d59bb72727f58bb47e23",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-12T01:20:58Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/498ca1d27ff782827670d59bb72727f58bb47e23",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
