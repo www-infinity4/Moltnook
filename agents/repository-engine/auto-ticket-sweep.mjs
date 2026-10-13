@@ -18,7 +18,7 @@ export function deriveTickets(snapshot,{now=Date.now()}={}){
   const sha=/^[a-f0-9]{40}$/.test(j.head?.sha||'')?j.head.sha:null;
   const evidence=category==='failed-workflow'?j.ci?.url:j.head?.url;
   if(typeof evidence!=='string'||!/^https:\/\/github\.com\/www-infinity4\//.test(evidence))continue;
-  const title='[Brain Ticket] '+j.repo+' · '+category;
+  const title='[Agent Job] '+j.repo+' · '+category;
   const body=[
    'Automated source-evidence ticket; not proof of repair.',
    '',
