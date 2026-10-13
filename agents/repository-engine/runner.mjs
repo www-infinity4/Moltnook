@@ -173,7 +173,9 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   git('config','user.name','infinity-repository-engine[bot]');git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com');git('add','--',...Object.keys(patched));
   git('-c','core.hooksPath=/dev/null','commit','-m','Implement '+report.jobId+' after reader handoff, tests and GPT Purple arbitration');commitSha=git('rev-parse','HEAD');
   report.publication=await publishReviewed({repository:report.repository,base:repo.default_branch,commitSha,jobId:report.jobId,runId:process.env.GITHUB_RUN_ID,push:ref=>command('git',['push','origin',ref],{env:credentialEnv()}),api:github});
+  if(report.publication?.publishedToDefault!==false||!report.publication?.prUrl)throw Error('Missing isolated bot branch PR publication receipt');
   report.status='committed_unverified';report.commitSha=commitSha;report.changedFiles=Object.keys(patched);
+  await event('gpt-purple','Reviewed patch staged in '+report.publication.branch+' as pull request '+report.publication.prUrl+'. Main remains unchanged; target CI and merge verification remain pending.');
   report.liveSource=await observeLiveSource({repository:report.repository,commitSha,patched});
   report.liveBrowserAfter=await verifyLiveBrowser({repository:report.repository,linkFacts,task:lease.job.instructions,directory:'repository-receipts/live-browser-after'});
   await fs.writeFile('repository-receipts/live-browser-after.json',JSON.stringify(report.liveBrowserAfter,null,2));
