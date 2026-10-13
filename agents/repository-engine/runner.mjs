@@ -1,3 +1,5 @@
+import {publishReviewed} from './publish-reviewed.mjs';
+import {archiveScreenshots} from './archive-screenshots.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -27,7 +29,7 @@ const credentialEnv=()=>({...cleanEnv,GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_1:'cor
 const command=(cmd,args,options={})=>execFileSync(cmd,args,{cwd:workspace,encoding:'utf8',timeout:180000,maxBuffer:3*1024*1024,env:cleanEnv,...options});
 const git=(...args)=>command('git',args).trim();
 function scrub(value){return String(value).replaceAll(token||'__NO_TOKEN__','[redacted]').slice(-9000);}
-async function github(resource){const r=await fetch('https://api.github.com/'+resource,{headers:{Accept:'application/vnd.github+json',...(token?{Authorization:'Bearer '+token}:{})},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('GitHub '+r.status+' at '+resource.split('?')[0]);return r.json();}
+async function github(resource,options={}){const r=await fetch('https://api.github.com/'+resource,{method:options.method||'GET',...(options.body?{body:JSON.stringify(options.body)}:{}),headers:{Accept:'application/vnd.github+json','Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('GitHub '+r.status+' at '+resource.split('?')[0]);return r.json();}
 async function call(step,body={}){
  const identityUrl=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);identityUrl.searchParams.set('audience','infinity-brain-writer');
  const response=await fetch(identityUrl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
@@ -170,7 +172,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   command('git',['fetch','origin',repo.default_branch],{env:credentialEnv()});if(git('rev-parse','origin/'+repo.default_branch)!==baseSha)throw Error('Repository head changed; retry reader against the new commit');
   git('config','user.name','infinity-repository-engine[bot]');git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com');git('add','--',...Object.keys(patched));
   git('-c','core.hooksPath=/dev/null','commit','-m','Implement '+report.jobId+' after reader handoff, tests and GPT Purple arbitration');commitSha=git('rev-parse','HEAD');
-  command('git',['push','origin','HEAD:'+repo.default_branch],{env:credentialEnv()});
+  report.publication=await publishReviewed({repository:report.repository,base:repo.default_branch,commitSha,jobId:report.jobId,runId:process.env.GITHUB_RUN_ID,push:ref=>command('git',['push','origin',ref],{env:credentialEnv()}),api:github});
   report.status='committed_unverified';report.commitSha=commitSha;report.changedFiles=Object.keys(patched);
   report.liveSource=await observeLiveSource({repository:report.repository,commitSha,patched});
   report.liveBrowserAfter=await verifyLiveBrowser({repository:report.repository,linkFacts,task:lease.job.instructions,directory:'repository-receipts/live-browser-after'});
@@ -179,11 +181,11 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   await fs.writeFile('repository-receipts/live-source.json',JSON.stringify(report.liveSource,null,2));
   await event('pink-panther','Live source observation: '+report.liveSource.status+'. '+report.liveSource.files.filter(x=>x.matched).length+' exact public assets match the commit. Feature acceptance remains unverified.');
   try{const preview=await captureSourceViews({workspace,repository:report.repository,baseSha,commitSha,paths:report.changedFiles,entry:plan.previewPath||'index.html',summary:'Bot implementation: '+plan.summary,jobId:report.jobId});await fs.writeFile('repository-receipts/work-preview.json',JSON.stringify(preview));await call('preview',{preview,verificationToken:token});report.previewPublished=true;}catch(e){report.previewError=scrub(e.message);await event('pink-panther','Source committed; visual preview needs its adapter: '+report.previewError);} 
-  await call('result',{status:'committed_unverified',commitSha,testsPassed,verificationToken:token,message:'Implemented '+report.jobId+' in '+report.repository+'. Reader handoff, independent review, repository checks and GPT Purple approval recorded. Commit '+commitSha.slice(0,9)+'. Deployment and job-specific live acceptance still need verification; source work is not marked complete.'});
+  await call('result',{status:'committed_unverified',commitSha,testsPassed,verificationToken:token,message:'Implemented '+report.jobId+' in '+report.repository+'. Reader handoff, independent review, repository checks and GPT Purple approval recorded. Commit '+commitSha.slice(0,9)+(report.publication.prUrl?' · reviewed PR '+report.publication.prUrl:'')+'. Deployment and job-specific live acceptance still need verification; source work is not marked complete.'});
  }
 }catch(e){
  report.status=commitSha?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
  if(lease)try{await call('result',{status:report.status,commitSha,testsPassed,verificationToken:token,message:report.error,repairFeedback:report.attempts?.length?{baseSha:report.baseSha,stage:report.attempts.at(-1).stage,reason:report.attempts.at(-1).reason,failures:report.attempts.at(-1).failures,tests:report.tests?{passed:report.tests.passed,runs:report.tests.runs.slice(-15).map(row=>({...row,output:row.output.slice(0,1000)}))}:null}:undefined});}catch(error){report.receiptError=scrub(error.message)}
  process.exitCode=1;
-}finally{await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/report.json',JSON.stringify(report,null,2));console.log(report.status,report.jobId||'',report.commitSha||'');}
+}finally{if(lease&&/^[a-f0-9]{40}$/.test(commitSha||report.baseSha||''))try{report.visualEvidence=await archiveScreenshots('repository-receipts',{repository:lease.job.repository||lease.repository,commitSha:commitSha||report.baseSha},call)}catch(e){report.evidenceArchiveError=String(e.message).slice(0,300)}await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/report.json',JSON.stringify(report,null,2));console.log(report.status,report.jobId||'',report.commitSha||'');}
 
