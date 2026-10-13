@@ -1,7 +1,7 @@
 // Never write bot patches straight to main. A source review and local tests
 // are prerequisites for staging, not proof of production acceptance.
 export async function publishReviewed({repository,base,commitSha,jobId,runId,push,api}){
- if(!/^www-infinity4\/[\w.-]+$/.test(repository)||!/^[a-f0-9]{40}$/.test(commitSha)||!/^\d+$/.test(String(runId))||!typeof jobId==='string')throw Error('invalid_reviewed_publish');
+ if(!/^www-infinity4\/[\w.-]+$/.test(repository)||!/^[a-f0-9]{40}$/.test(commitSha)||!/^\d+$/.test(String(runId))||typeof jobId!=='string'||!jobId)throw Error('invalid_reviewed_publish');
  const branch='robot/'+String(jobId).replace(/[^a-zA-Z0-9_-]/g,'-').slice(0,90)+'/'+runId;
  await push('HEAD:refs/heads/'+branch);
  const pr=await api('repos/'+repository+'/pulls',{method:'POST',body:{
