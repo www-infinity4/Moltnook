@@ -1,0 +1,55 @@
+name: Code Phi immutable clone and Python toolbox
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: "Owner repository (www-infinity4/name)"
+        required: true
+        default: www-infinity4/QuantaPhi
+      sha:
+        description: "Exact 40-character commit SHA to check (never a moving branch)"
+        required: true
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Validate repository and pinned SHA
+        env:
+          TARGET_REPOSITORY: ${{ inputs.repository }}
+          TARGET_SHA: ${{ inputs.sha }}
+        run: |
+          [[ "$TARGET_REPOSITORY" =~ ^www-infinity4/[A-Za-z0-9_.-]+$ ]] || exit 2
+          [[ "$TARGET_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 2
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          path: engine
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.sha }}
+          persist-credentials: false
+          path: target
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check pinned source and Python toolkit without deployment secrets
+        env:
+          TARGET_REPOSITORY: ${{ inputs.repository }}
+          TARGET_SHA: ${{ inputs.sha }}
+        run: |
+          cd target
+          test "$(git rev-parse HEAD)" = "$TARGET_SHA"
+          node ../engine/agents/repository-engine/python-toolbox.mjs
+      - name: Upload actual Python checks and package receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-phi-python-toolbox
+          path: target/repository-receipts/python-toolbox.json
