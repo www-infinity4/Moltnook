@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T11:50:42.162Z",
+  "generatedAt": "2026-10-13T12:28:29.700Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-7b604709d7863aec148278c8299ad430805133df",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T11:53:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/7b604709d7863aec148278c8299ad430805133df",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-e01f8b8a11d6bed0734762129c3adad405ec54f4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T11:50:50Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e01f8b8a11d6bed0734762129c3adad405ec54f4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-0b42c0cb71a39aa8b8773cb64b5220999f61b7fb",
       "agent": "greenbeans",
@@ -136,30 +160,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/232",
       "title": "[Agent Job] Oracle reuse: button → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-61c723640f211e8714f1bbf0ba242e9879cac858",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T10:19:15Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/61c723640f211e8714f1bbf0ba242e9879cac858",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-66f08965ffc87f2b795e7e36b0a43de5ac228d09",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T09:56:26Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/66f08965ffc87f2b795e7e36b0a43de5ac228d09",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-commit-4e54e86be1f6d98cf152563883bc8184238c30c3",
