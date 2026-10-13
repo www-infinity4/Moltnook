@@ -1,8 +1,9 @@
+import {focusPair} from './image-focus.mjs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 export async function captureSourceViews({workspace,repository,baseSha,commitSha,paths,entry='index.html',summary,jobId}){
  if(!/^[\w./-]+\.html$/.test(entry)||entry.includes('..'))throw Error('No static-page preview adapter for this entry');
- const {chromium}=await import('playwright');const browser=await chromium.launch({headless:true});const images={};
+ const {chromium}=await import('playwright');const browser=await chromium.launch({headless:true});const images={};let focus=null;
  const read=(ref,p)=>execFileSync('git',['show',ref+':'+p],{cwd:workspace,encoding:'utf8',maxBuffer:3*1024*1024});
  try{for(const [side,ref]of [['before',baseSha],['after',commitSha]]){
   const context=await browser.newContext({viewport:{width:360,height:800},serviceWorkers:'block'});
@@ -20,6 +21,6 @@ export async function captureSourceViews({workspace,repository,baseSha,commitSha
    let image;for(const quality of [65,45,25]){image=await page.screenshot({type:'jpeg',quality,clip:{x:0,y:0,width:360,height}});if(image.length<=44000)break;}
    if(image.length>44000)throw Error('Rendered page exceeds image storage bound');images[side]='data:image/jpeg;base64,'+image.toString('base64');
   }finally{await context.close()}
- }}finally{await browser.close()}
- return {schemaVersion:1,repository,baseSha,commitSha,paths,summary:summary.slice(0,500),jobId,status:'source_preview',when:new Date().toISOString(),viewport:'360x800',renderMode:'isolated-static-source',note:'Exact committed HTML rendered with network services disconnected. This is source evidence; deployment and runtime acceptance are separate.',...images};
+ }focus=await focusPair(browser,images);}finally{await browser.close()}
+ return {schemaVersion:1,repository,baseSha,commitSha,paths,summary:summary.slice(0,500),jobId,status:'source_preview',when:new Date().toISOString(),viewport:'360x800',renderMode:'isolated-static-source',note:'Exact committed HTML rendered with network services disconnected. This is source evidence; deployment and runtime acceptance are separate.',focus,...images};
 }
