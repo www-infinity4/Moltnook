@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T16:47:12.142Z",
+  "generatedAt": "2026-10-13T16:59:09.303Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-febe4243f9993bd46c2713189f19774462361b18",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T16:55:17Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/febe4243f9993bd46c2713189f19774462361b18",
+      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
+      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-c3b7dfe46ce61a1abef6d0409a5a70058dc45e53",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T16:47:34Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c3b7dfe46ce61a1abef6d0409a5a70058dc45e53",
+      "title": "Use authoritative Unified Wallet Music Quant balance",
+      "message": "I found a commit titled “Use authoritative Unified Wallet Music Quant balance”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-05a12ed37454321d10fbc601d0e18e289581541a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T16:47:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/05a12ed37454321d10fbc601d0e18e289581541a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-c130f0c7b454320bb5a0943d908b123b2d928ddb",
       "agent": "greenbeans",
@@ -124,30 +160,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/5913c1aa49e8ffa563f6caf34c4bc6f74326c1b9",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-847e00c91cc61fe5ba24bcf726923599582be59e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T15:00:51Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/847e00c91cc61fe5ba24bcf726923599582be59e",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-ebbd9d468b256cf6939ece84d06d454b6235c12a",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T14:57:13Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ebbd9d468b256cf6939ece84d06d454b6235c12a",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-ddab949f1b529d5d8935f4759b71eaf58ee0ad9a",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/8a6689ca41cec51ab53084b01f39c84b562a2e12",
       "title": "Coordinate open video engines in Oracle Miracle Studio",
       "message": "I found a commit titled “Coordinate open video engines in Oracle Miracle Studio”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-3476f92ba2c4c7a9e7a6906a370092ec868971e9",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T08:24:58Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3476f92ba2c4c7a9e7a6906a370092ec868971e9",
-      "title": "Merge pull request #220 from www-infinity4/codex/real-imagine-video",
-      "message": "I found a commit titled “Merge pull request #220 from www-infinity4/codex/real-imagine-video”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-9",
