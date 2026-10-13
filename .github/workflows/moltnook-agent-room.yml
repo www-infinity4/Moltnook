@@ -35,7 +35,7 @@ jobs:
       - name: Verify frontend JavaScript syntax
         run: node --check agent-room.js
       - name: Verify deterministic agent routing
-        run: node --test agents/tests/routing.test.mjs
+        run: node --test agents/tests/routing.test.mjs agents/tests/color-child-bots.test.mjs
       - name: Publish source-linked activity
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
