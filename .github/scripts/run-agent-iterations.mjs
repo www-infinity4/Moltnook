@@ -4,6 +4,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {routeEvent} from './agent-routing.mjs';
+import {spawnColorChild,selectChildRoles,inspectChild,parentReport,responsibilitiesFor,READ_ONLY_TOOLS} from '../../agents/color-child-bots.mjs';
 const input=JSON.parse(await fs.readFile('agents/jobs.json','utf8'));
 if(!Array.isArray(input.jobs)||!input.jobs.length)throw Error('Empty agent job registry');
 const headers={'Accept':'application/vnd.github+json','User-Agent':'moltnook-infinity-iteration/2.0',
@@ -59,7 +60,7 @@ function spawn(job){
   specialist={...parent,id:'specialist-'+job.id.toLowerCase().replace(/[^a-z0-9-]/g,'-'),
    name:(names[parent.color]||'Phi Scout')+' · '+job.id,jobId:job.id,parent:parent.id,
    job:job.title,createdAt:time,permissions:['read public repository','write Moltnook evidence'],
-   status:'assigned'};
+   tools:[...READ_ONLY_TOOLS],depth:1,status:'assigned'};
   agents.push(specialist);
  }
  return specialist;
@@ -85,13 +86,30 @@ for(const job of ordered){
    }
  }
  const found=checks.filter(c=>c.found).length;
+ // Existing color desk chooses bounded child roles. Each child is a real scoped
+ // GitHub evidence inspection performed by this runner, not a new model process.
+ const delegations=[];
+ if(specialist){
+   for(const roleId of selectChildRoles(specialist,roster)){
+     const role=roster.find(a=>a.id===roleId),[task,completion]=responsibilitiesFor(role.color);
+     try{
+       const {agent}=spawnColorChild({agents,roster,parentId:specialist.id,job,roleId,task,completion,now:time});
+       const updated=inspectChild({child:agent,job,head,mission:repo?.mission,checks,ci:repo?.action,now:time});
+       agents[agents.findIndex(a=>a.id===agent.id)]=updated;
+       delegations.push({id:updated.id,parentId:updated.parentId,roleId:updated.roleId,color:updated.color,
+         task:updated.task,completion:updated.completion,status:updated.status,
+         receipt:updated.receipt});
+     }catch(error){failed.push('Child delegation '+job.id+'/'+roleId+': '+String(error.message||error).slice(0,150))}
+   }
+ }
+ const childSummary=specialist?parentReport(agents,specialist.id):null;
  const scan=head?'scanned':'unavailable';
  const blocked=!head||found<checks.length||repo?.action?.status==='failure';
  const status=blocked?'needs_work':'scanned';
  jobRows.push({id:job.id,priority:job.priority,title:job.title,repo:job.repo,
    agent:job.agent,next:job.next,status,source:job.source,sourceUrl:job.sourceUrl,mission:repo?.mission||null,
-   checkedAt:time,head,ci:repo?.action||null,checks,
-   execution:'diagnostic-only: repository mutation NOT attempted'});
+   checkedAt:time,head,ci:repo?.action||null,checks,delegations,childSummary,
+   execution:'delegated read-only GitHub inspections only: child bots did not edit source or deploy'});
  if(!head)continue;
  say(job,'bluth',job.agent,'Prioritized','Priority '+job.priority+
    ' · Assigned: '+job.title+' · Owner-requested queue; no automatic completion claim.',link(job.repo), 'routing');
@@ -125,7 +143,7 @@ try{
  }
 }catch(error){failed.push('Oracle issue intake: '+String(error.message||error))}
 const output={schemaVersion:2,generatedAt:time,source:'Live GitHub API + owner-authored agents/jobs.json',
- runUrl,mode:'authenticated GitHub read / verified evidence writing to Moltnook only',
+ runUrl,mode:'bounded color-parent delegation + authenticated GitHub read / Moltnook evidence writing only',
  claim:'Actual source inspections, route decisions and workflow checks. No model code edits are implied.',
  agents,jobs:jobRows,discoveredIssues:discovered,failures:failed,
  messages:messages.slice(-160)};
