@@ -1,0 +1,38 @@
+name: Robot Brain evidence-to-ticket sweep
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/auto-ticket-sweep.mjs'
+      - '.github/workflows/robot-brain-auto-tickets.yml'
+permissions:
+  contents: read
+concurrency:
+  group: robot-brain-auto-tickets
+  cancel-in-progress: false
+jobs:
+  create-evidence-tickets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate ticket derivation and deduplication
+        run: node --test agents/repository-engine/auto-ticket-sweep.test.mjs
+      - name: Create tickets only for actual recent measured failures
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node agents/repository-engine/auto-ticket-sweep.mjs
+      - name: Preserve GitHub issue creation receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-brain-auto-ticket-receipts
+          path: repository-receipts/created-brain-tickets.json

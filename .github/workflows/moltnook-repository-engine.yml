@@ -58,6 +58,7 @@ jobs:
           node --test agents/repository-engine/model-format-retry.test.mjs
           node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs agents/repository-engine/execution-context.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
+          node --test agents/repository-engine/publish-reviewed.test.mjs agents/repository-engine/python-toolbox.test.mjs agents/repository-engine/auto-ticket-sweep.test.mjs
       - name: Verify isolated sandbox and canary fixture contracts
         run: node agents/repository-engine/sandbox-verification.mjs
       - name: Verify live adapter reads and preserve unresolved capabilities

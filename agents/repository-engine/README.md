@@ -17,6 +17,18 @@ For permanent operation, a dedicated GitHub App installed on all owner repositor
 - JavaScript/Python/HTML parsing and existing npm test/build commands.
 - Source commits with verification receipts, immutable source previews and exact blockers.
 
+## Clone → Python toolbox → GPT-reviewed pull request (staged build)
+
+The cross-repository engine already clones each owner repository into a temporary workspace and runs Yellow/Blue/Green/Pink/GPT Purple stages. This update makes **all bot-generated changes go onto `robot/<job>/<run>` branches and into reviewable pull requests**, even where `main` is unprotected. A successful source test is not live deployment evidence. No automated default-branch merges are enabled by this change.
+
+- Every selected job pins its source SHA, reads owner instructions, generates a bounded patch, independently reviews it, and executes repository checks before GitHub creates a staging PR. The code cannot try `git push HEAD:main`.
+- `code-phi-python-toolbox.yml` is a separate **credential-free**, on-demand GitHub Actions clone runner for a specified owner repository and exact commit SHA. It provides Python 3.12, `venv`, standard-library checks, unittest discovery, and optional **SHA-256 pinned binary wheel** packages from `requirements-toolbox.lock`. It retains receipt artifacts. It does not accept arbitrary shell commands or unpinned `pip install`; Android/Termux is not executing the tests.
+- `robot-branch-review-checks.yml` runs source-stage regression tests on Moltnook PRs without giving the PR code the write credential. Other repositories still require their own target checks.
+- `robot-brain-auto-tickets.yml` inspects recent `activity/iterations.json` receipts every 15 minutes, raises at most two deduplicated **[Agent Job]** GitHub issues per run in the issues-enabled Oracle-Octaves tracker for observed missing files or failed CI, and attaches source evidence. Its ticket routing is real, but this alone does not enqueue a live repair lease into the separate Brain Clock executor.
+- To audit a job, check the originating GitHub Actions artifact, task branch diff, PR, target CI, reviewer result, and only then production acceptance evidence. The browser polls every 10 seconds; polling does not imply an actual repository edit every 10 seconds.
+
+**Activation boundaries:** after the PR merges, the Python toolbox can be dispatched with a pinned commit. The ticket sweep needs the preexisting `GHP` writer credential to create Oracle-Octaves issues; without it the workflow fails and records a blocker. Cloning owner repositories is distinct from forking them in GitHub: this implementation uses isolated local clones and task branches, not new fork repositories. Automated promotion to `main` remains disabled until independently verifiable, target-specific CI and reviewer gates exist.
+
 ## Remaining adapters
 
 The generic engine does not yet deploy every repository or implement canary/rollback across providers. Unknown languages, package managers, missing acceptance commands and framework page rendering require project adapters. Secrets and execution permissions are excluded from generated source patches. Committed source remains **committed_unverified** until live acceptance is proven. Source previews disconnect services and cannot prove database, wallet or production behavior. GPT Purple currently uses Workers AI's gpt-oss-120b model; it is a separate review stage, not this ChatGPT session.

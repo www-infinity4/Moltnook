@@ -1,0 +1,31 @@
+name: Robot Brain staged source checks
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-robot-branch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse clone, ticket and publication scripts
+        run: |
+          node --check agents/repository-engine/publish-reviewed.mjs
+          node --check agents/repository-engine/python-toolbox.mjs
+          node --check agents/repository-engine/auto-ticket-sweep.mjs
+      - name: Exercise branch-only publishing, pinned Python tools and real ticket dedup
+        run: |
+          node --test agents/repository-engine/publish-reviewed.test.mjs
+          node --test agents/repository-engine/python-toolbox.test.mjs
+          node --test agents/repository-engine/auto-ticket-sweep.test.mjs
