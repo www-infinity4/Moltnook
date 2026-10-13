@@ -58,6 +58,20 @@
          const passing=job.checks.filter(x=>x.found).length;
          entry.append(make('small','mi-files','Repository files checked: '+passing+'/'+job.checks.length));
        }
+       if(job.delegations?.length){
+         const summary=job.childSummary;
+         entry.append(make('small','mi-files','Child desks: '+(summary?.inspected||0)+' inspected · '+(summary?.needsWork||0)+' needing work · read-only evidence'));
+         const details=make('details','mi-child-jobs');
+         details.append(make('summary','','Delegated color bots ('+job.delegations.length+')'));
+         for(const child of job.delegations){
+           const row=make('div','mi-child-row tone-'+tone(child.roleId));
+           row.append(make('strong','',pretty(child.roleId)+' · '+child.status),
+             make('p','',child.task),make('small','',child.receipt?.result||'Awaiting scoped inspection'));
+           if(child.receipt?.sourceUrl)row.append(link('Source evidence ↗',child.receipt.sourceUrl));
+           details.append(row);
+         }
+         entry.append(details);
+       }
        card.append(entry);
      }
      mount.append(card);

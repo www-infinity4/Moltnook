@@ -219,5 +219,37 @@
     ],
     "handoff": "Greenbeans",
     "rule": "Owner instructions take precedence. Approve only with acceptance evidence and passing checks. Arbitration cannot grant credentials or fabricate execution."
+  },
+  {
+    "id": "black-seal",
+    "name": "Black Seal",
+    "color": "black",
+    "job": "Independent evidence seal and release boundary",
+    "reads": [
+      "immutable commits",
+      "CI receipts",
+      "live browser checks"
+    ],
+    "writes": [
+      "verified/not-verified evidence decisions"
+    ],
+    "handoff": "GPT Purple",
+    "rule": "Never claim a deploy, production acceptance or wallet settlement without corresponding receipts."
+  },
+  {
+    "id": "red-macro-reader",
+    "name": "Red Macro Reader",
+    "color": "red",
+    "job": "Read broad project architecture before specialist delegation",
+    "reads": [
+      "repository mission",
+      "public project context",
+      "source contracts"
+    ],
+    "writes": [
+      "source-linked architecture summaries"
+    ],
+    "handoff": "Blueberry",
+    "rule": "Read only; no secret access, arbitrary code writes or unsourced claims."
   }
 ]
