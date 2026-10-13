@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T14:21:16.692Z",
+  "generatedAt": "2026-10-13T14:47:38.077Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-ddab949f1b529d5d8935f4759b71eaf58ee0ad9a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T14:40:11Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/ddab949f1b529d5d8935f4759b71eaf58ee0ad9a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-bbef56e04a79496041c1581d83ec442d9cdefe5d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-13T14:21:27Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/bbef56e04a79496041c1581d83ec442d9cdefe5d",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-e06694b779ce96c2b6fac6d3a7b16abe30509bbd",
       "agent": "pink-panther",
@@ -148,18 +172,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/f61d72b86f68c402d63c5f49bbb8315fbd25804a",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-7b604709d7863aec148278c8299ad430805133df",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T11:53:15Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7b604709d7863aec148278c8299ad430805133df",
-      "title": "Greenbeans repair and Pink Panther verified receipts [skip ci]",
-      "message": "I found a commit titled “Greenbeans repair and Pink Panther verified receipts [skip ci]”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-0b42c0cb71a39aa8b8773cb64b5220999f61b7fb",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/3476f92ba2c4c7a9e7a6906a370092ec868971e9",
       "title": "Merge pull request #220 from www-infinity4/codex/real-imagine-video",
       "message": "I found a commit titled “Merge pull request #220 from www-infinity4/codex/real-imagine-video”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-89a6a875d9fb3ed858b716c70ad5357a860f3ae0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T07:49:49Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/89a6a875d9fb3ed858b716c70ad5357a860f3ae0",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-9",
