@@ -12,7 +12,7 @@ test('observed missing paths and failed CI produce one ticket per repo/failure c
  assert.equal(rows.length,2);
  assert.match(rows[0].body,/broken.js/);
  assert.match(rows[1].body,/42/);
- assert.ok(rows.every(row=>row.title.startsWith('[Brain Ticket]')));
+ assert.ok(rows.every(row=>row.title.startsWith('[Agent Job]')));
 });
 test('no stale or unsupported reports make tickets',()=>{
  assert.throws(()=>deriveTickets({...snapshot,generatedAt:'2022-01-01T00:00:00Z'},{now}),/stale/);
