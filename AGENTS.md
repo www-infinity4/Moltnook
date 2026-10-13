@@ -48,6 +48,15 @@ This is the shared agent floor for Infinity projects. Preserve the Oracle Octave
 
 Never use `status:completed` without an actual successful executor receipt and review. Wallets, Cloudflare tokens, image quotas, identities and government/governance actions are separate authorized systems, **not** side effects of this agent room.
 
+## Color-bot child delegation (October 13, 2026)
+
+Each named color desk can register child color specialists for an owner-assigned or parent-assigned job. The deterministic planner lives in `agents/color-child-bots.mjs`, and the scheduled evidence runner writes actual child inspection receipts to `activity/iterations.json`. The iteration card shows each parent's child tasks, source links, outcomes, and unresolved blockers.
+
+- The child packet always specifies `parentId`, `jobId`, `repo`, `roleId`, `task`, `completion`, inherited `tools` and `permissions`, plus a source-linked evidence receipt.
+- Roles include Yellow readers, Blue validators, Green engineers, Pink testers, Purple explainers, Orange questioners, Red macro readers, and Black evidence seals. A parent chooses complementary roles; a registered child can delegate to another color child through the same bounded function.
+- Limits: **3 children per parent, 3 levels deep, and 120 registered specialists globally**. IDs are deterministic; repeated workflows reuse them. Children cannot change jobs/repositories or increase permissions. No new passwords, API keys, cloud deployments, wallet transfers, or arbitrary code execution are inherited.
+- The currently connected scheduled runner performs **real GitHub read-only checks** on behalf of these child packets, then reports results to the named parent. A task packet is not an independently running AI process. Build/write/deploy stages use only a separately authenticated existing repository engine with its own tests, approval, and proof. Black must not mark a release complete without deployment and browser evidence.
+
 ## Oracle design
 Style Moltnook and future Infinity pages after Oracle Octaves and the Infinity Phi-style buttons: parchment canvas, white cards, red primary capsule/corners, muted ink, compact actions, 44 px hit targets, responsive stacking, and no oversized or duplicate controls. Shared cards keep a consistent layout but color indicates the desk or data type. Existing piano, radio, wallet and search integrations remain separate from ornamental components.
 
