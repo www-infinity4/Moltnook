@@ -44,7 +44,7 @@ async function call(step,body={}){
  return result;
 }
 async function event(agent,message){const row={agent,message,when:new Date().toISOString()};report.events.push(row);await call('event',row);}
-async function sourceFile(file,maxBytes=180000){safePath(file);const absolute=inside(workspace,file);try{
+async function sourceFile(file,maxBytes=400000){safePath(file);const absolute=inside(workspace,file);try{
  const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Error('Writer refuses symlink source');}
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
