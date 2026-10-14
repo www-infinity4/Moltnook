@@ -51,20 +51,27 @@ export async function collectInventory({maxRepos=2000}={}){
   if(batch.length<100)break;
  }
  const evidence=[],failures=[];
- for(const repo of repos.slice(0,maxRepos)){
+ // Bounded parallel reads prevent one slow repository from stalling the entire owner audit.
+ async function inspect(repo){
   try{
-   const sha=repo.default_branch;
-   const data=await gh('repos/'+repo.full_name+'/git/trees/'+encodeURIComponent(sha)+'?recursive=1');
-   if(data.truncated){failures.push({repository:repo.full_name,error:'tree_truncated'});continue;}
+   const ref=repo.default_branch;
+   const data=await gh('repos/'+repo.full_name+'/git/trees/'+encodeURIComponent(ref)+'?recursive=1');
+   if(data.truncated){failures.push({repository:repo.full_name,error:'tree_truncated'});return;}
    const paths=(data.tree||[]).map(x=>x.path);
-   const picks=[...new Set([...paths.filter(x=>UI.test(x)&&x.length<150),...paths.filter(x=>STYLE.test(x)&&x.length<150)])].slice(0,8);
-   if(!picks.length)continue;
+   const picks=[...new Set([...paths.filter(x=>UI.test(x)&&x.length<150),...paths.filter(x=>STYLE.test(x)&&x.length<150)])].slice(0,5);
+   if(!picks.length)return;
    const samples={};
-   for(const path of picks)samples[path]=await readSource(repo.full_name,path,sha);
+   for(const path of picks)samples[path]=await readSource(repo.full_name,path,ref);
    const record=reviewRepositoryTree({...repo,headSha:data.sha},data.tree,samples);
    if(record)evidence.push(record);
   }catch(error){failures.push({repository:repo.full_name,error:String(error.message).slice(0,180)})}
  }
+ for(let i=0;i<Math.min(repos.length,maxRepos);i+=6){
+  await Promise.all(repos.slice(i,i+6).map(inspect));
+  if(i%60===0)console.log('Owner-wide Oracle source scan:',Math.min(i+6,repos.length),'/',repos.length,'repositories');
+ }
+ evidence.sort((a,b)=>a.name.localeCompare(b.name));
+ failures.sort((a,b)=>a.repository.localeCompare(b.repository));
  return {scannedAt:new Date().toISOString(),owner:OWNER,foundRepositories:repos.length,scannedRepositories:Math.min(repos.length,maxRepos),
   source:'authenticated owner repository trees, GitHub default-branch source; no deployment claim',oraclePolicy:ORACLE,evidence,failures};
 }
