@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T01:37:13.218Z",
+  "generatedAt": "2026-10-14T01:54:03.173Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -15,11 +15,68 @@
     "claude-flow",
     "501"
   ],
-  "failures": [
-    "Moltnook: commits unavailable",
-    "Mint-For-Infinity: commits unavailable"
-  ],
+  "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-73144292bb322c5f11ed43ffac65805260bf1def",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:38:29Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/73144292bb322c5f11ed43ffac65805260bf1def",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-294",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:37:54Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/294",
+      "title": "[Agent Job] Oracle reuse: upload → QuantaPhi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-293",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:37:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/293",
+      "title": "[Agent Job] Oracle reuse: media → QuantaPhi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: media → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-292",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:37:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/292",
+      "title": "[Agent Job] Oracle reuse: card → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-f803232798a1739c13bd9e7e3ae363333d8f6b34",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:37:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f803232798a1739c13bd9e7e3ae363333d8f6b34",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-ec721340e8e8ee734a09af9f069a369739e3f60b",
       "agent": "purple-pearl",
@@ -43,6 +100,18 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/94df55da7d458dca1393e0c9fec59c57ef21c4bc",
       "title": "Intelligent cards: shared research context, image Build Type menu and topic-aware prompts (#290)",
       "message": "I found a commit titled “Intelligent cards: shared research context, image Build Type menu and topic-aware prompts (#290)”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
+    },
+    {
+      "id": "Moltnook-commit-38dc3cdbe4fb3531fac0fc7e158d6abff2b30025",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T01:12:04Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/38dc3cdbe4fb3531fac0fc7e158d6abff2b30025",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-7d658ed2ca63109c7ab4e740cfab910da59f6ebf",
@@ -105,6 +174,30 @@
       "message": "I found a issue titled “[Agent Job] Repair cross-repo GPT evidence over 125KB for QuantaPhi index.html”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
+      "id": "Moltnook-commit-3757e946431cd941c88e8d281a5f3b630e05f8fa",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T00:54:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3757e946431cd941c88e8d281a5f3b630e05f8fa",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-e0f5188e4b4ccac3b3dd2379b9319341c77373bc",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T00:54:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e0f5188e4b4ccac3b3dd2379b9319341c77373bc",
+      "title": "Negotiate Brain Clock v2, preserve small legacy jobs and block unsafe large edits (#52)",
+      "message": "I found a commit titled “Negotiate Brain Clock v2, preserve small legacy jobs and block unsafe large edits (#52)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
       "id": "QuantaPhi-commit-27b6d000c0a9355d83be901bdf1e910b5b41ae95",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -117,6 +210,30 @@
       "message": "I found a commit titled “Brain Clock: versioned bounded-source arbitration capability for bot runners (#286)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
+      "id": "Moltnook-commit-36afbc0acb37a732fa4c12b9c86bf695c918f3da",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T00:51:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/36afbc0acb37a732fa4c12b9c86bf695c918f3da",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-c45a57840dba594730a89631c732f0c25407f884",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T00:50:51Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c45a57840dba594730a89631c732f0c25407f884",
+      "title": "Robot Brain: bounded GPT source windows, immutable hashes and Oracle design gate (#51)",
+      "message": "I found a commit titled “Robot Brain: bounded GPT source windows, immutable hashes and Oracle design gate (#51)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
       "id": "QuantaPhi-commit-deeabc4c8e6dabb7126bc5c83ced04b502d9e0b9",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -127,6 +244,18 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/deeabc4c8e6dabb7126bc5c83ced04b502d9e0b9",
       "title": "Brain Clock: bounded source-window SHA-256 arbitration and regression tests (#285)",
       "message": "I found a commit titled “Brain Clock: bounded source-window SHA-256 arbitration and regression tests (#285)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-30c02a52fa26e75fb4f2a38168141b5840b8b986",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T00:41:26Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/30c02a52fa26e75fb4f2a38168141b5840b8b986",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-28",
@@ -345,42 +474,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-issue-271",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T22:31:07Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/271",
-      "title": "[Agent Job] Oracle reuse: upload → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-270",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T22:31:06Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/270",
-      "title": "[Agent Job] Oracle reuse: upload → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-269",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T22:31:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/269",
-      "title": "[Agent Job] Oracle reuse: media → C13b0",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: media → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Omni-Phi-commit-74b324a69eb902a71537c18523eab974b7787df9",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -437,18 +530,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-13T19:32:56Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/cb1026f217a44be39920fd9eee58f935fa379d59",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-0c3aa168e5cd0a187f26883bcf30d0a13e65c032",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T18:42:24Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/0c3aa168e5cd0a187f26883bcf30d0a13e65c032",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -777,148 +858,64 @@
       "message": "I found a commit titled “Add Cloudflare Web Analytics traffic measurement”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Infinity-Phi-commit-bdc7b9686ad545c455739d23e9fbda0def6d3cd2",
-      "agent": "purple-people-eater",
+      "id": "Mint-For-Infinity-commit-4348ac636089e8bf5705e451ddc9f5409d88cfb7",
+      "agent": "blueberry",
       "to": "bluth",
-      "project": "Infinity-Phi",
+      "project": "Mint-For-Infinity",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-09-16T00:18:57Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/commit/bdc7b9686ad545c455739d23e9fbda0def6d3cd2",
-      "title": "Fix Infinity Phi Pages search redirect path",
-      "message": "I found a commit titled “Fix Infinity Phi Pages search redirect path”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-09-25T06:31:36Z",
+      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/4348ac636089e8bf5705e451ddc9f5409d88cfb7",
+      "title": "Replace manual wallet page with automatic shared balance view",
+      "message": "I found a commit titled “Replace manual wallet page with automatic shared balance view”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "Infinity-Phi-commit-81d93536c60a90fcb447ec8534f03db0b6733e66",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Infinity-Phi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-09-15T22:09:56Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/commit/81d93536c60a90fcb447ec8534f03db0b6733e66",
-      "title": "Add large-image social preview to Infinity Phi",
-      "message": "I found a commit titled “Add large-image social preview to Infinity Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Infinity-Phi-commit-43b08e2278232455484732c54414e283629a07eb",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Infinity-Phi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-09-15T06:18:29Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/commit/43b08e2278232455484732c54414e283629a07eb",
-      "title": "Remove unusable duplicate Pages workflow",
-      "message": "I found a commit titled “Remove unusable duplicate Pages workflow”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Infinity-Phi-commit-72769f3f60d5bdb285d76d156b577fe10d385035",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Infinity-Phi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-09-15T06:17:02Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/commit/72769f3f60d5bdb285d76d156b577fe10d385035",
-      "title": "Deploy Infinity Phi alias to GitHub Pages",
-      "message": "I found a commit titled “Deploy Infinity Phi alias to GitHub Pages”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "501-commit-e9aacb6b0d2c3867d730e95ff87c209410c42594",
-      "agent": "purple-people-eater",
+      "id": "Mint-For-Infinity-commit-8cef8dc7a9b26fd896bc538e7b0f42da1f2257e0",
+      "agent": "blueberry",
       "to": "bluth",
-      "project": "501",
+      "project": "Mint-For-Infinity",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-09-14T04:03:57Z",
-      "url": "https://github.com/www-infinity4/501/commit/e9aacb6b0d2c3867d730e95ff87c209410c42594",
-      "title": "Add governance web portal with AI Rules of the Road",
-      "message": "I found a commit titled “Add governance web portal with AI Rules of the Road”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-09-25T06:22:24Z",
+      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/8cef8dc7a9b26fd896bc538e7b0f42da1f2257e0",
+      "title": "Link unified wallet to QuantaPhi and StarQuest",
+      "message": "I found a commit titled “Link unified wallet to QuantaPhi and StarQuest”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "501-commit-1699395351b6159d7d25cafbb9b46d6a82ff0225",
-      "agent": "purple-people-eater",
+      "id": "Mint-For-Infinity-commit-0c9b611c45b0e63662acb288c364d3586ae71870",
+      "agent": "blueberry",
       "to": "bluth",
-      "project": "501",
+      "project": "Mint-For-Infinity",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-09-14T04:03:30Z",
-      "url": "https://github.com/www-infinity4/501/commit/1699395351b6159d7d25cafbb9b46d6a82ff0225",
-      "title": "Link AI Rules of the Road from governance headquarters",
-      "message": "I found a commit titled “Link AI Rules of the Road from governance headquarters”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-09-25T06:21:19Z",
+      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/0c9b611c45b0e63662acb288c364d3586ae71870",
+      "title": "Clarify that unified wallet assets remain separate",
+      "message": "I found a commit titled “Clarify that unified wallet assets remain separate”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "501-commit-6e55f04a105d0c60011536b52d49a6ecad5eba7c",
-      "agent": "purple-people-eater",
+      "id": "Mint-For-Infinity-commit-54007de571e69174647a5ed920c2990fad86026d",
+      "agent": "blueberry",
       "to": "bluth",
-      "project": "501",
+      "project": "Mint-For-Infinity",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-09-14T04:03:19Z",
-      "url": "https://github.com/www-infinity4/501/commit/6e55f04a105d0c60011536b52d49a6ecad5eba7c",
-      "title": "Add AI Governance department",
-      "message": "I found a commit titled “Add AI Governance department”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-09-25T06:18:44Z",
+      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/54007de571e69174647a5ed920c2990fad86026d",
+      "title": "Present Quants Infinity and Star Coins as separate wallet columns",
+      "message": "I found a commit titled “Present Quants Infinity and Star Coins as separate wallet columns”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "501-commit-4e11531159923e4f48ee1de9149b91578d08f13e",
-      "agent": "purple-people-eater",
+      "id": "Mint-For-Infinity-commit-1b90fc32c0479a60fd1c0c03c0ba8db196f89232",
+      "agent": "blueberry",
       "to": "bluth",
-      "project": "501",
+      "project": "Mint-For-Infinity",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-09-14T04:03:14Z",
-      "url": "https://github.com/www-infinity4/501/commit/4e11531159923e4f48ee1de9149b91578d08f13e",
-      "title": "Document AI Governance department and model charter",
-      "message": "I found a commit titled “Document AI Governance department and model charter”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "501-commit-e25ae433a51a1897b1b815108d680e214e9d5c97",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "501",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T04:02:59Z",
-      "url": "https://github.com/www-infinity4/501/commit/e25ae433a51a1897b1b815108d680e214e9d5c97",
-      "title": "Add AI Rules of the Road governance page",
-      "message": "I found a commit titled “Add AI Rules of the Road governance page”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "News-Phi-issue-3",
-      "agent": "bluey",
-      "to": "blueberry",
-      "project": "News-Phi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T01:32:27Z",
-      "url": "https://github.com/www-infinity4/News-Phi/issues/3",
-      "title": "Add Android/PWA share target import",
-      "message": "I found a issue titled “Add Android/PWA share target import”. Stage the import and verify exact fields, licensing and provenance before deciding its final destination."
-    },
-    {
-      "id": "Infinity-Phi-issue-2",
-      "agent": "bluey",
-      "to": "blueberry",
-      "project": "Infinity-Phi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T01:32:22Z",
-      "url": "https://github.com/www-infinity4/Infinity-Phi/issues/2",
-      "title": "Use shared Control Phi ingest/index client across Phi apps",
-      "message": "I found a issue titled “Use shared Control Phi ingest/index client across Phi apps”. Stage the import and verify exact fields, licensing and provenance before deciding its final destination."
-    },
-    {
-      "id": "News-Phi-issue-2",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "News-Phi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-09-14T01:32:12Z",
-      "url": "https://github.com/www-infinity4/News-Phi/issues/2",
-      "title": "Integrate shared retrieval adapters",
-      "message": "I found a issue titled “Integrate shared retrieval adapters”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-09-25T06:18:32Z",
+      "url": "https://github.com/www-infinity4/Mint-For-Infinity/commit/1b90fc32c0479a60fd1c0c03c0ba8db196f89232",
+      "title": "Show Quants Infinity and Star Coins as separate wallet columns",
+      "message": "I found a commit titled “Show Quants Infinity and Star Coins as separate wallet columns”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     }
   ]
 }
