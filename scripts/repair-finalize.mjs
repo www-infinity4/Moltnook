@@ -74,14 +74,31 @@ export async function finalize(pr,proposal,{token,fetchImpl=fetch,dryRun=true,br
   return {status:'deployed_verified',prNumber:pr.number,commitSha:result.sha,browser:deployed};
  }catch(e){return {status:'merged_unverified',prNumber:pr.number,commitSha:result.sha,reason:e.message};}
 }
+export async function scanRepairPulls({token,fetchImpl=fetch,maxPages=20}={}){
+ const rows=[],seen=new Set();
+ if(!Number.isInteger(maxPages)||maxPages<1||maxPages>20)throw Error('Invalid PR scan page bound');
+ for(let page=1;page<=maxPages;page++){
+  const batch=await api('/pulls?state=all&sort=updated&direction=desc&per_page=100&page='+page,{token,fetchImpl});
+  if(!Array.isArray(batch)||batch.length>100)throw Error('Invalid PR scan response');
+  for(const row of batch){
+   if(!Number.isInteger(row?.number)||row.number<1)throw Error('Invalid PR scan identity');
+   // Updated-at ordering can move rows across pages during a scan. Never trust
+   // an incomplete snapshot: retry next run instead of silently missing work.
+   if(seen.has(row.number))throw Error('PR scan changed during pagination; retry intake');
+   seen.add(row.number);rows.push(row);
+  }
+  if(batch.length<100)return rows;
+ }
+ throw Error('PR scan incomplete; page bound reached');
+}
+
 export async function main(){
  const apply=process.argv.includes('--apply'),token=apply?process.env.REPAIR_APP_TOKEN:process.env.REPAIR_READ_TOKEN;
  const receipt={schemaVersion:1,checkedAt:new Date().toISOString(),mode:apply?'apply':'dry_run',status:'idle',results:[]};
  await fs.mkdir('repository-receipts',{recursive:true});
  try{
   if(apply&&!token)throw Error('Repository-scoped App token missing');
-  const pulls=await api('/pulls?state=all&sort=updated&direction=desc&per_page=100',{token});
-  if(!Array.isArray(pulls)||pulls.length>=100)throw Error('PR scan incomplete; refuse partial intake');
+  const pulls=await scanRepairPulls({token});
   const {browserCheck}=await import('./repair-finalize-browser.mjs');
   for(const row of pulls.filter(p=>p.user?.login===BOT&&/^repair\/browser-[a-f0-9]{24}$/.test(p.head?.ref||'')).sort((a,b)=>(a.state==='open'?0:1)-(b.state==='open'?0:1)).slice(0,10)){
    try{
