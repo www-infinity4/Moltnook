@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "name": "Oracle Octaves Daylight",
+  "referenceRepos": [
+    "www-infinity4/Oracle-Octaves",
+    "www-infinity4/QuantaPhi"
+  ],
+  "colors": {
+    "paper": "#f7f4f0",
+    "surface": "#ffffff",
+    "ink": "#312722",
+    "muted": "#736a64",
+    "line": "#e5ddd6",
+    "primary": "#b83b32",
+    "primaryText": "#ffffff",
+    "gold": "#d6a34a"
+  },
+  "minimumNormalContrast": 4.5,
+  "minimumTouchTargetPx": 44,
+  "cardRadiusPx": 18,
+  "componentVault": {
+    "oracle-card": {
+      "element": "article",
+      "required": [
+        "title"
+      ],
+      "slots": [
+        "title",
+        "description",
+        "content",
+        "artwork",
+        "actions",
+        "receipt"
+      ],
+      "colorVariants": [
+        "red",
+        "orange",
+        "yellow",
+        "purple",
+        "blue",
+        "green"
+      ]
+    },
+    "oracle-action": {
+      "element": "button",
+      "required": [
+        "label"
+      ],
+      "slots": [
+        "label",
+        "icon"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "disabled"
+      ]
+    },
+    "oracle-image": {
+      "element": "figure",
+      "required": [
+        "image",
+        "alt"
+      ],
+      "slots": [
+        "image",
+        "caption",
+        "source"
+      ]
+    },
+    "oracle-player": {
+      "element": "section",
+      "required": [
+        "mediaSource",
+        "controls"
+      ],
+      "slots": [
+        "title",
+        "player",
+        "transcript",
+        "actions"
+      ]
+    },
+    "oracle-receipt": {
+      "element": "output",
+      "required": [
+        "transactionId"
+      ],
+      "slots": [
+        "item",
+        "serial",
+        "token",
+        "timestamp"
+      ]
+    }
+  },
+  "rules": [
+    "Preserve existing image, video, sound, unified wallet, identity, StarQuest share/collect/star and ledger actions.",
+    "Treat injected source CSS/markup as untrusted.",
+    "Do not reintroduce old full-black atmospheres into new Oracle components.",
+    "No unsupported :has selector in new edits; do not hide wallet or checkout controls.",
+    "Android-first, real test receipts; do not assert deployed from a source diff."
+  ]
+}
