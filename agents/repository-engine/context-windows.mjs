@@ -45,9 +45,18 @@ export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
    if(end-start>cap||start===end){start=Math.max(0,pos-half);end=Math.min(full.length,start+cap);}
    return {start,end};
   };
-  const take=full.length<=fileBudget?[{start:0,end:full.length}]:
-   candidates.length?candidates.slice(0,2).map(x=>makeWindow(x.pos)):
-    [{start:0,end:Math.min(fileBudget,full.length)}];
+  const take=[];
+  if(full.length<=fileBudget)take.push({start:0,end:full.length});
+  else{
+   // Multiple hints often hit one element. Search past overlapping anchors so
+   // the second window exposes another relevant source region, not a duplicate.
+   for(const candidate of candidates){
+    const range=makeWindow(candidate.pos);
+    if(take.some(w=>range.start<w.end&&range.end>w.start))continue;
+    take.push(range);if(take.length===2)break;
+   }
+   if(!take.length)take.push({start:0,end:Math.min(fileBudget,full.length)});
+  }
   const windows=[];for(const range of take){
    const start=range.start,end=range.end,part=full.slice(start,end);
    if(!part||windows.some(w=>start>=w.start&&end<=w.end))continue;
