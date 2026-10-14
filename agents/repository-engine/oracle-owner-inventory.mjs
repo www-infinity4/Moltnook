@@ -1,7 +1,7 @@
 // Owner-wide Oracle Octaves visual and development audit; issues are proposals, not edits.
 // Scan every accessible owner repository (paginated) using pinned GitHub source evidence.
 import fs from 'node:fs/promises';
-import {fileURLToPath} from 'node:url';
+import {pathToFileURL} from 'node:url';
 const OWNER='www-infinity4',TRACKER=OWNER+'/Oracle-Octaves';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const headers={authorization:'Bearer '+token,accept:'application/vnd.github+json','x-github-api-version':'2022-11-28'};
@@ -57,7 +57,7 @@ export async function collectInventory({maxRepos=2000}={}){
    const data=await gh('repos/'+repo.full_name+'/git/trees/'+encodeURIComponent(sha)+'?recursive=1');
    if(data.truncated){failures.push({repository:repo.full_name,error:'tree_truncated'});continue;}
    const paths=(data.tree||[]).map(x=>x.path);
-   const picks=paths.filter(x=>UI.test(x)&&x.length<150).slice(0,6);
+   const picks=[...new Set([...paths.filter(x=>UI.test(x)&&x.length<150),...paths.filter(x=>STYLE.test(x)&&x.length<150)])].slice(0,8);
    if(!picks.length)continue;
    const samples={};
    for(const path of picks)samples[path]=await readSource(repo.full_name,path,sha);
@@ -120,6 +120,6 @@ export async function run(){
  console.log(JSON.stringify({repositories:inventory.scannedRepositories,designGaps:inventory.evidence.length,errors:inventory.failures.length,issuesCreated:inventory.issuesCreated}));
  return inventory;
 }
-if(process.argv[1]&&import.meta.url===fileURLToPath(new URL(import.meta.url)))try{await run()}catch(e){
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)try{await run()}catch(e){
  await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/oracle-owner-inventory.json',JSON.stringify({error:String(e.message),at:new Date().toISOString()},null,2));console.error(e.message);process.exitCode=1;
 }
