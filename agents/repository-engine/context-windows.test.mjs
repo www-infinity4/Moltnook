@@ -27,3 +27,18 @@ test('UTF-8 hashes and exact file-size claims are deterministic',()=>{
  assert.equal(pkg.source['x.css'].complete,true);
  assert.equal(pkg.source['x.css'].windows[0].sha256,sha256('p{color:#b83b32}'));
 });
+
+test('overlapping high-scoring anchors do not consume the second source window',()=>{
+ const left='<section id="videoGenerator">videoGenerator upload playback</section>\n';
+ const right='<section id="audioReceiver">audioReceiver control</section>\n';
+ const src=left+'neutral line\n'.repeat(2000)+right+'neutral tail\n'.repeat(2000);
+ const packet=sourceWindows({'index.html':src},{task:'videoGenerator upload playback audioReceiver'});
+ const w=packet.source['index.html'].windows;
+ assert.equal(w.length,2);
+ assert.ok(w.some(x=>x.text.includes('videoGenerator')));
+ assert.ok(w.some(x=>x.text.includes('audioReceiver')));
+ assert.ok(w[0].end<=w[1].start||w[1].end<=w[0].start);
+ assert.ok(w.reduce((n,x)=>n+x.text.length,0)<=7000);
+ assert.equal(checkVisibleEdits(packet,[{path:'index.html',before:right.trim(),after:'<section>Repaired</section>'}]),true);
+ assert.equal(checkVisibleEdits(packet,[{path:'index.html',before:'neutral line\n'.repeat(500),after:'unshown'}]),false);
+});
