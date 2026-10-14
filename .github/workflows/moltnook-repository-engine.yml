@@ -30,6 +30,7 @@ jobs:
       - name: Validate immutable patch and path policy
         run: |
           node --test workers/bot-sandbox/worker.test.mjs agents/repository-engine/rollout-gate.test.mjs agents/repository-engine/evaluate-rollout.test.mjs agents/repository-engine/wallet-contract.test.mjs
+          node --test agents/repository-engine/dependency-context.test.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/preview.mjs
           node --check agents/repository-engine/patch.mjs
