@@ -1,0 +1,34 @@
+# TEMPLATE ONLY: NOT READY FOR DEPLOYMENT
+name = "quantaphi-transition-stream"
+main = "worker.mjs"
+compatibility_date = "2026-10-13"
+
+[vars]
+MAX_EVENTS_PER_REPO_HOUR = "20000"
+
+[[d1_databases]]
+binding = "BOT_TRANSITIONS_DB"
+database_name = "quantaphi-robot-transitions"
+database_id = "REPLACE_WITH_REAL_D1_DATABASE_UUID"
+
+[[queues.producers]]
+binding = "BOT_EVENTS_QUEUE"
+queue = "quantaphi-robot-transitions"
+
+[[queues.consumers]]
+queue = "quantaphi-robot-transitions"
+max_batch_size = 25
+max_batch_timeout = 5
+max_concurrency = 4
+max_retries = 5
+dead_letter_queue = "quantaphi-robot-transitions-dlq"
+
+[[ratelimits]]
+name = "INGEST_RATE_LIMITER"
+namespace_id = "REPLACE_WITH_UNIQUE_INTEGER_STRING"
+[ratelimits.simple]
+limit = 600
+period = 60
+
+# Required Worker secret: BOT_INGEST_TOKEN, min length 32.
+# All resources and IDs must actually exist. Never commit the secret.
