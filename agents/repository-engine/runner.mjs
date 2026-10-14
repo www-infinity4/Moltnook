@@ -75,7 +75,9 @@ try{
  await fs.writeFile('repository-receipts/job-quant-audit.json',JSON.stringify(report.jobQuantAudit,null,2));
  report.baseline=await inspectRuntime();
  if(!report.baseline.passed)throw Error('Runtime baseline missing: '+report.baseline.checks.filter(x=>!x.passed).map(x=>x.name).join(', '));
- await call('capability',{status:token?'credential_configured':'credential_missing'});
+ const liveWindowCapability=await call('capability',{status:token?'credential_configured':'credential_missing'});
+ const useWindowV2=liveWindowCapability.sourceWindowsV2===true&&liveWindowCapability.arbitrationDigestValidation===true;
+ report.sourceProtocol=useWindowV2?'bounded-windows-v2':'legacy-small-files-only';
  if(token){let count=0,pushReported=0;for(let page=1;page<=20;page++){const repos=await github('user/repos?affiliation=owner&per_page=100&page='+page);for(const r of repos){if(r.owner.login!==OWNER)continue;count++;if(r.permissions?.push)pushReported++;}if(repos.length<100)break;}report.inventory={ownerRepositoriesVisible:count,reportedPushPermission:pushReported,note:'Reported account permissions; actual writes are proven by successful commits.'};await call('capability',{status:'credential_configured',repositoriesVisible:count});}
  lease=(await call('claim',{})).lease;
  if(!lease){report.status='idle';}
@@ -129,6 +131,8 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
   const windowEvidence=sourceWindows(original,{task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),plan});
+  if(!useWindowV2&&JSON.stringify(original).length>32000)throw Error('brain_clock_bounded_windows_v2_not_deployed: large source edit is blocked; small jobs may use legacy review');
+  const modelSource=useWindowV2?windowEvidence.source:original;
   await fs.writeFile('repository-receipts/immutable-window-manifest.json',JSON.stringify({baseSha,source:Object.fromEntries(Object.entries(windowEvidence.source).map(([p,x])=>[p,{totalChars:x.totalChars,sha256:x.sha256,windows:x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))}]))},null,2));
   const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
   const compactTests=tests=>({passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(x=>({name:x.name,passed:x.passed,output:String(x.output||'').slice(-350)}))});
@@ -145,10 +149,10 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:windowEvidence.source,sourceWindowsSchema:windowEvidence.schemaVersion,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
-    if(!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows');
+    if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows');
     for(const edit of proposal.edits)validateOracleCssEdit(edit.path,edit.after);
     const patched=applyEdits(original,proposal.edits);
     await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
@@ -156,7 +160,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     return {proposal,patched};
    },
    review:async candidate=>{
-    const review=await call('engine-review',{evidence:{baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:windowEvidence.source,phiSkills:phaseSkills('review'),pinnedControls}});report.review=review;return review;
+    const review=await call('engine-review',{evidence:{baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:modelSource,phiSkills:phaseSkills('review'),pinnedControls}});report.review=review;return review;
    },
    test:async candidate=>{
     for(const [file,content]of Object.entries(candidate.patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}
@@ -165,7 +169,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     return report.tests;
    },
    arbitrate:async(candidate,review,tests)=>{
-    const arbitration=await call('arbitrate',{evidence:{baseSha,plan:compactPlan,review,tests:compactTests(tests),edits:candidate.proposal.edits,patched:boundedPatched(candidate.patched),patchedHashes:patchDigests(candidate.patched),source:windowEvidence.source,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
+    const arbitration=await call('arbitrate',{evidence:{baseSha,plan:compactPlan,review,tests:compactTests(tests),edits:candidate.proposal.edits,patched:useWindowV2?boundedPatched(candidate.patched):candidate.patched,...(useWindowV2?{patchedHashes:patchDigests(candidate.patched)}:{}),source:modelSource,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
     await event('gpt-purple',arbitration.decision+': '+arbitration.reason);return arbitration;
    },
    restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
