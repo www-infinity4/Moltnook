@@ -5,6 +5,8 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
+import {sourceWindows,checkVisibleEdits,patchDigests,boundedPatched} from './context-windows.mjs';
+import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
@@ -126,6 +128,10 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
+  const windowEvidence=sourceWindows(original,{task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),plan});
+  await fs.writeFile('repository-receipts/immutable-window-manifest.json',JSON.stringify({baseSha,source:Object.fromEntries(Object.entries(windowEvidence.source).map(([p,x])=>[p,{totalChars:x.totalChars,sha256:x.sha256,windows:x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))}]))},null,2));
+  const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
+  const compactTests=tests=>({passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(x=>({name:x.name,passed:x.passed,output:String(x.output||'').slice(-350)}))});
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
   report.attempts=[];
   // These are pinned baseline facts, not new owner requirements or payment proof.
@@ -139,16 +145,18 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan,source:original,agents,scopedAgents,phiSkills:phaseSkills('build'),feedback,previousTests:report.tests||remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:windowEvidence.source,sourceWindowsSchema:windowEvidence.schemaVersion,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
+    if(!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows');
+    for(const edit of proposal.edits)validateOracleCssEdit(edit.path,edit.after);
     const patched=applyEdits(original,proposal.edits);
     await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
     report.proposal=proposal;
     return {proposal,patched};
    },
    review:async candidate=>{
-    const review=await call('engine-review',{evidence:{baseSha,plan,edits:candidate.proposal.edits,source:original,phiSkills:phaseSkills('review'),pinnedControls}});report.review=review;return review;
+    const review=await call('engine-review',{evidence:{baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:windowEvidence.source,phiSkills:phaseSkills('review'),pinnedControls}});report.review=review;return review;
    },
    test:async candidate=>{
     for(const [file,content]of Object.entries(candidate.patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}
@@ -157,7 +165,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     return report.tests;
    },
    arbitrate:async(candidate,review,tests)=>{
-    const arbitration=await call('arbitrate',{evidence:{baseSha,plan,review,tests,edits:candidate.proposal.edits,patched:candidate.patched,source:original,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
+    const arbitration=await call('arbitrate',{evidence:{baseSha,plan:compactPlan,review,tests:compactTests(tests),edits:candidate.proposal.edits,patched:boundedPatched(candidate.patched),patchedHashes:patchDigests(candidate.patched),source:windowEvidence.source,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
     await event('gpt-purple',arbitration.decision+': '+arbitration.reason);return arbitration;
    },
    restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
