@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-14T02:49:00Z",
+  "accountScope": "Cloudflare account connected to QuantaPhi",
+  "worker": {
+    "name": "quantaphi-transition-stream",
+    "deploymentVersion": "44f8e246-2033-4b99-b96d-7412502df056",
+    "status": "deployed_inactive",
+    "workersDevEnabled": false,
+    "tokenConfigured": false
+  },
+  "d1": {
+    "name": "quantaphi-robot-transitions",
+    "databaseId": "2f7681ff-2906-46ad-b23d-43b618b4eedb",
+    "schemaApplied": true,
+    "transitionCount": 0,
+    "verifiedTables": [
+      "token_state_transitions"
+    ],
+    "verifiedTriggers": [
+      "prevent_transition_update",
+      "prevent_transition_delete"
+    ]
+  },
+  "queue": {
+    "name": "quantaphi-robot-transitions",
+    "queueId": "924705f85ddb49e68a6a0673ef508015",
+    "consumerId": "c048f04510e241b8aa1849ef15f754c5",
+    "worker": "quantaphi-transition-stream",
+    "batchSize": 25,
+    "maxConcurrency": 4,
+    "maxRetries": 5
+  },
+  "deadLetterQueue": {
+    "name": "quantaphi-robot-transitions-dlq",
+    "queueId": "ff483d393c8e4682a60bb2f4437d3552"
+  },
+  "notes": [
+    "No BOT_INGEST_TOKEN secret is configured. Worker fails closed.",
+    "No GitHub producer environment variables/secrets are configured.",
+    "No synthetic events or currency credits issued.",
+    "No live ingest/readback success has been observed.",
+    "Runtime permission and wallet settlement remain separate."
+  ]
+}
