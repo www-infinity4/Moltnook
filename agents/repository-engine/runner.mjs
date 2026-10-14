@@ -6,6 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
 import {sourceWindows,checkVisibleEdits,patchDigests,boundedPatched} from './context-windows.mjs';
+import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-adapter.mjs';
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
@@ -134,6 +135,21 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   if(!useWindowV2&&JSON.stringify(original).length>32000)throw Error('brain_clock_bounded_windows_v2_not_deployed: large source edit is blocked; small jobs may use legacy review');
   const modelSource=useWindowV2?windowEvidence.source:original;
   await fs.writeFile('repository-receipts/immutable-window-manifest.json',JSON.stringify({baseSha,source:Object.fromEntries(Object.entries(windowEvidence.source).map(([p,x])=>[p,{totalChars:x.totalChars,sha256:x.sha256,windows:x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))}]))},null,2));
+  // Optional inspection metadata. A queue receipt is neither a D1 commit nor wallet payment.
+  report.transitionStream={status:'not_configured',payoutIssued:false};
+  if(process.env.BOT_TRANSITIONS_URL&&process.env.BOT_INGEST_TOKEN){
+   try{
+    const {events}=inspectionEvents({original,task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),
+      repository:report.repository,commitSha:baseSha,jobId:report.jobId,
+      quantId:'scan:'+report.jobId.replace(/[^A-Za-z0-9_.:-]/g,'_').slice(0,95),agentId:'pink-panther'});
+    const receipt=await submitInspectionEvents(events,{url:process.env.BOT_TRANSITIONS_URL,
+      bearerToken:process.env.BOT_INGEST_TOKEN});
+    report.transitionStream={status:'queued_not_persisted',...receipt};
+   }catch(e){
+    report.transitionStream={status:'enqueue_failed',error:String(e.message||e).slice(0,200),payoutIssued:false};
+   }
+   await fs.writeFile('repository-receipts/transition-queue-status.json',JSON.stringify(report.transitionStream,null,2));
+  }
   const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
   const compactTests=tests=>({passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(x=>({name:x.name,passed:x.passed,output:String(x.output||'').slice(-350)}))});
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
