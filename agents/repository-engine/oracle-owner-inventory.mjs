@@ -70,7 +70,9 @@ export async function collectInventory({maxRepos=2000}={}){
   await Promise.all(repos.slice(i,i+6).map(inspect));
   if(i%60===0)console.log('Owner-wide Oracle source scan:',Math.min(i+6,repos.length),'/',repos.length,'repositories');
  }
- evidence.sort((a,b)=>a.name.localeCompare(b.name));
+ const priority=['QuantaPhi','Omni-Phi','Infinity-Phi','C13b0','Oracle-Octaves','News-Phi','Moltnook','Bitcoin-Crusher','StarQuest','WidgetPhi'];
+ const score=name=>{const suffix=name.split('/')[1];const n=priority.indexOf(suffix);return n<0?1000:n;};
+ evidence.sort((a,b)=>score(a.name)-score(b.name)||a.name.localeCompare(b.name));
  failures.sort((a,b)=>a.repository.localeCompare(b.repository));
  return {scannedAt:new Date().toISOString(),owner:OWNER,foundRepositories:repos.length,scannedRepositories:Math.min(repos.length,maxRepos),
   source:'authenticated owner repository trees, GitHub default-branch source; no deployment claim',oraclePolicy:ORACLE,evidence,failures};
