@@ -10,7 +10,7 @@ test('Oracle daylight dictionary has WCAG readable buttons and exact accepted ca
 });
 test('legacy dark themes, :has, protected controls and illegible cards fail closed',()=>{
  for(const css of ['body:has(.menu){color:#fff}','html{color-scheme:dark}','body{background:#030613}', '.wallet-card{display:none!important}','h2{background:#ffffff;color:#eeeeee}']){
-  assert.throws(()=>validateOracleCssEdit('new.css',css),/Oracle/);
+  assert.throws(()=>validateOracleCssEdit('new.css',css),/Oracle|Protected/);
  }
  assert.equal(validateOracleCssEdit('cards.css','.oracle-card { color:#312722; background:#f7f4f0; min-height:44px; }').checked,true);
 });
