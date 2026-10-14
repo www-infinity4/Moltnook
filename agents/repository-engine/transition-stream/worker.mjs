@@ -98,7 +98,7 @@ async function queueOneBatch(items, env) {
   // All inserts commit atomically in D1.batch. Only acknowledge persisted IDs.
   try {
     const results = await env.BOT_TRANSITIONS_DB.batch(items.map(x => statement(env, x.record)));
-    const unknown = items.filter((x, i) => !results[i] || results[i].success === false || results[i].meta?.changes === 0);
+    const unknown = items.filter((x, i) => !results[i] || results[i].success === false || !(results[i].meta?.changes > 0));
     let existing = new Set();
     if (unknown.length) {
       const marks = unknown.map(() => '?').join(',');
