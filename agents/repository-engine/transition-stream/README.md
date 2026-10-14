@@ -32,6 +32,34 @@ All user-facing state must label `queued`, `persisted`, `blocked`, or
 `unavailable` truthfully. Neither a browser refresh nor source ingestion
 automatically creates a new Infinity token or a payable job receipt.
 
+## Live infrastructure inventory — 2026-10-14 (verified)
+
+The Cloudflare account now has dedicated resources, and the D1 migration
+completed successfully. These facts are also recorded in
+`cloudflare-observed-state.json`.
+
+- D1 `quantaphi-robot-transitions`: UUID
+  `2f7681ff-2906-46ad-b23d-43b618b4eedb`; schema, indexes and
+  append-only update/delete triggers verified; **zero transition rows**.
+- Cloudflare Queue `quantaphi-robot-transitions` and dead-letter queue
+  `quantaphi-robot-transitions-dlq` exist.
+- Worker `quantaphi-transition-stream` was uploaded through the
+  Cloudflare API with D1, Queue, rate-limit, and hourly-cap bindings.
+- Queue consumer points to that Worker (25 messages/batch, four concurrent,
+  five retries, dead-letter fallback).
+- `wrangler.toml` now references the actual Cloudflare resources.
+
+**Activation remains blocked:** The Worker has no
+`BOT_INGEST_TOKEN` secret and its public workers.dev subdomain is disabled.
+The authenticated GitHub runner does not have
+`BOT_TRANSITIONS_URL` or `BOT_INGEST_TOKEN` configured. No events have
+been ingested, and there is no production readback or token payout evidence.
+Do not call this stream live or claim it is automatically inspecting all
+repositories. When credentials are configured through authorized secret
+management, test a real queued event and D1 readback before enabling a
+public endpoint. Do not expose report/resume access to visitors without
+separate identity enforcement.
+
 ## Install boundaries
 
 **No infrastructure has been created by this PR.** The deploy operator must
