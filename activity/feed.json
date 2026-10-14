@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T15:51:14.977Z",
+  "generatedAt": "2026-10-14T16:18:05.396Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-36c533d5302f519e2e1c4f89238049d8d2362ed5",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T16:12:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/36c533d5302f519e2e1c4f89238049d8d2362ed5",
+      "title": "Merge pull request #344 from www-infinity4/fix-music-receipt-wallet-credit-20261014",
+      "message": "I found a commit titled “Merge pull request #344 from www-infinity4/fix-music-receipt-wallet-credit-20261014”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-3819b692ed954d467edba50a31b35b4fcd16b2fe",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T16:12:16Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3819b692ed954d467edba50a31b35b4fcd16b2fe",
+      "title": "Verify music credits, legacy floor and retry idempotency",
+      "message": "I found a commit titled “Verify music credits, legacy floor and retry idempotency”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-9b22fa5fb2ed55baa491d79a4133f3dbb5d6664e",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T16:12:14Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9b22fa5fb2ed55baa491d79a4133f3dbb5d6664e",
+      "title": "Credit durable Music Quant receipts to unified wallet exactly once",
+      "message": "I found a commit titled “Credit durable Music Quant receipts to unified wallet exactly once”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-8e01a45f0af5b553f9c21bc0033149b9cfcecd4b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T15:51:26Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8e01a45f0af5b553f9c21bc0033149b9cfcecd4b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-d3415b4a8d3b508866e823de784da43604c8f0f0",
       "agent": "greenbeans",
@@ -122,18 +170,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-14T13:57:43Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/e51d924c6838ebe6eb700d55c6a999f2ff148f6d",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-c8abf26e09a95183995d723cd39a339913282230",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T13:48:16Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/c8abf26e09a95183995d723cd39a339913282230",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -366,30 +402,6 @@
       "message": "I found a commit titled “Bubbles: introduce official GPT-Live 1 WebRTC voice path with owner-only gateway”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-6f3843829c8b5d58579dc9675054e22416d70bc6",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T07:18:42Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6f3843829c8b5d58579dc9675054e22416d70bc6",
-      "title": "Bubbles Preview 3: floating Oracle conversation and reliable installer",
-      "message": "I found a commit titled “Bubbles Preview 3: floating Oracle conversation and reliable installer”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-7a3fa7b3b118c73a213d461cfec3db6a04099768",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T06:56:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/7a3fa7b3b118c73a213d461cfec3db6a04099768",
-      "title": "Bubbles 0.6: Oracle chat, interrupt speech, natural voice options (#332)",
-      "message": "I found a commit titled “Bubbles 0.6: Oracle chat, interrupt speech, natural voice options (#332)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Oracle-Octaves-issue-35",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -424,18 +436,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/34",
       "title": "[Agent Job] Oracle Octaves visual + development audit: Adventure-TV",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Adventure-TV”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-b20ae58c3304a38c73eb1eecc68f8d4f22f2f24c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T06:29:16Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b20ae58c3304a38c73eb1eecc68f8d4f22f2f24c",
-      "title": "Fix Bubbles preview install failure and publish direct APK (#331)",
-      "message": "I found a commit titled “Fix Bubbles preview install failure and publish direct APK (#331)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-329",
