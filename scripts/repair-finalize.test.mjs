@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {reviewGate,checkGate,finalize} from './repair-finalize.mjs';
+import {reviewGate,checkGate,finalize,scanRepairPulls} from './repair-finalize.mjs';
 import {rewriteDeployedHTML} from './repair-finalize-edge.mjs';
 process.env.REPAIR_READ_TOKEN='read-only-test-token';
 const base='a'.repeat(40),head='b'.repeat(40),merge='c'.repeat(40);
@@ -69,4 +69,24 @@ test('delivery transform preserves legacy wallet bridge while rewriting suite li
 test('delivery transform leaves the approved ShopLC correction and unrelated content intact',()=>{
  assert.equal(rewriteDeployedHTML(fixed),fixed);
  assert.notEqual(rewriteDeployedHTML(fixed+'unexpected'),rewriteDeployedHTML(fixed));
+});
+
+test('repair intake scans beyond the first 100 PRs and keeps exact candidate receipts',async()=>{
+ const pages=[];
+ const first=Array.from({length:100},(_,i)=>({number:i+1}));
+ const candidate={number:101,user:{login:'infinity-quantaphi-repair-bot[bot]'}};
+ const rows=await scanRepairPulls({fetchImpl:async url=>{
+  const page=Number(new URL(url).searchParams.get('page'));pages.push(page);
+  return {ok:true,json:async()=>page===1?first:[candidate]};
+ }});
+ assert.deepEqual(pages,[1,2]);assert.equal(rows.length,101);assert.equal(rows.at(-1),candidate);
+});
+test('incomplete, shifting or failed paginated intake fails closed',async()=>{
+ const full=Array.from({length:100},(_,i)=>({number:i+1}));
+ for(const second of [full,{message:'bad response'}]){
+  let calls=0;
+  await assert.rejects(scanRepairPulls({fetchImpl:async()=>({ok:true,json:async()=>++calls===1?full:second})}));
+ }
+ await assert.rejects(scanRepairPulls({maxPages:1,fetchImpl:async()=>({ok:true,json:async()=>full})}),/page bound/);
+ await assert.rejects(scanRepairPulls({fetchImpl:async()=>({ok:false,status:403})}),/GitHub 403/);
 });
