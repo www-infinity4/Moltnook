@@ -29,6 +29,15 @@ CREATE INDEX IF NOT EXISTS idx_transitions_repository_hour ON token_state_transi
 CREATE INDEX IF NOT EXISTS idx_transitions_resume ON token_state_transitions(repository_name, quant_id, observed_at_ms DESC);
 CREATE INDEX IF NOT EXISTS idx_transitions_report ON token_state_transitions(repository_name, observed_at_ms DESC);
 
+-- Application-level append-only protection. A database owner can still
+-- modify the schema; these triggers deter accidental UPDATE/DELETE from bots.
+CREATE TRIGGER IF NOT EXISTS prevent_transition_update
+BEFORE UPDATE ON token_state_transitions
+BEGIN SELECT RAISE(ABORT, 'immutable_transition'); END;
+CREATE TRIGGER IF NOT EXISTS prevent_transition_delete
+BEFORE DELETE ON token_state_transitions
+BEGIN SELECT RAISE(ABORT, 'immutable_transition'); END;
+
 -- "system_credit_value" is a unit of inspection workload, not a mint.
 -- Never convert this counter to StarCoins, Quant, Music Quant or Infinity
 -- without separate authenticated wallet settlement + durable receipt readback.
