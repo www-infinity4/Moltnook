@@ -25,5 +25,6 @@ jobs:
         run: |
           node --check agents/repository-engine/transition-stream/worker.mjs
           node --check agents/repository-engine/transition-stream/bot-adapter.mjs
+          node --check agents/repository-engine/runner.mjs
       - name: Test integrity, retries, budgets and no mint claims
         run: node --test agents/repository-engine/transition-stream/*.test.mjs
