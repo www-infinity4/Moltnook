@@ -62,11 +62,13 @@ separate identity enforcement.
 
 ## Install boundaries
 
-**No infrastructure has been created by this PR.** The deploy operator must
-create a separate Cloudflare D1 database and Queues primary/DLQ pair; apply
-`schema.sql` with D1 migrations; copy `wrangler.example.toml` to the
-actual project manifest, supply the real D1 UUID, an unused integer namespace,
-and a 32+ character `BOT_INGEST_TOKEN` via encrypted Cloudflare secret.
+**The separate D1 database, primary Queue, DLQ, Worker and consumer have
+now been created and the schema verified.** Use the checked-in `wrangler.toml`
+with the real binding IDs; do not reuse the old placeholder example.
+
+The operator still needs an encrypted Cloudflare `BOT_INGEST_TOKEN` secret
+and a corresponding GitHub Actions producer credential. No secrets have been
+provisioned. The Worker and runner currently remain fail-closed.
 Do **not** paste tokens into code, GitHub issue text, mobile HTML or chat.
 
 The existing `runner.mjs` now invokes the adapter **only when both**
