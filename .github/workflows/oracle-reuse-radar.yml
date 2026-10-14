@@ -30,7 +30,7 @@ jobs:
       - name: Verify bounded source matcher and exact LLM target checks
         run: |
           node --check agents/reuse-radar/runner.mjs
-          node --test agents/reuse-radar/engine.test.mjs agents/reuse-radar/runner.test.mjs
+          node --test agents/reuse-radar/engine.test.mjs agents/reuse-radar/runner.test.mjs agents/reuse-radar/widget-layout.test.mjs
       - name: Review recent cross-repository features with Oracle LLM
         if: github.event_name != 'pull_request'
         env:
