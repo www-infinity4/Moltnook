@@ -1,0 +1,41 @@
+name: Oracle Octaves all-owner repository design inventory
+on:
+  schedule:
+    - cron: '23 8 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/oracle-owner-inventory.mjs'
+      - '.github/workflows/oracle-all-repo-inventory.yml'
+permissions:
+  contents: read
+concurrency:
+  group: oracle-owner-inventory
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate design and engineering audit policy
+        run: |
+          node --check agents/repository-engine/oracle-owner-inventory.mjs
+          node --test agents/repository-engine/oracle-owner-inventory.test.mjs
+      - name: Inventory every accessible owner repository and raise verified gaps
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node agents/repository-engine/oracle-owner-inventory.mjs
+      - name: Archive source evidence and created issues
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-all-repository-inventory
+          path: repository-receipts/oracle-owner-inventory.json
+          retention-days: 14
