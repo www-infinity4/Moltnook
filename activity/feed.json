@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T05:34:29.319Z",
+  "generatedAt": "2026-10-14T05:48:13.831Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-21ac3fb8e3fc2d25ad09f9d444a0af9ac30b665c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T05:34:50Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/21ac3fb8e3fc2d25ad09f9d444a0af9ac30b665c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-6ff598936c227d6159aa48628eab45499e6f7546",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T05:34:40Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6ff598936c227d6159aa48628eab45499e6f7546",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-329",
       "agent": "purple-pearl",
@@ -244,18 +268,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/b267a723cd2fa20282bb34a55020456a64d2371c",
       "title": "Ground Bubbles engineering plans in actual JS source and tests",
       "message": "I found a commit titled “Ground Bubbles engineering plans in actual JS source and tests”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-23982958076d3d464e8ef462601a7bdaeab5280c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T03:28:54Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/23982958076d3d464e8ef462601a7bdaeab5280c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-317",
@@ -494,18 +506,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-13T23:30:41Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/0158ca6254e6a1092c02bacbdcff9ef49e9924b5",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-5331ba32c7c1d8373feb106f25f214425b93b62f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-13T22:32:20Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/5331ba32c7c1d8373feb106f25f214425b93b62f",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
