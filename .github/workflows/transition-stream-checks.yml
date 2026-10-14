@@ -1,0 +1,29 @@
+name: Transition stream adapter checks
+on:
+  pull_request:
+    branches:
+      - main
+      - robot/bounded-context-hash-review-20261013
+    paths:
+      - 'agents/repository-engine/transition-stream/**'
+      - '.github/workflows/transition-stream-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse the Cloudflare worker and adapter
+        run: |
+          node --check agents/repository-engine/transition-stream/worker.mjs
+          node --check agents/repository-engine/transition-stream/bot-adapter.mjs
+      - name: Test integrity, retries, budgets and no mint claims
+        run: node --test agents/repository-engine/transition-stream/*.test.mjs
