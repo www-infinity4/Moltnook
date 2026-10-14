@@ -26,5 +26,21 @@ jobs:
           node --check agents/repository-engine/transition-stream/worker.mjs
           node --check agents/repository-engine/transition-stream/bot-adapter.mjs
           node --check agents/repository-engine/runner.mjs
+      - name: Verify real Cloudflare bindings without exposing credentials
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, tomllib
+          base = pathlib.Path('agents/repository-engine/transition-stream')
+          with (base / 'wrangler.toml').open('rb') as fd:
+              config = tomllib.load(fd)
+          observed = json.loads((base / 'cloudflare-observed-state.json').read_text())
+          assert config['name'] == observed['worker']['name']
+          assert config['d1_databases'][0]['database_id'] == observed['d1']['databaseId']
+          assert config['queues']['producers'][0]['queue'] == observed['queue']['name']
+          assert config['queues']['consumers'][0]['dead_letter_queue'] == observed['deadLetterQueue']['name']
+          assert config['ratelimits'][0]['name'] == 'INGEST_RATE_LIMITER'
+          assert observed['worker']['tokenConfigured'] is False
+          assert observed['worker']['workersDevEnabled'] is False
+          PY
       - name: Test integrity, retries, budgets and no mint claims
         run: node --test agents/repository-engine/transition-stream/*.test.mjs
