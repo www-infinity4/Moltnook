@@ -1,0 +1,37 @@
+# Real Cloudflare resources verified 2026-10-14 UTC.
+# DO NOT infer that a GitHub source merge activates the producer.
+# Security: Worker is unpublished to workers.dev until ingestion is authenticated.
+name = "quantaphi-transition-stream"
+main = "worker.mjs"
+compatibility_date = "2026-10-13"
+
+[vars]
+MAX_EVENTS_PER_REPO_HOUR = "20000"
+
+[[d1_databases]]
+binding = "BOT_TRANSITIONS_DB"
+database_name = "quantaphi-robot-transitions"
+database_id = "2f7681ff-2906-46ad-b23d-43b618b4eedb"
+
+[[queues.producers]]
+binding = "BOT_EVENTS_QUEUE"
+queue = "quantaphi-robot-transitions"
+
+[[queues.consumers]]
+queue = "quantaphi-robot-transitions"
+max_batch_size = 25
+max_batch_timeout = 5
+max_concurrency = 4
+max_retries = 5
+dead_letter_queue = "quantaphi-robot-transitions-dlq"
+
+[[ratelimits]]
+name = "INGEST_RATE_LIMITER"
+namespace_id = "2610132001"
+[ratelimits.simple]
+limit = 600
+period = 60
+
+# Required: BOT_INGEST_TOKEN with 32+ characters set as an encrypted
+# Cloudflare Worker secret; and a matching GitHub Actions secret.
+# No token values are committed or printed.
