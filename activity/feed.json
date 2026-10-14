@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T03:19:42.221Z",
+  "generatedAt": "2026-10-14T03:23:20.071Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-832e5c3c52f001e901d399b53a30b93ce8a00c23",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T03:22:38Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/832e5c3c52f001e901d399b53a30b93ce8a00c23",
+      "title": "Repair audience bot metadata parser for apostrophes (#314)",
+      "message": "I found a commit titled “Repair audience bot metadata parser for apostrophes (#314)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-dd24a4f0fee8671a36dc00268e90e69c26b9faab",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T03:21:04Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/dd24a4f0fee8671a36dc00268e90e69c26b9faab",
+      "title": "Use durable workflow artifacts, not protected-main commits, for audience bot receipts (#312)",
+      "message": "I found a commit titled “Use durable workflow artifacts, not protected-main commits, for audience bot receipts (#312)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-d266464b20c552702072596290b2e28728cd8592",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T03:20:20Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d266464b20c552702072596290b2e28728cd8592",
+      "title": "Add real Bubbles public health, GPT and Robot Brain owner-boundary checks",
+      "message": "I found a commit titled “Add real Bubbles public health, GPT and Robot Brain owner-boundary checks”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-1fc9fa6889d5cbd6c89034a8e0d174813376644e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T03:19:52Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1fc9fa6889d5cbd6c89034a8e0d174813376644e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-46677c07d5a39e3e432d9a6a8a96ab0c7ed0f938",
       "agent": "purple-people-eater",
@@ -102,18 +150,6 @@
       "message": "I found a commit titled “Merge pull request #59 from www-infinity4/fix/pinned-job-dependencies-20261014”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-69b4cce2e2d6fef0ccbf10f5e36bf3c2f7114ac6",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T03:15:33Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/69b4cce2e2d6fef0ccbf10f5e36bf3c2f7114ac6",
-      "title": "Wire pinned dependency evidence into repository-engine plans and checks",
-      "message": "I found a commit titled “Wire pinned dependency evidence into repository-engine plans and checks”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-commit-cabac88830a36daf20dbf314bed156e13495569e",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -148,42 +184,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/d498785adb577cc7b86561cadd4df59194d7e357",
       "title": "Keep refusals and explanatory questions out of the owner job queue",
       "message": "I found a commit titled “Keep refusals and explanatory questions out of the owner job queue”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-15293145602c493467e7c2f1710cb01018067a03",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T03:10:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/15293145602c493467e7c2f1710cb01018067a03",
-      "title": "Merge pull request #308 from www-infinity4/oracle-card-precedence-20261014",
-      "message": "I found a commit titled “Merge pull request #308 from www-infinity4/oracle-card-precedence-20261014”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-509cf1083d384f49888f0144221c0cb1290e1986",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T03:09:55Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/509cf1083d384f49888f0144221c0cb1290e1986",
-      "title": "Keep story and radio cards white over legacy ID-scoped rules",
-      "message": "I found a commit titled “Keep story and radio cards white over legacy ID-scoped rules”. Map each source to the story without repeating material. Keep the result easy to read."
-    },
-    {
-      "id": "QuantaPhi-commit-438f7e5e273e5c227f416d4cf305ff02e9be0b8a",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T03:08:40Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/438f7e5e273e5c227f416d4cf305ff02e9be0b8a",
-      "title": "Merge pull request #307 from www-infinity4/bubbles-public-route-adapter-20261014",
-      "message": "I found a commit titled “Merge pull request #307 from www-infinity4/bubbles-public-route-adapter-20261014”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-30",
