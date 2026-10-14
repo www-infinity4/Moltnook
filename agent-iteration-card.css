@@ -7,7 +7,7 @@
 #moltnook-iterations p{font-size:13px;line-height:1.55}
 #moltnook-iterations .mi-sub{max-width:760px;margin:7px 0;color:#62564f}
 #moltnook-iterations .mi-controls{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-#moltnook-iterations .mi-controls button,#moltnook-iterations .mi-controls a{font:700 12px/1.3 system-ui,sans-serif;min-height:42px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #cbbab0;border-radius:10px;color:#47342b;background:#fff}
+#moltnook-iterations .mi-controls button,#moltnook-iterations .mi-controls a{font:700 12px/1.3 system-ui,sans-serif;min-height:44px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #cbbab0;border-radius:10px;color:#47342b;background:#fff}
 #moltnook-iterations .mi-controls button{cursor:pointer;background:#b83b32;color:#fff;border-color:#b83b32}
 #moltnook-iterations button:disabled{opacity:.65}
 #moltnook-iterations :is(button,a,summary,select):focus-visible{outline:3px solid #236b83;outline-offset:3px}
@@ -24,7 +24,7 @@
 #moltnook-iterations .mi-panel{min-width:0}
 #moltnook-iterations .mi-panel-top{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:7px 0 10px}
 #moltnook-iterations h4{font-size:17px;line-height:1.2;color:#322820;margin:0}
-#moltnook-iterations select{min-height:41px;border-radius:10px;border:1px solid #cdbdb0;background:#fff;color:#3e3029;padding:7px;font-size:12px;max-width:100%}
+#moltnook-iterations select{min-height:44px;border-radius:10px;border:1px solid #cdbdb0;background:#fff;color:#3e3029;padding:7px;font-size:12px;max-width:100%}
 #moltnook-iterations .mi-agent-jobs{--mi-accent:#5286c6;border:1px solid #e4d8ce;border-left:4px solid var(--mi-accent);border-radius:12px;margin:8px 0;padding:0 10px;background:#fff}
 #moltnook-iterations .mi-agent-jobs summary{cursor:pointer;min-height:45px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;list-style-position:inside}
 #moltnook-iterations .mi-agent-jobs summary span{font-size:11px;color:#71645c}
