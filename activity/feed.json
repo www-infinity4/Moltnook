@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T15:35:59.080Z",
+  "generatedAt": "2026-10-14T15:51:14.977Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-d3415b4a8d3b508866e823de784da43604c8f0f0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T15:36:14Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/d3415b4a8d3b508866e823de784da43604c8f0f0",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-9dd82a27f3b908fba46bddee694647716b02fe7a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-14T15:36:12Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9dd82a27f3b908fba46bddee694647716b02fe7a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-343",
       "agent": "purple-pearl",
@@ -136,18 +160,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/342",
       "title": "[Agent Job] Oracle reuse: viewer → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-01307db9514da4504670a04dbe76bf17191a91d2",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T13:31:38Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/01307db9514da4504670a04dbe76bf17191a91d2",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-40",
@@ -352,18 +364,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/84c773e0f86f70d69ed0364219f3ba8f6ff99f90",
       "title": "Bubbles: introduce official GPT-Live 1 WebRTC voice path with owner-only gateway",
       "message": "I found a commit titled “Bubbles: introduce official GPT-Live 1 WebRTC voice path with owner-only gateway”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-8f4b469abca995c424f17a2641bc6ac138053bfd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-14T07:38:20Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/8f4b469abca995c424f17a2641bc6ac138053bfd",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-6f3843829c8b5d58579dc9675054e22416d70bc6",
