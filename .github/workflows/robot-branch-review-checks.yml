@@ -5,6 +5,11 @@ on:
     paths:
       - 'agents/repository-engine/**'
       - '.github/workflows/**'
+      - 'styles.css'
+      - 'agent-room.css'
+      - 'agent-iteration-card.css'
+      - 'index.html'
+      - 'agents/model-job.json'
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,3 +34,10 @@ jobs:
           node --test agents/repository-engine/publish-reviewed.test.mjs
           node --test agents/repository-engine/python-toolbox.test.mjs
           node --test agents/repository-engine/auto-ticket-sweep.test.mjs
+          node --test agents/repository-engine/oracle-review-gate.test.mjs agents/repository-engine/oracle-owner-inventory.test.mjs
+      - name: Assert Oracle surface and functional JavaScript syntax
+        run: |
+          node --check agent-room.js
+          node --check agent-iteration-card.js
+          node --test agents/tests/routing.test.mjs agents/tests/color-child-bots.test.mjs
+          node -e "const fs=require('fs'); const s=fs.readFileSync('agent-room.css','utf8'); if(!s.includes('#f7f4f0')||!s.includes('#b83b32')||!s.includes('min-height:44px'))process.exit(1)"

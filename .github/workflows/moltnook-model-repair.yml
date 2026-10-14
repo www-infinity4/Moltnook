@@ -1,4 +1,4 @@
-name: Moltnook GPT build and deploy
+name: Moltnook GPT build and reviewed branch
 on:
   workflow_dispatch:
   push:
@@ -7,20 +7,21 @@ on:
       - agents/model-job.json
       - .github/workflows/moltnook-model-repair.yml
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 concurrency:
   group: moltnook-model-writer
   cancel-in-progress: false
 jobs:
   repair:
     runs-on: ubuntu-latest
+    timeout-minutes: 22
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - name: GPT scoped repair, independent review and regression checks
         run: node agents/repair-kit/model-repair.mjs
       - name: Preserve evidence even if the tool is blocked
@@ -29,30 +30,22 @@ jobs:
         with:
           name: moltnook-model-repair
           path: activity/model-repair.json
-      - name: Commit tested presentation patch
+      - name: Publish tested edits only as a robot pull request
+        env:
+          GH_TOKEN: ${{ secrets.GHP }}
         run: |
+          test -n "$GH_TOKEN" || { echo "Missing scoped GitHub PR writer"; exit 1; }
           git config user.name "infinity-color-agents[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html styles.css agent-room.css agent-iteration-card.css activity/model-repair.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Apply GPT repair after independent review and regression checks"
-            git push origin HEAD:main
+          if git diff --cached --quiet; then
+            echo "No reviewed changes; nothing to propose"
+            exit 0
           fi
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - uses: actions/deploy-pages@v4
-      - name: Verify public deployment response
-        run: |
-          curl --fail --retry 2 https://quantaphi.org/moltnook/ -o /tmp/moltnook-live.html
-          test -s /tmp/moltnook-live.html
-      - name: Cloudflare Android browser verification
-        env:
-          CF_BROWSER_TOKEN: ${{ secrets.CF_BROWSER_TOKEN }}
-        run: |
-          if [ -z "$CF_BROWSER_TOKEN" ]; then
-            echo "Deployment response checked. Full completion blocked: Cloudflare Browser token is not connected to this runner."
-            exit 1
-          fi
-          node agents/repair-kit/verify-mobile.mjs
+          branch="robot/moltnook-gpt-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git commit -m "Stage scoped GPT Oracle frontend work after independent tests"
+          sha="$(git rev-parse HEAD)"
+          gh auth setup-git
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch"             --title "Robot review: Moltnook GPT Oracle frontend $GITHUB_RUN_ID"             --body "Source was generated and independently reviewed using the bounded Moltnook model repair adapter. Target CI and later live checks remain required.\n\nStaged source commit: $sha\nReview run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"

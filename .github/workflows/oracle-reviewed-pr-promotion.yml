@@ -1,0 +1,44 @@
+name: Independent GPT reviewer and safe Oracle style promotion
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/oracle-review-*.mjs'
+      - '.github/workflows/oracle-reviewed-pr-promotion.yml'
+permissions:
+  contents: read
+concurrency:
+  group: independent-oracle-pr-promoter
+  cancel-in-progress: false
+jobs:
+  source-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify bounded tests and exact-source promotion gate
+        run: |
+          node --check agents/repository-engine/oracle-review-gate.mjs
+          node --check agents/repository-engine/oracle-review-promoter.mjs
+          node --test agents/repository-engine/oracle-review-gate.test.mjs
+      - name: Independently review bot CSS PRs and merge only passing source
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || 'ef25728c096c6ba92cf510caa2058003' }}
+        run: node agents/repository-engine/oracle-review-promoter.mjs
+      - name: Publish reviewer decisions and blockers
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: independent-oracle-gpt-review
+          path: repository-receipts/oracle-promotion-review.json
+          retention-days: 14
