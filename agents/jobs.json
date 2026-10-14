@@ -263,6 +263,74 @@
       "source": "Owner requested Shop Phi eBay-like marketplace and contextual Quant matching, 2026-10-12",
       "sourceUrl": "https://github.com/www-infinity4/Oracle-Octaves/issues/7",
       "scope": "Use real approved inventory and relevance to current search, not invented item cards or sensitive targeting; Ad Phi sponsorship separately labeled; no checkout claims until settlement."
+    },
+    {
+      "id": "GROW-001",
+      "priority": 1,
+      "title": "Google discovery: review QuantaPhi AI research, image, video, Bubbles landing page and sitemap",
+      "repo": "QuantaPhi",
+      "agent": "gold-diggers-ink",
+      "next": "blueberry",
+      "checkPaths": [
+        "explore/index.html",
+        "index.html",
+        "sitemap.xml"
+      ],
+      "source": "Owner requested more real users and Cloudflare-measured growth, 2026-10-13",
+      "sourceUrl": "https://github.com/www-infinity4/QuantaPhi/blob/main/explore/index.html",
+      "status": "queued",
+      "scope": "Yellow: inspect indexed, public and useful content. Blue: check canonical URLs, sitemap and exact feature promises. Green: improve only verified code, Pink: run audit, Purple: explain verified search impressions. A crawlable page is not a ranking or an indexed URL receipt."
+    },
+    {
+      "id": "GROW-002",
+      "priority": 1,
+      "title": "Bot site-health checks: monitor real URLs, canonical metadata, social cards and visible failure receipts",
+      "repo": "QuantaPhi",
+      "agent": "pink-panther",
+      "next": "greenbeans",
+      "checkPaths": [
+        "scripts/audience-audit.mjs",
+        "test/audience-audit.test.mjs",
+        ".github/workflows/audience-watch.yml"
+      ],
+      "source": "Owner requested more real users and Cloudflare-measured growth, 2026-10-13",
+      "sourceUrl": "https://github.com/www-infinity4/QuantaPhi/blob/main/explore/index.html",
+      "status": "queued",
+      "scope": "Run scheduled read-only HTTP audit and publish evidence JSON; verify sitemap and share metadata. Do not claim successful conversion, browser playback, search ranking, payouts or human-visitor counts from a 200 response."
+    },
+    {
+      "id": "GROW-003",
+      "priority": 1,
+      "title": "Twitter referral and shared AI pages: verify destination stays on QuantaPhi and preview cards match pages",
+      "repo": "QuantaPhi",
+      "agent": "greenbeans",
+      "next": "pink-panther",
+      "checkPaths": [
+        "bubbles.html",
+        "video-studio.html",
+        "test/social-share-preview.test.cjs"
+      ],
+      "source": "Owner requested more real users and Cloudflare-measured growth, 2026-10-13",
+      "sourceUrl": "https://github.com/www-infinity4/QuantaPhi/blob/main/explore/index.html",
+      "status": "queued",
+      "scope": "Check QuantaPhi canonical URL, OpenGraph image/title/description, Twitter previews, and exact destination on sharing. Keep original source link as secondary provenance. Do not assume all Twitter webviews supply referers or credit unseen visits."
+    },
+    {
+      "id": "GROW-004",
+      "priority": 2,
+      "title": "Human audience growth: separate Cloudflare HTTP requests, browser page loads, bot traffic and Google Search clicks",
+      "repo": "Moltnook",
+      "agent": "blueberry",
+      "next": "purple-pearl",
+      "checkPaths": [
+        "agents/jobs.json",
+        "agents/color-child-bots.mjs",
+        "activity/iterations.json"
+      ],
+      "source": "Owner requested more real users and Cloudflare-measured growth, 2026-10-13",
+      "sourceUrl": "https://github.com/www-infinity4/QuantaPhi/blob/main/explore/index.html",
+      "status": "queued",
+      "scope": "Different metrics are noninterchangeable. Do not infer 270000 customers from request counts; require account-scoped Cloudflare analytics reader for numbers and GSC reader for impressions. Report missing integration honestly. No automatic ads, bots clicking ads, artificial traffic or token issuance."
     }
   ]
 }
