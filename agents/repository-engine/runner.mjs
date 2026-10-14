@@ -75,7 +75,8 @@ try{
  await fs.writeFile('repository-receipts/job-quant-audit.json',JSON.stringify(report.jobQuantAudit,null,2));
  report.baseline=await inspectRuntime();
  if(!report.baseline.passed)throw Error('Runtime baseline missing: '+report.baseline.checks.filter(x=>!x.passed).map(x=>x.name).join(', '));
- await call('capability',{status:token?'credential_configured':'credential_missing'});
+ const liveWindowCapability=await call('capability',{status:token?'credential_configured':'credential_missing'});
+ if(liveWindowCapability.sourceWindowsV2!==true||liveWindowCapability.arbitrationDigestValidation!==true)throw Error('brain_clock_bounded_windows_v2_not_deployed: deploy reviewed infinity-brain-clock Worker before resuming autonomous source edits');
  if(token){let count=0,pushReported=0;for(let page=1;page<=20;page++){const repos=await github('user/repos?affiliation=owner&per_page=100&page='+page);for(const r of repos){if(r.owner.login!==OWNER)continue;count++;if(r.permissions?.push)pushReported++;}if(repos.length<100)break;}report.inventory={ownerRepositoriesVisible:count,reportedPushPermission:pushReported,note:'Reported account permissions; actual writes are proven by successful commits.'};await call('capability',{status:'credential_configured',repositoriesVisible:count});}
  lease=(await call('claim',{})).lease;
  if(!lease){report.status='idle';}
