@@ -38,6 +38,7 @@ jobs:
           node --check agents/repository-engine/context-windows.mjs
           node --check agents/repository-engine/runner.mjs
           node --test agents/repository-engine/context-windows.test.mjs
+          node --test agents/repository-engine/oracle-style-contract.test.mjs
       - name: Assert Oracle surface and functional JavaScript syntax
         run: |
           node --check agent-room.js
