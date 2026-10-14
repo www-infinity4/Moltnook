@@ -27,8 +27,26 @@ export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
    }
   }
   candidates.sort((a,b)=>b.score-a.score||a.pos-b.pos);
+  // Prefer up to fifteen complete lines before and after each anchor. A minified
+  // megabyte-sized line falls back to a strict character budget.
+  const makeWindow=pos=>{
+   const cap=Math.floor(fileBudget/2),half=Math.floor(cap/2);
+   let start=pos,end=pos,lines=0;
+   while(start>0&&pos-start<half&&lines<15){
+    const prev=full.lastIndexOf('\n',start-2);
+    const next=prev<0?0:prev+1;
+    if(next===start)break;start=next;lines++;
+   }
+   lines=0;
+   while(end<full.length&&end-start<cap&&lines<15){
+    const next=full.indexOf('\n',end);
+    end=next<0?full.length:next+1;lines++;
+   }
+   if(end-start>cap||start===end){start=Math.max(0,pos-half);end=Math.min(full.length,start+cap);}
+   return {start,end};
+  };
   const take=full.length<=fileBudget?[{start:0,end:full.length}]:
-   candidates.length?candidates.slice(0,2).map(x=>({start:Math.max(0,x.pos-Math.floor(fileBudget/4)),end:Math.min(full.length,x.pos+Math.floor(fileBudget/4))})):
+   candidates.length?candidates.slice(0,2).map(x=>makeWindow(x.pos)):
     [{start:0,end:Math.min(fileBudget,full.length)}];
   const windows=[];for(const range of take){
    const start=range.start,end=range.end,part=full.slice(start,end);
