@@ -29,6 +29,14 @@ The cross-repository engine already clones each owner repository into a temporar
 
 **Activation boundaries:** after the PR merges, the Python toolbox can be dispatched with a pinned commit. The ticket sweep needs the preexisting `GHP` writer credential to create Oracle-Octaves issues; without it the workflow fails and records a blocker. Cloning owner repositories is distinct from forking them in GitHub: this implementation uses isolated local clones and task branches, not new fork repositories. Automated promotion to `main` remains disabled until independently verifiable, target-specific CI and reviewer gates exist.
 
+## Scheduled review and owner-wide design inventory
+
+`oracle-reviewed-pr-promotion.yml` is an independent 15-minute reviewer. For **new** `Robot review:` PRs it verifies a pinned exact head SHA, same owner repository, target GitHub Actions checks, GitHub mergeability, CSS-only non-sensitive diff, and a second Cloudflare Workers AI `gpt-oss-120b` code review. The model posts a traceable PR review comment. Only approvals with current passing checks can be squash-merged into main. GitHub branch rules remain authoritative; a missing model token, absent CI, failed checks or review rejection blocks promotion. The model review runs as an explicit billed Workers AI inference, not this ChatGPT session.
+
+`oracle-all-repo-inventory.yml` runs daily and on demand. It paginates accessible owner repositories, checks real UI/CSS/test/CI files and creates at most five nonduplicate `[Agent Job]` Oracle-Octaves issues per cycle, with pinned source evidence and exact Oracle design requirements. It does **not** itself deploy altered source or create Brain Clock leases. Existing authenticated readers and writers must adopt each ticket through a supported owner job path.
+
+The design reference is `www-infinity4/Oracle-Octaves/index.html` and `www-infinity4/QuantaPhi/oracle-interface.css`; white daylight cards, paper #f7f4f0, ink #312722, red #b83b32 actions, 18px corners and accessible Android controls. Retain each card's original hue and all working features. The first automatic merge policy intentionally only covers small CSS/SCSS changes. Broader automated UI deployment requires controlled preview/build/runtime adapters per repository.
+
 ## Remaining adapters
 
 The generic engine does not yet deploy every repository or implement canary/rollback across providers. Unknown languages, package managers, missing acceptance commands and framework page rendering require project adapters. Secrets and execution permissions are excluded from generated source patches. Committed source remains **committed_unverified** until live acceptance is proven. Source previews disconnect services and cannot prove database, wallet or production behavior. GPT Purple currently uses Workers AI's gpt-oss-120b model; it is a separate review stage, not this ChatGPT session.
