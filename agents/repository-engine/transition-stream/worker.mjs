@@ -54,7 +54,7 @@ export function normalizeIteration(raw) {
       observedAt > Date.now() + 300000) throw new Error('invalid_observed_at');
   return {repository, quantId, jobId, iterationId, filePath, commitSha,
     fullFileSha256, snippetSha256, stage, outcome, assessment, ruleId,
-    agentId, scope, weight, observedAt, hourBucket: Math.floor(observedAt / 3600000)};
+    agentId, scope, weight, lineStart: start, lineEnd: end, observedAt, hourBucket: Math.floor(observedAt / 3600000)};
 }
 export async function eventId(record) {
   const basis = [record.repository, record.jobId, record.iterationId, record.commitSha,
