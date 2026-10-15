@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T09:24:22.502Z",
+  "generatedAt": "2026-10-15T09:43:10.702Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-9f2a3f79c48e92f64bfb67236138fb4d07ee13fd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T09:36:01Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/9f2a3f79c48e92f64bfb67236138fb4d07ee13fd",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-1b7efb0b879c1973a0dc1136914adf070f8b9020",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T09:24:35Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/1b7efb0b879c1973a0dc1136914adf070f8b9020",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-c1f008dbc07c6986d1beb7c318c4e410fa2f4a7a",
       "agent": "greenbeans",
@@ -160,18 +184,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/a59e544ac9dfec55c203d38de6d1ee95ea9080a0",
       "title": "Rebuild Bubbles Android chat with one scrolling surface (#379)",
       "message": "I found a commit titled “Rebuild Bubbles Android chat with one scrolling surface (#379)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-d95e4a12850934155824e8d817156db423daa620",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T07:00:15Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d95e4a12850934155824e8d817156db423daa620",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-5ec3c0f5ea1db4ca6cd43644fbf2d04d4db36c39",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-15T03:37:27Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/e2a60f950fd04c049f22bca41cb575a8d7248cb3",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-9541f9e0623151fad60f66a51f4c7758005546d0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T02:40:00Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/9541f9e0623151fad60f66a51f4c7758005546d0",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
