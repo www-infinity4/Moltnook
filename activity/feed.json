@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T21:31:16.156Z",
+  "generatedAt": "2026-10-15T21:45:22.276Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-b66c7cfdaff3e54af3aec71a1bd47e7fc66a6e40",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:33:13Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/b66c7cfdaff3e54af3aec71a1bd47e7fc66a6e40",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-f203770b02188e54299d95e8a0aa66a49ee20d7e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:31:27Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f203770b02188e54299d95e8a0aa66a49ee20d7e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-788ffd67b423dd2a1a881e5f4020452eb2f80207",
       "agent": "purple-people-eater",
@@ -186,18 +210,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-33d2b81c5bd88cfd2321324f683aebec901d2926",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T19:41:17Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/33d2b81c5bd88cfd2321324f683aebec901d2926",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-2e4198e71b133c862f1727da38fa184b2611f1ff",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -352,18 +364,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/62",
       "title": "[Agent Job] QuantaPhi · failed-workflow",
       "message": "I found a issue titled “[Agent Job] QuantaPhi · failed-workflow”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-e1ee379579efb5f6a6562202b1cf06d3b34e288a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T14:34:59Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/e1ee379579efb5f6a6562202b1cf06d3b34e288a",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-61",
