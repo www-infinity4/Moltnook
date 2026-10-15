@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T08:28:01.139Z",
+  "generatedAt": "2026-10-15T08:48:55.585Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-5f333bdc65821701cd8038253f0038e88a94768a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T08:41:23Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/5f333bdc65821701cd8038253f0038e88a94768a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-cd27e32fe0c07d25834e6bdfd29a18b27fbd30cd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T08:28:11Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/cd27e32fe0c07d25834e6bdfd29a18b27fbd30cd",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-c0ed0215cdc3d5ae6279a823f3b475f87b2c8749",
       "agent": "purple-people-eater",
@@ -282,18 +306,6 @@
       "message": "I found a commit titled “Make Bubbles owner pairing code easy to paste in floating chat (#373)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-74fa259d79eb1bd05a888b57aa3db8c7c3034f7b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T05:48:13Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/74fa259d79eb1bd05a888b57aa3db8c7c3034f7b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-70f780962e0cd38ad501dc8c7853511d9f06c4ae",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-15T02:40:00Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/9541f9e0623151fad60f66a51f4c7758005546d0",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-01b400598877eb6631495c296e915c85fbad7e4c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T01:39:23Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/01b400598877eb6631495c296e915c85fbad7e4c",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
