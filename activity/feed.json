@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T21:16:11.916Z",
+  "generatedAt": "2026-10-15T21:31:16.156Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-788ffd67b423dd2a1a881e5f4020452eb2f80207",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:30:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/788ffd67b423dd2a1a881e5f4020452eb2f80207",
+      "title": "Make bare 'record' capture screen + microphone in one video (#397)",
+      "message": "I found a commit titled “Make bare 'record' capture screen + microphone in one video (#397)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-9cbb715bc56540e4ebf60d2be1d20b1fd4234379",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:22:31Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9cbb715bc56540e4ebf60d2be1d20b1fd4234379",
+      "title": "Pin unified Bubbles website assets to merged screen-audio/history source and rotate edge version (#396)",
+      "message": "I found a commit titled “Pin unified Bubbles website assets to merged screen-audio/history source and rotate edge version (#396)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-1942bbe478653c55ee358657e63af307200c7c08",
+      "agent": "bluey",
+      "to": "blueberry",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:21:48Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1942bbe478653c55ee358657e63af307200c7c08",
+      "title": "Bubbles: record screen with mic, reject phantom speech, import both chat histories (#395)",
+      "message": "I found a commit titled “Bubbles: record screen with mic, reject phantom speech, import both chat histories (#395)”. Stage the import and verify exact fields, licensing and provenance before deciding its final destination."
+    },
+    {
+      "id": "Moltnook-commit-e8fe303f0e43d6c0d26f02c7011532af5146b905",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-15T21:16:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e8fe303f0e43d6c0d26f02c7011532af5146b905",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-f74c5bb986eb409b751c2f7dbabdc0bd452fd2a5",
       "agent": "purple-people-eater",
@@ -138,42 +186,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-a12e0412eecc4af37e629bebb0effb2508438848",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T19:44:15Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a12e0412eecc4af37e629bebb0effb2508438848",
-      "title": "fix(deploy): pin Bubbles entrypoints to verified sync release (#390)",
-      "message": "I found a commit titled “fix(deploy): pin Bubbles entrypoints to verified sync release (#390)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-b0efa3eafe753fb1a5da78c01961843db3009407",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T19:43:11Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b0efa3eafe753fb1a5da78c01961843db3009407",
-      "title": "fix(deploy): refresh gateway source cache for Bubbles sync release (#389)",
-      "message": "I found a commit titled “fix(deploy): refresh gateway source cache for Bubbles sync release (#389)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-2b25af5c5ebffeb3c29a138370343d763d4231af",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T19:41:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2b25af5c5ebffeb3c29a138370343d763d4231af",
-      "title": "Show Bubbles pairing directly in chat and refresh script version (#388)",
-      "message": "I found a commit titled “Show Bubbles pairing directly in chat and refresh script version (#388)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-33d2b81c5bd88cfd2321324f683aebec901d2926",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -196,18 +208,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/2e4198e71b133c862f1727da38fa184b2611f1ff",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-0f996e8501d72ef23587b549585ef67ae907632b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-15T19:29:31Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0f996e8501d72ef23587b549585ef67ae907632b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-68",
