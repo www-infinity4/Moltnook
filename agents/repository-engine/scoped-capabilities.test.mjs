@@ -34,7 +34,7 @@ test('reader derives existing scoped runner and worker facts without inventing t
  assert.ok(result.knownSourcePaths.includes('scripts/brain-writer.mjs'));
  assert.ok(!result.knownSourcePaths.some(p=>p.startsWith('.github')));
  assert.ok(!JSON.stringify(result).includes('CLOUDFLARE_API_TOKEN'));
- assert.throws(()=>safePath('.github/workflows/brain-writer.yml'));
+ assert.equal(safePath('.github/workflows/brain-writer.yml'),'.github/workflows/brain-writer.yml');
  assert.equal(result.cloudflare[0].deploymentVerified,false);
 });
 test('absent workflows and wrangler remain absent, not invented capabilities',async()=>{
@@ -42,7 +42,7 @@ test('absent workflows and wrangler remain absent, not invented capabilities',as
  assert.deepEqual(result.existingWorkflows,[]);
  assert.deepEqual(result.testCommands,[]);
  assert.deepEqual(result.cloudflare,[]);
- assert.equal(result.writerPolicy.includes('excluded'),true);
+ assert.equal(result.writerPolicy.includes('credential'),true);
 });
 test('workflow metadata remains bounded and strips credential expressions',async()=>{
  const workflow=['name: build','jobs:','  test:','    runs-on: ubuntu-latest','    steps:','      - run: node --test test/build.test.mjs','      - run: node --test \${{ secrets.SECRET_TEST_COMMAND }}','      - env: { TOKEN: \${{ secrets.PRIVATE_TEST_TOKEN }} }'].join('\n');

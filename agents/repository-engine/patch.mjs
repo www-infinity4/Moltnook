@@ -1,6 +1,6 @@
 import path from 'node:path';
 export function safePath(value){
- if(typeof value!=='string'||value.length>240||value.includes('\\')||value.startsWith('/')||value.split('/').some(x=>!x||x==='.'||x==='..')||/^(?:\.git|\.github)(?:\/|$)|^\.env(?:[.\/]|$)/.test(value)||/(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
+ if(typeof value!=='string'||value.length>240||value.includes('\\')||value.startsWith('/')||value.split('/').some(x=>!x||x==='.'||x==='..')||/^(?:\.git)(?:\/|$)|^\.env(?:[.\/]|$)/.test(value)||/(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
  return value;
 }
 export function applyEdits(original,edits){

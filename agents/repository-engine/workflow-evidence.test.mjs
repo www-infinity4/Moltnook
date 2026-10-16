@@ -15,7 +15,7 @@ test('workflow evidence is inspected with strict read-only boundaries and creden
   assert.ok(result['.github/workflows/robot.yml']);assert.match(result['.github/workflows/robot.yml'],/Robot Tests/);
   assert.ok(!JSON.stringify(result).includes('REPOSITORY_TOKEN'));
   assert.ok(!seen.includes('.github/workflows/robot.yml'));
-  assert.throws(()=>safePath('.github/workflows/robot.yml'));
+  assert.equal(safePath('.github/workflows/robot.yml'),'.github/workflows/robot.yml');
   for(const file of ['.github/workflows/../steal.yml','.github/secrets/private.yml','/tmp/x.yml','.github/workflows/hi.yaml/extra']){
    await assert.rejects(()=>readWorkflowEvidence(root,file));
   }

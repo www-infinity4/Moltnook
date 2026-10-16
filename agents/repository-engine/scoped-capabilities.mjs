@@ -9,11 +9,11 @@ const safeLine=(line)=> !/(\$\{\{\s*secrets\.|bearer\s+\S+|api[_-]?token\s*=|pas
 export async function discoverScopedCapabilities({paths,readWorkflow,readSource,maximumWorkflows=12}={}){
  if(!Array.isArray(paths)||typeof readWorkflow!=='function'||typeof readSource!=='function')throw TypeError('Pinned paths and read-only readers required');
  const workflows=paths.filter(p=>typeof p==='string'&&WORKFLOW_EVIDENCE_PATH.test(p)).sort().slice(0,maximumWorkflows);
- const result={schemaVersion:1,workflowInspection:'read_only',writerPolicy:'protected .github and credential paths remain excluded',
+ const result={schemaVersion:1,workflowInspection:'read_only',writerPolicy:'Owner authorizes repository source and workflow changes; credential values remain excluded',
   existingWorkflows:[],testCommands:[],sourcePathFilters:[],runnerImages:[],permissions:[],
   cloudflare:[],limits:['Workflow path filters describe GitHub event triggers, not bot file-write authorization.',
    'Worker metadata does not prove account API credentials or deployment acceptance.',
-   'No arbitrary workflow authoring, releases, or database mutations are granted.']};
+   'Workflow changes use the current owner order; deployment and database changes require actual authenticated capability and verified receipts.']};
  for(const file of workflows){
   let content;
   try{content=await readWorkflow(file)}catch{continue}
