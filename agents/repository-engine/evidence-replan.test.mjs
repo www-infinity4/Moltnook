@@ -69,3 +69,22 @@ test('explicit source-and-tests work proceeds while deployment stays pending',()
  const r=evidenceReplanFeedback({plan,task:'Ship actual source and tests; deployment stays blocked until its adapter is available.'});
  assert.equal(r.retry,true);assert.deepEqual(r.categories,['source_only_deploy']);assert.equal(r.originalBlockers.length,1);
 });
+
+
+test('reader must look in authenticated Robot Brain source before asking owner for file paths',()=>{
+ const plan={blockers:[b('owner_input_required','The owner request does not specify the exact definition of old tickets vs run tickets, desired UI behavior (filter, toggle, sorting), or which files should be modified.')]};
+ const sourceTree=['robot-directions.js','robot-directions.css','bubbles-ai.js','.github/workflows/brain-writer.yml','test/robot-directions.test.mjs'];
+ const r=evidenceReplanFeedback({plan,task:'Fix the robot brain directions area showing old tickets instead of tickets I want to run',sourceTree});
+ assert.equal(r.retry,true);
+ assert.deepEqual(r.categories,['existing_source_tree']);
+ assert.match(r.facts[0],/robot-directions\.js/);
+ assert.doesNotMatch(r.facts[0],/\.github\/workflows|test\/robot-directions/);
+ assert.equal(plan.blockers.length,1,'no blocker is automatically erased');
+});
+test('source suggestions never invent files or bypass missing private access',()=>{
+ const plan={blockers:[b('owner_input_required','An API token or secret credential is needed for the endpoint and the source component is unknown.')]};
+ const r=evidenceReplanFeedback({plan,task:'Deploy the Bubbles reader to the protected endpoint',sourceTree:['bubbles-ai.js']});
+ assert.equal(r.retry,false);
+ const unknown=evidenceReplanFeedback({plan:{blockers:[b('owner_input_required','Which source files should be modified?')]},task:'Fix new device component',sourceTree:['unrelated.js','.env','test/new-device.test.mjs']});
+ assert.equal(unknown.retry,false);
+});

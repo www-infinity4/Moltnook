@@ -9,7 +9,19 @@ const EXPLICIT_LABEL=/\b(?:rename|relabel|change (?:the )?(?:label|wording|text)
 const EXPLICIT_URL=/\b(?:change (?:the )?(?:destination|url|link)|point (?:it|the link) to|link to https?:\/\/|redirect to https?:\/\/)\b/i;
 const EXPLICIT_DEPLOY=/\b(?:deploy|redeploy|publish|production release|migrate database|apply migration)\b/i;
 const trim=s=>String(s||'').slice(0,280);
-export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions=''}={}){
+const CODE_LOCATION=/\b(?:source\s+files?|file\s+paths?|which\s+files?|exact\s+(?:component|file)|locate|component|source\s+location|ui\s+behaviou?r|filter|sorting|toggle)\b/i;
+const PRIVATE_SCOPE=/\b(?:credential|secret|authentication|api\s+key|token|authorization|permission|private\s+endpoint|database\s+schema|billing|wallet\s+transfer)\b/i;
+function sourceCandidates(sourceTree,request){
+ if(!Array.isArray(sourceTree))return [];
+ const words=new Set(String(request||'').toLowerCase().match(/[a-z]{4,}/g)||[]);
+ const terms=[...words].map(w=>w.endsWith('s')?w.slice(0,-1):w);
+ return sourceTree.filter(p=>typeof p==='string'&&p.length<180&&/\.(?:js|mjs|cjs|css|html|ts|tsx|jsx|py)$/.test(p)&&
+   !/(?:^|\/)(?:test|tests|node_modules|\.github|\.git|vendor|dist|secrets?)(?:\/|$)/i.test(p))
+  .map(p=>({path:p,score:terms.reduce((n,w)=>n+(p.toLowerCase().includes(w)?1:0),0)}))
+  .filter(p=>p.score>0).sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path))
+  .slice(0,7).map(p=>p.path);
+}
+export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions='',sourceTree=[]}={}){
  const blockers=Array.isArray(plan?.blockers)?plan.blockers:[];
  const request=String(task||'')+' '+String(ownerRequest||'');
  const facts=[],matchedCodes=[];
@@ -18,6 +30,16 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
  for(const blocker of blockers){
   if(!blocker||blocker.code!=='owner_input_required'||typeof blocker.reason!=='string')continue;
   const reason=blocker.reason;
+  // The signed runner already cloned a scoped repository and supplied its file
+  // tree. A reader cannot demand an owner-supplied file path instead of first
+  // inspecting those actual files. Replan once; never silently drop blockers.
+  if(CODE_LOCATION.test(reason)&&!PRIVATE_SCOPE.test(reason)){
+   const candidates=sourceCandidates(sourceTree,request);
+   if(candidates.length){
+    facts.push('The authenticated repository checkout has these matching source paths: '+candidates.join(', ')+'. Inspect their current implementation and tests before demanding an owner-supplied path. Prefer a small reversible fix grounded in existing behavior, and preserve actual semantic ambiguity or conflicting requirements as blockers.');
+    matchedCodes.push('existing_source_tree');continue;
+   }
+  }
   if(/Oracle Octaves/i.test(reason)&&/(?:mockups|CSS guidelines|design assets)/i.test(reason)&&/Oracle design/i.test(agentInstructions)&&/44 px/i.test(agentInstructions)&&/parchment/i.test(agentInstructions)&&!/\b(?:credentials|secret|authentication|endpoint|bindings)\b/i.test(reason)){
    facts.push('Pinned AGENTS.md already specifies Oracle design: '+trim(agentInstructions.slice(agentInstructions.indexOf('## Oracle design')).replace(/^## Oracle design\s*/, '').split(/\n## /)[0])+'. Inspect existing CSS and use those source rules. Missing mockups alone do not prevent a source-only implementation.');
    matchedCodes.push('existing_oracle_design');continue;
