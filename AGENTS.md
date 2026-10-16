@@ -1,5 +1,9 @@
 # Moltnook · Oracle Octaves agent contracts
 
+## Current owner execution authorization — October 16, 2026
+
+This directive supersedes earlier CSS-only, short-repository-list and read-only source restrictions for owner-assigned work. Kris authorized Bubbles and its color bots to create repositories, edit/add source code and workflows throughout www-infinity4, use the existing Moltnook GHP credential, and automatically merge independently reviewed changes after target CI passes. Do not add a manual claim or merge-approval step for those orders. The executor claims work, records real tool/test/commit/merge receipts, and reports blockers through one notification card with arrows above the order box. Keep GitHub branch protection and exact-head checks; never manufacture completion. Hardware validation and deployment remain separate evidence requirements and must not be replaced with fake fixtures or false success claims. The existing key is connected server-side through verified GitHub Actions OIDC and encrypted in the Brain store; do not expose key values in source, logs, models, APKs or browser code. GitHub enforces the key's actual permissions. Visitors do not inherit owner rights.
+
 This is the shared agent floor for Infinity projects. Preserve the Oracle Octaves interface, existing first-party wallet and Mint-for-Infinity records, current search routes and deployed services. Never manufacture a completed job, agent message, Cloudflare write, wallet payout or deploy receipt.
 
 ## Real infrastructure
