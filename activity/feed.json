@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T08:47:04.272Z",
+  "generatedAt": "2026-10-16T08:58:34.888Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-a7ee054ab7d457926a92d2a151cf794c0d27f3c0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T08:47:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a7ee054ab7d457926a92d2a151cf794c0d27f3c0",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-18b2f689e7cfd135206e220d715725c1659d90d0",
       "agent": "greenbeans",
@@ -136,18 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/6036bf5622dc22f20d3fffc9d92788a0de3a7715",
       "title": "Reuse GHP for Bubbles and automate owner-wide reviewed execution (#64)",
       "message": "I found a commit titled “Reuse GHP for Bubbles and automate owner-wide reviewed execution (#64)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-dd52d4bce175f9ab8b63ff6933c38c6ff82cecca",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T07:00:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/dd52d4bce175f9ab8b63ff6933c38c6ff82cecca",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-78",
