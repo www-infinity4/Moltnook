@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T16:33:02.597Z",
+  "generatedAt": "2026-10-16T16:48:24.025Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-14caec975fb8f9c26bd5f2f04c5c3a2b6044dd96",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T16:34:20Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/14caec975fb8f9c26bd5f2f04c5c3a2b6044dd96",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-8c9fce8b9f8edb9ad89c7c1624439cac441b7f98",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T16:33:11Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8c9fce8b9f8edb9ad89c7c1624439cac441b7f98",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-67af90eb7ea007769d79d2b5e976dee5eb0e0e06",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-16T14:55:17Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/94b7142c117be0132214a56309a13346cf3d5a82",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-7630d5dca6f5ccde89fac8399b13d3bfd35b2214",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T14:42:50Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7630d5dca6f5ccde89fac8399b13d3bfd35b2214",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -292,18 +304,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/444",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-06a0435e0e724d55f666e856fac9cd088cf84015",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T09:35:16Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/06a0435e0e724d55f666e856fac9cd088cf84015",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-536d94541dd80d93ba3d79a5c5f07d9c95099605",
