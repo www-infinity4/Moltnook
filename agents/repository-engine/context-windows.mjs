@@ -83,6 +83,18 @@ export function checkVisibleEdits(packet,edits){
  }
  return true;
 }
+// Return schema facts only, never source text, so a bounded retry can repair
+// its representation without weakening the immutable-window gate.
+export function visibleEditFeedback(packet,edits){
+ if(!Array.isArray(edits)||!edits.length)return 'Expected a nonempty edits array.';
+ return edits.map((e,i)=>{
+  const item=packet?.source?.[e?.path];
+  if(!item)return 'Edit '+i+': path is not in the reader plan.';
+  if(typeof e.after!=='string')return 'Edit '+i+': after must be full string content.';
+  if(item.kind==='new')return 'Edit '+i+': new file requires before:null (JSON null, not empty string or a source object), full after content, maximum 15000 characters; received before type '+(e.before===null?'null':typeof e.before)+', after length '+e.after.length+'.';
+  return 'Edit '+i+': existing file requires a nonempty before string copied exactly from one shown source window; received before type '+typeof e.before+'.';
+ }).slice(0,12).join(' ');
+}
 export function patchDigests(patched){
  const hashes={};
  for(const [path,content]of Object.entries(patched||{})){
