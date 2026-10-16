@@ -21,15 +21,30 @@ function sourceCandidates(sourceTree,request){
   .filter(p=>p.score>0).sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path))
   .slice(0,7).map(p=>p.path);
 }
-export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions='',sourceTree=[]}={}){
+export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions='',sourceTree=[],writeScope=null}={}){
  const blockers=Array.isArray(plan?.blockers)?plan.blockers:[];
  const request=String(task||'')+' '+String(ownerRequest||'');
  const facts=[],matchedCodes=[];
  const links=(Array.isArray(linkFacts)?linkFacts:[]).filter(x=>x&&typeof x.href==='string'&&typeof x.label==='string'&&x.href.length<400&&x.label.length<170).slice(0,5);
  const viewTargets=Array.isArray(liveBrowser?.targets)?liveBrowser.targets:[];
  for(const blocker of blockers){
-  if(!blocker||blocker.code!=='owner_input_required'||typeof blocker.reason!=='string')continue;
+  if(!blocker||typeof blocker.reason!=='string')continue;
   const reason=blocker.reason;
+  // An authenticated repository runner has already inspected GitHub's scoped
+  // permissions before asking the model to plan. The model cannot replace
+  // that evidence with a fictional repo-wide read-only policy. This ONLY
+  // requests another evidence-grounded plan; it never grants a write.
+  if(['owner_input_required','excluded_path_required'].includes(blocker.code)
+      && writeScope?.reportedPushPermission===true
+      && /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'')
+      && reason.toLowerCase().includes(writeScope.repository.toLowerCase())
+      && /(?:read[ -]?only|write permission|required to (?:create|write)|prohibit(?:s|ing)? (?:creation|modification)|(?:cannot|can't) (?:create|modify|write))/i.test(reason)
+      && !/(?:\.env|\.git\/|secret|credential|authorization token|branch protection|403|401|sensitive path)/i.test(reason)){
+   facts.push('The authenticated executor cloned '+writeScope.repository+
+    ' and its GitHub repository metadata reported push permission. The scoped runtime excludes .git, .env, credentials and secrets, NOT the entire repository. Reassess source-only changes inside the assigned repository. This is not proof a future push, merge or deployment will succeed.');
+   matchedCodes.push('verified_repo_write_scope');continue;
+  }
+  if(blocker.code!=='owner_input_required')continue;
   // The signed runner already cloned a scoped repository and supplied its file
   // tree. A reader cannot demand an owner-supplied file path instead of first
   // inspecting those actual files. Replan once; never silently drop blockers.

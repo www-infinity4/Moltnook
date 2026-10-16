@@ -88,3 +88,25 @@ test('source suggestions never invent files or bypass missing private access',()
  const unknown=evidenceReplanFeedback({plan:{blockers:[b('owner_input_required','Which source files should be modified?')]},task:'Fix new device component',sourceTree:['unrelated.js','.env','test/new-device.test.mjs']});
  assert.equal(unknown.retry,false);
 });
+
+
+test('verified cross-repository runner scope triggers bounded replan of invented read-only policy',()=>{
+ const plan={blockers:[
+  b('owner_input_required','Write permission on the www-infinity4/WidgetPhi repository is required to create the recommendation report.'),
+  b('excluded_path_required','The runtime policy marks the www-infinity4/WidgetPhi repository as read-only, prohibiting creation or modification of any files.')
+ ]};
+ const scope={repository:'www-infinity4/WidgetPhi',reportedPushPermission:true};
+ const r=evidenceReplanFeedback({plan,task:'Make a WidgetPhi recommendation report from source evidence',writeScope:scope});
+ assert.equal(r.retry,true);
+ assert.deepEqual(r.categories,['verified_repo_write_scope']);
+ assert.match(r.facts.join(' '),/reported push permission/);
+ assert.match(r.facts.join(' '),/not proof a future push/);
+ assert.equal(plan.blockers.length,2,'the returned blockers remain available for review');
+});
+test('unverified push access or protected paths never grant repo writes via the reader',()=>{
+ const p={blockers:[b('excluded_path_required','The runtime policy marks the www-infinity4/WidgetPhi repository as read-only')]};
+ const scoped={repository:'www-infinity4/WidgetPhi',reportedPushPermission:true};
+ assert.equal(evidenceReplanFeedback({plan:p,writeScope:{...scoped,reportedPushPermission:false}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan:p,writeScope:{...scoped,repository:'www-infinity4/OtherRepo'}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan:{blockers:[b('excluded_path_required','The .env secret file in www-infinity4/WidgetPhi is read-only')]},writeScope:scoped}).retry,false);
+});
