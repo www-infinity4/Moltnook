@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sourceWindows,checkVisibleEdits,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,checkVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
 test('184 KB source is represented by bounded, exact anchored source windows',()=>{
  const prefix='noise without the requested element\n'.repeat(5200);
  const src=prefix+'<section id="videoGenerator">Broken 3 images</section>\n'+('other content\n'.repeat(600));
@@ -26,6 +26,18 @@ test('UTF-8 hashes and exact file-size claims are deterministic',()=>{
  const pkg=sourceWindows({'x.css':'p{color:#b83b32}'},{task:'style'});
  assert.equal(pkg.source['x.css'].complete,true);
  assert.equal(pkg.source['x.css'].windows[0].sha256,sha256('p{color:#b83b32}'));
+});
+test('new-file retry receives its exact null contract without accepting an invalid edit or leaking source',()=>{
+ const packet=sourceWindows({'test/canary.mjs':null,'existing.js':'private-source-marker'},{task:'canary'});
+ const edits=[{path:'test/canary.mjs',before:'',after:'private-proposal-marker'}];
+ assert.equal(checkVisibleEdits(packet,edits),false);
+ const feedback=visibleEditFeedback(packet,edits);
+ assert.match(feedback,/before:null/);assert.match(feedback,/before type string/);
+ assert.ok(!feedback.includes('private-proposal-marker'));assert.ok(!feedback.includes('private-source-marker'));
+ const corrected=[{...edits[0],before:null}];
+ assert.equal(checkVisibleEdits(packet,corrected),true);
+ assert.equal(checkVisibleEdits(packet,[{...corrected[0],path:'outside.js'}]),false);
+ assert.match(visibleEditFeedback(packet,[{...corrected[0],path:'outside.js'}]),/not in the reader plan/);
 });
 
 test('overlapping high-scoring anchors do not consume the second source window',()=>{
