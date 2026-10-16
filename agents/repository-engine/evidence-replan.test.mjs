@@ -83,7 +83,7 @@ test('reader must look in authenticated Robot Brain source before asking owner f
 });
 test('source suggestions never invent files or bypass missing private access',()=>{
  const plan={blockers:[b('owner_input_required','An API token or secret credential is needed for the endpoint and the source component is unknown.')]};
- const r=evidenceReplanFeedback({plan,task:'Fix the Bubbles reader',sourceTree:['bubbles-ai.js']});
+ const r=evidenceReplanFeedback({plan,task:'Deploy the Bubbles reader to the protected endpoint',sourceTree:['bubbles-ai.js']});
  assert.equal(r.retry,false);
  const unknown=evidenceReplanFeedback({plan:{blockers:[b('owner_input_required','Which source files should be modified?')]},task:'Fix new device component',sourceTree:['unrelated.js','.env','test/new-device.test.mjs']});
  assert.equal(unknown.retry,false);
