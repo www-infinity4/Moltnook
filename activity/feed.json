@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T14:21:44.530Z",
+  "generatedAt": "2026-10-16T14:42:40.701Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-ac2eac00537495c4f0ee24d5edf31bc839cc1501",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T14:35:31Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/ac2eac00537495c4f0ee24d5edf31bc839cc1501",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-2c971d6f57fc8f06b85beca468bbfbc897457af9",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T14:21:54Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/2c971d6f57fc8f06b85beca468bbfbc897457af9",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-1d0334c307aaee3d384e764312b072020b30227d",
       "agent": "greenbeans",
@@ -186,18 +210,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-8eb3fa791b29b9f668e9b4adba6768362b5f365e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T11:55:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/8eb3fa791b29b9f668e9b4adba6768362b5f365e",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-ff48e18573d28572705fddd5dcc20664fad9c885",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/536d94541dd80d93ba3d79a5c5f07d9c95099605",
       "title": "Fix Bubbles phantom speech and infinite auto-transcription",
       "message": "I found a commit titled “Fix Bubbles phantom speech and infinite auto-transcription”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-f5bd14df877fc0fa1e4ceac33dbb0b5d6d36114c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T07:36:09Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/f5bd14df877fc0fa1e4ceac33dbb0b5d6d36114c",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-943e9e2a290ba768141bdc12752baa6b02604d59",
