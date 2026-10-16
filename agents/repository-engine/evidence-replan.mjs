@@ -34,10 +34,10 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
    }
   }
   if(RUNNER.test(reason)&&Array.isArray(scopedCapabilities.existingWorkflows)&&scopedCapabilities.existingWorkflows.length){
-   facts.push('Existing scoped runner metadata is supplied in scopedCapabilities: '+scopedCapabilities.existingWorkflows.slice(0,4).map(x=>x.path).join(', ')+'; '+(scopedCapabilities.testCommands||[]).length+' test commands. Inspect before treating setup as missing. Workflow files remain read-only for this writer.');
+   facts.push('Existing scoped runner metadata is supplied in scopedCapabilities: '+scopedCapabilities.existingWorkflows.slice(0,4).map(x=>x.path).join(', ')+'; '+(scopedCapabilities.testCommands||[]).length+' test commands. Inspect before treating setup as missing. Workflow source changes follow the current owner authorization; credential values remain excluded.');
    matchedCodes.push('existing_workflow');continue;
   }
-  if(DEPLOYMENT.test(reason)&&!EXPLICIT_DEPLOY.test(request)){
+  if(DEPLOYMENT.test(reason)&&(!EXPLICIT_DEPLOY.test(request)||/\b(?:source.only|independently testable|ship actual source|source and tests)\b/i.test(request))){
    const browserOK=liveBrowser?.browserPassed===true;
    facts.push('Source-only code changes can be committed as committed_unverified after independent review/tests. '+(browserOK?'Anonymous public browser observations already exist. ':'')+'Neither that browser observation nor a source commit constitutes a production deployment. Do not demand deployment credentials for an independently testable source-only change; retain deployment as a separate unmet acceptance criterion if the owner explicitly requires it.');
    matchedCodes.push('source_only_deploy');continue;

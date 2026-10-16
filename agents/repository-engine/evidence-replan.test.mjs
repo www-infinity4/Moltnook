@@ -53,7 +53,7 @@ test('scoped workflow evidence supports reconsidering missing runner but not gra
  const r=evidenceReplanFeedback({plan:p,task:'Give repository a scoped runner',scopedCapabilities:capability});
  assert.equal(r.retry,true);
  assert.deepEqual(r.categories,['existing_workflow']);
- assert.match(r.facts[0],/read-only/);
+ assert.match(r.facts[0],/current owner authorization/);
  assert.equal(p.blockers.length,1);
 });
 test('unknown or actual inaccessible blockers are preserved for owner',()=>{
@@ -63,3 +63,9 @@ test('unknown or actual inaccessible blockers are preserved for owner',()=>{
  assert.equal(r.originalBlockers.length,2);
 });
 
+
+test('explicit source-and-tests work proceeds while deployment stays pending',()=>{
+ const plan={blockers:[{code:'owner_input_required',reason:'Cloudflare D1 and deployment credentials missing'}]};
+ const r=evidenceReplanFeedback({plan,task:'Ship actual source and tests; deployment stays blocked until its adapter is available.'});
+ assert.equal(r.retry,true);assert.deepEqual(r.categories,['source_only_deploy']);assert.equal(r.originalBlockers.length,1);
+});
