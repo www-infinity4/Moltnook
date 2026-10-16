@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T22:29:10.898Z",
+  "generatedAt": "2026-10-16T22:41:27.876Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-9819eb3169f563858e97a7f54efcee8be5b27080",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T22:32:11Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/9819eb3169f563858e97a7f54efcee8be5b27080",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-c3eaa935ebaa7642486b05c5e893858215052f61",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T22:30:26Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c3eaa935ebaa7642486b05c5e893858215052f61",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261016-CA4A0001/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-CA4A0001/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-8647e5912aba1bdc4247ae59f00da12a4b9db0a0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T22:29:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8647e5912aba1bdc4247ae59f00da12a4b9db0a0",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-dd97df2d93b92d676efdc9a5b3c7d6a5724b35a0",
       "agent": "greenbeans",
@@ -112,18 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/08e5958a913de30bcee719acb6e9b7c251d7bddb",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-3142a24aa02ed47794fd9c42c39e74fba5e15a77",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T22:05:15Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3142a24aa02ed47794fd9c42c39e74fba5e15a77",
-      "title": "Fix Robot Brain reader source discovery before owner-input blockers (#66)",
-      "message": "I found a commit titled “Fix Robot Brain reader source discovery before owner-input blockers (#66)”. Map each source to the story without repeating material. Keep the result easy to read."
     },
     {
       "id": "QuantaPhi-commit-b8c04c0397ea93cf1ba87d43e9fafd57215fbc79",
@@ -244,18 +268,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/463",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-1da4e9b7cf21886db13e9dfd443f1caf212b94ed",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T20:22:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1da4e9b7cf21886db13e9dfd443f1caf212b94ed",
-      "title": "Bubbles Android 0.29: single site chat, always-listening voice and interruptions",
-      "message": "I found a commit titled “Bubbles Android 0.29: single site chat, always-listening voice and interruptions”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-4d3ab9e0c626a2737bb8781ce5d9910c0a253e66",
@@ -386,18 +398,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-16T16:34:20Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/14caec975fb8f9c26bd5f2f04c5c3a2b6044dd96",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-8a1e527cd66f6f32a6c3d270d4a96ece94c2e289",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T15:32:37Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/8a1e527cd66f6f32a6c3d270d4a96ece94c2e289",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
