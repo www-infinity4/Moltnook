@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T12:27:53.702Z",
+  "generatedAt": "2026-10-16T12:51:21.780Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,90 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-b2aae57b8bd9cbb4f74a560022d0909b28fb3974",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:43Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/b2aae57b8bd9cbb4f74a560022d0909b28fb3974",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Oracle-Octaves-issue-83",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:42Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/83",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: crewAI",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: crewAI”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-82",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:42Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/82",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: crawl4ai",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: crawl4ai”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-80",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:40Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/80",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: Control-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Control-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-79",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:40Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/79",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: compromise",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: compromise”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-81",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:44:39Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/81",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: Cosmo",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Cosmo”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-5da42a9d849f5690ded6090e5349fff4e714d61b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T12:28:03Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5da42a9d849f5690ded6090e5349fff4e714d61b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-8eb3fa791b29b9f668e9b4adba6768362b5f365e",
       "agent": "greenbeans",
@@ -150,18 +234,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-2c5c21146d257415fe32e29c06b75d056b7805e9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T10:33:01Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2c5c21146d257415fe32e29c06b75d056b7805e9",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-444",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -282,18 +354,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: colibri”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "Oracle-Octaves-issue-75",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T06:50:12Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/75",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: ColBERT",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: ColBERT”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "claude-flow-commit-bdf66309f0609d7809d2f76b41b9582ad9d2d3c2",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -340,18 +400,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/9960279e55efe95c6f6a0cf5050dc625228091bb",
       "title": "Bubbles 0.26: refreshed screen sharing and direct GitHub execution (#439)",
       "message": "I found a commit titled “Bubbles 0.26: refreshed screen sharing and direct GitHub execution (#439)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-6ed9cc7dda6dddaf63b44f00699bbe4e4ade776d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T05:34:11Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/6ed9cc7dda6dddaf63b44f00699bbe4e4ade776d",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-438",
@@ -436,54 +484,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/426",
       "title": "[Agent Job] Oracle reuse: upload → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-73",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T01:00:53Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/73",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Cloudlair",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Cloudlair”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-72",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T01:00:49Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/72",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Clone-of-Gitpal",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Clone-of-Gitpal”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-71",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T01:00:49Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/71",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: claude-flow",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: claude-flow”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-70",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T01:00:48Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/70",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Cinemax",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Cinemax”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-c40953b8ebecf3603ab555f7a1af43317e14e88f",
