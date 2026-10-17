@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T05:32:03.886Z",
+  "generatedAt": "2026-10-17T05:45:26.812Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-cfedde85d80d6ae7073230b99f1cafc2997fba49",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:33:03Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/cfedde85d80d6ae7073230b99f1cafc2997fba49",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-259e5a4b023104df5ce3d75140e704e968cb3708",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:32:23Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/259e5a4b023104df5ce3d75140e704e968cb3708",
+      "title": "Bubbles: hand native recorder evidence and Brain tool state into actual spoken chat (#505)",
+      "message": "I found a commit titled “Bubbles: hand native recorder evidence and Brain tool state into actual spoken chat (#505)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-49fdf999991a31e70bbfb384974ef1a5eb643ab1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:32:13Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/49fdf999991a31e70bbfb384974ef1a5eb643ab1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-508",
       "agent": "purple-pearl",
@@ -150,18 +186,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-ef8dcbd8ac8dc0786d5916e12eabcda23850604c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T04:56:42Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ef8dcbd8ac8dc0786d5916e12eabcda23850604c",
-      "title": "Bubbles: live QuantaPhi/Google search and town weather (PR #500)",
-      "message": "I found a commit titled “Bubbles: live QuantaPhi/Google search and town weather (PR #500)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-92d547fb89227fe6360e5e9751cb6fb57f784a9d",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -218,18 +242,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T03:54:47Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/13364ff9ee2d2dbdb4d25ea0719266169395c0fa",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-9e37d8ceb0c393b9c7719d845f3fa2c13a0abcb6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T03:42:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/9e37d8ceb0c393b9c7719d845f3fa2c13a0abcb6",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -400,18 +412,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/474",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-9819eb3169f563858e97a7f54efcee8be5b27080",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T22:32:11Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/9819eb3169f563858e97a7f54efcee8be5b27080",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-467",
