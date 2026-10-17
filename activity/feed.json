@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T05:18:01.296Z",
+  "generatedAt": "2026-10-17T05:32:03.886Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-508",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:31:28Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/508",
+      "title": "[Agent Job] Oracle reuse: button → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-507",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:31:25Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/507",
+      "title": "[Agent Job] Oracle reuse: search → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: search → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-506",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:31:22Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/506",
+      "title": "[Agent Job] Oracle reuse: media → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: media → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-c46c5294f6d446caf4139119eb841066028e8371",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:18:12Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c46c5294f6d446caf4139119eb841066028e8371",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-f786fe69a0cf0ca2e2e118b6758e23847680e700",
       "agent": "purple-people-eater",
@@ -196,18 +244,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/379fd54424ba324dc596e5f1b16d6d1843d653c3",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-65a8decfffe34dfced51e25db220e3da709fb95b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T03:21:07Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/65a8decfffe34dfced51e25db220e3da709fb95b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-d494990448a23b5badd24c58a83f142ce5bb01d0",
@@ -402,30 +438,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-issue-464",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T20:32:17Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/464",
-      "title": "[Agent Job] Oracle reuse: search → Omni-Phi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: search → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-463",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T20:32:12Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/463",
-      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Oracle-Octaves-issue-86",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -472,18 +484,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/84",
       "title": "[Agent Job] Oracle Octaves visual + development audit: deepeval",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: deepeval”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-453",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T17:30:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/453",
-      "title": "[Agent Job] Oracle reuse: viewer → C13b0",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-c40953b8ebecf3603ab555f7a1af43317e14e88f",
