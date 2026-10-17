@@ -110,3 +110,35 @@ test('unverified push access or protected paths never grant repo writes via the 
  assert.equal(evidenceReplanFeedback({plan:p,writeScope:{...scoped,repository:'www-infinity4/OtherRepo'}}).retry,false);
  assert.equal(evidenceReplanFeedback({plan:{blockers:[b('excluded_path_required','The .env secret file in www-infinity4/WidgetPhi is read-only')]},writeScope:scoped}).retry,false);
 });
+
+test('pinned QuantaPhi files and successful OIDC claim contradict invented Red-Brain connection blockers',()=>{
+ const deps={repositories:[{repository:'www-infinity4/QuantaPhi',status:'verified_read_only',files:[
+  {path:'workers/infinity-brain-clock/worker.js',status:'verified_source',blobSha:'a'.repeat(40)},
+  {path:'workers/infinity-brain-clock/runner-auth.mjs',status:'verified_source',blobSha:'b'.repeat(40)},
+  {path:'scripts/brain-writer.mjs',status:'verified_source',blobSha:'c'.repeat(40)}
+ ]}]};
+ const authenticatedAdapters={brain:{authentication:'GitHub Actions OIDC audience infinity-brain-writer',
+  verifiedCalls:['quant-audit','capability','claim'],leaseClaimed:true}};
+ const plan={blockers:[
+  b('owner_input_required','The required source files workers/infinity‑brain‑clock/worker.js, runner‑auth.mjs, and scripts/brain-writer.mjs are not present in the current read-only snapshot of www-infinity4/QuantaPhi.'),
+  b('owner_input_required','Moltnook lacks BRAIN_LEASE_TOKEN (or an OIDC-based token provider) required for Brain-Clock lease adapter.')
+ ]};
+ const r=evidenceReplanFeedback({plan,task:'Repair Robot Brain source routing in QuantaPhi',dependencyContext:deps,authenticatedAdapters});
+ assert.equal(r.retry,true);
+ assert.deepEqual(r.categories,['verified_dependency_source','verified_brain_oidc']);
+ assert.match(r.facts.join(' '),/runner-auth\.mjs/);
+ assert.match(r.facts.join(' '),/already authenticated/);
+ assert.equal(plan.blockers.length,2,'evidence causes replan, not automatic silent approval');
+});
+test('no source or OIDC assertion without pinned read and actual runner claim',()=>{
+ const plan={blockers:[
+  b('owner_input_required','workers/infinity-brain-clock/worker.js missing in www-infinity4/QuantaPhi'),
+  b('owner_input_required','Missing BRAIN_LEASE_TOKEN for the Brain-Clock runner'),
+  b('owner_input_required','Wallet API credential is missing'),
+ ]};
+ const deps={repositories:[{repository:'www-infinity4/QuantaPhi',status:'blocked',files:[{path:'workers/infinity-brain-clock/worker.js',status:'verified_source'}]}]};
+ const unclaimed={brain:{authentication:'GitHub Actions OIDC',verifiedCalls:['capability'],leaseClaimed:false}};
+ const r=evidenceReplanFeedback({plan,dependencyContext:deps,authenticatedAdapters:unclaimed});
+ assert.equal(r.retry,false);
+ assert.deepEqual(r.categories,[]);
+});
