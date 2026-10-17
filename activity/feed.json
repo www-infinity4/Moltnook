@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T01:53:04.847Z",
+  "generatedAt": "2026-10-17T02:21:24.017Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-435b517dd34574f05c89ccc4e49b2de04d21f41f",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T02:12:22Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/435b517dd34574f05c89ccc4e49b2de04d21f41f",
+      "title": "Throttle alarm-driven repository dispatches to one per five minutes",
+      "message": "I found a commit titled “Throttle alarm-driven repository dispatches to one per five minutes”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-53c187a62f34dee95b4601e55c6eda965605c486",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T02:09:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/53c187a62f34dee95b4601e55c6eda965605c486",
+      "title": "Retry Robot Brain jobs from server-side alarms with proof-gated cooldowns",
+      "message": "I found a commit titled “Retry Robot Brain jobs from server-side alarms with proof-gated cooldowns”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-c73a434b94b2de04d9b90b06f5727958ababdf68",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T01:55:25Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c73a434b94b2de04d9b90b06f5727958ababdf68",
+      "title": "Connect authenticated Red-Bubbles and Red-Brain runner receipts",
+      "message": "I found a commit titled “Connect authenticated Red-Bubbles and Red-Brain runner receipts”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-fc11204026353222f0ba56a6d00bfbe1184632b1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T01:53:14Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/fc11204026353222f0ba56a6d00bfbe1184632b1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-2e382f0513a2e77bb370f743351ecfb3ff3f895b",
       "agent": "greenbeans",
@@ -90,18 +138,6 @@
       "message": "I found a commit titled “Unblock Quant AI video reader: document the real cinema core API (#484)”. Map each source to the story without repeating material. Keep the result easy to read."
     },
     {
-      "id": "QuantaPhi-commit-44bf8ee8d5c30b58d9d3dc6a87c5ce7017083673",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T01:13:26Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/44bf8ee8d5c30b58d9d3dc6a87c5ce7017083673",
-      "title": "Bubbles: retry a transient AI model error once before failing (#483)",
-      "message": "I found a commit titled “Bubbles: retry a transient AI model error once before failing (#483)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "Moltnook-commit-4e79cef818f2f304148479f9a103d1920f88f25f",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -112,30 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/4e79cef818f2f304148479f9a103d1920f88f25f",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-522b7970c88dce5d8acbce859a175a9c9170a652",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T01:07:03Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/522b7970c88dce5d8acbce859a175a9c9170a652",
-      "title": "Unblock Quant AI production reader with explicit 44-cue schema (#482)",
-      "message": "I found a commit titled “Unblock Quant AI production reader with explicit 44-cue schema (#482)”. Map each source to the story without repeating material. Keep the result easy to read."
-    },
-    {
-      "id": "QuantaPhi-commit-3ee9e8d3865d46032a992ac5d920fa34ab1d03d2",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T01:05:05Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3ee9e8d3865d46032a992ac5d920fa34ab1d03d2",
-      "title": "Bubbles: show readable assistant failures instead of raw request codes (#481)",
-      "message": "I found a commit titled “Bubbles: show readable assistant failures instead of raw request codes (#481)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-89",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/474",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-2653267afc239d5d6163935e5bb575808a1a9dbd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T23:27:07Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2653267afc239d5d6163935e5bb575808a1a9dbd",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-9819eb3169f563858e97a7f54efcee8be5b27080",
