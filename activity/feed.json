@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T08:54:21.260Z",
+  "generatedAt": "2026-10-17T09:15:24.547Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-5f29260cfd2e6356a63d4d27d30caac78d75e682",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T08:57:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5f29260cfd2e6356a63d4d27d30caac78d75e682",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261017-3280F88D/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261017-3280F88D/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-658a008334b19d591586cb20e25e549f976eda95",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T08:54:30Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/658a008334b19d591586cb20e25e549f976eda95",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-5f3f6dd50f712bac51e364358bc4632cbc22c13e",
       "agent": "greenbeans",
@@ -134,18 +158,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T07:22:39Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/f73e0ed9fe4561344c71e48bb93773e52c7c9993",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-b4ef5ce33d9e7b9ee72bd502660158c3ce71e093",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T07:00:30Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b4ef5ce33d9e7b9ee72bd502660158c3ce71e093",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -340,18 +352,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/f786fe69a0cf0ca2e2e118b6758e23847680e700",
       "title": "Merge pull request #504 from www-infinity4/fix/bubbles-cloudflare-redirect-weather",
       "message": "I found a commit titled “Merge pull request #504 from www-infinity4/fix/bubbles-cloudflare-redirect-weather”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-ed1d0965c98cdeebd690420056a5ed61dc46fd74",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T05:16:16Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ed1d0965c98cdeebd690420056a5ed61dc46fd74",
-      "title": "Bubbles: Run All Eligible owner batch control (#503)",
-      "message": "I found a commit titled “Bubbles: Run All Eligible owner batch control (#503)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-f68ea77c818cbe732c9405715ae745f7e716c2ed",
