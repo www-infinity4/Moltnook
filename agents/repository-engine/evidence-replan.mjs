@@ -113,3 +113,44 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
   facts:facts.slice(0,6),originalBlockers:blockers.map(b=>({code:b.code,reason:trim(b.reason)})).slice(0,12)};
 }
 
+
+
+// A positive implementation plan also needs an evidence check. The signed
+// Moltnook runner is the OIDC CLIENT; the QuantaPhi runner-auth.mjs module
+// verifies INBOUND tokens on the Cloudflare Worker. A Green proposal cannot
+// fix an already-verified claim by importing the Worker verifier across repos.
+export function authPlanReconsideration({
+ plan,writableRepository='',authenticatedAdapters=null,dependencyContext=null
+}={}){
+ const claim=authenticatedAdapters?.brain;
+ const signedClaim=claim?.leaseClaimed===true&&
+  Array.isArray(claim.verifiedCalls)&&claim.verifiedCalls.includes('claim')&&
+  /GitHub Actions OIDC/i.test(String(claim.authentication||''));
+ const remote=Array.isArray(dependencyContext?.repositories)?
+  dependencyContext.repositories.find(r=>r.repository==='www-infinity4/QuantaPhi'&&r.status==='verified_read_only'):null;
+ const hasQuantaVerifier=remote?.files?.some(f=>f.status==='verified_source'&&
+  f.path==='workers/infinity-brain-clock/runner-auth.mjs')===true;
+ const steps=[plan?.summary,...(plan?.requirements||[]),
+  ...(plan?.subtasks||[]).flatMap(s=>[s?.task,s?.description])]
+  .filter(x=>typeof x==='string');
+ const findings=[];
+ if(writableRepository!=='www-infinity4/QuantaPhi'){
+  if(steps.some(s=>(/\b(?:import|require|load|copy)\b/i.test(s)&&
+    /\brunner-auth\.mjs\b/i.test(s)&&/www-infinity4\/QuantaPhi|QuantaPhi repository/i.test(s))||
+    (/authenticate\s*\(\s*request\s*\)/.test(s)&&/\brunner\.mjs\b/.test(s)))){
+   findings.push('cross_repository_worker_auth_import');
+  }
+ }
+ if(signedClaim&&steps.some(s=>/\bBRAIN_LEASE_TOKEN\b/i.test(s)&&
+  /\b(?:add|configure|create|supply|provide|need|required|missing|lacks|provision)\b/i.test(s))){
+  findings.push('verified_oidc_not_static_secret');
+ }
+ if(!findings.length)return {retry:false,categories:[],facts:[],instruction:''};
+ const facts=[
+  'Writable repository: '+String(writableRepository).slice(0,120)+'. A separate read-only QuantaPhi dependency snapshot is NOT a Node module dependency or permission to edit that repository.',
+  ...(signedClaim?['The live GitHub Actions executor already obtained an authenticated Brain lease by OIDC. Verified calls: '+claim.verifiedCalls.filter(x=>['quant-audit','capability','claim'].includes(x)).join(', ')+'. No BRAIN_LEASE_TOKEN is required for that proven claim.']:[]),
+  ...(hasQuantaVerifier?['Pinned QuantaPhi workers/infinity-brain-clock/runner-auth.mjs exists and verifies inbound Worker requests. It cannot be imported directly into a separate Moltnook GitHub Actions checkout.']:[])
+ ];
+ return {retry:true,categories:[...new Set(findings)],facts,
+  instruction:'The previous implementation plan is contradicted by verified source/runtime facts. Build a new plan only for a real defect in the WRITABLE repository; no cross-repository runtime imports or invented secrets. A GitHub Actions runner sends OIDC bearer tokens via its existing call(step) path; the QuantaPhi Worker independently verifies inbound tokens. Do not add authenticate(request) to the Node runner. Do not reproduce old ticket error text as current truth. Prefer a focused local regression test or a small verified source change when warranted; if no change is justified, explain the existing implementation and preserve any genuinely unmet acceptance requirements as explicit blockers. Do not return an impossible implementation to Green.'};
+}
