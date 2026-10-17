@@ -38,7 +38,7 @@ jobs:
           node --check agents/repository-engine/context-windows.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/credential-bridge.mjs
-          node --test agents/repository-engine/credential-bridge.test.mjs
+          node --test agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs
           node --check agents/repository-engine/dependency-context.mjs
           node --check agents/repository-engine/evidence-replan.mjs
           node --test agents/repository-engine/dependency-context.test.mjs agents/repository-engine/evidence-replan.test.mjs
