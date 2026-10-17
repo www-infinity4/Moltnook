@@ -21,7 +21,7 @@ function sourceCandidates(sourceTree,request){
   .filter(p=>p.score>0).sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path))
   .slice(0,7).map(p=>p.path);
 }
-export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions='',sourceTree=[],writeScope=null}={}){
+export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[],liveBrowser,scopedCapabilities={},agentInstructions='',sourceTree=[],writeScope=null,dependencyContext=null,authenticatedAdapters=null}={}){
  const blockers=Array.isArray(plan?.blockers)?plan.blockers:[];
  const request=String(task||'')+' '+String(ownerRequest||'');
  const facts=[],matchedCodes=[];
@@ -30,6 +30,34 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
  for(const blocker of blockers){
   if(!blocker||typeof blocker.reason!=='string')continue;
   const reason=blocker.reason;
+  // The model may hallucinate that a file in a different owner's repository
+  // is absent because the writable clone is Moltnook. Only pinned, hash-
+  // verified dependency files are evidence of presence; never infer access.
+  const normalized=String(reason).replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g,'-').toLowerCase();
+  if(blocker.code==='owner_input_required'&&/(?:missing|do not exist|not present|cannot (?:find|locate|inspect)|lacks)/i.test(normalized)){
+   const sources=(Array.isArray(dependencyContext?.repositories)?dependencyContext.repositories:[])
+    .filter(row=>row.status==='verified_read_only'&&normalized.includes(String(row.repository||'').toLowerCase()))
+    .flatMap(row=>(Array.isArray(row.files)?row.files:[])
+     .filter(file=>file.status==='verified_source'&&typeof file.path==='string'&&
+       (normalized.includes(file.path.toLowerCase())||normalized.includes(file.path.split('/').at(-1).toLowerCase())))
+     .map(file=>row.repository+'/'+file.path));
+   if(sources.length){
+    facts.push('A pinned cross-repository read already verified these exact source blobs: '+sources.slice(0,4).join(', ')+'. They are read-only reference material for the current task; do not claim them missing or infer permission to edit that other repository.');
+    matchedCodes.push('verified_dependency_source');continue;
+   }
+  }
+  // Authentication to the Brain claim API is a signed GitHub Actions OIDC
+  // exchange, not a missing static BRAIN_LEASE_TOKEN secret. Never claim this
+  // without the executor's successful authenticated claim receipt.
+  const brain=authenticatedAdapters?.brain;
+  if(blocker.code==='owner_input_required'&&brain?.leaseClaimed===true&&
+    Array.isArray(brain.verifiedCalls)&&brain.verifiedCalls.includes('claim')&&
+    /oidc/i.test(String(brain.authentication||''))&&
+    /(?:brain.lease.token|oidc|brain.clock|runner identity)/i.test(normalized)&&
+    /(?:missing|lack|not (?:present|provided|configured)|required|need)/i.test(normalized)){
+   facts.push('This exact GitHub Actions runner already authenticated to Brain using OIDC and obtained an actual claim lease. Brain claim does not require a new BRAIN_LEASE_TOKEN secret. Preserve this verified claim, but do not infer unrelated write, deployment or wallet privileges.');
+   matchedCodes.push('verified_brain_oidc');continue;
+  }
   // An authenticated repository runner has already inspected GitHub's scoped
   // permissions before asking the model to plan. The model cannot replace
   // that evidence with a fictional repo-wide read-only policy. This ONLY
