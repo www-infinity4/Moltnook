@@ -20,7 +20,7 @@ import {collectLinkFacts} from './source-links.mjs';
 import {readWorkflowEvidence} from './workflow-evidence.mjs';
 import {discoverScopedCapabilities} from './scoped-capabilities.mjs';
 import {retryStructuredModelCall} from './model-format-retry.mjs';
-import {evidenceReplanFeedback} from './evidence-replan.mjs';
+import {evidenceReplanFeedback,authPlanReconsideration} from './evidence-replan.mjs';
 import {deriveFeatureManifest} from './feature-manifest.mjs';
 import {skillPackets} from './phi-skills.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
@@ -125,6 +125,21 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     await event('blueberry','Reader reported existing facts missing; one bounded evidence-based replan requested. Categories: '+correction.categories.join(', ')+'. No credentials or writer permissions changed.');
     continue;
    }
+   // Reject impossible positive plans based on verified OIDC and pinned
+   // cross-repository source, rather than exhausting Green's edit retries.
+   const authPlan=authPlanReconsideration({
+    plan,writableRepository:report.repository,
+    authenticatedAdapters:report.authenticatedAdapters,dependencyContext
+   });
+   if(authPlan.retry){
+    if(readerPass===0){
+     readerFeedback=authPlan;report.authPlanFeedback=authPlan;
+     await fs.writeFile('repository-receipts/auth-plan-feedback.json',JSON.stringify(authPlan,null,2));
+     await event('blueberry','Reader proposed invalid authentication architecture ('+authPlan.categories.join(', ')+'). One evidence-grounded replan requested before Green.');
+     continue;
+    }
+    throw Error('Reader plan contradicts verified Brain authentication: '+authPlan.categories.join(', ')+'. No source edit attempted; exact OIDC and pinned-file facts are in auth-plan-feedback receipt.');
+   }
    break;
   }
   report.plan=plan;
@@ -174,7 +189,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows. '+visibleEditFeedback(windowEvidence,proposal.edits));
