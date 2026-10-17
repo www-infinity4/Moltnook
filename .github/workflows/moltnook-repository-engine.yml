@@ -66,7 +66,7 @@ jobs:
           node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs agents/repository-engine/execution-context.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
           node --test agents/repository-engine/publish-reviewed.test.mjs agents/repository-engine/python-toolbox.test.mjs agents/repository-engine/auto-ticket-sweep.test.mjs
-          node --test agents/repository-engine/context-windows.test.mjs
+          node --test agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs
           node --test agents/repository-engine/auto-promote-reviewed.test.mjs
           node --check agents/repository-engine/auto-promote-reviewed.mjs
           node --test agents/repository-engine/oracle-style-contract.test.mjs

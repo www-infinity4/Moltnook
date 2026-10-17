@@ -40,7 +40,7 @@ jobs:
           node --check agents/repository-engine/dependency-context.mjs
           node --check agents/repository-engine/evidence-replan.mjs
           node --test agents/repository-engine/dependency-context.test.mjs agents/repository-engine/evidence-replan.test.mjs
-          node --test agents/repository-engine/context-windows.test.mjs
+          node --test agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs
           node --test agents/repository-engine/oracle-style-contract.test.mjs
       - name: Assert Oracle surface and functional JavaScript syntax
         run: |

@@ -6,7 +6,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
-import {sourceWindows,checkVisibleEdits,visibleEditFeedback,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,recalculateBounds,checkVisibleEdits,visibleEditFeedback,patchDigests,boundedPatched} from './context-windows.mjs';
 import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-adapter.mjs';
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
@@ -137,9 +137,11 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
-  const windowEvidence=sourceWindows(original,{task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),plan});
+  const windowTask=[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' ');
+  const initialWindowEvidence=sourceWindows(original,{task:windowTask,plan});
+  let windowEvidence=initialWindowEvidence;
   if(!useWindowV2&&JSON.stringify(original).length>32000)throw Error('brain_clock_bounded_windows_v2_not_deployed: large source edit is blocked; small jobs may use legacy review');
-  const modelSource=useWindowV2?windowEvidence.source:original;
+  let modelSource=useWindowV2?windowEvidence.source:original;
   await fs.writeFile('repository-receipts/immutable-window-manifest.json',JSON.stringify({baseSha,source:Object.fromEntries(Object.entries(windowEvidence.source).map(([p,x])=>[p,{totalChars:x.totalChars,sha256:x.sha256,windows:x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))}]))},null,2));
   // Optional inspection metadata. A queue receipt is neither a D1 commit nor wallet payment.
   report.transitionStream={status:'not_configured',payoutIssued:false};
@@ -168,10 +170,11 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     sourceEvidence:true,ownerSpecified:false
   }));
   const remembered=lease.job.runtimeFeedback?.baseSha===baseSha?lease.job.runtimeFeedback:undefined;
+  let rejectedSourceEdits=[];
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows. '+visibleEditFeedback(windowEvidence,proposal.edits));
@@ -196,6 +199,25 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    },
    restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
    onFeedback:async feedback=>{
+    // Only a build-window rejection (including empty edits) may request
+    // an alternate bounded source view. Replan from the original pinned SHA;
+    // do not modify the allowed file list or weaken review/push gates.
+    if(useWindowV2&&feedback.stage==='build'&&
+      /Model attempted an edit outside the pinned source windows/.test(feedback.reason)){
+     const shifted=recalculateBounds(original,windowEvidence,{
+      attempt:Math.min(2,feedback.attempt),baseline:initialWindowEvidence,
+      expansionRatio:1.5,task:windowTask,plan,rejectedEdits:rejectedSourceEdits
+     });
+     if(shifted.replanned){
+      windowEvidence=shifted;modelSource=shifted.source;
+      const receipt={attempt:feedback.attempt,baseSha,maximumChars:shifted.maximumChars,
+       originalFileHashes:Object.fromEntries(Object.entries(initialWindowEvidence.source).map(([p,x])=>[p,x.sha256])),
+       windows:Object.fromEntries(Object.entries(shifted.source).map(([p,x])=>[p,x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))])),
+       privilegedWrites:false};
+      await fs.writeFile('repository-receipts/source-window-replan-'+feedback.attempt+'.json',JSON.stringify(receipt,null,2));
+      feedback.windowReplan={applied:true,attempt:feedback.attempt,maxChars:shifted.maximumChars,sourceHashesUnchanged:true};
+     }else feedback.windowReplan={applied:false,reason:'No additional pinned source region was available'};
+    }
     feedback.reason=scrub(feedback.reason);report.attempts.push({...feedback,proposal:report.proposal,review:report.review,tests:report.tests,arbitration:report.arbitration});
     await event(feedback.stage==='arbitration'?'gpt-purple':'pink-panther','Attempt '+feedback.attempt+' failed at '+feedback.stage+': '+feedback.reason.slice(0,240)+'. Exact feedback returns to Green; maximum three attempts.');
    }

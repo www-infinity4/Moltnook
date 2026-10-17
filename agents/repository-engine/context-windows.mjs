@@ -111,3 +111,97 @@ export function boundedPatched(patched,{maxChars=18000}={}){
  }
  return output;
 }
+
+
+// One bounded, deterministic source-context replan after a failed Green build.
+// This is a REPLACEMENT of view windows, never permission to edit unseen source.
+// The verified checkout stays pinned to its original blob digest and file list.
+export function recalculateBounds(original,packet,{
+ attempt=1,expansionRatio=1.5,baseline=packet,task='',plan={},rejectedEdits=[]
+}={}){
+ if(!Number.isInteger(attempt)||attempt<1||attempt>2)throw Error('source_replan_attempt_invalid');
+ if(!Number.isFinite(expansionRatio)||expansionRatio<1||expansionRatio>1.5)
+  throw Error('source_window_expansion_limit');
+ if(!packet?.source||!baseline?.source||!Number.isInteger(packet.maximumChars)||
+    packet.maximumChars<4000||packet.maximumChars>32000||
+    baseline.maximumChars!==packet.maximumChars)throw Error('source_replan_packet_invalid');
+ const paths=Object.keys(original||{});
+ if(paths.length>12||paths.length!==Object.keys(packet.source).length||
+    paths.length!==Object.keys(baseline.source).length||
+    paths.some(p=>!Object.hasOwn(packet.source,p)||!Object.hasOwn(baseline.source,p)))
+  throw Error('source_replan_scope_changed');
+ const usage=x=>x.windows.reduce((n,w)=>n+w.text.length,0);
+ const verify=(item,full)=>{
+  if(full===null)return item.kind==='new'&&item.sha256===null&&item.windows.length===0;
+  if(typeof full!=='string'||item.kind!=='existing'||item.sha256!==sha256(full)||
+     item.totalChars!==full.length||!Array.isArray(item.windows))return false;
+  return item.windows.every(w=>Number.isInteger(w.start)&&Number.isInteger(w.end)&&
+   w.start>=0&&w.end<=full.length&&w.end>w.start&&
+   w.text===full.slice(w.start,w.end)&&w.sha256===sha256(w.text));
+ };
+ for(const path of paths)if(!verify(packet.source[path],original[path])||
+  !verify(baseline.source[path],original[path]))throw Error('source_replan_snapshot_mismatch');
+ const total=Object.values(packet.source).reduce((n,item)=>n+usage(item),0);
+ if(total>packet.maximumChars)throw Error('source_replan_budget_invalid');
+ let slack=packet.maximumChars-total,changed=false;
+ const result={...packet.source};
+ const terms=words([task,plan.summary,...(plan.requirements||[]),...(plan.acceptance||[])].join(' '));
+ for(const path of paths){
+  const full=original[path],prior=packet.source[path],initial=baseline.source[path];
+  if(full===null||prior.complete||prior.windows.length===0)continue;
+  const oldUsed=usage(prior),baseUsed=usage(initial);
+  const limit=Math.min(7000,Math.floor(baseUsed*expansionRatio),oldUsed+slack);
+  if(limit<256)continue;
+  const inPrior=p=>prior.windows.some(w=>p>=w.start&&p<w.end);
+  let focus=-1;
+  // A rejected exact before literal may locate a different window, but it
+  // must match the actual pinned file uniquely. No supplied coordinates.
+  for(const e of Array.isArray(rejectedEdits)?rejectedEdits:[]){
+   if(e?.path!==path||typeof e.before!=='string'||!e.before||e.before.length>4000)continue;
+   const at=full.indexOf(e.before);
+   if(at>=0&&full.indexOf(e.before,at+1)<0&&!inPrior(at)){focus=at;break;}
+  }
+  // Empty edits: choose a previously unseen task-related source location.
+  if(focus<0){
+   const matches=[];
+   for(const term of [...words(path.replace(/[/.]/g,' ')),...terms]){
+    let at=-1,seen=0;
+    while(seen<8&&(at=full.toLowerCase().indexOf(term,at+1))!==-1){
+     if(!inPrior(at))matches.push({at,rank:term.length+(terms.includes(term)?8:0)});
+     seen++;
+    }
+   }
+   matches.sort((a,b)=>b.rank-a.rank||a.at-b.at);
+   if(matches.length)focus=matches[Math.min(attempt-1,matches.length-1)].at;
+  }
+  const primary=prior.windows[Math.min(attempt-1,prior.windows.length-1)];
+  if(focus<0)focus=attempt===1?primary.end:Math.max(0,primary.start-1);
+  if(focus<0||focus>=full.length)continue;
+  const keepLength=Math.min(primary.text.length,Math.max(128,Math.floor(limit/2)));
+  const keepStart=primary.start+Math.floor((primary.text.length-keepLength)/2);
+  const keep={start:keepStart,end:keepStart+keepLength};
+  const width=Math.min(limit-keepLength,full.length-keepLength);
+  if(width<64)continue;
+  let start=Math.max(0,Math.min(full.length-width,focus-Math.floor(width/2)));
+  let end=start+width;
+  if(start<keep.end&&end>keep.start){
+   if(keep.end+width<=full.length){start=keep.end;end=start+width;}
+   else if(keep.start>=width){end=keep.start;start=end-width;}
+   else continue;
+  }
+  const pieces=[keep,{start,end}].sort((a,b)=>a.start-b.start);
+  const windows=pieces.map(w=>({...w,text:full.slice(w.start,w.end),
+   sha256:sha256(full.slice(w.start,w.end))}));
+  const nextUsed=usage({windows});
+  if(nextUsed>limit||nextUsed>7000||nextUsed-oldUsed>slack||
+     windows.some((w,i)=>i>0&&w.start<windows[i-1].end))throw Error('source_replan_budget_violation');
+  const different=JSON.stringify(windows.map(w=>[w.start,w.end]))!==
+    JSON.stringify(prior.windows.map(w=>[w.start,w.end]));
+  if(!different)continue;
+  slack-=nextUsed-oldUsed;changed=true;
+  result[path]={...prior,windows,complete:nextUsed===full.length&&windows.length===1};
+ }
+ return {...packet,source:result,remainingChars:packet.maximumChars-
+  Object.values(result).reduce((n,item)=>n+usage(item),0),
+  replanned:changed};
+}
