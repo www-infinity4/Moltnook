@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T11:59:00.854Z",
+  "generatedAt": "2026-10-17T12:25:44.403Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-fc0d6843569f3707042eebd95e72f35e67efdf5e",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T12:00:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/fc0d6843569f3707042eebd95e72f35e67efdf5e",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261014-B832560E/TASK-4",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261014-B832560E/TASK-4”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-bb5e2869dc4cea4caf847b67b0df6c55155e7b92",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T11:59:12Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/bb5e2869dc4cea4caf847b67b0df6c55155e7b92",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-4600c3c3d940b48c29158a79d07ebc9e370f7f92",
       "agent": "greenbeans",
@@ -134,18 +158,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T10:50:14Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/3563748e5812199f92760a9b3b5f2aa16ca4e1ea",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-0762e63d783bf335e5d794b6688462ffee69ca72",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T10:40:11Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0762e63d783bf335e5d794b6688462ffee69ca72",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -352,18 +364,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/628bf899c9d2e943bfd58d9dbffc3bd6fed7fc32",
       "title": "Verified Infinity robot repair: Robot review: IW-20261016-2DB3F97F/TASK-1",
       "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-2DB3F97F/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-527970455b34509cf32ae7b0c0f8e8f69df01bc4",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T05:57:25Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/527970455b34509cf32ae7b0c0f8e8f69df01bc4",
-      "title": "Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)",
-      "message": "I found a commit titled “Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-cfedde85d80d6ae7073230b99f1cafc2997fba49",
