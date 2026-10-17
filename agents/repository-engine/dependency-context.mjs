@@ -12,10 +12,11 @@ export function dependencyRequests(task,target){
  // Basenames (for example runner-auth.mjs) resolve only when uniquely present.
  for(const name of KNOWN){
   const repo=OWNER+'/'+name;if(repo===target)continue;
-  const match=new RegExp('\\\\b'+name.replaceAll('-','\\\\-')+'\\\\b','i').exec(text);
+  const at=text.toLowerCase().indexOf(name.toLowerCase());
+  const match=at<0?null:{index:at};
   if(!match)continue;
   const context=text.slice(match.index,match.index+800);
-  for(const file of context.matchAll(/(?:^|[\\s,\\x60])((?:(?:workers|scripts|agents|src|test|tests|utils)\\/)?(?:[A-Za-z0-9_.-]+\\/)*[A-Za-z0-9_.-]+\\.(?:mjs|cjs|js|ts|tsx|py))(?:[\\s,;\\x60]|$)/g))add(name,file[1]);
+  for(const file of context.matchAll(/(?:^|[\s,\x60])((?:(?:workers|scripts|agents|src|test|tests|utils)\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:mjs|cjs|js|ts|tsx|py))(?:[\s,;\x60]|$)/g))add(name,file[1]);
  }
  // Canonical design references are read-only dependencies of every page job.
  add('Oracle-Octaves','index.html');add('QuantaPhi','oracle-interface.css');
