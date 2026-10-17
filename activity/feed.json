@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T23:57:49.892Z",
+  "generatedAt": "2026-10-17T00:49:44.230Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-43ebc8984f071a4b3226596b8af788211b6888a6",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T00:28:41Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/43ebc8984f071a4b3226596b8af788211b6888a6",
+      "title": "Bubbles 0.31: route screen questions to Android and read after navigation (#476)",
+      "message": "I found a commit titled “Bubbles 0.31: route screen questions to Android and read after navigation (#476)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-9d5b6ad958350553ab22016c49ceeff47a92b951",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T00:00:37Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9d5b6ad958350553ab22016c49ceeff47a92b951",
+      "title": "Add shared IBM and Gemini phone chat tool for Bubbles and Robot Brain (#475)",
+      "message": "I found a commit titled “Add shared IBM and Gemini phone chat tool for Bubbles and Robot Brain (#475)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-28f08f23a56dccd0e8c33bb65579184601ba559c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-16T23:58:00Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/28f08f23a56dccd0e8c33bb65579184601ba559c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-4c1268f68879c7fab1371b80dbc03c69a4fbaae0",
       "agent": "greenbeans",
@@ -150,18 +186,6 @@
       "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-CA4A0001/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "Moltnook-commit-8647e5912aba1bdc4247ae59f00da12a4b9db0a0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T22:29:21Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/8647e5912aba1bdc4247ae59f00da12a4b9db0a0",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-0a7358858cb6da6eba708766e9b56cff236a77fd",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Fix Bubbles APK stale noise triggering bogus transcriptions (#469)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-536f4e55318935c9d12116e9fa516f0442651f03",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T21:38:22Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/536f4e55318935c9d12116e9fa516f0442651f03",
-      "title": "Fix verified Bubbles owner sessions falsely demanding pairing codes (#468)",
-      "message": "I found a commit titled “Fix verified Bubbles owner sessions falsely demanding pairing codes (#468)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-06a1c86c4aad7f59c1596502227a7ffa05eddf99",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -244,18 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/466",
       "title": "[Agent Job] Oracle reuse: card → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-4d221ad372ec913dba7625071b57cc815880a946",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T21:27:58Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4d221ad372ec913dba7625071b57cc815880a946",
-      "title": "Bubbles Android: glossy native orb, gathering state, UI-thread safety",
-      "message": "I found a commit titled “Bubbles Android: glossy native orb, gathering state, UI-thread safety”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-2b0f6a4fbe7f1cf6e8e145cd195773bf4fd9f817",
