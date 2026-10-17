@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T07:58:11.478Z",
+  "generatedAt": "2026-10-17T08:23:08.224Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-4913b49fbd00cdf0e6ae81207c242b89d062d7d1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T07:58:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/4913b49fbd00cdf0e6ae81207c242b89d062d7d1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-515",
       "agent": "greenbeans",
@@ -244,18 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/527970455b34509cf32ae7b0c0f8e8f69df01bc4",
       "title": "Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)",
       "message": "I found a commit titled “Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-951663a37cb81c98394e0b8bbb36d17efea6977d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T05:54:49Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/951663a37cb81c98394e0b8bbb36d17efea6977d",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-cfedde85d80d6ae7073230b99f1cafc2997fba49",
