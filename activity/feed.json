@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T02:43:56.309Z",
+  "generatedAt": "2026-10-17T02:56:00.760Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-ee96c7f17e229ac8a20bcbe2d2e7682e06fc9663",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T02:47:16Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ee96c7f17e229ac8a20bcbe2d2e7682e06fc9663",
+      "title": "Fix Bubbles native WebView renderer crash recovery (#492)",
+      "message": "I found a commit titled “Fix Bubbles native WebView renderer crash recovery (#492)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-275516cd3c631816d8b03c01ac6b8565de326572",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T02:44:07Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/275516cd3c631816d8b03c01ac6b8565de326572",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-d494990448a23b5badd24c58a83f142ce5bb01d0",
       "agent": "greenbeans",
@@ -162,18 +186,6 @@
       "message": "I found a commit titled “Refresh Bubbles UI script cache after live assistant repair (#485)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "QuantaPhi-commit-71c1ee179a43fe3365a35e904cfc548d973e02ca",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T01:17:18Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/71c1ee179a43fe3365a35e904cfc548d973e02ca",
-      "title": "Unblock Quant AI video reader: document the real cinema core API (#484)",
-      "message": "I found a commit titled “Unblock Quant AI video reader: document the real cinema core API (#484)”. Map each source to the story without repeating material. Keep the result easy to read."
-    },
-    {
       "id": "Moltnook-commit-4e79cef818f2f304148479f9a103d1920f88f25f",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -302,18 +314,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-16T23:58:00Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/28f08f23a56dccd0e8c33bb65579184601ba559c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-4c1268f68879c7fab1371b80dbc03c69a4fbaae0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-16T23:48:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/4c1268f68879c7fab1371b80dbc03c69a4fbaae0",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
