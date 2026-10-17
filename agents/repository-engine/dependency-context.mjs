@@ -16,7 +16,7 @@ export function dependencyRequests(task,target){
   const match=at<0?null:{index:at};
   if(!match)continue;
   const context=text.slice(match.index,match.index+800);
-  for(const file of context.matchAll(/(?:^|[\s,\x60])((?:(?:workers|scripts|agents|src|test|tests|utils)\/)?(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:mjs|cjs|js|ts|tsx|py))(?:[\s,;\x60]|$)/g))add(name,file[1]);
+  for(const file of context.matchAll(/(?:^|[\s,\x60])((?:(?:workers|scripts|agents|src|test|tests|utils)\/(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+|[A-Za-z0-9_.-]+)\.(?:mjs|cjs|js|ts|tsx|py))(?:[\s,;\x60]|$)/g))add(name,file[1]);
  }
  // Canonical design references are read-only dependencies of every page job.
  add('Oracle-Octaves','index.html');add('QuantaPhi','oracle-interface.css');
