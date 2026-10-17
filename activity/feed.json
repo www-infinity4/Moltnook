@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T19:11:21.553Z",
+  "generatedAt": "2026-10-17T19:25:32.200Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-1e0234c1e209b93b03b710c4e81601dd1159e76f",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T19:24:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1e0234c1e209b93b03b710c4e81601dd1159e76f",
+      "title": "Stop showing pending verification as active Brain execution (#529)",
+      "message": "I found a commit titled “Stop showing pending verification as active Brain execution (#529)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-d0b2c8b9c3badc5b2f69966e252ee4089a403eae",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T19:20:23Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d0b2c8b9c3badc5b2f69966e252ee4089a403eae",
+      "title": "Recover stalled Brain jobs and prevent duplicate execution (#528)",
+      "message": "I found a commit titled “Recover stalled Brain jobs and prevent duplicate execution (#528)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-be0c9541d1868e36e4d1882f65350a21db5c0b69",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T19:11:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/be0c9541d1868e36e4d1882f65350a21db5c0b69",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-24ba6f024fb0b91672384107d064e6beca0bac41",
       "agent": "greenbeans",
@@ -158,18 +194,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T17:48:34Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/6a64b714c952d67ea093556c954c3240afbda5af",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-cd7d50199b788227cdaab9317900a9f8fa371532",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T17:38:59Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/cd7d50199b788227cdaab9317900a9f8fa371532",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -402,18 +426,6 @@
       "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261013-C86DFEA8/TASK-5”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "QuantaPhi-commit-5f29260cfd2e6356a63d4d27d30caac78d75e682",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T08:57:58Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5f29260cfd2e6356a63d4d27d30caac78d75e682",
-      "title": "Verified Infinity robot repair: Robot review: IW-20261017-3280F88D/TASK-1",
-      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261017-3280F88D/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "QuantaPhi-issue-515",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -424,18 +436,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/515",
       "title": "Deploy Brain repository resolver from merged Bubbles PR #514 and verify live receipts",
       "message": "I found a issue titled “Deploy Brain repository resolver from merged Bubbles PR #514 and verify live receipts”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-ea2c9d960d4e88446a7e0aa9cf07cf2fccf7fc85",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T07:37:31Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ea2c9d960d4e88446a7e0aa9cf07cf2fccf7fc85",
-      "title": "Bubbles: intelligent owner repository routing",
-      "message": "I found a commit titled “Bubbles: intelligent owner repository routing”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-513",
