@@ -11,6 +11,7 @@ import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-a
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
+import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
 import {verifyLiveBrowser} from './live-browser.mjs';
@@ -35,9 +36,7 @@ const git=(...args)=>command('git',args).trim();
 function scrub(value){return String(value).replaceAll(token||'__NO_TOKEN__','[redacted]').slice(-9000);}
 async function github(resource,options={}){const r=await fetch('https://api.github.com/'+resource,{method:options.method||'GET',...(options.body?{body:JSON.stringify(options.body)}:{}),headers:{Accept:'application/vnd.github+json','Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('GitHub '+r.status+' at '+resource.split('?')[0]);return r.json();}
 async function call(step,body={}){
- const identityUrl=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);identityUrl.searchParams.set('audience','infinity-brain-writer');
- const response=await fetch(identityUrl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
- if(!response.ok)throw Error('Runner identity unavailable');const {value}=await response.json();
+ const value=await fetchRunnerOidcIdentity();
  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...body,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
  const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
  if(step==='result'){
