@@ -33,3 +33,39 @@ test('failed, truncated or tampered dependencies never become verified',async()=
  }});assert.ok(r.repositories.every(x=>x.status==='blocked'));
  }
 });
+
+test('Robot Brain reads named QuantaPhi source files from a pinned dependency, including unique basenames',async()=>{
+ const task='In www-infinity4/QuantaPhi, inspect workers/infinity-brain-clock/worker.js, runner-auth.mjs and scripts/brain-writer.mjs; diagnose the Moltnook runner.';
+ const requested=dependencyRequests(task,'www-infinity4/Moltnook').find(x=>x.repository==='www-infinity4/QuantaPhi');
+ assert.ok(requested,'the named owner repository must be a dependency');
+ assert.ok(requested.files.includes('workers/infinity-brain-clock/worker.js'));
+ assert.ok(requested.files.includes('runner-auth.mjs'));
+ assert.ok(requested.files.includes('scripts/brain-writer.mjs'));
+ const content=Buffer.from('// signed safe fixture');
+ const sha=createHash('sha1').update(Buffer.concat([Buffer.from('blob '+content.length+'\0'),content])).digest('hex');
+ const pinnedTree=['README.md','AGENTS.md','workers/infinity-brain-clock/worker.js','workers/infinity-brain-clock/runner-auth.mjs','scripts/brain-writer.mjs']
+  .map(p=>({path:p,type:'blob',sha,size:content.length}));
+ const data=await collectDependencyContext({task,target:'www-infinity4/Moltnook',github:async route=>{
+  if(route.includes('/commits/'))return {sha:'a'.repeat(40)};
+  if(route.includes('/git/trees/'))return {tree:pinnedTree};
+  if(route.includes('/git/blobs/'))return {encoding:'base64',content:content.toString('base64')};
+  return {full_name:route.slice(6),default_branch:'main'};
+ }});
+ const sources=data.repositories.find(x=>x.repository==='www-infinity4/QuantaPhi');
+ assert.equal(sources.status,'verified_read_only');
+ for(const p of ['workers/infinity-brain-clock/worker.js','workers/infinity-brain-clock/runner-auth.mjs','scripts/brain-writer.mjs'])
+  assert.equal(sources.files.find(x=>x.path===p)?.status,'verified_source',p);
+ assert.equal(sources.readOnly,true,'cross-repo evidence never grants writes');
+});
+test('ambiguous dependency basenames are not silently attributed to the wrong file',async()=>{
+ const body=Buffer.from('source'),sha=createHash('sha1').update(Buffer.concat([Buffer.from('blob '+body.length+'\0'),body])).digest('hex');
+ const task='QuantaPhi runner-auth.mjs inspect';
+ const rows=await collectDependencyContext({task,target:'www-infinity4/Moltnook',github:async route=>{
+  if(route.includes('/commits/'))return {sha:'a'.repeat(40)};
+  if(route.includes('/git/trees/'))return {tree:['a/runner-auth.mjs','b/runner-auth.mjs'].map(path=>({type:'blob',path,sha,size:body.length}))};
+  if(route.includes('/git/blobs/'))return {encoding:'base64',content:body.toString('base64')};
+  return {full_name:route.slice(6),default_branch:'main'};
+ }});
+ const q=rows.repositories.find(x=>x.repository==='www-infinity4/QuantaPhi');
+ assert.equal(q.files.find(x=>x.path==='runner-auth.mjs')?.status,'ambiguous_path');
+});
