@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {evidenceReplanFeedback} from './evidence-replan.mjs';
+import {evidenceReplanFeedback,authPlanReconsideration} from './evidence-replan.mjs';
 const links=[{id:'shoplcShirtButton',label:'ShopLC Live channel',href:'https://quantaphi.org/shoplc/',siteUrl:'https://quantaphi.org/shoplc/',sourcePath:'index.html'}];
 const browser={browserPassed:true,targets:[{url:'https://quantaphi.org/',views:[{passed:true},{passed:true}]},{url:'https://quantaphi.org/shoplc/',views:[{passed:true}]}]};
 const capability={existingWorkflows:[{path:'.github/workflows/brain-writer.yml'}],testCommands:['node --test test/brain-writer.test.mjs']};
@@ -139,6 +139,49 @@ test('no source or OIDC assertion without pinned read and actual runner claim',(
  const deps={repositories:[{repository:'www-infinity4/QuantaPhi',status:'blocked',files:[{path:'workers/infinity-brain-clock/worker.js',status:'verified_source'}]}]};
  const unclaimed={brain:{authentication:'GitHub Actions OIDC',verifiedCalls:['capability'],leaseClaimed:false}};
  const r=evidenceReplanFeedback({plan,dependencyContext:deps,authenticatedAdapters:unclaimed});
+ assert.equal(r.retry,false);
+ assert.deepEqual(r.categories,[]);
+});
+
+
+test('exact Task-4 plan cannot import a Worker-side QuantaPhi JWT verifier into Moltnook',()=>{
+ const report={plan:{
+  summary:'Repair the source routing failure. The QuantaPhi files exist and OIDC authentication is verified.',
+  requirements:[
+   'Add a correct import of runner-auth.mjs from the www‑infinity4/QuantaPhi repository into agents/repository-engine/runner.mjs.',
+   'Update the request handling in runner.mjs to call authenticate(request) and reject unauthenticated calls.',
+   'Add a focused test for JWT verification.'
+  ],blockers:[],files:['agents/repository-engine/runner.mjs','agents/repository-engine/runner-auth.test.mjs']
+ }};
+ const authenticatedAdapters={brain:{authentication:'GitHub Actions OIDC audience infinity-brain-writer',
+   verifiedCalls:['quant-audit','capability','claim'],leaseClaimed:true}};
+ const dependencyContext={repositories:[{repository:'www-infinity4/QuantaPhi',status:'verified_read_only',files:[
+  {path:'workers/infinity-brain-clock/runner-auth.mjs',status:'verified_source',blobSha:'1'.repeat(40)}
+ ]}]};
+ const r=authPlanReconsideration({plan:report.plan,writableRepository:'www-infinity4/Moltnook',authenticatedAdapters,dependencyContext});
+ assert.equal(r.retry,true);
+ assert.deepEqual(r.categories,['cross_repository_worker_auth_import']);
+ assert.match(r.instruction,/no cross-repository runtime imports/);
+ assert.match(r.facts.join(' '),/authenticated Brain lease/);
+ assert.match(r.facts.join(' '),/inbound Worker requests/);
+ assert.equal(report.plan.blockers.length,0,'must detect invalid implementation despite no reported blockers');
+});
+test('signed OIDC Brain lease supersedes a fabricated static BRAIN_LEASE_TOKEN requirement',()=>{
+ const plan={requirements:['Configure BRAIN_LEASE_TOKEN for Moltnook repository to claim a Brain-Clock lease.']};
+ const c={brain:{authentication:'GitHub Actions OIDC',leaseClaimed:true,verifiedCalls:['claim']}};
+ const r=authPlanReconsideration({plan,writableRepository:'www-infinity4/Moltnook',authenticatedAdapters:c});
+ assert.deepEqual(r.categories,['verified_oidc_not_static_secret']);
+ assert.ok(r.facts.join(' ').includes('No BRAIN_LEASE_TOKEN is required'));
+ assert.equal(authPlanReconsideration({plan,writableRepository:'www-infinity4/Moltnook',
+  authenticatedAdapters:{brain:{...c.brain,leaseClaimed:false}}}).retry,false,'unverified OIDC cannot veto an actual missing credential');
+});
+test('a legitimate local runner test passes, without granting cross-repository writes',()=>{
+ const c={brain:{authentication:'GitHub Actions OIDC',leaseClaimed:true,verifiedCalls:['claim']}};
+ const plan={summary:'Unit-test a local OIDC request bridge in Moltnook.',requirements:[
+  'Add a test to agents/repository-engine/credential-bridge.test.mjs to reject unauthenticated GitHub write operations.',
+  'Do not import external QuantaPhi modules; preserve the source-only review gate.'
+ ]};
+ const r=authPlanReconsideration({plan,writableRepository:'www-infinity4/Moltnook',authenticatedAdapters:c});
  assert.equal(r.retry,false);
  assert.deepEqual(r.categories,[]);
 });
