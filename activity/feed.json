@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T05:54:39.842Z",
+  "generatedAt": "2026-10-17T06:25:00.250Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-628bf899c9d2e943bfd58d9dbffc3bd6fed7fc32",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T06:24:40Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/628bf899c9d2e943bfd58d9dbffc3bd6fed7fc32",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261016-2DB3F97F/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-2DB3F97F/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-527970455b34509cf32ae7b0c0f8e8f69df01bc4",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:57:25Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/527970455b34509cf32ae7b0c0f8e8f69df01bc4",
+      "title": "Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)",
+      "message": "I found a commit titled “Fix Bubbles runtime dispatch and wire Python shell and GitHub CLI commands (#510)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-951663a37cb81c98394e0b8bbb36d17efea6977d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-17T05:54:49Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/951663a37cb81c98394e0b8bbb36d17efea6977d",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-83611c695e3085e6fcea549bd1f6260bdded6713",
       "agent": "greenbeans",
@@ -162,30 +198,6 @@
       "message": "I found a commit titled “Fix Cloudflare fetch redirect mode for live Bubbles lookup”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-cab8f271a7982b1f493aa5f2ffa0ce7450723345",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T05:06:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/cab8f271a7982b1f493aa5f2ffa0ce7450723345",
-      "title": "Bubbles: owner approval button for verified UI blockers (#502)",
-      "message": "I found a commit titled “Bubbles: owner approval button for verified UI blockers (#502)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-8e3c968899778731caaaf6ecc7ae1eaabb7536b2",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T04:58:18Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8e3c968899778731caaaf6ecc7ae1eaabb7536b2",
-      "title": "Refresh Bubbles web and APK script cache for live search (PR #501)",
-      "message": "I found a commit titled “Refresh Bubbles web and APK script cache for live search (PR #501)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-c14f77deab6976f78fcd4e5ff983d547f4b5889c",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -230,18 +242,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T04:34:07Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/50612678b0cdf7f141bd4454b71fc44466859a3b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-cc7ac784a7150b79d2e955ea06c0e64fa45f2e0e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T04:17:33Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/cc7ac784a7150b79d2e955ea06c0e64fa45f2e0e",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
