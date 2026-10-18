@@ -6,7 +6,15 @@ const normalize=v=>JSON.stringify([...v].sort((a,b)=>a.version_id.localeCompare(
 export async function evaluateRollout({evidence,token,context=executionContext(),fetcher=fetch}){
  if(!context.productionAccess)return {action:'hold',executed:false,reason:'Isolated execution context'};
  if(!evidence)return {action:'hold',executed:false,reason:'No verified release evidence supplied'};
- const decision=assessRollout(evidence);if(!['promote','rollback'].includes(decision.action))return {...decision,executed:false};
+ const decision=assessRollout(evidence);
+ // BrainClock is an existing stateful singleton Durable Object. Cloudflare
+ // selects a DO version per instance, not independently for each HTTP call.
+ // Automatic percentage promotion cannot provide an isolated canary.
+ // A verified rollback to the known-stable 100% version remains permitted.
+ if(evidence.workerName==='infinity-brain-clock'&&decision.action==='promote')
+  return {action:'hold',executed:false,weight:0,
+   reason:'BrainClock singleton requires isolated Preview and an explicit whole-version owner release; percentage traffic rollout is blocked'};
+ if(!['promote','rollback'].includes(decision.action))return {...decision,executed:false};
  if(!['quantaphi-site','infinity-brain-clock'].includes(evidence.workerName)||![evidence.candidate.versionId,evidence.stable.versionId].every(id=>uuid.test(id)))throw Error('Worker or release ID outside rollout scope');
  if(!token)return {...decision,executed:false,reason:'CLOUDFLARE_API_TOKEN missing; no deployment mutation attempted'};
  const endpoint='https://api.cloudflare.com/client/v4/accounts/'+account+'/workers/scripts/'+evidence.workerName+'/deployments';
