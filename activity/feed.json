@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T08:35:55.655Z",
+  "generatedAt": "2026-10-18T08:48:20.051Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-be9caf1edc72db5f8dbba297b28028ae8c919c67",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:44:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/be9caf1edc72db5f8dbba297b28028ae8c919c67",
+      "title": "Keep mobile chat controls reachable and display connection codes (#591)",
+      "message": "I found a commit titled “Keep mobile chat controls reachable and display connection codes (#591)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-649a82550da3e818b1184b8584e00e6b636fe95e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:36:03Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/649a82550da3e818b1184b8584e00e6b636fe95e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "claude-flow-commit-6c3f2b91bb478a3d54c0be7a6c05f81a50b45058",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:35:59Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/6c3f2b91bb478a3d54c0be7a6c05f81a50b45058",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-590",
       "agent": "purple-pearl",
@@ -124,18 +160,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/49f13cde30a57cc57dbc5ce896b2635931fb285f",
       "title": "Merge pull request #585 from www-infinity4/verify-bubbles-public-release-20261018",
       "message": "I found a commit titled “Merge pull request #585 from www-infinity4/verify-bubbles-public-release-20261018”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-7fd0c63cc6f40ca77f59ac2a9cc8865518cb4140",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:04:15Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/7fd0c63cc6f40ca77f59ac2a9cc8865518cb4140",
-      "title": "Use explicit MIME check for blocked APK response",
-      "message": "I found a commit titled “Use explicit MIME check for blocked APK response”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Moltnook-commit-1c86efed228c2e2e14eeea965ae0168d67efc63d",
@@ -294,18 +318,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "Moltnook-commit-1f19f0e5cf9e15ee46b4e0006919d1c621dfd82d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:25:32Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/1f19f0e5cf9e15ee46b4e0006919d1c621dfd82d",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-f78151180cfbd27036293fc0d7fe54a983944969",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -424,18 +436,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/561",
       "title": "[Agent Job] Oracle reuse: builder → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: builder → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-a5785da3aeb47d181471e48d86fd5be0e3dbb94c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T01:41:04Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a5785da3aeb47d181471e48d86fd5be0e3dbb94c",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-110",
