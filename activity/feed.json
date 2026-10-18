@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T04:35:12.813Z",
+  "generatedAt": "2026-10-18T04:48:39.524Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-80a69d08ecec85ec1419b0c3560a9ed58af9792e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T04:36:00Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/80a69d08ecec85ec1419b0c3560a9ed58af9792e",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-298b034a621e74d1ea6be83d2443453b5a9839c8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T04:35:20Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/298b034a621e74d1ea6be83d2443453b5a9839c8",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-570",
       "agent": "purple-pearl",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/839cfe423c9da2b2cbda9bfbdf31659b5b6c9ba0",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-6858c5e8c4275e2d3317ecaba5d041349e92c487",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T04:14:34Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6858c5e8c4275e2d3317ecaba5d041349e92c487",
-      "title": "Run isolated zero-live-traffic Preview canary for shared GPT color Brain (#89)",
-      "message": "I found a commit titled “Run isolated zero-live-traffic Preview canary for shared GPT color Brain (#89)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-301dc64aba5aa47b46cfede5b56c6a714cec4858",
@@ -424,18 +436,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/541",
       "title": "[Agent Job] Oracle reuse: button → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-4853963f94a04f81a4ee69b1e1297ed45ef3442d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T21:30:42Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/4853963f94a04f81a4ee69b1e1297ed45ef3442d",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-106",
