@@ -13,6 +13,7 @@ import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
 import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs';
 import {runSourceReview} from './source-verify.mjs';
+import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -325,7 +326,20 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   }
  }
 }catch(e){
+ // The Brain re-checks generated Green repairs against current D1 state at
+ // Pink receipt time. If a repair started after this read-only lease was
+ // admitted, this is a legitimate scheduling race, not a failed code build.
+ // Preserve the guard: no Pink completion, no job Quant, no fake result.
+ if(isDeferredPinkReviewRace({lease,error:e,commitSha})){
+  report.status='deferred_active_repair';
+  report.error='Pink verification deferred because an associated Green repair is active or finished; no source verification or payout was recorded.';
+  report.retryPolicy='Do not replay this Pink review until the signed Brain selector finds it eligible again.';
+  report.testsPassed=testsPassed;
+  console.log(report.status,report.jobId||'');
+  process.exitCode=0;
+ }else{
  report.status=commitSha?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
  if(lease)try{await call('result',{status:report.status,commitSha,testsPassed,verificationToken:token,message:report.error,repairFeedback:report.attempts?.length?{baseSha:report.baseSha,stage:report.attempts.at(-1).stage,reason:report.attempts.at(-1).reason,failures:report.attempts.at(-1).failures,tests:report.tests?{passed:report.tests.passed,runs:report.tests.runs.slice(-15).map(row=>({...row,output:row.output.slice(0,1000)}))}:null}:undefined});}catch(error){report.receiptError=scrub(error.message)}
  process.exitCode=1;
+ }
 }finally{if(lease&&/^[a-f0-9]{40}$/.test(commitSha||report.baseSha||''))try{report.visualEvidence=await archiveScreenshots('repository-receipts',{repository:lease.job.repository||lease.repository,commitSha:commitSha||report.baseSha},call)}catch(e){report.evidenceArchiveError=String(e.message).slice(0,300)}await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/report.json',JSON.stringify(report,null,2));console.log(report.status,report.jobId||'',report.commitSha||'');}
