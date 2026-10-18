@@ -18,7 +18,8 @@ export function singleDeployment(payload){
 }
 export function validatePreview(probe){
  const expected=['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible',
-  'distinctClockReady','productionTrafficTouched','ownerOrWalletOperationsAllowed'];
+  'distinctClockReady','productionTrafficTouched','ownerOrWalletOperationsAllowed',
+  'mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved'];
  if(probe?.ok!==true||probe.mode!=='isolated_preview_only'||probe.ticketCount!==0)
   throw Error('isolated_preview_admission_failed');
  for(const k of expected){
@@ -72,6 +73,8 @@ async function run(mode,{request=fetch}={}){
  const previewId=items[0].id;
  const deploymentList=await api(workerRoot+'/previews/'+previewId+'/deployments');
  const previewDeployment=deploymentList?.items?.[0]||deploymentList?.[0];
+ if(previewDeployment?.annotations?.['workers/tag']!=='d690547')
+  throw Error('isolated_preview_source_version_not_updated');
  const env=previewDeployment?.env||{};
  const required=Object.keys(env).sort();
  if(JSON.stringify(required)!==JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
@@ -130,7 +133,7 @@ async function run(mode,{request=fetch}={}){
  fs.mkdirSync('repository-receipts',{recursive:true});
  const result={status:'isolated_preview_verified',
   stage:'synthetic_read_only_canary',sourceSha:process.env.TARGET_SHA||'',
-  candidateVersionId:'86aee386-f083-428b-8f73-b606b46e7525',
+  candidateVersionId:'8bb97b6d-cd05-4de1-ab08-c0c72f4dde5b',
   previewUrl:url,
   productionDeploymentId:earlier.id,productionVersionId:earlier.versionId,
   prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,

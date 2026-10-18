@@ -9,6 +9,8 @@ on:
       - 'agents/repository-engine/prepare-brain-preview.test.mjs'
       - 'agents/repository-engine/verify-brain-preview.mjs'
       - 'agents/repository-engine/verify-brain-preview.test.mjs'
+      - 'agents/repository-engine/brain-preview-update.mjs'
+      - 'agents/repository-engine/brain-preview-update.test.mjs'
       - '.github/workflows/moltnook-brain-isolated-preview.yml'
   workflow_dispatch:
 
@@ -36,15 +38,16 @@ jobs:
           node --check agents/repository-engine/brain-isolated-probe.mjs
           node --check agents/repository-engine/prepare-brain-preview.mjs
           node --check agents/repository-engine/verify-brain-preview.mjs
-          node --check agents/repository-engine/brain-preview-reuse.mjs
+          node --check agents/repository-engine/brain-preview-update.mjs
           node --test agents/repository-engine/prepare-brain-preview.test.mjs \
             agents/repository-engine/verify-brain-preview.test.mjs \
-            agents/repository-engine/brain-preview-reuse.test.mjs
+            agents/repository-engine/brain-preview-reuse.test.mjs \
+            agents/repository-engine/brain-preview-update.test.mjs
       - name: Check out the exact Cloudflare staged Brain source using central GHP
         uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: 26518e9645024ad2f18e7550171863c11a8e3ec8
+          ref: d6905475e7bafd0bbe6f22c4311a7d355c69ed92
           path: quantaphi-source
           persist-credentials: false
           token: ${{ secrets.GHP }}
@@ -53,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           ACTUAL_SHA="$(git rev-parse HEAD)"
-          if [[ "$ACTUAL_SHA" != "26518e9645024ad2f18e7550171863c11a8e3ec8" ]]; then
+          if [[ "$ACTUAL_SHA" != "d6905475e7bafd0bbe6f22c4311a7d355c69ed92" ]]; then
             echo "::error::Staged candidate source revision changed"; exit 1
           fi
           echo "TARGET_SHA=$ACTUAL_SHA" >> "$GITHUB_ENV"
@@ -62,6 +65,7 @@ jobs:
             test/brain-deferred-recovery.test.mjs \
             test/brain-clock.test.mjs \
             test/brain-clock-binding-parity.test.mjs \
+            test/brain-pink-source-review.test.mjs \
             test/bubbles-runner-dispatch.test.mjs
       - name: Record untouched production version before isolated preview
         env:
@@ -69,25 +73,20 @@ jobs:
         run: node agents/repository-engine/verify-brain-preview.mjs before
       - name: Prepare ephemeral Preview-only configuration and wrapper
         run: node agents/repository-engine/prepare-brain-preview.mjs
-      - name: Reuse verified existing isolated Preview after Wrangler 10500
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: node agents/repository-engine/brain-preview-reuse.mjs
-      - name: Create isolated Cloudflare Preview (never a production deployment)
-        if: env.PREVIEW_NEEDS_CREATE == '1'
+      - name: Dry-run bundle the isolated probe with pinned Pink source
         working-directory: quantaphi-source
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
-        shell: bash
         run: |
           set -euo pipefail
-          npx --yes wrangler@latest preview \
+          npx --yes wrangler@4 deploy \
             --config workers/infinity-brain-clock/wrangler.toml \
-            --name brain-candidate-26518e96 2>&1 | tee /tmp/brain-preview-output.log
-          grep -q 'Preview: brain-candidate-26518e96' /tmp/brain-preview-output.log || {
-            echo "::error::Cloudflare did not create expected isolated Preview"; exit 1;
-          }
+            --dry-run --outdir /tmp/brain-pink-preview-bundle
+          test -s /tmp/brain-pink-preview-bundle/brain-isolated-probe.js
+
+      - name: Update existing isolated Preview source without production traffic
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node agents/repository-engine/brain-preview-update.mjs
+
       - name: Check real Preview runtime and unchanged production deployment
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -127,7 +126,7 @@ jobs:
         run: |
           {
             echo "## Isolated Brain preview gate"
-            echo "Source candidate: QuantaPhi 26518e9645024ad2f18e7550171863c11a8e3ec8"
+            echo "Source candidate: QuantaPhi d6905475e7bafd0bbe6f22c4311a7d355c69ed92"
             echo "Preview tests synthetic, read-only admission and isolated DO/D1 only."
             echo "No user jobs, owner sessions, wallet payouts, repository merges or worker production traffic are invoked."
             echo "A Preview pass does not approve a full production rollout. Preserve the exact stable Worker rollback version."

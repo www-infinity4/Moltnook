@@ -1,6 +1,7 @@
 import {BrainClock} from './worker.js';
 import {filterActiveTickets} from './ticket-selector.mjs';
 import {sourceRecoveryEligibility} from './deferred-recovery.mjs';
+import {pinnedPinkReview,prioritizeReadOnlyPinkReviews,validatePinkSourceReceipt,completePinkReviewInContext} from './source-review.mjs';
 export {BrainClock};
 
 // Transient CI-only Preview wrapper. Nothing is forwarded to live owner,
@@ -38,15 +39,56 @@ export default {
   const response=await clock.fetch('https://clock.internal/status');
   const state=await response.json();
   const clockReady=response.ok&&state.ok===true&&state.writer==null;
+
+  // Exercise the new source-only Pink path against a synthetic merged Green
+  // receipt; no GitHub requests, owner tokens, wallet or real tickets exist
+  // in this Preview-only wrapper.
+  const mergedSha='a'.repeat(40),sourceSha='b'.repeat(40);
+  const fake={kind:'robot-directions',color_jobs:[
+   {id:'TASK-1',agent:'greenbeans',repository:'www-infinity4/QuantaPhi',status:'merged_verified',
+    progress:{mergeSha:mergedSha,commitSha:sourceSha,testsPassed:true,
+     prUrl:'https://github.com/www-infinity4/QuantaPhi/pull/418'}},
+   {id:'TASK-2',agent:'pink-panther',repository:'www-infinity4/QuantaPhi',status:'blocked',
+    dependencies:['TASK-1','TASK-3'],instructions:'After TASK-1, independently verify the requested work: synthetic routing fix'},
+   {id:'TASK-3',agent:'greenbeans',repository:'www-infinity4/QuantaPhi',status:'blocked',
+    title:'Repair source-routing',instructions:'Diagnose and repair the authenticated source-routing failure'}
+  ],technical_handoffs:[{sourceJobId:'TASK-2',repairJobId:'TASK-3',category:'source-routing'}]};
+  const pink=fake.color_jobs[1];
+  const candidate={ticket:{id:'synthetic-pink'},context:fake,job:pink};
+  const bad={ticket:{id:'synthetic-repair'},context:fake,job:fake.color_jobs[2]};
+  const review=pinnedPinkReview(fake,pink);
+  const prioritized=prioritizeReadOnlyPinkReviews([bad,candidate]);
+  const mergedSourceRecognized=review?.kind==='source_review_only'&&review.mayWrite===false&&
+    review.mergeSha===mergedSha&&review.prNumber===418&&
+    prioritized[0]===candidate;
+  let reviewReceiptSafe=false,generatedRepairSuperseded=false,ownerBlockPreserved=false;
+  if(mergedSourceRecognized){
+   const result=validatePinkSourceReceipt({review,job:pink,body:{
+    status:'source_verified',testsPassed:true,reviewedMergeSha:mergedSha,
+    commitSha:sourceSha,testPaths:['test/bubbles-brain-actions.test.cjs'],
+    productionVerified:false,ownerApprovalGranted:false,mergedNewCode:false
+   }});
+   const updated=completePinkReviewInContext(fake,pink.id,result,new Date().toISOString(),'synthetic://probe');
+   reviewReceiptSafe=result.noReward===true&&result.noNewCommit===true&&result.productionVerified===false&&
+     updated.color_jobs[1].status==='complete'&&updated.color_jobs[0].status==='merged_verified';
+   generatedRepairSuperseded=updated.color_jobs[2].status==='superseded'&&
+     fake.color_jobs[2].status==='blocked';
+  }
+  const unauthorized=structuredClone(fake);
+  unauthorized.technical_handoffs[0].category='tool-connection';
+  ownerBlockPreserved=pinnedPinkReview(unauthorized,unauthorized.color_jobs[1])===null;
+
   const ok=ownerDecisionProtected&&currentWorkSelected&&
-   sourceRecovery.eligible===true&&clockReady;
+   sourceRecovery.eligible===true&&clockReady&&mergedSourceRecognized&&
+   reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved;
   return Response.json({ok,mode:'isolated_preview_only',ticketCount:row.total,
    sourceDecisionVerified:ownerDecisionProtected,
    ownerPriorityVerified:currentWorkSelected,
    recoveryEligible:sourceRecovery.eligible,
    distinctClockReady:clockReady,
    productionTrafficTouched:false,
-   ownerOrWalletOperationsAllowed:false
+   ownerOrWalletOperationsAllowed:false,
+   mergedSourceRecognized,reviewReceiptSafe,generatedRepairSuperseded,ownerBlockPreserved
   },{status:ok?200:503,headers:{'Cache-Control':'no-store'}});
  }
 };
