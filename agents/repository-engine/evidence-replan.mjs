@@ -9,6 +9,24 @@ const EXPLICIT_LABEL=/\b(?:rename|relabel|change (?:the )?(?:label|wording|text)
 const EXPLICIT_URL=/\b(?:change (?:the )?(?:destination|url|link)|point (?:it|the link) to|link to https?:\/\/|redirect to https?:\/\/)\b/i;
 const EXPLICIT_DEPLOY=/\b(?:deploy|redeploy|publish|production release|migrate database|apply migration)\b/i;
 const trim=s=>String(s||'').slice(0,280);
+// A content-only job still needs a repository destination. Inspection paths
+// alone are not a delivery contract; ask Blue once, never grant Green a path.
+export function deliveryPlanFeedback({plan,writeScope}={}){
+ const notes=Array.isArray(plan?.notes)?plan.notes.filter(x=>typeof x==='string').join(' '):'';
+ const summary=String(plan?.summary||'');
+ const authorized=writeScope?.reportedPushPermission===true&&
+  /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'');
+ const contentOnly=/(?:no code changes|no write access|purely investigative|content[\u2010-\u2015 -]generation)/i.test(notes);
+ const deliverable=/\b(?:create|draft|compose|write|deliver)\b/i.test(summary)&&
+  /\b(?:recommendations?|report|document(?:ation)?|scenario)\b/i.test(summary);
+ if(!authorized||!contentOnly||!deliverable||!Array.isArray(plan?.files)||
+    !plan.files.length||!Array.isArray(plan?.blockers)||plan.blockers.length)
+  return {retry:false};
+ return {retry:true,categories:['content_delivery_destination'],
+  instruction:'Return a fresh complete implementation plan. This content-generation job must deliver its requested artifact through the repository runner. files is the engineer editable-path allowlist, not merely a reading list. Explicitly select a suitable existing document or a new documentation path in this assigned repository and describe where the requested content belongs. New files are supported: the runner verifies absence at the pinned commit and supplies a null source contract. Do not force narrative content into application code or overwrite the owner brief, attribution or unsent drafts. Keep required inspection paths, genuine blockers and acceptance checks; no deployment or access expansion is implied.',
+  facts:['The authenticated target repository reports push permission. Content-only work is not inherently read-only; source review, exact edits and tests still apply.'],
+  permissionsExpanded:false};
+}
 const CODE_LOCATION=/\b(?:source\s+files?|file\s+paths?|which\s+files?|exact\s+(?:component|file)|locate|component|source\s+location|ui\s+behaviou?r|filter|sorting|toggle)\b/i;
 const PRIVATE_SCOPE=/\b(?:credential|secret|authentication|api\s+key|token|authorization|permission|private\s+endpoint|database\s+schema|billing|wallet\s+transfer)\b/i;
 function sourceCandidates(sourceTree,request){
