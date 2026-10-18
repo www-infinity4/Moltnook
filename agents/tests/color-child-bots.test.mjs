@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {spawnColorChild,selectChildRoles,inspectChild,parentReport,responsibilitiesFor} from '../color-child-bots.mjs';
+import {spawnColorChild,selectChildRoles,inspectChild,parentReport,responsibilitiesFor,reasonColorChild} from '../color-child-bots.mjs';
 const roster=['green','blue','yellow','pink','black','purple','orange','red'].map(color=>({id:({green:'greenbeans',blue:'blueberry',yellow:'naked-gold-digger',pink:'pink-panther',black:'black-seal',purple:'purple-pearl',orange:'orange-peel',red:'red-macro-reader'})[color],name:color+' desk',color}));
 const job={id:'MN-002',repo:'Moltnook',sourceUrl:'https://github.com/www-infinity4/Moltnook/blob/main/agents/jobs.json'};
 const parent=()=>({id:'specialist-mn-002',jobId:job.id,color:'green',depth:1,permissions:['read public repository','write Moltnook evidence'],tools:['github-public-read','moltnook-evidence-write']});
@@ -43,4 +43,35 @@ test('no fabricated release success for black seal',()=>{
  const agents=[parent()], child=spawnColorChild(params(agents,'black-seal')).agent;
  const inspected=inspectChild({child,job,head:{sha:'a'.repeat(40),url:job.sourceUrl},mission:{title:'ok'},checks:[],ci:{status:'success'},now:'2026-10-13T20:20:00Z'});
  assert.equal(inspected.status,'needs_work');assert.match(inspected.receipt.result,/NOT verified/);
+});
+
+
+test('every delegated role has a GPT core contract but no invented inference receipt',()=>{
+ const agents=[parent()];
+ const child=spawnColorChild(params(agents,'pink-panther')).agent;
+ assert.equal(child.modelCore.model,'@cf/openai/gpt-oss-120b');
+ assert.equal(child.modelCore.status,'model_available_not_invoked');
+ assert.equal(child.modelReceipt,undefined);
+ assert.ok(child.execution.includes('evidence-only'));
+ const green=spawnColorChild({...params(agents,'greenbeans'),parentId:parent().id}).agent;
+ assert.deepEqual(green.modelCore.layers,['green','yellow','blue','pink','red','white']);
+ assert.deepEqual(responsibilitiesFor('white')[0],'Guard truthfulness, owner boundaries and source-versus-deploy claims');
+});
+test('registered child uses a real lease-bound GPT inference without gaining source or wallet privileges',async()=>{
+ const agents=[parent()];
+ const child=spawnColorChild(params(agents,'naked-gold-digger')).agent;
+ const before=[...child.permissions],beforeTools=[...child.tools];
+ let called=0;
+ const result=await reasonColorChild({agents,childId:child.id,
+  evidence:{sourceSha:'a'.repeat(40)},invoke:async(step,payload)=>{
+   assert.equal(step,'color-think');assert.equal(payload.color,'yellow');
+   called++;
+   return {ok:true,status:'model_inference_completed',model:'@cf/openai/gpt-oss-120b',
+    color:'yellow',layers:['yellow'],toolRequestsAreNotExecution:true,authorizedOperationsPerformed:false,
+    finding:'Research source found',nextAction:'Check dated source',blockers:[],toolRequests:['data-extraction']};
+  }});
+ assert.equal(called,1);assert.equal(result.modelCore.status,'model_inference_completed');
+ assert.equal(result.modelReceipt.walletChanged,false);assert.equal(result.modelReceipt.sourceCommitted,false);
+ assert.deepEqual(result.permissions,before);assert.deepEqual(result.tools,beforeTools);
+ assert.equal(agents.find(a=>a.id===child.id).modelReceipt.status,'model_inference_completed');
 });

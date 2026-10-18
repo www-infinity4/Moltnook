@@ -8,7 +8,7 @@ test('reviewer receives bounded pinned controls from actual source observations'
  assert.match(source,/existingLabel:check\.currentLabel/);
  assert.match(source,/existingHref:check\.sourceHref/);
  assert.match(source,/sourceEvidence:true,ownerSpecified:false/);
- assert.ok(source.includes("call('engine-review',{evidence:{baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:modelSource,phiSkills:phaseSkills('review'),pinnedControls}})"), 'Pink receives immutable windows plus pinned controls');
+ assert.ok(source.includes("call('engine-review',{evidence:{colorCore:phaseColorCore('review'),baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:modelSource,phiSkills:phaseSkills('review'),pinnedControls}})"), 'Pink receives immutable windows plus pinned controls');
  assert.ok(source.indexOf('const pinnedControls')<source.indexOf('const repaired'), 'Pinned source facts must be prepared before independent review');
  assert.ok(source.includes("patchedHashes:patchDigests(candidate.patched)"), 'v2 GPT Purple receives exact full-file digests');
  assert.ok(source.includes("source:modelSource,phiSkills:phaseSkills('arbitrate'),pinnedControls"), 'Pink and Purple use the same selected protocol source');
