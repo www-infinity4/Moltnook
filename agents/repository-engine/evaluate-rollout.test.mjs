@@ -10,3 +10,35 @@ test('missing credentials and stale deployment never mutate traffic',async()=>{
  assert.equal((await evaluateRollout({evidence,context:{productionAccess:true}})).executed,false);
  let writes=0;await assert.rejects(evaluateRollout({evidence,token:'private',context:{productionAccess:true},fetcher:async(_u,r)=>{if(r.method==='POST')writes++;return Response.json({success:true,result:{deployments:[{id:'changed'}]}})}}),/changed/);assert.equal(writes,0);
 });
+
+test('BrainClock singleton cannot use percentage canary routing and never sends a mutating API call',async()=>{
+ for(const weight of [0,.01,.1,.5]){
+  let reads=0,writes=0;
+  const result=await evaluateRollout({
+   evidence:{...evidence,workerName:'infinity-brain-clock',weight},
+   token:'fake-secret',context:{productionAccess:true},
+   fetcher:async(_url,request)=>{if(request.method==='POST')writes++;else reads++;throw Error('should not reach Cloudflare');}
+  });
+  assert.equal(result.action,'hold');
+  assert.equal(result.executed,false);
+  assert.match(result.reason,/singleton.*Preview/);
+  assert.equal(writes,0);
+  assert.equal(reads,0);
+ }
+});
+test('rollback of an already-exposed BrainClock candidate remains available with verified stable version',async()=>{
+ let writes=0,live={id:'before',versions:[
+  {version_id:candidate,percentage:10},{version_id:stable,percentage:90}]};
+ const fetcher=async(_url,request)=>{
+  if(request.method==='POST'){writes++;live={id:'after',versions:JSON.parse(request.body).versions};}
+  return Response.json({success:true,result:request.method==='GET'?{deployments:[live]}:live});
+ };
+ const result=await evaluateRollout({
+  evidence:{...evidence,workerName:'infinity-brain-clock',weight:.1,errors:1},
+  context:{productionAccess:true},token:'private',fetcher
+ });
+ assert.equal(result.action,'rollback');
+ assert.equal(result.executed,true);
+ assert.equal(writes,1);
+ assert.deepEqual(result.versions,[{version_id:stable,percentage:100}]);
+});
