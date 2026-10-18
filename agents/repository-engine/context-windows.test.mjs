@@ -20,6 +20,9 @@ test('unshown edits, invalid paths, oversized new source and empty evidence fail
  assert.equal(checkVisibleEdits(pkg,[{path:'new.css',before:null,after:'x'.repeat(16000)}]),false);
  assert.equal(checkVisibleEdits(pkg,[{path:'wallet.js',before:null,after:'x'}]),false);
  assert.equal(checkVisibleEdits(pkg,[]),false);
+ assert.match(visibleEditFeedback(pkg,[]),/Expected a nonempty edits array/);
+ assert.match(visibleEditFeedback(pkg,[]),/exact before substring/);
+ assert.match(visibleEditFeedback(pkg,[]),/before:null/);
 });
 test('UTF-8 hashes and exact file-size claims are deterministic',()=>{
  assert.match(sha256('é'),/^[0-9a-f]{64}$/);
