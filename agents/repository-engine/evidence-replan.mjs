@@ -72,6 +72,27 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
     ' and its GitHub repository metadata reported push permission. The scoped runtime excludes .git, .env, credentials and secrets, NOT the entire repository. Reassess source-only changes inside the assigned repository. This is not proof a future push, merge or deployment will succeed.');
    matchedCodes.push('verified_repo_write_scope');continue;
   }
+  // The signed runner has a pinned local tree and owner-authorized source write
+  // scope. An excluded-path claim about a *known local UI file* is evidence
+  // for ONE bounded replan, not permission to change a missing/protected file.
+  // Never infer write access to dependencies or bypass a real 401/403.
+  if(blocker.code==='excluded_path_required'&&writeScope?.reportedPushPermission===true&&
+    /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'')&&
+    /(?:outside|excluded|forbidden|disallow|not permitted|prohibit)/i.test(reason)&&
+    /(?:writ|path|source|scope|policy)/i.test(reason)&&
+    !/(?:\.env|\.git[\\/]|secret|credential|authorization token|branch protection|403|401|permission denied|private endpoint)/i.test(reason)){
+   const local=(Array.isArray(sourceTree)?sourceTree:[]).filter(p=>
+    typeof p==='string'&&p.length<180&&
+    /\.(?:js|mjs|cjs|ts|tsx|jsx|css|html|kt|java)$/.test(p)&&
+    !/(?:^|\\/)(?:\\.git|\\.env|node_modules|credentials|secrets?)(?:\\/|\\.|$)/i.test(p)&&
+    reason.toLowerCase().includes(p.toLowerCase())).slice(0,5);
+   if(local.length){
+    facts.push('The authenticated runner checked out '+writeScope.repository+
+     ', which reports push permission and contains these exact local source paths: '+local.join(', ')+
+     '. The stated runner policy does not exclude these paths. Reconsider the source-only change for those files; a missing overlay file, third-party dependency, protected file or deployment requirement remains a real blocker. Pinned tree access does not prove a push, test or deployment will succeed.');
+    matchedCodes.push('verified_local_source_path');continue;
+   }
+  }
   if(blocker.code!=='owner_input_required')continue;
   // The signed runner already cloned a scoped repository and supplied its file
   // tree. A reader cannot demand an owner-supplied file path instead of first
