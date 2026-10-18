@@ -13,9 +13,14 @@ export async function collectSourceEvidence({paths,task='',read,readWorkflow,max
  const allWords=new Set(taskText.toLowerCase().match(/[a-z][a-z0-9_-]{3,}/g)||[]);
  const terms=[...new Set([...symbols.map(x=>x.toLowerCase()),...[...allWords].filter(w=>!OMIT.has(w))])].slice(0,65);
  const wantsWorkflow=/\b(?:workflow|runner|github.actions|checks|ci|deployment|pipeline|permissions)\b/i.test(String(task));
- const candidates=paths.filter(p=>typeof p==='string'&&p.length<200&&((!SKIP.test(p)&&ALLOWED.test(p))||(wantsWorkflow&&typeof readWorkflow==='function'&&WORKFLOW.test(p)))&&!p.startsWith('/')&&!p.includes('..')&&!p.includes('\\'))
+ let candidates=paths.filter(p=>typeof p==='string'&&p.length<200&&((!SKIP.test(p)&&ALLOWED.test(p))||(wantsWorkflow&&typeof readWorkflow==='function'&&WORKFLOW.test(p)))&&!p.startsWith('/')&&!p.includes('..')&&!p.includes('\\'))
   .map(p=>{const stem=p.split('/').pop().replace(/\.[^.]+$/,'').toLowerCase();const named=(!['index','main','app','worker','test'].includes(stem)&&allWords.has(stem))||String(task).toLowerCase().includes(p.toLowerCase());return {path:p,score:(named?40:0)+(/(^|\/)index\.html?$/i.test(p)?5:0)+(terms.reduce((n,t)=>n+(p.toLowerCase().includes(t)?4:0),0))+(p.toLowerCase().includes('src/')?1:0)+(WORKFLOW.test(p)?14:0)}})
-  .sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path)).slice(0,symbols.length?48:9);
+  .sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path));
+ if(symbols.length){
+  const pools=[candidates.filter(x=>/\.(?:mjs|cjs|jsx?|tsx?)$/i.test(x.path)&&!/(^|\/)(?:tests?|fixtures)\//.test(x.path)).slice(0,16),candidates.filter(x=>/\.(?:java|kt|kts|xml)$/i.test(x.path)).slice(0,16),candidates];
+  const unique=new Map();for(const row of pools.flat())if(!unique.has(row.path))unique.set(row.path,row);
+  candidates=[...unique.values()].slice(0,48);
+ }else candidates=candidates.slice(0,9);
  const loaded=new Map();
  if(symbols.length){
   for(const candidate of candidates){
@@ -43,6 +48,12 @@ export async function collectSourceEvidence({paths,task='',read,readWorkflow,max
   }
   ranked.sort((a,b)=>b.score-a.score||a.i-b.i);
   const chosen=new Set();
+  // Cover each explicitly requested symbol before repeated generic matches.
+  for(const symbol of symbols){
+   const definition=lines.findIndex(line=>line.includes('function '+symbol)||line.includes('class '+symbol));
+   const at=definition>=0?definition:lines.findIndex(line=>line.includes(symbol));
+   if(at>=0)for(let nearby=Math.max(0,at-2);nearby<=Math.min(lines.length-1,at+2);nearby++)chosen.add(nearby);
+  }
   for(const {i} of ranked.slice(0,10)){
    for(let nearby=Math.max(0,i-4);nearby<=Math.min(lines.length-1,i+4);nearby++)chosen.add(nearby);
   }
