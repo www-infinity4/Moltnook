@@ -57,6 +57,8 @@ jobs:
           node --check agents/repository-engine/color-core.mjs
           node --test agents/repository-engine/color-core.test.mjs
           node --test agents/tests/color-child-bots.test.mjs
+          node --check agents/repository-engine/green-build-recovery.mjs
+          node --test agents/repository-engine/green-build-recovery.test.mjs
           node --test agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs
           node --test agents/repository-engine/oracle-style-contract.test.mjs
       - name: Assert Oracle surface and functional JavaScript syntax
