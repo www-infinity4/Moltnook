@@ -6,6 +6,27 @@ export const sha256=text=>createHash('sha256').update(text,'utf8').digest('hex')
 const WORD=/[a-z][a-z0-9_-]{3,}/gi;
 const STOP=new Set('that this from with have will into when where which should could everything project existing repository files source page build code bot agent make change work layout update something requested current about outside main work current fix create ensure checks original'.split(' '));
 function words(v){return [...new Set(String(v||'').match(WORD)||[])].map(x=>x.toLowerCase()).filter(x=>!STOP.has(x)).slice(0,65);}
+// Translate a small set of precise context requests into positions in the
+// pinned checkout. Generic word matches often stop at early array.push calls
+// and never reach the actual git publication code near the end of a file.
+// These positions select evidence only; all existing edit/hash gates apply.
+function requestedAnchors(full,request){
+ const text=String(request||'').slice(0,12000),positions=[];
+ if(/\bgit\s+push\b/i.test(text)){
+  const pattern=/\b(?:git\s*\(\s*['"]push['"]|command\s*\(\s*['"]git['"]\s*,\s*\[\s*['"]push['"]|git\s+push\b)/gi;
+  for(const match of full.matchAll(pattern))positions.push(match.index);
+ }
+ if(/<\/body>|\bclosing\s+body\b/i.test(text)){
+  const at=full.toLowerCase().lastIndexOf('</body>');if(at>=0)positions.push(at);
+ }
+ // A named code symbol or literal must actually occur in the immutable file.
+ for(const match of text.matchAll(/`([^`\n]{4,160})`/g)){
+  let at=-1,count=0;
+  while(count<4&&(at=full.indexOf(match[1],at+1))>=0){positions.push(at);count++;}
+ }
+ const unique=[...new Set(positions)];
+ return /\bfinal\b/i.test(text)?unique.sort((a,b)=>b-a):unique;
+}
 export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
  if(!original||typeof original!=='object'||maxChars<4000)throw Error('bounded_source_required');
  const paths=Object.keys(original);
@@ -19,7 +40,7 @@ export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
   const fileBudget=Math.min(7000,Math.max(1800,Math.floor(budget/Math.max(1,paths.length-Object.keys(packet).length))));
   if(fileBudget<1500)throw Error('source_window_budget_exhausted');
   const terms=[...new Set([...words(path.replace(/[/.]/g,' ')),...hints])];
-  const candidates=[];
+  const candidates=requestedAnchors(full,task).map((pos,index)=>({pos,score:1000-index}));
   for(const term of terms){
    let pos=-1,found=0;
    while(found<4&&(pos=full.toLowerCase().indexOf(term,pos+1))>=0){
@@ -161,6 +182,7 @@ export function recalculateBounds(original,packet,{
    const at=full.indexOf(e.before);
    if(at>=0&&full.indexOf(e.before,at+1)<0&&!inPrior(at)){focus=at;break;}
   }
+  if(focus<0)focus=requestedAnchors(full,task).find(at=>!inPrior(at))??-1;
   // Empty edits: choose a previously unseen task-related source location.
   if(focus<0){
    const matches=[];
