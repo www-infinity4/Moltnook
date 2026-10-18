@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: bbf3a91dfb4c2059c2a53b7dc8fe16d5923523c2
+          ref: 19510f55b43bf8daa342f6056962bf7ad72feeb9
           path: quantaphi-source
           persist-credentials: false
           token: ${{ secrets.GHP }}
@@ -56,13 +56,14 @@ jobs:
         run: |
           set -euo pipefail
           ACTUAL_SHA="$(git rev-parse HEAD)"
-          if [[ "$ACTUAL_SHA" != "bbf3a91dfb4c2059c2a53b7dc8fe16d5923523c2" ]]; then
+          if [[ "$ACTUAL_SHA" != "19510f55b43bf8daa342f6056962bf7ad72feeb9" ]]; then
             echo "::error::Staged candidate source revision changed"; exit 1
           fi
           echo "TARGET_SHA=$ACTUAL_SHA" >> "$GITHUB_ENV"
           node --test \
             test/brain-ticket-selector.test.mjs \
             test/brain-deferred-recovery.test.mjs \
+            test/brain-assigned-job-scope.test.mjs \
             test/brain-color-core.test.mjs \
             test/brain-clock.test.mjs \
             test/brain-clock-binding-parity.test.mjs \
@@ -127,7 +128,7 @@ jobs:
         run: |
           {
             echo "## Isolated Brain preview gate"
-            echo "Source candidate: QuantaPhi bbf3a91dfb4c2059c2a53b7dc8fe16d5923523c2"
+            echo "Source candidate: QuantaPhi 19510f55b43bf8daa342f6056962bf7ad72feeb9"
             echo "Preview tests synthetic, read-only admission and isolated DO/D1 only."
             echo "No user jobs, owner sessions, wallet payouts, repository merges or worker production traffic are invoked."
             echo "A Preview pass does not approve a full production rollout. Preserve the exact stable Worker rollback version."
