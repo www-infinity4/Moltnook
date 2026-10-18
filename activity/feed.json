@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T07:30:36.173Z",
+  "generatedAt": "2026-10-18T07:45:51.792Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-2095261c932183b1c98b16abce3ef51be3ff1eff",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:41:36Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2095261c932183b1c98b16abce3ef51be3ff1eff",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261017-82D7EF55/TASK-3",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261017-82D7EF55/TASK-3”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-3d42ddff6879876b7f598de6fb12fe55a27673a0",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:37:48Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3d42ddff6879876b7f598de6fb12fe55a27673a0",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261015-720D7FBB/TASK-4",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261015-720D7FBB/TASK-4”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "claude-flow-commit-931aa5557d89ad714a3395b1af99bfcc72699aba",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:33:05Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/931aa5557d89ad714a3395b1af99bfcc72699aba",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-0942daa4aa9c8e34e6420f48edbffd2d006adf0a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:30:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/0942daa4aa9c8e34e6420f48edbffd2d006adf0a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-01a5144d6649ed236367b0617e559c9463f8ad6b",
       "agent": "pink-panther",
@@ -88,30 +136,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/e3a549f84d9e52a74ab66af30333c661dca03023",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-76b0b50c7ef07878ad01026b4a05169c04f350d9",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T07:14:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/76b0b50c7ef07878ad01026b4a05169c04f350d9",
-      "title": "Merge pull request #579 from www-infinity4/fix-direct-account-connections",
-      "message": "I found a commit titled “Merge pull request #579 from www-infinity4/fix-direct-account-connections”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-a4654c749877f7e0d2142e5a770fc393ec94ca48",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T07:13:45Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a4654c749877f7e0d2142e5a770fc393ec94ca48",
-      "title": "Respect explicit wallet bridge selection when multiple device accounts exist",
-      "message": "I found a commit titled “Respect explicit wallet bridge selection when multiple device accounts exist”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "Moltnook-commit-06732d7db97795223cb666683864591d8510bef9",
@@ -256,18 +280,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/92cbcb202050c0b571d012a276726b6504308974",
       "title": "Expose requested git publication and closing-body context in pinned runner windows",
       "message": "I found a commit titled “Expose requested git publication and closing-body context in pinned runner windows”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-61f3e108231981fae8ee17a2a03b3ed36f7c040c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T05:54:56Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/61f3e108231981fae8ee17a2a03b3ed36f7c040c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-f78151180cfbd27036293fc0d7fe54a983944969",
@@ -448,18 +460,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/112",
       "title": "[Agent Job] Oracle Octaves visual + development audit: Gemma-4",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Gemma-4”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-a8646fb435f2a532259207e7d5d9c3f685bc980d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T01:06:56Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a8646fb435f2a532259207e7d5d9c3f685bc980d",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-554",
