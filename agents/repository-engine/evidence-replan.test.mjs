@@ -185,3 +185,20 @@ test('a legitimate local runner test passes, without granting cross-repository w
  assert.equal(r.retry,false);
  assert.deepEqual(r.categories,[]);
 });
+
+
+test('pinned UI source path contradicts invented blanket exclusion without granting extra permissions',()=>{
+ const repo='www-infinity4/QuantaPhi';
+ const plan={blockers:[b('excluded_path_required','Bubbles UI source bubbles-voice-gate.js is outside writer policy; editing this source path is not permitted')]};
+ const evidence={plan,task:'Fix Bubbles voice gating',writeScope:{repository:repo,reportedPushPermission:true},
+  sourceTree:['bubbles-voice-gate.js','test/bubbles-voice-gate.test.cjs','README.md']};
+ const reconsider=evidenceReplanFeedback(evidence);
+ assert.equal(reconsider.retry,true);
+ assert.deepEqual(reconsider.categories,['verified_local_source_path']);
+ assert.match(reconsider.facts.join(' '),/bubbles-voice-gate.js/);
+ assert.equal(plan.blockers.length,1,'original blocker is not removed without model replan');
+ assert.equal(evidenceReplanFeedback({...evidence,writeScope:{repository:repo,reportedPushPermission:false}}).retry,false);
+ assert.equal(evidenceReplanFeedback({...evidence,sourceTree:['README.md']}).retry,false);
+ assert.equal(evidenceReplanFeedback({...evidence,plan:{blockers:[b('excluded_path_required','Android overlay source bubbles-floating-window.js is forbidden by writer policy')]}}).retry,false,'missing file must stay blocked');
+ assert.equal(evidenceReplanFeedback({...evidence,plan:{blockers:[b('excluded_path_required','The .env credentials source is outside writer policy')]},sourceTree:['.env']}).retry,false);
+});
