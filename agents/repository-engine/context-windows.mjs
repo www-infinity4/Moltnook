@@ -86,7 +86,7 @@ export function checkVisibleEdits(packet,edits){
 // Return schema facts only, never source text, so a bounded retry can repair
 // its representation without weakening the immutable-window gate.
 export function visibleEditFeedback(packet,edits){
- if(!Array.isArray(edits)||!edits.length)return 'Expected a nonempty edits array.';
+ if(!Array.isArray(edits)||!edits.length)return 'Expected a nonempty edits array. Select one allowed path and copy an exact before substring from a shown immutable source window, with after containing the real replacement. For an approved new file use before:null. Empty edits cannot satisfy a build ticket; preserve genuine blockers instead of inventing a change.';
  return edits.map((e,i)=>{
   const item=packet?.source?.[e?.path];
   if(!item)return 'Edit '+i+': path is not in the reader plan.';
