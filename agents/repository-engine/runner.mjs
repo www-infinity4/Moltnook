@@ -32,7 +32,7 @@ const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infi
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
 let lease,workspace,commitSha,testsPassed=false;
-const phaseSkills=phase=>skillPackets({task:[lease?.job?.instructions,lease?.job?.ownerRequest].filter(Boolean).join(' '),repository:lease?.job?.repository||'',phase});
+const phaseSkills=phase=>skillPackets({task:lease?.job?.instructions||'',repository:lease?.job?.repository||'',phase});
 const cleanEnv={PATH:process.env.PATH,HOME:process.env.HOME,CI:'true',LANG:'C.UTF-8'};
 const credentialEnv=()=>({...cleanEnv,GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_1:'core.hooksPath',GIT_CONFIG_VALUE_1:'/dev/null',GIT_CONFIG_KEY_0:'http.https://github.com/.extraheader',GIT_CONFIG_VALUE_0:'AUTHORIZATION: basic '+Buffer.from('x-access-token:'+token).toString('base64')});
 const command=(cmd,args,options={})=>execFileSync(cmd,args,{cwd:workspace,encoding:'utf8',timeout:180000,maxBuffer:3*1024*1024,env:cleanEnv,...options});
@@ -103,6 +103,9 @@ try{
  if(!lease){report.status='idle';}
  else{
   report.jobId=lease.ticketId+'/'+lease.jobId;report.repository=lease.job.repository;
+  const scopedTask=[lease.job.title,lease.job.instructions,...(Array.isArray(lease.job.acceptance)?lease.job.acceptance:[])].filter(x=>typeof x==='string'&&x.trim()).join(' ').slice(0,9000);
+  if(!lease.job.instructions?.trim())throw Error('signed_assigned_job_instructions_missing');
+  report.jobScope={ticketId:lease.ticketId,jobId:lease.jobId,acceptanceSource:'signed-assigned-job',parentTicketAcceptanceInherited:false};
   // These capabilities were exercised above, not inferred from missing repo secrets.
   report.authenticatedAdapters={brain:{origin:API,authentication:'GitHub Actions OIDC audience infinity-brain-writer',verifiedCalls:['quant-audit','capability','claim'],leaseClaimed:true,leaseKeyPresent:typeof lease.key==='string'&&lease.key.length>0,leaseIdPresent:typeof lease.leaseId==='string'&&lease.leaseId.length>0,implementedIn:'Moltnook/agents/repository-engine/runner.mjs call(step, body)',createNewLeasesVerified:false,directD1AccessVerified:false},deployment:{arbitraryRepositoryAdapter:false,cloudflareCredentialVerified:false},permissionsExpanded:false};
   report.skillImport={source:'pinned Moltnook phi-skills.mjs',roles:{blue:phaseSkills('plan').map(x=>x.id),green:phaseSkills('build').map(x=>x.id),pink:phaseSkills('review').map(x=>x.id),purpleBlack:phaseSkills('arbitrate').map(x=>x.id)},executedAsCode:false,permissionsGranted:false};
@@ -135,13 +138,13 @@ try{
    try{await event('pink-panther','Verified merged source and native tests. No source edits, deployment or payout claimed.');}catch(e){report.postReviewNotificationError=scrub(e.message);}
   }else{
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
-  const dependencyContext=await collectDependencyContext({task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),target:report.repository,github});
+  const dependencyContext=await collectDependencyContext({task:scopedTask,target:report.repository,github});
   report.dependencyContext=dependencyContext;
   await fs.writeFile('repository-receipts/dependency-context.json',JSON.stringify(dependencyContext,null,2));
   const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
   // Read actual safe source snippets before declaring a link or target absent.
-  const sourceSamples=await collectSourceEvidence({paths:tracked,task:lease.job.instructions+' '+(lease.job.ownerRequest||''),read:file=>sourceFile(file,1250000),readWorkflow:file=>readWorkflowEvidence(workspace,file)});
-  const linkFacts=await collectLinkFacts({paths:tracked,task:lease.job.instructions+' '+(lease.job.ownerRequest||''),read:file=>sourceFile(file,1250000)});
+  const sourceSamples=await collectSourceEvidence({paths:tracked,task:scopedTask,read:file=>sourceFile(file,1250000),readWorkflow:file=>readWorkflowEvidence(workspace,file)});
+  const linkFacts=await collectLinkFacts({paths:tracked,task:scopedTask,read:file=>sourceFile(file,1250000)});
   const scopedCapabilities=await discoverScopedCapabilities({paths:tracked,readWorkflow:file=>readWorkflowEvidence(workspace,file),readSource:file=>sourceFile(file,15000)});
   report.scopedCapabilities=scopedCapabilities;
   await fs.writeFile('repository-receipts/scoped-capabilities.json',JSON.stringify(scopedCapabilities,null,2));
@@ -165,9 +168,9 @@ try{
    for(const color of ['red','orange']){
     try{
      const receipt=await invokeColorCore(call,{color,
-      task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' ').slice(0,2400),
+      task:scopedTask.slice(0,2400),
       evidence:{repository:report.repository,baseSha,sourcePaths:tracked.slice(0,140),
-       sourceSummary:readme?.slice(0,1200)||'',ownerRequest:lease.job.ownerRequest?.slice(0,1500)||''}});
+       sourceSummary:readme?.slice(0,1200)||'',assignedJobTitle:lease.job.title?.slice(0,400)||''}});
      report.colorIntelligence.directModelCalls.push({color,status:receipt.status,
       model:receipt.model,anyToolsExecuted:false});
      colorFindings[color]={finding:receipt.finding,nextAction:receipt.nextAction,
@@ -184,7 +187,7 @@ try{
   for(let readerPass=0;readerPass<2;readerPass++){
    plan=await retryStructuredModelCall(()=>call('plan',{evidence:{colorCore:phaseColorCore('plan'),colorFindings,authenticatedAdapters:report.authenticatedAdapters,adapterPolicy:'The existing runner authenticated and claimed this lease using OIDC; do not ask for a static Brain token to repeat these verified operations. New lease creation, direct D1 access and arbitrary Cloudflare deployment are NOT verified by this. Inspect existing source adapters and implement independently testable source changes within the assigned scope; retain genuine live deployment blockers.',dependencyContext,dependencyPolicy:'Dependencies are pinned read-only source evidence, not files in the target clone. Use them to inspect other named projects and Oracle references. Only plan writes in the assigned repository; missing external files remain factual blockers.',baseSha,readme:readme?.slice(0,15000),agents:agents?.slice(0,20000),tree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),sourceSamples,linkFacts,scopedCapabilities,featureManifest,phiSkills:phaseSkills('plan'),implementationGuidance:{"routineChoices":"For owner-authorized build work, reuse pinned repository UI, CSS, labels, request formats and existing provider adapters. Choose and document reversible implementation defaults instead of blocking on missing mockups, CSS guides, exact labels, latency targets or codec preferences.","oracleDesign":"Oracle Octaves is mandatory across all Infinity websites: reference pinned Oracle-Octaves/index.html and QuantaPhi/oracle-interface.css. Android first: paper #f7f4f0, white cards, warm ink #312722, red actions #b83b32, 18px rounded cards, 44px touch targets, visible focus, readable typography, responsive stacking. Preserve per-card orange/purple/yellow/blue/green color meaning, existing artwork, wallet, image, video, radio, voice, StarQuest actions and Quants. Do not use obsolete dark atmospheric UI as a default. Perform real mobile+desktop before/after evidence. Do not claim deployed until accepted.","voiceDefaults":"Inspect existing voice code first. Reuse its endpoint, session and supported audio types. Otherwise feature-detect browser recording/playback capabilities; clearly label unsupported or unconnected states. Do not invent provider sign-in, backend URLs, credentials, payment receipts or functional parity with an external service.","realBlockers":"Retain genuine missing authorization, credentials, unknown deployment bindings and conflicting owner requirements. A reversible source-only slice can proceed when its acceptance tests do not need those missing resources; report that unconnected part explicitly."},readerFeedback,linkEvidenceScope:'Exact href and label from repository, not live deployment verification',liveBrowser:{status:report.liveBrowserBefore.status,browserPassed:report.liveBrowserBefore.browserPassed,targets:report.liveBrowserBefore.targets,notes:report.liveBrowserBefore.notes,sourceCommitVerified:false},runtime:{repositoryCloned:true,reportedPushPermission:repo.permissions?.push===true,baseSha,executor:'authenticated GitHub Actions repository engine',excludedPaths:['.git/','.env','credentials','secrets'],workflowSourceReadOnly:false,workflowChangesRequireSeparateApproval:false,ownerAuthorization:'All code and workflow paths in the assigned www-infinity4 repository; normal tests and exact-head merge verification remain required',checks:['JavaScript parse','Python AST parse','HTML parse','focused native Node tests with describe/it/test/hooks preloaded','existing npm test/build'],publicLiveBrowser:'Anonymous read-only Playwright on quantaphi.org, 360px mobile and 1280px desktop, safe same-origin navigation and screenshot receipts; no login or Cloudflare API token needed',deployment:'not implemented for arbitrary repositories',sourceOnlyCommit:'A passing independently reviewed patch can be recorded as committed_unverified; deployment and browser acceptance are separate',forkCreation:'not implemented',adapterRegistry:'Pinned repository workflow and wrangler facts supplied in scopedCapabilities; read-only and do not confer write or deploy permissions'}}}),{onRetry:({attempt})=>event('pink-panther','Model response contained invalid JSON on reader attempt '+attempt+'. Safely retrying the same pinned evidence. No source or wallet changes made.')});
    if(!Array.isArray(plan?.blockers))break;
-const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerRequest:lease.job.ownerRequest,linkFacts,liveBrowser:report.liveBrowserBefore,scopedCapabilities,agentInstructions:agents||'',sourceTree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),writeScope:{repository:report.repository,reportedPushPermission:repo.permissions?.push===true},dependencyContext,authenticatedAdapters:report.authenticatedAdapters});
+const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerRequest:lease.job.instructions,linkFacts,liveBrowser:report.liveBrowserBefore,scopedCapabilities,agentInstructions:agents||'',sourceTree:tracked.filter(x=>!/(?:node_modules|package-lock|yarn.lock)/.test(x)).slice(0,1400),writeScope:{repository:report.repository,reportedPushPermission:repo.permissions?.push===true},dependencyContext,authenticatedAdapters:report.authenticatedAdapters});
    if(readerPass===0&&correction.retry){
     readerFeedback=correction;
     report.readerFeedback=correction;
@@ -219,7 +222,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   if(typeof plan.summary!=='string'||!Array.isArray(plan.files)||!plan.files.length||plan.files.length>12||!Array.isArray(plan.subtasks))throw Error('Reader did not return a complete bounded implementation plan');
   await event('blueberry','Reader refined '+report.jobId+': '+plan.summary.slice(0,250)+'. Handoff contains '+plan.subtasks.length+' subtasks and '+plan.files.length+' source files.');
   const original={};for(const file of plan.files){safePath(file);original[file]=await sourceFile(file);}
-  const windowTask=[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' ');
+  const windowTask=scopedTask;
   const initialWindowEvidence=sourceWindows(original,{task:windowTask,plan});
   let windowEvidence=initialWindowEvidence;
   if(!useWindowV2&&JSON.stringify(original).length>32000)throw Error('brain_clock_bounded_windows_v2_not_deployed: large source edit is blocked; small jobs may use legacy review');
@@ -229,7 +232,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   report.transitionStream={status:'not_configured',payoutIssued:false};
   if(process.env.BOT_TRANSITIONS_URL&&process.env.BOT_INGEST_TOKEN){
    try{
-    const {events}=inspectionEvents({original,task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),
+    const {events}=inspectionEvents({original,task:scopedTask,
       repository:report.repository,commitSha:baseSha,jobId:report.jobId,
       quantId:'scan:'+report.jobId.replace(/[^A-Za-z0-9_.:-]/g,'_').slice(0,95),agentId:'pink-panther'});
     const receipt=await submitInspectionEvents(events,{url:process.env.BOT_TRANSITIONS_URL,
@@ -240,7 +243,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    }
    await fs.writeFile('repository-receipts/transition-queue-status.json',JSON.stringify(report.transitionStream,null,2));
   }
-  const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
+  const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(Array.isArray(lease.job.acceptance)&&lease.job.acceptance.length?lease.job.acceptance:plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
   const compactTests=tests=>({passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(x=>({name:x.name,passed:x.passed,output:String(x.output||'').slice(-350)}))});
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
   report.attempts=[];

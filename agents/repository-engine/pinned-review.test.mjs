@@ -16,3 +16,10 @@ test('reviewer receives bounded pinned controls from actual source observations'
  assert.ok(source.includes("legacy-small-files-only"), 'Legacy mode is limited to small files until Cloudflare v2 is deployed');
  assert.ok(source.includes("scrub(e.stderr||e.stdout||e.message).slice(0,900)"), 'Actionable Node syntax error must return to engineer');
 });
+
+test('independent color jobs do not inherit parent ticket criteria',()=>{
+ assert.equal(source.includes('lease.job.ownerRequest'),false);
+ assert.ok(source.includes('const scopedTask='));
+ assert.ok(source.includes('parentTicketAcceptanceInherited:false'));
+ assert.ok(source.includes('const windowTask=scopedTask'));
+});
