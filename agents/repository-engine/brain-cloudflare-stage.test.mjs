@@ -5,7 +5,7 @@ const id1='bb324bd0-d25f-4684-bd43-5abc1e06b667',id2='facda43e-23ea-4476-a12b-bb
 const deployId='8ec9e28e-badc-4a2f-8d48-4951e2e79931';
 const commit='a'.repeat(40);
 const candidateVersion=(bindings,versionId=id2)=>({
- id:versionId,annotations:{'workers/message':'Verified deferred recovery from '+commit},
+ id:versionId,annotations:{'workers/message':'Verified Brain source from '+commit},
  resources:{bindings}
 });
 const resources=Object.entries(REQUIRED_BINDINGS).map(([name,type])=>({
