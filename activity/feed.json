@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T07:15:47.941Z",
+  "generatedAt": "2026-10-18T07:30:36.173Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,78 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-01a5144d6649ed236367b0617e559c9463f8ad6b",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:25:05Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/01a5144d6649ed236367b0617e559c9463f8ad6b",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261017-82D7EF55/TASK-4",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261017-82D7EF55/TASK-4”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-580f6c0ceec11b9a7871eabaadcf4d9d651ad1fe",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:24:08Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/580f6c0ceec11b9a7871eabaadcf4d9d651ad1fe",
+      "title": "Merge pull request #580 from www-infinity4/fix-bubbles-originless-browser-reads-20261018",
+      "message": "I found a commit titled “Merge pull request #580 from www-infinity4/fix-bubbles-originless-browser-reads-20261018”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-f1d939c2a0bf13b197874888d5ccbad74fbaf6b2",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:23:25Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/f1d939c2a0bf13b197874888d5ccbad74fbaf6b2",
+      "title": "Add dedicated CI for Bubbles connector browser and pairing regressions",
+      "message": "I found a commit titled “Add dedicated CI for Bubbles connector browser and pairing regressions”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-85a461dbdac816d4a9102f9c70f5c9d529dc928e",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:21:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/85a461dbdac816d4a9102f9c70f5c9d529dc928e",
+      "title": "Test originless same-origin account reads and cross-site rejection",
+      "message": "I found a commit titled “Test originless same-origin account reads and cross-site rejection”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-328b132310d17dd5e3f9b988fc8e1c1fa4fe3782",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:21:27Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/328b132310d17dd5e3f9b988fc8e1c1fa4fe3782",
+      "title": "Permit Fetch Metadata-verified same-origin account reads without Origin header",
+      "message": "I found a commit titled “Permit Fetch Metadata-verified same-origin account reads without Origin header”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-e3a549f84d9e52a74ab66af30333c661dca03023",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T07:15:56Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e3a549f84d9e52a74ab66af30333c661dca03023",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-76b0b50c7ef07878ad01026b4a05169c04f350d9",
       "agent": "purple-people-eater",
@@ -40,54 +112,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/a4654c749877f7e0d2142e5a770fc393ec94ca48",
       "title": "Respect explicit wallet bridge selection when multiple device accounts exist",
       "message": "I found a commit titled “Respect explicit wallet bridge selection when multiple device accounts exist”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-e8070f47884d1a4c0155af512a39e29e7b374a8c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T07:12:09Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e8070f47884d1a4c0155af512a39e29e7b374a8c",
-      "title": "Expose account connections directly and wait for verified device bridge",
-      "message": "I found a commit titled “Expose account connections directly and wait for verified device bridge”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-29a41a70fd169688a3bd4a40ac5b27c2104013af",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:56:56Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/29a41a70fd169688a3bd4a40ac5b27c2104013af",
-      "title": "Merge pull request #578 from www-infinity4/bubbles-connector-pairing",
-      "message": "I found a commit titled “Merge pull request #578 from www-infinity4/bubbles-connector-pairing”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-67eff70298994bd397bd87247fc6c4a8ea1dbe98",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:55:59Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/67eff70298994bd397bd87247fc6c4a8ea1dbe98",
-      "title": "Load the same connector-pairing assets from every Bubbles entrypoint",
-      "message": "I found a commit titled “Load the same connector-pairing assets from every Bubbles entrypoint”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-75439b864bbff6bf6dbd6c1cbc2c0a26dc7414f2",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:54:59Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/75439b864bbff6bf6dbd6c1cbc2c0a26dc7414f2",
-      "title": "Connect account browsers through wallet-approved expiring pairing",
-      "message": "I found a commit titled “Connect account browsers through wallet-approved expiring pairing”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "Moltnook-commit-06732d7db97795223cb666683864591d8510bef9",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-adff773d88a6a77b0bf832ea6c118329d62027dc",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:00:44Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/adff773d88a6a77b0bf832ea6c118329d62027dc",
-      "title": "Merge pull request #576 from www-infinity4/fix-pink-deferral-lease-cleanup",
-      "message": "I found a commit titled “Merge pull request #576 from www-infinity4/fix-pink-deferral-lease-cleanup”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-d2410798a0e713b0c2f0b5b6629ede65d57a8f28",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -254,18 +266,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-18T05:54:56Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/61f3e108231981fae8ee17a2a03b3ed36f7c040c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-5fe387881507525a77c35469ca6216480d6268ea",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T05:45:41Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5fe387881507525a77c35469ca6216480d6268ea",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
