@@ -13,6 +13,7 @@ import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
 import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs';
 import {runSourceReview} from './source-verify.mjs';
+import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -329,8 +330,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
  // Pink receipt time. If a repair started after this read-only lease was
  // admitted, this is a legitimate scheduling race, not a failed code build.
  // Preserve the guard: no Pink completion, no job Quant, no fake result.
- if(!commitSha&&lease?.job?.sourceReview?.kind==='source_review_only'&&
-    e?.message==='source_review_repair_still_executing_or_finished'){
+ if(isDeferredPinkReviewRace({lease,error:e,commitSha})){
   report.status='deferred_active_repair';
   report.error='Pink verification deferred because an associated Green repair is active or finished; no source verification or payout was recorded.';
   report.retryPolicy='Do not replay this Pink review until the signed Brain selector finds it eligible again.';
