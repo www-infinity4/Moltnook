@@ -36,8 +36,10 @@ jobs:
           node --check agents/repository-engine/brain-isolated-probe.mjs
           node --check agents/repository-engine/prepare-brain-preview.mjs
           node --check agents/repository-engine/verify-brain-preview.mjs
+          node --check agents/repository-engine/brain-preview-reuse.mjs
           node --test agents/repository-engine/prepare-brain-preview.test.mjs \
-            agents/repository-engine/verify-brain-preview.test.mjs
+            agents/repository-engine/verify-brain-preview.test.mjs \
+            agents/repository-engine/brain-preview-reuse.test.mjs
       - name: Check out the exact Cloudflare staged Brain source using central GHP
         uses: actions/checkout@v4
         with:
@@ -67,7 +69,12 @@ jobs:
         run: node agents/repository-engine/verify-brain-preview.mjs before
       - name: Prepare ephemeral Preview-only configuration and wrapper
         run: node agents/repository-engine/prepare-brain-preview.mjs
+      - name: Reuse verified existing isolated Preview after Wrangler 10500
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node agents/repository-engine/brain-preview-reuse.mjs
       - name: Create isolated Cloudflare Preview (never a production deployment)
+        if: env.PREVIEW_NEEDS_CREATE == '1'
         working-directory: quantaphi-source
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
