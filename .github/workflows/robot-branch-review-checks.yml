@@ -43,7 +43,8 @@ jobs:
           node --test agents/repository-engine/brain-cloudflare-stage.test.mjs
           node --check agents/repository-engine/prepare-brain-preview.mjs
           node --check agents/repository-engine/verify-brain-preview.mjs
-          node --test agents/repository-engine/prepare-brain-preview.test.mjs agents/repository-engine/verify-brain-preview.test.mjs
+          node --test agents/repository-engine/prepare-brain-preview.test.mjs agents/repository-engine/verify-brain-preview.test.mjs agents/repository-engine/brain-preview-reuse.test.mjs
+          node --check agents/repository-engine/brain-preview-reuse.mjs
           node --check agents/repository-engine/dependency-context.mjs
           node --check agents/repository-engine/evidence-replan.mjs
           node --test agents/repository-engine/dependency-context.test.mjs agents/repository-engine/evidence-replan.test.mjs
