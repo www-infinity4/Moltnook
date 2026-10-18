@@ -55,12 +55,14 @@ jobs:
         run: |
           node --check workers/infinity-brain-clock/worker.js
           node --check workers/infinity-brain-clock/deferred-recovery.mjs
+          node --check workers/infinity-brain-clock/source-review.mjs
           node --test \
             test/brain-ticket-selector.test.mjs \
             test/brain-deferred-recovery.test.mjs \
             test/brain-queue-order.test.mjs \
             test/brain-clock.test.mjs \
             test/brain-clock-binding-parity.test.mjs \
+            test/brain-pink-source-review.test.mjs \
             test/bubbles-runner-dispatch.test.mjs \
             workers/infinity-brain-clock/arbitration-evidence.test.mjs
 
@@ -110,7 +112,7 @@ jobs:
         run: |
           npx --yes wrangler@4 versions upload \
             --config workers/infinity-brain-clock/wrangler.toml \
-            --message "Verified deferred recovery from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
+            --message "Verified Brain source from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
 
       - name: Prove no production traffic changed and no binding identity changed
         env:
