@@ -78,17 +78,35 @@ jobs:
           npx --yes wrangler@latest preview \
             --config workers/infinity-brain-clock/wrangler.toml \
             --name brain-candidate-26518e96 2>&1 | tee /tmp/brain-preview-output.log
-          CANDIDATE_URL="$(grep -Eo 'https://[a-z0-9.-]+\.workers\.dev' /tmp/brain-preview-output.log |
-            grep 'brain-candidate-26518e96-infinity-brain-clock' | tail -1 || true)"
-          if [[ -z "$CANDIDATE_URL" ]]; then
-            echo "::error::Cloudflare did not report a verified isolated Preview URL"
-            exit 1
-          fi
-          echo "BRAIN_CANARY_URL=$CANDIDATE_URL" >> "$GITHUB_ENV"
+          grep -q 'Preview: brain-candidate-26518e96' /tmp/brain-preview-output.log || {
+            echo "::error::Cloudflare did not create expected isolated Preview"; exit 1;
+          }
       - name: Check real Preview runtime and unchanged production deployment
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: node agents/repository-engine/verify-brain-preview.mjs after
+      - name: Ensure public Preview URLs are disabled after test or failure
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$CLOUDFLARE_API_TOKEN" ]]; then
+            curl --fail --silent --show-error \
+              --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              --header "Content-Type: application/json" \
+              --request POST \
+              --data '{"enabled":true,"previews_enabled":false}' \
+              "https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/infinity-brain-clock/subdomain" \
+              > /tmp/brain-preview-restore.json
+            node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          if(JSON.parse(readFileSync('/tmp/brain-preview-restore.json','utf8')).success!==true)
+            throw Error('isolated_preview_disable_request_failed');
+          console.log('Public Preview URL routing restored to disabled; production Worker traffic unchanged.');
+          NODE
+          fi
       - name: Archive nonsecret Preview verification receipt
         if: always()
         uses: actions/upload-artifact@v4

@@ -46,23 +46,87 @@ async function run(mode,{request=fetch}={}){
  const earlier=JSON.parse(fs.readFileSync(snapshot,'utf8'));
  if(JSON.stringify(earlier)!==JSON.stringify(state))
   throw Error('production_changed_during_isolated_canary');
- const url=process.env.BRAIN_CANARY_URL;
- if(!url||!/^https:\/\/brain-candidate-[0-9a-f]{8}-infinity-brain-clock\.[a-z0-9-]+\.workers\.dev$/.test(url))
-  throw Error('isolated_preview_url_unverified');
- const probeRequest=await request(url+'/__preview__/admission',{
-  method:'GET',redirect:'error',signal:AbortSignal.timeout(20000),
-  headers:{Accept:'application/json'}
- });
- if(!probeRequest.ok)throw Error('isolated_preview_probe_http_'+probeRequest.status);
- const verdict=validatePreview(await probeRequest.json());
- // Any other path, especially owner actions, must remain unavailable even
- // when someone tries to hit a public Preview hostname directly.
- const unauthorized=await request(url+'/work/run-next',{method:'POST',
-  redirect:'error',signal:AbortSignal.timeout(20000),
-  headers:{'Content-Type':'application/json'},body:'{}'});
- if(unauthorized.status!==404)throw Error('isolated_preview_owner_action_exposed');
- const health=await request(url+'/health',{method:'GET',signal:AbortSignal.timeout(20000)});
- if(health.status!==404)throw Error('isolated_preview_live_route_exposed');
+ // Before exposing Preview URLs, prove this Worker has only our isolated
+ // Preview. Public Preview URLs are opt-in and may expose any other Preview.
+ const workerRoot='https://api.cloudflare.com/client/v4/accounts/'+account+
+  '/workers/workers/infinity-brain-clock';
+ const scriptRoot='https://api.cloudflare.com/client/v4/accounts/'+account+
+  '/workers/scripts/infinity-brain-clock';
+ const token=process.env.CLOUDFLARE_API_TOKEN;
+ const api=async(url,method='GET',body)=>{
+  const response=await request(url,{method,headers:{
+   Authorization:'Bearer '+token,Accept:'application/json',
+   ...(body?{'Content-Type':'application/json'}:{})
+  },body:body?JSON.stringify(body):undefined,redirect:'error',
+  signal:AbortSignal.timeout(15000)});
+  const payload=await response.json();
+  if(!response.ok||payload?.success!==true)
+   throw Error('cloudflare_preview_control_rejected_'+method+'_'+response.status);
+  return payload.result;
+ };
+ const previews=await api(workerRoot+'/previews?per_page=20');
+ const items=previews?.items||previews;
+ if(!Array.isArray(items)||items.length!==1||
+    items[0]?.slug!=='brain-candidate-26518e96')
+  throw Error('unexpected_extra_preview_or_missing_isolated_preview');
+ const previewId=items[0].id;
+ const deploymentList=await api(workerRoot+'/previews/'+previewId+'/deployments');
+ const previewDeployment=deploymentList?.items?.[0]||deploymentList?.[0];
+ const env=previewDeployment?.env||{};
+ const required=Object.keys(env).sort();
+ if(JSON.stringify(required)!==JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
+    env.BRAIN_CANARY_MODE?.text!=='isolated'||
+    env.WORK_DB?.database_id!=='76deaa98-5d3a-4151-8390-e14d7da87cb3'||
+    env.CLOCK?.type!=='durable_object_namespace')
+  throw Error('preview_environment_uses_production_bindings');
+ const version=await api(scriptRoot+'/versions/'+earlier.versionId);
+ const stableClock=version?.resources?.bindings?.find(b=>b.name==='CLOCK')?.namespace_id;
+ if(!stableClock||stableClock===env.CLOCK.namespace_id)
+  throw Error('preview_durable_object_not_isolated');
+ const originalRoute=await api(scriptRoot+'/subdomain');
+ if(originalRoute?.enabled!==true||originalRoute?.previews_enabled!==false)
+  throw Error('existing_preview_routing_state_unexpected');
+
+ // Make the test-only Preview briefly routable. In all cases, disable URL
+ // routing again. The actual 100% production deployment is never mutated.
+ const url='https://brain-candidate-26518e96-infinity-brain-clock.marvaseater.workers.dev';
+ let verdict,firstHTTP=0;
+ try{
+  await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:true});
+  const currentPreview=await api(workerRoot+'/previews/'+previewId);
+  if(!currentPreview?.urls?.includes(url))
+   throw Error('expected_isolated_preview_url_missing');
+  let probeRequest;
+  for(let attempt=0;attempt<8;attempt++){
+   try{
+    probeRequest=await request(url+'/__preview__/admission',{
+     method:'GET',redirect:'error',signal:AbortSignal.timeout(5000),
+     headers:{Accept:'application/json'}});
+    firstHTTP=probeRequest.status;
+    if(probeRequest.ok)break;
+   }catch(error){firstHTTP=0;}
+   if(attempt<7)await new Promise(resolve=>setTimeout(resolve,1000));
+  }
+  if(!probeRequest?.ok)
+   throw Error('isolated_preview_probe_http_'+firstHTTP);
+  verdict=validatePreview(await probeRequest.json());
+  // Any other path, especially owner actions, must remain unavailable.
+  const unauthorized=await request(url+'/work/run-next',{method:'POST',
+   redirect:'error',signal:AbortSignal.timeout(20000),
+   headers:{'Content-Type':'application/json'},body:'{}'});
+  if(unauthorized.status!==404)throw Error('isolated_preview_owner_action_exposed');
+  const health=await request(url+'/health',{method:'GET',signal:AbortSignal.timeout(20000)});
+  if(health.status!==404)throw Error('isolated_preview_live_route_exposed');
+ }finally{
+  // Restore even if the enable call changed state but its reply was lost.
+  await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:false});
+  const restored=await api(scriptRoot+'/subdomain');
+  if(restored?.previews_enabled!==false||restored?.enabled!==true)
+   throw Error('preview_route_disable_unverified');
+ }
+ const afterwards=await deployment(request);
+ if(JSON.stringify(earlier)!==JSON.stringify(afterwards))
+  throw Error('production_changed_after_isolated_runtime_test');
  fs.mkdirSync('repository-receipts',{recursive:true});
  const result={status:'isolated_preview_verified',
   stage:'synthetic_read_only_canary',sourceSha:process.env.TARGET_SHA||'',

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {singleDeployment,validatePreview} from './verify-brain-preview.mjs';
 const deployId='8ec9e28e-badc-4a2f-8d48-4951e2e79931';
 const stable='bb324bd0-d25f-4684-bd43-5abc1e06b667';
@@ -32,4 +33,16 @@ test('preview gate requires real synthetic admission, isolated DO and an empty d
   assert.throws(()=>validatePreview({...clean,[key]:true}),/isolated_preview_check_failed/);
  assert.throws(()=>validatePreview({...clean,ticketCount:1}),/isolated_preview_admission_failed/);
  assert.throws(()=>validatePreview({...clean,ok:false}),/isolated_preview_admission_failed/);
+});
+
+test('temporary public Preview routing always gets disabled and production-bound credentials are never copied',()=>{
+ const source=readFileSync(new URL('./verify-brain-preview.mjs',import.meta.url),'utf8');
+ const workflow=readFileSync(new URL('../../.github/workflows/moltnook-brain-isolated-preview.yml',import.meta.url),'utf8');
+ assert.match(source,/previews_enabled:true/);
+ assert.match(source,/finally\s*\{/);
+ assert.match(source,/previews_enabled:false/);
+ assert.match(source,/preview_environment_uses_production_bindings/);
+ assert.match(workflow,/name: Ensure public Preview URLs are disabled after test or failure/);
+ assert.match(workflow,/if: always\(\)/);
+ assert.doesNotMatch(workflow,/wrangler@latest versions deploy|wrangler@latest deploy /);
 });
