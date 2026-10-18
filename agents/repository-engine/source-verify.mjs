@@ -6,6 +6,9 @@
 const SHA=/^[0-9a-f]{40}$/;
 const REPO=/^www-infinity4\/[A-Za-z0-9_.-]+$/;
 const TEST=/^(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:test|spec)\.(?:js|mjs|cjs)$/;
+const safeTestPath=value=>typeof value==='string'&&TEST.test(value)&&
+ value.split('/').every(part=>part!=='.'&&part!=='..'&&!part.startsWith('.'));
+
 export function sourceReviewEligibility({job,sourceReview,capability}={}){
  if(capability?.sourceReviewV1!==true||sourceReview?.kind!=='source_review_only'||
   sourceReview?.mayWrite!==false||job?.agent!=='pink-panther'||
@@ -24,9 +27,10 @@ export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changed
   !String(pr.title||'').includes(sourceReview.primaryId)||
   !SHA.test(headSha||'')||!Array.isArray(changedPaths)||changedPaths.length>=100)
   throw Error('merged_source_review_provenance_invalid');
- const allowed=changedPaths.filter(path=>typeof path==='string'&&TEST.test(path)).slice(0,8);
+ const allowed=changedPaths.filter(safeTestPath).slice(0,8);
  if(!allowed.length)throw Error('merged_source_review_test_paths_missing');
- const sourcePaths=changedPaths.filter(path=>typeof path==='string'&&!TEST.test(path));
+ const sourcePaths=changedPaths.filter(path=>typeof path==='string'&&!safeTestPath(path)&&
+ path.split('/').every(part=>part!=='.'&&part!=='..'&&!part.startsWith('.')));
  if(!sourcePaths.length)throw Error('merged_source_review_source_paths_missing');
  return {repository:job.repository,sourceSha:headSha,mergeSha:sourceReview.mergeSha,
   prNumber:sourceReview.prNumber,testPaths:allowed,sourcePaths,
