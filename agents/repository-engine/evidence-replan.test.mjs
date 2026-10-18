@@ -1,6 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {evidenceReplanFeedback,authPlanReconsideration} from './evidence-replan.mjs';
+import {evidenceReplanFeedback,authPlanReconsideration,deliveryPlanFeedback} from './evidence-replan.mjs';
+test('content job receipt gets a reader destination replan before Green edits',()=>{
+ const plan={summary:'Investigate Group Build, then create original scenario recommendations.',
+  files:['docs/GROUP_BUILD_BRAIN_BRIEF.md','group-story.js'],blockers:[],
+  notes:['This job is purely investigative and content-generation; no code changes or deployments are required.','No write access is needed.']};
+ const scope={repository:'www-infinity4/QuantaPhi',reportedPushPermission:true};
+ const result=deliveryPlanFeedback({plan,writeScope:scope});
+ assert.equal(result.retry,true);
+ assert.equal(result.permissionsExpanded,false);
+ assert.match(result.instruction,/editable-path allowlist/);
+ assert.match(result.instruction,/null source contract/);
+ assert.deepEqual(plan.files,['docs/GROUP_BUILD_BRAIN_BRIEF.md','group-story.js']);
+ assert.equal(deliveryPlanFeedback({plan,writeScope:{...scope,reportedPushPermission:false}}).retry,false);
+ assert.equal(deliveryPlanFeedback({plan:{...plan,blockers:[{code:'owner_input_required',reason:'Private source unavailable'}]},writeScope:scope}).retry,false);
+ assert.equal(deliveryPlanFeedback({plan:{...plan,summary:'Fix Android announcement receipt logic',notes:['Hardware validation remains separate.']},writeScope:scope}).retry,false);
+ assert.equal(deliveryPlanFeedback({plan:{...plan,notes:'invalid'},writeScope:scope}).retry,false);
+});
 const links=[{id:'shoplcShirtButton',label:'ShopLC Live channel',href:'https://quantaphi.org/shoplc/',siteUrl:'https://quantaphi.org/shoplc/',sourcePath:'index.html'}];
 const browser={browserPassed:true,targets:[{url:'https://quantaphi.org/',views:[{passed:true},{passed:true}]},{url:'https://quantaphi.org/shoplc/',views:[{passed:true}]}]};
 const capability={existingWorkflows:[{path:'.github/workflows/brain-writer.yml'}],testCommands:['node --test test/brain-writer.test.mjs']};
