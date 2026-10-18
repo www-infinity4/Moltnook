@@ -36,6 +36,8 @@ jobs:
           node --test agents/repository-engine/auto-ticket-sweep.test.mjs
           node --test agents/repository-engine/oracle-review-gate.test.mjs agents/repository-engine/oracle-owner-inventory.test.mjs
           node --check agents/repository-engine/context-windows.mjs
+          node --check agents/repository-engine/patch.mjs
+          node --test agents/repository-engine/patch.test.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/source-verify.mjs
           node --test agents/repository-engine/source-verify.test.mjs
