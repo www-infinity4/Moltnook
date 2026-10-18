@@ -1,0 +1,135 @@
+name: Moltnook central bot credential and Brain zero-traffic staging
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/moltnook-central-brain-stage.yml'
+      - 'agents/repository-engine/brain-cloudflare-stage.mjs'
+      - 'agents/repository-engine/brain-cloudflare-stage.test.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: moltnook-central-brain-stage
+  cancel-in-progress: false
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Check out trusted central Moltnook scripts
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate central credential and version safety tests
+        run: |
+          node --check agents/repository-engine/brain-cloudflare-stage.mjs
+          node --test agents/repository-engine/brain-cloudflare-stage.test.mjs
+
+      - name: Read QuantaPhi source using existing owner-wide GHP credential
+        uses: actions/checkout@v4
+        with:
+          repository: www-infinity4/QuantaPhi
+          ref: main
+          path: quantaphi-source
+          persist-credentials: false
+          token: ${{ secrets.GHP }}
+
+      - name: Pin exact QuantaPhi source revision
+        run: |
+          echo "TARGET_SHA=$(git -C quantaphi-source rev-parse HEAD)" >> "$GITHUB_ENV"
+          test -f quantaphi-source/workers/infinity-brain-clock/wrangler.toml
+          test -f quantaphi-source/workers/infinity-brain-clock/deferred-recovery.mjs
+
+      - name: Test current QuantaPhi Brain source without deployment credentials
+        working-directory: quantaphi-source
+        run: |
+          node --check workers/infinity-brain-clock/worker.js
+          node --check workers/infinity-brain-clock/deferred-recovery.mjs
+          node --test \
+            test/brain-ticket-selector.test.mjs \
+            test/brain-deferred-recovery.test.mjs \
+            test/brain-queue-order.test.mjs \
+            test/brain-clock.test.mjs \
+            test/bubbles-runner-dispatch.test.mjs \
+            workers/infinity-brain-clock/arbitration-evidence.test.mjs
+
+      - name: Confirm reviewed Worker configuration has no arbitrary build hooks
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const c=readFileSync('quantaphi-source/workers/infinity-brain-clock/wrangler.toml','utf8');
+          for(const p of ['name = "infinity-brain-clock"','main = "worker.js"','keep_vars = true',
+            'binding = "WORK_DB"','binding = "CLOCK"','binding = "BOT_WALLET"',
+            'required = ["BOT_WORK_SECRET"]']){
+            if(!c.includes(p))throw Error('Worker config safety gate missing: '+p);
+          }
+          if(/^\s*\[(?:build|build\.|unsafe|unsafe\.)/m.test(c))
+            throw Error('Worker config contains a build or unsafe override; no token granted.');
+          console.log('Immutable Worker config, required secret, D1, DO and wallet binding declarations present.');
+          NODE
+
+      - name: Bundle Worker without staging or deployment secrets
+        working-directory: quantaphi-source
+        run: |
+          npx --yes wrangler@4 deploy \
+            --config workers/infinity-brain-clock/wrangler.toml \
+            --dry-run --outdir /tmp/moltnook-brain-bundle
+
+      - name: Verify Moltnook has its own Cloudflare deployment credential
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" ]]; then
+            echo "::error::Moltnook CLOUDFLARE_API_TOKEN is not configured. Its GHP secret is GitHub-only; no Cloudflare upload attempted."
+            exit 1
+          fi
+          echo "Moltnook Cloudflare credential is configured. Secret value intentionally suppressed."
+
+      - name: Record live 100% Cloudflare baseline and immutable binding identities
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
+        run: node agents/repository-engine/brain-cloudflare-stage.mjs before
+
+      - name: Stage new immutable Brain Worker version at zero percent traffic
+        working-directory: quantaphi-source
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
+        run: |
+          npx --yes wrangler@4 versions upload \
+            --config workers/infinity-brain-clock/wrangler.toml \
+            --message "Verified deferred recovery from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
+
+      - name: Prove no production traffic changed and no binding identity changed
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
+        run: node agents/repository-engine/brain-cloudflare-stage.mjs after
+
+      - name: Store only safe release receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: moltnook-brain-zero-traffic-stage
+          path: repository-receipts/moltnook-brain-stage.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Preserve exact scope of the staging result
+        if: always()
+        run: |
+          echo "## Central Moltnook credential staging" >> "$GITHUB_STEP_SUMMARY"
+          echo "GHP is used only by the QuantaPhi source checkout; it is not copied to other repositories." >> "$GITHUB_STEP_SUMMARY"
+          echo "Cloudflare requires its own configured token in Moltnook; GitHub and Cloudflare tokens are NOT interchangeable." >> "$GITHUB_STEP_SUMMARY"
+          echo "This workflow does not deploy or change production traffic; only a validated zero-traffic version upload is permitted." >> "$GITHUB_STEP_SUMMARY"
