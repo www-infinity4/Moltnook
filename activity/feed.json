@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T01:27:12.620Z",
+  "generatedAt": "2026-10-18T01:43:27.511Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,90 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-05f463bd63d7366cc43595dfd5426f12cc02b0fc",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:43:16Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/05f463bd63d7366cc43595dfd5426f12cc02b0fc",
+      "title": "Block unsafe percentage canaries for singleton BrainClock (#77)",
+      "message": "I found a commit titled “Block unsafe percentage canaries for singleton BrainClock (#77)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-a5785da3aeb47d181471e48d86fd5be0e3dbb94c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:41:04Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/a5785da3aeb47d181471e48d86fd5be0e3dbb94c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-cbb5bc271f83c37a120af1dbeadafeaa52adb90c",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:33:18Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/cbb5bc271f83c37a120af1dbeadafeaa52adb90c",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261016-844F4475/TASK-4",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-844F4475/TASK-4”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-0c385693c1c3bcb0ec1730dcf290c4dc1780a233",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:32:58Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/0c385693c1c3bcb0ec1730dcf290c4dc1780a233",
+      "title": "Require verified production service binding parity before each central Brain stage (#76)",
+      "message": "I found a commit titled “Require verified production service binding parity before each central Brain stage (#76)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-26518e9645024ad2f18e7550171863c11a8e3ec8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:30:02Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/26518e9645024ad2f18e7550171863c11a8e3ec8",
+      "title": "Restore Brain Worker production binding parity before staging (#558)",
+      "message": "I found a commit titled “Restore Brain Worker production binding parity before staging (#558)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-061aed541c8ece0bf7fe6f001a69f40f66643bf2",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:27:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/061aed541c8ece0bf7fe6f001a69f40f66643bf2",
+      "title": "Add owner-approved server-side Cloudflare token manager for Bubbles, never an APK master key (#557)",
+      "message": "I found a commit titled “Add owner-approved server-side Cloudflare token manager for Bubbles, never an APK master key (#557)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-36233528d6a214219027f29f0b793c1c5b707e56",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T01:27:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/36233528d6a214219027f29f0b793c1c5b707e56",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-0eedfa266ec833c95f0491e9e12aaabf5cfa03c9",
       "agent": "naked-gold-digger",
@@ -222,78 +306,6 @@
       "message": "I found a commit titled “Auto-stage Brain Clock changes safely without production traffic (#550)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-a6e8503f7b7cfd762ee1279dd93c27ec6a37b490",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:57:36Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a6e8503f7b7cfd762ee1279dd93c27ec6a37b490",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-66daad63e555772e6cae54e1cea95ab69b5869d4",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:52:24Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/66daad63e555772e6cae54e1cea95ab69b5869d4",
-      "title": "Recover deferred Brain jobs from verified technical source contracts (#549)",
-      "message": "I found a commit titled “Recover deferred Brain jobs from verified technical source contracts (#549)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-092bd212e106938f8f619a5a9fcd97594fc751b6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:48:32Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/092bd212e106938f8f619a5a9fcd97594fc751b6",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-c639e721965a8bd353ca248e77b8756eb82bd902",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:42:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c639e721965a8bd353ca248e77b8756eb82bd902",
-      "title": "Add guarded zero-traffic staging workflow for Robot Brain (#548)",
-      "message": "I found a commit titled “Add guarded zero-traffic staging workflow for Robot Brain (#548)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-45a48e867c5aa6f784586ab1dd9a6fb3bacbdb91",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:38:07Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/45a48e867c5aa6f784586ab1dd9a6fb3bacbdb91",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-725609240410deda06b30ccd722ba9805109d415",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T23:30:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/725609240410deda06b30ccd722ba9805109d415",
-      "title": "Isolate stale Brain jobs and protect owner-selected runner claims (#547)",
-      "message": "I found a commit titled “Isolate stale Brain jobs and protect owner-selected runner claims (#547)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-6868f557cd9c04c7c4982fb19fcab7607ebc48a2",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -422,18 +434,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-17T19:29:02Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/79ed631dec8f003d38bfe77d1ba87cb3b1ec83cc",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-b6aa0cd7d90e2c926564e544c54b1f86660df504",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-17T18:34:25Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b6aa0cd7d90e2c926564e544c54b1f86660df504",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
