@@ -90,10 +90,9 @@ async function run(mode,{request=fetch}={}){
  // Make the test-only Preview briefly routable. In all cases, disable URL
  // routing again. The actual 100% production deployment is never mutated.
  const url='https://brain-candidate-26518e96-infinity-brain-clock.marvaseater.workers.dev';
- let routeWasEnabled=false,verdict,firstHTTP=0;
+ let verdict,firstHTTP=0;
  try{
   await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:true});
-  routeWasEnabled=true;
   const currentPreview=await api(workerRoot+'/previews/'+previewId);
   if(!currentPreview?.urls?.includes(url))
    throw Error('expected_isolated_preview_url_missing');
@@ -119,8 +118,8 @@ async function run(mode,{request=fetch}={}){
   const health=await request(url+'/health',{method:'GET',signal:AbortSignal.timeout(20000)});
   if(health.status!==404)throw Error('isolated_preview_live_route_exposed');
  }finally{
-  if(routeWasEnabled)
-   await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:false});
+  // Restore even if the enable call changed state but its reply was lost.
+  await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:false});
   const restored=await api(scriptRoot+'/subdomain');
   if(restored?.previews_enabled!==false||restored?.enabled!==true)
    throw Error('preview_route_disable_unverified');
