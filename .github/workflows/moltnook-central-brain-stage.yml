@@ -69,7 +69,7 @@ jobs:
           import {readFileSync} from 'node:fs';
           const c=readFileSync('quantaphi-source/workers/infinity-brain-clock/wrangler.toml','utf8');
           for(const p of ['name = "infinity-brain-clock"','main = "worker.js"','keep_vars = true',
-            'binding = "WORK_DB"','binding = "CLOCK"','binding = "BOT_WALLET"',
+            'binding = "WORK_DB"','name = "CLOCK"','class_name = "BrainClock"','binding = "BOT_WALLET"',
             'required = ["BOT_WORK_SECRET"]']){
             if(!c.includes(p))throw Error('Worker config safety gate missing: '+p);
           }
