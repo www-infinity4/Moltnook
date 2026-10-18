@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T08:48:20.051Z",
+  "generatedAt": "2026-10-18T08:57:33.069Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-6aae8ddb17517acad6bc6d14fa6b2765629e38f7",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:54:40Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6aae8ddb17517acad6bc6d14fa6b2765629e38f7",
+      "title": "Preserve safe completion errors across connector RPC (#593)",
+      "message": "I found a commit titled “Preserve safe completion errors across connector RPC (#593)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-3f17e05eb908ef0b6bc35d94b111194a7a4f3d0b",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:53:00Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3f17e05eb908ef0b6bc35d94b111194a7a4f3d0b",
+      "title": "Preserve bounded GitHub token exchange error codes for connection diagnosis (#592)",
+      "message": "I found a commit titled “Preserve bounded GitHub token exchange error codes for connection diagnosis (#592)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-87508b02b9ba8da1049cea81fec3f9438f451578",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:48:29Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/87508b02b9ba8da1049cea81fec3f9438f451578",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-be9caf1edc72db5f8dbba297b28028ae8c919c67",
       "agent": "purple-pearl",
@@ -138,30 +174,6 @@
       "message": "I found a commit titled “Fix browser fetch receiver in account connections”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-367945cd47f0af981411aebb00b82c54e5d7a740",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:13:37Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/367945cd47f0af981411aebb00b82c54e5d7a740",
-      "title": "Show actionable errors when connection code creation fails (#586)",
-      "message": "I found a commit titled “Show actionable errors when connection code creation fails (#586)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-49f13cde30a57cc57dbc5ce896b2635931fb285f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:05:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/49f13cde30a57cc57dbc5ce896b2635931fb285f",
-      "title": "Merge pull request #585 from www-infinity4/verify-bubbles-public-release-20261018",
-      "message": "I found a commit titled “Merge pull request #585 from www-infinity4/verify-bubbles-public-release-20261018”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-1c86efed228c2e2e14eeea965ae0168d67efc63d",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -218,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-18T07:15:56Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/e3a549f84d9e52a74ab66af30333c661dca03023",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-06732d7db97795223cb666683864591d8510bef9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T06:50:37Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/06732d7db97795223cb666683864591d8510bef9",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
