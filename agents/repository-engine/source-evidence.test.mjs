@@ -50,3 +50,13 @@ test('late named bridge symbols are found in source without asking the owner for
  assert.match(result['android/app/src/main/java/VoiceWindow.java'],/drainNativeReply/);
  assert.ok(reads.length<=48);assert.ok(Object.keys(result).length<=9);
 });
+test('mixed Android jobs retain web narrator and every named method before repeated matches',async()=>{
+ const files=Object.fromEntries(Array.from({length:40},(_,i)=>['android/app/src/main/java/Bubbles'+i+'.java','class Bubbles'+i+' {}']));
+ files['bubbles-ai.js']='function sendMessage() {}\n'+('sendMessage();\n'.repeat(100))+'function pollBrainProgress() { verifyClaim(); }\nfunction announceBrainProgress() { showReceipt(); }';
+ files['android/app/src/main/java/FloatingOracleWindow.java']='class FloatingOracleWindow { void drainNativeReply() {} }';
+ const result=await collectSourceEvidence({paths:Object.keys(files),task:('Bubbles Android job notification. ').repeat(50)+'Inspect sendMessage, pollBrainProgress, announceBrainProgress and drainNativeReply.',read:async path=>files[path]});
+ assert.match(result['bubbles-ai.js'],/function pollBrainProgress/);
+ assert.match(result['bubbles-ai.js'],/function announceBrainProgress/);
+ assert.match(result['android/app/src/main/java/FloatingOracleWindow.java'],/drainNativeReply/);
+ assert.ok(Object.values(result).join('').length<=16000);
+});
