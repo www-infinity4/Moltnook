@@ -24,7 +24,7 @@ import {collectLinkFacts} from './source-links.mjs';
 import {readWorkflowEvidence} from './workflow-evidence.mjs';
 import {discoverScopedCapabilities} from './scoped-capabilities.mjs';
 import {retryStructuredModelCall} from './model-format-retry.mjs';
-import {evidenceReplanFeedback,authPlanReconsideration} from './evidence-replan.mjs';
+import {evidenceReplanFeedback,authPlanReconsideration,deliveryPlanFeedback} from './evidence-replan.mjs';
 import {deriveFeatureManifest} from './feature-manifest.mjs';
 import {skillPackets} from './phi-skills.mjs';
 import {COLOR_GPT_MODEL,phaseColorCore,invokeColorCore} from './color-core.mjs';
@@ -209,6 +209,13 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
      continue;
     }
     throw Error('Reader plan contradicts verified Brain authentication: '+authPlan.categories.join(', ')+'. No source edit attempted; exact OIDC and pinned-file facts are in auth-plan-feedback receipt.');
+   }
+   const deliveryPlan=deliveryPlanFeedback({plan,writeScope:{repository:report.repository,reportedPushPermission:repo.permissions?.push===true}});
+   if(readerPass===0&&deliveryPlan.retry){
+    readerFeedback=deliveryPlan;report.deliveryPlanFeedback=deliveryPlan;
+    await fs.writeFile('repository-receipts/delivery-plan-feedback.json',JSON.stringify(deliveryPlan,null,2));
+    await event('blueberry','Content-only plan needs an explicit delivery destination. One reader replan requested before Green; file access and review gates are unchanged.');
+    continue;
    }
    break;
   }
