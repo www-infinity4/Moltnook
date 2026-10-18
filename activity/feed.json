@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T08:57:33.069Z",
+  "generatedAt": "2026-10-18T09:18:59.575Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,28 +18,100 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-commit-6aae8ddb17517acad6bc6d14fa6b2765629e38f7",
+      "id": "QuantaPhi-commit-b30fd5a5e5aafad27a26a8e37153310c111f77cb",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T09:16:41Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b30fd5a5e5aafad27a26a8e37153310c111f77cb",
+      "title": "Fix GitHub token exchange headers and guard redirects (#600)",
+      "message": "I found a commit titled “Fix GitHub token exchange headers and guard redirects (#600)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-b4fb5ef5580413ac50255e93ba5ea2059c720381",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-18T08:54:40Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6aae8ddb17517acad6bc6d14fa6b2765629e38f7",
-      "title": "Preserve safe completion errors across connector RPC (#593)",
-      "message": "I found a commit titled “Preserve safe completion errors across connector RPC (#593)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-18T09:13:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b4fb5ef5580413ac50255e93ba5ea2059c720381",
+      "title": "Preserve fetch receiver in GitHub and Google provider adapters (#599)",
+      "message": "I found a commit titled “Preserve fetch receiver in GitHub and Google provider adapters (#599)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-3f17e05eb908ef0b6bc35d94b111194a7a4f3d0b",
-      "agent": "pink-panther",
-      "to": "greenbeans",
+      "id": "QuantaPhi-commit-5a6356ee7cdbcb9b0e74ad1c5c3c0bb638f3f199",
+      "agent": "purple-people-eater",
+      "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-18T08:53:00Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3f17e05eb908ef0b6bc35d94b111194a7a4f3d0b",
-      "title": "Preserve bounded GitHub token exchange error codes for connection diagnosis (#592)",
-      "message": "I found a commit titled “Preserve bounded GitHub token exchange error codes for connection diagnosis (#592)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+      "when": "2026-10-18T09:09:34Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5a6356ee7cdbcb9b0e74ad1c5c3c0bb638f3f199",
+      "title": "Serve immutable readable-chat release instead of cached GitHub main assets (#598)",
+      "message": "I found a commit titled “Serve immutable readable-chat release instead of cached GitHub main assets (#598)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-38ee341a600860fd7fac3bdeb48193a1959b1414",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T09:08:24Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/38ee341a600860fd7fac3bdeb48193a1959b1414",
+      "title": "Refresh Bubbles script version for readable controls (#597)",
+      "message": "I found a commit titled “Refresh Bubbles script version for readable controls (#597)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-cd80a7be03380d22f413b2ddc7af4139d3e32bc7",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T09:07:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/cd80a7be03380d22f413b2ddc7af4139d3e32bc7",
+      "title": "Restore complete connector source and identify completion failure stages (#596)",
+      "message": "I found a commit titled “Restore complete connector source and identify completion failure stages (#596)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-84f4b7db5f6efb0b011dad656d7aa276abb7d701",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T09:06:10Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/84f4b7db5f6efb0b011dad656d7aa276abb7d701",
+      "title": "Replace low-legibility purple controls with larger high-contrast chat buttons (#595)",
+      "message": "I found a commit titled “Replace low-legibility purple controls with larger high-contrast chat buttons (#595)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-5861eeb155e5a5ad2a21aaf0b36fcdd7a8296375",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T09:00:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5861eeb155e5a5ad2a21aaf0b36fcdd7a8296375",
+      "title": "Distinguish GitHub OAuth exchange configuration errors (#594)",
+      "message": "I found a commit titled “Distinguish GitHub OAuth exchange configuration errors (#594)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-129211759d0327322dd65309af5b71905bad5006",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:57:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/129211759d0327322dd65309af5b71905bad5006",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-87508b02b9ba8da1049cea81fec3f9438f451578",
@@ -52,18 +124,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/87508b02b9ba8da1049cea81fec3f9438f451578",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-be9caf1edc72db5f8dbba297b28028ae8c919c67",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:44:57Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/be9caf1edc72db5f8dbba297b28028ae8c919c67",
-      "title": "Keep mobile chat controls reachable and display connection codes (#591)",
-      "message": "I found a commit titled “Keep mobile chat controls reachable and display connection codes (#591)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Moltnook-commit-649a82550da3e818b1184b8584e00e6b636fe95e",
@@ -114,18 +174,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-commit-5eb5e5c04f351bef2c61832433a6ac079c68787a",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:29:07Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5eb5e5c04f351bef2c61832433a6ac079c68787a",
-      "title": "Add one-time connection code button beside Bubbles message box (#588)",
-      "message": "I found a commit titled “Add one-time connection code button beside Bubbles message box (#588)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Moltnook-commit-94573e14b4091774e7f37408238c660ae2948dbc",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -136,42 +184,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/94573e14b4091774e7f37408238c660ae2948dbc",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-c62e97ff23f699417b44f0b5877cc47eb0e95062",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:18:25Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c62e97ff23f699417b44f0b5877cc47eb0e95062",
-      "title": "Merge pull request #587 from www-infinity4/fix-chrome-connector-fetch-receiver",
-      "message": "I found a commit titled “Merge pull request #587 from www-infinity4/fix-chrome-connector-fetch-receiver”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-5dd4cb14eda80d3443b74cf0d2028b4e76ec2273",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:18:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5dd4cb14eda80d3443b74cf0d2028b4e76ec2273",
-      "title": "Test default fetch receiver for Chrome connection requests",
-      "message": "I found a commit titled “Test default fetch receiver for Chrome connection requests”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-2be627f4a7edf83e8cd9194f9c107d360131dc43",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:18:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2be627f4a7edf83e8cd9194f9c107d360131dc43",
-      "title": "Fix browser fetch receiver in account connections",
-      "message": "I found a commit titled “Fix browser fetch receiver in account connections”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Moltnook-commit-1c86efed228c2e2e14eeea965ae0168d67efc63d",
@@ -218,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-18T07:30:44Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/0942daa4aa9c8e34e6420f48edbffd2d006adf0a",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-e3a549f84d9e52a74ab66af30333c661dca03023",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T07:15:56Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e3a549f84d9e52a74ab66af30333c661dca03023",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
