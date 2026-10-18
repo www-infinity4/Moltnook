@@ -11,6 +11,7 @@ import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-a
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
+import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs';
 import {runSourceReview} from './source-verify.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
@@ -255,6 +256,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    initialFeedback:remembered,
    build:async feedback=>{
     const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
+    requireGreenEdits(proposal);
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows. '+visibleEditFeedback(windowEvidence,proposal.edits));
@@ -282,11 +284,11 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     // Only a build-window rejection (including empty edits) may request
     // an alternate bounded source view. Replan from the original pinned SHA;
     // do not modify the allowed file list or weaken review/push gates.
-    if(useWindowV2&&feedback.stage==='build'&&
-      /Model attempted an edit outside the pinned source windows/.test(feedback.reason)){
+    const recovery=greenReplanDecision(feedback,windowTask);
+    if(useWindowV2&&recovery.eligible){
      const shifted=recalculateBounds(original,windowEvidence,{
       attempt:Math.min(2,feedback.attempt),baseline:initialWindowEvidence,
-      expansionRatio:1.5,task:windowTask,plan,rejectedEdits:rejectedSourceEdits
+      expansionRatio:1.5,task:recovery.task,plan,rejectedEdits:rejectedSourceEdits
      });
      if(shifted.replanned){
       windowEvidence=shifted;modelSource=shifted.source;
