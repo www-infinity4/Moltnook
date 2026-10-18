@@ -67,6 +67,21 @@ jobs:
             test/bubbles-runner-dispatch.test.mjs \
             workers/infinity-brain-clock/arbitration-evidence.test.mjs
 
+      - name: Require verified Pink review concurrency admission before staging
+        working-directory: quantaphi-source
+        run: |
+          node --input-type=module <<'NODE'
+          import {pinkReviewHasActiveRepair} from './workers/infinity-brain-clock/source-review.mjs';
+          const review={kind:'source_review_only',repairIds:['TASK-3']};
+          for(const status of ['working','committed_unverified','merged_verified','complete']){
+            if(pinkReviewHasActiveRepair({color_jobs:[{id:'TASK-3',status}]},review)!==true)
+              throw Error('Pink/Green active repair concurrency gate missing: '+status);
+          }
+          if(pinkReviewHasActiveRepair({color_jobs:[{id:'TASK-3',status:'blocked'}]},review)!==false)
+            throw Error('Inactive technical repair should not prevent bounded source verification');
+          console.log('Pink source-review admission blocks active siblings and preserves inactive reviews.');
+          NODE
+
       - name: Confirm reviewed Worker configuration has no arbitrary build hooks
         run: |
           node --input-type=module <<'NODE'
