@@ -1,0 +1,124 @@
+name: Owner-approved Robot Brain production release or rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "release the exact canary-tested Worker to 100%, or restore stable 100%"
+        type: choice
+        options:
+          - release
+          - rollback
+        required: true
+        default: release
+      confirmation:
+        description: "Owner confirmation: DEPLOY_BRAIN_100 or ROLLBACK_BRAIN_100"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: infinity-brain-singleton-production-release
+  cancel-in-progress: false
+
+jobs:
+  verify-and-release:
+    if: ${{ github.actor == 'www-infinity4' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    environment: robot-brain-production
+    steps:
+      - name: Checkout central Moltnook verified release code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reject malformed owner request before any credential use
+        env:
+          RELEASE_OP: ${{ inputs.operation }}
+          OWNER_CONFIRMATION: ${{ inputs.confirmation }}
+          RELEASE_ACTOR: ${{ github.actor }}
+        run: |
+          node --input-type=module <<'NODE'
+          import {requireOwnerApproval} from './agents/repository-engine/brain-owner-release.mjs';
+          requireOwnerApproval({actor:process.env.RELEASE_ACTOR,mode:process.env.RELEASE_OP,approval:process.env.OWNER_CONFIRMATION});
+          console.log('Authenticated GitHub owner has explicitly confirmed the whole-version action.');
+          NODE
+      - name: Validate Cloudflare release and singleton rollback regressions
+        run: |
+          node --check agents/repository-engine/brain-owner-release.mjs
+          node --test agents/repository-engine/brain-owner-release.test.mjs \
+            agents/repository-engine/rollout-gate.test.mjs \
+            agents/repository-engine/evaluate-rollout.test.mjs
+      - name: Download immutable independent isolated canary proof
+        if: ${{ inputs.operation == 'release' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: brain-isolated-preview-receipt
+          run-id: 39088836895
+          repository: www-infinity4/Moltnook
+          github-token: ${{ github.token }}
+          path: canary-proof
+      - name: Checkout current QuantaPhi source for drift analysis
+        if: ${{ inputs.operation == 'release' }}
+        uses: actions/checkout@v4
+        with:
+          repository: www-infinity4/QuantaPhi
+          ref: main
+          path: quantaphi-source
+          persist-credentials: false
+          token: ${{ secrets.GHP }}
+      - name: Prevent release when Brain code changed since canary
+        if: ${{ inputs.operation == 'release' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C quantaphi-source fetch --no-tags origin 26518e9645024ad2f18e7550171863c11a8e3ec8
+          git -C quantaphi-source diff --exit-code 26518e9645024ad2f18e7550171863c11a8e3ec8 HEAD -- \
+            workers/infinity-brain-clock workers/bubbles-tools
+          test -f canary-proof/brain-isolated-preview-receipt.json
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {validateCanary} from './agents/repository-engine/brain-owner-release.mjs';
+          const c=JSON.parse(readFileSync('canary-proof/brain-isolated-preview-receipt.json','utf8'));
+          const receipt=validateCanary(c);
+          console.log('Pinned isolated canary passed '+receipt.checked+' checks, with exact unchanged Brain source.');
+          NODE
+      - name: Check real QuantaPhi owner and deferred-recovery gates
+        if: ${{ inputs.operation == 'release' }}
+        working-directory: quantaphi-source
+        run: |
+          node --test test/brain-ticket-selector.test.mjs \
+            test/brain-deferred-recovery.test.mjs \
+            test/brain-clock-binding-parity.test.mjs \
+            test/brain-clock.test.mjs
+      - name: Execute only exact 100%-version owner release or verified rollback
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          OWNER_RELEASE_CONFIRMATION: ${{ inputs.confirmation }}
+        run: node agents/repository-engine/brain-owner-release.mjs ${{ inputs.operation }}
+      - name: Preserve readback receipt without secrets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-brain-owner-release-receipt
+          path: repository-receipts/brain-owner-release.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Clarify delivery and manual signed runner acceptance
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Singleton Robot Brain release evidence'
+            echo 'This workflow is owner-only and never creates a percentage split on the BrainClock Durable Object.'
+            echo 'A release readback is not a completed Robot Brain job, real-wallet test, or permission to distribute the quarantined Platinum APK.'
+            echo 'Check production health, signed OIDC claims, actual GitHub commit, tests, final artifact and rollback readiness before declaring end-to-end success.'
+          } >> "$GITHUB_STEP_SUMMARY"
