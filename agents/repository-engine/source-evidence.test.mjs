@@ -28,3 +28,25 @@ test('Robot chooses the actual ShopLC anchor after dozens of unrelated links',as
  assert.match(samples['index.html'],/quantaphi\.org\/shoplc/);
  assert.ok(samples['index.html'].length<=3200);
 });
+
+test('named Android classes outrank generic web entrypoints and expose method context',async()=>{
+ const java='android/app/src/main/java/org/example/BrainLearningService.java';
+ const files=Object.fromEntries(Array.from({length:20},(_,i)=>['pages/'+i+'/index.html','<p>Web page</p>']));
+ files[java]='package org.example;\npublic class BrainLearningService {\n  void onJobClaim() {\n    announceStarted();\n  }\n}\n';
+ const result=await collectSourceEvidence({paths:Object.keys(files),task:'Find BrainLearningService onJobClaim for the Android job notification',read:async path=>files[path]});
+ assert.ok(Object.hasOwn(result,java));assert.match(result[java],/void onJobClaim/);assert.match(result[java],/announceStarted/);
+ assert.ok(Object.keys(result).length<=9);assert.ok(Object.values(result).join('').length<=16000);
+});
+test('Android Kotlin and manifest source are readable while generated and secret inputs stay excluded',async()=>{
+ const files={'android/app/src/main/java/VoiceBridge.kt':'class VoiceBridge { fun drainNativeReply() {} }','android/app/src/main/AndroidManifest.xml':'<manifest><application /></manifest>','android/app/build/generated/Generated.java':'private generated source','android/secrets/key.kt':'private credential source'};
+ const seen=[];const result=await collectSourceEvidence({paths:Object.keys(files),task:'Inspect VoiceBridge drainNativeReply and AndroidManifest',read:async path=>{seen.push(path);return files[path];}});
+ assert.match(JSON.stringify(result),/drainNativeReply/);assert.match(JSON.stringify(result),/<manifest>/);
+ assert.ok(!seen.some(p=>p.includes('/generated/')||p.includes('/secrets/')));
+});
+test('late named bridge symbols are found in source without asking the owner for file paths',async()=>{
+ const files=Object.fromEntries(Array.from({length:25},(_,i)=>['pages/'+i+'/index.html','<p>Owner job notifications</p>']));
+ files['android/app/src/main/java/VoiceWindow.java']='class VoiceWindow {\n void poll() {\n   browser.evaluateJavascript("window.QuantaBubbles.drainNativeReply()", callback);\n }\n}';
+ const reads=[];const result=await collectSourceEvidence({paths:Object.keys(files),task:('ordinary owner job requirements ').repeat(100)+' Inspect drainNativeReply in Android.',read:async path=>{reads.push(path);return files[path];}});
+ assert.match(result['android/app/src/main/java/VoiceWindow.java'],/drainNativeReply/);
+ assert.ok(reads.length<=48);assert.ok(Object.keys(result).length<=9);
+});
