@@ -58,7 +58,7 @@ export function compareStaged({before,activeAfter,candidate,expectedCommit,candi
  if(!UUID.test(candidateId||'')||candidateId===before.active.versionId||
   candidate?.id!==candidateId)throw Error('no_new_immutable_candidate');
  const note=String(candidate.annotations?.['workers/message']||'');
- if(!note.includes(expectedCommit)||!note.includes('deferred recovery'))
+ if(!note.includes(expectedCommit)||!note.includes('Verified Brain source'))
   throw Error('candidate_source_provenance_unverified');
  const after=safeBindingDigests(candidate);
  const names=Object.keys(before.bindings||{});
