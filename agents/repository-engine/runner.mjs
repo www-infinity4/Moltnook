@@ -11,6 +11,7 @@ import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-a
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
 import {repairWithFeedback} from './repair-feedback.mjs';
+import {runSourceReview} from './source-verify.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -40,9 +41,23 @@ async function call(step,body={}){
  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...body,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
  const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
  if(step==='result'){
-  const proof=await call('quant-receipt');
-  if(proof.durableReadback!==true||proof.latestFiveContains!==true||proof.status!==body.status||proof.repository!==report.repository||typeof proof.quantId!=='string')throw Error('Live job Quant receipt did not match this execution');
-  report.jobQuant={...proof,verified:true};await fs.writeFile('repository-receipts/job-quant-verification.json',JSON.stringify(report.jobQuant,null,2));
+  if(body.status==='source_verified'){
+   const proof=await call('source-review-receipt');
+   if(proof.durableReadback!==true||proof.status!=='source_verified'||
+      proof.repository!==report.repository||proof.testsPassed!==true||
+      proof.coinsMinted!==false||proof.productionVerified!==false||
+      proof.commitSha!==body.commitSha||proof.mergeSha!==body.reviewedMergeSha)
+    throw Error('Read-only Pink receipt did not match the signed runner execution');
+   report.sourceVerification={...proof,verified:true};
+   await fs.writeFile('repository-receipts/source-verification-receipt.json',JSON.stringify(report.sourceVerification,null,2));
+   report.jobQuant={status:'not_applicable_source_only_verification',paid:false};
+  }else{
+   const proof=await call('quant-receipt');
+   if(proof.durableReadback!==true||proof.latestFiveContains!==true||proof.status!==body.status||proof.repository!==report.repository||typeof proof.quantId!=='string')
+    throw Error('Live job Quant receipt did not match this execution');
+   report.jobQuant={...proof,verified:true};
+   await fs.writeFile('repository-receipts/job-quant-verification.json',JSON.stringify(report.jobQuant,null,2));
+  }
  }
  return result;
 }
@@ -94,6 +109,27 @@ try{
   workspace=await fs.mkdtemp(path.join(os.tmpdir(),'infinity-engine-'));
   command('git',['clone','--single-branch','--branch',repo.default_branch,'https://github.com/'+report.repository+'.git','.'],{env:credentialEnv()});
   const baseSha=git('rev-parse','HEAD');report.baseSha=baseSha;
+  if(lease.job.sourceReview?.kind==='source_review_only'&&liveWindowCapability.sourceReviewV1===true){
+   // Signed Brain selected already merged Green source: no new patch or payout.
+   await event('pink-panther','Reviewing merged source for '+report.jobId+' with an independent read-only runner.');
+   const verified=await runSourceReview({
+    job:lease.job,sourceReview:lease.job.sourceReview,capability:liveWindowCapability,
+    headSha:baseSha,github,readSource:sourceFile,
+    runCommand:async(cmd,args)=>command(cmd,args)
+   });
+   report.tests=verified.tests;testsPassed=true;
+   report.readOnlySourceReview={prUrl:verified.prUrl,mergeSha:verified.reviewedMergeSha,
+    sourceSha:verified.commitSha,testPaths:verified.testPaths,sourceOnly:true,
+    productionVerified:false,newCommit:false,coinsMinted:false};
+   await fs.writeFile('repository-receipts/read-only-source-review.json',JSON.stringify(report.readOnlySourceReview,null,2));
+   await call('result',{status:'source_verified',testsPassed:true,commitSha:baseSha,
+    reviewedMergeSha:verified.reviewedMergeSha,testPaths:verified.testPaths,
+    productionVerified:false,ownerApprovalGranted:false,mergedNewCode:false,
+    verificationToken:token,message:'Independent Pink review: merged source and '+verified.testPaths.length+
+     ' native test files passed. No new commit, deployment, or reward.'});
+   report.status='source_verified';
+   try{await event('pink-panther','Verified merged source and native tests. No source edits, deployment or payout claimed.');}catch(e){report.postReviewNotificationError=scrub(e.message);}
+  }else{
   await event('gold-diggers-ink','Read access confirmed for '+report.repository+'. Reading pinned README, agent instructions and source tree at '+baseSha.slice(0,9)+'.');
   const dependencyContext=await collectDependencyContext({task:[lease.job.instructions,lease.job.ownerRequest].filter(Boolean).join(' '),target:report.repository,github});
   report.dependencyContext=dependencyContext;
@@ -254,6 +290,7 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   await event('pink-panther','Live source observation: '+report.liveSource.status+'. '+report.liveSource.files.filter(x=>x.matched).length+' exact public assets match the commit. Feature acceptance remains unverified.');
   try{const preview=await captureSourceViews({workspace,repository:report.repository,baseSha,commitSha,paths:report.changedFiles,entry:plan.previewPath||'index.html',summary:'Bot implementation: '+plan.summary,jobId:report.jobId});await fs.writeFile('repository-receipts/work-preview.json',JSON.stringify(preview));await call('preview',{preview,verificationToken:token});report.previewPublished=true;}catch(e){report.previewError=scrub(e.message);await event('pink-panther','Source committed; visual preview needs its adapter: '+report.previewError);} 
   await call('result',{status:'committed_unverified',commitSha,testsPassed,verificationToken:token,message:'Implemented '+report.jobId+' in '+report.repository+'. Reader handoff, independent review, repository checks and GPT Purple approval recorded. Commit '+commitSha.slice(0,9)+(report.publication.prUrl?' · reviewed PR '+report.publication.prUrl:'')+'. Deployment and job-specific live acceptance still need verification; source work is not marked complete.'});
+  }
  }
 }catch(e){
  report.status=commitSha?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
