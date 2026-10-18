@@ -32,7 +32,7 @@ const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infi
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
 let lease,workspace,commitSha,testsPassed=false;
-const phaseSkills=phase=>skillPackets({task:[lease?.job?.instructions,lease?.job?.ownerRequest].filter(Boolean).join(' '),repository:lease?.job?.repository||'',phase});
+const phaseSkills=phase=>skillPackets({task:lease?.job?.instructions||'',repository:lease?.job?.repository||'',phase});
 const cleanEnv={PATH:process.env.PATH,HOME:process.env.HOME,CI:'true',LANG:'C.UTF-8'};
 const credentialEnv=()=>({...cleanEnv,GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_1:'core.hooksPath',GIT_CONFIG_VALUE_1:'/dev/null',GIT_CONFIG_KEY_0:'http.https://github.com/.extraheader',GIT_CONFIG_VALUE_0:'AUTHORIZATION: basic '+Buffer.from('x-access-token:'+token).toString('base64')});
 const command=(cmd,args,options={})=>execFileSync(cmd,args,{cwd:workspace,encoding:'utf8',timeout:180000,maxBuffer:3*1024*1024,env:cleanEnv,...options});
