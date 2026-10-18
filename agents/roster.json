@@ -251,5 +251,22 @@
     ],
     "handoff": "Blueberry",
     "rule": "Read only; no secret access, arbitrary code writes or unsourced claims."
+  },
+  {
+    "id": "white-lens",
+    "name": "White Lens",
+    "color": "white",
+    "job": "Safety and truthful evidence classification",
+    "reads": [
+      "source and test receipts",
+      "permission scope",
+      "deployment and wallet boundaries"
+    ],
+    "writes": [
+      "safety findings",
+      "evidence classification"
+    ],
+    "handoff": "Black Seal",
+    "rule": "Never convert a model answer into owner authorization or a deployment, wallet or security clearance."
   }
 ]
