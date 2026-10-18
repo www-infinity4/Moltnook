@@ -94,6 +94,26 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
    }
   }
   if(blocker.code!=='owner_input_required')continue;
+  // The reader cannot send the owner back to supply a literal 'before' snippet
+  // from a file that the signed checkout already has. The engineer's immutable
+  // source windows are generated *after* this plan, from actual pinned bytes.
+  // This is one evidence-only replan, not a guessed patch or widened scope.
+  if(writeScope?.reportedPushPermission===true&&
+    /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'')&&
+    /(?:before[\s\`"']*(?:snippet|literal|text)|exact[\s\`"']*before|immutable source window)/i.test(reason)&&
+    /(?:provide|supply|must provide|need|require|exact)/i.test(reason)&&
+    !/(?:\.env|\.git\/|secret|credential|authorization token|403|401|private endpoint)/i.test(reason)){
+   const present=(Array.isArray(sourceTree)?sourceTree:[]).filter(p=>
+    typeof p==='string'&&p.length<180&&
+    /\.(?:js|mjs|cjs|ts|tsx|jsx|css|html|kt|java)$/.test(p)&&
+    !p.split('/').some(part=>/^(?:\.git|\.env|node_modules|credentials|secrets?)$/i.test(part))&&
+    reason.toLowerCase().includes(p.toLowerCase())).slice(0,4);
+   if(present.length){
+    facts.push('Verified runner checkout in '+writeScope.repository+' contains '+present.join(', ')+
+     '. The reader must select those existing files and acceptance checks, not ask the owner for exact before bytes. After plan, the authenticated runner generates SHA-256-pinned bounded source windows and the engineer copies a literal before value from those windows; only exact unique matches can be applied. Missing source context remains a bounded engineering blocker, not an owner credential request. This does not grant a write or prove a working patch.');
+    matchedCodes.push('verified_pinned_before_source');continue;
+   }
+  }
   // The signed runner already cloned a scoped repository and supplied its file
   // tree. A reader cannot demand an owner-supplied file path instead of first
   // inspecting those actual files. Replan once; never silently drop blockers.

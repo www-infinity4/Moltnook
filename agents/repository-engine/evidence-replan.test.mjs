@@ -202,3 +202,20 @@ test('pinned UI source path contradicts invented blanket exclusion without grant
  assert.equal(evidenceReplanFeedback({...evidence,plan:{blockers:[b('excluded_path_required','Android overlay source bubbles-floating-window.js is forbidden by writer policy')]}}).retry,false,'missing file must stay blocked');
  assert.equal(evidenceReplanFeedback({...evidence,plan:{blockers:[b('excluded_path_required','The .env credentials source is outside writer policy')]},sourceTree:['.env']}).retry,false);
 });
+
+
+test('reader must obtain exact before literal from pinned own source, not make owner supply code',()=>{
+ const reason='The edit must match an immutable source window. Provide the exact before snippet (a few lines surrounding repositoryFor) from bubbles-brain-actions.js.';
+ const base={plan:{blockers:[b('owner_input_required',reason)]},
+  task:'Fix repositoryFor selection in Bubbles',
+  sourceTree:['bubbles-brain-actions.js','test/bubbles-brain-actions.test.cjs','README.md'],
+  writeScope:{repository:'www-infinity4/QuantaPhi',reportedPushPermission:true}};
+ const retry=evidenceReplanFeedback(base);
+ assert.equal(retry.retry,true);
+ assert.deepEqual(retry.categories,['verified_pinned_before_source']);
+ assert.match(retry.facts.join(' '),/SHA-256-pinned bounded source windows/);
+ assert.equal(base.plan.blockers.length,1);
+ assert.equal(evidenceReplanFeedback({...base,sourceTree:['README.md']}).retry,false,'no invented file');
+ assert.equal(evidenceReplanFeedback({...base,writeScope:{...base.writeScope,reportedPushPermission:false}}).retry,false,'permission remains necessary');
+ assert.equal(evidenceReplanFeedback({...base,plan:{blockers:[b('owner_input_required','Please provide exact before snippet from .env for repair')]},sourceTree:['.env']}).retry,false,'secrets excluded');
+});
