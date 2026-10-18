@@ -7,7 +7,7 @@ import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 
 export const PRODUCTION_DEPLOYMENT='f900b406-6ac5-477d-9f53-23e6ad2a9fc1';
-export const PRODUCTION_VERSION='1fbaf9d8-d42a-4ddd-a386-0f4253c62142';
+export const PRODUCTION_VERSION='20ba46b4-f46a-49f6-88a0-78305433fc37';
 export const CANDIDATE_VERSION='1fbaf9d8-d42a-4ddd-a386-0f4253c62142';
 export const SOURCE_SHA='bbf3a91dfb4c2059c2a53b7dc8fe16d5923523c2';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
