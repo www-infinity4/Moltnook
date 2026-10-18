@@ -84,7 +84,7 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
    const local=(Array.isArray(sourceTree)?sourceTree:[]).filter(p=>
     typeof p==='string'&&p.length<180&&
     /\.(?:js|mjs|cjs|ts|tsx|jsx|css|html|kt|java)$/.test(p)&&
-    !/(?:^|\\/)(?:\\.git|\\.env|node_modules|credentials|secrets?)(?:\\/|\\.|$)/i.test(p)&&
+    !p.split('/').some(part=>/^(?:\.git|\.env|node_modules|credentials|secrets?)$/i.test(part))&&
     reason.toLowerCase().includes(p.toLowerCase())).slice(0,5);
    if(local.length){
     facts.push('The authenticated runner checked out '+writeScope.repository+
