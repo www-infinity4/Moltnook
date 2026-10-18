@@ -21,7 +21,7 @@ const env={BRAIN_CANARY_MODE:{type:'plain_text',text:'isolated'},
  CLOCK:{type:'durable_object_namespace',class_name:'BrainClock',namespace_id:'b'.repeat(32)},
  WORK_DB:{type:'d1',database_id:'76deaa98-5d3a-4151-8390-e14d7da87cb3'}};
 const original={items:[{id:'a'.repeat(8)+'-aaaa-aaaa-aaaa-'+'a'.repeat(12),
- main_module:'brain-isolated-probe.js',env,annotations:{'workers/tag':'d690547'}}]};
+ main_module:'brain-isolated-probe.js',env,annotations:{'workers/tag':'301dc64'}}]};
 const subdomain={enabled:true,previews_enabled:false};
 const args={production:active,productionVersion,stagedVersion,previews,
  deployments:original,subdomain};
