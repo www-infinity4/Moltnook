@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T08:19:55.766Z",
+  "generatedAt": "2026-10-18T08:35:55.655Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-590",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:35:33Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/590",
+      "title": "[Agent Job] Oracle reuse: button → QuantaPhi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-589",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:35:24Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/589",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-5eb5e5c04f351bef2c61832433a6ac079c68787a",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:29:07Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5eb5e5c04f351bef2c61832433a6ac079c68787a",
+      "title": "Add one-time connection code button beside Bubbles message box (#588)",
+      "message": "I found a commit titled “Add one-time connection code button beside Bubbles message box (#588)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-94573e14b4091774e7f37408238c660ae2948dbc",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T08:20:04Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/94573e14b4091774e7f37408238c660ae2948dbc",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-c62e97ff23f699417b44f0b5877cc47eb0e95062",
       "agent": "purple-people-eater",
@@ -88,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/7fd0c63cc6f40ca77f59ac2a9cc8865518cb4140",
       "title": "Use explicit MIME check for blocked APK response",
       "message": "I found a commit titled “Use explicit MIME check for blocked APK response”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-3dec87f5ad5dd034d8c4a4b9c41c0ec8dba44c73",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T08:03:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3dec87f5ad5dd034d8c4a4b9c41c0ec8dba44c73",
-      "title": "Accept Cloudflare WAF 403 or Worker 410 for blocked Platinum APK and reject binary download",
-      "message": "I found a commit titled “Accept Cloudflare WAF 403 or Worker 410 for blocked Platinum APK and reject binary download”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-1c86efed228c2e2e14eeea965ae0168d67efc63d",
@@ -266,18 +302,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-18T06:25:32Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/1f19f0e5cf9e15ee46b4e0006919d1c621dfd82d",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-d2410798a0e713b0c2f0b5b6629ede65d57a8f28",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T05:58:07Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d2410798a0e713b0c2f0b5b6629ede65d57a8f28",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -460,30 +484,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/112",
       "title": "[Agent Job] Oracle Octaves visual + development audit: Gemma-4",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Gemma-4”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-554",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T01:06:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/554",
-      "title": "[Agent Job] Oracle reuse: viewer → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-553",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T01:06:44Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/553",
-      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-c40953b8ebecf3603ab555f7a1af43317e14e88f",
