@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T13:15:23.057Z",
+  "generatedAt": "2026-10-18T13:28:14.646Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-023b9fef772b7eac6042c7a583ba2bd4ff9bd9f0",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T13:23:53Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/023b9fef772b7eac6042c7a583ba2bd4ff9bd9f0",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261015-050AEAAD/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261015-050AEAAD/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-2bf382171bf03bf9b7ef52f84d13bbb608f9d6ef",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T13:19:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2bf382171bf03bf9b7ef52f84d13bbb608f9d6ef",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261015-720D7FBB/TASK-3",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261015-720D7FBB/TASK-3”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-d5e5426ee02cd2a803abcb95d98d7c76c679c0a4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-18T13:15:34Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d5e5426ee02cd2a803abcb95d98d7c76c679c0a4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-d1065eb1d16671e11503963dee87ff2591a146d1",
       "agent": "greenbeans",
@@ -198,18 +234,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-ddd0500f34821ea15ab8eac845422f5c9feea9dd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T11:28:06Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ddd0500f34821ea15ab8eac845422f5c9feea9dd",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-17d141c714f456b25367b92dfd7e24813b8cee94",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -292,30 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/d01c71ccc742f14f715a97c387154e805cce3fc0",
       "title": "Verify repositories through the connected GitHub account (#601)",
       "message": "I found a commit titled “Verify repositories through the connected GitHub account (#601)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-b30fd5a5e5aafad27a26a8e37153310c111f77cb",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T09:16:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b30fd5a5e5aafad27a26a8e37153310c111f77cb",
-      "title": "Fix GitHub token exchange headers and guard redirects (#600)",
-      "message": "I found a commit titled “Fix GitHub token exchange headers and guard redirects (#600)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-b4fb5ef5580413ac50255e93ba5ea2059c720381",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T09:13:39Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b4fb5ef5580413ac50255e93ba5ea2059c720381",
-      "title": "Preserve fetch receiver in GitHub and Google provider adapters (#599)",
-      "message": "I found a commit titled “Preserve fetch receiver in GitHub and Google provider adapters (#599)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-6c3f2b91bb478a3d54c0be7a6c05f81a50b45058",
