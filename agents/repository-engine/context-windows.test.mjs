@@ -1,6 +1,31 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {sourceWindows,recalculateBounds,checkVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
+import {readFileSync} from 'node:fs';
+test('actual runner publication code is visible when the job asks for final git push context',()=>{
+ const full=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
+ const literal="command('git',['push','origin',ref]";
+ assert.ok(full.includes(literal));
+ const packet=sourceWindows({'agents/repository-engine/runner.mjs':full},{task:'Inspect the final git push and surrounding control flow'});
+ assert.ok(packet.source['agents/repository-engine/runner.mjs'].windows.some(w=>w.text.includes(literal)));
+ assert.equal(packet.source['agents/repository-engine/runner.mjs'].sha256,sha256(full));
+ assert.ok(packet.source['agents/repository-engine/runner.mjs'].windows.reduce((n,w)=>n+w.text.length,0)<=7000);
+});
+test('missing-context feedback replans to the real git operation beyond early push references',()=>{
+ const target="command('git',['push','origin',ref]);";
+ const full=('const item = values.push(value); // source code\n'.repeat(1000))+target+'\n'+('tail\n'.repeat(1000));
+ const original={'runner.mjs':full},first=sourceWindows(original,{task:'values source'});
+ const shifted=recalculateBounds(original,first,{baseline:first,task:'Missing source window for the final git push and surrounding control flow',attempt:1});
+ assert.equal(checkVisibleEdits(first,[{path:'runner.mjs',before:target,after:target+'\n'}]),false);
+ assert.equal(checkVisibleEdits(shifted,[{path:'runner.mjs',before:target,after:target+'\n'}]),true);
+ assert.equal(shifted.source['runner.mjs'].sha256,first.source['runner.mjs'].sha256);
+});
+test('closing body context selects the real footer without granting missing file access',()=>{
+ const full='<body>\n'+('body content\n'.repeat(6000))+'</body></html>';
+ const packet=sourceWindows({'index.html':full},{task:'Insert before the closing body tag'});
+ assert.equal(checkVisibleEdits(packet,[{path:'index.html',before:'</body>',after:'<footer>Text</footer></body>'}]),true);
+ assert.equal(checkVisibleEdits(packet,[{path:'secret.js',before:'</body>',after:'bad'}]),false);
+});
 test('184 KB source is represented by bounded, exact anchored source windows',()=>{
  const prefix='noise without the requested element\n'.repeat(5200);
  const src=prefix+'<section id="videoGenerator">Broken 3 images</section>\n'+('other content\n'.repeat(600));
