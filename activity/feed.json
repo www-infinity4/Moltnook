@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T22:15:39.451Z",
+  "generatedAt": "2026-10-19T22:29:42.360Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-1a6dbe8cba8a2259515a5018dd4c618844007ea5",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T22:24:09Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1a6dbe8cba8a2259515a5018dd4c618844007ea5",
+      "title": "Enable one-time Cloudflare-admin original-wallet recovery",
+      "message": "I found a commit titled “Enable one-time Cloudflare-admin original-wallet recovery”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-78babea26b0f23b28a11fb2d43486540ef10aed6",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T22:15:48Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/78babea26b0f23b28a11fb2d43486540ef10aed6",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-8ecc5581dcf47e6942f600f1c9fd9f5fdf1f2e75",
       "agent": "blueberry",
@@ -174,18 +198,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-0cb3f4122e5a32f37f2b25e17fbc2d9d909cc104",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T20:49:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0cb3f4122e5a32f37f2b25e17fbc2d9d909cc104",
-      "title": "Add private StarCoin GitHub evidence backups with Cloudflare cross-checks",
-      "message": "I found a commit titled “Add private StarCoin GitHub evidence backups with Cloudflare cross-checks”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "Moltnook-commit-01d9430f8e93395c31041e1186dc4100b617fee7",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -194,18 +206,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-19T20:47:49Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/01d9430f8e93395c31041e1186dc4100b617fee7",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-378048b56f843b63f6ee28ece0a779bc0f94224f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T20:35:25Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/378048b56f843b63f6ee28ece0a779bc0f94224f",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
