@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T19:56:23.698Z",
+  "generatedAt": "2026-10-19T20:20:10.258Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-b51d4930ba7ec7258d3ad57b9f723a437a3d184e",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T20:18:25Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b51d4930ba7ec7258d3ad57b9f723a437a3d184e",
+      "title": "Release Bubbles v0.45 with native wallet preservation",
+      "message": "I found a commit titled “Release Bubbles v0.45 with native wallet preservation”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-e2fa869a5c328fc47584a237969f0677e1bca82c",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T20:10:55Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e2fa869a5c328fc47584a237969f0677e1bca82c",
+      "title": "Preserve verified native Bubbles wallet outside WebView storage",
+      "message": "I found a commit titled “Preserve verified native Bubbles wallet outside WebView storage”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-4efc8cec33398f8bbe5b982592e4412ad598dd25",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T19:56:32Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/4efc8cec33398f8bbe5b982592e4412ad598dd25",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ddaaeba597ce7b5e5e2d6d6c0e3a00b7d0ad9afe",
       "agent": "greenbeans",
@@ -218,42 +254,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-19T18:21:41Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/16a7fcc1f385ab0e64b1df17fd14f0af24b1a6de",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-543767a76f272f2c375e0686901bed5b739747dc",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T18:07:29Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/543767a76f272f2c375e0686901bed5b739747dc",
-      "title": "Release automatic request frontend through current-main gateway routes (#707)",
-      "message": "I found a commit titled “Release automatic request frontend through current-main gateway routes (#707)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-acf79763247ffa33b79d8aa61ef7548a5d79bb08",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T18:01:30Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/acf79763247ffa33b79d8aa61ef7548a5d79bb08",
-      "title": "Start each Robot Brain request automatically and explain bot progress clearly (#706)",
-      "message": "I found a commit titled “Start each Robot Brain request automatically and explain bot progress clearly (#706)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-5b3d587545fcacc41bc0e06959dc25fb69330c02",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T17:54:57Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5b3d587545fcacc41bc0e06959dc25fb69330c02",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
