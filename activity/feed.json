@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T21:54:08.978Z",
+  "generatedAt": "2026-10-19T22:15:39.451Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-8ecc5581dcf47e6942f600f1c9fd9f5fdf1f2e75",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T22:13:08Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8ecc5581dcf47e6942f600f1c9fd9f5fdf1f2e75",
+      "title": "Show verified wallet and original Infinity history in Bubbles web and Android",
+      "message": "I found a commit titled “Show verified wallet and original Infinity history in Bubbles web and Android”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-27f1d42ea55b9525a4b7bf7dcd983d98d4e10e7a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:54:17Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/27f1d42ea55b9525a4b7bf7dcd983d98d4e10e7a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ed78f7bca4eb9c1d127d9d4b769623e5a2f98c67",
       "agent": "greenbeans",
@@ -196,30 +220,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/0a02ee5bb991259340e56d541fa1f4730c4d010e",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-3b10ef31afdd6a53e2b8668474785e6dc0978f1a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T20:20:22Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3b10ef31afdd6a53e2b8668474785e6dc0978f1a",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-b51d4930ba7ec7258d3ad57b9f723a437a3d184e",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T20:18:25Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b51d4930ba7ec7258d3ad57b9f723a437a3d184e",
-      "title": "Release Bubbles v0.45 with native wallet preservation",
-      "message": "I found a commit titled “Release Bubbles v0.45 with native wallet preservation”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "Oracle-Octaves-issue-149",
