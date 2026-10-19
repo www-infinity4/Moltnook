@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T04:48:19.061Z",
+  "generatedAt": "2026-10-19T04:58:56.633Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-3bb296f3c2babd83ccb7ef5484bdbad75845bdc5",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T04:56:28Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3bb296f3c2babd83ccb7ef5484bdbad75845bdc5",
+      "title": "Bubbles Android: one recommended setup and voice-only wake opens the floating chat (#675)",
+      "message": "I found a commit titled “Bubbles Android: one recommended setup and voice-only wake opens the floating chat (#675)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-390169c539ebdf7866744ebf6e7b6abd44140a06",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T04:48:29Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/390169c539ebdf7866744ebf6e7b6abd44140a06",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-b43bfe8b3d9df7a09183fc4bef2d0c759b4776a8",
       "agent": "greenbeans",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-b56dcca78f4236b6eb97a9344da54fe28ff91f00",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T02:50:10Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b56dcca78f4236b6eb97a9344da54fe28ff91f00",
-      "title": "Fix Bubbles direct GitHub timeout with durable request receipts (#665)",
-      "message": "I found a commit titled “Fix Bubbles direct GitHub timeout with durable request receipts (#665)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
       "id": "claude-flow-commit-ed44a151e00a6db854beb5849dd44aaf93dcc213",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -254,18 +266,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-19T02:30:52Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/bfb5d13d4d2b291f06d8c01794cd4b8557dd1689",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-f0955376815123144dcae7eed0f104f3caa42491",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T01:58:05Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f0955376815123144dcae7eed0f104f3caa42491",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
