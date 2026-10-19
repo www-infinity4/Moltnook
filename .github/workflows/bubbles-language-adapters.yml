@@ -1,0 +1,60 @@
+name: Bubbles language forks and real Python checks
+on:
+  pull_request:
+    paths: ['agents/repository-engine/python-language*', 'agents/repository-engine/fork-language-upstreams*', 'agents/repository-engine/language-*.lock', '.github/actions/bubbles-python-tools/**', '.github/workflows/bubbles-language-adapters.yml']
+  push:
+    branches: [main]
+    paths: ['agents/repository-engine/python-language*', 'agents/repository-engine/fork-language-upstreams*', 'agents/repository-engine/language-*.lock', '.github/actions/bubbles-python-tools/**', '.github/workflows/bubbles-language-adapters.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bubbles-language-adapters-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  language:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ./.github/actions/bubbles-python-tools
+      - name: Verify adapters and ambiguous fork recovery
+        run: node --test agents/repository-engine/python-language.test.mjs agents/repository-engine/fork-language-upstreams.test.mjs
+      - name: Exercise actual lint success and undefined-name failure
+        run: |
+          mkdir -p repository-receipts
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import os from 'node:os';
+          import path from 'node:path';
+          import {lintPython} from './agents/repository-engine/python-language.mjs';
+          const root=await fs.mkdtemp(path.join(os.tmpdir(),'bubbles-python-'));
+          await fs.writeFile(path.join(root,'good.py'),'result = 1 + 2\n');
+          await fs.writeFile(path.join(root,'bad.py'),'print(undefined_bubbles_name)\n');
+          const good=lintPython(['good.py'],{cwd:root});
+          let rejected=false;
+          try {lintPython(['bad.py'],{cwd:root});} catch {rejected=true;}
+          if(!rejected)throw Error('Undefined Python name was not rejected');
+          const report={checkedAt:new Date().toISOString(),good,undefinedNameRejected:rejected,sourceExecuted:false};
+          await fs.writeFile('repository-receipts/bubbles-python-language.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report));
+          JS
+      - name: Fork approved upstreams using existing owner credential
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node agents/repository-engine/fork-language-upstreams.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bubbles-language-receipts
+          path: repository-receipts/bubbles-*.json
+          if-no-files-found: warn

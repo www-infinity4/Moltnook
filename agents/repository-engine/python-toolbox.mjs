@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
+import {lintPython} from './python-language.mjs';
 
 export function validateRepository(value){
  if(typeof value!=='string'||!/^www-infinity4\/[A-Za-z0-9_.-]+$/.test(value))throw Error('Repository outside owner scope');
@@ -57,6 +58,8 @@ export async function inspectPythonCheckout({root=process.cwd(),output='reposito
    }
    check('Python AST compilation',python,['-B','-c',
     'import ast,sys;[ast.parse(open(x,encoding="utf8").read(),filename=x) for x in sys.argv[1:]]',...files]);
+   try{report.checks.push({name:'Pinned Ruff Python correctness checks',...lintPython(files,{cwd:root,execute})});}
+   catch(error){report.checks.push({name:'Pinned Ruff Python correctness checks',passed:false,error:String(error.stderr||error.stdout||error.message).slice(-900)});}
    const testPaths=files.filter(f=>/(^|\/)(test_[^/]+|[^/]+_test)\.py$/.test(f));
    if(testPaths.length)check('Discovered Python unit tests',python,['-B','-m','unittest','discover','-s','.','-p','test_*.py']);
    else report.checks.push({name:'Python test discovery',passed:true,output:'No tracked test_*.py; AST compilation only, behavior not verified'});

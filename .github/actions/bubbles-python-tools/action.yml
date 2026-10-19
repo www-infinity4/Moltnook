@@ -1,0 +1,17 @@
+name: Bubbles pinned Python language tools
+description: Install hash-pinned Linux x86_64 uv and Ruff wheels without target project code
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        LANGUAGE_LOCK_ROOT: ${{ github.action_path }}/../../../agents/repository-engine
+      run: |
+        set -euo pipefail
+        TOOLS_ENV="$RUNNER_TEMP/bubbles-language-tools"
+        python3 -m venv "$TOOLS_ENV"
+        "$TOOLS_ENV/bin/python" -m pip install --disable-pip-version-check --no-deps --require-hashes --only-binary=:all: -r "$LANGUAGE_LOCK_ROOT/language-uv.lock"
+        "$TOOLS_ENV/bin/uv" pip install --python "$TOOLS_ENV/bin/python" --no-deps --require-hashes --only-binary=:all: -r "$LANGUAGE_LOCK_ROOT/language-ruff.lock"
+        "$TOOLS_ENV/bin/uv" --version
+        "$TOOLS_ENV/bin/ruff" --version
+        echo "$TOOLS_ENV/bin" >> "$GITHUB_PATH"

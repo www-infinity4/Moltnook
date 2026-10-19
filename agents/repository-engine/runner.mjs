@@ -1,4 +1,5 @@
 import {collectDependencyContext} from './dependency-context.mjs';
+import {lintPython} from './python-language.mjs';
 import {publishReviewed} from './publish-reviewed.mjs';
 import {archiveScreenshots} from './archive-screenshots.mjs';
 import fs from 'node:fs/promises';
@@ -72,6 +73,11 @@ async function sourceFile(file,maxBytes=400000){safePath(file);const absolute=in
 async function checks(patched){
  const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name+': '+scrub(e.stderr||e.stdout||e.message).slice(0,900));}};
  const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
+ const pythonFiles=paths.filter(file=>file.endsWith('.py'));
+ if(pythonFiles.length){
+  try{const receipt=lintPython(pythonFiles,{cwd:workspace});runs.push({name:'Pinned Ruff Python correctness checks',...receipt});}
+  catch(error){runs.push({name:'Pinned Ruff Python correctness checks',passed:false,output:scrub(error.stdout||error.stderr||error.message)});report.tests={passed:false,runs};throw Error('Python lint did not pass');}
+ }
  const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
  let pkg;try{pkg=JSON.parse(await fs.readFile(path.join(workspace,'package.json'),'utf8'))}catch{}
  if(pkg){
