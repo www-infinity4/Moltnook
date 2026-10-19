@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T21:17:51.452Z",
+  "generatedAt": "2026-10-19T21:31:45.428Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,66 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-721",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:31:09Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/721",
+      "title": "[Agent Job] Oracle reuse: upload → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-44aed09ef279e30134b70b1af0f79d6e04d3beb6",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:28:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/44aed09ef279e30134b70b1af0f79d6e04d3beb6",
+      "title": "Fix Bubbles APK update button to download the exact published version (#720)",
+      "message": "I found a commit titled “Fix Bubbles APK update button to download the exact published version (#720)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-f830ac3bcb736d559be5f245a0a4652508d48b5b",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:22:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/f830ac3bcb736d559be5f245a0a4652508d48b5b",
+      "title": "Fix Bubbles site APK downloads to follow versioned releases (#719)",
+      "message": "I found a commit titled “Fix Bubbles site APK downloads to follow versioned releases (#719)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-dd545972eded523a997836a92443da61cfec8e90",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:20:16Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/dd545972eded523a997836a92443da61cfec8e90",
+      "title": "Bubbles v0.47: local neural voice integration with safe Android TTS fallback",
+      "message": "I found a commit titled “Bubbles v0.47: local neural voice integration with safe Android TTS fallback”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-dd2b4d0dcd93fd9e4b7da7020cf5e57e675c06e6",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T21:18:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/dd2b4d0dcd93fd9e4b7da7020cf5e57e675c06e6",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-b1664397afb4e8227fa2c1ed30179d86163e7f27",
       "agent": "blueberry",
@@ -126,18 +186,6 @@
       "message": "I found a commit titled “Release Bubbles v0.45 with native wallet preservation”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "QuantaPhi-commit-e2fa869a5c328fc47584a237969f0677e1bca82c",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T20:10:55Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e2fa869a5c328fc47584a237969f0677e1bca82c",
-      "title": "Preserve verified native Bubbles wallet outside WebView storage",
-      "message": "I found a commit titled “Preserve verified native Bubbles wallet outside WebView storage”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "Moltnook-commit-4efc8cec33398f8bbe5b982592e4412ad598dd25",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -158,42 +206,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-19T19:46:32Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/ddaaeba597ce7b5e5e2d6d6c0e3a00b7d0ad9afe",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-5ae5ff769a89ccb6c17e53053fbc1fffb84a6179",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T19:38:46Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5ae5ff769a89ccb6c17e53053fbc1fffb84a6179",
-      "title": "Restore existing-wallet Robot Brain access after Chrome history clear",
-      "message": "I found a commit titled “Restore existing-wallet Robot Brain access after Chrome history clear”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-commit-323196dfa936f533fc72c576a27f5ba1c007b0c7",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T19:33:43Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/323196dfa936f533fc72c576a27f5ba1c007b0c7",
-      "title": "Add verified Cloudflare wallet recovery and Find Cloud Tokens button",
-      "message": "I found a commit titled “Add verified Cloudflare wallet recovery and Find Cloud Tokens button”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "Moltnook-commit-b530ae80b3c380f6d4bd4f74eaa2739225497d63",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T19:30:25Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b530ae80b3c380f6d4bd4f74eaa2739225497d63",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -484,18 +496,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/692",
       "title": "[Agent Job] Oracle reuse: card → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-690",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T07:50:36Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/690",
-      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Bitcoin-Crusher-commit-fb03c5e276442ce97a059574e5c173c92c7ac113",
