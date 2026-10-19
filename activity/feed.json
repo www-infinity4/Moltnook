@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T08:04:12.110Z",
+  "generatedAt": "2026-10-19T08:38:26.194Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-5247980dc5316fbc4f21e499b3afc3e8c2aed61b",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T08:28:29Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5247980dc5316fbc4f21e499b3afc3e8c2aed61b",
+      "title": "Fix Bubbles repo creation mishearing and voice feedback (#691)",
+      "message": "I found a commit titled “Fix Bubbles repo creation mishearing and voice feedback (#691)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-6f9541f33ce07bb7dd38447448b767b9bdaf8107",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T08:04:22Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6f9541f33ce07bb7dd38447448b767b9bdaf8107",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-690",
       "agent": "purple-pearl",
@@ -246,18 +270,6 @@
       "message": "I found a commit titled “Stop unchanged speech fragments from postponing Bubbles replies (#683)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-d1037e1d0046217ef6348ebe4599597a98b7a6eb",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T06:17:23Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d1037e1d0046217ef6348ebe4599597a98b7a6eb",
-      "title": "Verify live Bubbles product-first pages from outside Cloudflare (#682)",
-      "message": "I found a commit titled “Verify live Bubbles product-first pages from outside Cloudflare (#682)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-fccdf8ef02f476242003d4a57c6773aae48737c6",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/677",
       "title": "[Agent Job] Oracle reuse: button → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-5847320dc82a974655073acf6d5696dfa931283e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T05:22:41Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5847320dc82a974655073acf6d5696dfa931283e",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-b43bfe8b3d9df7a09183fc4bef2d0c759b4776a8",
