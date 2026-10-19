@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T07:49:27.816Z",
+  "generatedAt": "2026-10-19T08:04:12.110Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-690",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T07:50:36Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/690",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-49d6e7adf5ec193d3407aaf0e55d440a1dd6cdea",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T07:49:37Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/49d6e7adf5ec193d3407aaf0e55d440a1dd6cdea",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-7d656b7242ff800803c250878aa3474f201b6ea4",
       "agent": "greenbeans",
@@ -294,18 +318,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-4fd36ccea9d10d5f1541bb51def860bf3f2ef391",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T04:59:06Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/4fd36ccea9d10d5f1541bb51def860bf3f2ef391",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-b43bfe8b3d9df7a09183fc4bef2d0c759b4776a8",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -484,18 +496,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/647",
       "title": "Finish Bubbles MCP live verification and external-client authorization",
       "message": "I found a issue titled “Finish Bubbles MCP live verification and external-client authorization”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-643",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T23:28:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/643",
-      "title": "[Agent Job] Oracle reuse: viewer → QuantaPhi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-c40953b8ebecf3603ab555f7a1af43317e14e88f",
