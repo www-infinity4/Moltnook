@@ -23,6 +23,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: ./.github/actions/bubbles-python-tools
       - name: Verify owner credential bridge
         run: node --test agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
       - name: Connect existing owner GitHub key to Bubbles
@@ -68,6 +72,7 @@ jobs:
           node --test agents/repository-engine/live-source.test.mjs agents/repository-engine/adapter-verification.test.mjs agents/repository-engine/execution-context.test.mjs
           node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs agents/repository-engine/runtime-baseline.test.mjs
           node --test agents/repository-engine/publish-reviewed.test.mjs agents/repository-engine/python-toolbox.test.mjs agents/repository-engine/auto-ticket-sweep.test.mjs
+          node --test agents/repository-engine/python-language.test.mjs agents/repository-engine/fork-language-upstreams.test.mjs
           node --check agents/repository-engine/green-build-recovery.mjs
           node --test agents/repository-engine/green-build-recovery.test.mjs
           node --test agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs

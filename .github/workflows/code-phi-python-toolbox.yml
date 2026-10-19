@@ -39,6 +39,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: ./engine/.github/actions/bubbles-python-tools
       - name: Check pinned source and Python toolkit without deployment secrets
         env:
           TARGET_REPOSITORY: ${{ inputs.repository }}
