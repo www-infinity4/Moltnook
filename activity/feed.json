@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T00:54:47.369Z",
+  "generatedAt": "2026-10-19T01:30:33.608Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,16 +18,172 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-commit-877e069c736d715664bed30458f8e2826ca7e453",
+      "id": "QuantaPhi-commit-5d296ccfeb365b141da514d29094b8b168076e41",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:27:31Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5d296ccfeb365b141da514d29094b8b168076e41",
+      "title": "Repair Next Physics image rotation (#655)",
+      "message": "I found a commit titled “Repair Next Physics image rotation (#655)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-9d3802e793f78fca58ad789868e0feb9cd6cb052",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:24:59Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9d3802e793f78fca58ad789868e0feb9cd6cb052",
+      "title": "Bubbles: hands-free spoken Android app workflow runner (preview 0.38.0)",
+      "message": "I found a commit titled “Bubbles: hands-free spoken Android app workflow runner (preview 0.38.0)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-2a1438bd4970b693d57cd12108994198270de72d",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-19T00:03:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/877e069c736d715664bed30458f8e2826ca7e453",
-      "title": "Bubbles: responsive speech turns, verified DU recording and CapCut clip handoff",
-      "message": "I found a commit titled “Bubbles: responsive speech turns, verified DU recording and CapCut clip handoff”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-10-19T01:21:43Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2a1438bd4970b693d57cd12108994198270de72d",
+      "title": "Serve current Bubbles MCP client JS on quantaphi.org (#654)",
+      "message": "I found a commit titled “Serve current Bubbles MCP client JS on quantaphi.org (#654)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-3af1a6b4ddb4d88cc7ecb9779728396cd264acad",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:16:17Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3af1a6b4ddb4d88cc7ecb9779728396cd264acad",
+      "title": "Fix model-selected MCP resonance unit normalization (#652)",
+      "message": "I found a commit titled “Fix model-selected MCP resonance unit normalization (#652)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-df3b553fc3af92fee23ac071734f8f2ee77c8169",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:13:14Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/df3b553fc3af92fee23ac071734f8f2ee77c8169",
+      "title": "fix(Bubbles): faster replies and verified GitHub tool controls (#650)",
+      "message": "I found a commit titled “fix(Bubbles): faster replies and verified GitHub tool controls (#650)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-85f1e5107fc96dd03c1a623a1d86fc2e0929e17f",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:11:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/85f1e5107fc96dd03c1a623a1d86fc2e0929e17f",
+      "title": "Add live Bubbles MCP gateway smoke verification (#651)",
+      "message": "I found a commit titled “Add live Bubbles MCP gateway smoke verification (#651)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-a2bc9e66b695baeca5547a349344bab82bbe1070",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:44Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/a2bc9e66b695baeca5547a349344bab82bbe1070",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Oracle-Octaves-issue-134",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:41Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/134",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: Humanoid-BioBots",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Humanoid-BioBots”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-133",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:41Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/133",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: Hosting-service",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Hosting-service”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-132",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:40Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/132",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: History-Channel",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: History-Channel”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-131",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:40Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/131",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: Hermit-TV",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Hermit-TV”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Oracle-Octaves-issue-130",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:07:39Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/130",
+      "title": "[Agent Job] Oracle Octaves visual + development audit: HBO",
+      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: HBO”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-3b9764476dc31b472d71d967394da3c83c594dfe",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T01:00:56Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3b9764476dc31b472d71d967394da3c83c594dfe",
+      "title": "Bubbles Android: XRecorder voice control and installed-app actions (v0.37.0)",
+      "message": "I found a commit titled “Bubbles Android: XRecorder voice control and installed-app actions (v0.37.0)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-232e41bfd0b04d86907908ce4d4d4bdaaf32684c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T00:54:57Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/232e41bfd0b04d86907908ce4d4d4bdaaf32684c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-2b03e1e944cf33604901dbdf79193904704e7a71",
@@ -54,18 +210,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-3fbae686448ea03eaf9089f1b1ac43622b6a056a",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T23:43:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3fbae686448ea03eaf9089f1b1ac43622b6a056a",
-      "title": "Bubbles: use DU Recorder floating control instead of unstable native screen video",
-      "message": "I found a commit titled “Bubbles: use DU Recorder floating control instead of unstable native screen video”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-647",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -88,18 +232,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/8bfbdf5b03e8a101cf3d250d358249dc2c8c5c88",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-44a6ef974ecfdcf2e823899d8ca34d578775eb9a",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T23:34:59Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/44a6ef974ecfdcf2e823899d8ca34d578775eb9a",
-      "title": "Connect Bubbles to authenticated read-only MCP LLM tools (#645)",
-      "message": "I found a commit titled “Connect Bubbles to authenticated read-only MCP LLM tools (#645)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-46d786fd40111e4a128092d0c8696992a256e62c",
@@ -162,30 +294,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-25e256d6cdcc97ae2999d38004576379d3e2db50",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T22:40:49Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/25e256d6cdcc97ae2999d38004576379d3e2db50",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-002c88492d24e3bb6abd96f72f46cd13c37c4796",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T22:35:31Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/002c88492d24e3bb6abd96f72f46cd13c37c4796",
-      "title": "Bubbles: opt-in internal phone playback transcription with isolated context fusion",
-      "message": "I found a commit titled “Bubbles: opt-in internal phone playback transcription with isolated context fusion”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-7331b73d8abb59efe910985ea3b7e506c9628c84",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -208,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/638",
       "title": "[Agent Job] Oracle reuse: media → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: media → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-e58cb0998722c788ac652c4c301033f7195ff80b",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T22:24:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e58cb0998722c788ac652c4c301033f7195ff80b",
-      "title": "Bubbles: three-lane voice notes context and truthful quick feedback",
-      "message": "I found a commit titled “Bubbles: three-lane voice notes context and truthful quick feedback”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-8439cb44adfd1351ca58dceef00324feddbf2230",
@@ -306,30 +402,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-commit-40dc5b89ec8ae53804daa7fae6184a904b73fab0",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T20:18:18Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/40dc5b89ec8ae53804daa7fae6184a904b73fab0",
-      "title": "Show Brain tool progress and results beside its button (#628)",
-      "message": "I found a commit titled “Show Brain tool progress and results beside its button (#628)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-5d340ba1495284e6cdf522f96e6823377cf89bd1",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T20:16:42Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5d340ba1495284e6cdf522f96e6823377cf89bd1",
-      "title": "Connect Live voice delegation to authenticated Brain status (#627)",
-      "message": "I found a commit titled “Connect Live voice delegation to authenticated Brain status (#627)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-1a00c17ca14a070c6714c2935e612db9e039e5c1",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -412,78 +484,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/126",
       "title": "[Agent Job] Oracle Octaves visual + development audit: GPT-Oracle-Studio",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: GPT-Oracle-Studio”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-125",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T18:34:40Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/125",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: GP",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: GP”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-a673eb713b765519f2d746fc67a0c05702fc748f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T17:30:15Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a673eb713b765519f2d746fc67a0c05702fc748f",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Oracle-Octaves-issue-122",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T12:39:54Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/122",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Gitpub",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Gitpub”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-124",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T12:39:53Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/124",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Goudey-Tradition-Trading-Card-Company-LLC",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Goudey-Tradition-Trading-Card-Company-LLC”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "Oracle-Octaves-issue-123",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T12:39:53Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/123",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: gods-eye-view",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: gods-eye-view”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-121",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-18T12:39:52Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/121",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: Gitpro",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Gitpro”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-c40953b8ebecf3603ab555f7a1af43317e14e88f",
