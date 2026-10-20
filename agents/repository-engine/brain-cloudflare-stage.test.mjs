@@ -27,6 +27,26 @@ test('authenticated central bot staging requires exact Worker types including Du
  assert.ok(Object.values(digest).every(v=>/^[a-f0-9]{64}$/.test(v.sha256)));
  assert.ok(!JSON.stringify(digest).includes('test-private-owner-hash'),'never serialize plaintext owner identifier into receipts');
 });
+test('owner-created Cloudflare token manager survives staging as an opaque exact binding',()=>{
+ const ownerTokenBinding={name:'Cloudflare_token_manager',type:'secret_text',
+  secret_id:'opaque-account-managed-token-value'};
+ const before={active:deployed,bindings:safeBindingDigests({
+  resources:{bindings:[...resources,ownerTokenBinding]}})};
+ assert.equal(before.bindings.Cloudflare_token_manager.type,'secret_text');
+ const good=compareStaged({before,activeAfter:{...deployed},
+  candidate:candidateVersion([ownerTokenBinding,...resources]),
+  expectedCommit:commit,candidateId:id2});
+ assert.equal(good.bindingIdentitiesVerified,true);
+ assert.ok(good.bindingNames.includes('Cloudflare_token_manager'));
+ assert.ok(!JSON.stringify(good).includes('opaque-account-managed-token-value'));
+ assert.throws(()=>compareStaged({before,activeAfter:deployed,
+  candidate:candidateVersion(resources),expectedCommit:commit,candidateId:id2}),
+  /candidate_binding_list_changed/,'accidental loss of existing token-manager secret must block rollout');
+ assert.throws(()=>compareStaged({before,activeAfter:deployed,
+  candidate:candidateVersion([...resources,{...ownerTokenBinding,secret_id:'changed'}]),
+  expectedCommit:commit,candidateId:id2}),
+  /candidate_binding_identity_changed: Cloudflare_token_manager/);
+});
 test('one existing production version at exactly 100% is required',()=>{
  assert.deepEqual(live100Percent({deployments:[{id:deployId,versions:[{version_id:id1,percentage:100}]}]}),deployed);
  assert.throws(()=>live100Percent({deployments:[{id:deployId,versions:[
