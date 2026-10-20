@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T22:15:19.432Z",
+  "generatedAt": "2026-10-20T22:29:49.376Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-742aa7828554a9f90de009d997b0b4178192c26c",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T22:25:13Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/742aa7828554a9f90de009d997b0b4178192c26c",
+      "title": "Bubbles: interact with visible ChatGPT Android app under foreground permission",
+      "message": "I found a commit titled “Bubbles: interact with visible ChatGPT Android app under foreground permission”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-73c51895c5e2c4d2d96543a158df468f4c878305",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T22:17:10Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/73c51895c5e2c4d2d96543a158df468f4c878305",
+      "title": "Deploy Bubbles synapse memory Worker and refresh Android/web cache (#793)",
+      "message": "I found a commit titled “Deploy Bubbles synapse memory Worker and refresh Android/web cache (#793)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-bad60681091ff5931eb91a4bc1d2ddcefa28320f",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T22:15:30Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/bad60681091ff5931eb91a4bc1d2ddcefa28320f",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-abf3a4ac4cfbc2bfe059e1702ac8ad938a13dc1a",
       "agent": "purple-pearl",
@@ -162,18 +198,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-257f8f8daad377d2f34cdc4036732dc8b7fbdaee",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T20:34:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/257f8f8daad377d2f34cdc4036732dc8b7fbdaee",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-53c99a5bc78d8f5dc334cfd13efcc790e29e5343",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -186,18 +210,6 @@
       "message": "I found a commit titled “Restore continuous Bubbles orb listening with hidden chat (Android v0.51)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-0e41fa4efbb67da898c3824360f9c5365778cb62",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T19:37:56Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0e41fa4efbb67da898c3824360f9c5365778cb62",
-      "title": "Bubbles 0.50: simplified launcher and guarded voice restoration (#783)",
-      "message": "I found a commit titled “Bubbles 0.50: simplified launcher and guarded voice restoration (#783)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-79bff1f71c586e4984cef61fe4bc58dc85cde49c",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -208,18 +220,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/79bff1f71c586e4984cef61fe4bc58dc85cde49c",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-d6433106b8a926a6387e609e446deb501db82ead",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T18:58:56Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d6433106b8a926a6387e609e446deb501db82ead",
-      "title": "Bubbles APK 0.49: respond to spoken name and hideaway without stopping the microphone (#782)",
-      "message": "I found a commit titled “Bubbles APK 0.49: respond to spoken name and hideaway without stopping the microphone (#782)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-168",
