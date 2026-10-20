@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T23:54:07.594Z",
+  "generatedAt": "2026-10-20T00:43:23.047Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-9bf06935516afe45be8c84debcb741eab3bde5f7",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T00:40:26Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9bf06935516afe45be8c84debcb741eab3bde5f7",
+      "title": "Accept signed Cloudflare Access cookie on wallet recovery (#732)",
+      "message": "I found a commit titled “Accept signed Cloudflare Access cookie on wallet recovery (#732)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-b47f0546b2a135643cf863935f5f2af798b2511f",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T00:34:05Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b47f0546b2a135643cf863935f5f2af798b2511f",
+      "title": "Repair wallet owner Access verification (#731)",
+      "message": "I found a commit titled “Repair wallet owner Access verification (#731)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-9ce6c395e076635f662589dbf3aa1598ff0d8959",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T00:13:33Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9ce6c395e076635f662589dbf3aa1598ff0d8959",
+      "title": "Add owner-only Access recovery code issuer (fail closed until configured) (#730)",
+      "message": "I found a commit titled “Add owner-only Access recovery code issuer (fail closed until configured) (#730)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-8ce87b9625b10c89acf088440107fd4013e63cfa",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-19T23:54:18Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8ce87b9625b10c89acf088440107fd4013e63cfa",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-18959e0470b60eb441251a9643e097f3033a7125",
       "agent": "purple-pearl",
@@ -186,42 +234,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-1a6dbe8cba8a2259515a5018dd4c618844007ea5",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T22:24:09Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1a6dbe8cba8a2259515a5018dd4c618844007ea5",
-      "title": "Enable one-time Cloudflare-admin original-wallet recovery",
-      "message": "I found a commit titled “Enable one-time Cloudflare-admin original-wallet recovery”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "Moltnook-commit-78babea26b0f23b28a11fb2d43486540ef10aed6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T22:15:48Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/78babea26b0f23b28a11fb2d43486540ef10aed6",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-8ecc5581dcf47e6942f600f1c9fd9f5fdf1f2e75",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T22:13:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8ecc5581dcf47e6942f600f1c9fd9f5fdf1f2e75",
-      "title": "Show verified wallet and original Infinity history in Bubbles web and Android",
-      "message": "I found a commit titled “Show verified wallet and original Infinity history in Bubbles web and Android”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "claude-flow-commit-fe0146a8e3d3389f617b66035b28cb8729d9135c",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -244,18 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/721",
       "title": "[Agent Job] Oracle reuse: upload → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: upload → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-44aed09ef279e30134b70b1af0f79d6e04d3beb6",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-19T21:28:12Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/44aed09ef279e30134b70b1af0f79d6e04d3beb6",
-      "title": "Fix Bubbles APK update button to download the exact published version (#720)",
-      "message": "I found a commit titled “Fix Bubbles APK update button to download the exact published version (#720)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "claude-flow-commit-0a02ee5bb991259340e56d541fa1f4730c4d010e",
