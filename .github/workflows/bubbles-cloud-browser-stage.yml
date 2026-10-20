@@ -1,0 +1,76 @@
+name: Stage Bubbles Chrome viewport Worker safely
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bubbles-cloud-browser-stage.yml'
+      - 'agents/repository-engine/bubbles-cloud-browser-stage.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bubbles-cloud-browser-verified-stage
+  cancel-in-progress: false
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify trusted staging script
+        run: node --check agents/repository-engine/bubbles-cloud-browser-stage.mjs
+      - name: Checkout exact reviewed QuantaPhi build
+        uses: actions/checkout@v4
+        with:
+          repository: www-infinity4/QuantaPhi
+          ref: 9ee9161e2c92b9a614c59c6b6c74364da6c3b1e0
+          path: quantaphi-source
+          persist-credentials: false
+      - name: Run browser and consent regression suite
+        working-directory: quantaphi-source
+        run: |
+          test "$(git rev-parse HEAD)" = "9ee9161e2c92b9a614c59c6b6c74364da6c3b1e0"
+          node --test test/bubbles-browser-agent.test.mjs test/bubbles-browser-consent.test.mjs test/bubbles-cloud-browser.test.mjs
+          node --check workers/bubbles-cloud-browser/worker.mjs
+          node --check workers/bubbles-tools/browser-cdp.mjs
+          node --check bubbles-cloud-browser.mjs
+      - name: Verify exact script and bindings before packaging
+        working-directory: quantaphi-source
+        run: |
+          grep -Fx 'name = "bubbles-cloud-browser"' workers/bubbles-cloud-browser/wrangler.toml
+          grep -Fx 'binding = "BROWSER"' workers/bubbles-cloud-browser/wrangler.toml
+          grep -Fx 'binding = "BRAIN"' workers/bubbles-cloud-browser/wrangler.toml
+          grep -Fx 'name = "CONSENT"' workers/bubbles-cloud-browser/wrangler.toml
+          grep -Fx 'class_name = "BrowserConsentStore"' workers/bubbles-cloud-browser/wrangler.toml
+          npx --yes wrangler@4 deploy --config workers/bubbles-cloud-browser/wrangler.toml --dry-run --outdir /tmp/bubbles-cloud-browser-staged-build
+      - name: Save active production binding baseline without revealing credentials
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node agents/repository-engine/bubbles-cloud-browser-stage.mjs before
+      - name: Upload version only (production traffic stays on existing version)
+        working-directory: quantaphi-source
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
+        run: |
+          npx --yes wrangler@4 versions upload \
+            --config workers/bubbles-cloud-browser/wrangler.toml \
+            --message "Bubbles viewport review 9ee9161e2c92b9a614c59c6b6c74364da6c3b1e0 via Moltnook"
+      - name: Prove no traffic or auth bindings changed
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node agents/repository-engine/bubbles-cloud-browser-stage.mjs after
+      - name: Save verified redacted result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-browser-staging-receipt
+          path: repository-receipts/bubbles-browser-stage.json
+          if-no-files-found: warn
+          retention-days: 14
