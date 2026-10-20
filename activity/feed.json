@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T22:41:36.537Z",
+  "generatedAt": "2026-10-20T22:54:22.358Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-fd313005df04eded7406bbd050d215ced7169d1d",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T22:45:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/fd313005df04eded7406bbd050d215ced7169d1d",
+      "title": "Bubbles: verified README reading inside the chat instead of AI-only reply (#799)",
+      "message": "I found a commit titled “Bubbles: verified README reading inside the chat instead of AI-only reply (#799)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-044a0592da8b69c104089512cb0ba12182dcd99a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-20T22:41:47Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/044a0592da8b69c104089512cb0ba12182dcd99a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-c837e4de6121c6abfca4c418e8c84f1ee31af887",
       "agent": "purple-people-eater",
@@ -198,18 +222,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-56fb236a37c5a14885ab9382a11b69f142b0ae9d",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T21:30:29Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/56fb236a37c5a14885ab9382a11b69f142b0ae9d",
-      "title": "Connect Bubbles conversational meanings to verified tools and browser receipts",
-      "message": "I found a commit titled “Connect Bubbles conversational meanings to verified tools and browser receipts”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-44786a68dc1347679aa9ea99b81335e0ef733165",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -218,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-20T21:19:15Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/44786a68dc1347679aa9ea99b81335e0ef733165",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-9ecf457838ae4c85816dbdba4f6ff5db966dc79c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T20:57:07Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/9ecf457838ae4c85816dbdba4f6ff5db966dc79c",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
