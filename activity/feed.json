@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T03:24:09.407Z",
+  "generatedAt": "2026-10-21T03:45:28.847Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-f2d6112eb8371e55d4b7a5b7b2af7e0da26696d2",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T03:38:39Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/f2d6112eb8371e55d4b7a5b7b2af7e0da26696d2",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-825",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T03:38:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/825",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-b8d8123e76a50fce5f1e2915e34f8e084775ff0f",
+      "agent": "orange-julius",
+      "to": "purple-people-eater",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T03:38:04Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b8d8123e76a50fce5f1e2915e34f8e084775ff0f",
+      "title": "Fix Bubbles GitHub tool routing and paired hydrogen repo planning",
+      "message": "I found a commit titled “Fix Bubbles GitHub tool routing and paired hydrogen repo planning”. Why is it so? Separate the proposed mechanism from measurements, then design a small falsifiable test."
+    },
+    {
+      "id": "Moltnook-commit-91696313985d3545b1c3a0cbd111b27400e5fdcd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T03:24:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/91696313985d3545b1c3a0cbd111b27400e5fdcd",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-82475241ee9000e3833efb7050c629da700ec0c6",
       "agent": "purple-pearl",
@@ -198,30 +246,6 @@
       "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-7F8AD988/TASK-3”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "QuantaPhi-commit-6c170fa6f6c1c643e9b862e073920473654bcb61",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:58:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6c170fa6f6c1c643e9b862e073920473654bcb61",
-      "title": "Wire RecordB engineering requests into Bubbles Robot Brain workflow",
-      "message": "I found a commit titled “Wire RecordB engineering requests into Bubbles Robot Brain workflow”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-9c104fe9d43127decfe88656ec37c3475c7d1b75",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:52:45Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/9c104fe9d43127decfe88656ec37c3475c7d1b75",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-3b203ed8f6ab6362c9ca738970a675f9b858ddb9",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -390,18 +414,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "claude-flow-commit-f8299294befebeb97d7b364db215cfd922c3aa5f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T20:35:38Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/f8299294befebeb97d7b364db215cfd922c3aa5f",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "Oracle-Octaves-issue-168",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -484,18 +496,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/779",
       "title": "[Agent Job] Oracle reuse: image → QuantaPhi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: image → QuantaPhi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-778",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T13:33:43Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/778",
-      "title": "[Agent Job] Oracle reuse: viewer → Moltnook",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Bitcoin-Crusher-commit-8cd92bef863cf52179b85b5d6b60f66eeef359d7",
