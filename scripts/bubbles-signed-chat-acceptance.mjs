@@ -1,7 +1,7 @@
 // Synthetic, owner-approved Bubbles chat QA via the existing short-lived GitHub
 // OIDC identity. Never reads private conversations or authorizes website taps.
 import {writeFile,mkdir} from 'node:fs/promises';
-const URL='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+const ENDPOINT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
 const prompts=[
  {name:'two_town_weather',text:'What is the weather in Lovilia, Iowa and Ottumwa, Iowa today? Check each town separately. Use available tools, explain the actual conditions and name the date; do not narrate tool commands.'},
  {name:'weather_followup',text:'Which of those two towns is warmer? Use our preceding answer and tell me clearly, without making me restate the towns.'},
@@ -12,7 +12,7 @@ const prompts=[
 ];
 function clean(s,n=1600){return String(s||'').replace(/[\x00-\x1f\x7f]/g,' ').slice(0,n);}
 async function request(headers,payload,ms){
- const r=await fetch(URL,{method:'POST',headers,body:JSON.stringify(payload),redirect:'manual',signal:AbortSignal.timeout(ms)});
+ const r=await fetch(ENDPOINT,{method:'POST',headers,body:JSON.stringify(payload),redirect:'manual',signal:AbortSignal.timeout(ms)});
  let data={};try{data=await r.json()}catch{}
  if(!r.ok||data.ok!==true)throw Error('signed_'+payload.operation+'_http_'+r.status+'_'+clean(data.error,90));
  return data;
