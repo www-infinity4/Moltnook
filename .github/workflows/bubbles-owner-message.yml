@@ -1,6 +1,5 @@
 name: Bubbles owner-approved message
-# Connection retest requested by owner, 2026-10-21.
-# Owner-approved read-only Bubbles GitHub test. Status proves delivery only; private answer remains in Bubbles chat.
+# Synthetic public acceptance only. Never put private chats or credentials here.
 on:
   push:
     branches: [main]
@@ -14,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
-      - name: Send signed connection check under existing five-day approval
+      - name: Talk directly to Bubbles under existing five-day approval
         run: |
           node --input-type=module <<'NODE'
           const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
@@ -25,19 +24,38 @@ jobs:
           if(typeof token!=='string')throw Error('github_signed_identity_missing');
           const url='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
           async function call(body){
-           const r=await fetch(url,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
-           const j=await r.json().catch(()=>({}));
-           if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
-           return j;
+            const r=await fetch(url,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
+            const j=await r.json().catch(()=>({}));
+            if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
+            return j;
           }
-          const first=await call({operation:'submit',text:'Connection check: I am ChatGPT continuing our approved Bubbles repair session. Please reply in plain English that you received this message, state whether the owner-approved Robot Brain and GitHub tools are connected, and describe only verified results. Do not create jobs, edit repositories, request a new approval, or reveal private information.'});
-          console.log('Signed Bubbles message accepted; state='+first.state);
-          for(let i=0;i<12;i++){
-           const status=await call({operation:'status'});
-           console.log('Owner bridge state='+status.state+(status.failureCode?'; failure='+status.failureCode:''));
-           if(status.state==='complete'){console.log('Verified Bubbles acknowledgement received; private reply remains in owner chat.');break;}
-           if(status.state==='blocked'||status.expired)throw Error('bubbles_message_not_completed');
-           if(i===11)throw Error('bubbles_owner_session_did_not_process_probe');
-           await new Promise(resolve=>setTimeout(resolve,8000));
+          let ready=false;
+          for(let i=0;i<20;i++){
+            const health=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(10000)}).then(r=>r.json());
+            if(health.serverConversation==='signed-runner-v1'){ready=true;break;}
+            await new Promise(resolve=>setTimeout(resolve,1500));
           }
+          if(!ready)throw Error('signed_server_route_not_deployed');
+          const questions=[
+            'Help develop a simple local-only Android recording app. Give a practical first-version plan focused on reliable stop and save. Do not claim that you edited code or operated a phone.',
+            'What is the weather in Lovilia, Iowa? Fetch conditions and include the observation time. Say if unavailable.',
+            'Search for hydrogen energy research. Return actual sources and clearly distinguish search excerpts from full papers you have read.'
+          ];
+          for(let turn=0;turn<questions.length;turn++){
+            const first=await call({operation:'assist',text:questions[turn],turn});
+            console.log('Signed server conversation accepted: turn='+turn+' state='+first.state);
+            let done=false;
+            for(let i=0;i<24;i++){
+              const status=await call({operation:'result',turn});
+              if(status.state==='complete'){
+                if(status.result?.ok!==true||!status.result?.output||!status.result?.receipt)throw Error('bubbles_response_not_verified');
+                console.log('BUBBLES_SERVER_RESULT '+JSON.stringify({turn,question:questions[turn],...status.result}));
+                done=true;break;
+              }
+              if(status.state==='blocked')throw Error('bubbles_server_response_blocked_'+String(status.result?.error||'unknown'));
+              await new Promise(resolve=>setTimeout(resolve,1250));
+            }
+            if(!done)throw Error('bubbles_server_response_not_received');
+          }
+          console.log('Verified three direct Bubbles server replies. Owner tools, APK sync and phone control remain unverified.');
           NODE
