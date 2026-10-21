@@ -49,12 +49,16 @@ jobs:
           echo "TARGET_SHA=$(git -C quantaphi-source rev-parse HEAD)" >> "$GITHUB_ENV"
           test -f quantaphi-source/workers/infinity-brain-clock/wrangler.toml
           test -f quantaphi-source/workers/infinity-brain-clock/deferred-recovery.mjs
+          test -f quantaphi-source/workers/infinity-brain-clock/owner-task-clock.mjs
+          test -f quantaphi-source/bubbles-cloud-clock.mjs
 
       - name: Test current QuantaPhi Brain source without deployment credentials
         working-directory: quantaphi-source
         run: |
           node --check workers/infinity-brain-clock/worker.js
           node --check workers/infinity-brain-clock/deferred-recovery.mjs
+          node --check workers/infinity-brain-clock/owner-task-clock.mjs
+          node --check bubbles-cloud-clock.mjs
           node --check workers/infinity-brain-clock/source-review.mjs
           node --test \
             test/brain-ticket-selector.test.mjs \
@@ -63,6 +67,7 @@ jobs:
             test/brain-assigned-job-scope.test.mjs \
             test/brain-color-core.test.mjs \
             test/brain-clock.test.mjs \
+            test/bubbles-owner-clock.test.mjs \
             test/brain-clock-binding-parity.test.mjs \
             test/brain-pink-source-review.test.mjs \
             test/bubbles-runner-dispatch.test.mjs \
@@ -129,7 +134,7 @@ jobs:
         run: |
           npx --yes wrangler@4 versions upload \
             --config workers/infinity-brain-clock/wrangler.toml \
-            --message "Verified Brain source from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
+            --message "Verified Brain clock schedule and source recovery from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
 
       - name: Prove no production traffic changed and no binding identity changed
         env:
