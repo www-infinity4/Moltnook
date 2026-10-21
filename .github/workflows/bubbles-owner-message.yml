@@ -1,5 +1,5 @@
 name: Bubbles owner-approved message
-# Owner consumer acceptance: latest reviewed QuantaPhi 7666f47, 2026-10-21.
+# Post-release acceptance of source 7666f47, Worker 242a08a5; requires signed consumer diagnostics.
 # Synthetic public acceptance only. Never put private chats or credentials here.
 on:
   push:
@@ -43,10 +43,12 @@ jobs:
           console.log('BUBBLES_OWNER_UI_SUBMIT '+JSON.stringify({state:ui.state}));
           let ownerUIState=ui.state;
           let ownerConsumerState='unavailable';
+          let consumerDiagnosticObserved=false;
           for(let i=0;i<12;i++){
             const status=await call({operation:'status'});
             ownerUIState=status.state;
             ownerConsumerState=['ready','busy','stale','not_observed','approval_inactive','unavailable'].includes(status.consumer?.state)?status.consumer.state:'unavailable';
+            if(['ready','busy','stale','not_observed','approval_inactive'].includes(ownerConsumerState))consumerDiagnosticObserved=true;
             const observedAge=Number.isFinite(status.consumer?.ageSeconds)?Math.min(86400,Math.max(0,Math.floor(status.consumer.ageSeconds))):undefined;
             console.log('BUBBLES_OWNER_UI_STATUS '+JSON.stringify({state:ownerUIState,expired:status.expired,failureCode:status.failureCode,consumer:ownerConsumerState,...(observedAge===undefined?{}:{consumerAgeSeconds:observedAge})}));
             if(['complete','blocked'].includes(status.state))break;
@@ -81,6 +83,7 @@ jobs:
             }
             if(!done){failures++;console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,error:'bubbles_server_response_not_received'}));}
           }
-          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:false,apkSyncVerified:false}));
+          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,consumerDiagnosticObserved,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:false,apkSyncVerified:false}));
+          if(!consumerDiagnosticObserved){console.log('::error::Deployed Worker did not return a recognized signed owner consumer diagnostic.');process.exitCode=1;}
           if(failures)process.exitCode=1;
           NODE
