@@ -12,10 +12,10 @@ const SHA=/^[0-9a-f]{40}$/;
 const SCRIPT='infinity-brain-clock';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
 const RECEIPT='repository-receipts/brain-owner-release.json';
-export const STABLE_VERSION='10a32f52-bdd2-42c4-a25a-3650233bcda7';
-export const CANDIDATE_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
-export const SOURCE_COMMIT='ca40684a16fa977f3a3576b62e30c269099c3e51';
-export const BASELINE_DEPLOYMENT='f5af22f6-d792-4ce5-b6b0-7e2e07ec1d2c';
+export const STABLE_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
+export const CANDIDATE_VERSION='f00ef78a-d044-4437-868b-73dcc0dd61d8';
+export const SOURCE_COMMIT='92c0e393769d4ea0abdb4010269357f35d99f954';
+export const BASELINE_DEPLOYMENT='a08f628e-c4ee-4928-a031-31892573bf84';
 const REQUIRED=['BOT_WALLET','BOT_WORK_SECRET','CLOCK','MODELS','WORK_DB','WRITER_AI','WRITER_OWNER_HASH'];
 function stable(v){if(Array.isArray(v))return v.map(stable);if(v&&typeof v==='object')return Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])]));return v;}
 function digest(x){return createHash('sha256').update(JSON.stringify(stable(x))).digest('hex');}
@@ -26,7 +26,10 @@ export function validateCanary(receipt,{now=Date.now()}={}){
   receipt.prodBeforeAfterEqual!==true||receipt.isolatedD1!==true||
   receipt.isolatedDurableObject!==true||receipt.originalTicketsCopied!==false||
   receipt.ownerOrWalletWrites!==false||receipt.liveProductionPromoted!==false||
-  receipt.isolationVerified!==true||!(Number(receipt.checked)>=8))
+  receipt.isolationVerified!==true||!(Number(receipt.checked)>=8)||
+  receipt.consentTransport?.reachable!==true||receipt.consentTransport?.httpStatus!==401||
+  receipt.consentTransport?.error!=='bridge_runner_not_verified'||
+  JSON.stringify(receipt.compatibilityFlags)!==JSON.stringify(['global_fetch_strictly_public']))
   throw Error('isolated_canary_evidence_incomplete_or_mismatched');
  const when=Date.parse(receipt.when);
  if(!Number.isFinite(when)||when>now+60000||now-when>72*3600000)
@@ -62,7 +65,10 @@ export function requireBindingAndRuntimeParity(stableVersion,candidateVersion){
  const canonical=x=>JSON.stringify((x?.resources?.script?.named_handlers||[]).map(h=>[h.name,[...h.handlers].sort()]).sort());
  if(canonical(stableVersion)!==canonical(candidateVersion))
   throw Error('worker_class_or_entrypoint_drift');
- return {count:old.length,runtime:a.compatibility_date,migrationTag:a.migration_tag};
+ if(JSON.stringify([...(b?.compatibility_flags||[])].sort())!==JSON.stringify(['global_fetch_strictly_public']))
+  throw Error('candidate_runtime_flag_drift');
+ return {count:old.length,runtime:a.compatibility_date,migrationTag:a.migration_tag,
+  compatibilityFlags:[...b.compatibility_flags]};
 }
 export function requireProductionState(deployments,{mode='release'}={}){
  const current=(deployments?.deployments||deployments||[])[0];
