@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sourceWindows,recalculateBounds,checkVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
 import {readFileSync} from 'node:fs';
 test('actual runner publication code is visible when the job asks for final git push context',()=>{
  const full=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
@@ -127,4 +127,26 @@ test('source replan never invents missing paths, forged baselines or executable 
  const tampered=structuredClone(first);
  tampered.source['bubbles-ai.js'].windows[0].start+=1;
  assert.throws(()=>recalculateBounds(original,tampered),/source_replan_snapshot_mismatch/);
+});
+
+test('Green edit wrapper recovery requires exact visible source and keeps all gates',()=>{
+ const pkt=sourceWindows({'bubbles-ai.js':'const ready = true;\nconst notReady = false;\n','new.js':null},{task:'ready'});
+ const literal='const ready = true;';
+ const wrapped=[{path:'bubbles-ai.js',before:{text:literal},after:'const ready = false;'}];
+ assert.equal(checkVisibleEdits(pkt,wrapped),false);
+ const normalized=normalizeVisibleEdits(pkt,wrapped);
+ assert.equal(normalized[0].before,literal);
+ assert.equal(checkVisibleEdits(pkt,normalized),true);
+ assert.equal(typeof wrapped[0].before,'object');
+ for(const before of [{text:'not-in-source'},{text:literal,regex:true},{value:literal},{text:''},null,42]){
+  const bad=[{path:'bubbles-ai.js',before,after:'unsafe'}];
+  assert.equal(checkVisibleEdits(pkt,normalizeVisibleEdits(pkt,bad)),false);
+ }
+ assert.equal(checkVisibleEdits(pkt,normalizeVisibleEdits(pkt,[{path:'outside.js',before:{text:literal},after:'unsafe'}])),false);
+ assert.equal(checkVisibleEdits(pkt,normalizeVisibleEdits(pkt,[{path:'new.js',before:{text:literal},after:'unsafe'}])),false);
+ const missing=visibleEditFeedback(pkt,[{path:'bubbles-ai.js',before:'not-shown',after:'ok'}]);
+ assert.match(missing,/does not match any shown source window/);
+ const objectFeedback=visibleEditFeedback(pkt,[{path:'bubbles-ai.js',before:{value:literal},after:'ok'}]);
+ assert.match(objectFeedback,/plain JSON string/);
+ assert.ok(!objectFeedback.includes(literal));
 });
