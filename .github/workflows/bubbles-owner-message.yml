@@ -81,6 +81,6 @@ jobs:
             }
             if(!done){failures++;console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,error:'bubbles_server_response_not_received'}));}
           }
-          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:ownerUIState==='complete',apkSyncVerified:false}));
+          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:false,apkSyncVerified:false}));
           if(failures)process.exitCode=1;
           NODE
