@@ -7,7 +7,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
-import {sourceWindows,recalculateBounds,checkVisibleEdits,visibleEditFeedback,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,patchDigests,boundedPatched} from './context-windows.mjs';
 import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-adapter.mjs';
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
@@ -274,6 +274,9 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    build:async feedback=>{
     const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
     requireGreenEdits(proposal);
+    // Repair only a single {text:literal} schema wrapper already verified in
+    // the immutable source windows. All other malformed/outside edits fail closed.
+    if(useWindowV2)proposal.edits=normalizeVisibleEdits(windowEvidence,proposal.edits);
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows. '+visibleEditFeedback(windowEvidence,proposal.edits));
