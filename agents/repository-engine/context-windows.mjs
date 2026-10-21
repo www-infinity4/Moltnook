@@ -92,6 +92,20 @@ export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
  return {schemaVersion:1,source:packet,maximumChars:maxChars,remainingChars:budget,
   note:'Only shown immutable windows may be edited. Full source is retained privately by the authenticated checkout.'};
 }
+// Canonicalize only a harmless model wrapper when its sole text value is
+// already an exact literal in a pinned source window. Never guess unseen
+// source, unwrap arbitrary objects, or relax the normal patch/review gates.
+export function normalizeVisibleEdits(packet,edits){
+ if(!Array.isArray(edits))return edits;
+ return edits.map(edit=>{
+  if(!edit||typeof edit!=='object'||Array.isArray(edit))return edit;
+  const item=packet?.source?.[edit.path],before=edit.before;
+  if(item?.kind!=='existing'||!before||typeof before!=='object'||Array.isArray(before))return edit;
+  if(Object.keys(before).length!==1||typeof before.text!=='string'||!before.text)return edit;
+  if(!item.windows?.some(w=>w.text.includes(before.text)))return edit;
+  return {...edit,before:before.text};
+ });
+}
 export function checkVisibleEdits(packet,edits){
  if(!packet?.source||!Array.isArray(edits)||!edits.length)return false;
  for(const e of edits){
@@ -113,7 +127,10 @@ export function visibleEditFeedback(packet,edits){
   if(!item)return 'Edit '+i+': path is not in the reader plan.';
   if(typeof e.after!=='string')return 'Edit '+i+': after must be full string content.';
   if(item.kind==='new')return 'Edit '+i+': new file requires before:null (JSON null, not empty string or a source object), full after content, maximum 15000 characters; received before type '+(e.before===null?'null':typeof e.before)+', after length '+e.after.length+'.';
-  return 'Edit '+i+': existing file requires a nonempty before string copied exactly from one shown source window; received before type '+typeof e.before+'.';
+  if(typeof e.before!=='string')return 'Edit '+i+': existing file before must be a plain JSON string (not a window object or regex) copied from a shown source window; received before type '+typeof e.before+'.';
+  if(!e.before)return 'Edit '+i+': existing file before is an empty string. Copy a nonempty exact literal from a shown source window.';
+  if(!item.windows?.some(w=>w.text.includes(e.before)))return 'Edit '+i+': existing file before is a string, but it does not match any shown source window. Select exact visible characters; do not infer unshown content.';
+  return 'Edit '+i+': edit fields are invalid despite a visible before literal.';
  }).slice(0,12).join(' ');
 }
 export function patchDigests(patched){
