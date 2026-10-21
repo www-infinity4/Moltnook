@@ -38,6 +38,7 @@ jobs:
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
           const questions=[
+            "A user reports Reads & Realms stopped serving fresh stories and is repeating a stock story set. They mention GPT Investigation as the place to retain the repair conversation and its connection to GPT. Explain how you would connect this report to the existing affected project and preserve its context. Do not create any repository, invent an execution receipt, or emit tool-call JSON.",
             "What is the current weather in Albia, Lovilia, and Ottumwa, Iowa? Check each town separately. Include each observation time and source. If one fails, still report the others.",
             "Read https://quantaphi.org/bubbles.html and explain what it actually says about connecting the Android app and website. Use the page content; clearly say if you cannot retrieve it.",
             "Research hydrogen energy and turn the findings into a small practical research project. Give real sources, distinguish search excerpts from full papers you read, and include a concrete project question and next steps.",
