@@ -57,7 +57,7 @@ jobs:
           console.log('Existing bindings verified; staging reviewed source without changing traffic.');
           let config=readFileSync('workers/bubbles-tools/wrangler.toml','utf8');
           if(!current.resources.bindings.some(b=>b.name==='BROWSER'))
-            config=config.replace(/\\n\\[browser\\]\\nbinding = "BROWSER"\\n?/,'\\n');
+            config=config.replace(/\n\[browser\]\nbinding = "BROWSER"\n?/,'\n');
           config=config.replace('main = "worker.mjs"','main = "'+process.cwd()+'/workers/bubbles-tools/worker.mjs"');
           writeFileSync('/tmp/bubbles-tools-release.toml',config,{mode:0o600});
           const output=execFileSync('npx',['--yes','wrangler@4','versions','upload','--config','/tmp/bubbles-tools-release.toml','--message','Reviewed Bubbles conversation quality '+pin],{encoding:'utf8',env:process.env,timeout:180000,maxBuffer:4000000});
