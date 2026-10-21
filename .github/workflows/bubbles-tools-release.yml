@@ -73,8 +73,17 @@ jobs:
             promoted=true;
             const deployed=active(await api('/deployments'));
             if(deployed.versions?.length!==1||deployed.versions[0].version_id!==candidate||deployed.versions[0].percentage!==100)throw Error('production_readback_failed');
-            const health=await fetch('https://bubbles-tools.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(15000)}).then(r=>r.json());
-            if(health.revision!=='20261021-conversation-quality-v1')throw Error('production_source_marker_missing');
+            // Cloudflare edge propagation may lag a freshly verified deployment.
+            // Probe boundedly and retain the original hard fail/automatic rollback.
+            let revision='unavailable';
+            for(let attempt=0;attempt<7;attempt++){
+              const health=await fetch('https://bubbles-tools.marvaseater.workers.dev/health?bubbles_release_check='+attempt,{
+                headers:{'Cache-Control':'no-cache'},signal:AbortSignal.timeout(15000)}).then(r=>r.json()).catch(()=>({}));
+              revision=String(health.revision||'unavailable').slice(0,100);
+              if(revision==='20261021-conversation-quality-v1')break;
+              if(attempt<6)await new Promise(resolve=>setTimeout(resolve,1500));
+            }
+            console.log('BUBBLES_TOOLS_HEALTH_MARKER '+revision);
             // Public fixed-fixture diagnostic: no owner credentials or private history.
             const pageProbe=await fetch('https://bubbles-tools.marvaseater.workers.dev/v1/assist',{
               method:'POST',redirect:'manual',headers:{Origin:'https://quantaphi.org','Content-Type':'application/json'},
@@ -85,6 +94,7 @@ jobs:
               http:pageProbe.status,tool:probe.receipt?.tool||'missing',status:probe.receipt?.status||'missing',
               reason:probe.receipt?.reason||'none',url:probe.sourceUrl||'none',
               outputPreview:String(probe.output||'').slice(0,160)}));
+            if(revision!=='20261021-conversation-quality-v1')throw Error('production_source_marker_missing');
             const live=execFileSync('node',['scripts/verify-bubbles-live-tools.mjs'],{encoding:'utf8',timeout:60000,maxBuffer:1000000});
             console.log(live);
             const receipt={status:'deployed_and_live_verified',worker:'bubbles-tools',source:pin,version:candidate,previous,bindingsPreserved:true,publicPageAndThreeTownRouteVerified:true};
