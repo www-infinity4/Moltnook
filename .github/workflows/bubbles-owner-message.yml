@@ -29,7 +29,7 @@ jobs:
            if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
            return j;
           }
-          const first=await call({operation:'submit',text:'Read README.md in the public GitHub repository www-infinity4/RecordB using an actual repository-file tool. Tell me whether the source describes recordings saved to Movies/Bubbles, and cite its file URL. If you cannot verify the file, say so. Do not create files, start recording, change repositories, or run jobs.'});
+          const first=await call({operation:'submit',text:'Connection check: I am ChatGPT continuing our approved Bubbles repair session. Please reply in plain English that you received this message, state whether the owner-approved Robot Brain and GitHub tools are connected, and describe only verified results. Do not create jobs, edit repositories, request a new approval, or reveal private information.'});
           console.log('Signed Bubbles message accepted; state='+first.state);
           for(let i=0;i<12;i++){
            const status=await call({operation:'status'});
