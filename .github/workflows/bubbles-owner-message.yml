@@ -38,11 +38,9 @@ jobs:
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
           const questions=[
-            "A user reports Reads & Realms stopped serving fresh stories and is repeating a stock story set. They mention GPT Investigation as the place to retain the repair conversation and its connection to GPT. Explain how you would connect this report to the existing affected project and preserve its context. Do not create any repository, invent an execution receipt, or emit tool-call JSON.",
-            "What is the current weather in Albia, Lovilia, and Ottumwa, Iowa? Check each town separately. Include each observation time and source. If one fails, still report the others.",
-            "Read https://quantaphi.org/bubbles.html and explain what it actually says about connecting the Android app and website. Use the page content; clearly say if you cannot retrieve it.",
-            "Research hydrogen energy and turn the findings into a small practical research project. Give real sources, distinguish search excerpts from full papers you read, and include a concrete project question and next steps.",
-            "Can you verify that this conversation is connected to the Android APK, its private memories, and its phone controls? State only what this session actually proves. Do not invent access or claim a phone action."
+            "Inspect your actual available website card and viewer tapping tools. Can this signed server conversation tap a button in my active website chat? Distinguish a real UI action receipt from a model reply. Do not invent access or open any account.",
+            "I have Story Writer open. Could you tap View Stories in that card? If this server session cannot reach the active website DOM, explain the exact missing connection; do not say you tapped it.",
+            "Build a test checklist for Bubbles card opening, named button taps, same-origin embedded viewer controls, duplicate button names, disabled and hidden controls, external viewer boundaries, and actual observed state changes. No repository changes or paid tools."
           ];
           let failures=0;
           for(let turn=0;turn<questions.length;turn++){
