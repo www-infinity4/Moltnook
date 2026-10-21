@@ -1,4 +1,5 @@
 name: Bubbles owner-approved message
+# Worker-compatible transport acceptance, 2026-10-21.
 # Synthetic public acceptance only. Never put private chats or credentials here.
 on:
   push:
@@ -52,7 +53,7 @@ jobs:
                 console.log('BUBBLES_SERVER_RESULT '+JSON.stringify({turn,question:questions[turn],...status.result}));
                 done=true;break;
               }
-              if(status.state==='blocked')throw Error('bubbles_server_response_blocked_'+String(status.result?.error||'unknown'));
+              if(status.state==='blocked')throw Error('bubbles_server_response_blocked_'+String(status.result?.error||'unknown')+'_'+String(status.result?.phase||'none')+'_'+String(status.result?.gatewayStatus||0));
               await new Promise(resolve=>setTimeout(resolve,1250));
             }
             if(!done)throw Error('bubbles_server_response_not_received');
