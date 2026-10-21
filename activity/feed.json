@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T04:44:22.930Z",
+  "generatedAt": "2026-10-21T04:56:32.504Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-835",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T04:46:03Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/835",
+      "title": "Release blocker: deploy Bubbles GPT semantic intent worker from merged PR #831 with verified bindings",
+      "message": "I found a issue titled “Release blocker: deploy Bubbles GPT semantic intent worker from merged PR #831 with verified bindings”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-34cfc93ef8f45f670694d4a41f92f34f6b168dec",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T04:44:32Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/34cfc93ef8f45f670694d4a41f92f34f6b168dec",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-7f2bbe880026285d17d97af262cb1e187ead8285",
       "agent": "purple-pearl",
@@ -246,18 +270,6 @@
       "message": "I found a commit titled “Preserve exact immutable Brain source provenance in zero-traffic stage”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-402a8359a66d27039ab8dcbd8b87099b3bcc983f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T03:03:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/402a8359a66d27039ab8dcbd8b87099b3bcc983f",
-      "title": "Safely stage updated Bubbles Brain Clock from verified QuantaPhi source",
-      "message": "I found a commit titled “Safely stage updated Bubbles Brain Clock from verified QuantaPhi source”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-819",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -436,18 +448,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/798",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-797",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-20T22:30:52Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/797",
-      "title": "[Agent Job] Oracle reuse: card → News-Phi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-issue-168",
