@@ -75,6 +75,16 @@ jobs:
             if(deployed.versions?.length!==1||deployed.versions[0].version_id!==candidate||deployed.versions[0].percentage!==100)throw Error('production_readback_failed');
             const health=await fetch('https://bubbles-tools.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(15000)}).then(r=>r.json());
             if(health.revision!=='20261021-conversation-quality-v1')throw Error('production_source_marker_missing');
+            // Public fixed-fixture diagnostic: no owner credentials or private history.
+            const pageProbe=await fetch('https://bubbles-tools.marvaseater.workers.dev/v1/assist',{
+              method:'POST',redirect:'manual',headers:{Origin:'https://quantaphi.org','Content-Type':'application/json'},
+              body:JSON.stringify({request:'Inspect https://quantaphi.org/bubbles.html and explain what the Bubbles page offers.'}),
+              signal:AbortSignal.timeout(20000)});
+            const probe=await pageProbe.json().catch(()=>({}));
+            console.log('BUBBLES_HTML_LIVE_DIAGNOSTIC '+JSON.stringify({
+              http:pageProbe.status,tool:probe.receipt?.tool||'missing',status:probe.receipt?.status||'missing',
+              reason:probe.receipt?.reason||'none',url:probe.sourceUrl||'none',
+              outputPreview:String(probe.output||'').slice(0,160)}));
             const live=execFileSync('node',['scripts/verify-bubbles-live-tools.mjs'],{encoding:'utf8',timeout:60000,maxBuffer:1000000});
             console.log(live);
             const receipt={status:'deployed_and_live_verified',worker:'bubbles-tools',source:pin,version:candidate,previous,bindingsPreserved:true,publicPageAndThreeTownRouteVerified:true};
