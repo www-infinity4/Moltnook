@@ -12,7 +12,9 @@ const canary={
  productionDeploymentId:BASELINE_DEPLOYMENT,productionVersionId:STABLE_VERSION,
  prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,
  originalTicketsCopied:false,ownerOrWalletWrites:false,liveProductionPromoted:false,
- isolationVerified:true,checked:8,when:new Date(now-1000).toISOString()
+ isolationVerified:true,checked:8,
+ consentTransport:{reachable:true,httpStatus:401,error:'bridge_runner_not_verified'},
+ compatibilityFlags:['global_fetch_strictly_public'],when:new Date(now-1000).toISOString()
 };
 const bindings=[
  ['BOT_WALLET','service',{service:'unified-wallet',environment:'production'}],
@@ -22,8 +24,8 @@ const bindings=[
  ['WORK_DB','d1',{database_id:'existing-d1'}],
  ['WRITER_AI','ai',{}],['WRITER_OWNER_HASH','plain_text',{text:'secret-owner-id-for-test'}]
 ].map(([name,type,properties])=>({name,type,...properties}));
-const version=(list=bindings)=>({resources:{
- bindings:list,script_runtime:{migration_tag:'v1',compatibility_date:'2026-10-10'},
+const version=(list=bindings,flags=[])=>({resources:{
+ bindings:list,script_runtime:{migration_tag:'v1',compatibility_date:'2026-10-10',compatibility_flags:flags},
  script:{named_handlers:[{name:'BrainClock',handlers:['class']}]}
 }});
 const deployed=(versionId=STABLE_VERSION,id=BASELINE_DEPLOYMENT)=>({
@@ -31,7 +33,7 @@ const deployed=(versionId=STABLE_VERSION,id=BASELINE_DEPLOYMENT)=>({
 });
 const input={
  mode:'release',approval:'DEPLOY_BRAIN_100',actor:'www-infinity4',
- canary,stableVersion:version(),candidateVersion:version([...bindings].reverse()),
+ canary,stableVersion:version(),candidateVersion:version([...bindings].reverse(),['global_fetch_strictly_public']),
  deployments:deployed(),previewEnabled:false,now
 };
 test('a real fresh synthetic isolated canary plus exact bindings can propose one whole-version release',()=>{
@@ -104,4 +106,15 @@ test('post-deployment acknowledgement must include exact expected deployment/ver
  assert.equal(requireProductionStateAfter(deployed(CANDIDATE_VERSION,id),CANDIDATE_VERSION,id).versionId,CANDIDATE_VERSION);
  assert.throws(()=>requireProductionStateAfter(deployed(CANDIDATE_VERSION,id),STABLE_VERSION,id),/release_readback/);
  assert.throws(()=>requireProductionStateAfter(deployed(CANDIDATE_VERSION,id),CANDIDATE_VERSION,BASELINE_DEPLOYMENT),/release_readback/);
+});
+
+test('public routing and transport evidence are mandatory and cannot admit unrelated runtime flags',()=>{
+ assert.throws(()=>requireBindingAndRuntimeParity(version(),version()),/runtime_flag_drift/);
+ assert.throws(()=>requireBindingAndRuntimeParity(version(),version(bindings,['global_fetch_strictly_public','nodejs_compat'])),/runtime_flag_drift/);
+ for(const patch of [
+  {consentTransport:{reachable:false,httpStatus:0,error:'transport_failed'}},
+  {consentTransport:{reachable:true,httpStatus:200,error:'bridge_runner_not_verified'}},
+  {compatibilityFlags:[]},
+  {compatibilityFlags:['global_fetch_strictly_public','nodejs_compat']}
+ ]) assert.throws(()=>validateCanary({...canary,...patch},{now}),/isolated_canary/);
 });
