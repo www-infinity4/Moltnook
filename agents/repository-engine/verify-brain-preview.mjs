@@ -73,8 +73,11 @@ async function run(mode,{request=fetch}={}){
  const previewId=items[0].id;
  const deploymentList=await api(workerRoot+'/previews/'+previewId+'/deployments');
  const previewDeployment=deploymentList?.items?.[0]||deploymentList?.[0];
- if(previewDeployment?.annotations?.['workers/tag']!=='ca40684')
+ if(previewDeployment?.annotations?.['workers/tag']!=='92c0e39')
   throw Error('isolated_preview_source_version_not_updated');
+ if(previewDeployment.compatibility_date!=='2026-10-10'||
+   JSON.stringify([...(previewDeployment.compatibility_flags||[])].sort())!==JSON.stringify(['global_fetch_strictly_public']))
+  throw Error('isolated_preview_runtime_flags_unverified');
  const env=previewDeployment?.env||{};
  const required=Object.keys(env).sort();
  if(JSON.stringify(required)!==JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
@@ -113,7 +116,10 @@ async function run(mode,{request=fetch}={}){
   if(!probeRequest?.ok)
    throw Error('isolated_preview_probe_http_'+firstHTTP);
   const observedProbe=await probeRequest.json();
-  verdict={...validatePreview(observedProbe),consentTransport:observedProbe.consentTransport};
+  verdict={...validatePreview(observedProbe),consentTransport:observedProbe.consentTransport,
+   compatibilityFlags:[...previewDeployment.compatibility_flags]};
+  if(verdict.consentTransport?.httpStatus!==401||verdict.consentTransport?.error!=='bridge_runner_not_verified'||verdict.consentTransport?.reachable!==true)
+   throw Error('candidate_consent_endpoint_not_reachable');
   console.log('CONSENT_TRANSPORT_DIAGNOSTIC '+JSON.stringify(observedProbe.consentTransport||{error:'unavailable'}));
   // Any other path, especially owner actions, must remain unavailable.
   const unauthorized=await request(url+'/work/run-next',{method:'POST',
@@ -135,7 +141,7 @@ async function run(mode,{request=fetch}={}){
  fs.mkdirSync('repository-receipts',{recursive:true});
  const result={status:'isolated_preview_verified',
   stage:'synthetic_read_only_canary',sourceSha:process.env.TARGET_SHA||'',
-  candidateVersionId:'012107be-79c6-400e-b279-69d11cd646d5',
+  candidateVersionId:'f00ef78a-d044-4437-868b-73dcc0dd61d8',
   previewUrl:url,
   productionDeploymentId:earlier.id,productionVersionId:earlier.versionId,
   prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,

@@ -8,8 +8,8 @@ import {pathToFileURL} from 'node:url';
 
 export const PRODUCTION_DEPLOYMENT='a08f628e-c4ee-4928-a031-31892573bf84';
 export const PRODUCTION_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
-export const CANDIDATE_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
-export const SOURCE_SHA='ca40684a16fa977f3a3576b62e30c269099c3e51';
+export const CANDIDATE_VERSION='f00ef78a-d044-4437-868b-73dcc0dd61d8';
+export const SOURCE_SHA='92c0e393769d4ea0abdb4010269357f35d99f954';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
 export const PREVIEW_ID='b5ad542188964721a0ab59319c1f0b3a';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
@@ -39,6 +39,10 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  if(stagedVersion?.id!==CANDIDATE_VERSION||
     !String(stagedVersion.annotations?.['workers/message']||'').includes(SOURCE_SHA))
   throw Error('staged_source_commit_unverified');
+ const runtime=stagedVersion?.resources?.script_runtime;
+ if(runtime?.compatibility_date!=='2026-10-10'||
+   JSON.stringify([...(runtime?.compatibility_flags||[])].sort())!==JSON.stringify(['global_fetch_strictly_public']))
+  throw Error('staged_consent_routing_runtime_unverified');
  const productionClock=prodBindings.find(b=>b.name==='CLOCK');
  const productionD1=prodBindings.find(b=>b.name==='WORK_DB');
  if(!DO.test(productionClock?.namespace_id||'')||productionD1?.database_id!==PROD_DB)
@@ -50,7 +54,7 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  const list=deployments?.items||deployments;
  const latest=Array.isArray(list)?list[0]:null,env=latest?.env||{};
  if(!latest||latest.main_module!==candidateName||
-   !['bbf3a91','19510f5',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
+   !['bbf3a91','19510f5','ca40684',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
    JSON.stringify(Object.keys(env).sort())!==
      JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
    env.BRAIN_CANARY_MODE?.text!=='isolated'||
@@ -72,7 +76,7 @@ export function buildPatch({js,sourceSha=SOURCE_SHA}){
    !js.includes('ownerBlockPreserved')||!js.includes('mergedSourceRecognized')||
    !js.includes('source_review_only'))
   throw Error('bundled_synthetic_pink_probe_missing_or_invalid');
- return {modules:[{name:candidateName,content_type:'application/javascript+module',
+ return {compatibility_date:'2026-10-10',compatibility_flags:['global_fetch_strictly_public'],modules:[{name:candidateName,content_type:'application/javascript+module',
    content_base64:Buffer.from(js,'utf8').toString('base64')}],
   annotations:{'workers/commit_sha':SOURCE_SHA,
    'workers/tag':SOURCE_SHA.slice(0,7),
@@ -85,6 +89,9 @@ export function assertUpdatedPreview({before,after,productionBefore,productionAf
  if(!last||last.annotations?.['workers/tag']!==SOURCE_SHA.slice(0,7)||
    last.annotations?.['workers/commit_sha']!==SOURCE_SHA)
   throw Error('isolated_preview_update_source_missing');
+ if(last.compatibility_date!=='2026-10-10'||
+    JSON.stringify([...(last.compatibility_flags||[])].sort())!==JSON.stringify(['global_fetch_strictly_public']))
+  throw Error('isolated_preview_runtime_flags_unverified');
  const prev=(before?.items||before||[])[0];
  if(prev?.id===last.id&&!(
    prev.annotations?.['workers/tag']===SOURCE_SHA.slice(0,7)))
