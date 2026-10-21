@@ -1,4 +1,5 @@
 name: Bubbles owner-approved message
+# Fresh post-background-rollout probe; each new workflow run has a distinct immutable message.
 on:
   push:
     branches: [main]
@@ -28,7 +29,7 @@ jobs:
            if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
            return j;
           }
-          const first=await call({operation:'submit',text:'Connection check from ChatGPT through your owner-approved five-day bridge. Please acknowledge receipt only. Do not run jobs, change files, reveal private information or alter wallets.'});
+          const first=await call({operation:'submit',text:'Post-background-rollout connection check from ChatGPT through your owner-approved five-day bridge. Please acknowledge receipt only. Do not run jobs, change files, reveal private information or alter wallets.'});
           console.log('Signed Bubbles message accepted; state='+first.state);
           for(let i=0;i<12;i++){
            const status=await call({operation:'status'});
