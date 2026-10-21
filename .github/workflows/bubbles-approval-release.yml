@@ -21,8 +21,8 @@ jobs:
           node --input-type=module <<'NODE'
           const token=process.env.CLOUDFLARE_API_TOKEN;if(!token)throw Error('existing_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-cloud-browser';
-          const candidate='e84e5d77-d8dd-40c8-8f00-312a158c6ee1';
-          const pin='5d9edaa0f28667191a2a6fb407298cd8a172b6f8';
+          const candidate='2abb3795-13f8-4a70-bbde-c55cec5031dd';
+          const pin='c1be1d6ce2c1ad222a1d163164d509c74cffe538';
           async function api(path,body){
            const r=await fetch(root+path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});
            if(!r.ok)throw Error('cloudflare_http_'+r.status);
