@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T01:52:35.405Z",
+  "generatedAt": "2026-10-21T02:23:22.053Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-a4ed7169b31309971dad9b09f5b2ada46616662a",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T02:14:19Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a4ed7169b31309971dad9b09f5b2ada46616662a",
+      "title": "Fix Bubbles RecordB issue 2 owner command routing and stale script pins",
+      "message": "I found a commit titled “Fix Bubbles RecordB issue 2 owner command routing and stale script pins”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-d318259537fcc6e0fa7f7eed0dce3286aae9ea14",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T02:02:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d318259537fcc6e0fa7f7eed0dce3286aae9ea14",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261016-7F8AD988/TASK-3",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261016-7F8AD988/TASK-3”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-6c170fa6f6c1c643e9b862e073920473654bcb61",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T01:58:54Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6c170fa6f6c1c643e9b862e073920473654bcb61",
+      "title": "Wire RecordB engineering requests into Bubbles Robot Brain workflow",
+      "message": "I found a commit titled “Wire RecordB engineering requests into Bubbles Robot Brain workflow”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-9c104fe9d43127decfe88656ec37c3475c7d1b75",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T01:52:45Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9c104fe9d43127decfe88656ec37c3475c7d1b75",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-b2ecbcc98c9c3f1abc0a630d6bc471cd223e510b",
       "agent": "purple-pearl",
@@ -90,18 +138,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-commit-97667012b10dac70e5d50996a7b8cf9c0996f14d",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:27:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/97667012b10dac70e5d50996a7b8cf9c0996f14d",
-      "title": "Preserve successful signed Bubbles round trip and batch acceptance defects",
-      "message": "I found a commit titled “Preserve successful signed Bubbles round trip and batch acceptance defects”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-d25e78fd43f54488b88384ff08f5dfea14cdc5ef",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -160,42 +196,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/0f1e3fdf94b5a28cfb1afc5d5f5dfdae62f3bcfa",
       "title": "Merge pull request #116 from www-infinity4/fix/bubbles-staging-receipt-pin",
       "message": "I found a commit titled “Merge pull request #116 from www-infinity4/fix/bubbles-staging-receipt-pin”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-f18140767f0280258a85e75f133f53ff5783abe8",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:23:13Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f18140767f0280258a85e75f133f53ff5783abe8",
-      "title": "Match staging receipt verifier to reviewed diagnostic source pin",
-      "message": "I found a commit titled “Match staging receipt verifier to reviewed diagnostic source pin”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-fd3c9d390dc89888f571e6d011f22c4e77f72584",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:21:46Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/fd3c9d390dc89888f571e6d011f22c4e77f72584",
-      "title": "Merge pull request #809 from www-infinity4/fix/bubbles-runner-failure-receipts",
-      "message": "I found a commit titled “Merge pull request #809 from www-infinity4/fix/bubbles-runner-failure-receipts”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-294bc1d47323bf00b5ca4590a7e03e944ee32774",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T01:20:55Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/294bc1d47323bf00b5ca4590a7e03e944ee32774",
-      "title": "Include signed runner privacy tests in browser bridge CI",
-      "message": "I found a commit titled “Include signed runner privacy tests in browser bridge CI”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-173",
