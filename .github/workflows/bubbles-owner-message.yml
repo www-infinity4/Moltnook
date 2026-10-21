@@ -87,3 +87,21 @@ jobs:
           if(!consumerDiagnosticObserved){console.log('::error::Deployed Worker did not return a recognized signed owner consumer diagnostic.');process.exitCode=1;}
           if(failures)process.exitCode=1;
           NODE
+
+      - name: Submit bounded owner handoff repair after verified production release 39657835756
+        if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Submit Bubbles owner handoff job 20261021') }}
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const auth=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000),redirect:'error'});
+          if(!auth.ok)throw Error('github_signed_identity_unavailable');
+          const token=(await auth.json()).value;
+          if(typeof token!=='string'||!token)throw Error('github_signed_identity_missing');
+          const body={"repository":"www-infinity4/QuantaPhi","request":"Diagnose and repair QuantaPhi Bubbles' authenticated website-control handoff. Evidence: Moltnook run 39656667627 returned three signed server replies, but the separate Story Writer View Stories request remained queued with consumer=not_observed. Do not infer expired approval, closed app, or missing owner rights from that state. Read AGENTS.md and docs/BUBBLES-GPT-CONNECTION.md, BUBBLES-OWNER-WORK-BRIDGE.md, BUBBLES-CONSUMER-OBSERVATION.md, BUBBLES-OWNER-CONSUMER-QA.md. Trace owner verification, consent partition, consumer mounting/heartbeat, polling/resume, request claim, DOM action adapter, and result acknowledgement. Reproduce the break, implement the smallest repair, and test ready/busy/resume/revoked/expired cases, duplicate delivery, named card taps and same-origin viewer controls. Preserve current authorization, owner sessions, wallets, chat histories and cross-origin boundaries. Do not renew consent or copy credentials. Independently review the exact patch and require target CI before merging. Live acceptance: under an existing authenticated owner page, open Story Writer and tap View Stories once; record ticket/runner IDs, before/after panel state and actual action receipt. Never count a model reply or accepted/queued status as a tap. If no owner consumer can be observed, report the exact blocker and retain pending live acceptance. Keep Android physical validation separate. Report actual commit, tests, merge and deployment receipts, and distinguish prepared/submitted/claimed/completed."};
+          if(body.repository!=='www-infinity4/QuantaPhi'||!body.request||body.request.length>1800)throw Error('owner_work_scope_invalid');
+          const r=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(90000),redirect:'error'});
+          const j=await r.json().catch(()=>({}));
+          if(!r.ok||j.ok!==true||typeof j.ticketId!=='string'||j.repository!==body.repository||j.completed!==false)throw Error('owner_work_intake_not_verified_'+r.status+'_'+String(j.error||'invalid_receipt').replace(/[^a-zA-Z0-9_]/g,'').slice(0,80));
+          console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:j.ticketId,repository:j.repository,status:j.status,deduplicated:j.deduplicated===true,execution:{status:j.execution?.status||'unverified'},completed:false,productionVerified:false}));
+          NODE
