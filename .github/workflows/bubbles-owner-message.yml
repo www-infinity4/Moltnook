@@ -37,6 +37,16 @@ jobs:
             await new Promise(resolve=>setTimeout(resolve,1500));
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
+          // This probe targets the approved active owner UI consumer specifically.
+          // It is separate from the working server conversation.
+          const ui=await call({operation:'submit',text:'Authorized website component QA: open the Story Writer card, inspect its controls, and tap View Stories once. Report the actual control receipt and whether the saved-story panel expanded. Do not generate stories, spend coins, change accounts or claim a tap without observing it.'});
+          console.log('BUBBLES_OWNER_UI_SUBMIT '+JSON.stringify({state:ui.state}));
+          for(let i=0;i<12;i++){
+            const status=await call({operation:'status'});
+            console.log('BUBBLES_OWNER_UI_STATUS '+JSON.stringify({state:status.state,expired:status.expired,failureCode:status.failureCode}));
+            if(['complete','blocked'].includes(status.state))break;
+            await new Promise(resolve=>setTimeout(resolve,2000));
+          }
           const questions=[
             "Inspect your actual available website card and viewer tapping tools. Can this signed server conversation tap a button in my active website chat? Distinguish a real UI action receipt from a model reply. Do not invent access or open any account.",
             "I have Story Writer open. Could you tap View Stories in that card? If this server session cannot reach the active website DOM, explain the exact missing connection; do not say you tapped it.",
