@@ -12,7 +12,7 @@ permissions:
 jobs:
   message:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 8
     steps:
       - name: Talk directly to Bubbles under existing five-day approval
         run: |
@@ -21,7 +21,7 @@ jobs:
           u.searchParams.set('audience','bubbles-owner-message-bridge');
           const response=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
           if(!response.ok)throw Error('github_signed_identity_unavailable');
-          const token=(await response.json()).value;
+          let token=(await response.json()).value;
           if(typeof token!=='string')throw Error('github_signed_identity_missing');
           const url='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
           async function call(body){
@@ -33,30 +33,38 @@ jobs:
           let ready=false;
           for(let i=0;i<20;i++){
             const health=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(10000)}).then(r=>r.json());
-            if(health.serverConversation==='signed-runner-v1'&&health.toolsBound===true){ready=true;break;}
+            if(health.serverConversation==='signed-durable-v1'&&health.toolsBound===true){ready=true;break;}
             await new Promise(resolve=>setTimeout(resolve,1500));
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
           const questions=[
-            'Help develop a simple local-only Android recording app. Give a practical first-version plan focused on reliable stop and save. Do not claim that you edited code or operated a phone.',
             'What is the weather in Lovilia, Iowa? Fetch conditions and include the observation time. Say if unavailable.',
+            'Help develop a simple local-only Android recording app. Give a practical first-version plan focused on reliable stop and save. Do not claim that you edited code or operated a phone.',
             'Search for hydrogen energy research. Return actual sources and clearly distinguish search excerpts from full papers you have read.'
           ];
+          let failures=0;
           for(let turn=0;turn<questions.length;turn++){
+            const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
+            if(!identity.ok)throw Error('github_signed_identity_unavailable');
+            token=(await identity.json()).value;
             const first=await call({operation:'assist',text:questions[turn],turn});
             console.log('Signed server conversation accepted: turn='+turn+' state='+first.state);
             let done=false;
-            for(let i=0;i<24;i++){
+            for(let i=0;i<80;i++){
               const status=await call({operation:'result',turn});
               if(status.state==='complete'){
                 if(status.result?.ok!==true||!status.result?.output||!status.result?.receipt)throw Error('bubbles_response_not_verified');
                 console.log('BUBBLES_SERVER_RESULT '+JSON.stringify({turn,question:questions[turn],...status.result}));
                 done=true;break;
               }
-              if(status.state==='blocked')throw Error('bubbles_server_response_blocked_'+String(status.result?.error||'unknown')+'_'+String(status.result?.phase||'none')+'_'+String(status.result?.gatewayStatus||0));
+              if(status.state==='blocked'){
+                console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,...status.result}));
+                failures++;done=true;break;
+              }
               await new Promise(resolve=>setTimeout(resolve,1250));
             }
-            if(!done)throw Error('bubbles_server_response_not_received');
+            if(!done){failures++;console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,error:'bubbles_server_response_not_received'}));}
           }
-          console.log('Verified three direct Bubbles server replies. Owner tools, APK sync and phone control remain unverified.');
+          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerToolsVerified:false,apkSyncVerified:false}));
+          if(failures)process.exitCode=1;
           NODE
