@@ -29,11 +29,11 @@ jobs:
            if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
            return j;
           }
-          const first=await call({operation:'submit',text:'Post-background-rollout connection check from ChatGPT through your owner-approved five-day bridge. Please acknowledge receipt only. Do not run jobs, change files, reveal private information or alter wallets.'});
+          const first=await call({operation:'submit',text:'Diagnostic acknowledgement check from ChatGPT through your owner-approved five-day bridge. Please acknowledge receipt only. Do not run jobs, change files, reveal private information or alter wallets.'});
           console.log('Signed Bubbles message accepted; state='+first.state);
           for(let i=0;i<12;i++){
            const status=await call({operation:'status'});
-           console.log('Owner bridge state='+status.state);
+           console.log('Owner bridge state='+status.state+(status.failureCode?'; failure='+status.failureCode:''));
            if(status.state==='complete'){console.log('Verified Bubbles acknowledgement received; private reply remains in owner chat.');break;}
            if(status.state==='blocked'||status.expired)throw Error('bubbles_message_not_completed');
            if(i===11)throw Error('bubbles_owner_session_did_not_process_probe');
