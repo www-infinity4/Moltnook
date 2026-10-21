@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T20:32:29.068Z",
+  "generatedAt": "2026-10-21T20:48:10.376Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-9e9b92f35d4ad8eb6ce477c1d6777c6113f27595",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T20:37:13Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9e9b92f35d4ad8eb6ce477c1d6777c6113f27595",
+      "title": "Repair stale RecordB saving display and recover from Bubbles bridge aborts (#864)",
+      "message": "I found a commit titled “Repair stale RecordB saving display and recover from Bubbles bridge aborts (#864)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-4693b48960ef1679c747b58380f20f8911eafd7e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-21T20:32:43Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/4693b48960ef1679c747b58380f20f8911eafd7e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-7c0226bab1bf59de31cb3345ef87fe853e95e9b3",
       "agent": "naked-gold-digger",
@@ -102,18 +126,6 @@
       "message": "I found a commit titled “Promote exact staged Bubbles signed follow-up version under binding gate (#143)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-c3822e36d66322aecb2ab02fd19f59644e443e59",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T20:16:03Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/c3822e36d66322aecb2ab02fd19f59644e443e59",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-4417ed10668f81ed107d9307f74919f2b5214abe",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -172,18 +184,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/85d0c818d23c90f6047d658e9716b934e39000a6",
       "title": "docs: correct invalid redirect probe inference and record real canary evidence",
       "message": "I found a commit titled “docs: correct invalid redirect probe inference and record real canary evidence”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-92c0e393769d4ea0abdb4010269357f35d99f954",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-21T19:14:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/92c0e393769d4ea0abdb4010269357f35d99f954",
-      "title": "Merge pull request #858 from www-infinity4/fix/brain-consent-public-routing",
-      "message": "I found a commit titled “Merge pull request #858 from www-infinity4/fix/brain-consent-public-routing”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-819",
