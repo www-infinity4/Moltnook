@@ -73,7 +73,7 @@ async function run(mode,{request=fetch}={}){
  const previewId=items[0].id;
  const deploymentList=await api(workerRoot+'/previews/'+previewId+'/deployments');
  const previewDeployment=deploymentList?.items?.[0]||deploymentList?.[0];
- if(previewDeployment?.annotations?.['workers/tag']!=='19510f5')
+ if(previewDeployment?.annotations?.['workers/tag']!=='ca40684')
   throw Error('isolated_preview_source_version_not_updated');
  const env=previewDeployment?.env||{};
  const required=Object.keys(env).sort();
@@ -133,7 +133,7 @@ async function run(mode,{request=fetch}={}){
  fs.mkdirSync('repository-receipts',{recursive:true});
  const result={status:'isolated_preview_verified',
   stage:'synthetic_read_only_canary',sourceSha:process.env.TARGET_SHA||'',
-  candidateVersionId:'85538a70-509f-4847-969f-28b3505cc325',
+  candidateVersionId:'012107be-79c6-400e-b279-69d11cd646d5',
   previewUrl:url,
   productionDeploymentId:earlier.id,productionVersionId:earlier.versionId,
   prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,
