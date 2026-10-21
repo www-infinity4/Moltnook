@@ -112,7 +112,9 @@ async function run(mode,{request=fetch}={}){
   }
   if(!probeRequest?.ok)
    throw Error('isolated_preview_probe_http_'+firstHTTP);
-  verdict=validatePreview(await probeRequest.json());
+  const observedProbe=await probeRequest.json();
+  verdict={...validatePreview(observedProbe),consentTransport:observedProbe.consentTransport};
+  console.log('CONSENT_TRANSPORT_DIAGNOSTIC '+JSON.stringify(observedProbe.consentTransport||{error:'unavailable'}));
   // Any other path, especially owner actions, must remain unavailable.
   const unauthorized=await request(url+'/work/run-next',{method:'POST',
    redirect:'error',signal:AbortSignal.timeout(20000),

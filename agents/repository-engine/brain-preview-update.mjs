@@ -6,8 +6,8 @@
 import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 
-export const PRODUCTION_DEPLOYMENT='f5af22f6-d792-4ce5-b6b0-7e2e07ec1d2c';
-export const PRODUCTION_VERSION='10a32f52-bdd2-42c4-a25a-3650233bcda7';
+export const PRODUCTION_DEPLOYMENT='a08f628e-c4ee-4928-a031-31892573bf84';
+export const PRODUCTION_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
 export const CANDIDATE_VERSION='012107be-79c6-400e-b279-69d11cd646d5';
 export const SOURCE_SHA='ca40684a16fa977f3a3576b62e30c269099c3e51';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
@@ -124,7 +124,7 @@ async function run(fetcher=fetch){
   stagedVersion,previews,deployments,subdomain});
  const file=process.env.BRAIN_PREVIEW_BUNDLE||'/tmp/brain-pink-preview-bundle/brain-isolated-probe.js';
  const code=readFileSync(file,'utf8'),patch=buildPatch({js:code});
- if(baseline.existingTag!==SOURCE_SHA.slice(0,7)){
+ { // Refresh the reviewed diagnostic wrapper even when Brain source is unchanged.
   // Preview only; do not give this endpoint a script path, production binding,
   // owner hash or any code the model supplied. CI built the pinned source.
   await api(previewPath+'/latest','PATCH',patch);
