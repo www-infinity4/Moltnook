@@ -45,12 +45,13 @@ async function main(){
    if(p.name==='page_understanding')result.actualPublicPageRead=result.receipt?.tool==='web.read_page'&&result.receipt?.status==='complete'&&result.sources.some(s=>s.url==='https://quantaphi.org/bubbles.html');
    if(p.name==='weather_followup')result.retainedLocations=/Lovilia/i.test(result.output)&&/Ottumwa/i.test(result.output);
    if(p.name==='source_research')result.twoRealSources=result.sources.filter(s=>/^https:\/\//.test(s.url)).length>=2;
+   if(p.name==='source_research')result.synthesizedResearch=!/^Live results from /i.test(result.output)&&/hydrogen/i.test(result.output)&&/\b(?:compressed|liquid|pressure|hydride|solid|storage)\b/i.test(result.output)&&result.output.length>=90;
   }catch(e){result.error=clean(e.message,160);result.complete=false;}
   report.results.push(result);
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.retainedLocations===false||x.twoRealSources===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
