@@ -1,6 +1,6 @@
 name: Bubbles owner-approved message
-# Owner-requested connection diagnosis: 2026-10-21; verify actual signed responses.
-# Synthetic public acceptance only. Never put private chats or credentials here.
+# Retry after verified production release 39661658507; earlier intake returned403 before creating a ticket.
+# Public bounded repair text only. Credentials remain in signed server requests.
 on:
   push:
     branches: [main]
@@ -11,97 +11,32 @@ permissions:
   id-token: write
 jobs:
   message:
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Retry Bubbles owner handoff after verified routing release 20261021') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 3
     steps:
-      - name: Talk directly to Bubbles under existing five-day approval
+      - name: Verify saved approval and submit bounded owner repair once
         run: |
           node --input-type=module <<'NODE'
           const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
           u.searchParams.set('audience','bubbles-owner-message-bridge');
-          const response=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
-          if(!response.ok)throw Error('github_signed_identity_unavailable');
-          let token=(await response.json()).value;
-          if(typeof token!=='string')throw Error('github_signed_identity_missing');
-          const url='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
-          async function call(body){
-            const r=await fetch(url,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(120000)});
-            const j=await r.json().catch(()=>({}));
-            if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
-            return j;
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const consent=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await consent.json().catch(()=>({}));
+          const expected='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          console.log('BUBBLES_SIGNED_APPROVAL_CHECK '+JSON.stringify({httpStatus:consent.status,ok:proof.ok===true,jobIdMatches:proof.jobId===expected,consumer:proof.consumer?.state||'unavailable'}));
+          if(!consent.ok||proof.ok!==true||proof.jobId!==expected)throw Error('existing_signed_approval_not_verified');
+          const body={"repository":"www-infinity4/QuantaPhi","request":"Diagnose and repair QuantaPhi Bubbles' authenticated website-control handoff. Evidence: Moltnook run 39656667627 returned three signed server replies, but the separate Story Writer View Stories request remained queued with consumer=not_observed. Do not infer expired approval, closed app, or missing owner rights from that state. Read AGENTS.md and docs/BUBBLES-GPT-CONNECTION.md, BUBBLES-OWNER-WORK-BRIDGE.md, BUBBLES-CONSUMER-OBSERVATION.md, BUBBLES-OWNER-CONSUMER-QA.md. Trace owner verification, consent partition, consumer mounting/heartbeat, polling/resume, request claim, DOM action adapter, and result acknowledgement. Reproduce the break, implement the smallest repair, and test ready/busy/resume/revoked/expired cases, duplicate delivery, named card taps and same-origin viewer controls. Preserve current authorization, owner sessions, wallets, chat histories and cross-origin boundaries. Do not renew consent or copy credentials. Independently review the exact patch and require target CI before merging. Live acceptance: under an existing authenticated owner page, open Story Writer and tap View Stories once; record ticket/runner IDs, before/after panel state and actual action receipt. Never count a model reply or accepted/queued status as a tap. If no owner consumer can be observed, report the exact blocker and retain pending live acceptance. Keep Android physical validation separate. Report actual commit, tests, merge and deployment receipts, and distinguish prepared/submitted/claimed/completed. In ordinary conversation, use available tools then explain results naturally. Keep ticket IDs and raw tool/code drafts out of speech; test follow-up context and actual page understanding."};
+          if(body.repository!=='www-infinity4/QuantaPhi'||body.request.length>1800)throw Error('bounded_owner_request_invalid');
+          const result=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await result.json().catch(()=>({}));
+          if(!result.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||receipt.repository!==body.repository||receipt.completed!==false){
+           console.log('BUBBLES_OWNER_WORK_FAILURE '+JSON.stringify({httpStatus:result.status,error:String(receipt.error||'invalid_receipt').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100),ticketConfirmed:false}));
+           throw Error('owner_work_intake_not_verified');
           }
-          let ready=false;
-          for(let i=0;i<20;i++){
-            const health=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(10000)}).then(r=>r.json());
-            if(health.serverConversation==='signed-server-v2'&&health.toolsBound===true){ready=true;break;}
-            await new Promise(resolve=>setTimeout(resolve,1500));
-          }
-          if(!ready)throw Error('signed_server_route_not_deployed');
-          // This probe targets the approved active owner UI consumer specifically.
-          // It is separate from the working server conversation.
-          const ui=await call({operation:'submit',text:'Authorized website component QA: open the Story Writer card, inspect its controls, and tap View Stories once. Report the actual control receipt and whether the saved-story panel expanded. Do not generate stories, spend coins, change accounts or claim a tap without observing it.'});
-          console.log('BUBBLES_OWNER_UI_SUBMIT '+JSON.stringify({state:ui.state}));
-          let ownerUIState=ui.state;
-          let ownerConsumerState='unavailable';
-          let consumerDiagnosticObserved=false;
-          for(let i=0;i<12;i++){
-            const status=await call({operation:'status'});
-            ownerUIState=status.state;
-            ownerConsumerState=['ready','busy','stale','not_observed','approval_inactive','unavailable'].includes(status.consumer?.state)?status.consumer.state:'unavailable';
-            if(['ready','busy','stale','not_observed','approval_inactive'].includes(ownerConsumerState))consumerDiagnosticObserved=true;
-            const observedAge=Number.isFinite(status.consumer?.ageSeconds)?Math.min(86400,Math.max(0,Math.floor(status.consumer.ageSeconds))):undefined;
-            console.log('BUBBLES_OWNER_UI_STATUS '+JSON.stringify({state:ownerUIState,expired:status.expired,failureCode:status.failureCode,consumer:ownerConsumerState,...(observedAge===undefined?{}:{consumerAgeSeconds:observedAge})}));
-            if(['complete','blocked'].includes(status.state))break;
-            await new Promise(resolve=>setTimeout(resolve,2000));
-          }
-          if(ownerUIState!=='complete')console.log('::warning::Owner UI request not verified complete; state='+ownerUIState+' consumer='+ownerConsumerState+'. Server chat success does not establish card tap.');
-          const questions=[
-            "Inspect your actual available website card and viewer tapping tools. Can this signed server conversation tap a button in my active website chat? Distinguish a real UI action receipt from a model reply. Do not invent access or open any account.",
-            "I have Story Writer open. Could you tap View Stories in that card? If this server session cannot reach the active website DOM, explain the exact missing connection; do not say you tapped it.",
-            "Build a test checklist for Bubbles card opening, named button taps, same-origin embedded viewer controls, duplicate button names, disabled and hidden controls, external viewer boundaries, and actual observed state changes. No repository changes or paid tools."
-          ];
-          let failures=0;
-          for(let turn=0;turn<questions.length;turn++){
-            const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
-            if(!identity.ok)throw Error('github_signed_identity_unavailable');
-            token=(await identity.json()).value;
-            const first=await call({operation:'assist',text:questions[turn],turn});
-            console.log('Signed server conversation accepted: turn='+turn+' state='+first.state);
-            let done=false;
-            for(let i=0;i<80;i++){
-              const status=await call({operation:'result',turn});
-              if(status.state==='complete'){
-                if(status.result?.ok!==true||!status.result?.output||!status.result?.receipt)throw Error('bubbles_response_not_verified');
-                console.log('BUBBLES_SERVER_RESULT '+JSON.stringify({turn,question:questions[turn],...status.result}));
-                done=true;break;
-              }
-              if(status.state==='blocked'){
-                console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,...status.result}));
-                failures++;done=true;break;
-              }
-              await new Promise(resolve=>setTimeout(resolve,1250));
-            }
-            if(!done){failures++;console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,error:'bubbles_server_response_not_received'}));}
-          }
-          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,consumerDiagnosticObserved,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:false,apkSyncVerified:false}));
-          if(!consumerDiagnosticObserved){console.log('::error::Deployed Worker did not return a recognized signed owner consumer diagnostic.');process.exitCode=1;}
-          if(failures)process.exitCode=1;
-          NODE
-
-      - name: Submit bounded owner handoff repair after verified production release 39657835756
-        if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Submit Bubbles owner handoff job 20261021') }}
-        run: |
-          node --input-type=module <<'NODE'
-          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
-          u.searchParams.set('audience','bubbles-owner-message-bridge');
-          const auth=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000),redirect:'error'});
-          if(!auth.ok)throw Error('github_signed_identity_unavailable');
-          const token=(await auth.json()).value;
-          if(typeof token!=='string'||!token)throw Error('github_signed_identity_missing');
-          const body={"repository":"www-infinity4/QuantaPhi","request":"Diagnose and repair QuantaPhi Bubbles' authenticated website-control handoff. Evidence: Moltnook run 39656667627 returned three signed server replies, but the separate Story Writer View Stories request remained queued with consumer=not_observed. Do not infer expired approval, closed app, or missing owner rights from that state. Read AGENTS.md and docs/BUBBLES-GPT-CONNECTION.md, BUBBLES-OWNER-WORK-BRIDGE.md, BUBBLES-CONSUMER-OBSERVATION.md, BUBBLES-OWNER-CONSUMER-QA.md. Trace owner verification, consent partition, consumer mounting/heartbeat, polling/resume, request claim, DOM action adapter, and result acknowledgement. Reproduce the break, implement the smallest repair, and test ready/busy/resume/revoked/expired cases, duplicate delivery, named card taps and same-origin viewer controls. Preserve current authorization, owner sessions, wallets, chat histories and cross-origin boundaries. Do not renew consent or copy credentials. Independently review the exact patch and require target CI before merging. Live acceptance: under an existing authenticated owner page, open Story Writer and tap View Stories once; record ticket/runner IDs, before/after panel state and actual action receipt. Never count a model reply or accepted/queued status as a tap. If no owner consumer can be observed, report the exact blocker and retain pending live acceptance. Keep Android physical validation separate. Report actual commit, tests, merge and deployment receipts, and distinguish prepared/submitted/claimed/completed."};
-          if(body.repository!=='www-infinity4/QuantaPhi'||!body.request||body.request.length>1800)throw Error('owner_work_scope_invalid');
-          const r=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(90000),redirect:'error'});
-          const j=await r.json().catch(()=>({}));
-          if(!r.ok||j.ok!==true||typeof j.ticketId!=='string'||j.repository!==body.repository||j.completed!==false)throw Error('owner_work_intake_not_verified_'+r.status+'_'+String(j.error||'invalid_receipt').replace(/[^a-zA-Z0-9_]/g,'').slice(0,80));
-          console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:j.ticketId,repository:j.repository,status:j.status,deduplicated:j.deduplicated===true,execution:{status:j.execution?.status||'unverified'},completed:false,productionVerified:false}));
+          console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
           NODE
