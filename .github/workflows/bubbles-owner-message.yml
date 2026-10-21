@@ -1,0 +1,41 @@
+name: Bubbles owner-approved message
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/bubbles-owner-message.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  message:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Send signed connection check under existing five-day approval
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const response=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000)});
+          if(!response.ok)throw Error('github_signed_identity_unavailable');
+          const token=(await response.json()).value;
+          if(typeof token!=='string')throw Error('github_signed_identity_missing');
+          const url='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          async function call(body){
+           const r=await fetch(url,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
+           const j=await r.json().catch(()=>({}));
+           if(!r.ok||j.ok!==true)throw Error('bubbles_bridge_'+r.status+'_'+String(j.error||'unverified').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100));
+           return j;
+          }
+          const first=await call({operation:'submit',text:'Connection check from ChatGPT through your owner-approved five-day bridge. Please acknowledge receipt only. Do not run jobs, change files, reveal private information or alter wallets.'});
+          console.log('Signed Bubbles message accepted; state='+first.state);
+          for(let i=0;i<12;i++){
+           const status=await call({operation:'status'});
+           console.log('Owner bridge state='+status.state);
+           if(status.state==='complete'){console.log('Verified Bubbles acknowledgement received; private reply remains in owner chat.');break;}
+           if(status.state==='blocked'||status.expired)throw Error('bubbles_message_not_completed');
+           if(i===11)throw Error('bubbles_owner_session_did_not_process_probe');
+           await new Promise(resolve=>setTimeout(resolve,8000));
+          }
+          NODE
