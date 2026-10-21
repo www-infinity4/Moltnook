@@ -5,7 +5,7 @@ const mode=process.argv[2];
 const account='ef25728c096c6ba92cf510caa2058003';
 const token=process.env.CLOUDFLARE_API_TOKEN;
 const root='https://api.cloudflare.com/client/v4/accounts/'+account+'/workers/scripts/bubbles-cloud-browser';
-const pin='96958f83e919089dd71a2d8e1a9063b668d9e61d';
+const pin='a06d932d57213fac04262050fdb2e0b1672b3f45';
 const beforePath='/tmp/bubbles-browser-stage-before.json';
 const receiptPath='repository-receipts/bubbles-browser-stage.json';
 if(!['before','after'].includes(mode))throw Error('stage_mode_invalid');
@@ -28,6 +28,10 @@ function summary(version){
  for(const [name,type] of Object.entries({BRAIN:'service',BROWSER:'browser',CONSENT:'durable_object_namespace'})){
   if(map.get(name)?.type!==type)throw Error('required_browser_binding_missing_'+name);
  }
+ if(map.has('TOOLS')){
+  const b=map.get('TOOLS');
+  if(b.type!=='service'||b.service!=='bubbles-tools'||(b.environment&&b.environment!=='production')||b.entrypoint)throw Error('unexpected_tools_service');
+ }
  return Object.fromEntries([...map].sort(([a],[b])=>a.localeCompare(b)).map(([name,b])=>[name,{type:b.type,digest:sha(Object.fromEntries(Object.entries(b).sort(([a],[b])=>a.localeCompare(b))))}]));
 }
 const a=active(await api('/deployments'));
@@ -43,7 +47,10 @@ if(mode==='before'){
  const id=list[0].id,v=await api('/versions/'+id);
  const m=String(v.annotations?.['workers/message']||'');
  if(!m.includes(pin)||!m.includes('Bubbles viewport review'))throw Error('candidate_provenance_unverified');
- if(JSON.stringify(summary(v))!==JSON.stringify(before.binding))throw Error('browser_binding_identity_changed');
+ const candidateBindings=summary(v);
+ if(!candidateBindings.TOOLS)throw Error('tools_service_missing');
+ const existing=x=>Object.fromEntries(Object.entries(x).filter(([name])=>name!=='TOOLS'));
+ if(JSON.stringify(existing(candidateBindings))!==JSON.stringify(existing(before.binding)))throw Error('browser_binding_identity_changed');
  mkdirSync('repository-receipts',{recursive:true});
  writeFileSync(receiptPath,JSON.stringify({status:'staged_zero_traffic',sourceCommit:pin,stagedVersionId:id,existingActiveVersionId:a.versionId,productionDeploymentUnchanged:true,allBindingIdentitiesMatched:true,ownerConsentPreserved:true,actualAndroidScreenConnected:false,verifiedAt:new Date().toISOString()},null,2)+'\n');
  console.log('STAGING VERIFIED: Chrome, Robot Brain and consent bindings match; production traffic unchanged.');
