@@ -1,5 +1,5 @@
 name: Bubbles owner-approved message
-# Post-release owner consumer acceptance for 7de426b, 2026-10-21.
+# Owner consumer acceptance: latest reviewed QuantaPhi 7666f47, 2026-10-21.
 # Synthetic public acceptance only. Never put private chats or credentials here.
 on:
   push:
@@ -41,12 +41,18 @@ jobs:
           // It is separate from the working server conversation.
           const ui=await call({operation:'submit',text:'Authorized website component QA: open the Story Writer card, inspect its controls, and tap View Stories once. Report the actual control receipt and whether the saved-story panel expanded. Do not generate stories, spend coins, change accounts or claim a tap without observing it.'});
           console.log('BUBBLES_OWNER_UI_SUBMIT '+JSON.stringify({state:ui.state}));
+          let ownerUIState=ui.state;
+          let ownerConsumerState='unavailable';
           for(let i=0;i<12;i++){
             const status=await call({operation:'status'});
-            console.log('BUBBLES_OWNER_UI_STATUS '+JSON.stringify({state:status.state,expired:status.expired,failureCode:status.failureCode}));
+            ownerUIState=status.state;
+            ownerConsumerState=['ready','busy','stale','not_observed','approval_inactive','unavailable'].includes(status.consumer?.state)?status.consumer.state:'unavailable';
+            const observedAge=Number.isFinite(status.consumer?.ageSeconds)?Math.min(86400,Math.max(0,Math.floor(status.consumer.ageSeconds))):undefined;
+            console.log('BUBBLES_OWNER_UI_STATUS '+JSON.stringify({state:ownerUIState,expired:status.expired,failureCode:status.failureCode,consumer:ownerConsumerState,...(observedAge===undefined?{}:{consumerAgeSeconds:observedAge})}));
             if(['complete','blocked'].includes(status.state))break;
             await new Promise(resolve=>setTimeout(resolve,2000));
           }
+          if(ownerUIState!=='complete')console.log('::warning::Owner UI request not verified complete; state='+ownerUIState+' consumer='+ownerConsumerState+'. Server chat success does not establish card tap.');
           const questions=[
             "Inspect your actual available website card and viewer tapping tools. Can this signed server conversation tap a button in my active website chat? Distinguish a real UI action receipt from a model reply. Do not invent access or open any account.",
             "I have Story Writer open. Could you tap View Stories in that card? If this server session cannot reach the active website DOM, explain the exact missing connection; do not say you tapped it.",
@@ -75,6 +81,6 @@ jobs:
             }
             if(!done){failures++;console.log('BUBBLES_SERVER_FAILURE '+JSON.stringify({turn,error:'bubbles_server_response_not_received'}));}
           }
-          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerToolsVerified:false,apkSyncVerified:false}));
+          console.log(JSON.stringify({questions:questions.length,failures,allRepliesVerified:failures===0,ownerUIState,ownerConsumerState,ownerUIComplete:ownerUIState==='complete',ownerToolsVerified:false,apkSyncVerified:false}));
           if(failures)process.exitCode=1;
           NODE
