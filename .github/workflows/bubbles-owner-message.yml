@@ -4,7 +4,7 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs']
   workflow_dispatch:
 permissions:
   contents: read
