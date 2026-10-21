@@ -118,9 +118,10 @@ async function run(mode,{request=fetch}={}){
   const observedProbe=await probeRequest.json();
   verdict={...validatePreview(observedProbe),consentTransport:observedProbe.consentTransport,
    compatibilityFlags:[...previewDeployment.compatibility_flags]};
+  console.log('CONSENT_TRANSPORT_DIAGNOSTIC '+JSON.stringify(observedProbe.consentTransport||{error:'unavailable'}));
   if(verdict.consentTransport?.httpStatus!==401||verdict.consentTransport?.error!=='bridge_runner_not_verified'||verdict.consentTransport?.reachable!==true)
    throw Error('candidate_consent_endpoint_not_reachable');
-  console.log('CONSENT_TRANSPORT_DIAGNOSTIC '+JSON.stringify(observedProbe.consentTransport||{error:'unavailable'}));
+
   // Any other path, especially owner actions, must remain unavailable.
   const unauthorized=await request(url+'/work/run-next',{method:'POST',
    redirect:'error',signal:AbortSignal.timeout(20000),

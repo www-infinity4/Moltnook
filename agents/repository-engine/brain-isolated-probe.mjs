@@ -24,13 +24,13 @@ export default {
   try{
    const probe=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({operation:'status'}),
-    redirect:'error',signal:AbortSignal.timeout(10000)});
+    redirect:'manual',signal:AbortSignal.timeout(10000)});
    const raw=await probe.text();
    let body;try{body=JSON.parse(raw)}catch{}
    consentTransport={httpStatus:probe.status,
     error:body?.error==='bridge_runner_not_verified'?'bridge_runner_not_verified':/1042/.test(raw)?'worker_transport_1042':'unrecognized_response',
     reachable:probe.status===401&&body?.error==='bridge_runner_not_verified'};
-  }catch{}
+  }catch(error){consentTransport.error=/1042/.test(String(error))?'worker_transport_1042':/redirect/i.test(String(error))?'unsupported_redirect_mode':/timeout|abort/i.test(String(error))?'transport_timeout':'transport_failed';}
   const now=Date.now();
   const legacy={ticket:{id:'LEGACY',created_at:now-4*86400000},job:{
    id:'TASK-4',repository:'www-infinity4/QuantaPhi',
