@@ -32,7 +32,7 @@ jobs:
           let ready=false;
           for(let i=0;i<20;i++){
             const health=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/health',{signal:AbortSignal.timeout(10000)}).then(r=>r.json());
-            if(health.serverConversation==='signed-runner-v1'){ready=true;break;}
+            if(health.serverConversation==='signed-runner-v1'&&health.toolsBound===true){ready=true;break;}
             await new Promise(resolve=>setTimeout(resolve,1500));
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
