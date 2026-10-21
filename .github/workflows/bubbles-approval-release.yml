@@ -1,4 +1,4 @@
-name: Release verified Bubbles approval repair
+name: Release verified Bubbles server connection
 on:
   push:
     branches: [main]
@@ -21,8 +21,8 @@ jobs:
           node --input-type=module <<'NODE'
           const token=process.env.CLOUDFLARE_API_TOKEN;if(!token)throw Error('existing_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-cloud-browser';
-          const candidate='ca919853-d49e-4933-ae74-31736b30e334';
-          const pin='fd3c9d390dc89888f571e6d011f22c4e77f72584';
+          const candidate='f01bc316-dc7e-4c2b-8737-df93b7b6e9a5';
+          const pin='96958f83e919089dd71a2d8e1a9063b668d9e61d';
           async function api(path,body){
            const r=await fetch(root+path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});
            if(!r.ok)throw Error('cloudflare_http_'+r.status);
@@ -41,7 +41,7 @@ jobs:
           }
           if(bindings(current)!==bindings(next))throw Error('binding_identity_changed');
           const check=active(await api('/deployments'));if(check.id!==baseline.id)throw Error('production_changed_during_preflight');
-          if(old!==candidate)await api('/deployments',{strategy:'percentage',versions:[{version_id:candidate,percentage:100}],annotations:{'workers/message':'Owner-authorized Bubbles five-day approval repair; source '+pin}});
+          if(old!==candidate)await api('/deployments',{strategy:'percentage',versions:[{version_id:candidate,percentage:100}],annotations:{'workers/message':'Owner-authorized Bubbles signed server conversation; source '+pin}});
           const live=active(await api('/deployments'));
           if(live.versions?.length!==1||live.versions[0].version_id!==candidate||live.versions[0].percentage!==100)throw Error('release_readback_failed');
           console.log(JSON.stringify({status:'deployed',worker:'bubbles-cloud-browser',version:candidate,source:pin,bindingsPreserved:true,ownerSessionVerified:false,queueAccessVerified:false}));
