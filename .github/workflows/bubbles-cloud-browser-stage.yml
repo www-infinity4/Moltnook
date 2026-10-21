@@ -29,13 +29,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: a06d932d57213fac04262050fdb2e0b1672b3f45
+          ref: 5d9edaa0f28667191a2a6fb407298cd8a172b6f8
           path: quantaphi-source
           persist-credentials: false
       - name: Run browser and consent regression suite
         working-directory: quantaphi-source
         run: |
-          test "$(git rev-parse HEAD)" = "a06d932d57213fac04262050fdb2e0b1672b3f45"
+          test "$(git rev-parse HEAD)" = "5d9edaa0f28667191a2a6fb407298cd8a172b6f8"
           node --test test/bubbles-browser-agent.test.mjs test/bubbles-browser-consent.test.mjs test/bubbles-cloud-browser.test.mjs test/bubbles-chatgpt-bridge.test.mjs test/bubbles-combined-approval.test.mjs test/bubbles-runner-bridge.test.mjs test/bubbles-server-assist.test.mjs
           node --check workers/bubbles-cloud-browser/worker.mjs
           node --check workers/bubbles-tools/browser-cdp.mjs
@@ -61,7 +61,7 @@ jobs:
         run: |
           npx --yes wrangler@4 versions upload \
             --config workers/bubbles-cloud-browser/wrangler.toml \
-            --message "Bubbles viewport review a06d932d57213fac04262050fdb2e0b1672b3f45 via Moltnook"
+            --message "Bubbles viewport review 5d9edaa0f28667191a2a6fb407298cd8a172b6f8 via Moltnook"
       - name: Prove no traffic or auth bindings changed
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
