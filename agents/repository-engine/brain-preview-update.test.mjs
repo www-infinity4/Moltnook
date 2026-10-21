@@ -33,7 +33,7 @@ test('preview gate requires one existing isolated Preview, no public URLs, match
  for(const [key,value] of [
   ['production',{deployments:[]}],
   ['production',{deployments:[{id:PRODUCTION_DEPLOYMENT,versions:[{version_id:PRODUCTION_VERSION,percentage:99}]}]}],
-  ['stagedVersion',{...stagedVersion,id:PRODUCTION_VERSION}],
+  ['stagedVersion',{...stagedVersion,id:'00000000-0000-0000-0000-000000000000'}],
   ['subdomain',{enabled:true,previews_enabled:true}],
   ['previews',[...previews,{id:'new',slug:'evil'}]],
   ['deployments',{items:[{...original.items[0],env:{...env,BOT_WALLET:{type:'service'}}}]}]

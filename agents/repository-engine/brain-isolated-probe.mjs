@@ -18,6 +18,19 @@ export default {
   const row=await env.WORK_DB.prepare('SELECT COUNT(*) AS total FROM work_tickets').first();
   if(Number(row?.total)!==0)
    return Response.json({ok:false,error:'canary_db_not_empty'},{status:503});
+  // Anonymous, read-only transport check. No owner token, cookies or consent mutation.
+  // A reachable signed endpoint rejects this probe with its fixed 401 code.
+  let consentTransport={httpStatus:0,error:'transport_failed',reachable:false};
+  try{
+   const probe=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{
+    method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({operation:'status'}),
+    redirect:'error',signal:AbortSignal.timeout(10000)});
+   const raw=await probe.text();
+   let body;try{body=JSON.parse(raw)}catch{}
+   consentTransport={httpStatus:probe.status,
+    error:body?.error==='bridge_runner_not_verified'?'bridge_runner_not_verified':/1042/.test(raw)?'worker_transport_1042':'unrecognized_response',
+    reachable:probe.status===401&&body?.error==='bridge_runner_not_verified'};
+  }catch{}
   const now=Date.now();
   const legacy={ticket:{id:'LEGACY',created_at:now-4*86400000},job:{
    id:'TASK-4',repository:'www-infinity4/QuantaPhi',
@@ -82,6 +95,7 @@ export default {
    sourceRecovery.eligible===true&&clockReady&&mergedSourceRecognized&&
    reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved;
   return Response.json({ok,mode:'isolated_preview_only',ticketCount:row.total,
+   consentTransport,
    sourceDecisionVerified:ownerDecisionProtected,
    ownerPriorityVerified:currentWorkSelected,
    recoveryEligible:sourceRecovery.eligible,
