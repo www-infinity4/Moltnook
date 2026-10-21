@@ -13,7 +13,7 @@ const production=[clock,{name:'WORK_DB',type:'d1',database_id:'4aa6a463-02c6-48c
 const active={deployments:[{id:PRODUCTION_DEPLOYMENT,versions:[
  {version_id:PRODUCTION_VERSION,percentage:100}]}]};
 const productionVersion={resources:{bindings:production}};
-const stagedVersion={id:CANDIDATE_VERSION,resources:{bindings:[...production]},annotations:{
+const stagedVersion={id:CANDIDATE_VERSION,resources:{bindings:[...production],script_runtime:{compatibility_date:'2026-10-10',compatibility_flags:['global_fetch_strictly_public']}},annotations:{
  'workers/message':'Verified Brain source from QuantaPhi commit '+SOURCE_SHA
 }};
 const previews=[{id:PREVIEW_ID,slug:PREVIEW_SLUG}];
@@ -21,7 +21,7 @@ const env={BRAIN_CANARY_MODE:{type:'plain_text',text:'isolated'},
  CLOCK:{type:'durable_object_namespace',class_name:'BrainClock',namespace_id:'b'.repeat(32)},
  WORK_DB:{type:'d1',database_id:'76deaa98-5d3a-4151-8390-e14d7da87cb3'}};
 const original={items:[{id:'a'.repeat(8)+'-aaaa-aaaa-aaaa-'+'a'.repeat(12),
- main_module:'brain-isolated-probe.js',env,annotations:{'workers/tag':'bbf3a91'}}]};
+ main_module:'brain-isolated-probe.js',env,compatibility_date:'2026-10-10',compatibility_flags:['global_fetch_strictly_public'],annotations:{'workers/tag':'bbf3a91'}}]};
 const subdomain={enabled:true,previews_enabled:false};
 const args={production:active,productionVersion,stagedVersion,previews,
  deployments:original,subdomain};
@@ -48,7 +48,7 @@ test('only synthetic pinned read-only preview module may be updated; never send 
  const sample=('export default {fetch(){return new Response("'+
  '__preview__/admission mergedSourceRecognized ownerBlockPreserved source_review_only'+'")}};\n').repeat(8);
  const patch=buildPatch({js:sample});
- assert.deepEqual(Object.keys(patch).sort(),['annotations','modules']);
+ assert.deepEqual(Object.keys(patch).sort(),['annotations','compatibility_date','compatibility_flags','modules']);
  assert.deepEqual(Object.keys(patch.modules[0]).sort(),['content_base64','content_type','name']);
  assert.equal(patch.annotations['workers/commit_sha'],SOURCE_SHA);
  assert.equal(patch.modules[0].name,'brain-isolated-probe.js');
@@ -72,4 +72,13 @@ test('no source-success receipt when preview bindings or production traffic chan
  const missing={items:[{...latest.items[0],annotations:{}}]};
  assert.throws(()=>assertUpdatedPreview({before:original,after:missing,
   productionBefore:active,productionAfter:active}),/source_missing/);
+});
+
+test('candidate routing flag and isolated readback must be exact; unrelated flags are refused',()=>{
+ for(const compatibility_flags of [[],['global_fetch_strictly_public','nodejs_compat']]){
+  const staged={...stagedVersion,resources:{...stagedVersion.resources,script_runtime:{compatibility_date:'2026-10-10',compatibility_flags}}};
+  assert.throws(()=>checkPreviewPatchPreflight({...args,stagedVersion:staged}),/runtime_unverified/);
+  const after={items:[{...original.items[0],compatibility_flags,annotations:{'workers/tag':SOURCE_SHA.slice(0,7),'workers/commit_sha':SOURCE_SHA}}]};
+  assert.throws(()=>assertUpdatedPreview({before:original,after,productionBefore:active,productionAfter:active}),/runtime_flags_unverified/);
+ }
 });
