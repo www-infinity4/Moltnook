@@ -21,8 +21,8 @@ jobs:
           node --input-type=module <<'NODE'
           const token=process.env.CLOUDFLARE_API_TOKEN;if(!token)throw Error('existing_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-cloud-browser';
-          const candidate='f01bc316-dc7e-4c2b-8737-df93b7b6e9a5';
-          const pin='96958f83e919089dd71a2d8e1a9063b668d9e61d';
+          const candidate='5baff14b-5cef-4f30-a807-ff762b599f5a';
+          const pin='a06d932d57213fac04262050fdb2e0b1672b3f45';
           async function api(path,body){
            const r=await fetch(root+path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});
            if(!r.ok)throw Error('cloudflare_http_'+r.status);
@@ -37,8 +37,11 @@ jobs:
           function bindings(v){
            const b=v.resources?.bindings;if(!Array.isArray(b))throw Error('bindings_missing');
            for(const n of ['BRAIN','BROWSER','CONSENT','BRIDGE_DB'])if(!b.some(x=>x.name===n))throw Error('required_binding_missing');
-           return JSON.stringify(b.map(x=>Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b)))).sort((a,b)=>a.name.localeCompare(b.name)));
+           const tools=b.find(x=>x.name==='TOOLS');
+           if(tools&&(tools.type!=='service'||tools.service!=='bubbles-tools'||(tools.environment&&tools.environment!=='production')||tools.entrypoint))throw Error('unexpected_tools_binding');
+           return JSON.stringify(b.filter(x=>x.name!=='TOOLS').map(x=>Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b)))).sort((a,b)=>a.name.localeCompare(b.name)));
           }
+          if(!next.resources?.bindings?.some(x=>x.name==='TOOLS'&&x.type==='service'&&x.service==='bubbles-tools'))throw Error('tools_binding_missing');
           if(bindings(current)!==bindings(next))throw Error('binding_identity_changed');
           const check=active(await api('/deployments'));if(check.id!==baseline.id)throw Error('production_changed_during_preflight');
           if(old!==candidate)await api('/deployments',{strategy:'percentage',versions:[{version_id:candidate,percentage:100}],annotations:{'workers/message':'Owner-authorized Bubbles signed server conversation; source '+pin}});
