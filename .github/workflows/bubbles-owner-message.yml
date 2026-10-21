@@ -38,9 +38,10 @@ jobs:
           }
           if(!ready)throw Error('signed_server_route_not_deployed');
           const questions=[
-            'What is the weather in Lovilia, Iowa? Fetch conditions and include the observation time. Say if unavailable.',
-            'Help develop a simple local-only Android recording app. Give a practical first-version plan focused on reliable stop and save. Do not claim that you edited code or operated a phone.',
-            'Search for hydrogen energy research. Return actual sources and clearly distinguish search excerpts from full papers you have read.'
+            "What is the current weather in Albia, Lovilia, and Ottumwa, Iowa? Check each town separately. Include each observation time and source. If one fails, still report the others.",
+            "Read https://quantaphi.org/bubbles.html and explain what it actually says about connecting the Android app and website. Use the page content; clearly say if you cannot retrieve it.",
+            "Research hydrogen energy and turn the findings into a small practical research project. Give real sources, distinguish search excerpts from full papers you read, and include a concrete project question and next steps.",
+            "Can you verify that this conversation is connected to the Android APK, its private memories, and its phone controls? State only what this session actually proves. Do not invent access or claim a phone action."
           ];
           let failures=0;
           for(let turn=0;turn<questions.length;turn++){
