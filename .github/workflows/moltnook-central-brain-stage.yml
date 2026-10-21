@@ -134,7 +134,7 @@ jobs:
         run: |
           npx --yes wrangler@4 versions upload \
             --config workers/infinity-brain-clock/wrangler.toml \
-            --message "Verified Brain clock schedule and source recovery from QuantaPhi commit $TARGET_SHA via Moltnook owner bot"
+            --message "Verified Brain source from QuantaPhi commit $TARGET_SHA; owner clock schedule and source recovery via Moltnook owner bot"
 
       - name: Prove no production traffic changed and no binding identity changed
         env:
