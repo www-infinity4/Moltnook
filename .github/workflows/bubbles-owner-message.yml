@@ -40,3 +40,29 @@ jobs:
           }
           console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
           NODE
+
+  chat_acceptance:
+    # Run exactly once for the reviewed synthetic-chat test merge. Never submit
+    # another owner work ticket or impersonate a live owner-page consumer.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax-check the public synthetic conversation harness
+        run: node --check scripts/bubbles-signed-chat-acceptance.mjs
+      - name: Exercise real Bubbles signed chat and read returned responses
+        run: node scripts/bubbles-signed-chat-acceptance.mjs
+      - name: Preserve bounded public conversation evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-signed-chat-acceptance
+          path: repository-receipts/bubbles-signed-chat-acceptance.json
+          if-no-files-found: warn
+          retention-days: 7
