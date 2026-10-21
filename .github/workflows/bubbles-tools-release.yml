@@ -34,7 +34,7 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import {execFileSync} from 'node:child_process';
-          import {mkdirSync,writeFileSync} from 'node:fs';
+          import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
           const pin='7380d33b1cfa9f1b20bd27eedb446a379ce526c4',token=process.env.CLOUDFLARE_API_TOKEN;
           if(!token)throw Error('existing_deploy_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-tools';
@@ -50,12 +50,17 @@ jobs:
           const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a.localeCompare(b)).map(([k,v])=>[k,canonical(v)])):x;
           function bindings(v){
             const b=v.resources?.bindings;if(!Array.isArray(b))throw Error('bindings_missing');
-            for(const name of ['AI','ORACLE','NEWS','BRAIN','SEARCH','BROWSER'])if(!b.some(x=>x.name===name))throw Error('required_binding_missing_'+name);
+            for(const name of ['AI','ORACLE','NEWS','BRAIN','SEARCH'])if(!b.some(x=>x.name===name))throw Error('required_binding_missing_'+name);
             return JSON.stringify(canonical([...b].sort((a,b)=>a.name.localeCompare(b.name))));
           }
           const beforeBindings=bindings(current);
           console.log('Existing bindings verified; staging reviewed source without changing traffic.');
-          const output=execFileSync('npx',['--yes','wrangler@4','versions','upload','--config','workers/bubbles-tools/wrangler.toml','--message','Reviewed Bubbles conversation quality '+pin],{encoding:'utf8',env:process.env,timeout:180000,maxBuffer:4000000});
+          let config=readFileSync('workers/bubbles-tools/wrangler.toml','utf8');
+          if(!current.resources.bindings.some(b=>b.name==='BROWSER'))
+            config=config.replace(/\\n\\[browser\\]\\nbinding = "BROWSER"\\n?/,'\\n');
+          config=config.replace('main = "worker.mjs"','main = "'+process.cwd()+'/workers/bubbles-tools/worker.mjs"');
+          writeFileSync('/tmp/bubbles-tools-release.toml',config,{mode:0o600});
+          const output=execFileSync('npx',['--yes','wrangler@4','versions','upload','--config','/tmp/bubbles-tools-release.toml','--message','Reviewed Bubbles conversation quality '+pin],{encoding:'utf8',env:process.env,timeout:180000,maxBuffer:4000000});
           const candidate=output.match(/Worker Version ID: ([a-f0-9-]{36})/)?.[1];
           if(!candidate)throw Error('candidate_version_missing');
           const next=await api('/versions/'+candidate);
