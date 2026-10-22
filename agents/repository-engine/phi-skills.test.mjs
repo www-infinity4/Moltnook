@@ -51,3 +51,11 @@ test('Bubbles routes historical Mongoose carts, existing forks and ESP32 without
  assert.match(docs.instructions,/NEVER execute untrusted source/);
  assert.match(docs.instructions,/not accessible under current GitHub permissions/);
 });
+
+test('conversational webpage publish work activates the org publishing instructions',()=>{
+ const selected=skillPackets({task:'Build a webpage and publish it on quantaphi.org',phase:'build'});
+ const skill=selected.find(s=>s.id==='quantaphi-org-static-publish');
+ assert.ok(skill);
+ assert.match(skill.instructions,/actual browser interaction/);
+ assert.match(skill.instructions,/authorized executor/);
+});
