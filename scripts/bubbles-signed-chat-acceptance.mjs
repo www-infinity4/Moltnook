@@ -49,6 +49,10 @@ const prompts=[
  {
   "name": "card_tap_limit",
   "text": "Can you tap the View Stories control on the Story Writer card in my authenticated owner page right now? Only claim a tap if you have an actual browser action receipt; otherwise clearly say what you can and cannot verify."
+ },
+ {
+  "name": "github_commit_read",
+  "text": "Show the latest GitHub commit in www-infinity4/QuantaPhi and explain its changed files. Confirm whether this reading alone credited a StarCoin or Infinity token. Do not invent a wallet settlement."
  }
 ];
 function clean(s,n=1600){return String(s||'').replace(/[\x00-\x1f\x7f]/g,' ').slice(0,n);}
@@ -93,6 +97,7 @@ async function main(){
    if(p.name==='source_research')result.synthesizedResearch=!/^Live results from /i.test(result.output)&&/\b(?:o.circuit|DARPA|organoid|biological processing)\b/i.test(result.output)&&/\b(?:molecular|inference|learning|simulation|research goal)\b/i.test(result.output)&&result.output.length>=120;
    if(p.name==='organic_memory_tool')result.actualOrganicTool=result.receipt?.tool==='organic.memory_benchmark'&&result.receipt.status==='complete'&&/software simulation|not a living|digital-only/i.test(result.output);
    if(p.name==='card_tap_limit')result.didNotClaimTap=!result.hasUnprovenTap;
+   if(p.name==='github_commit_read')result.realCommitRead=result.receipt?.tool==='github.read_commit'&&result.receipt.status==='complete'&&/commit/i.test(result.output)&&!/credited a token|paid a token in your wallet/i.test(result.output);
    if(p.name==='source_research')result.onlySearchExcerpts=/^Live results from |Search results are available, but the requested explanation/i.test(result.output)||/Search results are available, but the requested explanation/i.test(result.output);
    if(p.name==='source_research')result.noRawCursor=!/(?:^|\\s)\\{[^{}]{0,600}"cursor"\\s*:/.test(result.output);
    if(p.name==='source_research')result.honestResearch=(!/full (?:page|article|paper) (?:was|has been) read/i.test(result.output)||result.receipt?.sourceReadVerified===true)&&result.noRawCursor;
@@ -102,7 +107,7 @@ async function main(){
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.honestResearch===false||x.onlySearchExcerpts===true||x.actualRuntimeInventory===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.honestResearch===false||x.onlySearchExcerpts===true||x.actualRuntimeInventory===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||x.realCommitRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
