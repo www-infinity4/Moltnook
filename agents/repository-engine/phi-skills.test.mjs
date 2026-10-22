@@ -39,3 +39,15 @@ test('memory and small Oracle upgrades receive narrow executable skill guidance'
  assert.ok(ui.some(x=>x.id==='oracle-graded-microchange'));
  assert.ok(skillPackets({task:'grade Oracle card fix',phase:'review'}).some(x=>x.id==='oracle-graded-microchange'));
 });
+
+test('Bubbles routes historical Mongoose carts, existing forks and ESP32 without invented authority',()=>{
+ const legacy=skillPackets({task:'Find our mongoose.os c13b0 cardci cart Python scripts and reuse the forks',phase:'plan'});
+ for(const id of ['mongoose-c13b0-cart-recovery','verified-fork-navigation'])assert.ok(legacy.some(s=>s.id===id),id);
+ const hardware=skillPackets({task:'Use ESP32 Mongoose OS for MQTT telemetry, but first verify the board',phase:'build'});
+ assert.ok(hardware.some(s=>s.id==='esp32-firmware-telemetry-boundary'));
+ assert.ok(skillPackets({task:'Review the Mongoose cart Python importer',phase:'review'}).some(s=>s.id==='mongoose-c13b0-cart-recovery'));
+ assert.ok(skillPackets({task:'Seal the ESP32 repo source and test receipts',phase:'arbitrate'}).some(s=>s.id==='black-evidence-seal'));
+ const docs=legacy.find(s=>s.id==='mongoose-c13b0-cart-recovery');
+ assert.match(docs.instructions,/NEVER execute untrusted source/);
+ assert.match(docs.instructions,/not accessible under current GitHub permissions/);
+});

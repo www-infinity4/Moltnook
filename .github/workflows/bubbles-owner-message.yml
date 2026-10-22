@@ -5,9 +5,9 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs']
   pull_request:
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json']
   workflow_dispatch:
     inputs:
       task:
@@ -34,6 +34,12 @@ jobs:
       - run: node --check scripts/bubbles-site-acceptance.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
       - run: node --check scripts/bubbles-oracle-refinement.mjs
+      - run: node --check scripts/bubbles-legacy-cart-smoke.mjs
+      - run: node --test scripts/bubbles-legacy-cart-smoke.test.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s scripts -p 'test_mongoose_cart_inventory.py' -v
       - run: node --test scripts/bubbles-oracle-refinement.test.mjs
       - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs scripts/bubbles-memory-pilot.test.mjs
   site_acceptance:
@@ -342,5 +348,38 @@ jobs:
         with:
           name: bubbles-oracle-refinement
           path: repository-receipts/bubbles-oracle-refinement.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  legacy_cart_smoke:
+    # Read-only synthetic Bubbles conversation using existing short-lived five-day owner approval.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles legacy cart source awareness 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Static Python cart metadata inventory and skill routing
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_mongoose_cart_inventory.py' -v
+          node --test scripts/bubbles-legacy-cart-smoke.test.mjs agents/repository-engine/phi-skills.test.mjs
+      - name: Ask signed Bubbles to distinguish mongoose carts from ESP32
+        run: node scripts/bubbles-legacy-cart-smoke.mjs
+      - name: Preserve synthetic response and graded receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-legacy-cart-smoke
+          path: repository-receipts/bubbles-legacy-cart-smoke.json
           if-no-files-found: warn
           retention-days: 14
