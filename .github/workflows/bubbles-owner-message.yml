@@ -9,6 +9,12 @@ on:
   pull_request:
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**']
   workflow_dispatch:
+    inputs:
+      task:
+        description: Fixed owner-approved acceptance task
+        type: choice
+        default: none
+        options: [none, site_acceptance]
 permissions:
   contents: read
   id-token: write
@@ -28,7 +34,7 @@ jobs:
       - run: node --check scripts/bubbles-site-acceptance.mjs
       - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs
   site_acceptance:
-    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles site acceptance') }}
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.task == 'site_acceptance') || (github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles site acceptance')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 16
     concurrency:
