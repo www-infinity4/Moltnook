@@ -5,7 +5,7 @@ const mode=process.argv[2];
 const account='ef25728c096c6ba92cf510caa2058003';
 const token=process.env.CLOUDFLARE_API_TOKEN;
 const root='https://api.cloudflare.com/client/v4/accounts/'+account+'/workers/scripts/bubbles-cloud-browser';
-const pin='4417ed10668f81ed107d9307f74919f2b5214abe';
+const pin='def7de64086dd4e596e8d6f5da44f498ab2d8e65';
 const beforePath='/tmp/bubbles-browser-stage-before.json';
 const receiptPath='repository-receipts/bubbles-browser-stage.json';
 if(!['before','after'].includes(mode))throw Error('stage_mode_invalid');
