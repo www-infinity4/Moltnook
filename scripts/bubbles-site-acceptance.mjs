@@ -12,7 +12,13 @@ const ENDPOINT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser
 const FILES=['index.html','styles.css','app.js','README.md'];
 export function parseDocument(raw){
  const text=String(raw).trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,'');
- const parsed=JSON.parse(text);
+ let parsed;
+ // Accept at most two duplicated wrapper braces from plain-text generation.
+ // Never alter the quoted file content, tolerate trailing prose, or execute it.
+ let candidate=text;
+ for(let n=0;n<3;n++){
+  try{parsed=JSON.parse(candidate);break;}catch(error){if(n===2||!candidate.endsWith('}'))throw error;candidate=candidate.slice(0,-1).trimEnd();}
+ }
  if(!parsed||Object.keys(parsed).length!==1||typeof parsed.content!=='string')throw Error('source_document_invalid');
  return parsed.content;
 }

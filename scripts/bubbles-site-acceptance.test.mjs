@@ -22,3 +22,11 @@ test('the interaction contract tolerates punctuation while requiring an actual e
  assert.equal(validateSource('app.js',source),source);
  assert.throws(()=>validateSource('app.js',"document.getElementById('status').textContent='Build check passed';"));
 });
+
+test('duplicate closing JSON wrapper braces preserve exact source and cannot hide another payload',()=>{
+ const css='body{background:#f7f4f0;color:#b83b32}';
+ assert.equal(parseDocument(JSON.stringify({content:css})+'}'),css);
+ assert.equal(parseDocument(JSON.stringify({content:css})+'}}'),css);
+ assert.throws(()=>parseDocument(JSON.stringify({content:css})+' commentary'));
+ assert.throws(()=>parseDocument(JSON.stringify({content:css})+'{"tool":"shell"}'));
+});
