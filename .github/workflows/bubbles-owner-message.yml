@@ -11,13 +11,15 @@ on:
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-memory-lab*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs']
   pull_request:
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*', 'agents/repository-engine/oracle-owner-inventory*', 'agents/repository-engine/oracle-focus-policy*', 'agents/repository-engine/auto-promote-reviewed*']
+  schedule:
+    - cron: '41 16 * * *'
   workflow_dispatch:
     inputs:
       task:
         description: Fixed owner-approved acceptance task
         type: choice
         default: none
-        options: [none, site_acceptance]
+        options: [none, site_acceptance, deep_chat]
 permissions:
   contents: read
   id-token: write
@@ -398,8 +400,9 @@ jobs:
           retention-days: 14
 
   chat_benchmark_20261022:
-    # Non-sensitive signed test; never grants a new owner capability or bypasses expiry.
-    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles chat benchmark 20261022 trusted-owner') }}
+    # Runs only in the exact pinned owner workflow; no new consent or bypass.
+    # The Cloudflare bridge validates GitHub OIDC workflow_ref and both five-day grants.
+    if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.task == 'deep_chat') || (github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles chat benchmark 20261022 trusted-owner')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
