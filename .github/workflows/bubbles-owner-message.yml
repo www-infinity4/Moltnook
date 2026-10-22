@@ -8,7 +8,7 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-memory-lab*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs']
   pull_request:
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*']
   workflow_dispatch:
@@ -35,6 +35,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
+      - run: node --test scripts/bubbles-memory-lab.test.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
       - run: node --check scripts/bubbles-oracle-refinement.mjs
       - run: node --check scripts/bubbles-chat-verified-benchmark.mjs
@@ -426,3 +427,33 @@ jobs:
           retention-days: 14
 
 # Owner-requested memory architecture session: verify current signed conversation receipts.
+
+  memory_lab:
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles memory lab 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    concurrency:
+      group: bubbles-fixed-memory-lab
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node --test scripts/bubbles-memory-lab.test.mjs agents/repository-engine/phi-skills.test.mjs
+      - name: Generate and review all five static files with signed Bubbles
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node scripts/bubbles-memory-lab.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bubbles-memory-lab
+          path: repository-receipts/bubbles-memory-lab.json
+          if-no-files-found: warn
+          retention-days: 14
