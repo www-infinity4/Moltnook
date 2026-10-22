@@ -21,6 +21,10 @@ export function reviewCandidate(pr,files,checks,statuses){
   return {ready:false,reason:'missing_pinned_bot_evidence'};
  if(!Array.isArray(files)||files.length<1||files.length>12||files.some(f=>f.status!=='modified'&&f.status!=='added'||!safePath(f.filename)))
   return {ready:false,reason:'unsafe_changed_paths'};
+ // New/modified QuantaPhi card registry and host surfaces require explicit
+ // owner review; generic robot CI approval may not silently publish a card.
+ if(pr.base.repo.name==='QuantaPhi'&&files.some(f=>/^(?:bubbles-card-catalog\.mjs|bubbles-card-host(?:\.mjs|\.html)|bubbles-card-workspace\.mjs|bubbles-card-surface\.mjs)$/.test(f.filename)))
+  return {ready:false,reason:'owner_card_approval_required'};
  if(!Array.isArray(checks)||checks.length===0||
     !checks.some(c=>c.conclusion==='success')||checks.some(c=>c.status!=='completed'||!['success','skipped','neutral'].includes(c.conclusion)))
   return {ready:false,reason:'checks_not_successful'};
