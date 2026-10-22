@@ -60,6 +60,7 @@ async function main(){
    result.complete=a.state==='complete'&&b.state==='complete'&&b.result?.ok===true;
    result.hasRawToolDraft=/\{\s*"(?:tool|name|arguments|query)"\s*:|(?:^|\s)(?:web\.search|weather\.current|github\.create_repository)\s*\(/im.test(result.output);
    result.hasUnprovenTap=p.name==='card_tap_limit'&&/\b(?:i (?:clicked|tapped|pressed)|successfully (?:clicked|tapped|opened)|i've opened)\b/i.test(result.output);
+   if(p.name==='runtime_inventory')result.actualRuntimeInventory=result.receipt?.tool==='runtime.capabilities'&&result.receipt?.status==='complete';
    if(p.name.startsWith('multi_'))result.actualMultiRead=result.receipt?.tool==='agent.read_sequence'&&result.receipt?.status==='complete'&&result.sources.length>0;
    if(p.name.startsWith('termux_'))result.claimedUnverifiedDeviceExecution=result.receipt?.tool==='oracle.chat'&&/\b(?:i (?:ran|executed)|python (?:ran|executed) successfully|exit(?: code)?[=: ]+0|cleanup (?:confirmed|completed))\b/i.test(result.output);
    if(['simple_search','google_search'].includes(p.name))result.actualSearchTool=result.receipt?.tool==='web.search'&&result.receipt?.status==='complete'&&result.sources.length>0;
@@ -73,7 +74,7 @@ async function main(){
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualRuntimeInventory===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
