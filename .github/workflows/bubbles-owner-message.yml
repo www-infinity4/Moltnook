@@ -235,6 +235,12 @@ jobs:
           const result=check.result,receipt=result?.receipt;
           console.log('BUBBLES_BROWSER_CHECK '+JSON.stringify({state:check.state,result}));
           if(check.state!=='complete'||result?.ok!==true||receipt?.tool!=='browser.click_check'||receipt.status!=='complete'||!['clickObserved','beforeObserved','afterObserved','sessionClosed'].every(k=>receipt[k]===true)||result.before!=='Waiting for browser check.'||result.after!=='Bubbles clicked this control.')throw Error('browser_click_not_verified');
+          // Public Bubbles entry must be a real CDP click with an observed
+          // same-page state change, not a model-generated claim or private page.
+          if(!['publicPageReadVerified','publicChatClickDispatched','publicChatPageChangeObserved'].every(k=>receipt[k]===true)||
+             result.publicPage?.readVerified!==true||result.publicPage?.entryClick?.status!=='page_change_observed'||
+             result.publicPage?.title?.includes('Bubbles AI')!==true||receipt.ownerPageVerified!==false)
+            throw Error('public_bubbles_chat_entry_not_verified');
           const replay=await send({operation:'browser_check'});
           if(JSON.stringify(replay.result)!==JSON.stringify(result))throw Error('browser_replay_changed');
           const chat=await send({operation:'assist',turn:0,text:'What did your cloud browser just click? Use the actual browser receipt from this run. Explain what changed and whether cleanup was confirmed in two sentences.'});
