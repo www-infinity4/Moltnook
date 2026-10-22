@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'agents/repository-engine/oracle-owner-inventory.mjs'
+      - 'agents/repository-engine/oracle-focus-policy.mjs'
       - '.github/workflows/oracle-all-repo-inventory.yml'
 permissions:
   contents: read
@@ -27,7 +28,7 @@ jobs:
       - name: Validate design and engineering audit policy
         run: |
           node --check agents/repository-engine/oracle-owner-inventory.mjs
-          node --test agents/repository-engine/oracle-owner-inventory.test.mjs
+          node --test agents/repository-engine/oracle-owner-inventory.test.mjs agents/repository-engine/oracle-focus-policy.test.mjs
       - name: Inventory every accessible owner repository and raise verified gaps
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}

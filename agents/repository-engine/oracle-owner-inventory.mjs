@@ -2,6 +2,7 @@
 // Scan every accessible owner repository (paginated) using pinned GitHub source evidence.
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
+import {CARD_TARGETS,cardTarget,chooseFocus} from './oracle-focus-policy.mjs';
 const OWNER='www-infinity4',TRACKER=OWNER+'/Oracle-Octaves';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const headers={authorization:'Bearer '+token,accept:'application/vnd.github+json','x-github-api-version':'2022-11-28'};
@@ -53,6 +54,8 @@ export async function collectInventory({maxRepos=2000}={}){
  const evidence=[],failures=[];
  // Bounded parallel reads prevent one slow repository from stalling the entire owner audit.
  async function inspect(repo){
+  // The owner explicitly wants actual registered Infinity cards, not every forked library with an index.html.
+  if(!cardTarget(repo.full_name))return;
   try{
    const ref=repo.default_branch;
    const data=await gh('repos/'+repo.full_name+'/git/trees/'+encodeURIComponent(ref)+'?recursive=1');
@@ -70,7 +73,7 @@ export async function collectInventory({maxRepos=2000}={}){
   await Promise.all(repos.slice(i,i+6).map(inspect));
   if(i%60===0)console.log('Owner-wide Oracle source scan:',Math.min(i+6,repos.length),'/',repos.length,'repositories');
  }
- const priority=['QuantaPhi','Omni-Phi','Infinity-Phi','C13b0','Oracle-Octaves','News-Phi','Moltnook','Bitcoin-Crusher','StarQuest','WidgetPhi'];
+ const priority=CARD_TARGETS.map(x=>x.repo);
  const score=name=>{const suffix=name.split('/')[1];const n=priority.indexOf(suffix);return n<0?1000:n;};
  evidence.sort((a,b)=>score(a.name)-score(b.name)||a.name.localeCompare(b.name));
  failures.sort((a,b)=>a.repository.localeCompare(b.repository));
@@ -103,30 +106,32 @@ export function ticketFromFinding(finding){
  ].join('\n')};
 }
 async function publishFindings(inventory){
- const existing=new Set();
+ const issues=[];
+ // Fail closed if the tracker can't be fully listed. One focus at a time;
+ // never silently multiply card changes or merge without owner approval.
  for(let page=1;page<=10;page++){
   const rows=await gh('repos/'+TRACKER+'/issues?state=all&per_page=100&page='+page);
-  for(const row of rows)if(row.title&&!row.pull_request)existing.add(row.title);
+  issues.push(...rows);
   if(rows.length<100)break;
+  if(page===10)throw Error('focus_tracker_issue_listing_incomplete');
  }
+ const focus=chooseFocus(inventory.evidence,issues);
  const created=[];
- for(const item of inventory.evidence){
-  if(created.length>=5)break;
-  const t=ticketFromFinding(item);
-  if(existing.has(t.title))continue;
-  const issue=await gh('repos/'+TRACKER+'/issues',{method:'POST',body:t});
-  if(!issue.html_url||!issue.number)throw Error('New design ticket has no GitHub receipt');
-  created.push({repository:item.name,url:issue.html_url,number:issue.number});
-  existing.add(t.title);
+ if(focus.proposal){
+  const issue=await gh('repos/'+TRACKER+'/issues',{method:'POST',body:focus.proposal});
+  if(!issue.html_url||!issue.number)throw Error('Focused card proposal has no GitHub receipt');
+  created.push({repository:focus.proposal.title,url:issue.html_url,number:issue.number});
  }
- return created;
+ return {focus:{status:focus.status,activeUrl:focus.activeUrl||created[0]?.url||null},created};
 }
 export async function run(){
  const inventory=await collectInventory();
- inventory.issuesCreated=await publishFindings(inventory);
+ const focused=await publishFindings(inventory);
+ inventory.issuesCreated=focused.created;
+ inventory.focus=focused.focus;
  await fs.mkdir('repository-receipts',{recursive:true});
  await fs.writeFile('repository-receipts/oracle-owner-inventory.json',JSON.stringify(inventory,null,2));
- console.log(JSON.stringify({repositories:inventory.scannedRepositories,designGaps:inventory.evidence.length,errors:inventory.failures.length,issuesCreated:inventory.issuesCreated}));
+ console.log(JSON.stringify({repositories:inventory.scannedRepositories,designGaps:inventory.evidence.length,errors:inventory.failures.length,issuesCreated:inventory.issuesCreated,focus:inventory.focus}));
  return inventory;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)try{await run()}catch(e){

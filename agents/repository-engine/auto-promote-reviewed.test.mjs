@@ -38,3 +38,16 @@ test('owner-wide code authorization includes additional repositories, workflows 
  assert.equal(reviewCandidate(pr,[{status:'added',filename:'.env.local'}],checks,[]).ready,false);
  assert.equal(reviewCandidate(pr,files,[...checks,{status:'completed',conclusion:'skipped'}],[]).ready,true);
 });
+
+test('owner explicitly reviews card registry and host changes even after target CI passes',()=>{
+ for(const filename of ['bubbles-card-catalog.mjs','bubbles-card-host.html','bubbles-card-host.mjs','bubbles-card-workspace.mjs','bubbles-card-surface.mjs']){
+  const verdict=reviewCandidate(candidate(),[{status:'modified',filename}],checks,[]);
+  assert.equal(verdict.ready,false,filename);
+  assert.equal(verdict.reason,'owner_card_approval_required',filename);
+ }
+ assert.equal(reviewCandidate(candidate(),[{status:'modified',filename:'phone/phone.js'}],checks,[]).ready,true);
+ const other=candidate();
+ other.base.repo={name:'WidgetPhi',full_name:'www-infinity4/WidgetPhi'};
+ other.head.repo={full_name:'www-infinity4/WidgetPhi'};
+ assert.equal(reviewCandidate(other,[{status:'added',filename:'bubbles-card-catalog.mjs'}],checks,[]).ready,true);
+});

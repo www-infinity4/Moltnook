@@ -1,0 +1,59 @@
+name: Bubbles extended signed reasoning and agent acceptance
+# Signed ten-turn tests only, no owner's private conversation archive,
+# no publishing and no token renewal. Existing five-day consent is required.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 16 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/bubbles-chat-verified-benchmark.mjs'
+      - 'scripts/bubbles-chat-verified-benchmark.test.mjs'
+      - '.github/workflows/bubbles-extended-chat-acceptance.yml'
+  pull_request:
+    paths:
+      - 'scripts/bubbles-chat-verified-benchmark.mjs'
+      - 'scripts/bubbles-chat-verified-benchmark.test.mjs'
+      - '.github/workflows/bubbles-extended-chat-acceptance.yml'
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: bubbles-extended-reasoning
+  cancel-in-progress: false
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check scripts/bubbles-chat-verified-benchmark.mjs
+      - run: node --test scripts/bubbles-chat-verified-benchmark.test.mjs
+  signed_chat:
+    if: github.event_name != 'pull_request'
+    needs: [unit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Ask ten hard questions through the signed existing owner bridge
+        run: node scripts/bubbles-chat-verified-benchmark.mjs
+      - name: Preserve exact responses, source receipts, and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-extended-chat-acceptance
+          path: repository-receipts/bubbles-chat-benchmark.json
+          retention-days: 14
+          if-no-files-found: warn
