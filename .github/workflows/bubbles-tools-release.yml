@@ -27,6 +27,23 @@ jobs:
           test "$(git rev-parse HEAD)" = "10d3f13a097d4919bccf18e4eb4743703b576325"
           node --check workers/bubbles-tools/worker.mjs
           node --test test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs test/bubbles-orb-semantic.test.mjs test/bubbles-owner-immediate-dispatch.test.cjs
+      - name: Install reproducible Wrangler uploader with bounded npm retries
+        run: |
+          set -euo pipefail
+          npm config set fetch-timeout 30000
+          npm config set fetch-retries 2
+          for attempt in 1 2; do
+            if timeout 105s npm install --no-save --no-audit --no-fund --prefer-offline wrangler@4.45.0; then
+              test -x node_modules/.bin/wrangler
+              node_modules/.bin/wrangler --version
+              break
+            fi
+            if [ "$attempt" = 2 ]; then
+              echo 'Wrangler installation unavailable; no Cloudflare deployment was attempted.'
+              exit 1
+            fi
+            echo 'Retrying pinned Wrangler installation before any Cloudflare mutation.'
+          done
       - name: Stage, verify bindings, promote, and require live page/weather receipts
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -60,7 +77,7 @@ jobs:
             config=config.replace(/\n\[browser\]\nbinding = "BROWSER"\n?/,'\n');
           config=config.replace('main = "worker.mjs"','main = "'+process.cwd()+'/workers/bubbles-tools/worker.mjs"');
           writeFileSync('/tmp/bubbles-tools-release.toml',config,{mode:0o600});
-          const output=execFileSync('npx',['--yes','wrangler@4','versions','upload','--config','/tmp/bubbles-tools-release.toml','--message','Reviewed Bubbles conversation quality '+pin],{encoding:'utf8',env:process.env,timeout:180000,maxBuffer:4000000});
+          const output=execFileSync('./node_modules/.bin/wrangler',['versions','upload','--config','/tmp/bubbles-tools-release.toml','--message','Reviewed Bubbles conversation quality '+pin],{encoding:'utf8',env:process.env,timeout:150000,maxBuffer:4000000});
           const candidate=output.match(/Worker Version ID: ([a-f0-9-]{36})/)?.[1];
           if(!candidate)throw Error('candidate_version_missing');
           const next=await api('/versions/'+candidate);
