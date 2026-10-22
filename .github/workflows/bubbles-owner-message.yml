@@ -178,4 +178,6 @@ jobs:
           const readback=await send({operation:'result',turn:0});
           console.log('BUBBLES_BROWSER_CHAT_READBACK '+JSON.stringify(readback));
           if(readback.state!=='complete')throw Error('browser_chat_not_complete');
+          const answer=String(readback.result?.output||'');
+          if(!/Run browser check/i.test(answer)||!/(?:cleanup|closed)/i.test(answer)||/(?:cleanup.{0,35}(?:not|wasn.t|unconfirmed)|(?:not|wasn.t).{0,20}confirmed)/i.test(answer))throw Error('browser_receipt_explanation_incorrect');
           NODE
