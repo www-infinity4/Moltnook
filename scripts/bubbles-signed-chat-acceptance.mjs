@@ -4,6 +4,8 @@
 import {writeFile,mkdir} from 'node:fs/promises';
 const ENDPOINT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
 const prompts=[
+ {name:'termux_python_probe',text:'Run the fixed Python diagnostic in Termux through the original Bubbles Android app. Return the actual device callback, exit code, and temporary-file cleanup result. If this server conversation cannot invoke that adapter, say so plainly; do not substitute cloud execution or claim it ran.'},
+ {name:'termux_probe_followup',text:'Did Python actually run on the Android device? Base your answer only on the preceding execution receipt. Distinguish a request from a completed Termux callback.'},
  {name:'simple_search',text:'Search the web for hydrogen storage.'},
  {name:'google_search',text:'Search Google for hydrogen storage.'},
  {name:'two_town_weather',text:'What is the weather in Lovilia, Iowa and Ottumwa, Iowa today? Check each town separately. Use available tools, explain the actual conditions and name the date; do not narrate tool commands.'},
@@ -44,6 +46,7 @@ async function main(){
    result.complete=a.state==='complete'&&b.state==='complete'&&b.result?.ok===true;
    result.hasRawToolDraft=/\{\s*"(?:tool|name|arguments|query)"\s*:|(?:^|\s)(?:web\.search|weather\.current|github\.create_repository)\s*\(/im.test(result.output);
    result.hasUnprovenTap=p.name==='card_tap_limit'&&/\b(?:i (?:clicked|tapped|pressed)|successfully (?:clicked|tapped|opened)|i've opened)\b/i.test(result.output);
+   if(p.name.startsWith('termux_'))result.claimedUnverifiedDeviceExecution=result.receipt?.tool==='oracle.chat'&&/\b(?:i (?:ran|executed)|python (?:ran|executed) successfully|exit(?: code)?[=: ]+0|cleanup (?:confirmed|completed))\b/i.test(result.output);
    if(['simple_search','google_search'].includes(p.name))result.actualSearchTool=result.receipt?.tool==='web.search'&&result.receipt?.status==='complete'&&result.sources.length>0;
    if(p.name==='two_town_weather')result.actualWeatherTool=result.receipt?.tool==='weather.current'&&result.receipt?.status==='complete'&&/Lovilia/i.test(result.output)&&/Ottumwa/i.test(result.output);
    if(p.name==='page_understanding')result.actualPublicPageRead=result.receipt?.tool==='web.read_page'&&result.receipt?.status==='complete'&&result.sources.some(s=>s.url==='https://quantaphi.org/bubbles.html');
@@ -55,7 +58,7 @@ async function main(){
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
