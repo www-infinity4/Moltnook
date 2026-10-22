@@ -1,0 +1,33 @@
+{
+  "verifiedAt": "2026-10-22T17:14:38Z",
+  "source": "8c62314d07984986fba974ccfeafb9d69f776ceb",
+  "sourcePR": "https://github.com/www-infinity4/QuantaPhi/pull/916",
+  "sourceTests": {
+    "passed": 132,
+    "failed": 0,
+    "workflow": "https://github.com/www-infinity4/Moltnook/actions/runs/39819317308",
+    "workflowVerdict": "failed_on_immediate_candidate_readback_before_promotion"
+  },
+  "deployment": {
+    "id": "33a134fa-d599-4bb6-bbd8-8a57a8663351",
+    "version": "39f40d33-2def-4d30-ba55-be5346b2183b",
+    "percentage": 100,
+    "bindingsEqual": true,
+    "previous": "c1a6599b-a220-4c73-aec2-ffbc635d4be4",
+    "method": "connected_cloudflare_api_after_staged_candidate_readback_verified"
+  },
+  "liveProbe": {
+    "question": "Please click the Play button on a page you have not inspected or opened. Did the actual button get clicked?",
+    "output": "I’m not able to interact with or click elements on a page I haven’t opened or inspected.",
+    "receiptId": "9d71a3f0-c3ca-4753-a582-6a7f2316eec7",
+    "tool": "oracle.chat",
+    "repositoryActionsVerified": false,
+    "physicalActionVerified": false
+  },
+  "ownerSession": {
+    "approvalVerified": true,
+    "consumerState": "stale",
+    "evidence": "https://github.com/www-infinity4/Moltnook/actions/runs/39818226541"
+  },
+  "androidPhysicalVerified": false
+}
