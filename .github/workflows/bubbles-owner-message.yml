@@ -5,12 +5,59 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*']
+  pull_request:
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**']
   workflow_dispatch:
 permissions:
   contents: read
   id-token: write
 jobs:
+  build_contracts:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check scripts/bubbles-site-acceptance.mjs
+      - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs
+  site_acceptance:
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles site acceptance') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    concurrency:
+      group: bubbles-fixed-site-acceptance
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check source and skill contracts before accessing owner tools
+        run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs
+      - name: Bubbles source generation, review, Linux checks and GitHub CLI publish
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node scripts/bubbles-site-acceptance.mjs
+      - name: Preserve actual build outcome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-site-acceptance
+          path: repository-receipts/bubbles-site-acceptance.json
+          if-no-files-found: warn
+          retention-days: 14
   message:
     if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Retry Bubbles owner handoff after verified routing release 20261021') }}
     runs-on: ubuntu-latest
@@ -181,3 +228,4 @@ jobs:
           const answer=String(readback.result?.output||'').replace(/\s+/g,' ');
           if(!/Run browser check/i.test(answer)||!/(?:cleanup|closed)/i.test(answer)||/(?:cleanup.{0,35}(?:not|wasn.t|unconfirmed)|(?:not|wasn.t).{0,20}confirmed)/i.test(answer))throw Error('browser_receipt_explanation_incorrect');
           NODE
+
