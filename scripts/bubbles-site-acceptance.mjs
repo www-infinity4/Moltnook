@@ -20,7 +20,7 @@ export function validateSource(path,content){
  if(!FILES.includes(path)||typeof content!=='string'||content.length<30||content.length>1300||content.includes('\0'))throw Error('source_outside_fixed_contract');
  if(/https?:\/\/|<iframe|<form|\bon\w+\s*=|\beval\s*\(|\bfetch\s*\(|XMLHttpRequest|localStorage|document\.cookie|process\.env|child_process|import\s|require\s*\(/i.test(content))throw Error('source_external_or_privileged_behavior');
  if(path==='index.html'&&(!/<!doctype html>/i.test(content)||!/<html[^>]*lang=/i.test(content)||!/name=["']viewport["']/i.test(content)||!content.includes('Bubbles Agent Workshop')||!content.includes('styles.css')||!content.includes('app.js')||!/id=["']check["']/.test(content)||!/id=["']status["']/.test(content)))throw Error('html_contract_incomplete');
- if(path==='app.js'&&(!content.includes('addEventListener')||!content.includes('Build check passed.')))throw Error('interaction_contract_incomplete');
+ if(path==='app.js'&&(!content.includes('addEventListener')||!content.includes('Build check passed')))throw Error('interaction_contract_incomplete');
  if(path==='styles.css'&&(!content.includes('#f7f4f0')||!content.includes('#b83b32')))throw Error('oracle_style_missing');
  return content;
 }

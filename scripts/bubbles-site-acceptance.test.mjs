@@ -16,3 +16,9 @@ test('only complete local static sources pass, and unrelated file types are reje
  assert.throws(()=>validateSource('.github/workflows/run.yml','x'.repeat(90)));
  assert.throws(()=>validateSource('README.md','x'.repeat(1301)));
 });
+
+test('the interaction contract tolerates punctuation while requiring an actual event handler',()=>{
+ const source="document.getElementById('check').addEventListener('click',()=>{document.getElementById('status').textContent='Build check passed';});";
+ assert.equal(validateSource('app.js',source),source);
+ assert.throws(()=>validateSource('app.js',"document.getElementById('status').textContent='Build check passed';"));
+});
