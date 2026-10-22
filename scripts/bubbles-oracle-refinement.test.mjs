@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {feedback,gradeTwoAttempts} from './bubbles-oracle-refinement.mjs';
+import {feedback,gradeTwoAttempts,boundedAssistText} from './bubbles-oracle-refinement.mjs';
 test('grader gives repair instructions for missing white cards and button handler',()=>{
  const incomplete='<!doctype html><html><head><meta name="viewport" content="width=device-width"></head><style>body{background:#f7f4f0}</style><main><button>Action</button></main></html>';
  const x=gradeTwoAttempts(incomplete,incomplete);
@@ -21,4 +21,12 @@ test('source improvement is measured, not called a browser event',()=>{
  assert.equal(result.rendered,false);
  assert.equal(result.clickVerified,false);
  assert.equal(result.actionsExecuted,false);
+});
+
+test('signed assist repair text stays within strict 1800 character gateway limit',()=>{
+ const long='instruction '.repeat(700);
+ const value=boundedAssistText(long);
+ assert.ok(value.length>100);
+ assert.ok(value.length<=1700);
+ assert.equal(boundedAssistText(value),value);
 });
