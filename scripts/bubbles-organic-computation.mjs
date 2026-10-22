@@ -158,7 +158,7 @@ async function signed(body){
  if(!token)throw Error('signed_identity_missing');
  const r=await fetch(GATEWAY,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(120000)});
  const data=await r.json().catch(()=>({}));
- if(!r.ok||data.ok!==true||data.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('signed_'+body.operation+'_not_approved');
+ if(!r.ok||data.ok!==true||(typeof data.jobId==='string'&&data.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID))throw Error('signed_'+body.operation+'_not_approved');
  return data;
 }
 export async function main(){
@@ -166,7 +166,8 @@ export async function main(){
  const dir=mkdtempSync(join(tmpdir(),'organic-computation-'));
  try{
   if(!process.env.REPOSITORY_WRITE_TOKEN)throw Error('github_runner_secret_missing');
-  await signed({operation:'status'});
+  const approval=await signed({operation:'status'});
+  if(approval.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('signed_run_identity_mismatch');
   const prompt='Bubbles: prepare a scientifically careful, brief research overview of DARPA O-Circuit 2026 neural tissue computing and Molecular Informatics. Explain learning, memory, energy measurement, engineering challenges, and ethics. Distinguish actual results from DARPA goals and avoid inventing data or references. Make no claim of DARPA partnership. Include a paragraph identifying the owner\'s hydrogen/electron-doorway idea as an unvalidated separate hypothesis. Do not provide biological laboratory procedures or military applications.';
   await signed({operation:'assist',turn:0,text:prompt});
   const finished=await signed({operation:'result',turn:0});
