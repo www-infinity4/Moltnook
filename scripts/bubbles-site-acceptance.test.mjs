@@ -30,3 +30,10 @@ test('duplicate closing JSON wrapper braces preserve exact source and cannot hid
  assert.throws(()=>parseDocument(JSON.stringify({content:css})+' commentary'));
  assert.throws(()=>parseDocument(JSON.stringify({content:css})+'{"tool":"shell"}'));
 });
+
+test('README may document the fixed local preview address, but source and external URLs stay restricted',()=>{
+ const text='# Workshop\nPreview with python3 -m http.server 8000, then open http://localhost:8000. Deployment remains unverified.';
+ assert.equal(validateSource('README.md',text),text);
+ assert.throws(()=>validateSource('README.md',text.replace('http://localhost:8000','https://example.com')));
+ assert.throws(()=>validateSource('app.js',"// http://localhost:8000\naddEventListener('click',()=>{}); // Build check passed"));
+});
