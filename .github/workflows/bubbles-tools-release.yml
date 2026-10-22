@@ -17,14 +17,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: be254e20f426421434ee329df6c6558c41e2b8f3
+          ref: a3c020fb83df154048d1e1206a61a6d8989d7cca
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - name: Verify exact source and regressions
         run: |
-          test "$(git rev-parse HEAD)" = "be254e20f426421434ee329df6c6558c41e2b8f3"
+          test "$(git rev-parse HEAD)" = "a3c020fb83df154048d1e1206a61a6d8989d7cca"
           node --check workers/bubbles-tools/worker.mjs
           node --test test/bubbles-read-agent.test.mjs test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs test/bubbles-orb-semantic.test.mjs test/bubbles-owner-immediate-dispatch.test.cjs
       - name: Install reproducible Wrangler uploader with bounded npm retries
@@ -52,7 +52,7 @@ jobs:
           node --input-type=module <<'NODE'
           import {execFileSync} from 'node:child_process';
           import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
-          const pin='be254e20f426421434ee329df6c6558c41e2b8f3',token=process.env.CLOUDFLARE_API_TOKEN;
+          const pin='a3c020fb83df154048d1e1206a61a6d8989d7cca',token=process.env.CLOUDFLARE_API_TOKEN;
           if(!token)throw Error('existing_deploy_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-tools';
           async function api(path,body){
