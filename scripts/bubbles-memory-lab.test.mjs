@@ -7,7 +7,7 @@ test('memory lab is fixed static source and permits only its own module import',
  for(const source of ["import {x} from 'elsewhere'; addEventListener; rankMemories",app+"fetch('/private')",app+'process.env.GH_TOKEN',app+'document.cookie'])assert.throws(()=>validateSource('app.mjs',source));
  assert.throws(()=>validateSource('../secrets','x'.repeat(100)));
  assert.throws(()=>validateSource('app.mjs','x'.repeat(8001)));
- const validLong="export function rankMemories(notes,query,aliases={}) { return notes; }"+'\n// safe elaboration'.repeat(180);
+ const validLong="export function rankMemories(notes,query,aliases={}) { return notes.map(n=>({...n,score:1,reasons:['source']})); }"+'\n// safe elaboration'.repeat(180);
  assert.ok(validLong.length>1500);
  assert.equal(validateSource('context-engine.mjs',validLong),validLong);
  assert.throws(()=>validateSource('context-engine.mjs',validLong+'\n// padding'.repeat(1800)));
