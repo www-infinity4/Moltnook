@@ -1,3 +1,4 @@
+// Owner-requested reconnect check: 2026-10-22T04:15Z; reuse existing signed consent.
 // Synthetic, owner-approved Bubbles chat QA via the existing short-lived GitHub
 // OIDC identity. Never reads private conversations or authorizes website taps.
 import {writeFile,mkdir} from 'node:fs/promises';
