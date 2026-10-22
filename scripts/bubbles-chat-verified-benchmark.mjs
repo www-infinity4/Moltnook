@@ -30,7 +30,8 @@ export function gradeProbe(probe,response){
   add('correct_town',has(out,/\bAlbia\b/i),15);
   add('actual_conditions',has(out,/(?:\d+(?:\.\d+)?\s*°?\s*[CF]\b|\d+\s*degrees|temperatur)/i)&&independent,15);
  }else if(probe.id==='repo_source'){
-  const source=(Array.isArray(body.sources)?body.sources:[]).some(s=>/github\.com|QuantaPhi/i.test(String(s.url||s.title||'')));
+  const source=(Array.isArray(body.sources)?body.sources:[]).some(s=>/github\.com|QuantaPhi/i.test(String(s.url||s.title||'')))||
+   (body.receipt?.sourceReadVerified===true&&/^https:\/\/github\.com\/www-infinity4\/QuantaPhi\/blob\//i.test(String(body.sourceUrl||'')));
   add('actual_github_read_tool',independent,40);
   add('matching_file_source',source,15);
   add('README_detail',has(out,/QuantaPhi|Grammar Phi|search|Bubbles|semantic/i)&&independent,15);
