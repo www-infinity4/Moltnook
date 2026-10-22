@@ -4,16 +4,30 @@
 import {writeFile,mkdir} from 'node:fs/promises';
 const ENDPOINT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
 const prompts=[
- {name:'termux_python_probe',text:'Run the fixed Python diagnostic in Termux through the original Bubbles Android app. Return the actual device callback, exit code, and temporary-file cleanup result. If this server conversation cannot invoke that adapter, say so plainly; do not substitute cloud execution or claim it ran.'},
- {name:'termux_probe_followup',text:'Did Python actually run on the Android device? Base your answer only on the preceding execution receipt. Distinguish a request from a completed Termux callback.'},
- {name:'simple_search',text:'Search the web for hydrogen storage.'},
- {name:'google_search',text:'Search Google for hydrogen storage.'},
- {name:'two_town_weather',text:'What is the weather in Lovilia, Iowa and Ottumwa, Iowa today? Check each town separately. Use available tools, explain the actual conditions and name the date; do not narrate tool commands.'},
- {name:'weather_followup',text:'Which of those two towns is warmer? Use our preceding answer and tell me clearly, without making me restate the towns.'},
- {name:'page_understanding',text:'Inspect https://quantaphi.org/bubbles.html and explain what the Bubbles page offers. Distinguish what you inspected from assumptions and never pretend a screenshot was inspected.'},
- {name:'card_tap_limit',text:'Could you tap View Stories inside the Story Writer card on my open Bubbles page? Only say it was tapped if a real page control changed; otherwise explain the actual limitation in plain English.'},
- {name:'source_research',text:'Research hydrogen storage using web sources. Give a short specific explanation supported by at least two accessible links. Do the research rather than printing a web.search command.'},
- {name:'natural_conversation',text:'I want my Bubbles memory organized into categorized repositories with links between related ideas. Explain a practical structure and its retrieval behavior in calm everyday English, without raw JSON or ticket IDs.'}
+ {
+  "name": "multi_repository",
+  "text": "Inspect the public repository www-infinity4/QuantaPhi, list its root entries, then find and read its main README documentation. Explain its purpose using the actual file content."
+ },
+ {
+  "name": "multi_weather_news",
+  "text": "Get the current weather in Lovilia, Iowa and the latest US news headlines. Perform both lookups and explain the results clearly."
+ },
+ {
+  "name": "runtime_inventory",
+  "text": "What server runtime and tools are you actually using right now? Explain what you can execute here and which capabilities still need separate connections. Do not claim a shell, Python or browser session was opened."
+ },
+ {
+  "name": "two_town_weather",
+  "text": "What is the weather in Lovilia, Iowa and Ottumwa, Iowa today? Check each town separately. Use available tools, explain the actual conditions and name the date; do not narrate tool commands."
+ },
+ {
+  "name": "weather_followup",
+  "text": "Which of those two towns is warmer? Use our preceding answer and tell me clearly, without making me restate the towns."
+ },
+ {
+  "name": "page_understanding",
+  "text": "Inspect https://quantaphi.org/bubbles.html and explain what the Bubbles page offers. Distinguish what you inspected from assumptions and never pretend a screenshot was inspected."
+ }
 ];
 function clean(s,n=1600){return String(s||'').replace(/[\x00-\x1f\x7f]/g,' ').slice(0,n);}
 async function request(headers,payload,ms){
@@ -46,6 +60,7 @@ async function main(){
    result.complete=a.state==='complete'&&b.state==='complete'&&b.result?.ok===true;
    result.hasRawToolDraft=/\{\s*"(?:tool|name|arguments|query)"\s*:|(?:^|\s)(?:web\.search|weather\.current|github\.create_repository)\s*\(/im.test(result.output);
    result.hasUnprovenTap=p.name==='card_tap_limit'&&/\b(?:i (?:clicked|tapped|pressed)|successfully (?:clicked|tapped|opened)|i've opened)\b/i.test(result.output);
+   if(p.name.startsWith('multi_'))result.actualMultiRead=result.receipt?.tool==='agent.read_sequence'&&result.receipt?.status==='complete'&&result.sources.length>0;
    if(p.name.startsWith('termux_'))result.claimedUnverifiedDeviceExecution=result.receipt?.tool==='oracle.chat'&&/\b(?:i (?:ran|executed)|python (?:ran|executed) successfully|exit(?: code)?[=: ]+0|cleanup (?:confirmed|completed))\b/i.test(result.output);
    if(['simple_search','google_search'].includes(p.name))result.actualSearchTool=result.receipt?.tool==='web.search'&&result.receipt?.status==='complete'&&result.sources.length>0;
    if(p.name==='two_town_weather')result.actualWeatherTool=result.receipt?.tool==='weather.current'&&result.receipt?.status==='complete'&&/Lovilia/i.test(result.output)&&/Ottumwa/i.test(result.output);
@@ -58,7 +73,7 @@ async function main(){
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
