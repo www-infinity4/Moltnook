@@ -145,3 +145,37 @@ jobs:
           }
           throw Error('owner_chat_no_verified_reply_'+finalState);
           NODE
+
+  browser_acceptance:
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles browser acceptance') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify real browser click and explain its same-run receipt
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(!token)throw Error('signed_identity_missing');
+          const endpoint='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          async function send(body){
+            const r=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(120000)});
+            const j=await r.json();
+            if(!r.ok||j.ok!==true)throw Error('signed_request_failed_'+r.status+'_'+String(j.error||'unknown').replace(/[^a-z0-9_]/gi,'').slice(0,80));
+            return j;
+          }
+          const check=await send({operation:'browser_check'});
+          const result=check.result,receipt=result?.receipt;
+          console.log('BUBBLES_BROWSER_CHECK '+JSON.stringify({state:check.state,result}));
+          if(check.state!=='complete'||result?.ok!==true||receipt?.tool!=='browser.click_check'||receipt.status!=='complete'||!['clickObserved','beforeObserved','afterObserved','sessionClosed'].every(k=>receipt[k]===true)||result.before!=='Waiting for browser check.'||result.after!=='Bubbles clicked this control.')throw Error('browser_click_not_verified');
+          const replay=await send({operation:'browser_check'});
+          if(JSON.stringify(replay.result)!==JSON.stringify(result))throw Error('browser_replay_changed');
+          const chat=await send({operation:'assist',turn:0,text:'What did your cloud browser just click? Use the actual browser receipt from this run. Explain what changed and whether cleanup was confirmed in two sentences.'});
+          console.log('BUBBLES_BROWSER_CHAT '+JSON.stringify(chat));
+          const readback=await send({operation:'result',turn:0});
+          console.log('BUBBLES_BROWSER_CHAT_READBACK '+JSON.stringify(readback));
+          if(readback.state!=='complete')throw Error('browser_chat_not_complete');
+          NODE
