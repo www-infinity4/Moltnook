@@ -5,9 +5,9 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs']
   pull_request:
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*']
   workflow_dispatch:
     inputs:
       task:
@@ -33,6 +33,8 @@ jobs:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
+      - run: node --check scripts/bubbles-oracle-refinement.mjs
+      - run: node --test scripts/bubbles-oracle-refinement.test.mjs
       - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs scripts/bubbles-memory-pilot.test.mjs
   site_acceptance:
     if: ${{ (github.event_name == 'workflow_dispatch' && inputs.task == 'site_acceptance') || (github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles site acceptance')) }}
@@ -308,5 +310,37 @@ jobs:
         with:
           name: bubbles-memory-sector-private-pilot
           path: repository-receipts/bubbles-memory-pilot.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  oracle_grade_refinement:
+    # Source-only scoring for synthetic Bubbles UI code; same signed owner identity.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles Oracle grading refinement 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify feedback grading controls
+        run: |
+          node --check scripts/bubbles-oracle-refinement.mjs
+          node --test scripts/bubbles-oracle-refinement.test.mjs
+      - name: Ask signed Bubbles twice, grade and save private feedback
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node scripts/bubbles-oracle-refinement.mjs
+      - name: Preserve exact grading outcome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-oracle-refinement
+          path: repository-receipts/bubbles-oracle-refinement.json
           if-no-files-found: warn
           retention-days: 14
