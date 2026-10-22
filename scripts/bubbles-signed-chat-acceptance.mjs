@@ -1,3 +1,4 @@
+// Verified source fix PR901 released as Bubbles tools v56: signed synthetic research retest, 2026-10-22; no private owner transcript.
 // Public signed Bubbles conversation QA following deployment of cloud-browser v25 and tools v55, 2026-10-22; no access to private owner chat or phone.
 // Signed cloud-browser retest against newly deployed Bubbles Chrome Worker v25 (2026-10-22): verify actual CDP click, before/after DOM and cleanup.
 // Owner-requested 2026-10-22 browser verification: the separate signed browser_acceptance job must confirm CDP click AND changed DOM, not merely text from a model.
