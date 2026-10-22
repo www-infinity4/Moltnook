@@ -66,3 +66,35 @@ jobs:
           path: repository-receipts/bubbles-signed-chat-acceptance.json
           if-no-files-found: warn
           retention-days: 7
+
+  operator_bridge:
+    # Fixed one-use request, authorized by existing consent + GitHub OIDC.
+    # Never place phone numbers, wallet credentials, PINs or secrets here.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Repair ChatGPT owner Bubbles delegation 20261021') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Use existing signed owner route for missing ChatGPT operator delegation
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const id=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!id.ok)throw Error('signed_identity_unavailable');
+          const token=(await id.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const base='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          const approval=await fetch(base,{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          const match=proof.ok===true&&proof.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          console.log('OWNER_DELEGATION_APPROVAL '+JSON.stringify({verified:approval.ok&&match,consumer:proof.consumer?.state||'not_observed'}));
+          if(!approval.ok||!match)throw Error('existing_owner_approval_not_verified');
+          const body={repository:'www-infinity4/QuantaPhi',request:'Repair the missing ChatGPT-to-owner-Bubbles and Robot Brain operator bridge. Reuse existing signed Moltnook GitHub OIDC assist/result, Brain bridge-work and verified Unified Wallet owner identity; do not create a new wallet, permanent master PIN or hidden secret. Respect preexisting five-day consent and revocation, server-verify the owner and scoped delegation on EVERY read/write. Implement a narrow, revocable, audited, expiring grant to access canonical owner Bubbles chat messages and submit/status bounded Brain work. Never expose owner history or Brain to public voice/phone callers, other wallets or spoofed caller ID. No Android carrier interception. Test live signed Bubbles messaging, wrong-wallet/revoked/replayed/expired grants, cross-user isolation and independent Brain receipts. Keep GitHub writes, deployment and wallet movement behind existing owner authorization and approval. Require source PR, tests, signed end-to-end confirmation and independent deployment receipt; report queued work as queued, never complete.'};
+          if(body.request.length>1800)throw Error('request_too_long');
+          const res=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await res.json().catch(()=>({}));
+          const ok=res.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.repository===body.repository&&receipt.completed===false;
+          console.log('OWNER_DELEGATION_INTAKE '+JSON.stringify({http:res.status,ticketConfirmed:ok,status:receipt.status||'unavailable',execution:receipt.execution?.status||'unverified',completed:false}));
+          if(!ok)throw Error('owner_delegation_intake_unconfirmed');
+          NODE
