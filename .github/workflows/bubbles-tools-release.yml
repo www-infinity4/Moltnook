@@ -17,16 +17,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: b9fe3ce0192fded4460fadc26493c7cfad72d388
+          ref: 10d3f13a097d4919bccf18e4eb4743703b576325
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - name: Verify exact source and regressions
         run: |
-          test "$(git rev-parse HEAD)" = "b9fe3ce0192fded4460fadc26493c7cfad72d388"
+          test "$(git rev-parse HEAD)" = "10d3f13a097d4919bccf18e4eb4743703b576325"
           node --check workers/bubbles-tools/worker.mjs
-          node --test test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs
+          node --test test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs test/bubbles-orb-semantic.test.mjs test/bubbles-owner-immediate-dispatch.test.cjs
       - name: Stage, verify bindings, promote, and require live page/weather receipts
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
           node --input-type=module <<'NODE'
           import {execFileSync} from 'node:child_process';
           import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
-          const pin='b9fe3ce0192fded4460fadc26493c7cfad72d388',token=process.env.CLOUDFLARE_API_TOKEN;
+          const pin='10d3f13a097d4919bccf18e4eb4743703b576325',token=process.env.CLOUDFLARE_API_TOKEN;
           if(!token)throw Error('existing_deploy_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-tools';
           async function api(path,body){
