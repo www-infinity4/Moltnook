@@ -44,3 +44,12 @@ test('raw tool syntax and incomplete results incur deductions',()=>{
  const fail=gradeProbe(probe('weather'),{state:'working',result:{ok:true,output:'Albia is 72°F',receipt:{tool:'weather.current',status:'working'}}});
  assert.equal(fail.toolActionVerified,false);
 });
+
+test('post-release benchmark accepts an independently verified GitHub raw README receipt',()=>{
+ const responseBody={state:'complete',result:{ok:true,output:'Verified public QuantaPhi README.md includes Bubbles and search.',sourceUrl:'https://github.com/www-infinity4/QuantaPhi/blob/main/README.md',receipt:{tool:'github.read_file',status:'complete',sourceReadVerified:true,provider:'github-raw-public'}}};
+ const x=gradeProbe(probe('repo_source'),responseBody);
+ assert.equal(x.score,100);
+ assert.equal(x.toolActionVerified,true);
+ const unverified={...responseBody,result:{...responseBody.result,receipt:{tool:'oracle.chat',status:'complete',sourceReadVerified:false}}};
+ assert.ok(gradeProbe(probe('repo_source'),unverified).score<85);
+});
