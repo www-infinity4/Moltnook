@@ -14,3 +14,9 @@ test('creates a software-only reproducible research package',()=>{
  assert.match(files['simulations/associative_memory.py'],/def experiment/);
  assert.deepEqual(JSON.parse(files['research/sources.json']).sources.length,3);
 });
+
+test('incomplete Bubbles research is marked pending, never passed off as verified',()=>{
+ const files=filesForResearch('Model response was not completed.',{bubblesVerified:false});
+ assert.match(files['research/bubbles-analysis.md'],/response incomplete/i);
+ assert.doesNotMatch(files['research/bubbles-analysis.md'],/Bubbles response received through/);
+});
