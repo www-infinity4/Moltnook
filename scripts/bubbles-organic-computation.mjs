@@ -158,7 +158,7 @@ async function signed(body){
  if(!token)throw Error('signed_identity_missing');
  const r=await fetch(GATEWAY,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(120000)});
  const data=await r.json().catch(()=>({}));
- if(!r.ok||data.ok!==true||(typeof data.jobId==='string'&&data.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID))throw Error('signed_'+body.operation+'_not_approved');
+ if(!r.ok||data.ok!==true)throw Error('signed_'+body.operation+'_http_'+r.status+'_'+String(data.error||'unavailable').replace(/[^a-zA-Z0-9_]/g,'').slice(0,70));
  return data;
 }
 export async function main(){
