@@ -81,7 +81,7 @@ async function main(){
    if(p.name==='page_understanding')result.actualPublicPageRead=result.receipt?.tool==='web.read_page'&&result.receipt?.status==='complete'&&result.sources.some(s=>s.url==='https://quantaphi.org/bubbles.html');
    if(p.name==='weather_followup')result.retainedLocations=/Lovilia/i.test(result.output)&&/Ottumwa/i.test(result.output);
    if(p.name==='source_research')result.twoRealSources=result.sources.filter(s=>/^https:\/\//.test(s.url)).length>=2;
-   if(p.name==='source_research')result.synthesizedResearch=!/^Live results from /i.test(result.output)&&/hydrogen/i.test(result.output)&&/\b(?:compressed|liquid|pressure|hydride|solid|storage)\b/i.test(result.output)&&result.output.length>=90;
+   if(p.name==='source_research')result.synthesizedResearch=!/^Live results from /i.test(result.output)&&/\b(?:o.circuit|DARPA|organoid|biological processing)\b/i.test(result.output)&&/\b(?:molecular|inference|learning|simulation|research goal)\b/i.test(result.output)&&result.output.length>=120;
    if(p.name==='organic_memory_tool')result.actualOrganicTool=result.receipt?.tool==='organic.memory_benchmark'&&result.receipt.status==='complete'&&/software simulation|not a living|digital-only/i.test(result.output);
    if(p.name==='card_tap_limit')result.didNotClaimTap=!result.hasUnprovenTap;
    if(p.name==='source_research')result.onlySearchExcerpts=/^Live results from |Search results are available, but the requested explanation/i.test(result.output)||/Search results are available, but the requested explanation/i.test(result.output);
