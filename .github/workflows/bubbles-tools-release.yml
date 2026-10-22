@@ -17,16 +17,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: 10d3f13a097d4919bccf18e4eb4743703b576325
+          ref: be254e20f426421434ee329df6c6558c41e2b8f3
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - name: Verify exact source and regressions
         run: |
-          test "$(git rev-parse HEAD)" = "10d3f13a097d4919bccf18e4eb4743703b576325"
+          test "$(git rev-parse HEAD)" = "be254e20f426421434ee329df6c6558c41e2b8f3"
           node --check workers/bubbles-tools/worker.mjs
-          node --test test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs test/bubbles-orb-semantic.test.mjs test/bubbles-owner-immediate-dispatch.test.cjs
+          node --test test/bubbles-read-agent.test.mjs test/bubbles-tools.test.mjs test/bubbles-mcp.test.mjs test/bubbles-live-lookup.test.mjs test/bubbles-natural-tool-sweep.test.mjs test/bubbles-search-completion.test.mjs test/bubbles-source-read-ui.test.mjs test/bubbles-live-tool-acceptance.test.mjs test/bubbles-orb-semantic.test.mjs test/bubbles-owner-immediate-dispatch.test.cjs
       - name: Install reproducible Wrangler uploader with bounded npm retries
         run: |
           set -euo pipefail
@@ -52,7 +52,7 @@ jobs:
           node --input-type=module <<'NODE'
           import {execFileSync} from 'node:child_process';
           import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
-          const pin='10d3f13a097d4919bccf18e4eb4743703b576325',token=process.env.CLOUDFLARE_API_TOKEN;
+          const pin='be254e20f426421434ee329df6c6558c41e2b8f3',token=process.env.CLOUDFLARE_API_TOKEN;
           if(!token)throw Error('existing_deploy_credential_missing');
           const root='https://api.cloudflare.com/client/v4/accounts/ef25728c096c6ba92cf510caa2058003/workers/scripts/bubbles-tools';
           async function api(path,body){
@@ -97,7 +97,7 @@ jobs:
               const health=await fetch('https://bubbles-tools.marvaseater.workers.dev/health?bubbles_release_check='+attempt,{
                 headers:{'Cache-Control':'no-cache'},signal:AbortSignal.timeout(15000)}).then(r=>r.json()).catch(()=>({}));
               revision=String(health.revision||'unavailable').slice(0,100);
-              if(revision==='20261021-conversation-quality-v1')break;
+              if(revision==='20261022-read-agent-v1')break;
               if(attempt<6)await new Promise(resolve=>setTimeout(resolve,1500));
             }
             console.log('BUBBLES_TOOLS_HEALTH_MARKER '+revision);
@@ -111,7 +111,7 @@ jobs:
               http:pageProbe.status,tool:probe.receipt?.tool||'missing',status:probe.receipt?.status||'missing',
               reason:probe.receipt?.reason||'none',url:probe.sourceUrl||'none',
               outputPreview:String(probe.output||'').slice(0,160)}));
-            if(revision!=='20261021-conversation-quality-v1')throw Error('production_source_marker_missing');
+            if(revision!=='20261022-read-agent-v1')throw Error('production_source_marker_missing');
             const live=execFileSync('node',['scripts/verify-bubbles-live-tools.mjs'],{encoding:'utf8',timeout:60000,maxBuffer:1000000});
             console.log(live);
             const receipt={status:'deployed_and_live_verified',worker:'bubbles-tools',source:pin,version:candidate,previous,bindingsPreserved:true,publicPageAndThreeTownRouteVerified:true};
