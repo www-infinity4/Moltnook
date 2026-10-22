@@ -5,9 +5,9 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs']
   pull_request:
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*']
   workflow_dispatch:
     inputs:
       task:
@@ -34,6 +34,8 @@ jobs:
       - run: node --check scripts/bubbles-site-acceptance.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
       - run: node --check scripts/bubbles-oracle-refinement.mjs
+      - run: node --check scripts/bubbles-chat-verified-benchmark.mjs
+      - run: node --test scripts/bubbles-chat-verified-benchmark.test.mjs
       - run: node --check scripts/bubbles-legacy-cart-smoke.mjs
       - run: node --test scripts/bubbles-legacy-cart-smoke.test.mjs
       - uses: actions/setup-python@v5
@@ -381,5 +383,35 @@ jobs:
         with:
           name: bubbles-legacy-cart-smoke
           path: repository-receipts/bubbles-legacy-cart-smoke.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  chat_benchmark_20261022:
+    # Non-sensitive signed test; never grants a new owner capability or bypasses expiry.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles chat benchmark 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate graded test contract
+        run: |
+          node --check scripts/bubbles-chat-verified-benchmark.mjs
+          node --test scripts/bubbles-chat-verified-benchmark.test.mjs
+      - name: Grade the real signed Bubbles answers with read-only tools
+        run: node scripts/bubbles-chat-verified-benchmark.mjs
+      - name: Retain exact source-graded tool receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-chat-benchmark-20261022
+          path: repository-receipts/bubbles-chat-benchmark.json
           if-no-files-found: warn
           retention-days: 14
