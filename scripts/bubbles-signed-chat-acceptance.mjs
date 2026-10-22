@@ -1,3 +1,4 @@
+// Owner-requested retest on production Bubbles tools v57, including DARPA research synthesis and organic memory receipts.
 // Verified source fix PR901 released as Bubbles tools v56: signed synthetic research retest, 2026-10-22; no private owner transcript.
 // Public signed Bubbles conversation QA following deployment of cloud-browser v25 and tools v55, 2026-10-22; no access to private owner chat or phone.
 // Signed cloud-browser retest against newly deployed Bubbles Chrome Worker v25 (2026-10-22): verify actual CDP click, before/after DOM and cleanup.
@@ -89,13 +90,15 @@ async function main(){
    if(p.name==='organic_memory_tool')result.actualOrganicTool=result.receipt?.tool==='organic.memory_benchmark'&&result.receipt.status==='complete'&&/software simulation|not a living|digital-only/i.test(result.output);
    if(p.name==='card_tap_limit')result.didNotClaimTap=!result.hasUnprovenTap;
    if(p.name==='source_research')result.onlySearchExcerpts=/^Live results from |Search results are available, but the requested explanation/i.test(result.output)||/Search results are available, but the requested explanation/i.test(result.output);
+   if(p.name==='source_research')result.noRawCursor=!/(?:^|\\s)\\{[^{}]{0,600}"cursor"\\s*:/.test(result.output);
+   if(p.name==='source_research')result.honestResearch=(!/full (?:page|article|paper) (?:was|has been) read/i.test(result.output)||result.receipt?.sourceReadVerified===true)&&result.noRawCursor;
    result.hasToolNarration=/^\s*(?:Calling|Tool call|Executing tool|Using tool|\{\s*"name"\s*:)/i.test(result.output);
   }catch(e){result.error=clean(e.message,160);result.complete=false;}
   report.results.push(result);
   console.log('BUBBLES_CHAT_QA '+JSON.stringify(result));
  }
  report.completed=report.results.filter(x=>x.complete).length;
- report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.actualRuntimeInventory===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
+ report.qualityFlags=report.results.filter(x=>x.hasRawToolDraft||x.hasUnprovenTap||x.claimedUnverifiedDeviceExecution||x.retainedLocations===false||x.twoRealSources===false||x.synthesizedResearch===false||x.honestResearch===false||x.onlySearchExcerpts===true||x.actualRuntimeInventory===false||x.actualMultiRead===false||x.actualSearchTool===false||x.actualWeatherTool===false||x.actualPublicPageRead===false||!x.complete).map(x=>x.name);
  await mkdir('repository-receipts',{recursive:true});
  await writeFile('repository-receipts/bubbles-signed-chat-acceptance.json',JSON.stringify(report,null,2)+'\n');
  console.log('BUBBLES_CHAT_QA_SUMMARY '+JSON.stringify({completed:report.completed,total:prompts.length,qualityFlags:report.qualityFlags,ownerUiVerified:false,androidVerified:false}));
