@@ -15,7 +15,7 @@ test('natural language routes by meaningful sector without needing commands',()=
 test('sector repositories contain only synthetic references and explicit privacy policy',()=>{
  for(const item of SECTORS){
   const files=sectorFiles(item.kind);
-  assert.ok(files['README.md'].includes('private'));
+  assert.ok(files['README.md'].toLowerCase().includes('private'));
   assert.ok(files['skills/README.md'].includes('verified owner-scoped'));
   const schema=JSON.parse(files['schema/memory-reference.schema.json']);
   assert.equal(schema.policy.realUserDataInGit,false);
