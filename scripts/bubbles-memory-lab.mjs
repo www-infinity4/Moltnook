@@ -4,6 +4,7 @@ import {mkdtempSync,writeFileSync,rmSync,mkdirSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
+import {Script,createContext} from 'node:vm';
 import {pathToFileURL} from 'node:url';
 import {skillPackets} from '../agents/repository-engine/phi-skills.mjs';
 const REPO='www-infinity4/Bubbles-Memory-Lab';
@@ -26,12 +27,47 @@ export function validateSource(path,content){
  if(!FILES.includes(path)||typeof content!=='string'||content.length<30||content.length>1500||content.includes('\0'))throw Error('source_outside_fixed_contract');
  const inspected=path==='app.mjs'?content.replace(/import\s*\{[^}]+\}\s*from\s*['"]\.\/context-engine\.mjs['"];?/g,''):content;
  if(/https?:\/\/|<iframe|\bon\w+\s*=|\beval\s*\(|\bfetch\s*\(|XMLHttpRequest|localStorage|document\.cookie|process\.env|child_process|\bimport\s|require\s*\(/i.test(inspected))throw Error('source_external_or_privileged_behavior');
+ if(/\bimport\s*\(|\bFunction\s*\(|WebSocket|sendBeacon|navigator\.|\bglobalThis\b|window\s*\[/i.test(inspected))throw Error('source_privileged_behavior');
  if(path==='index.html'&&(!/<!doctype html>/i.test(content)||!content.includes('Bubbles Memory Lab')||!content.includes('styles.css')||!content.includes('app.mjs')||!content.includes('viewport')))throw Error('html_contract_incomplete');
  if(path==='context-engine.mjs'&&(!content.includes('export function rankMemories')||!content.includes('reasons')))throw Error('retrieval_contract_incomplete');
  if(path==='app.mjs'&&(!content.includes('addEventListener')||!content.includes('rankMemories')))throw Error('interaction_contract_incomplete');
  if(path==='styles.css'&&(!content.includes('#f7f4f0')||!content.includes('#b83b32')))throw Error('oracle_style_missing');
  return content;
 }
+// Test generated pure search functions without Node/process/network globals.
+// This does not substitute for a rendered browser interaction receipt.
+export function verifyGeneratedMemoryEngine(source){
+ validateSource('context-engine.mjs',source);
+ const code=source.replace(/\bexport\s+function\s+rankMemories\b/,'function rankMemories');
+ const notes=[
+  {id:'circuit',topic:'electronics',text:'LC resonant circuit and capacitor',at:100},
+  {id:'receiver',topic:'electronics',text:'AM radio antenna receiver',at:90},
+  {id:'playlist',topic:'music',text:'Radio music piano playlist',at:120},
+  {id:'parser',topic:'programming',text:'JavaScript syntax parser',at:80}
+ ];
+ const statements=code+'\nconst fixtures='+JSON.stringify(notes)+';\n'+
+  'globalThis.__cases=['+
+  "rankMemories(fixtures,'radyo electronics',{}),"+
+  "rankMemories(fixtures,'parser',{}),"+
+  "rankMemories(fixtures,'fooey',{}),"+
+  "rankMemories(fixtures,'',{}),"+
+  "rankMemories(fixtures,'fooey',{fooey:'parser'})"+
+  '];';
+ const context=createContext(Object.create(null),{codeGeneration:{strings:false,wasm:false}});
+ new Script(statements,{filename:'context-engine.mjs'}).runInContext(context,{timeout:750});
+ const [radio,parser,unknown,all,alias]=context.__cases||[];
+ const sane=values=>Array.isArray(values)&&values.every(x=>x&&
+  typeof x==='object'&&typeof x.id==='string'&&Number.isFinite(x.score)&&Array.isArray(x.reasons));
+ if(![radio,parser,unknown,all,alias].every(sane))throw Error('generated_engine_result_shape_invalid');
+ const ids=xs=>xs.map(x=>x.id);
+ if(!ids(radio).includes('receiver')||!ids(radio).includes('circuit')||
+    ids(radio).indexOf('receiver')>ids(radio).indexOf('playlist'))
+  throw Error('generated_engine_radio_context_failed');
+ if(parser[0]?.id!=='parser'||unknown.length!==0||all.length!==4||
+    alias[0]?.id!=='parser')throw Error('generated_engine_typo_alias_unknown_failed');
+ return {cases:5,passed:true};
+}
+
 async function signed(body){
  const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);u.searchParams.set('audience','bubbles-owner-message-bridge');
  const id=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
@@ -91,6 +127,7 @@ export async function main(){
   }
   command('node',['--check','app.mjs'],{cwd:dir});
   command('node',['--check','context-engine.mjs'],{cwd:dir});
+  report.engineChecks=verifyGeneratedMemoryEngine(source['context-engine.mjs']);
   command('python3',['-c',"from html.parser import HTMLParser; from pathlib import Path; p=HTMLParser(); p.feed(Path('index.html').read_text()); p.close(); assert all(Path(x).is_file() for x in ['README.md','styles.css','app.mjs','context-engine.mjs'])"],{cwd:dir});
   report.stages.push({stage:'source_checks',status:'passed'});
   await consent();
