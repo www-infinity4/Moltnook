@@ -1,3 +1,4 @@
+// Owner-requested 2026-10-22 browser verification: the separate signed browser_acceptance job must confirm CDP click AND changed DOM, not merely text from a model.
 // Verify the schema-planning runtime against live readers after PR881.
 // Owner-requested reconnect check: 2026-10-22T04:15Z; reuse existing signed consent.
 // Synthetic, owner-approved Bubbles chat QA via the existing short-lived GitHub
