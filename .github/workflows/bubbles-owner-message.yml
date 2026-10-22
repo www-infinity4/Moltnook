@@ -5,9 +5,9 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs']
   pull_request:
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*']
   workflow_dispatch:
     inputs:
       task:
@@ -32,7 +32,8 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
-      - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs
+      - run: node --check scripts/bubbles-memory-pilot.mjs
+      - run: node --test scripts/bubbles-site-acceptance.test.mjs agents/repository-engine/phi-skills.test.mjs scripts/bubbles-memory-pilot.test.mjs
   site_acceptance:
     if: ${{ (github.event_name == 'workflow_dispatch' && inputs.task == 'site_acceptance') || (github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles site acceptance')) }}
     runs-on: ubuntu-latest
@@ -275,5 +276,37 @@ jobs:
         with:
           name: bubbles-organic-computation-trusted-owner
           path: repository-receipts/organic-computation.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  memory_sector_pilot:
+    # Same pre-existing OIDC owner workflow as Bubbles; no new permanent permission.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles memory sector pilot 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test privacy, routing and Oracle source grading
+        run: |
+          node --check scripts/bubbles-memory-pilot.mjs
+          node --test scripts/bubbles-memory-pilot.test.mjs agents/repository-engine/phi-skills.test.mjs
+      - name: Use signed Bubbles and create private schema-only memory repositories
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node scripts/bubbles-memory-pilot.mjs
+      - name: Preserve verified owner-run receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-memory-sector-private-pilot
+          path: repository-receipts/bubbles-memory-pilot.json
           if-no-files-found: warn
           retention-days: 14

@@ -31,3 +31,11 @@ test('Pink verifies regressions and Purple/Black gate receipts',()=>{
  assert.throws(()=>skillPackets({phase:'billing'}),/Unknown color-agent phase/);
 });
 
+
+test('memory and small Oracle upgrades receive narrow executable skill guidance',()=>{
+ const memory=skillPackets({task:'Remember my earlier conversation about my brother and scripts; use repository memory',phase:'plan'});
+ assert.ok(memory.some(x=>x.id==='private-memory-sector-retrieval'));
+ const ui=skillPackets({task:'Build an Oracle card with working button, then grade the CSS and actual tests',phase:'build'});
+ assert.ok(ui.some(x=>x.id==='oracle-graded-microchange'));
+ assert.ok(skillPackets({task:'grade Oracle card fix',phase:'review'}).some(x=>x.id==='oracle-graded-microchange'));
+});
