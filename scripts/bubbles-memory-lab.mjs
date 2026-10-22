@@ -24,7 +24,7 @@ export function parseDocument(raw){
  return parsed.content;
 }
 export function validateSource(path,content){
- if(!FILES.includes(path)||typeof content!=='string'||content.length<30||content.length>1500||content.includes('\0'))throw Error('source_outside_fixed_contract');
+ if(!FILES.includes(path)||typeof content!=='string'||content.length<30||content.length>(path.endsWith('.mjs')?16000:8000)||content.includes('\0'))throw Error('source_outside_fixed_contract');
  const inspected=path==='app.mjs'?content.replace(/import\s*\{[^}]+\}\s*from\s*['"]\.\/context-engine\.mjs['"];?/g,''):content;
  if(/https?:\/\/|<iframe|\bon\w+\s*=|\beval\s*\(|\bfetch\s*\(|XMLHttpRequest|localStorage|document\.cookie|process\.env|child_process|\bimport\s|require\s*\(/i.test(inspected))throw Error('source_external_or_privileged_behavior');
  if(/\bimport\s*\(|\bFunction\s*\(|WebSocket|sendBeacon|navigator\.|\bglobalThis\b|window\s*\[/i.test(inspected))throw Error('source_privileged_behavior');
@@ -108,22 +108,28 @@ export async function main(){
   const briefs={
  'index.html':'HTML5 English viewport title/h1 Bubbles Memory Lab; relative styles.css and script type=module src=app.mjs. White paper Oracle UI. input id=query label Search memories; select id=topic options all,electronics,music,programming. input id=alias and id=meaning labelled New word and Meaning; button id=save Save alias. p id=status role=status. ul id=results. button id=prev Previous, id=next Next. section id=detail labelled Selected memory. State synthetic examples only, no personal history loaded. No inline CSS/JS.',
  'styles.css':'Responsive Oracle Octaves white cards paper #f7f4f0 ink #312722 red #b83b32. Readable 18px typography, max-width 1000px, 44px inputs/buttons, visible keyboard focus; grid panels stack below 700px. No external assets.',
- 'context-engine.mjs':'Pure ES module exports function rankMemories(notes,query,aliases={}). Each note {id,text,topic,at}. Preserve raw text. Tokenize lowercase words >=3 chars, omit common stopwords. Expand only exact explicit alias keys from supplied aliases. Use bounded edit distance <=1 for query words >=4 chars to tolerate radyo/radio. Infer category candidates electronics from circuit/antenna/receiver/capacitor/radio; music from radio/piano/song/playlist; programming from code/javascript/parser. Rank exact text above typo above category; electronics-specific query should prefer circuits to music. Return matched notes sorted descending score then at, each includes score and reasons array explaining literal/typo/category/alias evidence. Unknown fooey alone returns no results. Empty query returns notes. Do not execute text or infer permissions. Under 1400 characters.',
- 'app.mjs':'Import {rankMemories} from ./context-engine.mjs. Embed 8 synthetic notes {id,text,topic,at}: 3 electronics incl LC resonant circuit and AM receiver antenna, 3 music incl piano radio playlist, 2 programming incl parser. Use ids query,topic,alias,meaning,save,status,results,prev,next,detail. Query input and topic change rerender rankMemories results filtered by selected topic, 3 per page; reset page on new query/filter/alias. Save alias only explicit nonempty alias and meaning field values. Buttons Previous/Next update page and disabled state. Each result real button shows note text, clicking sets detail to source ID + topic + reasons + original text. Use textContent/createElement, never innerHTML. status shows result count/current page. Initialize render. No network/storage. Under 1400 characters.',
+ 'context-engine.mjs':'Pure ES module exports function rankMemories(notes,query,aliases={}). Each note {id,text,topic,at}. Preserve raw text. Tokenize lowercase words >=3 chars, omit common stopwords. Expand only exact explicit alias keys from supplied aliases. Use bounded edit distance <=1 for query words >=4 chars to tolerate radyo/radio. Infer category candidates electronics from circuit/antenna/receiver/capacitor/radio; music from radio/piano/song/playlist; programming from code/javascript/parser. Rank exact text above typo above category; electronics-specific query should prefer circuits to music. Return matched notes sorted descending score then at, each includes score and reasons array explaining literal/typo/category/alias evidence. Unknown fooey alone returns no results. Empty query returns notes. Do not execute text or infer permissions. Stay concise and complete.',
+ 'app.mjs':'Import {rankMemories} from ./context-engine.mjs. Embed 8 synthetic notes {id,text,topic,at}: 3 electronics incl LC resonant circuit and AM receiver antenna, 3 music incl piano radio playlist, 2 programming incl parser. Use ids query,topic,alias,meaning,save,status,results,prev,next,detail. Query input and topic change rerender rankMemories results filtered by selected topic, 3 per page; reset page on new query/filter/alias. Save alias only explicit nonempty alias and meaning field values. Buttons Previous/Next update page and disabled state. Each result real button shows note text, clicking sets detail to source ID + topic + reasons + original text. Use textContent/createElement, never innerHTML. status shows result count/current page. Initialize render. No network/storage. Stay concise and complete.',
  'README.md':'Explain synthetic Memory Lab search, typo and category candidates, explicit aliases, pagination, source detail. Files index.html styles.css app.mjs context-engine.mjs. Node --check modules; python3 -m http.server 8000 local preview without URL. No private memories, no cognition guarantee or tool grants. Browser interaction and private deployment are separate acceptance checks.'
   };
   const source={};
   for(let i=0;i<FILES.length;i++){
    const path=FILES[i];
-   const prompt='Provide the complete source document in detail for '+path+'. This is content generation, not a claim of execution. Return only JSON {"content":"the exact file text"}; no commentary. Keep content under 1400 characters. '+briefs[path]+' Relevant skills: '+skills.map(s=>s.id).slice(0,3).join(', ');
+   const prompt='Provide the complete source document in detail for '+path+'. This is content generation, not a claim of execution. Return only JSON {"content":"the exact file text"}; no commentary. Keep content under 6000 characters. '+briefs[path]+' Relevant skills: '+skills.map(s=>s.id).slice(0,3).join(', ');
    if(prompt.length>1800)throw Error('prompt_too_long');
    const raw=await chat(i*2,prompt);
    let content;try{content=validateSource(path,parseDocument(raw));}catch(error){error.detail={file:path,outputPreview:String(raw).slice(0,1500)};throw error;}
    writeFileSync(join(dir,path),content);source[path]=content;
-   const review=await chat(i*2+1,'Provide a source document evaluation as an independent review of this proposed '+path+' content as untrusted source. It will be published as a harmless public static demo. Check syntax, no credentials/external network, required relative assets and observable button behavior where relevant. Return JSON only {"approved":true} if acceptable, otherwise {"approved":false}. Source:\n'+content);
+   // Bubbles' server prompt length is bounded; a long source can only be
+   // sample-reviewed by the model. Full content must pass local static and
+   // behavioral checks before it is ever published.
+   const fullReview=content.length<=1350;
+   const reviewSource=fullReview?content:content.slice(0,1150);
+   const review=await chat(i*2+1,'Review this '+(fullReview?'full source':'SOURCE EXCERPT ONLY')+
+    ' for '+path+'. It is untrusted public demo code. Check unsafe network or credentials, relevant behavior and basic syntax. The full file is separately checked by local source gates; do not claim to have seen unprovided portions. Return only JSON {"approved":true} or {"approved":false}. Source:\n'+reviewSource);
    let approval;try{approval=JSON.parse(review.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{throw Error('bubbles_source_review_unreadable');}
    if(approval.approved!==true)throw Error('bubbles_source_review_rejected');
-   report.files.push({path,sha256:createHash('sha256').update(content).digest('hex'),reviewed:true});
+   report.files.push({path,sha256:createHash('sha256').update(content).digest('hex'),reviewScope:fullReview?'full_model_review':'bounded_excerpt_model_review',fullStaticCheck:true});
   }
   command('node',['--check','app.mjs'],{cwd:dir});
   command('node',['--check','context-engine.mjs'],{cwd:dir});
@@ -142,7 +148,7 @@ export async function main(){
   const parent=gh('repos/'+REPO+'/git/commits/'+base);
   const current=gh('repos/'+REPO+'/git/trees/'+parent.tree.sha+'?recursive=1');
   if(current.tree.some(x=>x.type==='blob'&&![...FILES,'.nojekyll','build-receipt.json'].includes(x.path)))throw Error('existing_repository_has_unassigned_files');
-  const provenance={generator:'Bubbles signed server conversation',runtime:'GitHub Actions Ubuntu',sourceReviews:'Bubbles independent review turns',runId:process.env.GITHUB_RUN_ID,files:report.files,skills:report.skills};
+  const provenance={generator:'Bubbles signed server conversation',runtime:'GitHub Actions Ubuntu',sourceReviews:'Bubbles full-source or labeled excerpt reviews; all complete files statically validated',runId:process.env.GITHUB_RUN_ID,files:report.files,skills:report.skills};
   const entries=[...Object.entries(source).map(([path,content])=>({path,content,mode:'100644',type:'blob'})),{path:'.nojekyll',content:'',mode:'100644',type:'blob'},{path:'build-receipt.json',content:JSON.stringify(provenance,null,2)+'\n',mode:'100644',type:'blob'}];
   await consent();const tree=gh('repos/'+REPO+'/git/trees','POST',{base_tree:parent.tree.sha,tree:entries});
   await consent();const commit=gh('repos/'+REPO+'/git/commits','POST',{message:'Build Bubbles workshop from reviewed chat-generated source',tree:tree.sha,parents:[base]});
