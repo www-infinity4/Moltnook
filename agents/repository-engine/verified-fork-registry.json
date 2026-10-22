@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-22",
+  "purpose": "Owner-scope, read-only fork and legacy cart discovery for Bubbles. Availability is not execution or delegation.",
+  "verifiedRepositories": [
+    {
+      "repository": "www-infinity4/Moltnook",
+      "role": "color-agent executor and owner-approved signed runner",
+      "status": "repository_verified",
+      "readPaths": [
+        "AGENTS.md",
+        "agents/repository-engine/phi-skills.mjs"
+      ]
+    },
+    {
+      "repository": "www-infinity4/QuantaPhi",
+      "role": "Bubbles chat, private memory and authenticated work adapters",
+      "status": "repository_verified",
+      "readPaths": [
+        "AGENTS.md",
+        "docs/BUBBLES-GPT-CONNECTION.md",
+        "workers/bubbles-memory/synapse-memory.mjs"
+      ]
+    },
+    {
+      "repository": "www-infinity4/C13b0",
+      "role": "Infinity OS successor and cart-related historical investigation",
+      "status": "repository_verified_not_legacy_cart_contents",
+      "readPaths": [
+        "README.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/WidgetPhi",
+      "role": "existing card catalog and specialized skills",
+      "status": "repository_verified",
+      "readPaths": [
+        "skills/phi-card-registry-and-creator-rewards/SKILL.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/Oracle-Octaves",
+      "role": "Oracle mobile card styling reference",
+      "status": "repository_verified",
+      "readPaths": [
+        "README.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/Omni-Phi",
+      "role": "Code Phi website and preview studio",
+      "status": "repository_verified",
+      "readPaths": [
+        "code/oracle-workspace.js"
+      ]
+    },
+    {
+      "repository": "www-infinity4/claude-flow",
+      "role": "owner Claude-Flow copy with AgentDB and tool documentation, not assumed executable integration",
+      "status": "repository_verified_runtime_unverified",
+      "readPaths": [
+        "README.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/Builder-Reserve",
+      "role": "available owner repository; discover exact adapters before use",
+      "status": "repository_verified_role_unconfirmed",
+      "readPaths": [
+        "README.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/Infinity-Phi",
+      "role": "Infinity research and site code",
+      "status": "repository_verified",
+      "readPaths": [
+        "README.md"
+      ]
+    },
+    {
+      "repository": "www-infinity4/Quant-AI",
+      "role": "existing AI-related code, no automatic delegated credentials",
+      "status": "repository_verified",
+      "readPaths": [
+        "README.md"
+      ]
+    }
+  ],
+  "legacySources": [
+    {
+      "repository": "pewpi-infinity/mongoose.os",
+      "status": "not_accessible_2026-10-22",
+      "historicalRole": "original automation cart library",
+      "expectedPatterns": [
+        "cart*.py",
+        "cart*.sh",
+        "carts/**/cart*.py",
+        "carts/**/cart*.sh"
+      ]
+    },
+    {
+      "repository": "pewpi-infinity/infinity-treasury",
+      "status": "not_accessible_2026-10-22",
+      "historicalRole": "carts-only consumer, excluding large research/token directories"
+    },
+    {
+      "repository": "pewpi-infinity/infinity-brain-111",
+      "status": "not_accessible_2026-10-22",
+      "historicalRole": "C13b0 assimilation and repo index"
+    }
+  ],
+  "historicalCartUnits": [
+    {
+      "id": "cart-011",
+      "topic": "assembler",
+      "originalFiles": [
+        "assembler/registry.js",
+        "assembler/assemble.js",
+        "assembler/intent_handlers.js"
+      ],
+      "verification": "historical-description-only"
+    },
+    {
+      "id": "cart-012",
+      "topic": "activation",
+      "verification": "historical-description-only"
+    },
+    {
+      "id": "cart-013",
+      "topic": "token-to-sandboxed-spa",
+      "originalFiles": [
+        "ledger/OWNERSHIP_LEDGER.json"
+      ],
+      "verification": "historical-description-only"
+    },
+    {
+      "id": "cart-014",
+      "topic": "marketplace",
+      "originalFiles": [
+        "marketplace/index.html",
+        "market.js",
+        "capture/capture_preview.js",
+        "listings/LISTINGS.json"
+      ],
+      "verification": "historical-description-only"
+    }
+  ],
+  "boundaries": {
+    "ownerApproval": "Verified five-day owner grant plus current server-side credential for each privileged action",
+    "cartSourceFiles": "metadata-only until fetched from verified owner-approved repository; never run arbitrary imported shell/Python",
+    "noFullClone": "Carts-only discovery; no tokens, research, or heavy folders",
+    "ownerMemory": "Bubbles wallet-scoped Cloudflare D1, not GitHub or ChatGPT personal_context",
+    "hardware": "ESP32 needs actual board, firmware and physical test; simulation is not telemetry",
+    "mongooseDisambiguation": "mongoose.os historical carts is distinct from Cesanta Mongoose OS firmware and from Mongoose MongoDB ODM"
+  }
+}
