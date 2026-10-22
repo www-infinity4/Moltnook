@@ -1,3 +1,4 @@
+// Live Test Ground AI public Chrome v28 one-test browser verification 2026-10-22.
 // Owner-approved real Chrome v27 public Open Bubbles chat CTA dispatch/observed effect verification, 2026-10-22.
 // Live browser v26 signed QA: require actual Chrome button inventory and read-only public Bubbles page receipt, 2026-10-22.
 // Owner-requested retest on production Bubbles tools v57, including DARPA research synthesis and organic memory receipts.
