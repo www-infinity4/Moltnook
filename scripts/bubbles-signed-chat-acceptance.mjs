@@ -4,6 +4,8 @@
 import {writeFile,mkdir} from 'node:fs/promises';
 const ENDPOINT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
 const prompts=[
+ {name:'simple_search',text:'Search the web for hydrogen storage.'},
+ {name:'google_search',text:'Search Google for hydrogen storage.'},
  {name:'two_town_weather',text:'What is the weather in Lovilia, Iowa and Ottumwa, Iowa today? Check each town separately. Use available tools, explain the actual conditions and name the date; do not narrate tool commands.'},
  {name:'weather_followup',text:'Which of those two towns is warmer? Use our preceding answer and tell me clearly, without making me restate the towns.'},
  {name:'page_understanding',text:'Inspect https://quantaphi.org/bubbles.html and explain what the Bubbles page offers. Distinguish what you inspected from assumptions and never pretend a screenshot was inspected.'},
