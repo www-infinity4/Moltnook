@@ -1,3 +1,4 @@
+// Live browser v26 signed QA: require actual Chrome button inventory and read-only public Bubbles page receipt, 2026-10-22.
 // Owner-requested retest on production Bubbles tools v57, including DARPA research synthesis and organic memory receipts.
 // Verified source fix PR901 released as Bubbles tools v56: signed synthetic research retest, 2026-10-22; no private owner transcript.
 // Public signed Bubbles conversation QA following deployment of cloud-browser v25 and tools v55, 2026-10-22; no access to private owner chat or phone.
