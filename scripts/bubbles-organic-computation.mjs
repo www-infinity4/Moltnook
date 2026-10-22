@@ -36,10 +36,8 @@ A research and software-simulation project prepared through the Bubbles AI signe
 5. Theories: a separate, clearly speculative track for user-proposed hydrogen/electron/energy connections, with explicit falsifiable predictions and tests.
 
 ## Run
-```sh
-python3 simulations/associative_memory.py
-python3 -m unittest discover -s tests
-```
+    python3 simulations/associative_memory.py
+    python3 -m unittest discover -s tests
 
 Nothing in this repository grows biological tissue, enables drone control, supplies wet-lab protocols, or establishes a commercial product. No DARPA affiliation or funding is claimed.
 
@@ -138,7 +136,7 @@ if __name__ == "__main__":
 ${notes}
 
 ## Research controls
-This is not a scientific review, real wet-lab experiment, or grant award. Source pages are curated independently in `sources.json`.
+This is not a scientific review, real wet-lab experiment, or grant award. Source pages are curated independently in sources.json.
 `;
  const sources={checkedDate:"2026-10-22",sources:DARPA.map(([title,url])=>({title,url,provider:"DARPA",evidenceType:title==="O-Circuit"?"program description / 2026 solicitation":"program page"}))};
  return {"README.md":readme,"research/overview.md":overview,"research/hypotheses.md":hypotheses,"research/bubbles-analysis.md":preliminary,"research/sources.json":JSON.stringify(sources,null,2)+"\n","simulations/__init__.py":"","simulations/associative_memory.py":sim,"tests/test_associative_memory.py":tests,".gitignore":"__pycache__/\n*.pyc\n"};
