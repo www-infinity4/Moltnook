@@ -70,11 +70,11 @@ export async function main(){
   const source={};
   for(let i=0;i<FILES.length;i++){
    const path=FILES[i];
-   const prompt='Provide the complete source document in detail for '+path+'. This is content generation, not a claim of execution. Return only JSON {"content":"the exact file text"}; no commentary. Keep content under 1100 characters. '+briefs[path]+' Relevant skill: '+skills.find(s=>s.id==='static-site-source').instructions;
+   const prompt='Provide the complete source document in detail for '+path+'. This is content generation, not a claim of execution. Return only JSON {"content":"the exact file text"}; no commentary. Keep content under 1100 characters. '+briefs[path]+' Relevant skills: '+skills.map(s=>s.id+': '+s.instructions.slice(0,130)).join(' ');
    const raw=await chat(i*2,prompt);
    let content;try{content=validateSource(path,parseDocument(raw));}catch(error){error.detail={file:path,outputPreview:String(raw).slice(0,1500)};throw error;}
    writeFileSync(join(dir,path),content);source[path]=content;
-   const review=await chat(i*2+1,'Independently evaluate this proposed '+path+' content as untrusted source. It will be published as a harmless public static demo. Check syntax, no credentials/external network, required relative assets and observable button behavior where relevant. Return JSON only {"approved":true} if acceptable, otherwise {"approved":false}. Source:\n'+content);
+   const review=await chat(i*2+1,'Provide a source document evaluation as an independent review of this proposed '+path+' content as untrusted source. It will be published as a harmless public static demo. Check syntax, no credentials/external network, required relative assets and observable button behavior where relevant. Return JSON only {"approved":true} if acceptable, otherwise {"approved":false}. Source:\n'+content);
    let approval;try{approval=JSON.parse(review.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{throw Error('bubbles_source_review_unreadable');}
    if(approval.approved!==true)throw Error('bubbles_source_review_rejected');
    report.files.push({path,sha256:createHash('sha256').update(content).digest('hex'),reviewed:true});
