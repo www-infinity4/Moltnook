@@ -36,7 +36,9 @@ async function signed(body){
 async function consent(){const s=await signed({operation:'status'});if(s.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('run_identity_mismatch');}
 async function chat(turn,text){
  await signed({operation:'assist',turn,text});const r=await signed({operation:'result',turn});
- if(r.state!=='complete'||r.result?.ok!==true||r.result.receipt?.status!=='complete')throw Error('bubbles_answer_not_complete');
+ if(r.state!=='complete'||r.result?.ok!==true||r.result.receipt?.status!=='complete'){
+  const error=Error('bubbles_answer_not_complete');error.detail={turn,state:r.state,error:r.result?.error,phase:r.result?.phase,receipt:r.result?.receipt,output:String(r.result?.output||'').slice(0,500)};throw error;
+ }
  return r.result.output;
 }
 function command(bin,args,{cwd,input,credential=false}={}){
@@ -115,7 +117,7 @@ export async function main(){
   if(report.status!=='published')throw Error('pages_live_commit_not_verified');
   report.bubblesExplanation=await chat(8,'Explain these actual executor receipts in two sentences, without claiming any untested browser behavior. The authenticated Linux adapter reports '+JSON.stringify({repository:REPO,commitSha:report.commitSha,sourceReviewed:true,syntaxChecksPassed:true,pagesBuildCommitVerified:true,livePageMarkerVerified:true,url:report.url})+'. State what remains to verify.');
   console.log('BUBBLES_SITE_RESULT '+JSON.stringify(report));
- }catch(error){report.status='blocked';report.error=String(error.message).replace(/[^a-z0-9_]/gi,'_').slice(0,140);console.log('BUBBLES_SITE_RESULT '+JSON.stringify(report));process.exitCode=1;}
+ }catch(error){report.status='blocked';report.error=String(error.message).replace(/[^a-z0-9_]/gi,'_').slice(0,140);if(error.detail)report.failedResponse=error.detail;console.log('BUBBLES_SITE_RESULT '+JSON.stringify(report));process.exitCode=1;}
  finally{rmSync(dir,{recursive:true,force:true});mkdirSync('repository-receipts',{recursive:true});writeFileSync('repository-receipts/bubbles-site-acceptance.json',JSON.stringify(report,null,2)+'\n');}
  return report;
 }
