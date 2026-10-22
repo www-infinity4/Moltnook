@@ -229,3 +229,5 @@ jobs:
           if(!/Run browser check/i.test(answer)||!/(?:cleanup|closed)/i.test(answer)||/(?:cleanup.{0,35}(?:not|wasn.t|unconfirmed)|(?:not|wasn.t).{0,20}confirmed)/i.test(answer))throw Error('browser_receipt_explanation_incorrect');
           NODE
 
+
+# Reviewed owner-requested Linux site acceptance: 2026-10-22.
