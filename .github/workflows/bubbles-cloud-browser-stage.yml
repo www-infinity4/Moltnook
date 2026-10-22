@@ -29,13 +29,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: www-infinity4/QuantaPhi
-          ref: def7de64086dd4e596e8d6f5da44f498ab2d8e65
+          ref: a41f25a0542c34a609f533c5609997138d79c2e6
           path: quantaphi-source
           persist-credentials: false
       - name: Run browser, signed owner consumer and consent regressions
         working-directory: quantaphi-source
         run: |
-          test "$(git rev-parse HEAD)" = "def7de64086dd4e596e8d6f5da44f498ab2d8e65"
+          test "$(git rev-parse HEAD)" = "a41f25a0542c34a609f533c5609997138d79c2e6"
           node --test test/bubbles-signed-browser-check.test.mjs test/bubbles-browser-agent.test.mjs test/bubbles-browser-consent.test.mjs test/bubbles-cloud-browser.test.mjs test/bubbles-chatgpt-bridge.test.mjs test/bubbles-combined-approval.test.mjs test/bubbles-runner-bridge.test.mjs test/bubbles-server-assist.test.mjs
           node --check workers/bubbles-cloud-browser/worker.mjs
           node --check workers/bubbles-tools/browser-cdp.mjs
@@ -61,7 +61,7 @@ jobs:
         run: |
           npx --yes wrangler@4 versions upload \
             --config workers/bubbles-cloud-browser/wrangler.toml \
-            --message "Bubbles viewport review def7de64086dd4e596e8d6f5da44f498ab2d8e65 via Moltnook"
+            --message "Bubbles viewport review a41f25a0542c34a609f533c5609997138d79c2e6 via Moltnook"
       - name: Prove no traffic or auth bindings changed
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
