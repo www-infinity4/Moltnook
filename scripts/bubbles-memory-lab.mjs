@@ -125,10 +125,24 @@ export async function main(){
    // behavioral checks before it is ever published.
    const fullReview=content.length<=1350;
    const reviewSource=fullReview?content:content.slice(0,1150);
-   const review=await chat(i*2+1,'Review this '+(fullReview?'full source':'SOURCE EXCERPT ONLY')+
-    ' for '+path+'. It is untrusted public demo code. Check unsafe network or credentials, relevant behavior and basic syntax. The full file is separately checked by local source gates; do not claim to have seen unprovided portions. Return only JSON {"approved":true} or {"approved":false}. Source:\n'+reviewSource);
-   let approval;try{approval=JSON.parse(review.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{throw Error('bubbles_source_review_unreadable');}
-   if(approval.approved!==true)throw Error('bubbles_source_review_rejected');
+   // Source excerpt review must not reject solely because the excerpt omits
+   // the remainder of the document. Whole-file syntax and behavior are gated
+   // below; this model review checks only visible safety concerns.
+   const review=await chat(i*2+1,
+    'Safety-review '+path+' '+(fullReview?'complete file':'limited excerpt')+
+    ' for a synthetic static demo. Evaluate ONLY the provided source for explicit unsafe/external behavior or clearly visible bugs. Missing sections in an excerpt are not defects. Full-file static, syntax and behavioral gates run separately. State one specific issue if rejected. Respond JSON only: {"approved":true,"reason":"no blocking issue observed"} or {"approved":false,"reason":"specific observed blocking issue"}. Excerpt:\n'+reviewSource);
+   let approval;try{approval=JSON.parse(review.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));}catch{
+    const err=Error('bubbles_source_review_unreadable');
+    err.detail={file:path,responsePreview:String(review).slice(0,500),reviewScope:fullReview?'full':'excerpt'};
+    throw err;
+   }
+   if(approval.approved!==true){
+    const err=Error('bubbles_source_review_rejected');
+    err.detail={file:path,reason:String(approval.reason||'reason_unavailable').slice(0,450),
+     responsePreview:String(review).slice(0,550),reviewScope:fullReview?'full':'excerpt',
+     sourcePreview:content.slice(0,500)};
+    throw err;
+   }
    report.files.push({path,sha256:createHash('sha256').update(content).digest('hex'),reviewScope:fullReview?'full_model_review':'bounded_excerpt_model_review',fullStaticCheck:true});
   }
   command('node',['--check','app.mjs'],{cwd:dir});
