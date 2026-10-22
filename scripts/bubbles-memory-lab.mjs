@@ -83,6 +83,14 @@ async function chat(turn,text){
  if(r.state!=='complete'||r.result?.ok!==true||r.result.receipt?.status!=='complete'){
   const error=Error('bubbles_answer_not_complete');error.detail={turn,state:r.state,error:r.result?.error,phase:r.result?.phase,receipt:r.result?.receipt,output:String(r.result?.output||'').slice(0,500)};throw error;
  }
+ // Source generation and source review should be conversations, not reads
+ // of the unpublished URLs embedded inside code being evaluated.
+ if(r.result?.receipt?.tool!=='oracle.chat'){
+  const error=Error('bubbles_source_request_misrouted');
+  error.detail={turn,tool:String(r.result?.receipt?.tool||'missing').slice(0,80),
+   status:String(r.result?.receipt?.status||'missing').slice(0,40)};
+  throw error;
+ }
  return r.result.output;
 }
 function command(bin,args,{cwd,input,credential=false}={}){
