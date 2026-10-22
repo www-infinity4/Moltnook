@@ -5,7 +5,7 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-organic-computation.mjs']
   pull_request:
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**']
   workflow_dispatch:
@@ -241,3 +241,39 @@ jobs:
 # Retest after deployed empty-model-response recovery.
 
 # Live source drafting and owner Pages reader deployed; rerun full build.
+
+  organic_computation:
+    # Bubbles gateway only trusts the already approved owner-message workflow.
+    # This job reuses that signed identity, never signs in as a visitor or bypasses revocation.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles organic computation repository creation 20261022 trusted-owner') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixed signed research build contracts
+        run: |
+          node --check scripts/bubbles-organic-computation.mjs
+          node --test scripts/bubbles-organic-computation.test.mjs
+      - name: Ask signed Bubbles and create the fixed research repository
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node scripts/bubbles-organic-computation.mjs
+      - name: Upload exact repository creation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-organic-computation-trusted-owner
+          path: repository-receipts/organic-computation.json
+          if-no-files-found: warn
+          retention-days: 14
