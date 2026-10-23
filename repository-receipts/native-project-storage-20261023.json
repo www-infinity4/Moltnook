@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-23",
+  "repository": "www-infinity4/QuantaPhi",
+  "pr": 953,
+  "testedHead": "6316b5739f77b74f103235a64c3a8885845e9985",
+  "merge": "33e911fe4a8bc86512184cde91ee6180ef8b38ea",
+  "status": "source_merged",
+  "localTestsPassed": 32,
+  "ci": [
+    {
+      "name": "search-and-wallet",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838448/job/120524681670"
+    },
+    {
+      "name": "native-project-contracts",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838477/job/120524659185"
+    },
+    {
+      "name": "inspect",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838460/job/120524658499"
+    },
+    {
+      "name": "validate",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838399/job/120524658199"
+    },
+    {
+      "name": "payout-receipts",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838331/job/120524657958"
+    },
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985838376/job/120524657722"
+    },
+    {
+      "name": "validate",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39985830171/job/120524631040"
+    }
+  ],
+  "implemented": [
+    "Existing ledger device identity and active-wallet authorization",
+    "Private native project create/list",
+    "Immutable UTF-8 source snapshots with expected-head comparisons",
+    "Idempotent request keys and conflicting-retry rejection",
+    "Historical reads and hash-verified JSON export",
+    "Source/request/project/revision bounds"
+  ],
+  "runtimeGitHubDependency": false,
+  "cloudflareBindingsChanged": false,
+  "deployed": false,
+  "liveD1AcceptanceVerified": false,
+  "browserVerified": false,
+  "bubblesToolRegistered": false,
+  "remaining": [
+    "Live approved Worker release and authenticated D1 smoke test",
+    "Owner browser controls and Bubbles typed adapter",
+    "Isolated preview, publication, release rollback and later large-blob storage"
+  ],
+  "notIncluded": [
+    "Git wire protocol",
+    "Payments or reward credits",
+    "Public source execution"
+  ]
+}
