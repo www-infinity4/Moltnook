@@ -461,3 +461,5 @@ jobs:
           path: repository-receipts/bubbles-memory-lab.json
           if-no-files-found: warn
           retention-days: 14
+
+# QA 2026-10-23: inspect consent-bound owner consumer readiness; no grant renewal.
