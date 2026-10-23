@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-23",
+  "tools": {
+    "pr": 949,
+    "source": "bed83f06ab19c195125baba6d7c05d15ac525dcd",
+    "merge": "2f049dc62440078fd9cfaaa22a386fcbba663e82",
+    "version": "fdff4dda-26db-45b8-8bf1-4bfc39092737",
+    "deployment": "21b4af3b-c76e-4a03-92df-bcc9e3308f21",
+    "previous": "774cd3d7-8a1b-4331-b64e-ffd95c4b77c6",
+    "bindingsPreserved": true,
+    "livePublicPageReadVerified": true,
+    "liveThreeTownWeatherVerified": true,
+    "sourceTestsPassed": 140
+  },
+  "memory": {
+    "pr": 951,
+    "source": "eca0ed0f5560bada3c557bcc3986685c545933c8",
+    "merge": "9dd150ef4ac56cf75fd8fb06808d6986433e5e45",
+    "version": "66e1e512-c92d-4bf6-9d9f-a0d25f46b779",
+    "deployment": "fe2a2687-bd03-474a-ac70-e0eba1f417c9",
+    "previous": "666f4855-9e64-4cae-8ac0-95f66f85adb3",
+    "bindingsPreserved": true,
+    "ciChecksPassed": 12,
+    "focusedTestsPassed": 14,
+    "explicitOwnerDefinitionRecallTested": true,
+    "privateOwnerRecallVerified": false
+  },
+  "limitations": [
+    "Recall uses authenticated candidate notes already retrieved; no guarantee of all prior conversations.",
+    "Physical Motorola microphone, overlay and recording acceptance remains separate.",
+    "No owner consent renewal or new permissions."
+  ]
+}
