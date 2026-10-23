@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-23",
+  "task": "Bubbles bounded voice, brain and card QA",
+  "sourceFix": {
+    "pr": "https://github.com/www-infinity4/QuantaPhi/pull/949",
+    "testedHead": "bed83f06ab19c195125baba6d7c05d15ac525dcd",
+    "merge": "2f049dc62440078fd9cfaaa22a386fcbba663e82",
+    "ciChecksPassed": 13,
+    "localFocusedTestsPassed": 30,
+    "localReleaseTestsPassed": 140
+  },
+  "worker": {
+    "status": "staged_zero_traffic",
+    "candidate": "fdff4dda-26db-45b8-8bf1-4bfc39092737",
+    "productionVersion": "774cd3d7-8a1b-4331-b64e-ffd95c4b77c6",
+    "productionSource": "b54156bfa2a44a9b66e2c3f7684182c0e1cf30b6",
+    "bindingIdentitiesVerified": true,
+    "productionUnchanged": true,
+    "promoted": false
+  },
+  "liveSemanticProbe": {
+    "http": 200,
+    "decision": {
+      "kind": "play_card",
+      "cardId": "oracle-octaves",
+      "confidence": 0.99
+    },
+    "receipt": {
+      "status": "planned_only",
+      "executed": false,
+      "permissionGranted": false
+    }
+  },
+  "hostedRadio": {
+    "request": "Please play Infinity Radio",
+    "observedRoute": "https://quantaphi.org/infinity-radio/",
+    "paused": false,
+    "currentTime": 47.753804,
+    "readyState": 4,
+    "audibleSoundVerified": false
+  },
+  "android": {
+    "version": "0.58.0",
+    "source": "d35f81a28069b3f571632db3d48d4c16779fb0dd",
+    "buildRun": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39951900426",
+    "assetBytes": 85254468,
+    "physicalMotorolaTestsVerified": false
+  },
+  "unresolved": [
+    "Issue 819: physical active owner consumer still requires fresh readiness and page action evidence",
+    "RecordB issue 2: recording persistence, continuous voice and multi-device private media sync need physical acceptance",
+    "Memory Lab previous run 39837100478 failed before repository creation at source-generation turn 4; no published lab claimed"
+  ]
+}
