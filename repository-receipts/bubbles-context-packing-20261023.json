@@ -14,6 +14,46 @@
     "source": "88f1d3dc435d13c0a9aa93eccf48c698e4301786",
     "completeCssExcerptRegressionPassed": true,
     "allGeneratedFilesNowRetainedOnFailure": true,
-    "status": "retry_in_progress"
-  }
+    "status": "blocked",
+    "published": false,
+    "browserVerified": false,
+    "repairs": [
+      {
+        "pr": 193,
+        "testedHead": "1165a7fc677002aa17881c620e38fc41504952d2",
+        "merge": "70a19b5d2bc890801000058a9908ae6e402f8c2c",
+        "change": "Request complete compact source within existing model budget",
+        "ci": "build_contracts success; 12 execution jobs intentionally skipped on PR"
+      },
+      {
+        "pr": 194,
+        "testedHead": "8b33fa5f56f807abb845f12fe189b15e5f7919f2",
+        "merge": "e343977494470583307132c39c9624f4437e73f5",
+        "change": "Explicitly draft new source from specification rather than retrieve existing file",
+        "ci": "build_contracts success; 12 execution jobs intentionally skipped on PR"
+      }
+    ],
+    "localContractAndSkillTestsPassed": 12,
+    "lastRun": "https://github.com/www-infinity4/Moltnook/actions/runs/39979883889",
+    "lastJob": 120504077709,
+    "error": "signed_status_http_401_bridge_runner_not_verified",
+    "generatedFilesInLastRun": 0,
+    "priorRun": {
+      "url": "https://github.com/www-infinity4/Moltnook/actions/runs/39979509860",
+      "generatedReviewedFiles": [
+        "index.html",
+        "styles.css"
+      ],
+      "blocker": "Bubbles treated the new context-engine.mjs drafting request as existing-file retrieval",
+      "artifactId": 12513116057
+    },
+    "consentAndBindingsUnchanged": true
+  },
+  "publishedSourceSha256": "cfca57571177607aad8b23b2af01e1787a888a2e28b47616624e3d5a956f0fdb",
+  "remaining": [
+    "Restore a freshly verified authorized signed runner request without weakening identity or consent checks",
+    "Complete all five generated files and full syntax/behavior gates",
+    "Verify the actual published page visually and interactively",
+    "Private owner memory retrieval and physical Motorola overlay/microphone acceptance remain unverified"
+  ]
 }
