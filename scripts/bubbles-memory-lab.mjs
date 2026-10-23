@@ -95,7 +95,7 @@ async function signed(body){
  const token=(await id.json()).value;if(!token)throw Error('signed_identity_missing');
  const r=await fetch(ENDPOINT,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(120000)});
  const data=await r.json();if(!r.ok||data.ok!==true){
-  const known=new Set(['bridge_runner_identity_required','bridge_runner_identity_rejected','bridge_runner_signature_rejected','bridge_runner_keys_unavailable','bridge_runner_key_unknown','chatgpt_five_day_approval_required','browser_consent_required','invalid_bridge_request']);
+  const known=new Set(['bridge_runner_not_verified','bridge_runner_identity_required','bridge_runner_identity_rejected','bridge_runner_signature_rejected','bridge_runner_keys_unavailable','bridge_runner_key_unknown','chatgpt_five_day_approval_required','browser_consent_required','invalid_bridge_request']);
   const reason=known.has(data.error)?data.error:'unclassified_bridge_error';
   throw Error('signed_'+body.operation+'_http_'+r.status+'_'+reason);
  }
