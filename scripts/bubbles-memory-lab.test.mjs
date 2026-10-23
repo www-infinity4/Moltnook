@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validateSource,verifyGeneratedMemoryEngine,reviewSourceDocument} from './bubbles-memory-lab.mjs';
+import {validateSource,verifyGeneratedMemoryEngine,reviewSourceDocument,readVerifiedStatus} from './bubbles-memory-lab.mjs';
 test('memory lab is fixed static source and permits only its own module import',()=>{
  const app="import {rankMemories} from './context-engine.mjs'; document.addEventListener('click',()=>rankMemories([],''));";
  assert.equal(validateSource('app.mjs',app),app);
@@ -50,4 +50,19 @@ test('CSS review excerpts end at complete top-level rules, including nested medi
  assert.throws(()=>reviewSourceDocument('styles.css','body {'+'padding:1px;'.repeat(150)+'}'),/css_review_unit_exceeds_budget/);
  const short='body{color:red}';
  assert.deepEqual(reviewSourceDocument('styles.css',short),{fullReview:true,reviewSource:short});
+});
+
+test('status identity retry is bounded and never retries consent denials or mutations',async()=>{
+ let reads=0,waits=0;
+ const rejected=()=>Error('signed_status_http_401_bridge_runner_not_verified');
+ const result=await readVerifiedStatus(async()=>{if(++reads===1)throw rejected();return {ok:true};},async ms=>{assert.equal(ms,1000);waits++;});
+ assert.deepEqual(result,{ok:true});assert.equal(reads,2);assert.equal(waits,1);
+ reads=0;
+ await assert.rejects(readVerifiedStatus(async()=>{reads++;throw rejected();},async()=>{}),/bridge_runner_not_verified/);
+ assert.equal(reads,2);
+ for(const code of ['signed_status_http_403_browser_consent_required','signed_status_http_403_chatgpt_five_day_approval_required','signed_assist_http_401_bridge_runner_not_verified','signed_status_http_500_unclassified_bridge_error']){
+  reads=0;
+  await assert.rejects(readVerifiedStatus(async()=>{reads++;throw Error(code);},async()=>{assert.fail('must not wait');}),{message:code});
+  assert.equal(reads,1);
+ }
 });

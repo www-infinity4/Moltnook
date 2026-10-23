@@ -101,7 +101,16 @@ async function signed(body){
  }
  return data;
 }
-async function consent(){const s=await signed({operation:'status'});if(s.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('run_identity_mismatch');}
+// Retry only the read-only initial status check, once, with fresh OIDC issuance.
+// No failed request creates consent, and a persistent rejection stays blocked.
+export async function readVerifiedStatus(readStatus,wait=ms=>new Promise(r=>setTimeout(r,ms))){
+ try{return await readStatus();}catch(error){
+  if(error.message!=='signed_status_http_401_bridge_runner_not_verified')throw error;
+  await wait(1000);
+  return readStatus();
+ }
+}
+async function consent(){const s=await readVerifiedStatus(()=>signed({operation:'status'}));if(s.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('run_identity_mismatch');}
 async function chat(turn,text){
  await signed({operation:'assist',turn,text});const r=await signed({operation:'result',turn});
  if(r.state!=='complete'||r.result?.ok!==true||r.result.receipt?.status!=='complete'){
