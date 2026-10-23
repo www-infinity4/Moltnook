@@ -59,3 +59,16 @@ test('conversational webpage publish work activates the org publishing instructi
  assert.match(skill.instructions,/actual browser interaction/);
  assert.match(skill.instructions,/authorized executor/);
 });
+
+test('broad owner requests retain late matching memory and evidence instructions',()=>{
+ const task='Bubbles build Linux GitHub website HTML CSS media radio player card shop merchant wallet paid reward repair memory conversation semantic mongoose c13b0 ESP32 MQTT scripts forks Oracle grade test';
+ const selected=skillPackets({task,phase:'plan'});
+ assert.ok(selected.length>12,'exercise the old cutoff');
+ for(const id of ['private-memory-sector-retrieval','oracle-graded-microchange','black-evidence-seal','starquest-settlement-boundary','esp32-firmware-telemetry-boundary'])assert.ok(selected.some(s=>s.id===id),id);
+ assert.equal(new Set(selected.map(s=>s.id)).size,selected.length);
+ for(const phase of Object.keys(PHASE_COLORS)){
+  const packets=skillPackets({task,phase});
+  assert.ok(packets.length<=SKILLS.length);
+  assert.ok(packets.every(p=>p.colors.length&&p.colors.every(c=>PHASE_COLORS[phase].includes(c))));
+ }
+});
