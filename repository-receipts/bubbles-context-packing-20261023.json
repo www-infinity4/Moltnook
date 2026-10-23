@@ -31,12 +31,20 @@
         "merge": "e343977494470583307132c39c9624f4437e73f5",
         "change": "Explicitly draft new source from specification rather than retrieve existing file",
         "ci": "build_contracts success; 12 execution jobs intentionally skipped on PR"
+      },
+      {
+        "pr": 195,
+        "testedHead": "9fa2b1eb18ed14ad5ed3bb5a596ab7d47f7bb3f1",
+        "merge": "4b221045a5c1f3fd63c8ec1c5a100507203c9264",
+        "change": "Retry read-only status once with fresh OIDC; persistent identity/consent denial stays blocked",
+        "ci": "build_contracts success; execution jobs intentionally skipped on PR",
+        "localContractAndSkillTestsPassed": 13
       }
     ],
-    "localContractAndSkillTestsPassed": 12,
-    "lastRun": "https://github.com/www-infinity4/Moltnook/actions/runs/39979883889",
-    "lastJob": 120504077709,
-    "error": "signed_status_http_401_bridge_runner_not_verified",
+    "localContractAndSkillTestsPassed": 13,
+    "lastRun": "https://github.com/www-infinity4/Moltnook/actions/runs/39980636493",
+    "lastJob": 120506691096,
+    "error": "signed_assist_http_401_bridge_runner_not_verified",
     "generatedFilesInLastRun": 0,
     "priorRun": {
       "url": "https://github.com/www-infinity4/Moltnook/actions/runs/39979509860",
@@ -47,7 +55,10 @@
       "blocker": "Bubbles treated the new context-engine.mjs drafting request as existing-file retrieval",
       "artifactId": 12513116057
     },
-    "consentAndBindingsUnchanged": true
+    "consentAndBindingsUnchanged": true,
+    "lastRunStatusVerified": true,
+    "lastRunAssistVerified": false,
+    "rootCauseVerified": false
   },
   "publishedSourceSha256": "cfca57571177607aad8b23b2af01e1787a888a2e28b47616624e3d5a956f0fdb",
   "remaining": [
