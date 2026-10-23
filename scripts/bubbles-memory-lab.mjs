@@ -147,7 +147,7 @@ export async function main(){
   const source={};
   for(let i=0;i<FILES.length;i++){
    const path=FILES[i];
-   const prompt='Provide the complete source document in detail for '+path+'. This is content generation, not a claim of execution. Return only JSON {"content":"the exact file text"}; no commentary. Reply budget is limited: keep file text under 2200 characters, use concise code, small stopword/category sets and no explanatory comments. Include every closing delimiter; never truncate. '+briefs[path]+' Relevant skills: '+skills.map(s=>s.id).slice(0,3).join(', ');
+   const prompt='Write a NEW original source document in detail for '+path+'. This file does not exist yet. Create it from the specification below; do not retrieve or describe any existing file. This is content generation, not execution. Return only JSON {"content":"the exact file text"}; no commentary. Reply budget is limited: keep file text under 2200 characters, use concise code, small stopword/category sets and no explanatory comments. Include every closing delimiter; never truncate. '+briefs[path]+' Relevant skills: '+skills.map(s=>s.id).slice(0,3).join(', ');
    if(prompt.length>1800)throw Error('prompt_too_long');
    const raw=await chat(i*2,prompt);
    let content;try{content=validateSource(path,parseDocument(raw));}catch(error){error.detail={file:path,outputPreview:String(raw).slice(0,1500)};throw error;}
