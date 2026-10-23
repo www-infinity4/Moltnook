@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-23",
+  "pr": "https://github.com/www-infinity4/QuantaPhi/pull/958",
+  "testedHead": "c8b8f915e39afd075b1dbe6fe45f3ac28048688e",
+  "merge": "e0770dccbfea4703c905efc481268b0c5a344d57",
+  "ciChecksPassed": 21,
+  "pagesRun": 40015892682,
+  "pagesDeployment": "success",
+  "snapshot": {
+    "schemaVersion": 1,
+    "site": "quantaphi.org",
+    "source": "Cloudflare GraphQL httpRequests1dGroups",
+    "fetchedAt": "2026-10-23T18:53:22.667Z",
+    "period": {
+      "since": "2026-10-17",
+      "untilExclusive": "2026-10-24",
+      "timeZone": "UTC",
+      "todayPartial": true
+    },
+    "requests": 370694,
+    "pageViews": 150603,
+    "includesBots": true,
+    "uniqueVisitors": false,
+    "days": [
+      {
+        "date": "2026-10-17",
+        "requests": 85504,
+        "pageViews": 22538
+      },
+      {
+        "date": "2026-10-18",
+        "requests": 74680,
+        "pageViews": 22363
+      },
+      {
+        "date": "2026-10-19",
+        "requests": 52670,
+        "pageViews": 22488
+      },
+      {
+        "date": "2026-10-20",
+        "requests": 44052,
+        "pageViews": 22393
+      },
+      {
+        "date": "2026-10-21",
+        "requests": 45961,
+        "pageViews": 22214
+      },
+      {
+        "date": "2026-10-22",
+        "requests": 37878,
+        "pageViews": 22038
+      },
+      {
+        "date": "2026-10-23",
+        "requests": 29949,
+        "pageViews": 16569
+      }
+    ]
+  },
+  "oldDisplayed": {
+    "requests": 273731,
+    "pageViews": 87324,
+    "snapshotDate": "2026-10-13",
+    "implementation": "hardcoded HTML"
+  },
+  "publishedBrowserVerified": true,
+  "observedDisplay": "370,694 HTTP requests · 150,603 page views; October 17–23 UTC, today partial; verified October 23 at 1:53:22 PM America/Chicago",
+  "siteCachePurged": [
+    "/",
+    "/site-traffic.js",
+    "/data/site-traffic.json"
+  ],
+  "manualChecksPassed": [
+    "fresh totals",
+    "overdue snapshot hidden",
+    "invalid totals rejected",
+    "offline fetch reports unavailable"
+  ],
+  "automaticCollectionEnabled": false,
+  "remaining": "Durable server-side Zone Analytics Read credential and scheduled JSON publisher. Interactive Cloudflare GraphQL read succeeded; account token-management permission was unavailable. No new token created."
+}
