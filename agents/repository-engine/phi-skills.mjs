@@ -62,8 +62,9 @@ function skillPackets({task='',repository='',phase='plan'}={}){
  if(!Object.hasOwn(PHASE_COLORS,phase))throw new Error('Unknown color-agent phase');
  const q=String(task).slice(0,5000)+' '+String(repository).slice(0,200);
  return SKILLS.filter(x=>x.colors.some(c=>PHASE_COLORS[phase].includes(c))&&x.triggers.test(q))
-  .map(x=>({id:x.id,source:x.source,colors:x.colors.filter(c=>PHASE_COLORS[phase].includes(c)),instructions:x.instructions}))
-  .slice(0,12);
+  // The registry is a finite, reviewed local list. A positional cutoff silently
+  // dropped late matching memory and evidence boundaries from complex jobs.
+  .map(x=>({id:x.id,source:x.source,colors:x.colors.filter(c=>PHASE_COLORS[phase].includes(c)),instructions:x.instructions}));
 }
 export {skillPackets,SKILLS,PHASE_COLORS};
 
