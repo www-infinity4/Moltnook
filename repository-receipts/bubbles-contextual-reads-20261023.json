@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-23",
+  "repository": "www-infinity4/QuantaPhi",
+  "pr": 954,
+  "testedHead": "39d10dbd5803ce8bff76d23f6e8a3327b068b3be",
+  "merge": "8ccd85cec9be27c6d571fd6a519a610598465da5",
+  "localFocusedTestsPassed": 57,
+  "ci": [
+    {
+      "name": "publish-preview",
+      "conclusion": "skipped",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092374/job/120584861163"
+    },
+    {
+      "name": "Diagnostic verdict (device and authenticated job still manual)",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092322/job/120584065863"
+    },
+    {
+      "name": "live-bubbles-chat",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092293/job/120584060011"
+    },
+    {
+      "name": "payout-receipts",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092663/job/120584000237"
+    },
+    {
+      "name": "tools",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092393/job/120583999726"
+    },
+    {
+      "name": "Live public Workers, owner boundary and optional AI reply",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092322/job/120583999613"
+    },
+    {
+      "name": "validate",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092382/job/120583999475"
+    },
+    {
+      "name": "Moltnook Red Blue Yellow Orange Green Pink Purple Black",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092322/job/120583999414"
+    },
+    {
+      "name": "search-and-wallet",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092447/job/120583999365"
+    },
+    {
+      "name": "Android voice, screen, recording and speech safeguards",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092322/job/120583999352"
+    },
+    {
+      "name": "android",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092374/job/120583999350"
+    },
+    {
+      "name": "Bubbles to authenticated Brain, queue and receipt contracts",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092322/job/120583999177"
+    },
+    {
+      "name": "deploy",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092349/job/120583999061"
+    },
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092390/job/120583998917"
+    },
+    {
+      "name": "source-and-mini-apps",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003092293/job/120583998363"
+    },
+    {
+      "name": "validate",
+      "conclusion": "success",
+      "url": "https://github.com/www-infinity4/QuantaPhi/actions/runs/40003086540/job/120583980245"
+    }
+  ],
+  "implemented": [
+    "QuantaPhi-origin public repository defaults for deictic reads",
+    "Single-character QuantaPhi name typo handling",
+    "Explicit repository and registered card precedence",
+    "Traffic source inspection uses actual index.html reader",
+    "Fabricated reader-call JSON rejected",
+    "12-second post-read findings deadline with truthful partial result"
+  ],
+  "productionBaseline": {
+    "syntheticPrompt": "Read the repository for this site.",
+    "observedOutput": "Generic no-verified-edit guidance rather than repository findings",
+    "note": "No owner/private conversation was used"
+  },
+  "actionsRelease": {
+    "runId": 40003413552,
+    "status": "failed",
+    "reason": "Configured GitHub Actions Cloudflare deployment credential unavailable",
+    "deploymentStep": "skipped"
+  },
+  "connectedCloudflare": {
+    "stagedVersion": "f635a202-ad43-4acd-a639-24fe9db98741",
+    "modulesPinnedAndVerified": 13,
+    "versionReadbackVerified": true,
+    "bindingsPreserved": [
+      "AI",
+      "BRAIN",
+      "NEWS",
+      "ORACLE",
+      "SEARCH"
+    ],
+    "previewChecks": [
+      {
+        "url": "https://qa954-bubbles-tools.marvaseater.workers.dev/health",
+        "httpStatus": 404,
+        "error": "1042"
+      },
+      {
+        "url": "https://f635a202-bubbles-tools.marvaseater.workers.dev/health",
+        "httpStatus": 404,
+        "error": "1042"
+      }
+    ],
+    "stagedBehaviorVerified": false,
+    "productionDeploymentUnchanged": "21b4af3b-c76e-4a03-92df-bcc9e3308f21",
+    "productionVersionUnchanged": "fdff4dda-26db-45b8-8bf1-4bfc39092737"
+  },
+  "productionReleased": false,
+  "trafficCountsVerified": false,
+  "trafficCounterFixed": false,
+  "physicalAndroidVerified": false,
+  "remaining": [
+    "Resolve authorized preview access and run hosted synthetic read checks",
+    "Complete existing release confirmation and production receipt checks",
+    "Investigate actual live traffic-data source, freshness and counter behavior through authenticated adapters"
+  ]
+}
