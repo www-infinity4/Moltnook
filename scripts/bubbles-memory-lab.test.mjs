@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validateSource,verifyGeneratedMemoryEngine} from './bubbles-memory-lab.mjs';
+import {validateSource,verifyGeneratedMemoryEngine,reviewSourceDocument} from './bubbles-memory-lab.mjs';
 test('memory lab is fixed static source and permits only its own module import',()=>{
  const app="import {rankMemories} from './context-engine.mjs'; document.addEventListener('click',()=>rankMemories([],''));";
  assert.equal(validateSource('app.mjs',app),app);
@@ -37,4 +37,17 @@ test('actual query fixtures gate the generated engine, including timeout behavio
  assert.throws(()=>verifyGeneratedMemoryEngine(fake),/generated_engine_/);
  const runaway="export function rankMemories(notes,query,aliases){while(true){} return []}";
  assert.throws(()=>verifyGeneratedMemoryEngine(runaway));
+});
+
+test('CSS review excerpts end at complete top-level rules, including nested media and quoted braces',()=>{
+ const first='body { content: "}"; color: red; }';
+ const nested='@media (width < 700px) { main { display:block; } }';
+ const long=first+nested+'\n/* {comment} */\nsection {'+'padding:1px;'.repeat(150)+'}';
+ const result=reviewSourceDocument('styles.css',long);
+ assert.equal(result.fullReview,false);
+ assert.equal(result.reviewSource,first+nested);
+ assert.ok(result.reviewSource.length<=1150);
+ assert.throws(()=>reviewSourceDocument('styles.css','body {'+'padding:1px;'.repeat(150)+'}'),/css_review_unit_exceeds_budget/);
+ const short='body{color:red}';
+ assert.deepEqual(reviewSourceDocument('styles.css',short),{fullReview:true,reviewSource:short});
 });
