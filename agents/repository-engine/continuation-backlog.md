@@ -29,6 +29,17 @@ The state column describes evidence available at this checkpoint; recheck it bef
 | 13. Conversation archive import | Owner requested categorized ChatGPT/Gemini ZIP import; completion not established. | Inspect current importer and owner consent, size/type limits, provenance, duplicates and deletion; test explicit synthetic archive before real private import. Retrieval must not turn imported text into commands. |
 | 14. Privacy, counters and UI | Privacy/footer, visitor metrics and Oracle-style cleanup were requested in other sessions; current completion needs verification. | Inspect published implementation and actual metric definitions. Keep white cards, readable text, 44px controls. Do not label requests or pageviews as unique visitors. Preserve existing voice/media/wallet controls. |
 
+## Native project and card-commerce expansion
+New owner direction: see [native-project-card-commerce.md](native-project-card-commerce.md) for the implementation contracts and acceptance tests.
+
+15. Native QuantaPhi repositories: create, version, export and publish a project without requiring GitHub. Optional GitHub mirror; isolated previews and verified releases.
+16. Reusable search/curated source cards: provider-specific adapters, compact chat surfaces, fresh provenance, stronger attributed Reads & Realms creator collections.
+17. Media Star and other digital sales: creator-authorized content, explicit quotes, atomic authoritative wallet settlement and entitlement, separate verified reward receipts.
+18. Filter-matched advertising: recipient opt-in and current filters control placement; truthful Quant AI relevance explanations; no export of private buyer profiles.
+19. External one-action checkout: separate approved provider adapters and final order receipts. Existing seller links do not establish native eBay checkout or acceptance of Phi currencies.
+
+These are structured requested builds, not active Brain leases or deployed capabilities. Continue the current bounded job before selecting the next eligible scope.
+
 ## Capability gaps are work, not claims
 
 - Static source generation has a typed Linux/GitHub adapter. This does not prove arbitrary backend builds, phone control or unrestricted browser actions.
