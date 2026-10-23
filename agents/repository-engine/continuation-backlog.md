@@ -32,7 +32,7 @@ The state column describes evidence available at this checkpoint; recheck it bef
 ## Native project and card-commerce expansion
 New owner direction: see [native-project-card-commerce.md](native-project-card-commerce.md) for the implementation contracts and acceptance tests.
 
-15. Native QuantaPhi repositories: create, version, export and publish a project without requiring GitHub. Optional GitHub mirror; isolated previews and verified releases.
+15. Native QuantaPhi repositories: private create/list, immutable revisions, historical reads and hash-verified export are source-merged in QuantaPhi PR #953 (32 local tests, seven CI checks). Runtime operations do not call GitHub. Live Worker/D1 acceptance, browser/Bubbles controls, isolated previews, publishing and release rollback remain unfinished. See repository-receipts/native-project-storage-20261023.json.
 16. Reusable search/curated source cards: provider-specific adapters, compact chat surfaces, fresh provenance, stronger attributed Reads & Realms creator collections.
 17. Media Star and other digital sales: creator-authorized content, explicit quotes, atomic authoritative wallet settlement and entitlement, separate verified reward receipts.
 18. Filter-matched advertising: recipient opt-in and current filters control placement; truthful Quant AI relevance explanations; no export of private buyer profiles.
