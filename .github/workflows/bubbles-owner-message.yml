@@ -458,7 +458,7 @@ jobs:
         if: always()
         with:
           name: bubbles-memory-lab
-          path: repository-receipts/bubbles-memory-lab.json
+          path: repository-receipts/bubbles-memory-lab*
           if-no-files-found: warn
           retention-days: 14
 

@@ -68,6 +68,26 @@ export function verifyGeneratedMemoryEngine(source){
  return {cases:5,passed:true};
 }
 
+
+// Choose a complete top-level CSS unit, not a prefix ending inside a rule.
+// This is only an excerpt boundary; full-source validation remains mandatory.
+export function reviewSourceDocument(path,content){
+ const fullReview=content.length<=1350;
+ if(fullReview||path!=='styles.css')return {fullReview,reviewSource:fullReview?content:content.slice(0,1150)};
+ let depth=0,last=0,quote='',comment=false;
+ for(let i=0;i<Math.min(content.length,1150);i++){
+  const c=content[i],next=content[i+1];
+  if(comment){if(c==='*'&&next==='/'){comment=false;i++;}continue;}
+  if(quote){if(c==='\\'){i++;continue;}if(c===quote)quote='';continue;}
+  if(c==='/'&&next==='*'){comment=true;i++;continue;}
+  if(c==='"'||c==="'"){quote=c;continue;}
+  if(c==='{')depth++;
+  if(c==='}'&&--depth===0)last=i+1;
+ }
+ if(!last)throw Error('css_review_unit_exceeds_budget');
+ return {fullReview:false,reviewSource:content.slice(0,last)};
+}
+
 async function signed(body){
  const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);u.searchParams.set('audience','bubbles-owner-message-bridge');
  const id=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
@@ -128,11 +148,13 @@ export async function main(){
    const raw=await chat(i*2,prompt);
    let content;try{content=validateSource(path,parseDocument(raw));}catch(error){error.detail={file:path,outputPreview:String(raw).slice(0,1500)};throw error;}
    writeFileSync(join(dir,path),content);source[path]=content;
+   // Preserve exact non-sensitive generated source even if its review fails.
+   mkdirSync('repository-receipts/bubbles-memory-lab-source',{recursive:true});
+   writeFileSync(join('repository-receipts/bubbles-memory-lab-source',path),content);
    // Bubbles' server prompt length is bounded; a long source can only be
    // sample-reviewed by the model. Full content must pass local static and
    // behavioral checks before it is ever published.
-   const fullReview=content.length<=1350;
-   const reviewSource=fullReview?content:content.slice(0,1150);
+   const {fullReview,reviewSource}=reviewSourceDocument(path,content);
    // Source excerpt review must not reject solely because the excerpt omits
    // the remainder of the document. Whole-file syntax and behavior are gated
    // below; this model review checks only visible safety concerns.
