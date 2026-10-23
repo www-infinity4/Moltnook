@@ -7,7 +7,9 @@
     "merge": "2f049dc62440078fd9cfaaa22a386fcbba663e82",
     "ciChecksPassed": 13,
     "localFocusedTestsPassed": 30,
-    "localReleaseTestsPassed": 140
+    "localReleaseTestsPassed": 140,
+    "pagesRun": "https://github.com/www-infinity4/QuantaPhi/actions/runs/39960836505",
+    "pagesConclusion": "success"
   },
   "worker": {
     "status": "staged_zero_traffic",
@@ -50,5 +52,13 @@
     "Issue 819: physical active owner consumer still requires fresh readiness and page action evidence",
     "RecordB issue 2: recording persistence, continuous voice and multi-device private media sync need physical acceptance",
     "Memory Lab previous run 39837100478 failed before repository creation at source-generation turn 4; no published lab claimed"
-  ]
+  ],
+  "ownerConsumer": {
+    "run": "https://github.com/www-infinity4/Moltnook/actions/runs/39961057186",
+    "consentApproved": true,
+    "state": "stale",
+    "ageSeconds": 38274,
+    "messageSubmitted": false,
+    "privateReplyExposed": false
+  }
 }
