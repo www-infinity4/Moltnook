@@ -9,6 +9,38 @@ const EXPLICIT_LABEL=/\b(?:rename|relabel|change (?:the )?(?:label|wording|text)
 const EXPLICIT_URL=/\b(?:change (?:the )?(?:destination|url|link)|point (?:it|the link) to|link to https?:\/\/|redirect to https?:\/\/)\b/i;
 const EXPLICIT_DEPLOY=/\b(?:deploy|redeploy|publish|production release|migrate database|apply migration)\b/i;
 const trim=s=>String(s||'').slice(0,280);
+// A plan that invents src/foo.mjs when the checkout has foo.mjs must be
+// reconsidered before Green creates an unused parallel implementation.
+export function shadowSourcePlanFeedback({plan,sourceTree=[],task=''}={}){
+ if(/\b(?:move|migrate|relocate|duplicate|copy)\b/i.test(task))return {retry:false,categories:[]};
+ const known=new Set(sourceTree),conflicts=[];
+ for(const proposed of Array.isArray(plan?.files)?plan.files:[]){
+  if(typeof proposed!=='string'||known.has(proposed)||!proposed.includes('/')||! /\.(?:mjs|cjs|js|tsx|ts|jsx)$/.test(proposed))continue;
+  const name=proposed.split('/').at(-1);
+  if(/^(?:index|main|app|worker|config)\.|\.(?:test|spec)\./.test(name))continue;
+  const matches=sourceTree.filter(p=>typeof p==='string'&&p.split('/').at(-1)===name);
+  if(matches.length===1)conflicts.push({proposed,existing:matches[0]});
+ }
+ return {retry:conflicts.length>0,categories:conflicts.length?['shadow_source_path']:[],conflicts,
+  facts:conflicts.map(x=>'The pinned checkout contains '+x.existing+'; '+x.proposed+' does not exist.'),
+  instruction:'Return a fresh complete plan grounded in the existing application. Inspect and select the actual existing renderer and entrypoint paths before adding a parallel same-name source file. Include every existing integration path required to make the requested behavior visible. A new data file or unused test fixture alone is not a working feature. Do not rewrite paths automatically, expand repository permissions or discard genuine blockers.'};
+}
+
+// Preserve complete, explicitly named owner briefing documents as pinned
+// evidence instead of silently reducing a long work order to a few snippets.
+export async function collectPinnedTaskBriefs({task='',sourceTree=[],baseSha,read}={}){
+ if(!/^[a-f0-9]{40}$/.test(baseSha||'')||typeof read!=='function')throw TypeError('pinned_brief_reader_required');
+ const paths=[...new Set(String(task).match(/\b(?:docs|work-tickets)\/[A-Za-z0-9_./-]+\.md\b/g)||[])].slice(0,2);
+ const documents=[];let budget=24000;
+ for(const path of paths){
+  if(path.split('/').some(p=>p==='..'||/^(?:secrets?|credentials?)$/i.test(p))||!sourceTree.includes(path))continue;
+  const text=await read(path);
+  if(typeof text!=='string')continue;
+  if(text.length>budget){documents.push({path,sourceCommit:baseSha,status:'brief_exceeds_context_budget',totalChars:text.length,truncated:false});continue;}
+  documents.push({path,sourceCommit:baseSha,status:'complete_pinned_brief',text,truncated:false});budget-=text.length;
+ }
+ return {documents,scope:'read_only_assigned_repository',permissionsExpanded:false};
+}
 // A content-only job still needs a repository destination. Inspection paths
 // alone are not a delivery contract; ask Blue once, never grant Green a path.
 export function deliveryPlanFeedback({plan,writeScope}={}){

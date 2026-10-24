@@ -1,5 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {shadowSourcePlanFeedback,collectPinnedTaskBriefs} from './evidence-replan.mjs';
+test('reader replans a shadow src path before building an unconnected card catalog',()=>{
+ const plan={files:['src/source-quick-cards.mjs','test/new.test.mjs'],blockers:[]};
+ const sourceTree=['source-quick-cards.mjs','quanta-card-experience.mjs'];
+ const r=shadowSourcePlanFeedback({plan,sourceTree,task:'Build Xavior and Bridge cards'});
+ assert.deepEqual(r.conflicts,[{proposed:'src/source-quick-cards.mjs',existing:'source-quick-cards.mjs'}]);
+ assert.match(r.instruction,/renderer/);
+ assert.equal(plan.files[0],'src/source-quick-cards.mjs','feedback never silently rewrites a plan');
+ assert.equal(shadowSourcePlanFeedback({plan,sourceTree:[],task:'Build cards'}).retry,false);
+ assert.equal(shadowSourcePlanFeedback({plan,sourceTree,task:'Migrate the source to src'}).retry,false);
+ assert.equal(shadowSourcePlanFeedback({plan:{files:['src/index.html','new-feature.mjs']},sourceTree:['index.html']}).retry,false);
+});
+test('complete explicitly named long owner brief reaches the planner as pinned read-only evidence',async()=>{
+ const text='Owner requirement.\n'.repeat(700)+'FINAL REQUIREMENT';
+ const sourceTree=['docs/owner-brief.md'];const baseSha='a'.repeat(40);
+ const r=await collectPinnedTaskBriefs({task:'Read docs/owner-brief.md',sourceTree,baseSha,read:async()=>text});
+ assert.equal(r.documents[0].text,text);assert.equal(r.documents[0].sourceCommit,baseSha);
+ assert.equal(r.permissionsExpanded,false);assert.equal(r.documents[0].truncated,false);
+ const paths=[];
+ await collectPinnedTaskBriefs({task:'docs/../secret.md docs/missing.md',sourceTree,baseSha,read:async p=>paths.push(p)});
+ assert.deepEqual(paths,[]);
+ const large=await collectPinnedTaskBriefs({task:'Read docs/owner-brief.md',sourceTree,baseSha,read:async()=> 'x'.repeat(24001)});
+ assert.equal(large.documents[0].status,'brief_exceeds_context_budget');assert.equal(large.documents[0].text,undefined);
+});
 test('observed anonymous public reads contradict an invented web token blocker',()=>{
  const plan={blockers:[{code:'owner_input_required',reason:'Missing WEB_ACCESS_TOKEN needed to fetch public Quick Card pages'}]};
  const liveBrowser={targets:[{url:'https://quantaphi.org/',views:[{passed:true,httpStatus:200}]}]};
