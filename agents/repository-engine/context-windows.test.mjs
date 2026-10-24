@@ -1,5 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+test('plain named function gets a contiguous definition rather than early call sites',()=>{
+ const body='async function submitRepositoryWork(request) {\n'+Array.from({length:32},(_,i)=>' const step'+i+' = "verified source";').join('\n')+'\n return "saved";\n}\n';
+ const full=('submitRepositoryWork("earlier caller");\n').repeat(2000)+body+'// trailing context\n'.repeat(1000);
+ const packet=sourceWindows({'bubbles-ai.js':full},{task:'Repair submitRepositoryWork ticket delivery'});
+ const view=packet.source['bubbles-ai.js'];
+ assert.equal(view.windows.length,1);
+ assert.ok(view.windows[0].text.includes(body));
+ assert.ok(view.windows[0].text.length<=7000);
+ assert.equal(checkVisibleEdits(packet,[{path:'bubbles-ai.js',before:body,after:body.replace('saved','verified')}]),true);
+ assert.equal(checkVisibleEdits(packet,[{path:'bubbles-ai.js',before:'unshown fabricated function',after:'x'}]),false);
+});
 import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
 import {readFileSync} from 'node:fs';
 test('actual runner publication code is visible when the job asks for final git push context',()=>{
