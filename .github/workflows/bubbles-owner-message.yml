@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
+      - run: node --test scripts/bubbles-gpt-card-owner-inline.test.mjs
       - run: node --test scripts/bubbles-memory-lab.test.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
       - run: node --check scripts/bubbles-oracle-refinement.mjs
