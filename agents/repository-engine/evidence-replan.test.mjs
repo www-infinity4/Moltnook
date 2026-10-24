@@ -235,3 +235,31 @@ test('reader must obtain exact before literal from pinned own source, not make o
  assert.equal(evidenceReplanFeedback({...base,writeScope:{...base.writeScope,reportedPushPermission:false}}).retry,false,'permission remains necessary');
  assert.equal(evidenceReplanFeedback({...base,plan:{blockers:[b('owner_input_required','Please provide exact before snippet from .env for repair')]},sourceTree:['.env']}).retry,false,'secrets excluded');
 });
+
+test('public Quick Card source work is not blocked solely by publisher API credentials',()=>{
+ const plan={blockers:[b('owner_input_required','API credentials or confirmed public-access endpoints for TradingView, Zillow, SEC EDGAR, F-Droid and Reddit are not present')]};
+ const r=evidenceReplanFeedback({plan,task:'Build public source Quick Cards and test original provider links'});
+ assert.equal(r.retry,true);
+ assert.deepEqual(r.categories,['public_quick_card_source']);
+ assert.match(r.facts.join(' '),/separately blocked integration/);
+ assert.equal(plan.blockers.length,1);
+ assert.equal(evidenceReplanFeedback({plan,task:'Integrate a licensed authenticated exchange trading API'}).retry,false);
+});
+test('claimed Brain lease beats unrelated ChatGPT Cloudflare plugin scope complaint for source-only cards',()=>{
+ const plan={blockers:[b('owner_input_required','Cloudflare ChatGPT connector lacks Workers D1 DO OAuth scopes; need owner authorization')]};
+ const owned={brain:{leaseClaimed:true,verifiedCalls:['quant-audit','capability','claim']}};
+ const task='Build Quick Cards in QuantaPhi source';
+ const r=evidenceReplanFeedback({plan,task,authenticatedAdapters:owned});
+ assert.deepEqual(r.categories,['independent_brain_credential']);
+ assert.match(r.facts.join(' '),/deployment credentials/);
+ assert.ok(!evidenceReplanFeedback({plan,task,authenticatedAdapters:{}}).categories.includes('independent_brain_credential'),'No signed claim means that particular evidence cannot be asserted');
+});
+test('existing checked-out card source redirects missing repository map demand to public PR evidence',()=>{
+ const plan={blockers:[b('owner_input_required','Missing repository map and CI failure logs for merged PR #974 and draft PR #975')]};
+ const scoped={repository:'www-infinity4/QuantaPhi',reportedPushPermission:true};
+ const task='Reconcile the existing source Quick Cards #974 and #975, build more cards';
+ const r=evidenceReplanFeedback({plan,task,sourceTree:['source-quick-cards.mjs'],writeScope:scoped});
+ assert.deepEqual(r.categories,['quick_card_repository_evidence']);
+ assert.match(r.facts.join(' '),/Do not claim existing PR status/);
+ assert.equal(evidenceReplanFeedback({plan,task,sourceTree:[],writeScope:scoped}).retry,false);
+});
