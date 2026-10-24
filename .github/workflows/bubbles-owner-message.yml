@@ -577,3 +577,63 @@ jobs:
           console.log('GPT_CARDS_BRAIN_INTAKE '+JSON.stringify({httpStatus:res.status,ticketConfirmed:verified,ticketId:verified?receipt.ticketId:null,status:receipt.status||'unavailable',execution:receipt.execution?.status||'unverified',deduplicated:receipt.deduplicated===true,completed:false,error:verified?null:String(receipt.error||'invalid_receipt').slice(0,100)}));
           if (!verified) throw Error('gpt_cards_brain_intake_not_confirmed');
           NODE
+
+
+  cloudflare_oauth_owner_handoff_20261023:
+    # Existing five-day owner grant and GitHub OIDC must both be valid.
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles OAuth handoff 20261023')
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Send bounded Cloudflare OAuth setup instructions to signed Bubbles and Brain
+        run: |
+          node --input-type=module <<'NODE'
+          const url=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          url.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(url,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const runner='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          async function signed(body,timeoutMs=120000){
+            const response=await fetch(runner,{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(timeoutMs)});
+            const data=await response.json().catch(()=>({}));
+            if(!response.ok||data.ok!==true||data.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)
+              throw Error('signed_'+body.operation+'_rejected_'+response.status+'_'+String(data.error||'no_verified_receipt').replace(/[^a-z0-9_]/gi,'').slice(0,72));
+            return data;
+          }
+          const consent=await signed({operation:'status'},15000);
+          console.log('BUBBLES_OAUTH_GRANT '+JSON.stringify({confirmed:true,consumer:consent.consumer?.state||'unavailable'}));
+          const message=[
+            'Bubbles: Your owner requests you take up Cloudflare OAuth registration now rather than leave another browser-polled message queued.',
+            'Inspect QuantaPhi issue #978, PR #977 and production workers/bubbles-connections.',
+            'Desired client: Bubbles AI - QuantaPhi; response code; grant authorization_code; client_secret_basic plus PKCE S256; redirect https://quantaphi.org/api/bubbles/connections/cloudflare/callback; client URL https://quantaphi.org.',
+            'Diagnose Cloudflare Continue form validation from actual accessible authenticated UI, not clipped screenshots or guesses. Public launch needs domain verification, logo, scoped consent and approval.',
+            'Use ONLY a verified owner-authorized admin/browser session, if available. Cloud browser is NOT automatically logged into the owner phone session. No authorization bypass, secret leakage or fake clicks.',
+            'If registration succeeds verify client ID, store secret only in protected Worker binding through approved channel, test callback and report receipts; otherwise identify exact blocker.',
+            'For building delegate to consent-gated Robot Brain and distinguish queued, started and completed.'
+          ].join(' ');
+          const answer=await signed({operation:'assist',turn:0,text:message});
+          const readback=await signed({operation:'result',turn:0},15000);
+          const state=readback.state||answer.state||'unknown';
+          console.log('BUBBLES_OAUTH_SERVER_RECEIPT '+JSON.stringify({state,hasReply:typeof readback.result?.output==='string'&&readback.result.output.length>0,receiptStatus:readback.result?.receipt?.status||'unavailable',clientRegistered:false}));
+          if(state!=='complete')throw Error('server_bubbles_did_not_acknowledge');
+          const request=[
+            'Owner authorizes Bubbles/Robot Brain to handle Cloudflare OAuth setup: reconcile QuantaPhi issue #978 and PR #977, avoid duplicate work and failing browser-polled queues.',
+            'Audit deployed connection Worker OAuth code, callback https://quantaphi.org/api/bubbles/connections/cloudflare/callback, client_secret_basic and PKCE, scope allowlist, user consent and existing bindings. Diagnose Continue form only using observed errors, never guesses.',
+            'Attempt OAuth client registration ONLY through an existing explicitly authorized Cloudflare administrator session or compatible OAuth Clients Write API credential. No ChatGPT connector scope bypass or impersonation.',
+            'If registered, record nonsecret client ID in private owner receipt, store secret in protected server bindings. Public release requires logo and quantaphi.org domain verification.',
+            'Fix or replace owner browser-polled queue pickup with a durable consent-checked signed route; do not call queued instructions executed.',
+            'Deliver reviewed code PR, tests, verified deployment and browser execution receipts; preserve wallet/history, owner controls and cross-user isolation. Report blockers precisely.'
+          ].join(' ');
+          if(request.length>1800)throw Error('owner_request_too_long');
+          const res=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await res.json().catch(()=>({}));
+          const accepted=res.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.repository==='www-infinity4/QuantaPhi'&&receipt.completed===false;
+          console.log('BUBBLES_OAUTH_BRAIN_INTAKE '+JSON.stringify({httpStatus:res.status,accepted,ticketId:accepted?receipt.ticketId:null,status:receipt.status||'unavailable',executionStatus:receipt.execution?.status||'unverified',completed:false,error:accepted?null:String(receipt.error||'intake_unverified').slice(0,100)}));
+          if(!accepted)throw Error('bubbles_brain_intake_not_verified');
+          NODE
