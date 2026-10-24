@@ -11,7 +11,7 @@ test('plain named function gets a contiguous definition rather than early call s
  assert.equal(checkVisibleEdits(packet,[{path:'bubbles-ai.js',before:body,after:body.replace('saved','verified')}]),true);
  assert.equal(checkVisibleEdits(packet,[{path:'bubbles-ai.js',before:'unshown fabricated function',after:'x'}]),false);
 });
-import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,rejectedEditFacts,sha256,patchDigests,boundedPatched} from './context-windows.mjs';
 import {readFileSync} from 'node:fs';
 test('actual runner publication code is visible when the job asks for final git push context',()=>{
  const full=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
@@ -160,4 +160,28 @@ test('Green edit wrapper recovery requires exact visible source and keeps all ga
  const objectFeedback=visibleEditFeedback(pkt,[{path:'bubbles-ai.js',before:{value:literal},after:'ok'}]);
  assert.match(objectFeedback,/plain JSON string/);
  assert.ok(!objectFeedback.includes(literal));
+});
+
+test('Green feedback identifies only the failing edit and supplies source-existence facts without revealing source',()=>{
+ const hidden='PINNED_PRIVATE_SOURCE_SENTINEL';
+ const old='const target = "old";';
+ const full=old+'\\n'+('other unrelated lines\\n'.repeat(900))+hidden;
+ const original={'existing.js':full,'new.mjs':null};
+ const packet=sourceWindows(original,{task:'target'});
+ const validNew={path:'new.mjs',before:null,after:'export const ok=true;'};
+ const absent={path:'existing.js',before:'invented source not in file',after:'replacement'};
+ assert.equal(checkVisibleEdits(packet,[absent,validNew]),false);
+ const feedback=visibleEditFeedback(packet,[absent,validNew]);
+ assert.match(feedback,/Edit 0: existing file before/);
+ assert.doesNotMatch(feedback,/Edit 1:/);
+ const facts=rejectedEditFacts(original,packet,[absent,validNew]);
+ assert.equal(facts[0].status,'literal_absent_from_pinned_source');
+ assert.equal(facts[1].status,'valid_new_file_contract');
+ assert.equal(facts[0].exactInPinnedSource,false);
+ assert.doesNotMatch(JSON.stringify(facts),/PINNED_PRIVATE_SOURCE_SENTINEL|invented source/);
+ const exactUnshown={...absent,before:hidden};
+ assert.equal(rejectedEditFacts(original,packet,[exactUnshown])[0].status,'literal_outside_current_window');
+ assert.equal(checkVisibleEdits(packet,[exactUnshown]),false);
+ assert.equal(checkVisibleEdits(packet,[{...absent,before:old},validNew]),true);
+ assert.equal(rejectedEditFacts(original,packet,[{...absent,before:old}])[0].status,'exact_literal_visible');
 });

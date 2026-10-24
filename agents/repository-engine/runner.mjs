@@ -7,7 +7,7 @@ import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {applyEdits,safePath,inside} from './patch.mjs';
-import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,patchDigests,boundedPatched} from './context-windows.mjs';
+import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditFeedback,rejectedEditFacts,patchDigests,boundedPatched} from './context-windows.mjs';
 import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-adapter.mjs';
 import {validateOracleCssEdit} from './oracle-style-contract.mjs';
 import {captureSourceViews} from './preview.mjs';
@@ -306,6 +306,9 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     // do not modify the allowed file list or weaken review/push gates.
     const recovery=greenReplanDecision(feedback,windowTask);
     if(useWindowV2&&recovery.eligible){
+     // Per-edit facts contain no code text, unseen source, or new authority.
+     // The next GPT attempt learns whether a literal exists in the pinned SHA.
+     feedback.editFacts=rejectedEditFacts(original,windowEvidence,rejectedSourceEdits);
      const shifted=recalculateBounds(original,windowEvidence,{
       attempt:Math.min(2,feedback.attempt),baseline:initialWindowEvidence,
       expansionRatio:1.5,task:recovery.task,plan,rejectedEdits:rejectedSourceEdits

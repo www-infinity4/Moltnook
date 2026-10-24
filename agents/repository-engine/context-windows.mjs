@@ -140,12 +140,38 @@ export function visibleEditFeedback(packet,edits){
   const item=packet?.source?.[e?.path];
   if(!item)return 'Edit '+i+': path is not in the reader plan.';
   if(typeof e.after!=='string')return 'Edit '+i+': after must be full string content.';
-  if(item.kind==='new')return 'Edit '+i+': new file requires before:null (JSON null, not empty string or a source object), full after content, maximum 15000 characters; received before type '+(e.before===null?'null':typeof e.before)+', after length '+e.after.length+'.';
+  if(item.kind==='new')return e.before===null&&e.after.length<=15000?null:
+   'Edit '+i+': new file requires before:null (JSON null, not empty string or a source object), full after content, maximum 15000 characters; received before type '+(e.before===null?'null':typeof e.before)+', after length '+e.after.length+'.';
   if(typeof e.before!=='string')return 'Edit '+i+': existing file before must be a plain JSON string (not a window object or regex) copied from a shown source window; received before type '+typeof e.before+'.';
   if(!e.before)return 'Edit '+i+': existing file before is an empty string. Copy a nonempty exact literal from a shown source window.';
   if(!item.windows?.some(w=>w.text.includes(e.before)))return 'Edit '+i+': existing file before is a string, but it does not match any shown source window. Select exact visible characters; do not infer unshown content.';
-  return 'Edit '+i+': edit fields are invalid despite a visible before literal.';
- }).slice(0,12).join(' ');
+  // Do not tell Green that a valid sibling edit is broken. Only the actual
+  // rejection belongs in retry feedback.
+  return null;
+ }).slice(0,12).filter(Boolean).join(' ') || 'All individual edit fields passed; check the complete proposal.';
+}
+
+/** Facts about rejected literals, never the full hidden source or edit text.
+ * This helps Green distinguish an unshown exact match from a hallucinated
+ * source literal without relaxing immutable-window approval.
+ */
+export function rejectedEditFacts(original,packet,edits){
+ if(!Array.isArray(edits))return [];
+ return edits.slice(0,12).map((edit,index)=>{
+  const item=packet?.source?.[edit?.path];
+  if(!item)return {index,status:'path_not_in_signed_plan'};
+  if(typeof edit.after!=='string')return {index,status:'after_must_be_string'};
+  if(item.kind==='new')return {index,status:edit.before===null&&edit.after.length<=15000?
+   'valid_new_file_contract':'invalid_new_file_contract',requiredBefore:'json_null',maxAfterChars:15000};
+  if(typeof edit.before!=='string'||!edit.before)return {index,status:'before_must_be_nonempty_literal'};
+  const full=original?.[edit.path];
+  if(typeof full!=='string')return {index,status:'pinned_source_unavailable'};
+  const shown=item.windows?.some(w=>w.text.includes(edit.before))===true;
+  if(shown)return {index,status:'exact_literal_visible'};
+  const at=full.indexOf(edit.before);
+  return {index,status:at<0?'literal_absent_from_pinned_source':'literal_outside_current_window',
+   exactInPinnedSource:at>=0,uniqueInPinnedSource:at>=0&&full.indexOf(edit.before,at+1)<0};
+ });
 }
 export function patchDigests(patched){
  const hashes={};
