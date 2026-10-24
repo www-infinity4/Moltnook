@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T19:34:35.018Z",
+  "generatedAt": "2026-10-24T21:52:27.608Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,16 +18,124 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-commit-a7cd6761cc57e9befec77a40f252e1ba3c052de6",
+      "id": "Moltnook-commit-026d9f4ad2043af6fdcd779738c9c656d3b01485",
       "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T21:42:43Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/026d9f4ad2043af6fdcd779738c9c656d3b01485",
+      "title": "Repair Bubbles image context and action 20261024: signed owner handoff",
+      "message": "I found a commit titled “Repair Bubbles image context and action 20261024: signed owner handoff”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-1393054b9d58101b9bf5496ad6709713578a69b7",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T21:34:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1393054b9d58101b9bf5496ad6709713578a69b7",
+      "title": "Build 17 source cards and restore discovery of original QuantaPhi tools (#1029)",
+      "message": "I found a commit titled “Build 17 source cards and restore discovery of original QuantaPhi tools (#1029)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-2eaf31dee598d6ea5c3f5b3491ffdacf33044c0c",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T21:10:05Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2eaf31dee598d6ea5c3f5b3491ffdacf33044c0c",
+      "title": "Make Bubbles discover project sources before asking; block raw action replies (#1028)",
+      "message": "I found a commit titled “Make Bubbles discover project sources before asking; block raw action replies (#1028)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1027",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T21:05:29Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1027",
+      "title": "ShopPhi Create Post: connect real authenticated publisher and verify public card visibility",
+      "message": "I found a issue titled “ShopPhi Create Post: connect real authenticated publisher and verify public card visibility”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1026",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T20:59:27Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1026",
+      "title": "[Agent Job] Oracle reuse: card → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "claude-flow-commit-faf60ae3987b8de7106acd22039b80e8afbc279d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T20:59:25Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/faf60ae3987b8de7106acd22039b80e8afbc279d",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-d42c5def8b08721d2208a176602aa8f6e0b9a09b",
+      "agent": "purple-pearl",
       "to": "greenbeans",
       "project": "QuantaPhi",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-10-24T19:19:30Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a7cd6761cc57e9befec77a40f252e1ba3c052de6",
-      "title": "Repair Bubbles navigation contrast and preserve detailed premium card build orders",
-      "message": "I found a commit titled “Repair Bubbles navigation contrast and preserve detailed premium card build orders”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+      "when": "2026-10-24T20:41:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d42c5def8b08721d2208a176602aa8f6e0b9a09b",
+      "title": "Refresh Shop Phi Create Post assets to bypass old mobile cache",
+      "message": "I found a commit titled “Refresh Shop Phi Create Post assets to bypass old mobile cache”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-e2c5da10b710fa3375697a86c83482c95c59d883",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T20:41:10Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e2c5da10b710fa3375697a86c83482c95c59d883",
+      "title": "Clean up search and card navigation; rotate less-seen cards first (#1024)",
+      "message": "I found a commit titled “Clean up search and card navigation; rotate less-seen cards first (#1024)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-781e672be122b8c966ed27b0caa4285e53e680e1",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T20:39:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/781e672be122b8c966ed27b0caa4285e53e680e1",
+      "title": "Fix Public and For You card rotation across ready Oracle widgets",
+      "message": "I found a commit titled “Fix Public and For You card rotation across ready Oracle widgets”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-04336de60ca5519ff8244177748784ef41339c27",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T20:37:54Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/04336de60ca5519ff8244177748784ef41339c27",
+      "title": "Fix Shop Phi Create Post state, verified catalog checks and card controls",
+      "message": "I found a commit titled “Fix Shop Phi Create Post state, verified catalog checks and card controls”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-issue-1018",
@@ -36,10 +144,46 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-10-24T19:14:32Z",
+      "when": "2026-10-24T19:54:59Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1018",
       "title": "Bubbles: make X reader one-tap Sign in with X (PKCE), no developer-form loop",
       "message": "I found a issue titled “Bubbles: make X reader one-tap Sign in with X (PKCE), no developer-form loop”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "QuantaPhi-issue-1020",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Observed closed",
+      "when": "2026-10-24T19:54:43Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1020",
+      "title": "Bubbles public X inbox — @YahooPingcwlz",
+      "message": "I found a issue titled “Bubbles public X inbox — @YahooPingcwlz”. Determine the real task and identify the tool or specialist it needs before changing anything. Its closed state is recorded, but successful production behavior is not inferred."
+    },
+    {
+      "id": "QuantaPhi-commit-ae08da0e5c35a79b1883d48f984036d9d0d90487",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T19:53:24Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ae08da0e5c35a79b1883d48f984036d9d0d90487",
+      "title": "Use Cloudflare native hourly public X browser and durable Bubbles inbox",
+      "message": "I found a commit titled “Use Cloudflare native hourly public X browser and durable Bubbles inbox”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-b0e483ca66659b1e1b90d46e5f46f908d65356c6",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T19:34:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/b0e483ca66659b1e1b90d46e5f46f908d65356c6",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1017",
@@ -90,18 +234,6 @@
       "message": "I found a issue titled “Bubbles priority: upgrade VAMWorld + PCGS/NGC and add verified Heritage coin lots”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-484ba1964b258fab3034d5e88cff4411d8f3facb",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T18:15:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/484ba1964b258fab3034d5e88cff4411d8f3facb",
-      "title": "Add Quick Card sharing and direct X setup page",
-      "message": "I found a commit titled “Add Quick Card sharing and direct X setup page”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "claude-flow-commit-56aa8d86f536678c5363978da6ff910428ad4577",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -124,42 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1011",
       "title": "[Agent Job] Oracle reuse: card → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-2dfbb8d73c8c61876d7a7124d299c02e54c78fb6",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T18:03:43Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2dfbb8d73c8c61876d7a7124d299c02e54c78fb6",
-      "title": "Polish Quick Card creator and verify production assets",
-      "message": "I found a commit titled “Polish Quick Card creator and verify production assets”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-80a7f808d30bf30c83008980a8168d912fe3e1c2",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T17:58:13Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/80a7f808d30bf30c83008980a8168d912fe3e1c2",
-      "title": "Publish shareable QuantaPhi Quick Cards with moderated Oracle feed",
-      "message": "I found a commit titled “Publish shareable QuantaPhi Quick Cards with moderated Oracle feed”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-139babd4cf686b1d951ab90807e432e302f1d0aa",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T17:39:35Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/139babd4cf686b1d951ab90807e432e302f1d0aa",
-      "title": "Restore FOX One ad and functional Star Collect Share Build Quick Search card actions",
-      "message": "I found a commit titled “Restore FOX One ad and functional Star Collect Share Build Quick Search card actions”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Moltnook-commit-7a97192fa51d36b4844d89d26daa91fc65307683",
@@ -234,18 +330,6 @@
       "message": "I found a commit titled “Run signed Bubbles Fred cards with verified assets 20261024 (#211)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-5b97af71e0da23c5456e40ff36027ad01215a08b",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T08:58:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5b97af71e0da23c5456e40ff36027ad01215a08b",
-      "title": "Resolve Fred card asset and readiness questions from actual source evidence (#1006)",
-      "message": "I found a commit titled “Resolve Fred card asset and readiness questions from actual source evidence (#1006)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Moltnook-commit-8e1929d9e2ea2a05835de4329667a499e1f106cf",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -258,42 +342,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-b82e775885ea54da96983ee1304aaa3625501a76",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T08:54:18Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b82e775885ea54da96983ee1304aaa3625501a76",
-      "title": "Run signed Bubbles Fred card wiring repair 20261024 (#210)",
-      "message": "I found a commit titled “Run signed Bubbles Fred card wiring repair 20261024 (#210)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-b04fc0632d62dc6d47d8617d86692bf8746f6a30",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T08:51:10Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b04fc0632d62dc6d47d8617d86692bf8746f6a30",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-98450053eb03b4a43df218ea42a00aefabde0292",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T08:42:28Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/98450053eb03b4a43df218ea42a00aefabde0292",
-      "title": "Preserve Bubbles quick-card platform work order and acceptance (#1005)",
-      "message": "I found a commit titled “Preserve Bubbles quick-card platform work order and acceptance (#1005)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "claude-flow-commit-cd77ee22c1651095d977e78199d8df7c245e6634",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -304,42 +352,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/cd77ee22c1651095d977e78199d8df7c245e6634",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-995",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T06:00:37Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/995",
-      "title": "[Agent Job] Oracle reuse: viewer → C13b0",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-993",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T05:39:16Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/993",
-      "title": "Bubbles owner direction: Digital Mall — beautiful real-product cards, Quant-led next item, staged store/brand/travel rollout",
-      "message": "I found a issue titled “Bubbles owner direction: Digital Mall — beautiful real-product cards, Quant-led next item, staged store/brand/travel rollout”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-989",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T04:31:36Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/989",
-      "title": "Bubbles follow-up: wallet-synced Following, real finance connectors, live Spaces, licensed radio/VAM images",
-      "message": "I found a issue titled “Bubbles follow-up: wallet-synced Following, real finance connectors, live Spaces, licensed radio/VAM images”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "claude-flow-commit-9db0407b8cad88250e55bc646a9f30d6e7c935b2",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-23T22:23:21Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/7322364bc48a0a2c6273ab867ca14f01377eb1a1",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-c664497216f5073284eb258cb249f12bd86aa754",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-23T18:30:14Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/c664497216f5073284eb258cb249f12bd86aa754",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
