@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T13:54:19.957Z",
+  "generatedAt": "2026-10-24T17:16:43.877Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-2dfab8753264fe2b23186f743d35996833eb706c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T14:40:01Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/2dfab8753264fe2b23186f743d35996833eb706c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-f40e0f258f8d652490f14fb202c62ab05b37d05a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T13:54:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f40e0f258f8d652490f14fb202c62ab05b37d05a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-f19b3a55a82ba4677a4bec6d964e584bbd436459",
       "agent": "greenbeans",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/749a3adede90ff6bf5e45ad4fc98e6569f4b49da",
       "title": "Repair pinned-source Green retry diagnostics",
       "message": "I found a commit titled “Repair pinned-source Green retry diagnostics”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "Moltnook-commit-5d516b946d087740b5f2c44f7074651d9f7160b4",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T08:43:31Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5d516b946d087740b5f2c44f7074651d9f7160b4",
-      "title": "Run signed Bubbles quick-card expansion 20261024 (#208)",
-      "message": "I found a commit titled “Run signed Bubbles quick-card expansion 20261024 (#208)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-98450053eb03b4a43df218ea42a00aefabde0292",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-23T13:36:57Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/63b5c15e09b822c8388266483c3bcb38683a4c7a",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-b4d13e5362b98395ba8df9ecde1ea85c38ac1efa",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-23T07:43:11Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b4d13e5362b98395ba8df9ecde1ea85c38ac1efa",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
