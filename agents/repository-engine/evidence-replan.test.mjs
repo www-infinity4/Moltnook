@@ -252,7 +252,7 @@ test('claimed Brain lease beats unrelated ChatGPT Cloudflare plugin scope compla
  const r=evidenceReplanFeedback({plan,task,authenticatedAdapters:owned});
  assert.deepEqual(r.categories,['independent_brain_credential']);
  assert.match(r.facts.join(' '),/deployment credentials/);
- assert.equal(evidenceReplanFeedback({plan,task,authenticatedAdapters:{}}).retry,false);
+ assert.ok(!evidenceReplanFeedback({plan,task,authenticatedAdapters:{}}).categories.includes('independent_brain_credential'),'No signed claim means that particular evidence cannot be asserted');
 });
 test('existing checked-out card source redirects missing repository map demand to public PR evidence',()=>{
  const plan={blockers:[b('owner_input_required','Missing repository map and CI failure logs for merged PR #974 and draft PR #975')]};
