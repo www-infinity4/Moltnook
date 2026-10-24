@@ -1,5 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+test('observed anonymous public reads contradict an invented web token blocker',()=>{
+ const plan={blockers:[{code:'owner_input_required',reason:'Missing WEB_ACCESS_TOKEN needed to fetch public Quick Card pages'}]};
+ const liveBrowser={targets:[{url:'https://quantaphi.org/',views:[{passed:true,httpStatus:200}]}]};
+ const r=evidenceReplanFeedback({plan,liveBrowser});
+ assert.deepEqual(r.categories,['verified_public_browser_access']);
+ assert.match(r.facts.join(' '),/remain unverified/);
+ assert.equal(plan.blockers.length,1);
+ assert.equal(evidenceReplanFeedback({plan,liveBrowser:{targets:[]}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan,liveBrowser:{targets:[{url:'https://quantaphi.org/',views:[{passed:false,httpStatus:403}]}]}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan:{blockers:[{code:'owner_input_required',reason:'Need browser administrator OAuth login to private account'}]},liveBrowser,task:'Deploy production'}).retry,false);
+});
 import {evidenceReplanFeedback,authPlanReconsideration,deliveryPlanFeedback} from './evidence-replan.mjs';
 test('content job receipt gets a reader destination replan before Green edits',()=>{
  const plan={summary:'Investigate Group Build, then create original scenario recommendations.',

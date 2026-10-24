@@ -20,7 +20,7 @@ export async function collectSourceEvidence({paths,task='',read,readWorkflow,max
   const pools=[candidates.filter(x=>/\.(?:mjs|cjs|jsx?|tsx?)$/i.test(x.path)&&!/(^|\/)(?:tests?|fixtures)\//.test(x.path)).slice(0,16),candidates.filter(x=>/\.(?:java|kt|kts|xml)$/i.test(x.path)).slice(0,16),candidates];
   const unique=new Map();for(const row of pools.flat())if(!unique.has(row.path))unique.set(row.path,row);
   candidates=[...unique.values()].slice(0,48);
- }else candidates=candidates.slice(0,9);
+ }else candidates=candidates.slice(0,48);
  const loaded=new Map();
  if(symbols.length){
   for(const candidate of candidates){
@@ -30,9 +30,17 @@ export async function collectSourceEvidence({paths,task='',read,readWorkflow,max
   }
   candidates.sort((a,b)=>b.score-a.score||a.path.localeCompare(b.path));
  }
- const selected=candidates.slice(0,9);
+ // Repeated CI/test filenames must not crowd the implementation out of the
+ // reader's small context. Keep supporting evidence, with bounded diversity.
+ const selected=[];let workflows=0,tests=0;
+ for(const row of candidates){
+  const workflow=WORKFLOW.test(row.path),test=/(?:^|\/)(?:tests?|fixtures)(?:\/|$)|\.(?:test|spec)\./i.test(row.path);
+  if(workflow&&workflows>=2||test&&tests>=2)continue;
+  selected.push(row);if(workflow)workflows++;if(test)tests++;
+  if(selected.length===9)break;
+ }
  const result={};let remaining=Math.min(20000,Math.max(1000,Number(maxChars)||16000));
- for(const {path:file} of selected){
+ for(const [index,{path:file}] of selected.entries()){
   if(remaining<500)break;
   let source;try{source=loaded.has(file)?loaded.get(file):WORKFLOW.test(file)?await readWorkflow(file):await read(file)}catch{continue}
   if(typeof source!=='string'||!source.trim())continue;
@@ -59,7 +67,9 @@ export async function collectSourceEvidence({paths,task='',read,readWorkflow,max
   }
   for(let i=0;i<Math.min(lines.length,3);i++)chosen.add(i);
   const snippets=[...chosen].map(i=>String(i+1)+': '+(SENSITIVE.test(lines[i])?'[credential-bearing line omitted]':lines[i].slice(0,500)));
-  const excerpt=snippets.join('\n').slice(0,Math.min(3200,remaining));
+  // Reserve context for later selected files rather than letting the first
+  // five long snippets consume the entire reader budget.
+  const excerpt=snippets.join('\n').slice(0,Math.min(3200,Math.floor(remaining/(selected.length-index))));
   if(excerpt){result[file]=excerpt;remaining-=excerpt.length}
  }
  return result;

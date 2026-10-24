@@ -48,6 +48,17 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
  for(const blocker of blockers){
   if(!blocker||typeof blocker.reason!=='string')continue;
   const reason=blocker.reason;
+  // Replan a transport-access claim only from actual successful anonymous
+  // observations. Never infer login/API access or release provenance.
+  if(blocker.code==='owner_input_required'&&
+    /(?:web.access|web.access.token|browser|cannot reach|fetch.*public|public.*fetch)/i.test(reason)&&
+    !/(?:private|sign.in|log.in|oauth|administrator|403|401)/i.test(reason)){
+   const observed=viewTargets.filter(t=>Array.isArray(t.views)&&t.views.some(v=>v.passed===true&&v.httpStatus>=200&&v.httpStatus<400));
+   if(observed.length){
+    facts.push('The executor already loaded these public pages anonymously: '+observed.slice(0,4).map(t=>trim(t.url)).join(', ')+'. Use their recorded HTTP/browser observations. No WEB_ACCESS_TOKEN is needed for those observed public reads. Unobserved destinations, authenticated data, feature behavior and deployment provenance remain unverified.');
+    matchedCodes.push('verified_public_browser_access');continue;
+   }
+  }
   // A source-link Quick Card requires real public endpoints, not private
   // publisher API credentials. Distinguish this independently testable card
   // from a separately gated authenticated data-feed integration.
