@@ -37,6 +37,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
+      - run: node --test scripts/bubbles-gpt-card-owner-inline.test.mjs
       - run: node --test scripts/bubbles-memory-lab.test.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
       - run: node --check scripts/bubbles-oracle-refinement.mjs
@@ -543,7 +544,7 @@ jobs:
     # One consent-gated owner handoff. A GitHub issue alone is not a Brain ticket.
     # A specific reviewed main-branch merge may request it exactly once.
     if: >-
-      github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Submit GPT and Cards QA to Brain 20261023')
+      github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Resume signed GPT and Cards QA corrected 20261023')
     runs-on: ubuntu-latest
     timeout-minutes: 3
     permissions:
@@ -568,7 +569,7 @@ jobs:
           const valid=check.ok&&consent.ok===true&&consent.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
           console.log('GPT_CARDS_OWNER_GRANT '+JSON.stringify({httpStatus:check.status,verified:valid,consumer:consent.consumer?.state||'unavailable'}));
           if (!valid) throw Error('existing_owner_grant_unavailable');
-          const body={repository:'www-infinity4/QuantaPhi',request:"New owner-authorized follow-up, not retry of blocked Quick Card ticket: QuantaPhi issues #976 and #980. Robot Brain previous ticket IW-20261024-EAA1DDC3/TASK-1 was claimed then blocked by false owner-input demands. Moltnook PR #200 has now repaired evidence-based reader replanning. QuantaPhi PR #979 MERGED and Cloudflare Browser Rendering verified live the Muse AI, NASA Webb, NASA Science and Ars science/technology cards on quantaphi.org. Independently verify each card's live Bubbles specialist and mobile controls, report exact receipts and remaining gaps. Reconcile merged #974, draft #975, and current /science-quick-card.html routes; do not rewrite shipped source or fabricate private feeds. Continue user-requested GPT filtering path Grammar Phi -> per-user source/history -> GPT-backed review/planner -> independently authorized tool/Brain receipts -> Bubbles speech/chat. Current public model @cf/openai/gpt-oss-120b is working baseline, NOT a subscriber's ChatGPT plan. External ChatGPT plan usage requires approved Sign in with ChatGPT partner and separate user-authorized usage; no cookie/token imitation. Existing GPT Live broker is owner-only and separately API billed. Build source/tested provider/cost/privacy policy without claiming unauthorised subscriptions or voice. No owner-login retry. Code review, CI, stage, live deployment readback and ticket claim are separately required; report exact blocker not owner_input_required for public evidence.""};
+          const body={repository:'www-infinity4/QuantaPhi',request:"New owner-authorized follow-up, not retry of blocked Quick Card ticket: QuantaPhi issues #976 and #980. Robot Brain previous ticket IW-20261024-EAA1DDC3/TASK-1 was claimed then blocked by false owner-input demands. Moltnook PR #200 has now repaired evidence-based reader replanning. QuantaPhi PR #979 MERGED and Cloudflare Browser Rendering verified live the Muse AI, NASA Webb, NASA Science and Ars science/technology cards on quantaphi.org. Independently verify each card's live Bubbles specialist and mobile controls, report exact receipts and remaining gaps. Reconcile merged #974, draft #975, and current /science-quick-card.html routes; do not rewrite shipped source or fabricate private feeds. Continue user-requested GPT filtering path Grammar Phi -> per-user source/history -> GPT-backed review/planner -> independently authorized tool/Brain receipts -> Bubbles speech/chat. Current public model @cf/openai/gpt-oss-120b is working baseline, NOT a subscriber's ChatGPT plan. External ChatGPT plan usage requires approved Sign in with ChatGPT partner and separate user-authorized usage; no cookie/token imitation. Existing GPT Live broker is owner-only and separately API billed. Build source/tested provider/cost/privacy policy without claiming unauthorised subscriptions or voice. No owner-login retry. Code review, CI, stage, live deployment readback and ticket claim are separately required; report exact blocker not owner_input_required for public evidence."};
           if (body.request.length>1800) throw Error('owner_quick_card_work_too_long');
           const res=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
           const receipt=await res.json().catch(()=>({}));
