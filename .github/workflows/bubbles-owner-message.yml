@@ -602,7 +602,8 @@ jobs:
           async function signed(body,timeoutMs=120000){
             const response=await fetch(runner,{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(timeoutMs)});
             const data=await response.json().catch(()=>({}));
-            if(!response.ok||data.ok!==true||data.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)
+            const expected=body.operation==='status'?'chatgpt_runner_'+process.env.GITHUB_RUN_ID:'chatgpt_assist_'+process.env.GITHUB_RUN_ID+'_'+body.turn;
+            if(!response.ok||data.ok!==true||data.jobId!==expected)
               throw Error('signed_'+body.operation+'_rejected_'+response.status+'_'+String(data.error||'no_verified_receipt').replace(/[^a-z0-9_]/gi,'').slice(0,72));
             return data;
           }
@@ -617,11 +618,15 @@ jobs:
             'If registration succeeds verify client ID, store secret only in protected Worker binding through approved channel, test callback and report receipts; otherwise identify exact blocker.',
             'For building delegate to consent-gated Robot Brain and distinguish queued, started and completed.'
           ].join(' ');
-          const answer=await signed({operation:'assist',turn:0,text:message});
-          const readback=await signed({operation:'result',turn:0},15000);
-          const state=readback.state||answer.state||'unknown';
-          console.log('BUBBLES_OAUTH_SERVER_RECEIPT '+JSON.stringify({state,hasReply:typeof readback.result?.output==='string'&&readback.result.output.length>0,receiptStatus:readback.result?.receipt?.status||'unavailable',clientRegistered:false}));
-          if(state!=='complete')throw Error('server_bubbles_did_not_acknowledge');
+          try{
+            const answer=await signed({operation:'assist',turn:0,text:message});
+            const readback=await signed({operation:'result',turn:0},15000);
+            const state=readback.state||answer.state||'unknown';
+            console.log('BUBBLES_OAUTH_SERVER_RECEIPT '+JSON.stringify({state,hasReply:typeof readback.result?.output==='string'&&readback.result.output.length>0,answerStatus:readback.result?.answerStatus||'unverified',receiptStatus:readback.result?.receipt?.status||'unavailable',clientRegistered:false}));
+          }catch(error){
+            console.log('BUBBLES_OAUTH_SERVER_BLOCKED '+String(error.message||error).replace(/[^a-z0-9_]/gi,'').slice(0,100));
+          }
+          // Public conversation cannot operate owner browser; submit the separately authorized Brain task even if the public reply is partial.
           const request=[
             'Owner authorizes Bubbles/Robot Brain to handle Cloudflare OAuth setup: reconcile QuantaPhi issue #978 and PR #977, avoid duplicate work and failing browser-polled queues.',
             'Audit deployed connection Worker OAuth code, callback https://quantaphi.org/api/bubbles/connections/cloudflare/callback, client_secret_basic and PKCE, scope allowlist, user consent and existing bindings. Diagnose Continue form only using observed errors, never guesses.',
