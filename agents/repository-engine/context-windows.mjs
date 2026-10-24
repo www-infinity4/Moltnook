@@ -6,12 +6,20 @@ export const sha256=text=>createHash('sha256').update(text,'utf8').digest('hex')
 const WORD=/[a-z][a-z0-9_-]{3,}/gi;
 const STOP=new Set('that this from with have will into when where which should could everything project existing repository files source page build code bot agent make change work layout update something requested current about outside main work current fix create ensure checks original'.split(' '));
 function words(v){return [...new Set(String(v||'').match(WORD)||[])].map(x=>x.toLowerCase()).filter(x=>!STOP.has(x)).slice(0,65);}
+function namedDefinitions(full,request){
+ const names=[...new Set(String(request||'').slice(0,12000).match(/\b[A-Za-z_$][A-Za-z0-9_$]*[A-Z][A-Za-z0-9_$]*\b/g)||[])].slice(0,24);
+ return names.flatMap(name=>{
+  const literal=name.replace(/[$]/g,'\\$');
+  const pattern=new RegExp('^(?:export\\s+)?(?:async\\s+)?function\\s+'+literal+'\\s*\\(','m');
+  const match=pattern.exec(full);return match?[match.index]:[];
+ });
+}
 // Translate a small set of precise context requests into positions in the
 // pinned checkout. Generic word matches often stop at early array.push calls
 // and never reach the actual git publication code near the end of a file.
 // These positions select evidence only; all existing edit/hash gates apply.
 function requestedAnchors(full,request){
- const text=String(request||'').slice(0,12000),positions=[];
+ const text=String(request||'').slice(0,12000),positions=namedDefinitions(full,request);
  if(/\bgit\s+push\b/i.test(text)){
   const pattern=/\b(?:git\s*\(\s*['"]push['"]|command\s*\(\s*['"]git['"]\s*,\s*\[\s*['"]push['"]|git\s+push\b)/gi;
   for(const match of full.matchAll(pattern))positions.push(match.index);
@@ -68,7 +76,13 @@ export function sourceWindows(original,{task='',plan={},maxChars=32000}={}){
   };
   const take=[];
   if(full.length<=fileBudget)take.push({start:0,end:full.length});
-  else{
+  else if(namedDefinitions(full,task).length){
+   // A named function's definition is more useful than its early call sites.
+   // Keep one contiguous forward view so short function bodies are not split
+   // by the generic two-window, fifteen-line heuristic. Same byte/hash budget.
+   const start=namedDefinitions(full,task)[0];
+   take.push({start,end:Math.min(full.length,start+fileBudget)});
+  }else{
    // Multiple hints often hit one element. Search past overlapping anchors so
    // the second window exposes another relevant source region, not a duplicate.
    for(const candidate of candidates){
