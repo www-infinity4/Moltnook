@@ -642,3 +642,34 @@ jobs:
           console.log('BUBBLES_OAUTH_BRAIN_INTAKE '+JSON.stringify({httpStatus:res.status,accepted,ticketId:accepted?receipt.ticketId:null,status:receipt.status||'unavailable',executionStatus:receipt.execution?.status||'unverified',completed:false,error:accepted?null:String(receipt.error||'intake_unverified').slice(0,100)}));
           if(!accepted)throw Error('bubbles_brain_intake_not_verified');
           NODE
+
+  image_repair_owner_20261024:
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Repair Bubbles image context and action 20261024') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify saved approval and submit bounded owner repair once
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const consent=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await consent.json().catch(()=>({}));
+          const expected='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          console.log('BUBBLES_SIGNED_APPROVAL_CHECK '+JSON.stringify({httpStatus:consent.status,ok:proof.ok===true,jobIdMatches:proof.jobId===expected,consumer:proof.consumer?.state||'unavailable'}));
+          if(!consent.ok||proof.ok!==true||proof.jobId!==expected)throw Error('existing_signed_approval_not_verified');
+          const body={"repository":"www-infinity4/QuantaPhi","request":"Owner requests repair of actual Bubbles chat image-to-action behavior. Inspect bubbles-ai.js photoInput handler (files[0] only), pendingImage branch (early return after vision), bubbles-brain-actions.js resolveRepairRequest (rejects [Image] context without error words), and owner GPT/Brain prompting. Support multiple user-selected images in the same conversation, preserve indexed image evidence and source references in the correct user/thread history, resolve fix it against latest owner-selected image context without repeated upload demands, and distinguish re-reading an accessible original from a saved text observation. Explicit repair plus image must proceed from vision to existing consent-checked Brain write adapter instead of stopping at description. Expose only actual current tool capabilities to chat model; never pretend public vision itself edits or that ChatGPT subscription is connected. Preserve five-day expiry/revocation, user isolation, and untrusted image boundaries. Test two images, subsequent fix it, followup reread, thread switch, inaccessible source and revoked writes. Local source patch is being prepared in this session; reconcile current PRs before duplicating. Deliver actual code/test/PR and deployment receipts, then live synthetic multi-image-to-repair acceptance. Never report intake as completion."};
+          if(body.repository!=='www-infinity4/QuantaPhi'||body.request.length>1800)throw Error('bounded_owner_request_invalid');
+          const result=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await result.json().catch(()=>({}));
+          if(!result.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||receipt.repository!==body.repository||receipt.completed!==false){
+           console.log('BUBBLES_OWNER_WORK_FAILURE '+JSON.stringify({httpStatus:result.status,error:String(receipt.error||'invalid_receipt').replace(/[^a-zA-Z0-9_]/g,'').slice(0,100),ticketConfirmed:false}));
+           throw Error('owner_work_intake_not_verified');
+          }
+          console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
+          NODE
