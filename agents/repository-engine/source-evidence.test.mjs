@@ -1,6 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {collectSourceEvidence} from './source-evidence.mjs';
+test('repeated CI and test names cannot hide the actual ticket implementation',async()=>{
+ const workflows=Array.from({length:18},(_,i)=>'.github/workflows/brain-ticket-'+i+'.yml');
+ const tests=Array.from({length:18},(_,i)=>'test/brain-ticket-'+i+'.test.mjs');
+ const impl='workers/brain/ticket.js';
+ const result=await collectSourceEvidence({paths:[...workflows,...tests,impl],task:'Repair brain ticket workflow runner',
+  read:async p=>p===impl?'export function submitTicket() { return dispatch(); }':'// brain ticket test',
+  readWorkflow:async()=> 'name: brain ticket runner\nrun: node test.mjs'});
+ assert.match(result[impl],/submitTicket/);
+ assert.ok(Object.keys(result).filter(p=>p.startsWith('.github/')).length<=2);
+ assert.ok(Object.keys(result).filter(p=>p.startsWith('test/')).length<=2);
+});
+test('every selected implementation gets a bounded share of the reader context',async()=>{
+ const paths=Array.from({length:9},(_,i)=>'src/brain-'+i+'.js');
+ const result=await collectSourceEvidence({paths,task:'Inspect brain source',read:async p=>('// brain '+p+' implementation context '.repeat(20)+'\n').repeat(400)});
+ assert.equal(Object.keys(result).length,9);
+ assert.ok(Object.values(result).every(s=>s.length>=500));
+ assert.ok(Object.values(result).join('').length<=16000);
+});
 test('planner sees the actual shop link before claiming source URLs are missing',async()=>{
  const seen=[],samples={'index.html':'<a href="/shop/buy">Shop now</a>\n<a href="/news">News</a>','src/shop.js':'export const shopDestination="/shop/buy";\nconst next="https://quantaphi.org/shop/";','README.md':'Site overview'};
  const result=await collectSourceEvidence({paths:['.env','dist/bundle.js','README.md','index.html','src/shop.js'],task:'Fix broken shop link and check intended destination',read:async path=>{seen.push(path);return samples[path]}});
