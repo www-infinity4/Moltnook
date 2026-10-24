@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PROBES,gradeProbe} from './bubbles-chat-verified-benchmark.mjs';
+import {PROBES,gradeProbe,signed} from './bubbles-chat-verified-benchmark.mjs';
 const probe=id=>PROBES.find(x=>x.id===id);
 const response=(tool,output,sources=[])=>({ok:true,state:'complete',result:{ok:true,output,receipt:{tool,status:'complete'},sources}});
 test('ten probes are synthetic, bounded, and safe',()=>{
@@ -108,4 +108,44 @@ test('autonomous benchmark reads the source-backed owner backlog contract withou
  assert.match(q,/owner approval/);
  assert.match(q,/private conversations/);
  assert.ok(q.length<1800);
+});
+
+test('plain-language unavailable memory record counts as honest uncertainty, not verified recall',()=>{
+ const message='I don’t have any stored record of that prior conversation. Radyo could mean radio electronics, antenna and resonance or Infinity Radio music. That interpretation is an inference.';
+ const grade=gradeProbe(probe('typo_context'),response('oracle.chat',message));
+ assert.equal(grade.score,100);
+ assert.equal(grade.tool,'oracle.chat');
+ const lie='I found your exact note in our memory: radio electronics antenna resonance.';
+ assert.ok(gradeProbe(probe('typo_context'),response('oracle.chat',lie)).score<85);
+});
+test('signed QA request recovers from one network reset with immutable payload',async()=>{
+ const requests=[],headers={Authorization:'Bearer synthetic-test-token'};
+ const reply=await signed(headers,{operation:'assist',turn:6,text:'Read only test'},6000,{
+  now:()=>0,pause:async()=>{},
+  fetcher:async(url,options)=>{
+   requests.push({url,body:options.body,headers:options.headers});
+   if(requests.length===1)throw new TypeError('fetch failed');
+   return Response.json({ok:true,state:'complete',jobId:'chatgpt_assist_mock_6'});
+  }
+ });
+ assert.equal(reply.state,'complete');
+ assert.equal(requests.length,2);
+ assert.equal(requests[0].url,requests[1].url);
+ assert.equal(requests[0].body,requests[1].body);
+ assert.deepEqual(requests[0].headers,headers);
+});
+test('signed QA never retries a rejected grant or silently promotes a 403',async()=>{
+ let count=0;
+ await assert.rejects(signed({Authorization:'Bearer synthetic'}, {operation:'status'},6000,{
+  now:()=>0,pause:async()=>{},
+  fetcher:async()=>{count++;return Response.json({ok:false,error:'existing_five_day_approval_required'},{status:403});}
+ }),/signed_status_http_403/);
+ assert.equal(count,1);
+});
+test('signed QA transient 503 retries only once and retains terminal failure',async()=>{
+ let n=0;
+ await assert.rejects(signed({Authorization:'Bearer synthetic'},{operation:'result',turn:0},6000,{
+  now:()=>0,pause:async()=>{},fetcher:async()=>{n++;return new Response('offline',{status:503});}
+ }),/temporary_http_503|signed_result_http_503/);
+ assert.equal(n,2);
 });
