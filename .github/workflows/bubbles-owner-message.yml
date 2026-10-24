@@ -673,3 +673,35 @@ jobs:
           }
           console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
           NODE
+
+  vam_indexed_research_20261024:
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles indexed VAM search 20261024')
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Ask Bubbles for public indexed image and branding evidence
+        run: |
+          node --input-type=module <<'NODE'
+          const identityUrl=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          identityUrl.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(identityUrl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const endpoint='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          async function send(body,ms=120000){
+            const response=await fetch(endpoint,{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(ms)});
+            const data=await response.json().catch(()=>({}));
+            if(!response.ok||data.ok!==true)throw Error('signed_request_failed_'+response.status+'_'+String(data.error||'unknown').replace(/[^a-z0-9_]/gi,'').slice(0,80));
+            return data;
+          }
+          const consent=await send({operation:'status'},15000);
+          if(consent.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('run_identity_mismatch');
+          const text='Search public indexed sources for VAMWorld original logo asset URL, original page colors, and actual Morgan dollar variety diagnostic photographs including Scarface, Hot Lips, Spitting Eagle, Alligator Eye and Tailbar. Use web.search and accessible indexed pages. Return exact original source URLs and image URLs only when observed, distinguish verified assets from unavailable ones. VAMWorld presently shows a security-verification screen in another browser: do not bypass verification or invent a logo or palette. PCGS CoinFacts Top 100 index https://www.pcgs.com/coinfacts/vam/1 is accessible and has actual coin/diagnostic images. No redesign delegation, no private accounts, writes or jobs: read-only source research. Design remains Oracle Octaves in QuantaPhi. Report actual tool receipt and missing evidence truthfully.';
+          const answer=await send({operation:'assist',turn:0,text});
+          const result=await send({operation:'result',turn:0},15000);
+          if(result.jobId!=='chatgpt_assist_'+process.env.GITHUB_RUN_ID+'_0')throw Error('result_identity_mismatch');
+          console.log('VAM_INDEXED_RESEARCH '+JSON.stringify({state:result.state,output:result.result?.output||'',receipt:result.result?.receipt||null,sourceUrls:result.result?.sourceUrls||[],completed:result.state==='complete'}));
+          if(result.state!=='complete'||!result.result?.output)throw Error('research_response_unconfirmed');
+          NODE
