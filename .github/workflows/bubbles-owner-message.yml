@@ -19,7 +19,7 @@ on:
         description: Fixed owner-approved acceptance task
         type: choice
         default: none
-        options: [none, site_acceptance, deep_chat]
+        options: [none, site_acceptance, deep_chat, quick_cards]
 permissions:
   contents: read
   id-token: write
@@ -498,4 +498,43 @@ jobs:
           const confirmed=response.ok&&result.ok===true&&result.repository===body.repository&&typeof result.ticketId==='string'&&result.completed===false;
           console.log('BUBBLES_RESEARCH_BRAIN_RECEIPT '+JSON.stringify({httpStatus:response.status,ticketConfirmed:confirmed,ticketId:confirmed?result.ticketId:null,status:result.status||'unavailable',execution:result.execution?.status||'unverified',deduplicated:result.deduplicated===true,completed:false,error:confirmed?null:String(result.error||'intake_failed').slice(0,120)}));
           if(!confirmed)throw Error('brain_research_intake_unconfirmed');
+          NODE
+
+  quick_card_owner_handoff:
+    # One consent-gated owner handoff. A GitHub issue alone is not a Brain ticket.
+    # A specific reviewed main-branch merge may request it exactly once.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && inputs.task == 'quick_cards') ||
+      (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Submit Quick Cards owner work to Brain 20261023'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read
+      id-token: write
+    concurrency:
+      group: bubbles-quick-card-owner-handoff
+      cancel-in-progress: false
+    steps:
+      - name: Verify existing owner grant and submit one bounded Quick Card work request
+        run: |
+          node --input-type=module <<'NODE'
+          const idUrl = new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          idUrl.searchParams.set('audience', 'bubbles-owner-message-bridge');
+          const id = await fetch(idUrl, {headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN}, redirect:'error', signal:AbortSignal.timeout(15000)});
+          if (!id.ok) throw Error('signed_runner_identity_unavailable');
+          const jwt = (await id.json()).value;
+          if (typeof jwt!=='string'||!jwt) throw Error('missing_signed_runner_identity');
+          const headers = {Authorization:'Bearer '+jwt,'Content-Type':'application/json'};
+          const check = await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner', {method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const consent = await check.json().catch(()=>({}));
+          const valid=check.ok&&consent.ok===true&&consent.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          console.log('QUICK_CARDS_OWNER_GRANT '+JSON.stringify({httpStatus:check.status,verified:valid,consumer:consent.consumer?.state||'unavailable'}));
+          if (!valid) throw Error('existing_owner_grant_unavailable');
+          const body={repository:'www-infinity4/QuantaPhi',request:"Owner-authorized QuantaPhi specialist Quick Card build, source instruction https://github.com/www-infinity4/QuantaPhi/issues/976. FIRST reconcile merged #974 and draft #975 against current site and GitHub CI; do not duplicate. Then develop real interactive TradingView market ticker, Zillow/property comps, Internet Archive media, SEC EDGAR filings, F-Droid releases, and permitted Reddit community card with existing Bubbles specialist embeds. Investigate prediction-market data only for research, no wagers or trades. Follow Oracle Octaves visuals, source licensing, freshness/errors, working Infinity viewer and research history; preserve existing wallet, site cards, protected repos and owner data. Use existing consent-scoped Brain agent chain, independent review, tests, PR, target CI and verified deployment. Treat queued as queued, not completed. Report exact Brain intake, runner, commit, CI, live browser/mobile receipts, or precise blockers. Cloudflare ChatGPT connector is missing Workers/D1/DO OAuth scopes: do not request repeated reauthentication; use the already authorized owner GitHub-to-Brain path only if its existing grant is valid."};
+          if (body.request.length>1800) throw Error('owner_quick_card_work_too_long');
+          const res=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await res.json().catch(()=>({}));
+          const verified=res.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.repository===body.repository&&receipt.completed===false;
+          console.log('QUICK_CARDS_BRAIN_INTAKE '+JSON.stringify({httpStatus:res.status,ticketConfirmed:verified,ticketId:verified?receipt.ticketId:null,status:receipt.status||'unavailable',execution:receipt.execution?.status||'unverified',deduplicated:receipt.deduplicated===true,completed:false,error:verified?null:String(receipt.error||'invalid_receipt').slice(0,100)}));
+          if (!verified) throw Error('quick_cards_brain_intake_not_confirmed');
           NODE
