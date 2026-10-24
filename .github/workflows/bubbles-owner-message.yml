@@ -465,3 +465,37 @@ jobs:
 # QA 2026-10-23: inspect consent-bound owner consumer readiness; no grant renewal.
 
 # Resume fixed synthetic memory lab after PR951 release, preserving existing five-day grants.
+
+  research_history_owner_handoff:
+    # One bounded, owner-requested research inventory delegated to actual Bubbles/Robot Brain.
+    # The backend enforces the existing 5-day owner approval and signed OIDC workflow identity.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Ask Bubbles research-history inventory 20261023') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Check existing owner approval; ask Bubbles to take research inventory
+        run: |
+          node --input-type=module <<'NODE'
+          const url=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          url.searchParams.set('audience','bubbles-owner-message-bridge');
+          const signed=await fetch(url,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!signed.ok)throw Error('signed_identity_unavailable');
+          const token=(await signed.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          const verified=approval.ok&&proof.ok===true&&proof.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          console.log('BUBBLES_RESEARCH_APPROVAL '+JSON.stringify({verified,consumer:proof.consumer?.state||'unavailable'}));
+          if(!verified)throw Error('existing_owner_consent_unavailable');
+          const body={repository:'www-infinity4/QuantaPhi',request:"Bubbles/Robot Brain: OWN the audit for QuantaPhi issue #962. Do the searches yourself; ChatGPT must not inventory all code. Locate actual research/search/source-capture entry points across Bitcoin-Crusher, Writer/Story Writer, QuantaPhi cards, Bubbles tools and related repositories, starting with these two apps and then expanding in bounded batches. For each: cite repo/path/function, where raw source/results/history live, whether records are durably saved BEFORE synthesis/reward, how per-app history and cross-app lookup work, and precise loss/security gaps. Reuse #929 and #961; inspect current code/PRs before labeling a gap. Report first verified batch promptly in #962 with links and classifications implemented/tested/live vs absent; continue incremental inventory, avoid exhaustive pre-work and duplicate tickets. Then propose shared authenticated save-first research ingest/history/synthesis and stage reversible repairs under existing owner approval with real PR/test receipts. Preserve original private histories, citations, identity isolation and exactly-once Bitcoin Crusher rewards. No invented execution, credentials, broad deletions, or production deploy without authorization. Report blocked runner claim honestly."};
+          if(body.request.length>1800)throw Error('request_length_exceeded');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify(body),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const result=await response.json().catch(()=>({}));
+          const confirmed=response.ok&&result.ok===true&&result.repository===body.repository&&typeof result.ticketId==='string'&&result.completed===false;
+          console.log('BUBBLES_RESEARCH_BRAIN_RECEIPT '+JSON.stringify({httpStatus:response.status,ticketConfirmed:confirmed,ticketId:confirmed?result.ticketId:null,status:result.status||'unavailable',execution:result.execution?.status||'unverified',deduplicated:result.deduplicated===true,completed:false,error:confirmed?null:String(result.error||'intake_failed').slice(0,120)}));
+          if(!confirmed)throw Error('brain_research_intake_unconfirmed');
+          NODE
