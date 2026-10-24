@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T07:57:08.423Z",
+  "generatedAt": "2026-10-24T08:51:00.644Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-749a3adede90ff6bf5e45ad4fc98e6569f4b49da",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T08:50:47Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/749a3adede90ff6bf5e45ad4fc98e6569f4b49da",
+      "title": "Repair pinned-source Green retry diagnostics",
+      "message": "I found a commit titled “Repair pinned-source Green retry diagnostics”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-5d516b946d087740b5f2c44f7074651d9f7160b4",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T08:43:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5d516b946d087740b5f2c44f7074651d9f7160b4",
+      "title": "Run signed Bubbles quick-card expansion 20261024 (#208)",
+      "message": "I found a commit titled “Run signed Bubbles quick-card expansion 20261024 (#208)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-98450053eb03b4a43df218ea42a00aefabde0292",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T08:42:28Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/98450053eb03b4a43df218ea42a00aefabde0292",
+      "title": "Preserve Bubbles quick-card platform work order and acceptance (#1005)",
+      "message": "I found a commit titled “Preserve Bubbles quick-card platform work order and acceptance (#1005)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-7795f0efe58d87e5d0ad2081e307ca94e976c997",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-24T07:57:19Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/7795f0efe58d87e5d0ad2081e307ca94e976c997",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-a5982026e2e0a8939d62569c274db28b883d62f2",
       "agent": "pink-panther",
@@ -138,18 +186,6 @@
       "message": "I found a commit titled “Merge pull request #1002 from www-infinity4/fix/card-asset-consistency-20261024”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-commit-8b6aea67fb9ea7f4a9872eea8f37dc4ff75685c4",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T06:30:56Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8b6aea67fb9ea7f4a9872eea8f37dc4ff75685c4",
-      "title": "Serve quality-gated card assets from one verified immutable release",
-      "message": "I found a commit titled “Serve quality-gated card assets from one verified immutable release”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "claude-flow-commit-cd77ee22c1651095d977e78199d8df7c245e6634",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -172,18 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/995",
       "title": "[Agent Job] Oracle reuse: viewer → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-78b283c8bbad2bd83922ef145f28af28ff74ba59",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T05:47:50Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/78b283c8bbad2bd83922ef145f28af28ff74ba59",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-993",
@@ -232,30 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/978",
       "title": "Complete Bubbles public Cloudflare OAuth client and user-owned storage provisioning",
       "message": "I found a issue titled “Complete Bubbles public Cloudflare OAuth client and user-owned storage provisioning”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-6fd14f4214e8113ad09f13a40a7501825dc8875c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T03:02:02Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6fd14f4214e8113ad09f13a40a7501825dc8875c",
-      "title": "Run signed Bubbles OAuth handoff 20261023 corrected receipt",
-      "message": "I found a commit titled “Run signed Bubbles OAuth handoff 20261023 corrected receipt”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-e12b287299259a08bf9789b2fc3d6d288e90d1d5",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T03:00:37Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e12b287299259a08bf9789b2fc3d6d288e90d1d5",
-      "title": "Run signed Bubbles OAuth handoff 20261023",
-      "message": "I found a commit titled “Run signed Bubbles OAuth handoff 20261023”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-980",
