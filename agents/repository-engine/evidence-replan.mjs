@@ -48,6 +48,37 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
  for(const blocker of blockers){
   if(!blocker||typeof blocker.reason!=='string')continue;
   const reason=blocker.reason;
+  // A source-link Quick Card requires real public endpoints, not private
+  // publisher API credentials. Distinguish this independently testable card
+  // from a separately gated authenticated data-feed integration.
+  const normalizedReason=String(reason).toLowerCase();
+  const sourceCardRequest=/\b(?:quick\s*cards?|source\s*cards?|websites?\s+in\s+cards?)\b/i.test(request);
+  if(blocker.code==='owner_input_required'&&sourceCardRequest&&
+    /\b(?:api\s+credentials?|api\s+keys?|public.access\s+endpoints?|provider\s+auth(?:orization)?)\b/i.test(normalizedReason)&&
+    /\b(?:tradingview|zillow|sec\s+edgar|f.droid|reddit|source\s+cards?)\b/i.test(normalizedReason)){
+    facts.push('An independently testable provider-link Quick Card can use the provider\'s publicly reachable official page and an explicit Bubbles specialist without borrowing an API credential. Verify the exact URLs before including them. If true live API data was requested, retain it as a separately blocked integration with no fabricated feed, private data or unauthorized scraping.');
+    matchedCodes.push('public_quick_card_source');continue;
+  }
+  // Authentication to the already claimed Brain writer must not be confused
+  // with a different ChatGPT Cloudflare connector's OAuth scopes.
+  if(blocker.code==='owner_input_required'&&sourceCardRequest&&
+    /(?:chatgpt.*cloudflare|cloudflare.*chatgpt)/i.test(normalizedReason)&&
+    authenticatedAdapters?.brain?.leaseClaimed===true&&
+    Array.isArray(authenticatedAdapters.brain.verifiedCalls)&&
+    authenticatedAdapters.brain.verifiedCalls.includes('claim')){
+    facts.push('This runner has an independently authenticated Brain lease claim and its own scoped repository writer. A separate ChatGPT Cloudflare plugin failing OAuth does not remove this Brain lease or prevent source-only code/tests. Independently verify Cloudflare deployment credentials if actual production release is required.');
+    matchedCodes.push('independent_brain_credential');continue;
+  }
+  // The exact source routes are present in the authenticated checkout; PR
+  // metadata/CI can be fetched read-only. Do not ask the owner for a map
+  // before trying those sources; never assert that a CI check passed unseen.
+  if(blocker.code==='owner_input_required'&&sourceCardRequest&&
+    /(?:repository map|ci failure logs|merged pr|draft pr|pull request)/i.test(normalizedReason)&&
+    Array.isArray(sourceTree)&&sourceTree.includes('source-quick-cards.mjs')&&
+    writeScope?.reportedPushPermission===true){
+    facts.push('The authenticated checkout contains source-quick-cards.mjs and has a scoped writer; inspect source paths and PR metadata/CI via available read-only GitHub calls. If CI logs are unavailable, record a precise missing-evidence state, not owner_input_required. Do not claim existing PR status without an observed response.');
+    matchedCodes.push('quick_card_repository_evidence');continue;
+  }
   // The model may hallucinate that a file in a different owner's repository
   // is absent because the writable clone is Moltnook. Only pinned, hash-
   // verified dependency files are evidence of presence; never infer access.
