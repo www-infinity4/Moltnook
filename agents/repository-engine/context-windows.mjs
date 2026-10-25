@@ -284,3 +284,37 @@ export function recalculateBounds(original,packet,{
   Object.values(result).reduce((n,item)=>n+usage(item),0),
   replanned:changed};
 }
+
+// Short exact literals reduce transcription errors when Green only needs to
+// insert a bounded change. These are hints, not edits or permission: normal
+// visible-window, full-source uniqueness, review and test gates still apply.
+export function visibleEditAnchors(original,packet,{task='',maximum=4}={}){
+ const output={};
+ const count=Math.max(1,Math.min(4,Number.isInteger(maximum)?maximum:4));
+ const hints=words(task);
+ for(const [path,item] of Object.entries(packet?.source||{})){
+  const full=original?.[path];
+  if(item?.kind!=='existing'||typeof full!=='string'||sha256(full)!==item.sha256)continue;
+  const candidates=[];
+  for(const window of item.windows||[]){
+   if(typeof window.text!=='string'||window.sha256!==sha256(window.text)||
+      full.slice(window.start,window.end)!==window.text)continue;
+   for(const match of window.text.matchAll(/^[^\n]+/gm)){
+    const line=match[0];
+    if(!/^\s*(?:(?:export\s+)?(?:async\s+)?function\b|(?:const|let)\s+|(?:jobs|context|sourceJob)\.|if\s*\(|return\s)/.test(line))continue;
+    const before=line.length>240?line.slice(0,120):line;
+    if(before.trim().length<12||full.indexOf(before)<0||
+       full.indexOf(before,full.indexOf(before)+1)>=0)continue;
+    const score=hints.filter(term=>before.toLowerCase().includes(term)).length+
+     (/function\b|\b(?:instruction|jobs\.push|technical_handoffs)/.test(before)?3:0);
+    candidates.push({before,score,sha256:sha256(before)});
+   }
+  }
+  candidates.sort((a,b)=>b.score-a.score||a.before.length-b.before.length);
+  const seen=new Set();
+  const anchors=candidates.filter(x=>!seen.has(x.before)&&seen.add(x.before)).slice(0,count)
+   .map(({before,sha256})=>({before,sha256}));
+  if(anchors.length)output[path]={sourceSha256:item.sha256,anchors};
+ }
+ return output;
+}
