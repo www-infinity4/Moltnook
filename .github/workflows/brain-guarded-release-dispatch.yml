@@ -10,7 +10,7 @@ permissions:
   contents: read
 jobs:
   request:
-    if: ${{ github.actor == 'www-infinity4' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Request guarded Bubbles routing release 20261021') }}
+    if: ${{ github.actor == 'www-infinity4' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Request guarded Bubbles anti-loop release 20261024') }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -23,14 +23,14 @@ jobs:
           const key=process.env.OWNER_GITHUB_TOKEN;
           if(!key)throw Error('owner_github_credential_unavailable');
           const headers={Authorization:'Bearer '+key,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
-          const proof=await fetch(root+'/actions/runs/39660781356',{headers,redirect:'error',signal:AbortSignal.timeout(20000)});
+          const proof=await fetch(root+'/actions/runs/40155683336',{headers,redirect:'error',signal:AbortSignal.timeout(20000)});
           if(!proof.ok)throw Error('isolated_canary_receipt_unavailable');
           const run=await proof.json();
-          if(run.conclusion!=='success'||run.status!=='completed'||run.head_sha!=='a22ad5647fa1f956c68e466810a987a7cab86a6c'||run.path!=='.github/workflows/moltnook-brain-isolated-preview.yml')throw Error('isolated_canary_identity_or_result_invalid');
+          if(run.conclusion!=='success'||run.status!=='completed'||run.head_sha!=='4ea104409a7e42ddcea2d798fb225378b80ece80'||run.path!=='.github/workflows/moltnook-brain-isolated-preview.yml')throw Error('isolated_canary_identity_or_result_invalid');
           const response=await fetch(root+'/actions/workflows/moltnook-brain-owner-release.yml/dispatches',{
            method:'POST',headers:{...headers,'Content-Type':'application/json'},
            body:JSON.stringify({ref:'main',inputs:{operation:'release',confirmation:'DEPLOY_BRAIN_100'}}),
            redirect:'error',signal:AbortSignal.timeout(20000)});
           if(response.status!==204)throw Error('guarded_owner_release_dispatch_rejected_'+response.status);
-          console.log('GUARDED_OWNER_RELEASE_REQUESTED '+JSON.stringify({workflow:'moltnook-brain-owner-release.yml',canaryRun:39660781356,source:'92c0e393769d4ea0abdb4010269357f35d99f954',candidate:'f00ef78a-d044-4437-868b-73dcc0dd61d8',status:'dispatch_accepted',deployed:false,ownerJobFinished:false}));
+          console.log('GUARDED_OWNER_RELEASE_REQUESTED '+JSON.stringify({workflow:'moltnook-brain-owner-release.yml',canaryRun:40155683336,source:'0206dbae0aeb8dcfe7f4870cfd352ea5328383b3',candidate:'b43fbe8f-4d3c-4943-a62e-f19627cec378',status:'dispatch_accepted',deployed:false,ownerJobFinished:false}));
           NODE
