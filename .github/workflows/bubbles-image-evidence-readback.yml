@@ -19,7 +19,7 @@ jobs:
           node --input-type=module <<'NODE'
           import {createHash} from 'node:crypto';
           import {mkdirSync,writeFileSync} from 'node:fs';
-          const pin='40a3b0998c439086d597ee5129cde3831251761c',revision='20261024-image-handoff2';
+          const pin='715b0ef0688bc697546d1317cfe6d81360456f2d',revision='20261024-all-image-findings3';
           const report={sourcePin:pin,checks:[],ownerWritesVerified:false,androidHardwareVerified:false};
           async function read(url){const r=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(20000),headers:{'Cache-Control':'no-cache'}});if(!r.ok)throw Error('source_read_http_'+r.status);return r.text();}
           try {
