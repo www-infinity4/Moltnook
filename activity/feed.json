@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T04:40:46.101Z",
+  "generatedAt": "2026-10-25T09:27:30.489Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,78 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-97d76f1f1985d2301926de891575befba5a3d028",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T06:18:06Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/97d76f1f1985d2301926de891575befba5a3d028",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-ab637d3841df6be8b4622d7d96c8e4645b6ab24b",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T05:05:22Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ab637d3841df6be8b4622d7d96c8e4645b6ab24b",
+      "title": "Reconcile Continuity source checkpoints with verified live receipts",
+      "message": "I found a commit titled “Reconcile Continuity source checkpoints with verified live receipts”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-5fb023f80d7b76cfa486d3798fdc68783a729c5e",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T04:59:06Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5fb023f80d7b76cfa486d3798fdc68783a729c5e",
+      "title": "Distinguish manual X browser observations from scheduled scan results",
+      "message": "I found a commit titled “Distinguish manual X browser observations from scheduled scan results”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-86214d63ba86b0f590bb4ea63f74906d4139556e",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T04:58:04Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/86214d63ba86b0f590bb4ea63f74906d4139556e",
+      "title": "Add Continuity isolated checkpoint workspace and source recovery",
+      "message": "I found a commit titled “Add Continuity isolated checkpoint workspace and source recovery”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-c7f59048f403ae5539d9f219a7fcffd27a694e15",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T04:53:18Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c7f59048f403ae5539d9f219a7fcffd27a694e15",
+      "title": "Repair Bubbles public X reader: retry late-rendered owner posts (#1051)",
+      "message": "I found a commit titled “Repair Bubbles public X reader: retry late-rendered owner posts (#1051)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-3b9df3fd3a1b826f4ecd834c708f8455c2ecc863",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-25T04:40:55Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3b9df3fd3a1b826f4ecd834c708f8455c2ecc863",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-4f135ee42713fc04e336773ae98112c6fe9d8301",
       "agent": "gold-diggers-ink",
@@ -124,66 +196,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/54977734cfc4545c46cd9c5d1b87830763d82621",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-f213c6d51cd02fea6b1d0d8ff106a796e2e3b374",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-25T03:14:40Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/f213c6d51cd02fea6b1d0d8ff106a796e2e3b374",
-      "title": "Retain source-exact unapplied drafts across bounded formatting retries",
-      "message": "I found a commit titled “Retain source-exact unapplied drafts across bounded formatting retries”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-40a3b0998c439086d597ee5129cde3831251761c",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-25T02:42:12Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/40a3b0998c439086d597ee5129cde3831251761c",
-      "title": "Preserve Bubbles image evidence through Brain work handoffs",
-      "message": "I found a commit titled “Preserve Bubbles image evidence through Brain work handoffs”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-0206dbae0aeb8dcfe7f4870cfd352ea5328383b3",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-25T02:21:21Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0206dbae0aeb8dcfe7f4870cfd352ea5328383b3",
-      "title": "Stop Robot Brain auto-repair chains on Green model refusals (#1044)",
-      "message": "I found a commit titled “Stop Robot Brain auto-repair chains on Green model refusals (#1044)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-fc62a1b3f37844866a2d48b964585d8fe79e2d8b",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-25T02:08:05Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/fc62a1b3f37844866a2d48b964585d8fe79e2d8b",
-      "title": "Guard Bubbles source-review identity after rejected runner PR #1042 (#1043)",
-      "message": "I found a commit titled “Guard Bubbles source-review identity after rejected runner PR #1042 (#1043)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-00ffc8c10c55e3f11fb98eb71f0d56052ec23bb5",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-25T01:38:27Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/00ffc8c10c55e3f11fb98eb71f0d56052ec23bb5",
-      "title": "Bubbles: receipt-gated direct GitHub overflow to Robot Brain queue (#1041)",
-      "message": "I found a commit titled “Bubbles: receipt-gated direct GitHub overflow to Robot Brain queue (#1041)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-966f7eadf887eeaa34de008fc1554855e35a4b2b",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-24T11:17:57Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/f19b3a55a82ba4677a4bec6d964e584bbd436459",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-cd77ee22c1651095d977e78199d8df7c245e6634",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-24T06:01:28Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/cd77ee22c1651095d977e78199d8df7c245e6634",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
