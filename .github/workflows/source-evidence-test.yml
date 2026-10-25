@@ -5,12 +5,14 @@ on:
     paths:
       - 'agents/repository-engine/source-evidence.*'
       - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/repository-identity.*'
       - '.github/workflows/source-evidence-test.yml'
   push:
     branches: [main]
     paths:
       - 'agents/repository-engine/source-evidence.*'
       - 'agents/repository-engine/runner.mjs'
+      - 'agents/repository-engine/repository-identity.*'
       - '.github/workflows/source-evidence-test.yml'
 permissions:
   contents: read
@@ -25,3 +27,4 @@ jobs:
           node-version: '22'
       - run: node --check agents/repository-engine/runner.mjs
       - run: node --test agents/repository-engine/source-evidence.test.mjs
+      - run: node --test agents/repository-engine/repository-identity.test.mjs

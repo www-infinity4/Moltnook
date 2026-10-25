@@ -29,7 +29,7 @@ jobs:
           python-version: '3.12'
       - uses: ./.github/actions/bubbles-python-tools
       - name: Verify owner credential bridge
-        run: node --test agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
+        run: node --test agents/repository-engine/repository-identity.test.mjs agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
       - name: Connect existing owner GitHub key to Bubbles
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}

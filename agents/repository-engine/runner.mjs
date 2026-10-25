@@ -1,3 +1,4 @@
+import {verifyRepositoryIdentity} from './repository-identity.mjs';
 import {collectDependencyContext} from './dependency-context.mjs';
 import {lintPython} from './python-language.mjs';
 import {publishReviewed} from './publish-reviewed.mjs';
@@ -118,6 +119,7 @@ try{
   if(!/^www-infinity4\/[\w.-]+$/.test(report.repository))throw Error('Owner repository scope unresolved');
   if(!token)throw Error('Cross-repository writer credential missing: configure existing Moltnook GHP secret for all owner repositories; repository-local GITHUB_TOKEN cannot grant this scope');
   const repo=await github('repos/'+report.repository);report.permissions=repo.permissions;
+  report.repositoryIdentity=verifyRepositoryIdentity(report.repository,repo);
   if(repo.archived)throw Error('Target repository is archived');if(!repo.permissions?.push)throw Error('Credential has no reported push access to '+report.repository);
   workspace=await fs.mkdtemp(path.join(os.tmpdir(),'infinity-engine-'));
   command('git',['clone','--single-branch','--branch',repo.default_branch,'https://github.com/'+report.repository+'.git','.'],{env:credentialEnv()});
