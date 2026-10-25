@@ -302,7 +302,10 @@ export function visibleEditAnchors(original,packet,{task='',maximum=4}={}){
    for(const match of window.text.matchAll(/^[^\n]+/gm)){
     const line=match[0];
     if(!/^\s*(?:(?:export\s+)?(?:async\s+)?function\b|(?:const|let)\s+|(?:jobs|context|sourceJob)\.|if\s*\(|return\s)/.test(line))continue;
-    const before=line.length>240?line.slice(0,120):line;
+    // Never offer a prefix cut inside an expression or string: replacing
+    // that prefix with an entire line duplicates the untouched suffix.
+    if(line.length>240)continue;
+    const before=line;
     if(before.trim().length<12||full.indexOf(before)<0||
        full.indexOf(before,full.indexOf(before)+1)>=0)continue;
     const score=hints.filter(term=>before.toLowerCase().includes(term)).length+

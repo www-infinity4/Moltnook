@@ -42,3 +42,11 @@ test('real runner supplies copy anchors to Green and still applies all exact/rev
  assert.match(runner,/await call\('engine-review'/);
  assert.match(runner,/await checks\(candidate.patched\)/);
 });
+
+test('a long instruction line is never offered as a cut-off expression prefix',()=>{
+ const full="export function repair(){\n const instruction='"+'x'.repeat(400)+"';\n return {queued:true};\n}\n";
+ const original={[path]:full},packet=sourceWindows(original);
+ const result=visibleEditAnchors(original,packet);
+ for(const anchor of result[path].anchors)assert.ok(full.split('\n').includes(anchor.before));
+ assert.ok(result[path].anchors.every(a=>!a.before.includes('const instruction=')));
+});

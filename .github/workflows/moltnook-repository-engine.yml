@@ -76,7 +76,7 @@ jobs:
           node --test agents/repository-engine/python-language.test.mjs agents/repository-engine/fork-language-upstreams.test.mjs
           node --check agents/repository-engine/green-build-recovery.mjs
           node --test agents/repository-engine/green-build-recovery.test.mjs
-          node --test agents/repository-engine/exact-edit-anchors.test.mjs agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs
+          node --test agents/repository-engine/module-syntax.test.mjs agents/repository-engine/exact-edit-anchors.test.mjs agents/repository-engine/context-windows.test.mjs agents/repository-engine/runner-window-replan.test.mjs
           node --test agents/repository-engine/auto-promote-reviewed.test.mjs
           node --check agents/repository-engine/auto-promote-reviewed.mjs
           node --test agents/repository-engine/oracle-style-contract.test.mjs
