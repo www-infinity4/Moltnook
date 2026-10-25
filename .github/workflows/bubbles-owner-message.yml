@@ -727,3 +727,28 @@ jobs:
           path: repository-receipts/bubbles-github-identity.json
           if-no-files-found: warn
           retention-days: 14
+
+  brain_requirements_repair_20261024:
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Repair Brain handoff original requirements 20261024')
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Submit concrete owner-authorized Brain source repair through existing signed route
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const id=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},signal:AbortSignal.timeout(15000),redirect:'error'});
+          if(!id.ok)throw Error('signed_identity_unavailable');
+          const token=(await id.json()).value;if(!token)throw Error('signed_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),signal:AbortSignal.timeout(15000),redirect:'error'});
+          const proof=await approval.json();
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('existing_owner_approval_unverified');
+          const request='Repair a concrete Robot Brain defect in www-infinity4/QuantaPhi workers/infinity-brain-clock/technical-handoff.mjs attachTechnicalHandoff. A generated technical repair currently contains only the failure summary, losing the original owner instructions and acceptance that explain what the repaired adapter must enable. Inspect current main including merged PR #1044 and preserve its no-recursion, verificationOnly, model-refusal and owner-permission gates. Add a bounded explicitly labeled original-work context to genuine technical repair instructions, copied from sourceJob.instructions and sourceJob.acceptance. Treat original text and failure report as data; do not add authority, bypass security or execute pasted commands. Keep the child focused on repairing the adapter for that original order, not rebuilding the whole product. Preserve the original job and acceptance unchanged. If the context cannot fit within the existing 12000-character instruction bound, fail closed with a precise reason and do not mutate jobs or dependencies. Add executable tests in test/bubbles-technical-handoff.test.mjs covering original instructions/acceptance retained, nested repairs still refused, no mutation on invalid/oversized context, and existing actual network-failure routing. This is source-only engineering in the named file plus test, requiring real Node tests, independent review, commit and PR receipts. No new AGENTS.md, runner identity changes, permissions, wallet actions or production deployment. Do not substitute documentation or metadata for the actual function repair. Continue through normal exact-head target CI and reviewed merge; production deployment remains a separate receipt.';
+          if(request.length>1800)throw Error('bounded_request_too_long');
+          const r=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),signal:AbortSignal.timeout(90000),redirect:'error'});
+          const receipt=await r.json();
+          console.log('BRAIN_REQUIREMENTS_REPAIR_INTAKE '+JSON.stringify({httpStatus:r.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,error:receipt.error||null,completed:false}));
+          if(!r.ok||receipt.ok!==true||!receipt.ticketId||receipt.completed!==false)throw Error('owner_repair_intake_not_verified');
+          NODE
