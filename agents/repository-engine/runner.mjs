@@ -1,4 +1,5 @@
 import {verifyRepositoryIdentity} from './repository-identity.mjs';
+import {sourceDraftRetry,retainSourceExactDrafts,mergeSourceDrafts} from './source-drafts.mjs';
 import {checkCandidateModuleSyntax} from './module-syntax.mjs';
 import {collectDependencyContext} from './dependency-context.mjs';
 import {lintPython} from './python-language.mjs';
@@ -278,15 +279,21 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     sourceEvidence:true,ownerSpecified:false
   }));
   const remembered=lease.job.runtimeFeedback?.baseSha===baseSha?lease.job.runtimeFeedback:undefined;
-  let rejectedSourceEdits=[];
+  let rejectedSourceEdits=[],sourceExactDrafts=[];
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,exactCopyAnchors:useWindowV2?visibleEditAnchors(original,windowEvidence,{task:windowTask}):undefined,editLiteralGuidance:"For a small insertion, prefer an exact before literal from exactCopyAnchors. Copy its before value verbatim; after is plain replacement source only: inserted code followed by the exact unchanged anchor, or the real bounded replacement. Never include unified-diff + or - prefixes, code fences, ellipses, or unchanged source outside the before span. Anchors are complete lines; do not expand them into copies of unrelated source. Anchors confer no additional paths or authority; ordinary exact-source validation and independent reviews still apply.",sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
+    sourceExactDrafts=useWindowV2?retainSourceExactDrafts(original,windowEvidence,sourceExactDrafts):[];
+    const partialPatchDraft=sourceExactDrafts.length?{status:'unapplied_source_exact_draft',edits:sourceExactDrafts,correctionDrafts:rejectedSourceEdits.filter(edit=>!retainSourceExactDrafts(original,windowEvidence,[edit]).length).slice(0,2).map(edit=>{const raw=JSON.stringify(edit);return raw&&raw.length<=8000?edit:{path:edit?.path,reason:'Regenerate one bounded correction from the visible source'};}),instruction:'These exact-source drafts are NOT applied, reviewed or committed. Return corrections for the failing edits and any missing requirements. Do not recreate unchanged drafts; they are combined before full review, tests and arbitration. You may replace a draft by returning the same path and exact before with a corrected after. An existing-file before cannot be empty: for added tests, replace a unique visible closing line with that line followed by the new tests. Do not infer missing files or broader permissions.'}:undefined;
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,partialPatchDraft,exactCopyAnchors:useWindowV2?visibleEditAnchors(original,windowEvidence,{task:windowTask}):undefined,editLiteralGuidance:"For a small insertion, prefer an exact before literal from exactCopyAnchors. Copy its before value verbatim; after is plain replacement source only: inserted code followed by the exact unchanged anchor, or the real bounded replacement. Never include unified-diff + or - prefixes, code fences, ellipses, or unchanged source outside the before span. Anchors are complete lines; do not expand them into copies of unrelated source. Anchors confer no additional paths or authority; ordinary exact-source validation and independent reviews still apply.",sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
     requireGreenEdits(proposal);
     // Repair only a single {text:literal} schema wrapper already verified in
     // the immutable source windows. All other malformed/outside edits fail closed.
-    if(useWindowV2)proposal.edits=normalizeVisibleEdits(windowEvidence,proposal.edits);
+    if(useWindowV2){
+     proposal.edits=normalizeVisibleEdits(windowEvidence,proposal.edits);
+     proposal.edits=mergeSourceDrafts(sourceExactDrafts,proposal.edits);
+    }
+    rejectedSourceEdits=proposal.edits;
     const unplannedPaths=proposal.edits?.filter(e=>!Object.hasOwn(original,e.path)).map(e=>String(e.path));
     if(unplannedPaths?.length)throw Error('Engineer attempted files absent from the reader handoff: '+JSON.stringify(unplannedPaths)+'. Allowed paths: '+JSON.stringify(Object.keys(original))+'. Return edits only for the allowed paths; do not expand the reader plan.');
     if(useWindowV2&&!checkVisibleEdits(windowEvidence,proposal.edits))throw Error('Model attempted an edit outside the pinned source windows. '+visibleEditFeedback(windowEvidence,proposal.edits));
@@ -312,6 +319,8 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    },
    restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
    onFeedback:async feedback=>{
+    sourceExactDrafts=useWindowV2&&sourceDraftRetry(feedback)?retainSourceExactDrafts(original,windowEvidence,rejectedSourceEdits):[];
+    feedback.unappliedSourceDraftCount=sourceExactDrafts.length;
     // Only a build-window rejection (including empty edits) may request
     // an alternate bounded source view. Replan from the original pinned SHA;
     // do not modify the allowed file list or weaken review/push gates.
