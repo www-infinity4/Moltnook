@@ -141,6 +141,20 @@ test('source suggestions never invent files or bypass missing private access',()
 });
 
 
+test('nonbreaking hyphen in failed QuantaPhi owner path never turns verified writer scope into owner blocker',()=>{
+ // Regresses the observed reader failure in Moltnook Actions run 40138717376.
+ const plan={blockers:[b('owner_input_required',"The repository www‑infinity4/QuantaPhi is marked read‑only (scopedCapabilities.readOnly = true). Write permission from the owner is required to modify any source or workflow files needed for the repair.")]};
+ const scope={repository:'www-infinity4/QuantaPhi',reportedPushPermission:true};
+ const reconsider=evidenceReplanFeedback({plan,task:'Repair Bubbles execution handoffs',writeScope:scope});
+ assert.equal(reconsider.retry,true);
+ assert.deepEqual(reconsider.categories,['verified_repo_write_scope']);
+ assert.match(reconsider.facts.join(' '),/not proof a future push/);
+ assert.equal(plan.blockers.length,1,'model blocker is preserved for an evidence-grounded retry');
+ assert.equal(evidenceReplanFeedback({plan,writeScope:{...scope,reportedPushPermission:false}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan,writeScope:{...scope,repository:'www-infinity4/RecordB'}}).retry,false);
+ assert.equal(evidenceReplanFeedback({plan:{blockers:[b('owner_input_required',"The .env secret file in www‑infinity4/QuantaPhi is read‑only")]},writeScope:scope}).retry,false);
+});
+
 test('verified cross-repository runner scope triggers bounded replan of invented read-only policy',()=>{
  const plan={blockers:[
   b('owner_input_required','Write permission on the www-infinity4/WidgetPhi repository is required to create the recommendation report.'),

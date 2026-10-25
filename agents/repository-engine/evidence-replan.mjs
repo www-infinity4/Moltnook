@@ -157,8 +157,10 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
   if(['owner_input_required','excluded_path_required'].includes(blocker.code)
       && writeScope?.reportedPushPermission===true
       && /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'')
-      && reason.toLowerCase().includes(writeScope.repository.toLowerCase())
-      && /(?:read[ -]?only|write permission|required to (?:create|write)|prohibit(?:s|ing)? (?:creation|modification)|(?:cannot|can't) (?:create|modify|write))/i.test(reason)
+      // Match the canonical repository identity, not the model's typography.
+      // Some model responses use U+2011 nonbreaking hyphens in owner names.
+      && normalized.includes(writeScope.repository.toLowerCase())
+      && /(?:read[ -]?only|write permission|required to (?:create|write)|prohibit(?:s|ing)? (?:creation|modification)|(?:cannot|can't) (?:create|modify|write))/i.test(normalized)
       && !/(?:\.env|\.git\/|secret|credential|authorization token|branch protection|403|401|sensitive path)/i.test(reason)){
    facts.push('The authenticated executor cloned '+writeScope.repository+
     ' and its GitHub repository metadata reported push permission. The scoped runtime excludes .git, .env, credentials and secrets, NOT the entire repository. Reassess source-only changes inside the assigned repository. This is not proof a future push, merge or deployment will succeed.');
