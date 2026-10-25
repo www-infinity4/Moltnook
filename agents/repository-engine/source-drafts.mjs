@@ -1,7 +1,7 @@
 import {checkVisibleEdits,sha256} from './context-windows.mjs';
 import {applyEdits} from './patch.mjs';
 export function sourceDraftRetry(feedback){
- return feedback?.stage==='build'&&/Model attempted an edit outside the pinned source windows|Engineer attempted files absent from the reader handoff/.test(feedback.reason||'');
+ return feedback?.stage==='build'&&/Model attempted an edit outside the pinned source windows|Engineer attempted files absent from the reader handoff|Edit must match immutable source exactly once/.test(feedback.reason||'');
 }
 export function retainSourceExactDrafts(original,packet,edits,{maxChars=24000}={}){
  const result=[];let size=0;

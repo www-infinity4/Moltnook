@@ -39,6 +39,7 @@ test('semantic review, syntax, tests and arbitration rejection discard stale dra
  for(const stage of ['review','test','arbitration'])assert.equal(sourceDraftRetry({stage,reason:'Model attempted an edit outside the pinned source windows'}),false);
  assert.equal(sourceDraftRetry({stage:'build',reason:'Candidate module syntax failed before review'}),false);
  assert.equal(sourceDraftRetry({stage:'build',reason:'Model attempted an edit outside the pinned source windows'}),true);
+ assert.equal(sourceDraftRetry({stage:'build',reason:'Edit must match immutable source exactly once'}),true);
 });
 test('real engine combines drafts before existing full source, syntax, review and test gates',()=>{
  const s=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
