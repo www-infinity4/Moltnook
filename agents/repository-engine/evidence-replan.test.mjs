@@ -148,7 +148,7 @@ test('nonbreaking hyphen in failed QuantaPhi owner path never turns verified wri
  const reconsider=evidenceReplanFeedback({plan,task:'Repair Bubbles execution handoffs',writeScope:scope});
  assert.equal(reconsider.retry,true);
  assert.deepEqual(reconsider.categories,['verified_repo_write_scope']);
- assert.equal(reconsider.permissionsExpanded,false);
+ assert.match(reconsider.facts.join(' '),/not proof a future push/);
  assert.equal(plan.blockers.length,1,'model blocker is preserved for an evidence-grounded retry');
  assert.equal(evidenceReplanFeedback({plan,writeScope:{...scope,reportedPushPermission:false}}).retry,false);
  assert.equal(evidenceReplanFeedback({plan,writeScope:{...scope,repository:'www-infinity4/RecordB'}}).retry,false);
