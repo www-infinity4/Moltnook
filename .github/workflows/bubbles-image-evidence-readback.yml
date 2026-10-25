@@ -1,0 +1,46 @@
+name: Live Bubbles image handoff source readback
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/bubbles-image-evidence-readback.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  readback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare live JavaScript against exact reviewed source and check entrypoint revision
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import {mkdirSync,writeFileSync} from 'node:fs';
+          const pin='40a3b0998c439086d597ee5129cde3831251761c',revision='20261024-image-handoff2';
+          const report={sourcePin:pin,checks:[],ownerWritesVerified:false,androidHardwareVerified:false};
+          async function read(url){const r=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(20000),headers:{'Cache-Control':'no-cache'}});if(!r.ok)throw Error('source_read_http_'+r.status);return r.text();}
+          try {
+           for(const file of ['bubbles-ai.js','bubbles-work-evidence.mjs']) {
+            const [live,pinned]=await Promise.all([read('https://quantaphi.org/'+file+'?v='+revision),read('https://raw.githubusercontent.com/www-infinity4/QuantaPhi/'+pin+'/'+file)]);
+            const exact=live===pinned;
+            report.checks.push({file,exact,sha256:createHash('sha256').update(live).digest('hex')});
+            if(!exact)throw Error('live_source_does_not_match_reviewed_'+file);
+           }
+           const page=await read('https://quantaphi.org/bubbles.html?build='+revision);
+           const entrypointCurrent=page.includes('/bubbles-ai.js?v='+revision);
+           report.checks.push({file:'bubbles.html',entrypointCurrent});
+           if(!entrypointCurrent)throw Error('live_entrypoint_still_old');
+           report.status='passed';
+          }catch(e){report.status='failed';report.error=String(e.message);process.exitCode=1;}
+          finally{mkdirSync('repository-receipts',{recursive:true});writeFileSync('repository-receipts/bubbles-image-evidence-live.json',JSON.stringify(report,null,2));console.log('BUBBLES_IMAGE_EVIDENCE_LIVE '+JSON.stringify(report));}
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bubbles-image-evidence-live
+          path: repository-receipts/bubbles-image-evidence-live.json
+          if-no-files-found: warn
+          retention-days: 14
