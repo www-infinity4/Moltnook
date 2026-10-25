@@ -6,10 +6,10 @@
 import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 
-export const PRODUCTION_DEPLOYMENT='8aa84f00-6331-419c-885a-56ca61e170d7';
-export const PRODUCTION_VERSION='f00ef78a-d044-4437-868b-73dcc0dd61d8';
-export const CANDIDATE_VERSION='b43fbe8f-4d3c-4943-a62e-f19627cec378';
-export const SOURCE_SHA='0206dbae0aeb8dcfe7f4870cfd352ea5328383b3';
+export const PRODUCTION_DEPLOYMENT='c426aa64-77a2-409c-9332-316225557c4c';
+export const PRODUCTION_VERSION='b43fbe8f-4d3c-4943-a62e-f19627cec378';
+export const CANDIDATE_VERSION='4af258f9-deaf-4612-a2ed-125fcac6685a';
+export const SOURCE_SHA='715b0ef0688bc697546d1317cfe6d81360456f2d';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
 export const PREVIEW_ID='b5ad542188964721a0ab59319c1f0b3a';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
@@ -54,7 +54,7 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  const list=deployments?.items||deployments;
  const latest=Array.isArray(list)?list[0]:null,env=latest?.env||{};
  if(!latest||latest.main_module!==candidateName||
-   !['bbf3a91','19510f5','ca40684','92c0e39',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
+   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
    JSON.stringify(Object.keys(env).sort())!==
      JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
    env.BRAIN_CANARY_MODE?.text!=='isolated'||
