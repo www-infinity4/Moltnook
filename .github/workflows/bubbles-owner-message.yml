@@ -752,3 +752,29 @@ jobs:
           console.log('BRAIN_REQUIREMENTS_REPAIR_INTAKE '+JSON.stringify({httpStatus:r.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,error:receipt.error||null,completed:false}));
           if(!r.ok||receipt.ok!==true||!receipt.ticketId||receipt.completed!==false)throw Error('owner_repair_intake_not_verified');
           NODE
+
+  x_owner_build_bridge_20261026:
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Connect Bubbles X owner build intake 20261026')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify current owner consent and submit the concrete Twitter build connection
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('existing_owner_approval_unverified');
+          const request="Connect Bubbles owner X posts to actual repository builds. Confirmed account @YahooPingcwlz; owner's second handle is approximate @googlegware with Max Planck avatar, UNVERIFIED: do not follow/authorize a guessed account. Public reader JSON-envelope defect is repaired in QuantaPhi PR #1092; reconcile its merged source/deployment. Implement a durable per-author/post-ID intake ledger and authenticated owner-only consume/dispatch route, honoring existing five-day approval/revocation and normal eligible-job execution. Recover cursor/backlog after interruptions, do not stop at 92, keep post URLs and real ticket/commit/PR/test receipts. Read owner build requests without requiring #bubbles. Discover repositories from content, not repeated owner repo questions. Public reader/saved posts never grant execution rights. Separate quoted/reposted/other-user text, casual posts, threats and money/purchase assertions from software work. Seed actual legitimate requests: azure/original baseball-card pack builder (2114569927365460160), continuity.org follow-up (2114561084010959258), StarQuest repair (2114560911658672440); reconcile existing tickets/PRs before any build. Implement source and meaningful tests; use independent review/target CI and authorized merge/deploy pipeline, truthful queued vs completed receipts. Integrate with existing Integra draft PR #1065, avoiding its unrelated card changes. Integra AI must have a dedicated transparent X account, authorized posting/answer adapter, reply dedupe and actual returned X post IDs. Signup/credentials and X written AI-reply approval are NOT provisioned: report those exact blockers, never invent an account or bypass X rules. Preserve wallets, scope and APK hold #525.";
+          if(request.length>1800)throw Error('bounded_owner_request_invalid');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await response.json().catch(()=>({}));
+          console.log('BUBBLES_X_BUILD_INTAKE '+JSON.stringify({httpStatus:response.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
+          if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||!receipt.ticketId.trim()||receipt.repository!=='www-infinity4/QuantaPhi'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
+          NODE
