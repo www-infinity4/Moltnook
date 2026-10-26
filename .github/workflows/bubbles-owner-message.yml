@@ -776,5 +776,5 @@ jobs:
           const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
           const receipt=await response.json().catch(()=>({}));
           console.log('BUBBLES_X_BUILD_INTAKE '+JSON.stringify({httpStatus:response.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
-          if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
+          if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||!receipt.ticketId.trim()||receipt.repository!=='www-infinity4/QuantaPhi'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
           NODE
