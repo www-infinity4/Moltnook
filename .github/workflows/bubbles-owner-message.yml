@@ -778,3 +778,29 @@ jobs:
           console.log('BUBBLES_X_BUILD_INTAKE '+JSON.stringify({httpStatus:response.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
           if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||!receipt.ticketId.trim()||receipt.repository!=='www-infinity4/QuantaPhi'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
           NODE
+
+  x_owner_build_ledger_slice_20261026:
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Build Bubbles X durable owner intake slice 20261026')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify current owner consent and submit the bounded source-only owner X ledger slice
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('existing_owner_approval_unverified');
+          const request="SOURCE-ONLY prerequisite slice for blocked IW-20261026-D070DD98, not a retry or account activation. Implement durable owner X build intake in QuantaPhi. Existing browser data is workers/bubbles-public-x/schema.sql (owner_x_posts, owner_x_scans) with DB in its wrangler.json. Keep that public reader read-only. Use the Brain's separate WORK_DB for an additive owner_x_build_intake ledger keyed by authenticated owner, author and post ID; store request hash, target repo, processing state and ticket receipt. Concrete new files: workers/infinity-brain-clock/owner-x-builds.mjs, workers/infinity-brain-clock/owner-x-builds.sql, test/brain-owner-x-builds.test.mjs. Add the minimal authenticated /owner/bridge-x-builds integration in workers/infinity-brain-clock/worker.js. Reuse authenticateOwnerBridge and the existing signed Bubbles status check on EVERY intake/status attempt; preserve expiry/revocation and wallet isolation. Fetch canonical fixed @YahooPingcwlz inbox records server-side, never trust client post text, URLs, author or approval booleans. Preserve source URLs and stable per-post submission IDs into existing owner ticket/dispatch logic so retries after lost responses cannot create duplicate builds. Admit substantive owner software build requests, not bare hashtags, quotes/reposts, casual purchases or threats. Use parameterized SQL and atomic claim/recovery. Test duplicate/concurrent/expired/revoked/wrong-owner, interruption recovery, text mismatch and actual ticket receipts. Acceptance is implemented source, executable tests, independent review and a normal PR/target CI only. Dedicated Integra signup, OAuth, X approval and live replies are explicitly outside this slice. Existing source context is QuantaPhi commit 9b6091459d708021cc60809b1cb4f0129c7d9d69.";
+          if(request.length>1800)throw Error('bounded_owner_request_invalid');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await response.json().catch(()=>({}));
+          console.log('BUBBLES_X_LEDGER_SLICE_INTAKE '+JSON.stringify({httpStatus:response.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
+          if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||!receipt.ticketId.trim()||receipt.repository!=='www-infinity4/QuantaPhi'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
+          NODE
