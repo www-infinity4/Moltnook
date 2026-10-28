@@ -11,7 +11,7 @@ const args = () => ({ catalog: structuredClone(catalog), request: structuredClon
 
 test('verified signed scoped read produces only a sanitized receipt', async () => {
   let calls = 0;
-  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, skillId: input.skillId, resourceId: input.resourceId, jobId: input.jobId, leaseId: input.leaseId, fence: input.fence, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
+  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, skillId: input.skillId, resourceId: input.resourceId, jobId: input.jobId, leaseId: input.leaseId, fence: input.fence, permissionId: input.permissionId, runtimeIdentity: input.runtimeIdentity, sourceRevision: input.sourceRevision, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
   assert.equal(calls, 1);
   assert.deepEqual(result, { state: 'completed', skillId: request.skillId, resourceId: request.resourceId, jobId: 'job1', fence: 2, receiptId: 'cf_read_1', httpStatus: 200 });
 });
@@ -133,4 +133,26 @@ test('coordinated mutation cannot swap the skill, resource, runtime or source re
     } });
     assert.equal(result.reason, 'lease_or_permission_changed_during_execution');
   }
+});
+
+
+test('receipt must bind the exact permission, runtime identity and source revision', async () => {
+  for (const change of [
+    { permissionId: 'other_permission' },
+    { runtimeIdentity: 'other_runtime' },
+    { sourceRevision: 'b'.repeat(40) },
+  ]) {
+    const a = args();
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => ({
+      success: true, ...decision, ...change, receiptId: 'cross_scope_receipt', httpStatus: 200,
+    }) });
+    assert.deepEqual(result, { state: 'blocked', reason: 'missing_matching_tool_receipt', skillId: request.skillId });
+  }
+  const a = args();
+  const missing = await dispatchCloudflareRead({ ...a, adapter: async decision => ({
+    success: true, skillId: decision.skillId, resourceId: decision.resourceId,
+    jobId: decision.jobId, leaseId: decision.leaseId, fence: decision.fence,
+    receiptId: 'missing_identity', httpStatus: 200,
+  }) });
+  assert.equal(missing.reason, 'missing_matching_tool_receipt');
 });
