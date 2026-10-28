@@ -1,6 +1,12 @@
 import path from 'node:path';
 export function safePath(value){
- if(typeof value!=='string'||value.length>240||value.includes('\\')||value.startsWith('/')||value.split('/').some(x=>!x||x==='.'||x==='..')||/^(?:\.git)(?:\/|$)|^\.env(?:[.\/]|$)/.test(value)||/(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
+ if(typeof value!=='string'||value.length>240||value.includes('\\')||/[\u0000-\u001f\u007f]/.test(value)||value.startsWith('/'))throw Error('Source path is outside writer policy');
+ const parts=value.split('/');
+ // Reject sensitive dotfiles in ANY directory, not just at repository root.
+ // Preserve ordinary .github workflows and .gitignore source files.
+ if(parts.some(x=>!x||x==='.'||x==='..'||x==='.git'||x==='.env'||x.startsWith('.env.')||
+  ['.envrc','.npmrc','.netrc','.pypirc','.ssh','.aws'].includes(x))||
+  /(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
  return value;
 }
 
