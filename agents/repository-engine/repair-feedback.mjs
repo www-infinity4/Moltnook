@@ -46,7 +46,8 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
  // The final runner failure must retain the same safe path/count that the
  // retry feedback carried. Otherwise the job receipt becomes generic again.
  // Do not re-emit an untrusted upstream error message or source snippet.
- const finalDiagnostic=feedback?.diagnostic;
+ // Callbacks may retain/mutate feedback; revalidate at the receipt boundary.
+ const finalDiagnostic=safeImmutableDiagnostic(feedback?.diagnostic);
  const suffix=finalDiagnostic
   ?' (path='+JSON.stringify(finalDiagnostic.sourcePath)+', matches='+finalDiagnostic.matchCount+')'
   :'';
