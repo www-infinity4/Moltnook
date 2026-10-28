@@ -78,3 +78,33 @@ test('untrusted diagnostic fields never become file-path feedback',async()=>{
   assert.equal(result.attempt,2);
  }
 });
+
+test('typed immutable feedback never copies upstream source text or nested credential paths',async()=>{
+ for(const sourcePath of ['src/page.js','config/deep/.env','pkg/.npmrc','nested/.git/config','config/.ENV.production']){
+  let attempts=0;
+  const receipts=[];
+  const result=await repairWithFeedback({
+   build:async feedback=>{
+    if(++attempts===1){
+     const error=new Error('PRIVATE_TOKEN_SENTINEL in upstream edit text');
+     error.code='immutable_edit_match_count';
+     error.sourcePath=sourcePath;error.matchCount=2;
+     throw error;
+    }
+    assert.equal(feedback.reason,'Immutable source edit did not match exactly once');
+    assert.ok(!JSON.stringify(feedback).includes('PRIVATE_TOKEN_SENTINEL'));
+    const safe=sourcePath==='src/page.js';
+    assert.equal(Boolean(feedback.diagnostic),safe);
+    assert.equal(Boolean(feedback.failures[0].diagnostic),safe);
+    return {safe:true};
+   },
+   review:async()=>({approved:true}),test:async()=>({passed:true}),
+   arbitrate:async()=>({decision:'approve'}),restore:async()=>{},
+   onFeedback:async feedback=>receipts.push(structuredClone(feedback))
+  });
+  assert.equal(result.attempt,2);
+  assert.equal(receipts.length,1);
+  assert.ok(!JSON.stringify(receipts).includes('PRIVATE_TOKEN_SENTINEL'));
+  if(sourcePath!=='src/page.js')assert.ok(!JSON.stringify(receipts).includes(sourcePath));
+ }
+});
