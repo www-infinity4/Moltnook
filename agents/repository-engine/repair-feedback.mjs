@@ -43,5 +43,18 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
    await onFeedback(feedback);
   }
  }
- throw Error('Repair attempts exhausted: '+feedback.stage+': '+feedback.reason);
+ // The final runner failure must retain the same safe path/count that the
+ // retry feedback carried. Otherwise the job receipt becomes generic again.
+ // Do not re-emit an untrusted upstream error message or source snippet.
+ const finalDiagnostic=feedback?.diagnostic;
+ const suffix=finalDiagnostic
+  ?' (path='+JSON.stringify(finalDiagnostic.sourcePath)+', matches='+finalDiagnostic.matchCount+')'
+  :'';
+ const exhausted=new Error('Repair attempts exhausted: '+feedback.stage+': '+feedback.reason+suffix);
+ if(finalDiagnostic){
+  exhausted.code=finalDiagnostic.code;
+  exhausted.sourcePath=finalDiagnostic.sourcePath;
+  exhausted.matchCount=finalDiagnostic.matchCount;
+ }
+ throw exhausted;
 }
