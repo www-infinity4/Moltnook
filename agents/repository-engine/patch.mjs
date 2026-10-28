@@ -1,7 +1,9 @@
 import path from 'node:path';
 export function safePath(value){
  if(typeof value!=='string'||value.length>240||value.includes('\\')||/[\u0000-\u001f\u007f]/.test(value)||value.startsWith('/'))throw Error('Source path is outside writer policy');
- const parts=value.split('/');
+ // Case-insensitive denylist: source checkouts can move between filesystems.
+ // Never let a case-variant credential path bypass the writer policy.
+ const parts=value.toLowerCase().split('/');
  // Reject sensitive dotfiles in ANY directory, not just at repository root.
  // Preserve ordinary .github workflows and .gitignore source files.
  if(parts.some(x=>!x||x==='.'||x==='..'||x==='.git'||x==='.env'||x.startsWith('.env.')||
