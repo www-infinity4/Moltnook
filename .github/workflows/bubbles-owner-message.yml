@@ -804,3 +804,41 @@ jobs:
           console.log('BUBBLES_X_LEDGER_SLICE_INTAKE '+JSON.stringify({httpStatus:response.status,ok:receipt.ok===true,ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
           if(!response.ok||receipt.ok!==true||typeof receipt.ticketId!=='string'||!receipt.ticketId.trim()||receipt.repository!=='www-infinity4/QuantaPhi'||receipt.completed!==false)throw Error('x_build_intake_not_verified');
           NODE
+
+  apk_all_cards_parcels:
+    if: github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Parcel all-card APK upgrades to Brain 20261027')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        parcel: [{"id":"card-apk-catalog","request":"APK upgrades for ALL QuantaPhi cards, parcel 1 of 3: reconcile existing card/APK work and implement the shared card-to-Android app catalog and launcher wiring in www-infinity4/QuantaPhi. Inventory the actual canonical card registry, including Public, For You and Following; retain stable card IDs and a coverage report so no card is silently omitted. Inspect existing Android build/flavor/deep-link mechanisms and reuse them. Add a consistent app/install area for every eligible card using real existing packages or verified build status; do not substitute PWA installs or generic download links for Android APKs. Preserve each card's real source graphics, interaction/search/player, Share/Collect/Star/+1 build and Follow behavior, Oracle Octaves styling and 360px usability. Unsupported third-party integration must be labeled honestly, never claimed connected. Coordinate shared registry ownership with parcels card-apk-configs and card-apk-verification to avoid conflicts. Acceptance: implemented registry/launcher source, meaningful routing/coverage tests, independent review, commit and target CI/PR receipts. Reconcile duplicates before coding. Preserve the existing APK security hold #525; source/build work is allowed but no public APK release, secret embedding or permission bypass."},{"id":"card-apk-configs","request":"APK upgrades for ALL QuantaPhi cards, parcel 2 of 3: implement per-card Android application configurations using the actual shared Bubbles Android shell in www-infinity4/QuantaPhi. Reconcile existing jobs and use parcel card-apk-catalog as the canonical card-ID inventory; do not independently rewrite the shared catalog. Generate validated unique application IDs, labels, real authorized icons and initial/deep-link destinations for every supported card, with a shared upgradeable runtime instead of divergent copied apps. Preserve card-specific useful controls, search/media and existing Bubbles floating chat/voice features. Google card opens the actual Google search interface and Gemini path when available; other providers use their real supported routes, never fictitious signed-in sessions or APIs. Keep authentication isolated by user and provider; use existing wallet/session adapters without copying credentials into APKs. Missing account/provider capability must have a precise blocker. Acceptance: source/config generation, duplicate-ID and unsafe-URL tests, per-card coverage map and reproducible build commands, independently reviewed PR/CI receipts. Existing security hold #525 remains; do not distribute APKs, alter wallet balances or add unauthorized Android permissions."},{"id":"card-apk-verification","request":"APK upgrades for ALL QuantaPhi cards, parcel 3 of 3: build the Android verification and upgrade pipeline in www-infinity4/QuantaPhi, coordinating with parcels card-apk-catalog and card-apk-configs. First reconcile existing tickets/PRs. Using the canonical per-card inventory, validate every supported package config and build actual artifacts through existing Android CI. Record card ID, application ID, version, exact source commit, build result, artifact checksum and artifact location; failures remain failures and unsupported cards remain visible. Verify deep links, navigation/back, readable mobile controls, session isolation and shared-runtime upgrade compatibility. Use real emulator tests where possible and keep Motorola physical-device checks explicitly unverified until actual evidence exists. Preserve current signing identity without exposing keys. A compile or emulator result does not lift APK security hold #525: no public release or install button claiming availability before existing audit/release requirements pass. Acceptance: executable build/verification workflow, coverage and failure receipts for all inventory entries, regression tests, independent review and normal target CI/PR receipts. Report Started/Finished/Blocked in normal voice; never speak tool JSON or claim installation from a queued build."}]
+    steps:
+      - name: Verify existing owner consent and submit one bounded APK parcel
+        env:
+          PARCEL_ID: ${{ matrix.parcel.id }}
+          PARCEL_REQUEST: ${{ matrix.parcel.request }}
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID){
+            console.log('APK_PARCEL_BLOCKED '+JSON.stringify({parcel:process.env.PARCEL_ID,httpStatus:approval.status,error:proof.error||'existing_owner_approval_unverified',submitted:false}));
+            throw Error('existing_owner_approval_unverified');
+          }
+          const request=process.env.PARCEL_REQUEST;
+          if(typeof request!=='string'||request.length>1800||request.length<100)throw Error('bounded_owner_request_invalid');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await response.json().catch(()=>({}));
+          const confirmed=response.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.ticketId.trim()&&receipt.repository==='www-infinity4/QuantaPhi'&&receipt.completed===false;
+          console.log('APK_PARCEL_INTAKE '+JSON.stringify({parcel:process.env.PARCEL_ID,httpStatus:response.status,ticketConfirmed:Boolean(confirmed),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
+          if(!confirmed)throw Error('apk_parcel_intake_unverified');
+          NODE
