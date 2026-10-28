@@ -117,3 +117,20 @@ test('completion clock must not go backwards or become nonfinite', async () => {
     assert.equal(result.reason, 'invalid_completion_clock');
   }
 });
+
+test('coordinated mutation cannot swap the skill, resource, runtime or source revision', async () => {
+  const mutations = [
+    a => { a.request.resourceId = 'other'; a.evidence.resourceId = 'other'; },
+    a => { a.request.skillId = 'cloudflare.d1.inspect'; a.evidence.skillId = 'cloudflare.d1.inspect'; a.catalog.skills.push({ id: 'cloudflare.d1.inspect', risk: 'read' }); },
+    a => { a.runner.runtimeIdentity = 'different-runtime'; a.evidence.grantedTo = 'different-runtime'; },
+    a => { a.runner.sourceRevision = 'b'.repeat(40); },
+  ];
+  for (const mutation of mutations) {
+    const a = args();
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => {
+      mutation(a);
+      return { success: true, ...decision, receiptId: 'original_scope', httpStatus: 200 };
+    } });
+    assert.equal(result.reason, 'lease_or_permission_changed_during_execution');
+  }
+});
