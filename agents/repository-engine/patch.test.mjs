@@ -11,6 +11,9 @@ test('nested credential dotfiles and control characters never become edit target
   'src/.env','src/.env.production','config/deep/.git/config',
   'pkg/.npmrc','pkg/.netrc','pkg/.pypirc','team/.envrc',
   'team/.ssh/id_ed25519','team/.aws/credentials',
+  'src/.ENV','src/.Env.Production','config/deep/.GIT/config',
+  'pkg/.NPMRC','pkg/.NETRC','pkg/.PYPIRC','team/.EnvRc',
+  'team/.SSH/id_ed25519','team/.AWS/credentials',
   'src/bad\nname.js','src/bad\rname.js','src/bad\0name.js'
  ];
  for(const file of protectedPaths){
