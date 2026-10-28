@@ -6,6 +6,21 @@ test('source edits cannot traverse paths or mutate credentials ',()=>{
  assert.equal(safePath('.github/workflows/run.yml'),'.github/workflows/run.yml');
  assert.equal(inside('/tmp/repo','src/page.js'),'/tmp/repo/src/page.js');
 });
+test('nested credential dotfiles and control characters never become edit targets or diagnostics',()=>{
+ const protectedPaths=[
+  'src/.env','src/.env.production','config/deep/.git/config',
+  'pkg/.npmrc','pkg/.netrc','pkg/.pypirc','team/.envrc',
+  'team/.ssh/id_ed25519','team/.aws/credentials',
+  'src/bad\\nname.js','src/bad\\rname.js','src/bad\\0name.js'
+ ];
+ for(const file of protectedPaths){
+  assert.throws(()=>safePath(file),/outside writer policy/,JSON.stringify(file));
+  assert.throws(()=>inside('/tmp/repo',file),/outside writer policy/,JSON.stringify(file));
+  assert.throws(()=>applyEdits({[file]:'safe'},[{path:file,before:'safe',after:'changed'}]),/outside writer policy/,JSON.stringify(file));
+ }
+ assert.equal(safePath('src/.gitignore'),'src/.gitignore');
+ assert.equal(safePath('.github/workflows/check.yml'),'.github/workflows/check.yml');
+});
 test('engine binds edits to unique source and explicit new files',()=>{
  assert.deepEqual(applyEdits({'src/a.js':'const value=1;','src/new.js':null},[{path:'src/a.js',before:'value=1',after:'value=2'},{path:'src/new.js',before:null,after:'export default 2;'}]),{'src/a.js':'const value=2;','src/new.js':'export default 2;'});
  assert.throws(()=>applyEdits({'a.js':'same same'},[{path:'a.js',before:'same',after:'other'}]));
