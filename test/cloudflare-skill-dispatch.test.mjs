@@ -7,11 +7,11 @@ const request = { skillId: 'cloudflare.workers.inspect', resourceId: 'worker_123
 const runner = { jobId: 'job1', leaseId: 'lease1', fence: 2, signed: true, sourceRevision: 'a'.repeat(40), runtimeIdentity: 'bubbles-runtime', leaseStartedAt: '2026-10-28T19:29:00Z', leaseExpiresAt: '2026-10-28T19:33:00Z' };
 const evidence = { permissionId: 'perm_1', status: 'verified', skillId: request.skillId, grantedTo: runner.runtimeIdentity, resourceId: request.resourceId, risk: 'read', verifiedAt: '2026-10-28T19:29:00Z', expiresAt: '2026-10-28T19:32:00Z' };
 const catalog = { schemaVersion: 1, kind: 'bubbles.cloudflare.skill-catalog', authorization: { allowProductionMutation: false, connectorApiVerification: 'verified', runtimeIdentityVerified: true, verifiedPermissionCount: 403 }, skills: [{ id: request.skillId, risk: 'read' }, { id: 'cloudflare.workers.deploy', risk: 'write', enabled: false }] };
-const args = () => ({ catalog: structuredClone(catalog), request: structuredClone(request), runner: structuredClone(runner), evidence: structuredClone(evidence), now });
+const args = () => ({ catalog: structuredClone(catalog), request: structuredClone(request), runner: structuredClone(runner), evidence: structuredClone(evidence), now, clock: () => now });
 
 test('verified signed scoped read produces only a sanitized receipt', async () => {
   let calls = 0;
-  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, resourceId: input.resourceId, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
+  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, skillId: input.skillId, resourceId: input.resourceId, jobId: input.jobId, leaseId: input.leaseId, fence: input.fence, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
   assert.equal(calls, 1);
   assert.deepEqual(result, { state: 'completed', skillId: request.skillId, resourceId: request.resourceId, jobId: 'job1', fence: 2, receiptId: 'cf_read_1', httpStatus: 200 });
 });
@@ -63,4 +63,57 @@ test('adapter failures and forged receipts denied without exposing error', async
   assert.equal(bad.reason, 'missing_matching_tool_receipt');
   const failed = await dispatchCloudflareRead({ ...args(), adapter: async () => { throw Error('token=secret'); } });
   assert.deepEqual(failed, { state: 'blocked', reason: 'adapter_execution_failed', skillId: request.skillId });
+});
+
+test('completion cannot claim success after the fenced lease or permission expires', async () => {
+  for (const completedAt of ['2026-10-28T19:32:01Z', '2026-10-28T19:33:01Z']) {
+    const a = args();
+    a.clock = () => Date.parse(completedAt);
+    let calls = 0;
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => {
+      calls++;
+      return { success: true, ...decision, receiptId: 'late_receipt', httpStatus: 200 };
+    } });
+    assert.equal(calls, 1, 'an already-started call is not silently repeated');
+    assert.deepEqual(result, { state: 'blocked', reason: 'lease_or_permission_changed_during_execution', skillId: request.skillId });
+  }
+});
+
+test('adapter cannot turn a changed fence or revoked permission into completion', async () => {
+  for (const mutation of [
+    a => { a.runner.fence = 99; },
+    a => { a.evidence.status = 'revoked'; },
+    a => { a.evidence.resourceId = 'other'; },
+  ]) {
+    const a = args();
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => {
+      mutation(a);
+      return { success: true, ...decision, receiptId: 'stale_receipt', httpStatus: 200 };
+    } });
+    assert.equal(result.reason, 'lease_or_permission_changed_during_execution');
+  }
+});
+
+test('receipt must match the exact job, lease, fence and skill', async () => {
+  for (const change of [
+    { jobId: 'previous-job' }, { leaseId: 'previous-lease' },
+    { fence: 1 }, { skillId: 'cloudflare.d1.inspect' },
+  ]) {
+    const a = args();
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => ({
+      success: true, ...decision, ...change, receiptId: 'old_receipt', httpStatus: 200,
+    }) });
+    assert.equal(result.reason, 'missing_matching_tool_receipt');
+  }
+});
+
+test('completion clock must not go backwards or become nonfinite', async () => {
+  for (const completedAt of [now - 1, NaN]) {
+    const a = args();
+    a.clock = () => completedAt;
+    const result = await dispatchCloudflareRead({ ...a, adapter: async decision => ({
+      success: true, ...decision, receiptId: 'clock_receipt', httpStatus: 200,
+    }) });
+    assert.equal(result.reason, 'invalid_completion_clock');
+  }
 });
