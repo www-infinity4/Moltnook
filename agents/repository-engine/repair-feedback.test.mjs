@@ -108,3 +108,41 @@ test('typed immutable feedback never copies upstream source text or nested crede
   if(sourcePath!=='src/page.js')assert.ok(!JSON.stringify(receipts).includes(sourcePath));
  }
 });
+
+
+test('exhausted immutable edit retains only safe path/count in final job error',async()=>{
+ for(const sourcePath of ['src/page.js','config/deep/.env','../secret.txt']){
+  let restores=0;
+  const work=repairWithFeedback({
+   maxAttempts:1,
+   build:async()=>{
+    const error=new Error('PRIVATE_TOKEN_SENTINEL upstream text');
+    error.code='immutable_edit_match_count';
+    error.sourcePath=sourcePath;
+    error.matchCount=2;
+    throw error;
+   },
+   review:async()=>({approved:true}),
+   test:async()=>({passed:true}),
+   arbitrate:async()=>({decision:'approve'}),
+   restore:async()=>{restores++},
+   onFeedback:async()=>{}
+  });
+  await assert.rejects(work,error=>{
+   assert.match(error.message,/Repair attempts exhausted: build: Immutable source edit did not match exactly once/);
+   assert.ok(!error.message.includes('PRIVATE_TOKEN_SENTINEL'));
+   if(sourcePath==='src/page.js'){
+    assert.match(error.message,/path="src\/page.js", matches=2/);
+    assert.equal(error.code,'immutable_edit_match_count');
+    assert.equal(error.sourcePath,'src/page.js');
+    assert.equal(error.matchCount,2);
+   }else{
+    assert.ok(!error.message.includes(sourcePath));
+    assert.equal(error.sourcePath,undefined);
+    assert.equal(error.matchCount,undefined);
+   }
+   return true;
+  });
+  assert.equal(restores,1);
+ }
+});
