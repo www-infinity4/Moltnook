@@ -36,7 +36,7 @@ export function authorizeCloudflareSkill({ catalog, request, runner, evidence, n
   const checked = validDate(evidence.verifiedAt);
   const expires = validDate(evidence.expiresAt);
   if (!Number.isFinite(checked) || !Number.isFinite(expires) || checked > now || now - checked > MAX_EVIDENCE_AGE_MS || expires <= now) return blocked('stale_permission_evidence', skillId);
-  return { state: 'authorized', skillId, resourceId: request.resourceId, jobId: runner.jobId, leaseId: runner.leaseId, fence: runner.fence, permissionId: evidence.permissionId };
+  return { state: 'authorized', skillId, resourceId: request.resourceId, jobId: runner.jobId, leaseId: runner.leaseId, fence: runner.fence, permissionId: evidence.permissionId, runtimeIdentity: runner.runtimeIdentity, sourceRevision: runner.sourceRevision };
 }
 
 /** A trusted caller must cryptographically validate the signed runner before
@@ -57,7 +57,7 @@ export async function dispatchCloudflareRead({ catalog, request, runner, evidenc
     const completedAt = clock();
     if (!Number.isFinite(completedAt) || completedAt < now) return blocked('invalid_completion_clock', decision.skillId);
     const finalDecision = authorizeCloudflareSkill({ catalog, request, runner, evidence, now: completedAt });
-    if (finalDecision.state !== 'authorized' || finalDecision.jobId !== decision.jobId || finalDecision.leaseId !== decision.leaseId || finalDecision.fence !== decision.fence || finalDecision.permissionId !== decision.permissionId) {
+    if (finalDecision.state !== 'authorized' || finalDecision.skillId !== decision.skillId || finalDecision.resourceId !== decision.resourceId || finalDecision.jobId !== decision.jobId || finalDecision.leaseId !== decision.leaseId || finalDecision.fence !== decision.fence || finalDecision.permissionId !== decision.permissionId || finalDecision.runtimeIdentity !== decision.runtimeIdentity || finalDecision.sourceRevision !== decision.sourceRevision) {
       return blocked('lease_or_permission_changed_during_execution', decision.skillId);
     }
     // Require a receipt scoped to this *exact* job, lease and fence; a
