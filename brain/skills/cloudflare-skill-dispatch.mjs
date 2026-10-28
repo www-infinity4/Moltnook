@@ -62,7 +62,7 @@ export async function dispatchCloudflareRead({ catalog, request, runner, evidenc
     }
     // Require a receipt scoped to this *exact* job, lease and fence; a
     // previous success on the same Worker/resource is not a completion proof.
-    if (receipt?.success !== true || receipt?.skillId !== decision.skillId || receipt?.resourceId !== decision.resourceId || receipt?.jobId !== decision.jobId || receipt?.leaseId !== decision.leaseId || receipt?.fence !== decision.fence || typeof receipt?.receiptId !== 'string' || !/^[a-zA-Z0-9_:-]{1,128}$/.test(receipt.receiptId) || !Number.isInteger(receipt?.httpStatus) || receipt.httpStatus < 200 || receipt.httpStatus >= 300) return blocked('missing_matching_tool_receipt', decision.skillId);
+    if (receipt?.success !== true || receipt?.skillId !== decision.skillId || receipt?.resourceId !== decision.resourceId || receipt?.jobId !== decision.jobId || receipt?.leaseId !== decision.leaseId || receipt?.fence !== decision.fence || receipt?.permissionId !== decision.permissionId || receipt?.runtimeIdentity !== decision.runtimeIdentity || receipt?.sourceRevision !== decision.sourceRevision || typeof receipt?.receiptId !== 'string' || !/^[a-zA-Z0-9_:-]{1,128}$/.test(receipt.receiptId) || !Number.isInteger(receipt?.httpStatus) || receipt.httpStatus < 200 || receipt.httpStatus >= 300) return blocked('missing_matching_tool_receipt', decision.skillId);
     return { state: 'completed', skillId: decision.skillId, resourceId: decision.resourceId, jobId: decision.jobId, fence: decision.fence, receiptId: receipt.receiptId, httpStatus: receipt.httpStatus };
   } catch {
     return blocked('adapter_execution_failed', decision.skillId);
