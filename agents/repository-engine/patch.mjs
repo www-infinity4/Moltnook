@@ -36,7 +36,20 @@ export function applyEdits(original,edits){
  for(const e of edits){safePath(e.path);if(typeof e.after!=='string')throw Error('Patch content missing');size+=(e.before?.length||0)+e.after.length;if(size>60000)throw Error('Patch exceeds per-iteration size');
   const prior=Object.hasOwn(patched,e.path)?patched[e.path]:original[e.path];
   if(e.before===null){if(prior!==null)throw Error('New file already exists');patched[e.path]=e.after;}
-  else {if(typeof prior!=='string'||typeof e.before!=='string'||!e.before||prior.split(e.before).length!==2)throw Error('Edit must match immutable source exactly once');patched[e.path]=prior.replace(e.before,e.after);}
+  else {
+   // A failed immutable match must identify the failing *path* and match
+   // count. Never include the source text, the proposed edit, or credentials.
+   const matches=typeof prior==='string'&&typeof e.before==='string'&&e.before
+    ?prior.split(e.before).length-1:0;
+   if(typeof prior!=='string'||typeof e.before!=='string'||!e.before||matches!==1){
+    const error=new Error('Edit must match immutable source exactly once: path='+JSON.stringify(e.path)+', matches='+matches+', source='+(typeof prior==='string'?'present':'missing'));
+    error.code='immutable_edit_match_count';
+    error.sourcePath=e.path;
+    error.matchCount=matches;
+    throw error;
+   }
+   patched[e.path]=prior.replace(e.before,e.after);
+  }
  }
  if(!Object.keys(patched).some(p=>patched[p]!==original[p]))throw Error('Patch made no source change');
  for(const [file,after] of Object.entries(patched)){
