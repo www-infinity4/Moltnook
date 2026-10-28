@@ -8,7 +8,7 @@ function safeImmutableDiagnostic(error){
  // Defense in depth: the diagnostic must stay safe even if the separate
  // repository-writer path-policy fix has not merged yet.
  if(error.sourcePath.split('/').some(part=>
-  /^(?:\\.git|\\.env(?:\\..*)?|\\.envrc|\\.npmrc|\\.netrc|\\.pypirc|\\.ssh|\\.aws)$/i.test(part)))return null;
+  /^(?:\.git|\.env(?:\..*)?|\.envrc|\.npmrc|\.netrc|\.pypirc|\.ssh|\.aws)$/i.test(part)))return null;
  if(!Number.isSafeInteger(error.matchCount)||error.matchCount<0)return null;
  return {code:'immutable_edit_match_count',sourcePath:error.sourcePath,matchCount:error.matchCount};
 }
