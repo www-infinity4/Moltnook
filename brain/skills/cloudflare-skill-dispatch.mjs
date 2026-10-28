@@ -43,13 +43,26 @@ export function authorizeCloudflareSkill({ catalog, request, runner, evidence, n
  * setting runner.signed=true; this module cannot validate provider credentials.
  * The adapter must enforce the actual Cloudflare API permission/resource scope.
  */
-export async function dispatchCloudflareRead({ catalog, request, runner, evidence, adapter, now = Date.now() }) {
+export async function dispatchCloudflareRead({ catalog, request, runner, evidence, adapter, now = Date.now(), clock = Date.now }) {
   const decision = authorizeCloudflareSkill({ catalog, request, runner, evidence, now });
   if (decision.state !== 'authorized') return decision;
   if (typeof adapter !== 'function') return blocked('missing_verified_adapter', decision.skillId);
+  if (typeof clock !== 'function') return blocked('invalid_completion_clock', decision.skillId);
   try {
     const receipt = await adapter(Object.freeze({ ...decision }));
-    if (receipt?.success !== true || receipt?.resourceId !== decision.resourceId || typeof receipt?.receiptId !== 'string' || !/^[a-zA-Z0-9_:-]{1,128}$/.test(receipt.receiptId) || !Number.isInteger(receipt?.httpStatus) || receipt.httpStatus < 200 || receipt.httpStatus >= 300) return blocked('missing_matching_tool_receipt', decision.skillId);
+    // The adapter can wait on Cloudflare beyond the runner's fenced lease or
+    // permission evidence lifetime. Never report a late response as completed.
+    // A late operation may still have happened: reconcile its receipt before
+    // any retry, rather than dispatching the same operation again.
+    const completedAt = clock();
+    if (!Number.isFinite(completedAt) || completedAt < now) return blocked('invalid_completion_clock', decision.skillId);
+    const finalDecision = authorizeCloudflareSkill({ catalog, request, runner, evidence, now: completedAt });
+    if (finalDecision.state !== 'authorized' || finalDecision.jobId !== decision.jobId || finalDecision.leaseId !== decision.leaseId || finalDecision.fence !== decision.fence || finalDecision.permissionId !== decision.permissionId) {
+      return blocked('lease_or_permission_changed_during_execution', decision.skillId);
+    }
+    // Require a receipt scoped to this *exact* job, lease and fence; a
+    // previous success on the same Worker/resource is not a completion proof.
+    if (receipt?.success !== true || receipt?.skillId !== decision.skillId || receipt?.resourceId !== decision.resourceId || receipt?.jobId !== decision.jobId || receipt?.leaseId !== decision.leaseId || receipt?.fence !== decision.fence || typeof receipt?.receiptId !== 'string' || !/^[a-zA-Z0-9_:-]{1,128}$/.test(receipt.receiptId) || !Number.isInteger(receipt?.httpStatus) || receipt.httpStatus < 200 || receipt.httpStatus >= 300) return blocked('missing_matching_tool_receipt', decision.skillId);
     return { state: 'completed', skillId: decision.skillId, resourceId: decision.resourceId, jobId: decision.jobId, fence: decision.fence, receiptId: receipt.receiptId, httpStatus: receipt.httpStatus };
   } catch {
     return blocked('adapter_execution_failed', decision.skillId);
