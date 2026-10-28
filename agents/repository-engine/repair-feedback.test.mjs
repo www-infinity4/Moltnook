@@ -31,3 +31,50 @@ test('Purple rejection cannot commit and repair retries stop at the bound',async
  await assert.rejects(repairWithFeedback({build:async()=>{builds++;return {};},review:async()=>({approved:true}),test:async()=>({passed:true}),arbitrate:async()=>({decision:'reject',reason:'unmet owner requirement'}),restore:async()=>{restored++;},onFeedback:async()=>{}}),/attempts exhausted.*unmet owner requirement/);
  assert.equal(builds,3);assert.equal(restored,3);
 });
+
+test('typed immutable mismatch is carried into the next attempt without edit text',async()=>{
+ let attempts=0;const seen=[];
+ const result=await repairWithFeedback({
+  build:async feedback=>{
+   attempts++;
+   if(attempts===1){
+    const error=new Error('Edit must match immutable source exactly once');
+    error.code='immutable_edit_match_count';
+    error.sourcePath='src/page.js';error.matchCount=2;
+    error.before='PRIVATE_SOURCE_MUST_NOT_TRAVEL';
+    throw error;
+   }
+   assert.deepEqual(feedback.diagnostic,{code:'immutable_edit_match_count',sourcePath:'src/page.js',matchCount:2});
+   assert.deepEqual(feedback.failures[0].diagnostic,feedback.diagnostic);
+   assert.ok(!JSON.stringify(feedback).includes('PRIVATE_SOURCE_MUST_NOT_TRAVEL'));
+   return {safe:true};
+  },
+  review:async()=>({approved:true}),test:async()=>({passed:true}),
+  arbitrate:async()=>({decision:'approve'}),restore:async()=>{},
+  onFeedback:async f=>seen.push(structuredClone(f))
+ });
+ assert.equal(result.attempt,2);
+ assert.equal(seen[0].diagnostic.sourcePath,'src/page.js');
+});
+
+test('untrusted diagnostic fields never become file-path feedback',async()=>{
+ for(const data of [
+  {code:'immutable_edit_match_count',sourcePath:'../secrets',matchCount:0},
+  {code:'immutable_edit_match_count',sourcePath:'.env',matchCount:0},
+  {code:'immutable_edit_match_count',sourcePath:'src/page.js',matchCount:-1},
+  {code:'arbitrary',sourcePath:'src/page.js',matchCount:1}
+ ]){
+  let attempts=0;
+  const result=await repairWithFeedback({
+   build:async feedback=>{
+    if(++attempts===1)throw Object.assign(new Error('generic build failure'),data);
+    assert.equal(feedback.diagnostic,undefined);
+    assert.equal(feedback.failures[0].diagnostic,undefined);
+    return {};
+   },
+   review:async()=>({approved:true}),test:async()=>({passed:true}),
+   arbitrate:async()=>({decision:'approve'}),restore:async()=>{},onFeedback:async()=>{}
+  });
+  assert.equal(result.attempt,2);
+ }
+});
