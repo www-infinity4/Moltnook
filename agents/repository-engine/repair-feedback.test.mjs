@@ -146,3 +146,32 @@ test('exhausted immutable edit retains only safe path/count in final job error',
   assert.equal(restores,1);
  }
 });
+
+
+test('mutated feedback cannot smuggle a protected path into the terminal receipt',async()=>{
+ const run=repairWithFeedback({
+  maxAttempts:1,
+  build:async()=>{
+   const error=new Error('PRIVATE_TOKEN_SENTINEL');
+   error.code='immutable_edit_match_count';
+   error.sourcePath='src/page.js';
+   error.matchCount=1;
+   throw error;
+  },
+  review:async()=>({approved:true}),
+  test:async()=>({passed:true}),
+  arbitrate:async()=>({decision:'approve'}),
+  restore:async()=>{},
+  onFeedback:async feedback=>{
+   feedback.diagnostic.sourcePath='config/.env';
+   feedback.diagnostic.matchCount=999;
+  }
+ });
+ await assert.rejects(run,error=>{
+  assert.match(error.message,/Repair attempts exhausted/);
+  assert.ok(!error.message.includes('config/.env'));
+  assert.ok(!error.message.includes('PRIVATE_TOKEN_SENTINEL'));
+  assert.equal(error.sourcePath,undefined);
+  return true;
+ });
+});
