@@ -5,6 +5,10 @@ import {safePath} from './patch.mjs';
 function safeImmutableDiagnostic(error){
  if(error?.code!=='immutable_edit_match_count')return null;
  try{safePath(error.sourcePath)}catch{return null}
+ // Defense in depth: the diagnostic must stay safe even if the separate
+ // repository-writer path-policy fix has not merged yet.
+ if(error.sourcePath.split('/').some(part=>
+  /^(?:\\.git|\\.env(?:\\..*)?|\\.envrc|\\.npmrc|\\.netrc|\\.pypirc|\\.ssh|\\.aws)$/i.test(part)))return null;
  if(!Number.isSafeInteger(error.matchCount)||error.matchCount<0)return null;
  return {code:'immutable_edit_match_count',sourcePath:error.sourcePath,matchCount:error.matchCount};
 }
@@ -28,8 +32,13 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
   }catch(error){
    await restore();
    const diagnostic=safeImmutableDiagnostic(error);
-   failures.push({attempt,stage,reason:String(error.message).slice(0,2000),...(diagnostic?{diagnostic}:{})});
-   feedback={attempt,stage,reason:String(error.message),...(diagnostic?{diagnostic}:{}),
+   // Never echo arbitrary upstream error.message for typed immutable failures:
+   // it could include source text, tokens, or an unsafe file path.
+   const reason=error?.code==='immutable_edit_match_count'
+    ?'Immutable source edit did not match exactly once'
+    :String(error?.message||'Unknown repair error').slice(0,2000);
+   failures.push({attempt,stage,reason,...(diagnostic?{diagnostic}:{})});
+   feedback={attempt,stage,reason,...(diagnostic?{diagnostic}:{}),
     failures:failures.slice(-3).map(f=>({...f})),...(testResults?{testResults}:{})};
    await onFeedback(feedback);
   }
