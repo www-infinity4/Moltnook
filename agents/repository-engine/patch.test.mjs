@@ -34,3 +34,24 @@ test('real new source behavior and unrelated repeated structural lines are not b
  const repeatedMarkup="function render(){\n return '<div></div>';\n}\n";
  assert.equal(duplicateOnlyObjectEntries(repeatedMarkup,repeatedMarkup+" return '<div></div>';\n"),false);
 });
+
+test('immutable edit mismatch identifies source path and count without exposing source text',()=>{
+ const cases=[
+  {original:{'src/one.js':'const TOP_SECRET_FIXTURE=1;'},edit:{path:'src/one.js',before:'not present',after:'x'},matches:0,source:'present'},
+  {original:{'src/two.js':'repeat repeat'},edit:{path:'src/two.js',before:'repeat',after:'x'},matches:2,source:'present'},
+  {original:{'src/missing.js':null},edit:{path:'src/missing.js',before:'needle',after:'x'},matches:0,source:'missing'}
+ ];
+ for(const {original,edit,matches,source} of cases){
+  assert.throws(()=>applyEdits(original,[edit]),error=>{
+   assert.equal(error.code,'immutable_edit_match_count');
+   assert.equal(error.sourcePath,edit.path);
+   assert.equal(error.matchCount,matches);
+   assert.match(error.message,/Edit must match immutable source exactly once/);
+   assert.ok(error.message.includes('path='+JSON.stringify(edit.path)));
+   assert.ok(error.message.includes('matches='+matches+', source='+source));
+   assert.ok(!error.message.includes('TOP_SECRET_FIXTURE'));
+   assert.ok(!error.message.includes('needle'));
+   return true;
+  });
+ }
+});
