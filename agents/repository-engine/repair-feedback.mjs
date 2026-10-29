@@ -18,7 +18,7 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
  let feedback=initialFeedback;
  // Snapshot the terminal stage/reason before an observer callback can mutate
  // feedback; diagnostic fields are separately revalidated at the boundary.
- let terminalFailure=null;
+ let terminalFailure=null,terminalDiagnostic=null;
  const failures=Array.isArray(initialFeedback?.failures)?initialFeedback.failures.slice(-2):[];
  if(initialFeedback?.reason&&!failures.length)failures.push({stage:initialFeedback.stage,reason:String(initialFeedback.reason).slice(0,2000)});
  for(let attempt=1;attempt<=maxAttempts;attempt++){
@@ -44,17 +44,18 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
    feedback={attempt,stage,reason,...(diagnostic?{diagnostic}:{}),
     failures:failures.slice(-3).map(f=>({...f})),...(testResults?{testResults}:{})};
    terminalFailure={stage,reason};
-   // The callback is an observer, not the next attempt's authority. Deep-copy
-   // nested failure diagnostics before invoking it so mutation cannot alter
-   // the next build's immutable source path, reason or retry history.
-   await onFeedback(structuredClone(feedback));
+   terminalDiagnostic=diagnostic;
+   // Legacy window-replan callbacks intentionally annotate general failures.
+   // Typed immutable-edit evidence is different: never let an observer mutate
+   // its source path, count or retry history before the next build attempt.
+   await onFeedback(error?.code==='immutable_edit_match_count'?structuredClone(feedback):feedback);
   }
  }
  // The final runner failure must retain the same safe path/count that the
  // retry feedback carried. Otherwise the job receipt becomes generic again.
  // Do not re-emit an untrusted upstream error message or source snippet.
  // Callbacks may retain/mutate feedback; revalidate at the receipt boundary.
- const finalDiagnostic=safeImmutableDiagnostic(feedback?.diagnostic);
+ const finalDiagnostic=terminalDiagnostic;
  const suffix=finalDiagnostic
   ?' (path='+JSON.stringify(finalDiagnostic.sourcePath)+', matches='+finalDiagnostic.matchCount+')'
   :'';
