@@ -44,7 +44,10 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
    feedback={attempt,stage,reason,...(diagnostic?{diagnostic}:{}),
     failures:failures.slice(-3).map(f=>({...f})),...(testResults?{testResults}:{})};
    terminalFailure={stage,reason};
-   await onFeedback(feedback);
+   // The callback is an observer, not the next attempt's authority. Deep-copy
+   // nested failure diagnostics before invoking it so mutation cannot alter
+   // the next build's immutable source path, reason or retry history.
+   await onFeedback(structuredClone(feedback));
   }
  }
  // The final runner failure must retain the same safe path/count that the
