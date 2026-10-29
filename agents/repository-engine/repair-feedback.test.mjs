@@ -175,3 +175,31 @@ test('mutated feedback cannot smuggle a protected path into the terminal receipt
   return true;
  });
 });
+
+
+test('mutated callback reason and stage cannot leak into terminal failure',async()=>{
+ const run=repairWithFeedback({
+  maxAttempts:1,
+  build:async()=>{
+   const error=new Error('PRIVATE_UPSTREAM_SECRET');
+   error.code='immutable_edit_match_count';
+   error.sourcePath='src/page.js';error.matchCount=2;
+   throw error;
+  },
+  review:async()=>({approved:true}),test:async()=>({passed:true}),
+  arbitrate:async()=>({decision:'approve'}),restore:async()=>{},
+  onFeedback:async feedback=>{
+   feedback.reason='PRIVATE_CALLBACK_SECRET';
+   feedback.stage='PRIVATE_CALLBACK_STAGE';
+  }
+ });
+ await assert.rejects(run,error=>{
+  assert.match(error.message,/Repair attempts exhausted: build: Immutable source edit did not match exactly once/);
+  assert.ok(!error.message.includes('PRIVATE_UPSTREAM_SECRET'));
+  assert.ok(!error.message.includes('PRIVATE_CALLBACK_SECRET'));
+  assert.ok(!error.message.includes('PRIVATE_CALLBACK_STAGE'));
+  assert.equal(error.sourcePath,'src/page.js');
+  assert.equal(error.matchCount,2);
+  return true;
+ });
+});
