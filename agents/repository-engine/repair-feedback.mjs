@@ -16,6 +16,9 @@ function safeImmutableDiagnostic(error){
 export async function repairWithFeedback({build,review,test,arbitrate,restore,onFeedback,maxAttempts=3,initialFeedback}){
  if(!Number.isInteger(maxAttempts)||maxAttempts<1||maxAttempts>3)throw Error('Repair attempts must be bounded to 1–3');
  let feedback=initialFeedback;
+ // Snapshot the terminal stage/reason before an observer callback can mutate
+ // feedback; diagnostic fields are separately revalidated at the boundary.
+ let terminalFailure=null;
  const failures=Array.isArray(initialFeedback?.failures)?initialFeedback.failures.slice(-2):[];
  if(initialFeedback?.reason&&!failures.length)failures.push({stage:initialFeedback.stage,reason:String(initialFeedback.reason).slice(0,2000)});
  for(let attempt=1;attempt<=maxAttempts;attempt++){
@@ -40,6 +43,7 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
    failures.push({attempt,stage,reason,...(diagnostic?{diagnostic}:{})});
    feedback={attempt,stage,reason,...(diagnostic?{diagnostic}:{}),
     failures:failures.slice(-3).map(f=>({...f})),...(testResults?{testResults}:{})};
+   terminalFailure={stage,reason};
    await onFeedback(feedback);
   }
  }
@@ -51,7 +55,7 @@ export async function repairWithFeedback({build,review,test,arbitrate,restore,on
  const suffix=finalDiagnostic
   ?' (path='+JSON.stringify(finalDiagnostic.sourcePath)+', matches='+finalDiagnostic.matchCount+')'
   :'';
- const exhausted=new Error('Repair attempts exhausted: '+feedback.stage+': '+feedback.reason+suffix);
+ const exhausted=new Error('Repair attempts exhausted: '+terminalFailure.stage+': '+terminalFailure.reason+suffix);
  if(finalDiagnostic){
   exhausted.code=finalDiagnostic.code;
   exhausted.sourcePath=finalDiagnostic.sourcePath;
