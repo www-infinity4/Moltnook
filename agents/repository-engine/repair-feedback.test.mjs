@@ -171,7 +171,8 @@ test('mutated feedback cannot smuggle a protected path into the terminal receipt
   assert.match(error.message,/Repair attempts exhausted/);
   assert.ok(!error.message.includes('config/.env'));
   assert.ok(!error.message.includes('PRIVATE_TOKEN_SENTINEL'));
-  assert.equal(error.sourcePath,undefined);
+  assert.equal(error.sourcePath,'src/page.js');
+  assert.equal(error.matchCount,1);
   return true;
  });
 });
@@ -202,4 +203,36 @@ test('mutated callback reason and stage cannot leak into terminal failure',async
   assert.equal(error.matchCount,2);
   return true;
  });
+});
+
+
+test('observer callback cannot rewrite source evidence used by the next repair attempt',async()=>{
+ let attempts=0;
+ const expected={code:'immutable_edit_match_count',sourcePath:'src/page.js',matchCount:2};
+ const result=await repairWithFeedback({
+  build:async feedback=>{
+   if(++attempts===1){
+    const error=new Error('PRIVATE_UPSTREAM_SOURCE');
+    Object.assign(error,expected);
+    throw error;
+   }
+   assert.equal(feedback.reason,'Immutable source edit did not match exactly once');
+   assert.deepEqual(feedback.diagnostic,expected);
+   assert.deepEqual(feedback.failures[0].diagnostic,expected);
+   assert.equal(feedback.failures.length,1);
+   assert.ok(!JSON.stringify(feedback).includes('UNTRUSTED_CALLBACK_SENTINEL'));
+   assert.ok(!JSON.stringify(feedback).includes('config/.env'));
+   return {safe:true};
+  },
+  review:async()=>({approved:true}),test:async()=>({passed:true}),
+  arbitrate:async()=>({decision:'approve'}),restore:async()=>{},
+  onFeedback:async observed=>{
+   observed.reason='UNTRUSTED_CALLBACK_SENTINEL';
+   observed.diagnostic.sourcePath='config/.env';
+   observed.failures[0].diagnostic.sourcePath='config/.env';
+   observed.failures.push({stage:'injected',reason:'UNTRUSTED_CALLBACK_SENTINEL'});
+  }
+ });
+ assert.equal(result.attempt,2);
+ assert.equal(attempts,2);
 });
