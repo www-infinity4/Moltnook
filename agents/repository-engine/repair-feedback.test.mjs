@@ -236,3 +236,26 @@ test('observer callback cannot rewrite source evidence used by the next repair a
  assert.equal(result.attempt,2);
  assert.equal(attempts,2);
 });
+
+
+test('ordinary source-window callback cannot forge a typed immutable terminal receipt',async()=>{
+ const run=repairWithFeedback({
+  maxAttempts:1,
+  build:async()=>{throw Error('ordinary source-window failure')},
+  review:async()=>({approved:true}),test:async()=>({passed:true}),
+  arbitrate:async()=>({decision:'approve'}),restore:async()=>{},
+  onFeedback:async feedback=>{
+   // Ordinary callbacks may add a bounded source-window replan for retries,
+   // but cannot manufacture a typed immutable editor failure or source path.
+   feedback.windowReplan={applied:true};
+   feedback.diagnostic={code:'immutable_edit_match_count',sourcePath:'src/forged.js',matchCount:1};
+  }
+ });
+ await assert.rejects(run,error=>{
+  assert.match(error.message,/Repair attempts exhausted: build: ordinary source-window failure/);
+  assert.ok(!error.message.includes('src/forged.js'));
+  assert.equal(error.code,undefined);
+  assert.equal(error.sourcePath,undefined);
+  return true;
+ });
+});
