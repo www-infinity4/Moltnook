@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T19:37:04.963Z",
+  "generatedAt": "2026-10-30T23:14:40.759Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,28 +18,52 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-issue-1145",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-30T19:28:49Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
-      "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
-      "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "QuantaPhi-issue-1231",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-10-30T19:28:47Z",
+      "when": "2026-10-30T22:22:32Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
       "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
       "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1145",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T22:22:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
+      "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
+      "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "claude-flow-commit-8bbec106689a41ef39e6ba10aa1ef6a261d169db",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T21:37:03Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/8bbec106689a41ef39e6ba10aa1ef6a261d169db",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-5dfe8a644a1312c0944c383e1bbdeaae1525c3e8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T19:37:17Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5dfe8a644a1312c0944c383e1bbdeaae1525c3e8",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-71a195c437213fcb602d55a3e19d60484d39274a",
@@ -342,18 +366,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "claude-flow-commit-8ceff5d0774ea226e7a781f69f95a5bd5eec812b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-29T06:02:09Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/8ceff5d0774ea226e7a781f69f95a5bd5eec812b",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "Moltnook-commit-93bb1e862997a1853b3c0c2d8ff2d679571842ff",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-10-29T02:54:50Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/93bb1e862997a1853b3c0c2d8ff2d679571842ff",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-da5785c957e70fbb1e798372e90d7deeec43197b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-28T23:39:33Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/da5785c957e70fbb1e798372e90d7deeec43197b",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
