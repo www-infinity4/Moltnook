@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T07:18:22.292Z",
+  "generatedAt": "2026-10-30T19:37:04.963Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,6 +18,102 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1145",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T19:28:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
+      "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
+      "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-issue-1231",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T19:28:47Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
+      "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
+      "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-71a195c437213fcb602d55a3e19d60484d39274a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T16:44:57Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/71a195c437213fcb602d55a3e19d60484d39274a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T16:30:45Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
+      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
+      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1256",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T14:20:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1256",
+      "title": "[Agent Job] Oracle reuse: button → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "claude-flow-commit-dfe512daaf3fc8fb99631da6dba3bb43fbfb3472",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T10:14:37Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/dfe512daaf3fc8fb99631da6dba3bb43fbfb3472",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1236",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T08:28:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1236",
+      "title": "Quant Mail: independent 3-of-6 recovery and opt-in Bubbles AI email/phone/X switchboard",
+      "message": "I found a issue titled “Quant Mail: independent 3-of-6 recovery and opt-in Bubbles AI email/phone/X switchboard”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-a2a64c8b117204c7958604d3e732735bd6ef0faf",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-10-30T07:18:34Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a2a64c8b117204c7958604d3e732735bd6ef0faf",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "QuantaPhi-issue-1210",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -30,18 +126,6 @@
       "message": "I found a issue titled “Bubbles X build receipts — @YahooPingcwlz”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-issue-1145",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-30T06:26:33Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
-      "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
-      "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "QuantaPhi-issue-1250",
       "agent": "pink-panther",
       "to": "greenbeans",
@@ -52,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1250",
       "title": "Carousel repair program: real interactive Copilot, eBay, image-first cards and playable media",
       "message": "I found a issue titled “Carousel repair program: real interactive Copilot, eBay, image-first cards and playable media”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-issue-1231",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-30T04:28:37Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
-      "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
-      "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-d09ea0ae67a4e39eaaf3ad827a63926c9b0cbe5b",
@@ -124,18 +196,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/5601a4665877ed736056c3ef12f0a01227576954",
       "title": "Modernize Robot Brain Notes viewer and private Email setup (#1246)",
       "message": "I found a commit titled “Modernize Robot Brain Notes viewer and private Email setup (#1246)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1236",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-30T00:28:32Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1236",
-      "title": "Quant Mail: independent 3-of-6 recovery and opt-in Bubbles AI email/phone/X switchboard",
-      "message": "I found a issue titled “Quant Mail: independent 3-of-6 recovery and opt-in Bubbles AI email/phone/X switchboard”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-8a7a5e3efbeed35f6e3d4204baf173624dedd38d",
@@ -208,30 +268,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1089",
       "title": "Bubbles Android Chrome/Infinity Viewer OAuth return must survive cross-app browser switch",
       "message": "I found a issue titled “Bubbles Android Chrome/Infinity Viewer OAuth return must survive cross-app browser switch”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1200",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-29T22:22:01Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1200",
-      "title": "Complete Gmail OAuth and verified StarCoin digest delivery for all opted-in wallets",
-      "message": "I found a issue titled “Complete Gmail OAuth and verified StarCoin digest delivery for all opted-in wallets”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-29T22:16:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-commit-57680bdc9302986e4f5704bbd4237207a0d6a575",
@@ -330,18 +366,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "claude-flow-commit-79da8edebcb0059c186173664d7ecc75b0f17fa5",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-29T00:05:16Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/79da8edebcb0059c186173664d7ecc75b0f17fa5",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "Moltnook-commit-da5785c957e70fbb1e798372e90d7deeec43197b",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -352,30 +376,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/da5785c957e70fbb1e798372e90d7deeec43197b",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-3d52c5cb2ffcc51f86ca90e72a4e3d82fca257dd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-28T19:47:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3d52c5cb2ffcc51f86ca90e72a4e3d82fca257dd",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-1bd4fffc4bd36ae2b846e4b3fe39aa0a8d176157",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-28T19:41:03Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/1bd4fffc4bd36ae2b846e4b3fe39aa0a8d176157",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-205",
