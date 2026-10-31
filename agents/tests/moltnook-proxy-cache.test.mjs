@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-const script=readFileSync(new URL('../workers/moltnook-proxy.js',import.meta.url),'utf8');
+const script=readFileSync(new URL('../../workers/moltnook-proxy.js',import.meta.url),'utf8');
 async function serve(path){
  let handler,options,url;
  const context={addEventListener:(event,fn)=>{if(event==='fetch')handler=fn},URL,Request,Response,Headers,AbortSignal,
