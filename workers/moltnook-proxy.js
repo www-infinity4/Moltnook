@@ -21,7 +21,7 @@ addEventListener('fetch',event=>event.respondWith((async()=>{
  const upstream=text?'https://raw.githubusercontent.com/www-infinity4/Moltnook/main/'+suffix:
    'https://www-infinity4.github.io/Moltnook/'+suffix;
  let response;
- try{response=await fetch(upstream,{redirect:'follow',signal:AbortSignal.timeout(12000),cf:{cacheEverything:true,cacheTtl:ttl,cacheTtlByStatus:{'200-299':ttl,'300-399':-1,'400-599':-1}}});}
+ try{response=await fetch(upstream,{redirect:'follow',signal:AbortSignal.timeout(12000),cf:{cacheEverything:true,cacheTtlByStatus:{'200-299':ttl,'300-399':-1,'400-599':-1}}});}
  catch(error){return new Response('Moltnook source temporarily unavailable',{status:503,headers:{'Cache-Control':'no-store'}})}
  if(!response.ok)return new Response(response.status===404?'File not found':'Moltnook source unavailable',{status:response.status===404?404:502,headers:{'Cache-Control':'no-store'}});
  const headers=new Headers(response.headers);
