@@ -1,4 +1,4 @@
-// Owner-approved live Cloud Chrome Test Ground cold-start v29 verification 2026-10-22.
+// Owner-approved signed GPT-to-Bubbles connection retest 2026-10-30 for Robot Brain live handoff PR #1244. No private owner archive or credential access.\n// Owner-approved live Cloud Chrome Test Ground cold-start v29 verification 2026-10-22.
 // Live Test Ground AI public Chrome v28 one-test browser verification 2026-10-22.
 // Owner-approved real Chrome v27 public Open Bubbles chat CTA dispatch/observed effect verification, 2026-10-22.
 // Live browser v26 signed QA: require actual Chrome button inventory and read-only public Bubbles page receipt, 2026-10-22.
@@ -24,7 +24,7 @@ const prompts=[
  },
  {
   "name": "runtime_inventory",
-  "text": "What server runtime and tools are you actually using right now? Explain what you can execute here and which capabilities still need separate connections. Do not claim a shell, Python or browser session was opened."
+  "text": "What server runtime and tools are you actually using right now? Explain separately whether you can inspect GitHub source, edit literal shell and JavaScript text, run checks, open a PR and deploy to Cloudflare. For each capability distinguish an available adapter from an action verified in this conversation. Do not claim a shell, Python or browser session was opened, a write succeeded or complete ChatGPT scripting parity without actual receipts."
  },
  {
   "name": "two_town_weather",
