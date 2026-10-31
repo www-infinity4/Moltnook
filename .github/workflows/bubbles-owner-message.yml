@@ -844,3 +844,31 @@ jobs:
           console.log('APK_PARCEL_INTAKE '+JSON.stringify({parcel:process.env.PARCEL_ID,httpStatus:response.status,ticketConfirmed:Boolean(confirmed),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
           if(!confirmed)throw Error('apk_parcel_intake_unverified');
           NODE
+
+  verified_read_summary_repair:
+    # One owner-authorized source repair; retries cannot submit another ticket.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Build Bubbles verified-read summary repair 20261031') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify existing owner grants and submit the bounded source repair
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('existing_owner_approval_unverified');
+          const request="Repair Bubbles GitHub summary fallback using current QuantaPhi source 0f84ccb7467f3c7bf47909d36a474d6b82d6f866. Live public root and README reads now BOTH return complete tool receipts, but finishSearchReply's generic fallback says only snippets were found and full pages were not read. Implement an evidence-aware fallback for actual verified GitHub read sequences: identify which root/files were read, preserve bounded real source evidence and any observed commit, and say explanation pending when model synthesis fails. Never invent a summary, hidden file read, write or completed analysis. Inspect actual receipt/step schemas first. Target existing workers/bubbles-tools/worker.mjs and focused test/bubbles-read-agent.test.mjs or test/bubbles-search-completion.test.mjs, not a parallel implementation. Add executable regressions for summary timeout/rejection, successful root-plus-README observations, failed substeps and unverified sources. Keep owner-auth denial before anonymous fallback, source URLs, and truthful partial status. No wallet, consent, credentials, provider or production Cloudflare changes in this source slice. Use the existing repository engine to implement source, run real tests, obtain independent review, open the PR and complete target CI under the normal authorized merge policy. A ticket or model answer is not completed work. Return real ticket, test, commit and PR receipts; keep deployment and browser acceptance separate.";
+          if(request.length>1800)throw Error('bounded_owner_request_invalid');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await response.json().catch(()=>({}));
+          const verified=response.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.ticketId.trim()&&receipt.repository==='www-infinity4/QuantaPhi'&&receipt.completed===false;
+          console.log('BUBBLES_VERIFIED_READ_REPAIR '+JSON.stringify({httpStatus:response.status,ticketVerified:Boolean(verified),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
+          if(!verified)throw Error('owner_repair_intake_not_verified');
+          NODE
