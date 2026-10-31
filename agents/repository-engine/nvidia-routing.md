@@ -1,7 +1,8 @@
 # NVIDIA routing for the existing Bubbles executor
 
 Owner request: use the added NVIDIA skills in existing work. This reference is
-loaded by `phi-skills.mjs`; it is not an installer or a new execution adapter.
+named by packets in `phi-skills.mjs`; it is not an installer or a new execution
+adapter.
 `runner.mjs` already supplies matching packets to planning, building, review and
 arbitration. Generic website, search, video and optimization jobs do not need an
 NVIDIA packet unless they name a relevant NVIDIA product or workflow.
