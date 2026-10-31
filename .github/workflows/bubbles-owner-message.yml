@@ -115,9 +115,11 @@ jobs:
           NODE
 
   chat_acceptance:
-    # Run exactly once for the reviewed synthetic-chat test merge. Never submit
-    # another owner work ticket or impersonate a live owner-page consumer.
-    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021') }}
+    # Allow explicit job retries after the owner renews the existing grant.
+    # Every attempt rechecks signed identity and both five-day grants before
+    # synthetic public prompts. It creates no owner work ticket or UI consumer.
+    # Same-run turn receipts remain deduplicated for their four-minute lifetime.
+    if: ${{ github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021') }}
     runs-on: ubuntu-latest
     timeout-minutes: 16
     steps:
