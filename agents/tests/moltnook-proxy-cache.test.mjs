@@ -27,3 +27,10 @@ test('live agent evidence stays fresher than compiled JavaScript but is not perm
  assert.equal(scriptFile.options.cf.cacheTtl,600);
  assert.match(activity.response.headers.get('cache-control'),/max-age=15/);
 });
+
+test('upstream errors are explicitly excluded from Cloudflare cache, allowing newly published files to appear',async()=>{
+ const a=await serve('/moltnook/new-card.html');
+ assert.equal(a.options.cf.cacheTtlByStatus['200-299'],60);
+ assert.equal(a.options.cf.cacheTtlByStatus['300-399'],-1);
+ assert.equal(a.options.cf.cacheTtlByStatus['400-599'],-1);
+});
