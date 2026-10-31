@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 const script=readFileSync(new URL('../../workers/moltnook-proxy.js',import.meta.url),'utf8');
-async function serve(path){
+async function serve(path,{status=200,method='GET'}={}){
  let handler,options,url;
  const context={addEventListener:(event,fn)=>{if(event==='fetch')handler=fn},URL,Request,Response,Headers,AbortSignal,
- fetch:async(href,opt)=>{url=href;options=opt;return new Response('verified',{status:200,headers:{'Content-Type':'text/html','Set-Cookie':'never-forward'}})}};
+ fetch:async(href,opt)=>{url=href;options=opt;return new Response(status===404?'missing':'verified',{status,headers:{'Content-Type':'text/html','Set-Cookie':'never-forward'}})}};
  vm.runInNewContext(script,context);
- let answer;handler({request:new Request('https://quantaphi.org'+path),respondWith:p=>{answer=p}});
+ let answer;handler({request:new Request('https://quantaphi.org'+path,{method}),respondWith:p=>{answer=p}});
  return {response:await answer,options,url};
 }
 test('public static Moltnook HTML has bounded edge cache instead of cache-busting every request',async()=>{
@@ -33,4 +33,20 @@ test('upstream errors are explicitly excluded from Cloudflare cache, allowing ne
  assert.equal(a.options.cf.cacheTtlByStatus['200-299'],60);
  assert.equal(a.options.cf.cacheTtlByStatus['300-399'],-1);
  assert.equal(a.options.cf.cacheTtlByStatus['400-599'],-1);
+});
+
+test('missing upstream file is a no-store 404 and cannot poison future static cache',async()=>{
+ const a=await serve('/moltnook/newly-published.html',{status:404});
+ assert.equal(a.response.status,404);
+ assert.equal(a.response.headers.get('cache-control'),'no-store');
+ assert.equal(a.options.cf.cacheTtlByStatus['400-599'],-1);
+});
+test('HEAD does not return body and unsafe paths and methods fail closed',async()=>{
+ const head=await serve('/moltnook/agent-room.js',{method:'HEAD'});
+ assert.equal(head.response.status,200);
+ assert.equal(await head.response.text(),'');
+ const blocked=await serve('/moltnook/a..b.html');
+ assert.equal(blocked.response.status,400);
+ const post=await serve('/moltnook/',{method:'POST'});
+ assert.equal(post.response.status,405);
 });
