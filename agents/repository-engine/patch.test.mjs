@@ -32,6 +32,32 @@ test('engine binds edits to unique source and explicit new files',()=>{
  assert.throws(()=>applyEdits({'a.js':'old'},[{path:'a.js',before:'missing',after:'new'}]));
 });
 
+test('existing-file edits preserve literal JavaScript replacement tokens and shell dollars',()=>{
+ const tokens=['$$','$&','$'+String.fromCharCode(96),"$'",'$1','$<name>','$(pwd)','${HOME}'];
+ for(const token of tokens){
+  const original='prefix\nPLACEHOLDER\nsuffix\n';
+  const after='literal '+token+'\nnext line';
+  const patched=applyEdits({'scripts/example.sh':original},[
+   {path:'scripts/example.sh',before:'PLACEHOLDER',after}
+  ]);
+  assert.equal(patched['scripts/example.sh'],'prefix\n'+after+'\nsuffix\n',token);
+ }
+});
+
+test('sequential script edits and new files keep the exact same literal bytes',()=>{
+ const shell='#!/bin/sh\nprintf "%s\\n" "$$" "$&" "$(pwd)"\n';
+ const source='head\nFIRST\nSECOND\ntail\n';
+ const edits=[
+  {path:'scripts/run.sh',before:'FIRST',after:shell},
+  {path:'scripts/run.sh',before:'SECOND',after:"sed 's/a/b&c/' input\n# $& $$"},
+  {path:'scripts/new.sh',before:null,after:shell}
+ ];
+ const patched=applyEdits({'scripts/run.sh':source,'scripts/new.sh':null},edits);
+ assert.equal(patched['scripts/run.sh'],'head\n'+shell+"\nsed 's/a/b&c/' input\n# $& $$\ntail\n");
+ assert.equal(patched['scripts/new.sh'],shell);
+ assert.equal(source,'head\nFIRST\nSECOND\ntail\n');
+});
+
 
 test('Robot PR #565 duplicate alias insertions cannot count as an implementation',()=>{
  const source="const OWNER_REPOS={\n 'hbo':'www-infinity4/HBO',\n 'tv-database':'www-infinity4/TV-Database',\n 'widgetphi':'www-infinity4/WidgetPhi'\n};\n";

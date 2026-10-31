@@ -56,7 +56,9 @@ export function applyEdits(original,edits){
     error.matchCount=matches;
     throw error;
    }
-   patched[e.path]=prior.replace(e.before,e.after);
+   // Source is literal data: string replacements expand $$, $&, $` and $'.
+   // A callback preserves generated shell/JavaScript bytes exactly.
+   patched[e.path]=prior.replace(e.before,()=>e.after);
   }
  }
  if(!Object.keys(patched).some(p=>patched[p]!==original[p]))throw Error('Patch made no source change');
