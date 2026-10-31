@@ -1,4 +1,4 @@
-// Owner-approved live Cloud Chrome Test Ground cold-start v29 verification 2026-10-22.
+// Owner-approved signed GPT-to-Bubbles connection retest 2026-10-30 for Robot Brain live handoff PR #1244. No private owner archive or credential access.\n// Owner-approved live Cloud Chrome Test Ground cold-start v29 verification 2026-10-22.
 // Live Test Ground AI public Chrome v28 one-test browser verification 2026-10-22.
 // Owner-approved real Chrome v27 public Open Bubbles chat CTA dispatch/observed effect verification, 2026-10-22.
 // Live browser v26 signed QA: require actual Chrome button inventory and read-only public Bubbles page receipt, 2026-10-22.
