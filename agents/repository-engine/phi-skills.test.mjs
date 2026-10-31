@@ -72,3 +72,34 @@ test('broad owner requests retain late matching memory and evidence instructions
   assert.ok(packets.every(p=>p.colors.length&&p.colors.every(c=>PHASE_COLORS[phase].includes(c))));
  }
 });
+
+test('NVIDIA product work reaches all executor phases through the existing local reference',()=>{
+ for(const task of ['NVIDIA skills for Bubbles','CUDA-Q simulation','Jetson JetPack setup','Nemotron voice agent','NIM inference endpoint','TAO workflow stage cards']){
+  for(const phase of Object.keys(PHASE_COLORS)){
+   const selected=skillPackets({task,phase});
+   const nvidia=selected.find(s=>s.id==='nvidia-skill-discovery');
+   assert.ok(nvidia,task+' / '+phase);
+   assert.equal(nvidia.source,'www-infinity4/Moltnook/agents/repository-engine/nvidia-routing.md');
+   assert.ok(nvidia.colors.every(c=>PHASE_COLORS[phase].includes(c)));
+   assert.equal('tools' in nvidia,false);
+   assert.equal('permissions' in nvidia,false);
+  }
+ }
+});
+
+test('ordinary Infinity jobs do not pick up NVIDIA or TAO setup requirements',()=>{
+ for(const task of ['Optimize website search and HTTP request routing','Fix video playback on my radio card','Build an AI chatbot with memory','Tao Te Ching reading card']){
+  for(const phase of Object.keys(PHASE_COLORS)){
+   assert.ok(!skillPackets({task,phase}).some(s=>s.id.startsWith('nvidia-')),task+' / '+phase);
+  }
+ }
+});
+
+test('TAO stages are conditional guidance rather than a claim of installed services',()=>{
+ const stages=skillPackets({task:'NVIDIA TAO workflow with stage cards',phase:'build'}).find(s=>s.id==='nvidia-tao-stage-execution');
+ assert.ok(stages);
+ assert.match(stages.instructions,/launch gate before running/);
+ assert.match(stages.instructions,/not a connected executor/);
+ assert.ok(!skillPackets({task:'NVIDIA Jetson camera setup',phase:'build'}).some(s=>s.id==='nvidia-tao-stage-execution'));
+ assert.ok(!skillPackets({task:'Reduce chatbot token cost',phase:'plan'}).some(s=>s.id==='nvidia-tao-stage-execution'));
+});
