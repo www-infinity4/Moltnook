@@ -17,7 +17,7 @@ test('public static Moltnook HTML has bounded edge cache instead of cache-bustin
  assert.doesNotMatch(a.url,/moltnookFresh|Date\.now/);
  assert.match(a.response.headers.get('cache-control'),/public.*max-age=60/);
  assert.equal(a.options.cf.cacheEverything,true);
- assert.equal(a.options.cf.cacheTtl,60);
+ assert.equal(a.options.cf.cacheTtlByStatus['200-299'],60);
  assert.equal(a.response.headers.get('set-cookie'),null);
 });
 test('live agent evidence stays fresher than compiled JavaScript but is not permanently uncached',async()=>{
