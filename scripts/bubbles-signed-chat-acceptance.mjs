@@ -24,7 +24,7 @@ const prompts=[
  },
  {
   "name": "runtime_inventory",
-  "text": "What server runtime and tools are you actually using right now? Explain what you can execute here and which capabilities still need separate connections. Do not claim a shell, Python or browser session was opened."
+  "text": "What server runtime and tools are you actually using right now? Explain separately whether you can inspect GitHub source, edit literal shell and JavaScript text, run checks, open a PR and deploy to Cloudflare. For each capability distinguish an available adapter from an action verified in this conversation. Do not claim a shell, Python or browser session was opened, a write succeeded or complete ChatGPT scripting parity without actual receipts."
  },
  {
   "name": "two_town_weather",
