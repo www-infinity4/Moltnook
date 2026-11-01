@@ -102,4 +102,7 @@ test('TAO stages are conditional guidance rather than a claim of installed servi
  assert.match(stages.instructions,/not a connected executor/);
  assert.ok(!skillPackets({task:'NVIDIA Jetson camera setup',phase:'build'}).some(s=>s.id==='nvidia-tao-stage-execution'));
  assert.ok(!skillPackets({task:'Reduce chatbot token cost',phase:'plan'}).some(s=>s.id==='nvidia-tao-stage-execution'));
+ for(const task of ['Create NVIDIA CUDA stage cards for a simulation','NVIDIA token-efficient NIM inference']){
+  assert.ok(!skillPackets({task,phase:'build'}).some(s=>s.id==='nvidia-tao-stage-execution'),task);
+ }
 });
