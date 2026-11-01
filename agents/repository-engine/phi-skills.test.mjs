@@ -74,7 +74,7 @@ test('broad owner requests retain late matching memory and evidence instructions
 });
 
 test('NVIDIA product work reaches all executor phases through the existing local reference',()=>{
- for(const task of ['NVIDIA skills for Bubbles','CUDA-Q simulation','Jetson JetPack setup','Nemotron voice agent','NIM inference endpoint','NGC container registry','TAO workflow stage cards']){
+ for(const task of ['NVIDIA skills for Bubbles','CUDA-Q simulation','Jetson JetPack setup','Nemotron voice agent','NIM inference endpoint','NGC container registry','NeMo ASR speech model','NIM inference endpoint','TAO workflow stage cards']){
   for(const phase of Object.keys(PHASE_COLORS)){
    const selected=skillPackets({task,phase});
    const nvidia=selected.find(s=>s.id==='nvidia-skill-discovery');
