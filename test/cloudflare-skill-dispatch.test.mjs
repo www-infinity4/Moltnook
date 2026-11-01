@@ -6,7 +6,7 @@ const now = Date.parse('2026-10-28T19:30:00Z');
 const request = { skillId: 'cloudflare.workers.inspect', resourceId: 'worker_123' };
 const runner = { jobId: 'job1', leaseId: 'lease1', fence: 2, signed: true, sourceRevision: 'a'.repeat(40), runtimeIdentity: 'bubbles-runtime', leaseStartedAt: '2026-10-28T19:29:00Z', leaseExpiresAt: '2026-10-28T19:33:00Z' };
 const evidence = { permissionId: 'perm_1', status: 'verified', skillId: request.skillId, grantedTo: runner.runtimeIdentity, resourceId: request.resourceId, risk: 'read', verifiedAt: '2026-10-28T19:29:00Z', expiresAt: '2026-10-28T19:32:00Z' };
-const catalog = { schemaVersion: 1, kind: 'bubbles.cloudflare.skill-catalog', authorization: { allowProductionMutation: false, connectorApiVerification: 'verified', runtimeIdentityVerified: true, verifiedPermissionCount: 403 }, skills: [{ id: request.skillId, risk: 'read' }, { id: 'cloudflare.workers.deploy', risk: 'write', enabled: false }] };
+const catalog = { schemaVersion: 1, kind: 'bubbles.cloudflare.skill-catalog', authorization: { allowProductionMutation: false, connectorApiVerification: 'verified', runtimeIdentityVerified: true, verifiedPermissionCount: 403 }, policy: { noSecretsInCatalog: true, requireLivePermissionCheck: true, requireSignedBrainReceipt: true, requireIndependentSecurityReviewForSensitiveChanges: true }, skills: [{ id: request.skillId, risk: 'read' }, { id: 'cloudflare.workers.deploy', risk: 'write', enabled: false }] };
 const args = () => ({ catalog: structuredClone(catalog), request: structuredClone(request), runner: structuredClone(runner), evidence: structuredClone(evidence), now, clock: () => now });
 
 test('verified signed scoped read produces only a sanitized receipt', async () => {
@@ -155,4 +155,21 @@ test('receipt must bind the exact permission, runtime identity and source revisi
     receiptId: 'missing_identity', httpStatus: 200,
   }) });
   assert.equal(missing.reason, 'missing_matching_tool_receipt');
+});
+
+
+test('catalog safety policy flags cannot be disabled or omitted before any Cloudflare adapter call', async () => {
+  for (const key of ['noSecretsInCatalog', 'requireLivePermissionCheck', 'requireSignedBrainReceipt', 'requireIndependentSecurityReviewForSensitiveChanges']) {
+    for (const value of [false, undefined]) {
+      const a = args();
+      if (value === undefined) delete a.catalog.policy[key];
+      else a.catalog.policy[key] = value;
+      let calls = 0;
+      const result = await dispatchCloudflareRead({ ...a, adapter: async () => { calls++; throw Error('must not dispatch'); } });
+      assert.equal(result.reason, 'unsafe_catalog_policy', `${key}=${value}`);
+      assert.equal(calls, 0, 'untrusted policy must not reach Cloudflare adapter');
+    }
+  }
+  const a = args(); delete a.catalog.policy;
+  assert.equal(authorizeCloudflareSkill(a).reason, 'unsafe_catalog_policy');
 });
