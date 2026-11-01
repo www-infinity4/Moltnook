@@ -25,6 +25,9 @@ export function authorizeCloudflareSkill({ catalog, request, runner, evidence, n
   if (skill.enabled === false) return blocked('skill_disabled', skillId);
   if (skill.risk !== 'read') return blocked('write_requires_separate_reviewed_dispatcher', skillId);
   if (catalog.authorization?.allowProductionMutation !== false) return blocked('unsafe_catalog_policy', skillId);
+  // The catalog is itself a security boundary. A malformed or downgraded
+  // policy must not silently turn verified read-only skills into permissive ones.
+  if (catalog.policy?.noSecretsInCatalog !== true || catalog.policy?.requireLivePermissionCheck !== true || catalog.policy?.requireSignedBrainReceipt !== true || catalog.policy?.requireIndependentSecurityReviewForSensitiveChanges !== true) return blocked('unsafe_catalog_policy', skillId);
   if (catalog.authorization?.connectorApiVerification !== 'verified' || catalog.authorization?.runtimeIdentityVerified !== true || !Number.isInteger(catalog.authorization?.verifiedPermissionCount) || catalog.authorization.verifiedPermissionCount < 1) return blocked('cloudflare_connector_unverified', skillId);
   if (typeof now !== 'number' || !Number.isFinite(now)) return blocked('invalid_clock', skillId);
   if (typeof request?.resourceId !== 'string' || !/^[a-zA-Z0-9_:-]{1,120}$/.test(request.resourceId)) return blocked('invalid_resource', skillId);
