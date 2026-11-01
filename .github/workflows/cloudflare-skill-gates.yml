@@ -1,0 +1,24 @@
+name: Bubbles Cloudflare skill safety gates
+on:
+  pull_request:
+    paths:
+      - 'brain/skills/cloudflare-*'
+      - 'test/cloudflare-skill-dispatch.test.mjs'
+      - '.github/workflows/cloudflare-skill-gates.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cloudflare-skill-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify skill catalog parses and is fail closed
+        run: |
+          node -e "const c=require('./brain/skills/cloudflare-capability-catalog.json');if(c.authorization.allowProductionMutation!==false||c.authorization.runtimeIdentityVerified!==false||c.authorization.verifiedPermissionCount!==null)process.exit(1)"
+      - name: Test signed read dispatcher security gates
+        run: node --test test/cloudflare-skill-dispatch.test.mjs
