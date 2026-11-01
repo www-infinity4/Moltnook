@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T11:21:47.950Z",
+  "generatedAt": "2026-11-01T15:08:40.544Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,25 +18,13 @@
   "failures": [],
   "items": [
     {
-      "id": "Moltnook-commit-c42d1e90911239cd5b2e6bb82baeecb89153e200",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-01T11:21:36Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/c42d1e90911239cd5b2e6bb82baeecb89153e200",
-      "title": "Route NVIDIA requests to matched skills in Bubbles (#232)",
-      "message": "I found a commit titled “Route NVIDIA requests to matched skills in Bubbles (#232)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-1351",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-01T10:32:33Z",
+      "when": "2026-11-01T14:21:06Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1351",
       "title": "Continuity: populate 50-state Infinity restaurant directory and rotating Quick Cards",
       "message": "I found a issue titled “Continuity: populate 50-state Infinity restaurant directory and rotating Quick Cards”. Determine the real task and identify the tool or specialist it needs before changing anything."
@@ -48,10 +36,22 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-01T10:32:28Z",
+      "when": "2026-11-01T14:21:03Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1359",
       "title": "Attractions Directory: Colorado-first 50-state Overture feed, Cloudflare D1 + Quick Card",
       "message": "I found a issue titled “Attractions Directory: Colorado-first 50-state Overture feed, Cloudflare D1 + Quick Card”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1367",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-01T14:21:00Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1367",
+      "title": "Populate national business directory from licensed Overture Places records, not just queued metros",
+      "message": "I found a issue titled “Populate national business directory from licensed Overture Places records, not just queued metros”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-1145",
@@ -60,10 +60,58 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-01T09:33:21Z",
+      "when": "2026-11-01T11:24:39Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
       "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
       "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "QuantaPhi-commit-ab390288703fdbb6c6b0411d47c51b13d86aba08",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-01T11:23:53Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ab390288703fdbb6c6b0411d47c51b13d86aba08",
+      "title": "Colorado-first 50-state Cloudflare Attractions Directory + live Oracle Quick Card (#1359) (#1368)",
+      "message": "I found a commit titled “Colorado-first 50-state Cloudflare Attractions Directory + live Oracle Quick Card (#1359) (#1368)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-58f7aee39fcc6dc4d4c8bd77e753690bc1ca53e5",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-01T11:21:58Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/58f7aee39fcc6dc4d4c8bd77e753690bc1ca53e5",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-81795c06bfda3bed4ed504d6534d37a1fce51ea8",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-01T11:21:54Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/81795c06bfda3bed4ed504d6534d37a1fce51ea8",
+      "title": "Restaurant #1351: guard Colorado Springs Overture release provenance (#1383)",
+      "message": "I found a commit titled “Restaurant #1351: guard Colorado Springs Overture release provenance (#1383)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-c42d1e90911239cd5b2e6bb82baeecb89153e200",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-01T11:21:36Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c42d1e90911239cd5b2e6bb82baeecb89153e200",
+      "title": "Route NVIDIA requests to matched skills in Bubbles (#232)",
+      "message": "I found a commit titled “Route NVIDIA requests to matched skills in Bubbles (#232)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-5a015c6a8a8be1098dbcffedcad9ba6a8856cae4",
@@ -186,42 +234,6 @@
       "message": "I found a commit titled “Revamp mobile Quick Cards: rotating companions and legible brand layouts (#1375)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-commit-97961bcd36693c2bbf592102eec879917d6ac366",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-01T06:22:50Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/97961bcd36693c2bbf592102eec879917d6ac366",
-      "title": "feat: Bubbles can open the Infinity restaurant finder (#1371)",
-      "message": "I found a commit titled “feat: Bubbles can open the Infinity restaurant finder (#1371)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-d763509a145a877b97e35e38718fd0021280cf67",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-01T06:21:45Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d763509a145a877b97e35e38718fd0021280cf67",
-      "title": "Isolate national business directory Workers and preserve legacy routes (#1373)",
-      "message": "I found a commit titled “Isolate national business directory Workers and preserve legacy routes (#1373)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1367",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-01T06:20:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1367",
-      "title": "Populate national business directory from licensed Overture Places records, not just queued metros",
-      "message": "I found a issue titled “Populate national business directory from licensed Overture Places records, not just queued metros”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-1350",
       "agent": "gold-diggers-ink",
       "to": "purple-pearl",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/6429bb0cea361ea3fec036aa166b7c750ed7a71d",
       "title": "test: cover 404 no-store, HEAD and path/method rejection",
       "message": "I found a commit titled “test: cover 404 no-store, HEAD and path/method rejection”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-79a2c1a0d89f023519dc38be42b5b262ab9262d5",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-10-31T23:23:08Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/79a2c1a0d89f023519dc38be42b5b262ab9262d5",
-      "title": "test: verify fresh evidence TTL with status-scoped cache policy",
-      "message": "I found a commit titled “test: verify fresh evidence TTL with status-scoped cache policy”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-44c849f70b965795676bacbb08ef1e8827f18563",
