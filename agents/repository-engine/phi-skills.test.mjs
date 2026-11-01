@@ -88,7 +88,7 @@ test('NVIDIA product work reaches all executor phases through the existing local
 });
 
 test('ordinary Infinity jobs do not pick up NVIDIA or TAO setup requirements',()=>{
- for(const task of ['Optimize website search and HTTP request routing','Fix video playback on my radio card','Build an AI chatbot with memory','Tao Te Ching reading card','NGC coin grading and numismatic slabs','NGC-certified 1883 Morgan silver dollar']){
+ for(const task of ['Optimize website search and HTTP request routing','Fix video playback on my radio card','Build an AI chatbot with memory','Tao Te Ching reading card','NGC coin grading and numismatic slabs','NGC-certified 1883 Morgan silver dollar','Finding Nemo movie card','Nim game strategy guide','Build a Finding Nemo themed website']){
   for(const phase of Object.keys(PHASE_COLORS)){
    assert.ok(!skillPackets({task,phase}).some(s=>s.id.startsWith('nvidia-')),task+' / '+phase);
   }
