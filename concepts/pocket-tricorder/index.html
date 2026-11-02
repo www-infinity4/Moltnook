@@ -133,12 +133,12 @@
       padding: 0;
       margin: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
       gap: .5rem;
       font-size: .8rem;
       color: var(--text-muted);
     }
-    .ref-list li { display: flex; gap: .4rem; align-items: baseline; }
+    .ref-list li { display: flex; gap: .4rem; align-items: baseline; min-width: 0; }
     .ref-list .ref-num {
       min-width: 1.6rem;
       font-weight: 700;
@@ -146,7 +146,7 @@
       font-family: var(--font-mono);
       font-size: .72rem;
     }
-    .ref-list a { color: var(--text-muted); text-decoration: none; word-break: break-all; }
+    .ref-list a { color: var(--text-muted); text-decoration: none; overflow-wrap: anywhere; min-width: 0; }
     .ref-list a:hover { color: var(--accent2); text-decoration: underline; }
     /* ── Quantum future highlight ── */
     .quantum-highlight {
@@ -161,6 +161,7 @@
       margin: .25rem 0;
     }
   </style>
+  <noscript><style>.fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }</style></noscript>
 </head>
 <body>
 
@@ -233,19 +234,22 @@
           you are already carrying contains a <strong>magnetometer</strong>,
           <strong>barometer</strong>, <strong>accelerometer</strong>,
           <strong>gyroscope</strong>, <strong>GPS</strong>, <strong>camera array</strong>,
-          <strong>microphone</strong>, and increasingly a
-          <strong>miniaturised spectrometer</strong>. The fictional device was
-          a prediction — and it arrived early, hidden inside a communications device.
+          and <strong>microphone</strong> (depending on model). Miniaturised
+          spectrometers are being researched as <strong>additional hardware</strong>,
+          not a standard sensor already inside consumer phones. The fictional
+          tricorder anticipated several real phone capabilities, but not every function.
         </p>
         <p>
           Most users never access the raw sensor output. Specialised apps and research
           platforms unlock readouts that feel genuinely science-fictional: mapping
-          magnetic fields through walls, monitoring breathing acoustically during sleep,
-          identifying the chemical composition of food with the camera flash.
+          local magnetic-field changes, estimating pulse from camera signals, and
+          exploring breathing patterns with specialised apps. Chemical composition
+          analysis needs a calibrated external spectrometer or lab instrument,
+          not an ordinary camera flash.
         </p>
         <p>
-          The only thing missing from the Star Trek version is the "subspace" framing.
-          Strip that away and the hardware is already here.
+          The remaining gaps are important: a phone's sensors cannot replace a laboratory
+          spectrometer, medical diagnostic device, or a fictional subspace scanner.
         </p>
       </div>
     </div>
@@ -258,8 +262,8 @@
         <div class="section-label">Sensor Suite</div>
         <h2 class="section-title" id="capabilities-heading">Current tricorder capabilities.</h2>
         <p class="section-sub">
-          Three domains where off-the-shelf smartphone hardware already performs
-          real scanning — not simulation, not metaphor.
+          Built-in sensors can measure some environmental and body signals;
+          molecular analysis still needs research-grade or external equipment.
         </p>
       </div>
       <div class="sensor-grid" role="list">
@@ -294,12 +298,11 @@
           <div class="sensor-label">Chemical Analysis</div>
           <h3 class="sensor-name" id="cap3-title">⚗️ Molecular Scanning</h3>
           <p class="sensor-desc">
-            Researchers have built
-            <a href="https://spectrum.ieee.org/tricorderlike-mobile-phones-enabled-by-nanotechnology" rel="noopener noreferrer" target="_blank">miniaturised spectrometers</a>
-            that couple to the phone camera to identify chemical composition of
-            food, plastics, or soil — matching spectral fingerprints against
-            reference libraries in real time, exactly as a science officer
-            would scan an unknown material.
+            Researchers have demonstrated
+            <a href="https://spectrum.ieee.org/tricorderlike-mobile-phones-enabled-by-nanotechnology" rel="noopener noreferrer" target="_blank">miniaturised spectroscopy prototypes</a>
+            for identifying selected materials using dedicated optics, detectors,
+            illumination and calibration. These are research or accessory systems,
+            not a built-in chemical scanner in a typical smartphone.
           </p>
         </article>
 
@@ -335,13 +338,16 @@
           fields at <strong>microscopic spatial resolution</strong>: detecting
           fatigue cracks inside metal structures, mapping the magnetic signature
           of biological tissue, or visualising the field geometry of nearby
-          electronic components — all without specialist hardware.
+          electronic components — if dedicated microwave excitation electronics,
+          optical read-out and calibration can be integrated into future hardware.
         </p>
         <p>
           The key insight is that the sensing medium is already present:
           <span class="quantum-highlight">OLED pixels → quantum magnetometers</span>.
-          What is missing is the read-out layer — firmware and optics to
-          interrogate spin state across the full display in real time.
+          The 2023 experiment also required a <strong>microwave resonator and excitation
+          electronics</strong>, plus optical or electrical read-out. A phone
+          implementation would need these hardware additions, careful calibration,
+          better sensitivity and faster acquisition — not merely new firmware.
         </p>
       </div>
 
@@ -389,24 +395,26 @@
           <div class="feature-icon feature-icon-gold" aria-hidden="true">✅</div>
           <h3>Available Now</h3>
           <p>Magnetometer field mapping, barometric altitude sensing, photoplethysmography
-          heart and respiratory rate, acoustic sleep monitoring, miniaturised
-          spectrometry via camera modules — all accessible today via apps and
-          research platforms.</p>
+          pulse estimates, and some camera or microphone-based respiratory estimates.
+          These are device- and app-dependent and do not by themselves establish
+          clinical diagnoses or chemical identification.</p>
         </div>
         <div class="feature-card glass fade-up">
           <div class="feature-icon feature-icon-purple" aria-hidden="true">🔬</div>
           <h3>Research Stage</h3>
           <p>OLED quantum magnetometry (UNSW 2023 demonstration), full-panel
-          spin-state read-out firmware, nanotechnology-enhanced camera spectrometers
-          (IEEE Spectrum) — demonstrated in the lab, not yet in consumer hardware.</p>
+          microwave-resonator excitation and read-out hardware, and miniaturised
+          spectrometer prototypes (IEEE Spectrum) — research demonstrations,
+          not standard sensors in consumer phones.</p>
         </div>
         <div class="feature-card glass fade-up">
           <div class="feature-icon feature-icon-cyan" aria-hidden="true">🚀</div>
           <h3>The Gap to Close</h3>
           <p>The limiting factor is not sensor presence but <strong>read-out
-          architecture</strong>: firmware hooks to interrogate OLED spin state,
-          optics to isolate pixel-level signals, and standardised APIs that let
-          apps address the full sensor layer directly.</p>
+          architecture</strong>: an integrated microwave resonator and excitation
+          electronics, calibrated optical/electrical spin-state detection,
+          improved sensitivity, firmware, and suitable APIs. A normal OLED panel
+          alone cannot provide the demonstrated quantum sensing function.</p>
         </div>
       </div>
 
@@ -414,9 +422,9 @@
         <span class="notice-icon" aria-hidden="true">ℹ️</span>
         <div>
           <strong>Note.</strong>
-          The environmental, medical, and chemical scanning capabilities described
-          above are documented in published research and commercial products —
-          this is not speculative science. The OLED quantum sensing section describes
+          Environmental sensors and selected body-signal estimates exist in some phones;
+          medical diagnosis requires validated clinical methods, and chemical
+          spectroscopy requires additional equipment or research prototypes. The OLED quantum sensing section describes
           an <strong>early-stage research finding</strong> (UNSW, April 2023); the
           consumer application pathway remains an open engineering challenge.
         </div>
