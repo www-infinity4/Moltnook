@@ -1,0 +1,30 @@
+name: Pocket Tricorder concept regression
+on:
+  pull_request:
+    paths:
+      - 'concepts/pocket-tricorder/**'
+      - 'index.html'
+      - 'test/pocket-tricorder-concept.test.mjs'
+      - '.github/workflows/pocket-tricorder-concept.yml'
+  push:
+    branches:
+      - 'copilot/tune-proton-radio-frequency'
+    paths:
+      - 'concepts/pocket-tricorder/**'
+      - 'index.html'
+      - 'test/pocket-tricorder-concept.test.mjs'
+      - '.github/workflows/pocket-tricorder-concept.yml'
+permissions:
+  contents: read
+jobs:
+  concept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test/pocket-tricorder-concept.test.mjs
