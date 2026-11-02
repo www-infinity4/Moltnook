@@ -38,3 +38,16 @@ test('Pocket Tricorder uses observer when available', () => {
   }, { timeout: 1000 });
   assert.equal(observed, 1);
 });
+
+test('Pocket Tricorder remains readable without JavaScript and on 320px screens', () => {
+  assert.match(page, /<noscript><style>\\.fade-up\\s*\\{[^}]*opacity:\\s*1\\s*!important/);
+  assert.match(page, /grid-template-columns:\\s*repeat\\(auto-fill,\\s*minmax\\(min\\(100%,\\s*260px\\),\\s*1fr\\)\\)/);
+  assert.match(page, /\\.ref-list a\\s*\\{[^}]*overflow-wrap:\\s*anywhere/);
+});
+
+test('Pocket Tricorder separates phone sensors from accessory spectroscopy and OLED lab hardware', () => {
+  assert.match(page, /not a standard sensor already inside consumer phones/);
+  assert.match(page, /Chemical composition\\s+analysis needs a calibrated external spectrometer/);
+  assert.match(page, /microwave resonator and excitation/);
+  assert.match(page, /A normal OLED panel\\s+alone cannot provide/);
+});
