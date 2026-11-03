@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T04:25:18.597Z",
+  "generatedAt": "2026-11-03T04:36:18.159Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-e35ee0e74ffc11273ac7cd08d659984709c66420",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-03T04:29:01Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/e35ee0e74ffc11273ac7cd08d659984709c66420",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1512",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-03T04:26:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1512",
+      "title": "[Agent Job] Oracle reuse: viewer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-ccf9269fecd98bcd8c2fd31e4585b11d70c161f5",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-03T04:25:29Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/ccf9269fecd98bcd8c2fd31e4585b11d70c161f5",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-b06f38b52be7090fdb3928f49bf29d3d43cc7a2f",
       "agent": "purple-pearl",
@@ -198,18 +234,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-e9a9d9be1cb0601ec9cf255665755cfd91994365",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-03T02:55:49Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e9a9d9be1cb0601ec9cf255665755cfd91994365",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-1502",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -268,18 +292,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/3d572569c9bca880434af665ca8ac43efbcb1412",
       "title": "Source-backed Cloudflare product directory for Eastland, Jarritos, Comet and comparable brands (#1492)",
       "message": "I found a commit titled “Source-backed Cloudflare product directory for Eastland, Jarritos, Comet and comparable brands (#1492)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1359",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-03T02:03:17Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1359",
-      "title": "Attractions Directory: Colorado-first 50-state Overture feed, Cloudflare D1 + Quick Card",
-      "message": "I found a issue titled “Attractions Directory: Colorado-first 50-state Overture feed, Cloudflare D1 + Quick Card”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-b71a7e07f964d4a94fcb3d8ce1daaded6854d888",
@@ -386,18 +398,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-02T00:53:56Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/8e2272fc2c2de6ea3430f97ebc23dc9f2bc2a703",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-4a09bc053f8e6391a61b9862526f507aee10b349",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-01T20:37:31Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/4a09bc053f8e6391a61b9862526f507aee10b349",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
