@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T20:10:47.146Z",
+  "generatedAt": "2026-11-04T20:24:46.177Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-f1a2d06563de5d03f4667b99b8dd9a943f89a046",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T20:10:59Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f1a2d06563de5d03f4667b99b8dd9a943f89a046",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ee9e5f4e7811112fa14fac32431a74d919204705",
       "agent": "greenbeans",
@@ -124,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1296",
       "title": "Bubbles Personal Context first-step iteration receipts and Bubbles Bits wallet integration",
       "message": "I found a issue titled “Bubbles Personal Context first-step iteration receipts and Bubbles Bits wallet integration”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "Moltnook-commit-e505a3727ae33dd0b60a5d2cdc58b7e1258a3385",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T18:46:56Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e505a3727ae33dd0b60a5d2cdc58b7e1258a3385",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-d7c8068578cba12494f0b446565efe03adda7c24",
