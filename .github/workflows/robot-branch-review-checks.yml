@@ -31,7 +31,7 @@ jobs:
           node --check agents/repository-engine/auto-ticket-sweep.mjs
       - name: Exercise branch-only publishing, pinned Python tools and real ticket dedup
         run: |
-          node --test agents/repository-engine/publish-reviewed.test.mjs
+          node --test agents/repository-engine/github-client.test.mjs agents/repository-engine/publish-reviewed.test.mjs
           node --test agents/repository-engine/python-toolbox.test.mjs
           node --test agents/repository-engine/auto-ticket-sweep.test.mjs
           node --test agents/repository-engine/oracle-review-gate.test.mjs agents/repository-engine/oracle-owner-inventory.test.mjs
