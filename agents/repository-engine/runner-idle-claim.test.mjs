@@ -14,3 +14,12 @@ test('unsupported or missing code cannot leak untrusted private details',()=>{
  assert.deepEqual(parseRunnerIdle({lease:null,idle:{code:'Bearer secret',reason:'token'}}),{code:'reason_unavailable'});
  assert.deepEqual(parseRunnerIdle({lease:null}),{code:'reason_unavailable'});
 });
+
+test('aggregate post-admission reasons are whitelisted without exposing raw upstream data',()=>{
+ const receipt=parseRunnerIdle({lease:null,idle:{code:'eligible_but_not_claimed',examined:309,
+  admitted:3,deferred:306,adapterMatches:2,agedOut:176,scanLimited:true,
+  claimBlockedBy:{dependency_pending:1,repository_lease_active:1,runner_backoff:8000,
+   'Bearer token':42}}});
+ assert.deepEqual(receipt.claimBlockedBy,{dependency_pending:1,repository_lease_active:1,runner_backoff:0});
+ assert.ok(!JSON.stringify(receipt).includes('Bearer'));
+});
