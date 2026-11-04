@@ -1,4 +1,5 @@
 import {verifyRepositoryIdentity} from './repository-identity.mjs';
+import {createGithubClient} from './github-client.mjs';
 import {sourceDraftRetry,retainSourceExactDrafts,mergeSourceDrafts} from './source-drafts.mjs';
 import {checkCandidateModuleSyntax} from './module-syntax.mjs';
 import {collectDependencyContext} from './dependency-context.mjs';
@@ -42,7 +43,13 @@ const credentialEnv=()=>({...cleanEnv,GIT_CONFIG_COUNT:'2',GIT_CONFIG_KEY_1:'cor
 const command=(cmd,args,options={})=>execFileSync(cmd,args,{cwd:workspace,encoding:'utf8',timeout:180000,maxBuffer:3*1024*1024,env:cleanEnv,...options});
 const git=(...args)=>command('git',args).trim();
 function scrub(value){return String(value).replaceAll(token||'__NO_TOKEN__','[redacted]').slice(-9000);}
-async function github(resource,options={}){const r=await fetch('https://api.github.com/'+resource,{method:options.method||'GET',...(options.body?{body:JSON.stringify(options.body)}:{}),headers:{Accept:'application/vnd.github+json','Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('GitHub '+r.status+' at '+resource.split('?')[0]);return r.json();}
+let githubClient;
+async function github(resource,options={}){
+ // Authenticate only on the private Actions runner. A missing credential may
+ // still produce an honest blocked job receipt without throwing at import time.
+ if(!githubClient)githubClient=createGithubClient({token});
+ return githubClient(resource,options);
+}
 async function call(step,body={}){
  const value=await fetchRunnerOidcIdentity();
  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...body,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
