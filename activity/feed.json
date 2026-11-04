@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T17:47:59.503Z",
+  "generatedAt": "2026-11-04T17:56:46.892Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -24,10 +24,22 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-04T17:41:44Z",
+      "when": "2026-11-04T17:55:09Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
       "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
       "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-b89a0921d254bafa16b5b202efd982fa0a263773",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T17:48:11Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/b89a0921d254bafa16b5b202efd982fa0a263773",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-51f2d74f75e790933286709248f2b2c727c73257",
@@ -110,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T16:45:46Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/6aa2e92431c9650372841e0032354d9ee19581a5",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-e28a7d74a5a810a8b2339e04d5510c477b21716d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T16:36:33Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e28a7d74a5a810a8b2339e04d5510c477b21716d",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
