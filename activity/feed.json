@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T08:27:49.701Z",
+  "generatedAt": "2026-11-04T08:38:02.605Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-e41b4851c9eba3addc009ff975ee809fad271b3b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T08:29:35Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/e41b4851c9eba3addc009ff975ee809fad271b3b",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-19afa18c299e141cf57a6c5e91fdaa6a1b829b89",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T08:28:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/19afa18c299e141cf57a6c5e91fdaa6a1b829b89",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1667",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T08:27:58Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1667",
+      "title": "[Agent Job] Oracle reuse: image → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: image → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
     {
       "id": "Moltnook-commit-bb0d72d580024d058dfad5d320b55b1c2b3db538",
       "agent": "greenbeans",
@@ -98,18 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T07:13:06Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/dc0004a6d7c82391336db8eb027b079047cd4ede",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-6c38d516324891f13309131c298a879134bc0941",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T06:54:28Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6c38d516324891f13309131c298a879134bc0941",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -294,18 +318,6 @@
       "message": "I found a commit titled “Traffic: enable verified one-tap Cloudflare refresh (#1653)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-issue-1411",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T02:59:05Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1411",
-      "title": "Android Infinity Radio: native Media3 service for true uninterrupted playback",
-      "message": "I found a issue titled “Android Infinity Radio: native Media3 service for true uninterrupted playback”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "claude-flow-commit-328bf04279c9cd0e724caaf00f9ff2e70eac1362",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -314,18 +326,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T02:28:35Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/328bf04279c9cd0e724caaf00f9ff2e70eac1362",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-e5c6749ec5e73456be48f46bf454ff1a76aee496",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T01:28:28Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/e5c6749ec5e73456be48f46bf454ff1a76aee496",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
