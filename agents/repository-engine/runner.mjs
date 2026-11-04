@@ -1,5 +1,6 @@
 import {verifyRepositoryIdentity} from './repository-identity.mjs';
 import {createGithubClient} from './github-client.mjs';
+import {parseRunnerIdle} from './runner-idle-claim.mjs';
 import {sourceDraftRetry,retainSourceExactDrafts,mergeSourceDrafts} from './source-drafts.mjs';
 import {checkCandidateModuleSyntax} from './module-syntax.mjs';
 import {collectDependencyContext} from './dependency-context.mjs';
@@ -115,8 +116,13 @@ try{
  const useColorGpt=liveWindowCapability.colorThinkingV1===true&&liveWindowCapability.colorCoreModel===COLOR_GPT_MODEL;
  report.sourceProtocol=useWindowV2?'bounded-windows-v2':'legacy-small-files-only';
  if(token){let count=0,pushReported=0;for(let page=1;page<=20;page++){const repos=await github('user/repos?affiliation=owner&per_page=100&page='+page);for(const r of repos){if(r.owner.login!==OWNER)continue;count++;if(r.permissions?.push)pushReported++;}if(repos.length<100)break;}report.inventory={ownerRepositoriesVisible:count,reportedPushPermission:pushReported,note:'Reported account permissions; actual writes are proven by successful commits.'};await call('capability',{status:'credential_configured',repositoriesVisible:count});}
- lease=(await call('claim',{})).lease;
- if(!lease){report.status='idle';}
+ const claimReceipt=await call('claim',{});
+ lease=claimReceipt.lease;
+ if(!lease){
+  report.status='idle';
+  report.idle=parseRunnerIdle(claimReceipt);
+  console.log('BRAIN_RUNNER_IDLE '+JSON.stringify(report.idle));
+ }
  else{
   report.jobId=lease.ticketId+'/'+lease.jobId;report.repository=lease.job.repository;
   const scopedTask=[lease.job.title,lease.job.instructions,...(Array.isArray(lease.job.acceptance)?lease.job.acceptance:[])].filter(x=>typeof x==='string'&&x.trim()).join(' ').slice(0,9000);
