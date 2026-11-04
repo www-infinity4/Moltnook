@@ -23,3 +23,15 @@ test('aggregate post-admission reasons are whitelisted without exposing raw upst
  assert.deepEqual(receipt.claimBlockedBy,{dependency_pending:1,repository_lease_active:1,runner_backoff:0});
  assert.ok(!JSON.stringify(receipt).includes('Bearer'));
 });
+
+
+test('signed runner shows only categorized unfinished prerequisites, never private task data',()=>{
+ const parsed=parseRunnerIdle({lease:null,idle:{code:'eligible_but_not_claimed',examined:309,admitted:3,
+  deferred:306,adapterMatches:2,agedOut:176,scanLimited:true,
+  claimBlockedBy:{dependency_pending:2},
+  dependencyStates:{blocked:2,committed_unverified:1,queued:1,unknown:'Bearer secret',privateTicket:1}}});
+ assert.deepEqual(parsed.dependencyStates,{blocked:2,queued:1,committed_unverified:1});
+ assert.equal(parsed.claimBlockedBy.dependency_pending,2);
+ assert.ok(!JSON.stringify(parsed).includes('Bearer'));
+ assert.ok(!JSON.stringify(parsed).includes('privateTicket'));
+});
