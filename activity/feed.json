@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T15:24:49.811Z",
+  "generatedAt": "2026-11-04T15:36:23.695Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-4c0997b6c3a0447e48c8e2dcf0251d578cfb385a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T15:28:37Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/4c0997b6c3a0447e48c8e2dcf0251d578cfb385a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-5d3612f507a0e689a4770f3a160b22957ac92ad7",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T15:25:06Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5d3612f507a0e689a4770f3a160b22957ac92ad7",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-297b51442d491a5da394f480763f169806d62eb0",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T14:12:21Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/96c32bbd952b396933c88725ee9ffac7e056f027",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-d506c2ddb7267986d30868d02093ae687940c5dd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T13:54:47Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d506c2ddb7267986d30868d02093ae687940c5dd",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -196,18 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1667",
       "title": "[Agent Job] Oracle reuse: image → Omni-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: image → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-96f08ceb95b9e736c7cfe79e6b25966e8489ff41",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T07:28:34Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/96f08ceb95b9e736c7cfe79e6b25966e8489ff41",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1666",
