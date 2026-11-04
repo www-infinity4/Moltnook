@@ -17,6 +17,8 @@ const delayFor=(reply,attempt,now)=>{
  const remaining=header(reply,'x-ratelimit-remaining');
  const reset=Number(header(reply,'x-ratelimit-reset'));
  if(remaining==='0'&&Number.isFinite(reset)&&reset>0)return Math.max(0,Math.ceil(reset*1000-now()));
+ // GitHub requires at least one minute for a rate limit without timing headers.
+ if(reply.status===429)return 60000;
  return Math.min(20000,500*2**attempt);
 };
 const retryable=(reply)=>[429,500,502,503,504].includes(reply.status)||
