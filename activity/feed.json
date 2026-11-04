@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T19:10:10.453Z",
+  "generatedAt": "2026-11-04T19:24:47.651Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,6 +18,30 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T19:19:23Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-254b73eed983030132f8407026f0ec3f1ccf0b6a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T19:10:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/254b73eed983030132f8407026f0ec3f1ccf0b6a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "Moltnook-commit-db3175aa64ad685b99c3a0209948b0940b0c4427",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -28,18 +52,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/db3175aa64ad685b99c3a0209948b0940b0c4427",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T18:54:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-issue-1296",
@@ -122,18 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T17:56:59Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/d049dbbd7bceba3a45d610e333d4a73d8509faa1",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-b89a0921d254bafa16b5b202efd982fa0a263773",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T17:48:11Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b89a0921d254bafa16b5b202efd982fa0a263773",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
