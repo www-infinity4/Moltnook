@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T22:10:46.873Z",
+  "generatedAt": "2026-11-04T22:24:54.071Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,6 +18,30 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T22:14:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-e753dbb9d53b8f8e3bf1c47db08373157422667d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T22:10:57Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e753dbb9d53b8f8e3bf1c47db08373157422667d",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "QuantaPhi-commit-f666a696f3a34902ffa200468771c5db3153116b",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -28,18 +52,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/f666a696f3a34902ffa200468771c5db3153116b",
       "title": "fix(brain): resume same-ticket prerequisites of signed owner-selected work",
       "message": "I found a commit titled “fix(brain): resume same-ticket prerequisites of signed owner-selected work”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T21:58:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "Moltnook-commit-3eb24693a8f25fb6901058607130f877618ef327",
@@ -136,18 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/71549d7b0410b9758aa5c05e237437ea2e300804",
       "title": "merge(brain): safe GitHub request execution with signed runner idle receipts",
       "message": "I found a commit titled “merge(brain): safe GitHub request execution with signed runner idle receipts”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-2266dd567e0a4beb4dd3bc2341137f3cdbcda152",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T21:36:09Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2266dd567e0a4beb4dd3bc2341137f3cdbcda152",
-      "title": "merge(brain): retain runner idle receipts and add safe GitHub API transport",
-      "message": "I found a commit titled “merge(brain): retain runner idle receipts and add safe GitHub API transport”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-601f3a9c7ded4ac33e5629bb23d212080bfdcaef",
