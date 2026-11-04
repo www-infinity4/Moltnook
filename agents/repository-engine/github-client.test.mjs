@@ -62,4 +62,6 @@ test('unsafe route, over-budget retry and sensitive upstream error bodies fail c
  await assert.rejects(client('repos/www-infinity4/QuantaPhi'),error=>!/secret/.test(String(error))&&/github_http_401/.test(String(error)));
  const limited=createGithubClient({token:'secret',sleep:async()=>assert.fail('no long sleep'),fetchImpl:async()=>response(429,{},{'retry-after':'100'})});
  await assert.rejects(limited('repos/www-infinity4/Moltnook'),/github_rate_limit_deferred/);
+ const noHeader=createGithubClient({token:'secret',sleep:async()=>{throw Error('should defer unknown limit')},fetchImpl:async()=>response(429,{})});
+ await assert.rejects(noHeader('repos/www-infinity4/Moltnook'),/github_rate_limit_deferred/);
 });
