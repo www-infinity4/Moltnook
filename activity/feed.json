@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T02:46:39.423Z",
+  "generatedAt": "2026-11-04T02:55:49.450Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1231",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T02:55:17Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
+      "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
+      "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1250",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T02:55:15Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1250",
+      "title": "Carousel repair program: real interactive Copilot, eBay, image-first cards and playable media",
+      "message": "I found a issue titled “Carousel repair program: real interactive Copilot, eBay, image-first cards and playable media”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-853f746077d1ca7bfd808cc6f659494298ddcee8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-04T02:46:51Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/853f746077d1ca7bfd808cc6f659494298ddcee8",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-315d281eb9c1d0014cf3e8522417728546837213",
       "agent": "greenbeans",
@@ -112,18 +148,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/e5c6749ec5e73456be48f46bf454ff1a76aee496",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-ebcb500f0ba7b8f7539a40081dd2aae3cb724e13",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T01:24:09Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ebcb500f0ba7b8f7539a40081dd2aae3cb724e13",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-17c94d0ef2baa307866bf12bae33dc0f10ed3faf",
@@ -258,18 +282,6 @@
       "message": "I found a commit titled “feat(tv): separate Infinity channel players with source-linked program guide”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-issue-1231",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-03T20:45:02Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
-      "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
-      "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-1648",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -328,18 +340,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1190",
       "title": "Android mobile QA: Chrome ANR, Bubbles timeout, missing card artwork and action-first carousel",
       "message": "I found a issue titled “Android mobile QA: Chrome ANR, Bubbles timeout, missing card artwork and action-first carousel”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-issue-1509",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-03T20:34:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1509",
-      "title": "[#bubbles intake] Fix search relevance and trending context for emerging Liberty Coin queries",
-      "message": "I found a issue titled “[#bubbles intake] Fix search relevance and trending context for emerging Liberty Coin queries”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-0b6101fcb1979cc806b657a04e925c126f90783a",
