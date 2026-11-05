@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T05:24:53.179Z",
+  "generatedAt": "2026-11-05T05:36:35.432Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-cc750a5319851e6d30a5b850a37d7f97e6f3d767",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-05T05:28:52Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/cc750a5319851e6d30a5b850a37d7f97e6f3d767",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-22ffb8eda68c499b4ccdd12f1d7679438a2b8039",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-05T05:25:07Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/22ffb8eda68c499b4ccdd12f1d7679438a2b8039",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-a1bf08d06ed8127f431b0b5a3b736f2b76e88cd4",
       "agent": "greenbeans",
@@ -172,18 +196,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/8690f5d0f276f915d42c7d49c437edd939bccfb5",
       "title": "feat: Iowa live-radio station carousel (#1690)",
       "message": "I found a commit titled “feat: Iowa live-radio station carousel (#1690)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-55df52be5b360c9d9590e69d294d4bd62148950b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T03:56:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/55df52be5b360c9d9590e69d294d4bd62148950b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-fc61c2eaaeb1724882627edb0ea2873c03feb5a3",
@@ -362,18 +374,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-04T23:28:50Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/9ed99a39e103258e17b10a5400a5f85a3f9f1c42",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-b53289643d89610dc4c757d4159c343d62c9921d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-04T22:28:51Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b53289643d89610dc4c757d4159c343d62c9921d",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
