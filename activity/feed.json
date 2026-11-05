@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T12:16:04.837Z",
+  "generatedAt": "2026-11-05T12:30:48.065Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-d5a1510d0dd338f97638f838f8c45e9adb608609",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-05T12:30:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d5a1510d0dd338f97638f838f8c45e9adb608609",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261105-DA11A001/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261105-DA11A001/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-fb2943570b3902ac8d3fdb3f1a8da6b770b236e4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-05T12:16:17Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/fb2943570b3902ac8d3fdb3f1a8da6b770b236e4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-73522eb4bfec75acd4f9c43aba3c04a680df967d",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-05T10:54:31Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/e2234b0d51f5d303096376321b9613fe9ceed00d",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-25db57b3fb818d8b91c00719f1b92c9bb04d4e41",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T10:45:24Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/25db57b3fb818d8b91c00719f1b92c9bb04d4e41",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/3773f454d8aa4a869c1cdaa0765d328140bba830",
       "title": "Verify semantic routing separately from execution and retain credit activation holds",
       "message": "I found a commit titled “Verify semantic routing separately from execution and retain credit activation holds”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-6e456620da79e5ce1434c0f84e801f39edf899b9",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T02:19:50Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6e456620da79e5ce1434c0f84e801f39edf899b9",
-      "title": "Interpret ordinary owner repair requests before selecting the work engine",
-      "message": "I found a commit titled “Interpret ordinary owner repair requests before selecting the work engine”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "Oracle-Octaves-issue-209",
