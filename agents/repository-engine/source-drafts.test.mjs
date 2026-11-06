@@ -46,5 +46,5 @@ test('real engine combines drafts before existing full source, syntax, review an
  const combine=s.indexOf('proposal.edits=mergeSourceDrafts(sourceExactDrafts,proposal.edits)');
  assert.ok(combine>0&&combine<s.indexOf('!checkVisibleEdits(windowEvidence,proposal.edits)',combine));
  assert.ok(combine<s.indexOf('checkCandidateModuleSyntax(patched)',combine));
- assert.match(s,/await call\('engine-review'/);assert.match(s,/await checks\(candidate.patched\)/);
+ assert.match(s,/await call\('engine-review'/);assert.match(s,/await checks\(candidate\.patched,focused\)/);
 });

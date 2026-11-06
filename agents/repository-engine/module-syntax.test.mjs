@@ -19,7 +19,7 @@ test('real runner parses the exact candidate before review while retaining full 
  const s=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
  const start=s.indexOf('const patched=applyEdits(original,proposal.edits);');
  const preflight=s.indexOf('checkCandidateModuleSyntax(patched);',start);
- assert.ok(preflight>start&&preflight<s.indexOf("await event('greenbeans','Engineer produced",start));
+ assert.ok(preflight>start&&preflight<s.indexOf("{phase:'patch_prepared',attempt}",start));
  assert.ok(preflight<s.indexOf("await call('engine-review'",start));
- assert.match(s,/await checks\(candidate.patched\)/);assert.match(s,/await call\('arbitrate'/);
+ assert.match(s,/await checks\(candidate\.patched,focused\)/);assert.match(s,/await call\('arbitrate'/);
 });

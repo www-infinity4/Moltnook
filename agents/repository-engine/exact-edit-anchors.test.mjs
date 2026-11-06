@@ -40,7 +40,7 @@ test('real runner supplies copy anchors to Green and still applies all exact/rev
  assert.match(runner,/!checkVisibleEdits\(windowEvidence,proposal.edits\)/);
  assert.match(runner,/applyEdits\(original,proposal.edits\)/);
  assert.match(runner,/await call\('engine-review'/);
- assert.match(runner,/await checks\(candidate.patched\)/);
+ assert.match(runner,/await checks\(candidate\.patched,focused\)/);
 });
 
 test('a long instruction line is never offered as a cut-off expression prefix',()=>{
