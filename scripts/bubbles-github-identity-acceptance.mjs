@@ -6,10 +6,10 @@ export function gradeIdentityReply(reply,{negative=false}={}) {
  const body=reply?.result||{},receipt=body.receipt||{};
  const urls=[body.sourceUrl,...(Array.isArray(body.sources)?body.sources.map(s=>s?.url):[])].filter(x=>typeof x==='string');
  const exactSource=urls.some(value=>{try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='github.com'&&/^\/www-infinity4\/QuantaPhi\/blob\/[^/]+\/README\.md$/.test(u.pathname)&&!u.search&&!u.hash;}catch{return false;}});
- const delivered=reply?.state==='complete'&&body.ok===true&&typeof body.output==='string'&&body.output.trim().length>0;
+ const delivered=reply?.state==='complete'&&typeof body.output==='string'&&body.output.trim().length>0;
  const read=receipt.sourceReadVerified===true&&receipt.status==='complete'&&['github.read_file','agent.read_sequence'].includes(receipt.tool);
  const pass=negative?delivered&&receipt.tool==='github.read_file'&&['failed','needs_input'].includes(receipt.status)&&receipt.sourceReadVerified!==true:
-  delivered&&read&&exactSource&&(body.repository===undefined||body.repository==='www-infinity4/QuantaPhi')&&(body.path===undefined||body.path==='README.md');
+  delivered&&body.ok===true&&read&&exactSource&&(body.repository===undefined||body.repository==='www-infinity4/QuantaPhi')&&(body.path===undefined||body.path==='README.md');
  return {pass,delivered,exactSource,sourceReadVerified:receipt.sourceReadVerified===true,
   tool:receipt.tool||null,receiptStatus:receipt.status||null,repository:body.repository||null,
   sourceUrls:urls,output:body.output||'',writeVerified:false,deploymentVerified:false};
