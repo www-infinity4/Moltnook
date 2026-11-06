@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T20:24:44.192Z",
+  "generatedAt": "2026-11-06T20:36:22.120Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-5ce7edc6e5d536a35f21d60ec48446a73655c9c4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T20:28:33Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/5ce7edc6e5d536a35f21d60ec48446a73655c9c4",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-a2936c52d2552d60f58b4503a3ca788e83e23629",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T20:24:53Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a2936c52d2552d60f58b4503a3ca788e83e23629",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-911e0148adf6e0d20c9e969c8635e50fd51ac4af",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-06T19:20:02Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/26dd22026cc72f68554ae593dbe6d17b64377e0f",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-e3064de2edba1a456e22bda02ba97a5da8ad00ac",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T19:10:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e3064de2edba1a456e22bda02ba97a5da8ad00ac",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -268,18 +280,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1748",
       "title": "[Agent Job] Oracle reuse: image → News-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: image → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-b7924debd7a97affaeae84cf9f6d5dc0d5cd2ad8",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T13:28:37Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b7924debd7a97affaeae84cf9f6d5dc0d5cd2ad8",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1747",
