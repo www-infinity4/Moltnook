@@ -12,10 +12,10 @@ const SHA=/^[0-9a-f]{40}$/;
 const SCRIPT='infinity-brain-clock';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
 const RECEIPT='repository-receipts/brain-owner-release.json';
-export const STABLE_VERSION='b43fbe8f-4d3c-4943-a62e-f19627cec378';
-export const CANDIDATE_VERSION='4af258f9-deaf-4612-a2ed-125fcac6685a';
-export const SOURCE_COMMIT='715b0ef0688bc697546d1317cfe6d81360456f2d';
-export const BASELINE_DEPLOYMENT='c426aa64-77a2-409c-9332-316225557c4c';
+export const STABLE_VERSION='a38cc582-b006-4253-b957-bab48445853d';
+export const CANDIDATE_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
+export const SOURCE_COMMIT='c59d4659970fdcffc4429ac16a412b73c7c60e54';
+export const BASELINE_DEPLOYMENT='421fad0b-f50e-423a-93ac-e12111b74e08';
 const REQUIRED=['BOT_WALLET','BOT_WORK_SECRET','CLOCK','MODELS','WORK_DB','WRITER_AI','WRITER_OWNER_HASH'];
 function stable(v){if(Array.isArray(v))return v.map(stable);if(v&&typeof v==='object')return Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])]));return v;}
 function digest(x){return createHash('sha256').update(JSON.stringify(stable(x))).digest('hex');}
