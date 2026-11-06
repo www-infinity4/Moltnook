@@ -6,10 +6,10 @@
 import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 
-export const PRODUCTION_DEPLOYMENT='c426aa64-77a2-409c-9332-316225557c4c';
-export const PRODUCTION_VERSION='b43fbe8f-4d3c-4943-a62e-f19627cec378';
-export const CANDIDATE_VERSION='4af258f9-deaf-4612-a2ed-125fcac6685a';
-export const SOURCE_SHA='715b0ef0688bc697546d1317cfe6d81360456f2d';
+export const PRODUCTION_DEPLOYMENT='421fad0b-f50e-423a-93ac-e12111b74e08';
+export const PRODUCTION_VERSION='a38cc582-b006-4253-b957-bab48445853d';
+export const CANDIDATE_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
+export const SOURCE_SHA='c59d4659970fdcffc4429ac16a412b73c7c60e54';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
 export const PREVIEW_ID='b5ad542188964721a0ab59319c1f0b3a';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
@@ -54,7 +54,7 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  const list=deployments?.items||deployments;
  const latest=Array.isArray(list)?list[0]:null,env=latest?.env||{};
  if(!latest||latest.main_module!==candidateName||
-   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
+   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba','715b0ef',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
    JSON.stringify(Object.keys(env).sort())!==
      JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
    env.BRAIN_CANARY_MODE?.text!=='isolated'||

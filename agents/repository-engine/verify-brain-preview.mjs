@@ -2,6 +2,7 @@
 // Never POST to production, and never copy production owner/transaction data.
 import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
+import {CANDIDATE_VERSION,SOURCE_SHA} from './brain-preview-update.mjs';
 const account='ef25728c096c6ba92cf510caa2058003';
 const base='https://api.cloudflare.com/client/v4/accounts/'+account+
  '/workers/scripts/infinity-brain-clock/deployments';
@@ -73,7 +74,7 @@ async function run(mode,{request=fetch}={}){
  const previewId=items[0].id;
  const deploymentList=await api(workerRoot+'/previews/'+previewId+'/deployments');
  const previewDeployment=deploymentList?.items?.[0]||deploymentList?.[0];
- if(previewDeployment?.annotations?.['workers/tag']!=='715b0ef')
+ if(previewDeployment?.annotations?.['workers/tag']!==SOURCE_SHA.slice(0,7))
   throw Error('isolated_preview_source_version_not_updated');
  if(previewDeployment.compatibility_date!=='2026-10-10'||
    JSON.stringify([...(previewDeployment.compatibility_flags||[])].sort())!==JSON.stringify(['global_fetch_strictly_public']))
@@ -142,7 +143,7 @@ async function run(mode,{request=fetch}={}){
  fs.mkdirSync('repository-receipts',{recursive:true});
  const result={status:'isolated_preview_verified',
   stage:'synthetic_read_only_canary',sourceSha:process.env.TARGET_SHA||'',
-  candidateVersionId:'4af258f9-deaf-4612-a2ed-125fcac6685a',
+  candidateVersionId:CANDIDATE_VERSION,
   previewUrl:url,
   productionDeploymentId:earlier.id,productionVersionId:earlier.versionId,
   prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,
