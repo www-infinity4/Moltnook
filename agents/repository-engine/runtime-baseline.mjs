@@ -6,6 +6,30 @@ export function focusedTestCommand(files,packageJson){
  if(packageJson?.scripts?.test)return null;
  return files.length?['--import',nodeTestBootstrap,'--test',...files]:null;
 }
+const testFile=/^[A-Za-z0-9_][\w./-]*\.(?:test|spec)\.(?:js|cjs|mjs)$/i;
+export function repositoryNodeTests(changed,planned,tracked,sourceEvidence){
+ const existing=new Set(tracked);
+ const pinnedTests=files=>files.filter(file=>existing.has(file)&&testFile.test(file));
+ const selected=[...changed.filter(file=>testFile.test(file)),...pinnedTests(planned)];
+ return [...new Set(selected.length?selected:pinnedTests(sourceEvidence))].slice(0,12);
+}
+
+export function commandReceipt(name,execute,scrub=String){
+ try{return {name,passed:true,exitCode:0,output:scrub(execute())};}
+ catch(error){
+  const stdout=scrub(error.stdout||'').slice(-4500);
+  const stderr=scrub(error.stderr||'').slice(-4500);
+  const output=[stdout,stderr].filter(Boolean).join('\n')||scrub(error.message);
+  return {name,passed:false,exitCode:Number.isInteger(error.status)?error.status:null,output};
+ }
+}
+
+export function compactRepositoryChecks(tests){
+ return {passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(run=>({
+  name:run.name,passed:run.passed,exitCode:run.exitCode??null,
+  output:String(run.output||'').slice(run.passed?-350:-9000)
+ }))};
+}
 export async function inspectRuntime({version=process.versions.node,execute=(cmd,args)=>execFileSync(cmd,args,{encoding:'utf8',timeout:10000}),renderer=async()=>{const {chromium}=await import('playwright');await access(chromium.executablePath());}}={}){
  const checks=[{name:'Node 22 or newer',passed:Number(version.split('.')[0])>=22}];
  for(const [name,cmd]of [['Git','git'],['Python','python3']]){
