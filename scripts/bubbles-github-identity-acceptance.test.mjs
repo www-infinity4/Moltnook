@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {gradeIdentityReply as grade} from './bubbles-github-identity-acceptance.mjs';
+import {gradeIdentityReply as grade,gradeWriteBoundary} from './bubbles-github-identity-acceptance.mjs';
 const good=()=>({state:'complete',result:{ok:true,repository:'www-infinity4/QuantaPhi',path:'README.md',output:'Actual README detail.',sourceUrl:'https://github.com/www-infinity4/QuantaPhi/blob/main/README.md',receipt:{tool:'github.read_file',status:'complete',sourceReadVerified:true}}});
 test('read acceptance requires exact target and source receipt',()=>{
  assert.equal(grade(good()).pass,true);
@@ -17,4 +17,14 @@ test('negative target must have an actual failed tool receipt, never a silent co
  const r=good();r.result.receipt={tool:'github.read_file',status:'failed',reason:'github_file_read_failed'};
  assert.equal(grade(r,{negative:true}).pass,true);
  r.result.receipt.tool='oracle.chat';assert.equal(grade(r,{negative:true}).pass,false);
+});
+test('a signed conversation must return the actual blocked repo-create receipt',()=>{
+ const reply={state:'complete',result:{ok:false,output:'Connect owner tools in Bubbles before creating a repository. No repository was created or queued.',
+  receipt:{tool:'github.create_repository',status:'blocked',repositoryActionsVerified:false}}};
+ assert.equal(gradeWriteBoundary(reply).pass,true);
+ assert.equal(gradeWriteBoundary({...reply,state:'working'}).pass,false);
+ for(const patch of [{status:'complete'},{tool:'oracle.chat'},{repositoryActionsVerified:true}]){
+  const result={...reply.result,receipt:{...reply.result.receipt,...patch}};
+  assert.equal(gradeWriteBoundary({...reply,result}).pass,false);
+ }
 });
