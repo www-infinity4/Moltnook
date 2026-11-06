@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T04:25:42.067Z",
+  "generatedAt": "2026-11-06T04:36:55.703Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-6b27b9eb5e13db2aaf2ca55f188f07d94beb4513",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T04:28:59Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/6b27b9eb5e13db2aaf2ca55f188f07d94beb4513",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1721",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T04:27:39Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1721",
+      "title": "[Agent Job] Oracle reuse: button → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1720",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T04:27:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1720",
+      "title": "[Agent Job] Oracle reuse: card → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-d5b951e0449755fc97a971a34d32785e7b40f67a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T04:25:53Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d5b951e0449755fc97a971a34d32785e7b40f67a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-4ad21435dd0bb656ee87da50bfc27518701c801a",
       "agent": "greenbeans",
@@ -134,18 +182,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-06T03:15:05Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/f57f3aad766b16ae6e52ceac3f0d031c31bdb154",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-6835bb518e427d064b39449f49feebcbabff77e9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T02:56:42Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6835bb518e427d064b39449f49feebcbabff77e9",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -330,18 +366,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "claude-flow-commit-205ec583d21055f572d6a0d4400a59390003b744",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T21:28:39Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/205ec583d21055f572d6a0d4400a59390003b744",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-1701",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -352,30 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1701",
       "title": "Security: harden external website preview, block external framing and risky iframe permissions",
       "message": "I found a issue titled “Security: harden external website preview, block external framing and risky iframe permissions”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1641",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T19:03:17Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1641",
-      "title": "Classic Rock music buttons + artist-direct album/merch Quick Card",
-      "message": "I found a issue titled “Classic Rock music buttons + artist-direct album/merch Quick Card”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1411",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-05T19:03:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1411",
-      "title": "Android Infinity Radio: native Media3 service for true uninterrupted playback",
-      "message": "I found a issue titled “Android Infinity Radio: native Media3 service for true uninterrupted playback”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-209",
