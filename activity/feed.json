@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T05:36:58.902Z",
+  "generatedAt": "2026-11-06T05:45:35.062Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,90 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-80c4762d1df4db884b991841fe179e5f4e7f95e3",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:41:18Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/80c4762d1df4db884b991841fe179e5f4e7f95e3",
+      "title": "Merge pull request #1726 from www-infinity4/codex/google-oauth-worker-redirect-runtime-fix",
+      "message": "I found a commit titled “Merge pull request #1726 from www-infinity4/codex/google-oauth-worker-redirect-runtime-fix”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-e6ab0ced3335c024495d969aa30dc5427a03cf36",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:40:55Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e6ab0ced3335c024495d969aa30dc5427a03cf36",
+      "title": "Fix Bubbles Google OAuth callback and verified connection display (#1725)",
+      "message": "I found a commit titled “Fix Bubbles Google OAuth callback and verified connection display (#1725)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-5816a502c4c8070b3e59b0c0177a15392d48367c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:40:33Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/5816a502c4c8070b3e59b0c0177a15392d48367c",
+      "title": "test/fix: safely classify Google redirect responses across Worker RPC boundary",
+      "message": "I found a commit titled “test/fix: safely classify Google redirect responses across Worker RPC boundary”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-0c133879db2c0da9be6b250801d8c5cd504ae9bf",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:39:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0c133879db2c0da9be6b250801d8c5cd504ae9bf",
+      "title": "fix: Workers-supported OAuth redirect handling for Google, Cloudflare and GitHub connectors",
+      "message": "I found a commit titled “fix: Workers-supported OAuth redirect handling for Google, Cloudflare and GitHub connectors”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-0006170edebdc828619f977edc09fd6dc2623768",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:38:34Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0006170edebdc828619f977edc09fd6dc2623768",
+      "title": "test(red): OAuth providers must use Cloudflare Workers-supported redirect handling",
+      "message": "I found a commit titled “test(red): OAuth providers must use Cloudflare Workers-supported redirect handling”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-9b6adef11eec56b45eb85346240f9f5faca37ab3",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:38:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9b6adef11eec56b45eb85346240f9f5faca37ab3",
+      "title": "test(red): OAuth providers must use Cloudflare Workers-supported redirect handling",
+      "message": "I found a commit titled “test(red): OAuth providers must use Cloudflare Workers-supported redirect handling”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-36e467d4a929d6712ff9ae5cf4a29b5ddace765a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-06T05:37:11Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/36e467d4a929d6712ff9ae5cf4a29b5ddace765a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-0623c645c36bfea6e1c10dd1a98c1eee4f4bfd98",
       "agent": "greenbeans",
@@ -64,78 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/143db0c310728220bfcb0d161e4ba62111c30847",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-b69e86fff32d399efd7312074564f29353988204",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:11:35Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b69e86fff32d399efd7312074564f29353988204",
-      "title": "test/release: align cache versions and callback scripts with provider connection fix",
-      "message": "I found a commit titled “test/release: align cache versions and callback scripts with provider connection fix”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-0b1e75e29fd80fafe514c2305ce7153f2775bab5",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:11:04Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0b1e75e29fd80fafe514c2305ce7153f2775bab5",
-      "title": "release: load corrected Cloudflare and Google status scripts on all Bubbles pages",
-      "message": "I found a commit titled “release: load corrected Cloudflare and Google status scripts on all Bubbles pages”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-b902cf5137dd8549ac6a94b7bceb148a83d02787",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:09:44Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b902cf5137dd8549ac6a94b7bceb148a83d02787",
-      "title": "test: verify Google OAuth refresh and Android same-tab callback handling",
-      "message": "I found a commit titled “test: verify Google OAuth refresh and Android same-tab callback handling”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-6dafc024c0d2a8785e0009741c32eb23b16f1c2f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:08:13Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6dafc024c0d2a8785e0009741c32eb23b16f1c2f",
-      "title": "release: load corrected connected-account view and OAuth recovery",
-      "message": "I found a commit titled “release: load corrected connected-account view and OAuth recovery”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-dfe96944d091180e1b0bf81733ea2a6cc57d72c4",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:08:06Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/dfe96944d091180e1b0bf81733ea2a6cc57d72c4",
-      "title": "fix: expose secure Cloudflare callback completion through Durable Object RPC",
-      "message": "I found a commit titled “fix: expose secure Cloudflare callback completion through Durable Object RPC”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-8b2994c7a3658ebd57a5d2d0d0d8cf47651e81f0",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T05:07:57Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8b2994c7a3658ebd57a5d2d0d0d8cf47651e81f0",
-      "title": "fix: verify refreshed account connections and permit wallet-scoped Cloudflare handoff recovery",
-      "message": "I found a commit titled “fix: verify refreshed account connections and permit wallet-scoped Cloudflare handoff recovery”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "Moltnook-commit-5c687593e66e935562112fb600435d855cffdcef",
@@ -230,18 +242,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-06T04:25:53Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/d5b951e0449755fc97a971a34d32785e7b40f67a",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-4ad21435dd0bb656ee87da50bfc27518701c801a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T04:15:06Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/4ad21435dd0bb656ee87da50bfc27518701c801a",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
