@@ -15,6 +15,7 @@ test('read acceptance requires exact target and source receipt',()=>{
 test('negative target must have an actual failed tool receipt, never a silent correction',()=>{
  assert.equal(grade(good(),{negative:true}).pass,false);
  const r=good();r.result.receipt={tool:'github.read_file',status:'failed',reason:'github_file_read_failed'};
+ r.result.ok=false;
  assert.equal(grade(r,{negative:true}).pass,true);
  r.result.receipt.tool='oracle.chat';assert.equal(grade(r,{negative:true}).pass,false);
 });
