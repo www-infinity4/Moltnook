@@ -28,17 +28,17 @@ test('no capability, scope, foreign repository, missing merge or fraudulent test
  assert.throws(()=>verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths:['README.md'],headSha}),/test_paths_missing/);
  assert.throws(()=>verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths:['index.html','../../secrets.test.cjs'],headSha}),/test_paths_missing/);
 });
-test('run source review performs real git ancestry and focused Node tests only; no write, commit, or payouts',async()=>{
+test('source review checks trusted ancestry before it runs focused repository tests',async()=>{
  const calls=[];
  const receipt=await runSourceReview({
   job,sourceReview,capability,headSha,
   github:async path=>{calls.push(['github',path]);return path.endsWith('/files?per_page=100')
    ?changedPaths.map(filename=>({filename})):pr},
   readSource:async path=>{calls.push(['read',path]);return 'test code'},
-  runCommand:async(cmd,args)=>{calls.push([cmd,...args]);return 'TAP version 13\n# pass 4';}
+  verifyAncestry:async sha=>{calls.push(['ancestry',sha]);},
+  runTest:async path=>{calls.push(['test',path]);return 'TAP version 13\n# pass 4';}
  });
- assert.deepEqual(calls.filter(a=>a[0]==='git'),[['git','merge-base','--is-ancestor',mergeSha,'HEAD']]);
- assert.deepEqual(calls.filter(a=>a[0]==='node'),[['node','--test','test/bubbles-brain-actions.test.cjs']]);
+ assert.deepEqual(calls.slice(2),[['ancestry',mergeSha],['read','test/bubbles-brain-actions.test.cjs'],['test','test/bubbles-brain-actions.test.cjs']]);
  assert.equal(receipt.status,'source_verified');
  assert.equal(receipt.testsPassed,true);
  assert.equal(receipt.noNewSourceWrites,true);
@@ -50,11 +50,12 @@ test('missing real tests or failed ancestry refuses a false receipt',async()=>{
  await assert.rejects(runSourceReview({
   job,sourceReview,capability,headSha,
   github:async url=>url.endsWith('/files?per_page=100')?changedPaths.map(filename=>({filename})):pr,
-  readSource:async()=>'',runCommand:async()=>''
+  readSource:async()=>'',verifyAncestry:async()=>{},runTest:()=>assert.fail('missing test')
  }),/test_source_missing/);
  await assert.rejects(runSourceReview({
   job,sourceReview,capability,headSha,
   github:async url=>url.endsWith('/files?per_page=100')?changedPaths.map(filename=>({filename})):pr,
-  readSource:async()=>'',runCommand:async(cmd)=>{if(cmd==='git')throw Error('not_an_ancestor');}
+  readSource:()=>assert.fail('unverified source'),verifyAncestry:async()=>{throw Error('not_an_ancestor');},
+  runTest:()=>assert.fail('unverified test')
  }),/not_an_ancestor/);
 });

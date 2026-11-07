@@ -161,9 +161,11 @@ try{
   if(lease.job.sourceReview?.kind==='source_review_only'&&liveWindowCapability.sourceReviewV1===true){
    // Signed Brain selected already merged Green source: no new patch or payout.
    await event('pink-panther','Reviewing merged source for '+report.jobId+' with an independent read-only runner.');
-   const verified=await withRepositorySandbox(workspace,runCommand=>runSourceReview({
+   const verified=await withRepositorySandbox(workspace,sandbox=>runSourceReview({
     job:lease.job,sourceReview:lease.job.sourceReview,capability:liveWindowCapability,
-    headSha:baseSha,github,readSource:sourceFile,runCommand
+    headSha:baseSha,github,readSource:sourceFile,
+    verifyAncestry:sha=>git('merge-base','--is-ancestor',sha,'HEAD'),
+    runTest:file=>sandbox('node',['--test',file])
    }));
    report.tests=verified.tests;testsPassed=true;
    report.readOnlySourceReview={prUrl:verified.prUrl,mergeSha:verified.reviewedMergeSha,
