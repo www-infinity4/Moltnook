@@ -2,6 +2,7 @@ import {BrainClock} from './worker.js';
 import {filterActiveTickets} from './ticket-selector.mjs';
 import {sourceRecoveryEligibility} from './deferred-recovery.mjs';
 import {pinnedPinkReview,prioritizeReadOnlyPinkReviews,validatePinkSourceReceipt,completePinkReviewInContext} from './source-review.mjs';
+import {appendRunnerStep} from './runner-progress.mjs';
 export {BrainClock};
 
 // Transient CI-only Preview wrapper. Nothing is forwarded to live owner,
@@ -91,9 +92,23 @@ export default {
   unauthorized.technical_handoffs[0].category='tool-connection';
   ownerBlockPreserved=pinnedPinkReview(unauthorized,unauthorized.color_jobs[1])===null;
 
+  const runUrl='https://github.com/www-infinity4/Moltnook/actions/runs/1';
+  const prUrl='https://github.com/www-infinity4/QuantaPhi/pull/1';
+  const add=(progress,step)=>appendRunnerStep(progress,step,'www-infinity4/QuantaPhi',runUrl);
+  const started=add({runUrl},{phase:'discovery_started',attempt:0});
+  const checking=add(started,{phase:'checks_started',attempt:1});
+  const failure=add(checking,{phase:'attempt_failed',attempt:1,stage:'test',exitCode:1,output:'synthetic private output'});
+  const premature=add(failure,{phase:'pr_opened',attempt:1,prUrl});
+  const retry=add(failure,{phase:'checks_started',attempt:2});
+  const passed=add(retry,{phase:'checks_passed',attempt:2,exitCode:0,checkCount:1});
+  const published=add(passed,{phase:'pr_opened',attempt:2,prUrl});
+  const runnerProgressVerified=premature===null&&failure?.runnerSteps.at(-1)?.summary.includes('exit code 1')&&
+   published?.runnerSteps.length===6&&published.runnerSteps.at(-1).prUrl===prUrl&&
+   !JSON.stringify(published).includes('synthetic private output');
+
   const ok=ownerDecisionProtected&&currentWorkSelected&&
    sourceRecovery.eligible===true&&clockReady&&mergedSourceRecognized&&
-   reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved;
+   reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved&&runnerProgressVerified===true;
   return Response.json({ok,mode:'isolated_preview_only',ticketCount:row.total,
    consentTransport,
    sourceDecisionVerified:ownerDecisionProtected,
@@ -102,7 +117,8 @@ export default {
    distinctClockReady:clockReady,
    productionTrafficTouched:false,
    ownerOrWalletOperationsAllowed:false,
-   mergedSourceRecognized,reviewReceiptSafe,generatedRepairSuperseded,ownerBlockPreserved
+   mergedSourceRecognized,reviewReceiptSafe,generatedRepairSuperseded,ownerBlockPreserved,
+   runnerProgressVerified
   },{status:ok?200:503,headers:{'Cache-Control':'no-store'}});
  }
 };
