@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T11:08:52.301Z",
+  "generatedAt": "2026-11-07T11:18:18.553Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-304c140abf4b3e138d9385d576f6efe30d6f45be",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T11:12:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/304c140abf4b3e138d9385d576f6efe30d6f45be",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261107-F7D2A2F9/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261107-F7D2A2F9/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-881d792788b401734179a7a4d40b3e02a8b9bb4c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T11:09:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/881d792788b401734179a7a4d40b3e02a8b9bb4c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-d2611b96a8dc7507c939c4b7f134a90bf3574c31",
       "agent": "greenbeans",
@@ -146,18 +170,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T10:09:55Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/a972018268557cf4b9459f9919bd21352cfa9e04",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-1289090b7d79d5dd7aaadd439ef36235f725580d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T09:54:12Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/1289090b7d79d5dd7aaadd439ef36235f725580d",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/0161da1c3ca0187e0625095e2796b6a703346568",
       "title": "Add Google trending movie Oracle Quick Cards with inline trailers (#1776)",
       "message": "I found a commit titled “Add Google trending movie Oracle Quick Cards with inline trailers (#1776)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-32e585a9ce123d00dfa8f3f64899e182ef56426f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T02:30:20Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/32e585a9ce123d00dfa8f3f64899e182ef56426f",
-      "title": "Fix Steve Miller and Pink Floyd radio buttons and song queues (#1774)",
-      "message": "I found a commit titled “Fix Steve Miller and Pink Floyd radio buttons and song queues (#1774)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-209",
