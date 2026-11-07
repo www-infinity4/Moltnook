@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T17:17:36.886Z",
+  "generatedAt": "2026-11-07T17:26:37.977Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1804",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T17:26:13Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1804",
+      "title": "[Agent Job] Oracle reuse: card → News-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-3a82b8e25b74a536e3f18aa4af2820875632fd37",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T17:17:46Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3a82b8e25b74a536e3f18aa4af2820875632fd37",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-830fb113efdd5a9dc78d980b9649d380b05c53b5",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T16:11:55Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/f48332b662c2afb332a72ed70888f9c18f05386c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-6db392650ed57b04e8a8baed5412a943295a02e5",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T15:55:41Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6db392650ed57b04e8a8baed5412a943295a02e5",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -340,18 +352,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/deb11f580d18b532b3e5eab11bf3260675f20b40",
       "title": "Show real Red Orange Blue GPT reasoning steps in Bubbles owner job feed (#1786)",
       "message": "I found a commit titled “Show real Red Orange Blue GPT reasoning steps in Bubbles owner job feed (#1786)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T09:38:21Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-commit-2889cbc023518deaaa6b406fc6ae4f5893bee4d4",
