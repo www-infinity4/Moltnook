@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T01:11:17.818Z",
+  "generatedAt": "2026-11-07T01:24:44.580Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-f2c865ac2021a52ad7212e9cd6d6081593230e2f",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T01:24:24Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/f2c865ac2021a52ad7212e9cd6d6081593230e2f",
+      "title": "Fix native X Following feed and in-card replies (#1760)",
+      "message": "I found a commit titled “Fix native X Following feed and in-card replies (#1760)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-1bcaacf85ae5df600db52580596f4716e831b52d",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T01:22:06Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/1bcaacf85ae5df600db52580596f4716e831b52d",
+      "title": "Fix artist Quick Card playback sources (#1759)",
+      "message": "I found a commit titled “Fix artist Quick Card playback sources (#1759)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-d95822638cb00cbbfa74fe5f41127c9b2d512eee",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T01:15:21Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d95822638cb00cbbfa74fe5f41127c9b2d512eee",
+      "title": "Fix Bubbles music Quick Card repair routing (#1758)",
+      "message": "I found a commit titled “Fix Bubbles music Quick Card repair routing (#1758)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-a50dbcf52c11d52952f46a3dd177bc38a6faeb04",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T01:11:28Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a50dbcf52c11d52952f46a3dd177bc38a6faeb04",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-c6246df868c27ab354357e8245dd3989184619c6",
       "agent": "greenbeans",
@@ -100,18 +148,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/fa072ed494f2b396b6ddd882915bec96bb39c48b",
       "title": "Verify staged Bubbles progress in the isolated Brain preview (#245)",
       "message": "I found a commit titled “Verify staged Bubbles progress in the isolated Brain preview (#245)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-e80c7820f86fe4eee000268248479f2a0fb73dfb",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T00:45:49Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e80c7820f86fe4eee000268248479f2a0fb73dfb",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-d2dffd8ed21b161d821f40569a3bd9d14e198360",
@@ -268,42 +304,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/82c0ede5ced83535ed5118e7507486ab92234097",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-commit-27f753b1b90e89cd9f085cfee578792d48a718ec",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T18:25:33Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/27f753b1b90e89cd9f085cfee578792d48a718ec",
-      "title": "fix: serve AdSense crawler files directly from QuantaPhi edge",
-      "message": "I found a commit titled “fix: serve AdSense crawler files directly from QuantaPhi edge”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-d732c421516c94702c29cfd2ccc67285237b53d7",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T18:16:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/d732c421516c94702c29cfd2ccc67285237b53d7",
-      "title": "fix: serve verified cached homepage when GitHub origin is unavailable",
-      "message": "I found a commit titled “fix: serve verified cached homepage when GitHub origin is unavailable”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-9a09d4066d96f2003d1d73c233654e4f2a929e81",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-06T17:58:10Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/9a09d4066d96f2003d1d73c233654e4f2a929e81",
-      "title": "Keep runner events scoped to their originating Bubbles chat",
-      "message": "I found a commit titled “Keep runner events scoped to their originating Bubbles chat”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-1749",
