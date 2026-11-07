@@ -240,7 +240,7 @@ try{
      try{
       const agent={red:'red-macro-reader',orange:'orange-peel',blue:'blueberry'}[color];
       await event(agent,'GPT '+color+' reviewed pinned job evidence; next action: '+receipt.nextAction.slice(0,250),
-       {phase:'color_reasoned',color,model:receipt.model,baseSha,anyToolsExecuted:false});
+       {phase:color+'_reasoned',color,model:receipt.model,baseSha,anyToolsExecuted:false});
       entry.eventDelivery='submitted';
      }catch(error){entry.eventError=scrub(error.message||error).slice(0,140);}
      return receipt;
