@@ -312,3 +312,31 @@ test('existing checked-out card source redirects missing repository map demand t
  assert.match(r.facts.join(' '),/Do not claim existing PR status/);
  assert.equal(evidenceReplanFeedback({plan,task,sourceTree:[],writeScope:scoped}).retry,false);
 });
+
+test('a real search-card repair replans once when its known regression test is missing from Blue handoff',()=>{
+ const sourceTree=['quick-card-search.mjs','quick-card-search.css','test/quick-card-search.test.mjs',
+  'test/quick-card-search-improvement.test.cjs','test/unrelated.test.mjs','.env'];
+ const args={task:'Fix the broken Quick Card search input and test the behavior',
+  plan:{summary:'Repair the search input',files:['quick-card-search.mjs','quick-card-search.css'],
+   subtasks:[{id:'TASK-1',task:'Fix click handler'}],blockers:[]},
+  sourceTree,writeScope:{repository:'www-infinity4/QuantaPhi',reportedPushPermission:true}};
+ const feedback=evidenceReplanFeedback(args);
+ assert.equal(feedback.retry,true);
+ assert.ok(feedback.categories.includes('existing_test_missing_from_plan'));
+ assert.match(feedback.facts.join(' '),/test\/quick-card-search\.test\.mjs/);
+ assert.doesNotMatch(feedback.facts.join(' '),/test\/unrelated\.test\.mjs|\.env/);
+ assert.match(feedback.instruction,/planned existing test path/i);
+ assert.equal(feedback.permissionsExpanded,false);
+ assert.deepEqual(args.plan.files,['quick-card-search.mjs','quick-card-search.css'],
+  'evidence feedback must never silently broaden the signed editable-path plan');
+});
+
+test('reader test-path feedback does not replan when relevant tests are already pinned or no test is known',()=>{
+ const args={task:'Repair the Quick Card search input and test the behavior',
+  plan:{summary:'Fix input',files:['quick-card-search.mjs','test/quick-card-search.test.mjs'],blockers:[],subtasks:[]},
+  sourceTree:['quick-card-search.mjs','test/quick-card-search.test.mjs'],
+  writeScope:{repository:'www-infinity4/QuantaPhi',reportedPushPermission:true}};
+ assert.equal(evidenceReplanFeedback(args).retry,false);
+ assert.equal(evidenceReplanFeedback({...args,plan:{...args.plan,files:['quick-card-search.mjs']},sourceTree:['quick-card-search.mjs']}).retry,false);
+ assert.equal(evidenceReplanFeedback({...args,plan:{...args.plan,files:['quick-card-search.mjs']},writeScope:{...args.writeScope,reportedPushPermission:false}}).retry,false);
+});
