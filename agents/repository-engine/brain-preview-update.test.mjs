@@ -46,7 +46,7 @@ test('preview gate requires one existing isolated Preview, no public URLs, match
 });
 test('only synthetic pinned read-only preview module may be updated; never send owner credentials or resources',()=>{
  const sample=('export default {fetch(){return new Response("'+
- '__preview__/admission mergedSourceRecognized ownerBlockPreserved source_review_only'+'")}};\n').repeat(8);
+ '__preview__/admission mergedSourceRecognized ownerBlockPreserved source_review_only runnerProgressVerified'+'")}};\n').repeat(8);
  const patch=buildPatch({js:sample});
  assert.deepEqual(Object.keys(patch).sort(),['annotations','compatibility_date','compatibility_flags','modules']);
  assert.deepEqual(Object.keys(patch.modules[0]).sort(),['content_base64','content_type','name']);

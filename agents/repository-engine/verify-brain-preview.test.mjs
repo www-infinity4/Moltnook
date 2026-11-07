@@ -12,7 +12,7 @@ const clean={ok:true,mode:'isolated_preview_only',ticketCount:0,
  distinctClockReady:true,productionTrafficTouched:false,
  ownerOrWalletOperationsAllowed:false,
  mergedSourceRecognized:true,reviewReceiptSafe:true,
- generatedRepairSuperseded:true,ownerBlockPreserved:true};
+ generatedRepairSuperseded:true,ownerBlockPreserved:true,runnerProgressVerified:true};
 
 test('actual Cloudflare deployed singleton must remain an exact 100-percent stable version',()=>{
  assert.deepEqual(singleDeployment(payload),{id:deployId,versionId:stable,percentage:100});
@@ -27,8 +27,8 @@ test('actual Cloudflare deployed singleton must remain an exact 100-percent stab
  ])assert.throws(()=>singleDeployment(change),/unexpected_production_state/);
 });
 test('preview gate requires real synthetic admission, isolated DO and an empty dedicated D1',()=>{
- assert.deepEqual(validatePreview(clean),{isolationVerified:true,checked:12});
- for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved']){
+ assert.deepEqual(validatePreview(clean),{isolationVerified:true,runnerProgressVerified:true,checked:13});
+ for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified']){
   assert.throws(()=>validatePreview({...clean,[key]:false}),new RegExp('isolated_preview_check_failed'));
  }
  for(const key of ['productionTrafficTouched','ownerOrWalletOperationsAllowed'])
