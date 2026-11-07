@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T05:38:15.234Z",
+  "generatedAt": "2026-11-07T05:47:15.551Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-5bbeb9c1a7cac193c6a7cff13bcd0bc0bdd5e7fd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T05:38:26Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5bbeb9c1a7cac193c6a7cff13bcd0bc0bdd5e7fd",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-0e8d43269821fc9d7b753d19a5cd71ab366dd47f",
       "agent": "greenbeans",
@@ -124,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1777",
       "title": "[Agent Job] Oracle reuse: viewer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-c156b147bf152ae75950badfd69833466f0fa182",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T04:25:00Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/c156b147bf152ae75950badfd69833466f0fa182",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-e8acc644a7e98b543228e068b645c035e9319d0c",
