@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T16:24:15.877Z",
+  "generatedAt": "2026-11-07T16:35:07.840Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-d79fccdeb24d05127bb4bc51b86d9c4619dd343a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T16:28:36Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/d79fccdeb24d05127bb4bc51b86d9c4619dd343a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-0bd8854a84c3d5248496a5a396ba97eac281966e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T16:24:24Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/0bd8854a84c3d5248496a5a396ba97eac281966e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-f48332b662c2afb332a72ed70888f9c18f05386c",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T15:19:15Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/a6eddf568f97fd2ac0a9ae9fd915a9d39e2a7e26",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-ec40f240d316fb30c3804b55664d7eea0ec00c8a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T15:09:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/ec40f240d316fb30c3804b55664d7eea0ec00c8a",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -352,18 +364,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/2889cbc023518deaaa6b406fc6ae4f5893bee4d4",
       "title": "Persist Bubbles GPT Builder color-bot execution instructions for all QuantaPhi coding tasks (#1785)",
       "message": "I found a commit titled “Persist Bubbles GPT Builder color-bot execution instructions for all QuantaPhi coding tasks (#1785)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-d4a4af70298aa9a0031fc1d021441dac4b647312",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T09:28:38Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/d4a4af70298aa9a0031fc1d021441dac4b647312",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-3c47eb08762fc8f9bc3d8e90eac3c192ed126c24",
