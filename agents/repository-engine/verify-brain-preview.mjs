@@ -7,6 +7,7 @@ const account='ef25728c096c6ba92cf510caa2058003';
 const base='https://api.cloudflare.com/client/v4/accounts/'+account+
  '/workers/scripts/infinity-brain-clock/deployments';
 const snapshot='/tmp/brain-preview-production.json';
+const previewRouteMarker='/tmp/brain-preview-enable-attempted';
 const receipt='repository-receipts/brain-isolated-preview-receipt.json';
 const UUID=/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
 export function singleDeployment(payload){
@@ -37,19 +38,20 @@ async function deployment(request=fetch){
  if(!response.ok)throw Error('cloudflare_production_read_failed');
  return singleDeployment(await response.json());
 }
-async function run(mode,{request=fetch}={}){
- if(!['before','after'].includes(mode))throw Error('preview_check_mode_invalid');
- const state=await deployment(request);
- if(mode==='before'){
-  fs.writeFileSync(snapshot,JSON.stringify(state),{mode:0o600});
-  console.log('Active production version pinned. Preview will not touch its traffic.');
-  return state;
+export async function restorePreviewRouting(api,routeUrl,marker=previewRouteMarker){
+ if(!fs.existsSync(marker))return;
+ const current=await api(routeUrl);
+ if(typeof current?.enabled!=='boolean'||typeof current?.previews_enabled!=='boolean')
+  throw Error('preview_route_state_unverified');
+ if(current.previews_enabled){
+  await api(routeUrl,'POST',{enabled:current.enabled,previews_enabled:false});
+  const restored=await api(routeUrl);
+  if(restored?.previews_enabled!==false)throw Error('preview_route_disable_unverified');
  }
- const earlier=JSON.parse(fs.readFileSync(snapshot,'utf8'));
- if(JSON.stringify(earlier)!==JSON.stringify(state))
-  throw Error('production_changed_during_isolated_canary');
- // Before exposing Preview URLs, prove this Worker has only our isolated
- // Preview. Public Preview URLs are opt-in and may expose any other Preview.
+ fs.unlinkSync(marker);
+}
+async function run(mode,{request=fetch}={}){
+ if(!['before','after','cleanup'].includes(mode))throw Error('preview_check_mode_invalid');
  const workerRoot='https://api.cloudflare.com/client/v4/accounts/'+account+
   '/workers/workers/infinity-brain-clock';
  const scriptRoot='https://api.cloudflare.com/client/v4/accounts/'+account+
@@ -66,6 +68,18 @@ async function run(mode,{request=fetch}={}){
    throw Error('cloudflare_preview_control_rejected_'+method+'_'+response.status);
   return payload.result;
  };
+ const routeUrl=scriptRoot+'/subdomain';
+ if(mode==='cleanup')return restorePreviewRouting(api,routeUrl);
+ const state=await deployment(request);
+ if(mode==='before'){
+  fs.writeFileSync(snapshot,JSON.stringify(state),{mode:0o600});
+  console.log('Active production version pinned. Preview will not touch its traffic.');
+  return state;
+ }
+ const earlier=JSON.parse(fs.readFileSync(snapshot,'utf8'));
+ if(JSON.stringify(earlier)!==JSON.stringify(state))
+  throw Error('production_changed_during_isolated_canary');
+ // Before exposing Preview URLs, verify the inventory contains only this isolated Preview.
  const previews=await api(workerRoot+'/previews?per_page=20');
  const items=previews?.items||previews;
  if(!Array.isArray(items)||items.length!==1||
@@ -90,7 +104,7 @@ async function run(mode,{request=fetch}={}){
  const stableClock=version?.resources?.bindings?.find(b=>b.name==='CLOCK')?.namespace_id;
  if(!stableClock||stableClock===env.CLOCK.namespace_id)
   throw Error('preview_durable_object_not_isolated');
- const originalRoute=await api(scriptRoot+'/subdomain');
+ const originalRoute=await api(routeUrl);
  if(originalRoute?.enabled!==true||originalRoute?.previews_enabled!==false)
   throw Error('existing_preview_routing_state_unexpected');
 
@@ -98,8 +112,9 @@ async function run(mode,{request=fetch}={}){
  // routing again. The actual 100% production deployment is never mutated.
  const url='https://brain-candidate-26518e96-infinity-brain-clock.marvaseater.workers.dev';
  let verdict,firstHTTP=0;
+ fs.writeFileSync(previewRouteMarker,'attempted\n',{flag:'wx',mode:0o600});
  try{
-  await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:true});
+  await api(routeUrl,'POST',{enabled:originalRoute.enabled,previews_enabled:true});
   const currentPreview=await api(workerRoot+'/previews/'+previewId);
   if(!currentPreview?.urls?.includes(url))
    throw Error('expected_isolated_preview_url_missing');
@@ -132,10 +147,7 @@ async function run(mode,{request=fetch}={}){
   if(health.status!==404)throw Error('isolated_preview_live_route_exposed');
  }finally{
   // Restore even if the enable call changed state but its reply was lost.
-  await api(scriptRoot+'/subdomain','POST',{enabled:true,previews_enabled:false});
-  const restored=await api(scriptRoot+'/subdomain');
-  if(restored?.previews_enabled!==false||restored?.enabled!==true)
-   throw Error('preview_route_disable_unverified');
+  await restorePreviewRouting(api,routeUrl);
  }
  const afterwards=await deployment(request);
  if(JSON.stringify(earlier)!==JSON.stringify(afterwards))
