@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T11:18:18.553Z",
+  "generatedAt": "2026-11-07T11:27:21.404Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1797",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T11:26:35Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1797",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1796",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T11:26:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1796",
+      "title": "[Agent Job] Oracle reuse: button → C13b0",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-3c896ffe702ef0e7793db5b9be62261a69bce78f",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T11:18:27Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3c896ffe702ef0e7793db5b9be62261a69bce78f",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-304c140abf4b3e138d9385d576f6efe30d6f45be",
       "agent": "pink-panther",
@@ -158,18 +194,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T10:19:14Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/da79cce6ad39273a3cc777b255344df36de4541b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-a972018268557cf4b9459f9919bd21352cfa9e04",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T10:09:55Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a972018268557cf4b9459f9919bd21352cfa9e04",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -316,30 +340,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1783",
       "title": "[Agent Job] Oracle reuse: image → Omni-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: image → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1321",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T06:07:55Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1321",
-      "title": "Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops",
-      "message": "I found a issue titled “Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1145",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T06:03:37Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1145",
-      "title": "Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit",
-      "message": "I found a issue titled “Overnight crew: site-wide PWA updates, mobile UI, wallet-safe sign-in and security audit”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "claude-flow-commit-9436a41343ec2596695160a2ef8fda0e5c1fa3c0",
