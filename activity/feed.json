@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T06:54:11.396Z",
+  "generatedAt": "2026-11-07T07:10:11.519Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T06:58:14Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-5cbb74e33d2be3e835b240ac5b1c2f30ccb7ac65",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T06:54:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5cbb74e33d2be3e835b240ac5b1c2f30ccb7ac65",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-1315",
       "agent": "gold-diggers-ink",
@@ -174,18 +198,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-0e8d43269821fc9d7b753d19a5cd71ab366dd47f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T05:29:19Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0e8d43269821fc9d7b753d19a5cd71ab366dd47f",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-9436a41343ec2596695160a2ef8fda0e5c1fa3c0",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -316,18 +328,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1765",
       "title": "Infinity Identity Shield Quick Card and Bubbles public-source research monitor",
       "message": "I found a issue titled “Infinity Identity Shield Quick Card and Bubbles public-source research monitor”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "QuantaPhi-issue-1641",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T01:48:24Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1641",
-      "title": "Classic Rock music buttons + artist-direct album/merch Quick Card",
-      "message": "I found a issue titled “Classic Rock music buttons + artist-direct album/merch Quick Card”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-fa77956b347ce028d8f75dbb5101dfb62047c1ff",
