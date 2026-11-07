@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T13:19:11.596Z",
+  "generatedAt": "2026-11-07T13:28:17.230Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1801",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T13:26:10Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1801",
+      "title": "[Agent Job] Oracle reuse: card → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-b4f2dd4a1184de0dfaf3e0478c739396f1840e76",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T13:19:25Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/b4f2dd4a1184de0dfaf3e0478c739396f1840e76",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-bac3e5aa431f11b8a8c600a289ab6ac5289fdfd8",
       "agent": "greenbeans",
@@ -122,18 +146,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T12:14:38Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/55b2ff959efcb10bd27fa1daf9d62f86545d1e80",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-bc9db31245100b5a920736ac91555ff57e8a5a2d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T11:54:23Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/bc9db31245100b5a920736ac91555ff57e8a5a2d",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/d4a4af70298aa9a0031fc1d021441dac4b647312",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1315",
-      "agent": "gold-diggers-ink",
-      "to": "purple-pearl",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T08:33:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1315",
-      "title": "First-party QuantaPhi Quant-ranked feed, explainable GPT review, content/ads rights and privacy",
-      "message": "I found a issue titled “First-party QuantaPhi Quant-ranked feed, explainable GPT review, content/ads rights and privacy”. Map each source to the story without repeating material. Keep the result easy to read."
     },
     {
       "id": "claude-flow-commit-ae5cde38b8b94ccbd221e05fa91216cdfbd87f7b",
