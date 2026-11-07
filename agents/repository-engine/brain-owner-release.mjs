@@ -12,10 +12,10 @@ const SHA=/^[0-9a-f]{40}$/;
 const SCRIPT='infinity-brain-clock';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
 const RECEIPT='repository-receipts/brain-owner-release.json';
-export const STABLE_VERSION='a38cc582-b006-4253-b957-bab48445853d';
-export const CANDIDATE_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
-export const SOURCE_COMMIT='c59d4659970fdcffc4429ac16a412b73c7c60e54';
-export const BASELINE_DEPLOYMENT='421fad0b-f50e-423a-93ac-e12111b74e08';
+export const STABLE_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
+export const CANDIDATE_VERSION='1bc385c4-2f00-4ce4-93b9-0e85b5060673';
+export const SOURCE_COMMIT='609ae96449043e3ccfb791718584dd39c2e3a15d';
+export const BASELINE_DEPLOYMENT='edca44f0-a72d-41ee-a1a0-b4bee2ca0e3f';
 const REQUIRED=['BOT_WALLET','BOT_WORK_SECRET','CLOCK','MODELS','WORK_DB','WRITER_AI','WRITER_OWNER_HASH'];
 function stable(v){if(Array.isArray(v))return v.map(stable);if(v&&typeof v==='object')return Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])]));return v;}
 function digest(x){return createHash('sha256').update(JSON.stringify(stable(x))).digest('hex');}
@@ -26,7 +26,7 @@ export function validateCanary(receipt,{now=Date.now()}={}){
   receipt.prodBeforeAfterEqual!==true||receipt.isolatedD1!==true||
   receipt.isolatedDurableObject!==true||receipt.originalTicketsCopied!==false||
   receipt.ownerOrWalletWrites!==false||receipt.liveProductionPromoted!==false||
-  receipt.isolationVerified!==true||!(Number(receipt.checked)>=8)||
+  receipt.isolationVerified!==true||receipt.runnerProgressVerified!==true||!(Number(receipt.checked)>=13)||
   receipt.consentTransport?.reachable!==true||receipt.consentTransport?.httpStatus!==401||
   receipt.consentTransport?.error!=='bridge_runner_not_verified'||
   JSON.stringify(receipt.compatibilityFlags)!==JSON.stringify(['global_fetch_strictly_public']))
