@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T10:37:06.099Z",
+  "generatedAt": "2026-11-07T10:46:25.406Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,13 +18,25 @@
   "failures": [],
   "items": [
     {
+      "id": "Moltnook-commit-e75a9381da87a22f1a10c471f2715f47f4bf83e5",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T10:37:17Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e75a9381da87a22f1a10c471f2715f47f4bf83e5",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "QuantaPhi-issue-1793",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-07T10:36:36Z",
+      "when": "2026-11-07T10:37:10Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1793",
       "title": "Harley-Davidson & Indian Motorcycle model Quick Cards",
       "message": "I found a issue titled “Harley-Davidson & Indian Motorcycle model Quick Cards”. Determine the real task and identify the tool or specialist it needs before changing anything."
@@ -160,18 +172,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/deb11f580d18b532b3e5eab11bf3260675f20b40",
       "title": "Show real Red Orange Blue GPT reasoning steps in Bubbles owner job feed (#1786)",
       "message": "I found a commit titled “Show real Red Orange Blue GPT reasoning steps in Bubbles owner job feed (#1786)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-a0e08739a7defc112826f47e0f6ea7134ef81bda",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T09:39:02Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a0e08739a7defc112826f47e0f6ea7134ef81bda",
-      "title": "Brain #1192: keep existing regression tests in source-repair handoffs (#248)",
-      "message": "I found a commit titled “Brain #1192: keep existing regression tests in source-repair handoffs (#248)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-issue-1192",
