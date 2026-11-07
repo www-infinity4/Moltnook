@@ -36,7 +36,7 @@ export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changed
   prNumber:sourceReview.prNumber,testPaths:allowed,sourcePaths,
   productionVerified:false,newCommit:false,sourceReviewOnly:true};
 }
-export async function runSourceReview({job,sourceReview,capability,headSha,github,readSource,runCommand}){
+export async function runSourceReview({job,sourceReview,capability,headSha,github,readSource,verifyAncestry,runTest}){
  const gate=sourceReviewEligibility({job,sourceReview,capability});
  if(!gate.eligible)throw Error(gate.reason);
  const repo=sourceReview.repository,num=sourceReview.prNumber;
@@ -46,12 +46,12 @@ export async function runSourceReview({job,sourceReview,capability,headSha,githu
  ]);
  const plan=verifiedSourceReviewPlan({job,sourceReview,capability,pr,
   changedPaths:Array.isArray(changed)?changed.map(x=>x.filename):null,headSha});
- await runCommand('git',['merge-base','--is-ancestor',plan.mergeSha,'HEAD']);
+ await verifyAncestry(plan.mergeSha);
  const runs=[];
  for(const path of plan.testPaths){
   const content=await readSource(path);
   if(typeof content!=='string'||content.length<1)throw Error('merged_test_source_missing: '+path);
-  const output=await runCommand('node',['--test',path]);
+  const output=await runTest(path);
   runs.push({name:'Node test: '+path,passed:true,output:String(output||'').slice(-1200)});
  }
  if(runs.length<1)throw Error('merged_source_tests_not_executed');

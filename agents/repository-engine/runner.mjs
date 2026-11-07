@@ -21,7 +21,8 @@ import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs'
 import {runSourceReview} from './source-verify.mjs';
 import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
-import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage} from './runtime-baseline.mjs';
+import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage,repositoryNodeTests,commandReceipt,compactRepositoryChecks} from './runtime-baseline.mjs';
+import {withRepositorySandbox} from './execution-sandbox.mjs';
 import {observeLiveSource} from './live-source.mjs';
 import {verifyLiveBrowser} from './live-browser.mjs';
 import {executionContext} from './execution-context.mjs';
@@ -76,31 +77,48 @@ async function call(step,body={}){
  }
  return result;
 }
-async function event(agent,message){const row={agent,message,when:new Date().toISOString()};report.events.push(row);await call('event',row);}
+async function event(agent,message,step){
+ const row={agent,message,when:new Date().toISOString(),...(step?{step}:{})};
+ report.events.push(row);
+ await call('event',row);
+}
 async function sourceFile(file,maxBytes=400000){safePath(file);const absolute=inside(workspace,file);try{
  const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Error('Writer refuses symlink source');}
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
-async function checks(patched){
- const runs=[];const run=(name,cmd,args)=>{try{const output=command(cmd,args);runs.push({name,passed:true,output:scrub(output)});}catch(e){runs.push({name,passed:false,output:scrub(e.stdout||e.stderr||e.message)});report.tests={passed:false,runs};throw Error('Repository check failed: '+name+': '+scrub(e.stderr||e.stdout||e.message).slice(0,900));}};
- const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
+async function checks(patched,focusedTests){
+ const runs=[];
+ const run=(name,cmd,args,execute=command)=>{
+  const receipt=commandReceipt(name,()=>execute(cmd,args),scrub);
+  runs.push(receipt);
+  if(!receipt.passed){
+   report.tests={passed:false,runs};
+   throw Error('Repository check failed: '+name);
+  }
+ };
+ const paths=Object.keys(patched);for(const file of paths){if(/\.(?:js|cjs|mjs)$/.test(file))run('Parse '+file,'node',['--check','--',file]);if(file.endsWith('.html'))run('Parse HTML '+file,'python3',['-I','-c','from html.parser import HTMLParser;import sys;HTMLParser().feed(open(sys.argv[1]).read())',file]);if(file.endsWith('.py'))run('Compile '+file,'python3',['-I','-c','import ast,sys;ast.parse(open(sys.argv[1]).read())',file]);}
  const pythonFiles=paths.filter(file=>file.endsWith('.py'));
  if(pythonFiles.length){
   try{const receipt=lintPython(pythonFiles,{cwd:workspace});runs.push({name:'Pinned Ruff Python correctness checks',...receipt});}
   catch(error){runs.push({name:'Pinned Ruff Python correctness checks',passed:false,output:scrub(error.stdout||error.stderr||error.message)});report.tests={passed:false,runs};throw Error('Python lint did not pass');}
  }
- const focusedTests=paths.filter(file=>/(?:^|\/)[^/]+\.(?:test|spec)\.(?:js|cjs|mjs)$/.test(file));
  let pkg;try{pkg=JSON.parse(await fs.readFile(path.join(workspace,'package.json'),'utf8'))}catch{}
+ if(paths.some(file=>/\.(?:[cm]?js|jsx|tsx?)$/i.test(file))&&!focusedTests.length&&!pkg?.scripts?.test){
+  report.tests={passed:false,runs};
+  throw Error('No behavioral JavaScript check selected. Use a relevant existing test from the pinned tree or add a focused test on a planned path.');
+ }
  if(pkg){
   if(pkg.packageManager&&!pkg.packageManager.startsWith('npm@'))throw Error('Repository requires '+pkg.packageManager+' adapter');
   if(!pkg.scripts?.test&&!pkg.scripts?.build&&!focusedTests.length)throw Error('Repository has no configured test/build acceptance command');
-  run('Install dependencies without lifecycle hooks','npm',['install','--ignore-scripts','--package-lock=false','--no-audit','--no-fund']);
  }
  const focusedArgs=focusedTestCommand(focusedTests,pkg);
- if(focusedArgs)run('Focused Node tests with shared baseline','node',focusedArgs);
- if(pkg){
-  if(pkg.scripts?.test)run('Repository tests','npm',['run','test']);if(pkg.scripts?.build)run('Repository build','npm',['run','build']);
- }else if(!runs.length)throw Error(missingAcceptanceAdapterMessage(paths));
+ if(pkg||focusedArgs)await withRepositorySandbox(workspace,sandbox=>{
+  if(pkg)run('Install dependencies without lifecycle hooks','npm',['install','--ignore-scripts','--package-lock=false','--no-audit','--no-fund'],sandbox);
+  if(focusedArgs)run('Focused Node tests with shared baseline','node',focusedArgs,sandbox);
+  if(pkg?.scripts?.test)run('Repository tests','npm',['run','test'],sandbox);
+  if(pkg?.scripts?.build)run('Repository build','npm',['run','build'],sandbox);
+ });
+ if(!runs.length)throw Error(missingAcceptanceAdapterMessage(paths));
  report.tests={passed:true,runs};return report.tests;
 }
 try{
@@ -133,6 +151,7 @@ try{
   report.skillImport={source:'pinned Moltnook phi-skills.mjs',roles:{blue:phaseSkills('plan').map(x=>x.id),green:phaseSkills('build').map(x=>x.id),pink:phaseSkills('review').map(x=>x.id),purpleBlack:phaseSkills('arbitrate').map(x=>x.id)},executedAsCode:false,permissionsGranted:false};
   if(!/^www-infinity4\/[\w.-]+$/.test(report.repository))throw Error('Owner repository scope unresolved');
   if(!token)throw Error('Cross-repository writer credential missing: configure existing Moltnook GHP secret for all owner repositories; repository-local GITHUB_TOKEN cannot grant this scope');
+  if(!lease.job.sourceReview)await event('blueberry','Looking up the repository and its source.',{phase:'discovery_started',attempt:0});
   const repo=await github('repos/'+report.repository);report.permissions=repo.permissions;
   report.repositoryIdentity=verifyRepositoryIdentity(report.repository,repo);
   if(repo.archived)throw Error('Target repository is archived');if(!repo.permissions?.push)throw Error('Credential has no reported push access to '+report.repository);
@@ -142,11 +161,12 @@ try{
   if(lease.job.sourceReview?.kind==='source_review_only'&&liveWindowCapability.sourceReviewV1===true){
    // Signed Brain selected already merged Green source: no new patch or payout.
    await event('pink-panther','Reviewing merged source for '+report.jobId+' with an independent read-only runner.');
-   const verified=await runSourceReview({
+   const verified=await withRepositorySandbox(workspace,sandbox=>runSourceReview({
     job:lease.job,sourceReview:lease.job.sourceReview,capability:liveWindowCapability,
     headSha:baseSha,github,readSource:sourceFile,
-    runCommand:async(cmd,args)=>command(cmd,args)
-   });
+    verifyAncestry:sha=>git('merge-base','--is-ancestor',sha,'HEAD'),
+    runTest:file=>sandbox('node',['--test',file])
+   }));
    report.tests=verified.tests;testsPassed=true;
    report.readOnlySourceReview={prUrl:verified.prUrl,mergeSha:verified.reviewedMergeSha,
     sourceSha:verified.commitSha,testPaths:verified.testPaths,sourceOnly:true,
@@ -184,6 +204,7 @@ try{
   // Brain Worker advertises the new capability. The ordinary Yellow/Blue,
   // Green, Pink and Purple calls remain model-backed in the existing runner.
   // The model's optional capability requests are never automatically executed.
+  await event('blueberry','Planning the repair from pinned repository evidence.',{phase:'planning_started',attempt:0});
   const colorFindings={};
   report.colorIntelligence={model:COLOR_GPT_MODEL,available:useColorGpt,
    phaseCores:{plan:phaseColorCore('plan'),build:phaseColorCore('build'),
@@ -265,6 +286,9 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   if(!useWindowV2&&JSON.stringify(original).length>32000)throw Error('brain_clock_bounded_windows_v2_not_deployed: large source edit is blocked; small jobs may use legacy review');
   let modelSource=useWindowV2?windowEvidence.source:original;
   await fs.writeFile('repository-receipts/immutable-window-manifest.json',JSON.stringify({baseSha,source:Object.fromEntries(Object.entries(windowEvidence.source).map(([p,x])=>[p,{totalChars:x.totalChars,sha256:x.sha256,windows:x.windows.map(w=>({start:w.start,end:w.end,sha256:w.sha256}))}]))},null,2));
+  const readFiles=Object.keys(original).filter(file=>typeof original[file]==='string');
+  await event('blueberry','Read the pinned source tree and selected source files.',
+   {phase:'source_read',attempt:0,baseSha,fileCount:readFiles.length,files:readFiles.slice(0,3)});
   // Optional inspection metadata. A queue receipt is neither a D1 commit nor wallet payment.
   report.transitionStream={status:'not_configured',payoutIssued:false};
   if(process.env.BOT_TRANSITIONS_URL&&process.env.BOT_INGEST_TOKEN){
@@ -281,7 +305,6 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
    await fs.writeFile('repository-receipts/transition-queue-status.json',JSON.stringify(report.transitionStream,null,2));
   }
   const compactPlan={summary:String(plan.summary).slice(0,2400),files:plan.files,requirements:(plan.requirements||[]).slice(0,12),acceptance:(Array.isArray(lease.job.acceptance)&&lease.job.acceptance.length?lease.job.acceptance:plan.acceptance||[]).slice(0,12),subtasks:(plan.subtasks||[]).slice(0,12)};
-  const compactTests=tests=>({passed:tests?.passed===true,runs:(tests?.runs||[]).slice(-12).map(x=>({name:x.name,passed:x.passed,output:String(x.output||'').slice(-350)}))});
   const scopedAgents={};for(const file of plan.files){let folder=path.posix.dirname(file);while(folder!=='.'){const name=folder+'/AGENTS.md';if(!Object.hasOwn(scopedAgents,name)){const instructions=await sourceFile(name);if(instructions)scopedAgents[name]=instructions;}folder=path.posix.dirname(folder);}}
   report.attempts=[];
   // These are pinned baseline facts, not new owner requirements or payment proof.
@@ -296,9 +319,11 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   const repaired=await repairWithFeedback({
    initialFeedback:remembered,
    build:async feedback=>{
+    const attempt=report.attempts.length+1;
+    await event('greenbeans','Preparing a patch against the pinned source.',{phase:'patch_started',attempt});
     sourceExactDrafts=useWindowV2?retainSourceExactDrafts(original,windowEvidence,sourceExactDrafts):[];
     const partialPatchDraft=sourceExactDrafts.length?{status:'unapplied_source_exact_draft',edits:sourceExactDrafts,correctionDrafts:rejectedSourceEdits.filter(edit=>!retainSourceExactDrafts(original,windowEvidence,[edit]).length).slice(0,2).map(edit=>{const raw=JSON.stringify(edit);return raw&&raw.length<=8000?edit:{path:edit?.path,reason:'Regenerate one bounded correction from the visible source'};}),instruction:'These exact-source drafts are NOT applied, reviewed or committed. Return corrections for the failing edits and any missing requirements. Do not recreate unchanged drafts; they are combined before full review, tests and arbitration. You may replace a draft by returning the same path and exact before with a corrected after. An existing-file before cannot be empty: for added tests, replace a unique visible closing line with that line followed by the new tests. Do not infer missing files or broader permissions.'}:undefined;
-    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,partialPatchDraft,exactCopyAnchors:useWindowV2?visibleEditAnchors(original,windowEvidence,{task:windowTask}):undefined,editLiteralGuidance:"For a small insertion, prefer an exact before literal from exactCopyAnchors. Copy its before value verbatim; after is plain replacement source only: inserted code followed by the exact unchanged anchor, or the real bounded replacement. Never include unified-diff + or - prefixes, code fences, ellipses, or unchanged source outside the before span. Anchors are complete lines; do not expand them into copies of unrelated source. Anchors confer no additional paths or authority; ordinary exact-source validation and independent reviews still apply.",sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactTests(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
+    const proposal=await retryStructuredModelCall(()=>call('build',{evidence:{colorCore:phaseColorCore('build'),baseSha,plan:compactPlan,source:modelSource,partialPatchDraft,exactCopyAnchors:useWindowV2?visibleEditAnchors(original,windowEvidence,{task:windowTask}):undefined,editLiteralGuidance:"For a small insertion, prefer an exact before literal from exactCopyAnchors. Copy its before value verbatim; after is plain replacement source only: inserted code followed by the exact unchanged anchor, or the real bounded replacement. Never include unified-diff + or - prefixes, code fences, ellipses, or unchanged source outside the before span. Anchors are complete lines; do not expand them into copies of unrelated source. Anchors confer no additional paths or authority; ordinary exact-source validation and independent reviews still apply.",sourceWindowsSchema:useWindowV2?windowEvidence.schemaVersion:null,agents:agents?.slice(0,9000),scopedAgents:Object.fromEntries(Object.entries(scopedAgents).map(([p,x])=>[p,x.slice(0,3500)])),phiSkills:phaseSkills('build'),authenticatedRunner:{brainOidcClaimVerified:report.authenticatedAdapters?.brain?.leaseClaimed===true,verifiedCalls:report.authenticatedAdapters?.brain?.verifiedCalls||[],crossRepoDependenciesAreReadOnly:true},dependencyProof:dependencyContext?.repositories?.map(r=>({repository:r.repository,status:r.status,verifiedSourcePaths:(r.files||[]).filter(f=>f.status==='verified_source').map(f=>f.path).slice(0,12)})).slice(0,6),feedback,previousTests:report.tests?compactRepositoryChecks(report.tests):remembered?.tests}}),{onRetry:({attempt})=>event('pink-panther','Malformed build JSON on response '+attempt+'. Retrying the same pinned source and repair findings; no source changes made.')});report.proposalReason=proposal.reason;rejectedSourceEdits=Array.isArray(proposal.edits)?proposal.edits:[];
     requireGreenEdits(proposal);
     // Repair only a single {text:literal} schema wrapper already verified in
     // the immutable source windows. All other malformed/outside edits fail closed.
@@ -313,24 +338,32 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
     for(const edit of proposal.edits)validateOracleCssEdit(edit.path,edit.after);
     const patched=applyEdits(original,proposal.edits);
     checkCandidateModuleSyntax(patched);
-    await event('greenbeans','Engineer produced '+Object.keys(patched).length+' real source changes for '+report.repository+'. Sending exact edits to independent review.');
+    const files=Object.keys(patched);
+    await event('greenbeans','Prepared an exact source patch for independent review.',
+     {phase:'patch_prepared',attempt,fileCount:files.length,files:files.slice(0,3)});
     report.proposal=proposal;
-    return {proposal,patched};
+    return {proposal,patched,attempt};
    },
    review:async candidate=>{
+    await event('pink-panther','Reviewing the proposed changes.',{phase:'review_started',attempt:candidate.attempt});
     const review=await call('engine-review',{evidence:{colorCore:phaseColorCore('review'),baseSha,plan:compactPlan,edits:candidate.proposal.edits,source:modelSource,phiSkills:phaseSkills('review'),pinnedControls}});report.review=review;return review;
    },
    test:async candidate=>{
+    report.tests=null;
     for(const [file,content]of Object.entries(candidate.patched)){const target=inside(workspace,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,content);}
-    await checks(candidate.patched);testsPassed=true;
-    await event('pink-panther','Independent patch review approved; '+report.tests.runs.length+' actual repository checks passed. GPT Purple receives the outputs before any commit.');
+    const focused=repositoryNodeTests(Object.keys(candidate.patched),plan.files,tracked,Object.keys(sourceSamples));
+    await event('pink-panther','Applied the reviewed patch in the temporary checkout. Starting repository checks.',{phase:'checks_started',attempt:candidate.attempt});
+    await checks(candidate.patched,focused);testsPassed=true;
+    await event('pink-panther','Repository checks passed in the temporary checkout.',
+     {phase:'checks_passed',attempt:candidate.attempt,exitCode:0,checkCount:report.tests.runs.length});
     return report.tests;
    },
    arbitrate:async(candidate,review,tests)=>{
-    const arbitration=await call('arbitrate',{evidence:{colorCore:phaseColorCore('arbitrate'),baseSha,plan:compactPlan,review,tests:compactTests(tests),edits:candidate.proposal.edits,patched:useWindowV2?boundedPatched(candidate.patched):candidate.patched,...(useWindowV2?{patchedHashes:patchDigests(candidate.patched)}:{}),source:modelSource,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
+    await event('gpt-purple','Checking the reviewed patch against the request and test results.',{phase:'arbitration_started',attempt:candidate.attempt});
+    const arbitration=await call('arbitrate',{evidence:{colorCore:phaseColorCore('arbitrate'),baseSha,plan:compactPlan,review,tests:compactRepositoryChecks(tests),edits:candidate.proposal.edits,patched:useWindowV2?boundedPatched(candidate.patched):candidate.patched,...(useWindowV2?{patchedHashes:patchDigests(candidate.patched)}:{}),source:modelSource,phiSkills:phaseSkills('arbitrate'),pinnedControls}});report.arbitration=arbitration;
     await event('gpt-purple',arbitration.decision+': '+arbitration.reason);return arbitration;
    },
-   restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fd');},
+   restore:async()=>{testsPassed=false;git('reset','--hard',baseSha);git('clean','-fdx');},
    onFeedback:async feedback=>{
     sourceExactDrafts=useWindowV2&&sourceDraftRetry(feedback)?retainSourceExactDrafts(original,windowEvidence,rejectedSourceEdits):[];
     feedback.unappliedSourceDraftCount=sourceExactDrafts.length;
@@ -357,19 +390,25 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
      }else feedback.windowReplan={applied:false,reason:'No additional pinned source region was available'};
     }
     feedback.reason=scrub(feedback.reason);report.attempts.push({...feedback,proposal:report.proposal,review:report.review,tests:report.tests,arbitration:report.arbitration});
-    await event(feedback.stage==='arbitration'?'gpt-purple':'pink-panther','Attempt '+feedback.attempt+' failed at '+feedback.stage+': '+feedback.reason.slice(0,240)+'. Exact feedback returns to Green; maximum three attempts.');
+    const failedCheck=feedback.stage==='test'?report.tests?.runs?.find(run=>!run.passed):null;
+    await event(feedback.stage==='arbitration'?'gpt-purple':'pink-panther','Attempt '+feedback.attempt+' failed during '+feedback.stage+'.',
+     {phase:'attempt_failed',attempt:feedback.attempt,stage:feedback.stage,exitCode:failedCheck?.exitCode??null});
    }
   });
   const {patched}=repaired.candidate;report.repairAttempt=repaired.attempt;
+  await event('gpt-purple','Preparing to publish the reviewed patch.',{phase:'publication_started',attempt:repaired.attempt});
   // Prevent unrelated test/build output or concurrent edits from being included.
   for(const [file,content]of Object.entries(patched))if(await sourceFile(file)!==content)throw Error('Checks changed reviewed source: '+file);
   command('git',['fetch','origin',repo.default_branch],{env:credentialEnv()});if(git('rev-parse','origin/'+repo.default_branch)!==baseSha)throw Error('Repository head changed; retry reader against the new commit');
   git('config','user.name','infinity-repository-engine[bot]');git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com');git('add','--',...Object.keys(patched));
+  const staged=git('diff','--cached','--name-only','--no-renames','-z').split('\0').filter(Boolean);
+  if(!staged.length||staged.some(file=>!Object.hasOwn(patched,file)||command('git',['show',':'+file])!==patched[file]))
+   throw Error('Staged files differ from the reviewed patch');
   git('-c','core.hooksPath=/dev/null','commit','-m','Implement '+report.jobId+' after reader handoff, tests and GPT Purple arbitration');commitSha=git('rev-parse','HEAD');
   report.publication=await publishReviewed({repository:report.repository,base:repo.default_branch,commitSha,jobId:report.jobId,runId:process.env.GITHUB_RUN_ID,push:ref=>command('git',['push','origin',ref],{env:credentialEnv()}),api:github});
   if(report.publication?.publishedToDefault!==false||!report.publication?.prUrl)throw Error('Missing isolated bot branch PR publication receipt');
   report.status='committed_unverified';report.commitSha=commitSha;report.changedFiles=Object.keys(patched);
-  await event('gpt-purple','Reviewed patch staged in '+report.publication.branch+' as pull request '+report.publication.prUrl+'. Main remains unchanged; target CI and merge verification remain pending.');
+  await event('gpt-purple','Opened the pull request for the reviewed patch.',{phase:'pr_opened',attempt:repaired.attempt,prUrl:report.publication.prUrl});
   report.liveSource=await observeLiveSource({repository:report.repository,commitSha,patched});
   report.liveBrowserAfter=await verifyLiveBrowser({repository:report.repository,linkFacts,task:lease.job.instructions,directory:'repository-receipts/live-browser-after'});
   await fs.writeFile('repository-receipts/live-browser-after.json',JSON.stringify(report.liveBrowserAfter,null,2));
@@ -393,8 +432,9 @@ const correction=evidenceReplanFeedback({plan,task:lease.job.instructions,ownerR
   console.log(report.status,report.jobId||'');
   process.exitCode=0;
  }else{
- report.status=commitSha?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
- if(lease)try{await call('result',{status:report.status,commitSha,testsPassed,verificationToken:token,message:report.error,repairFeedback:report.attempts?.length?{baseSha:report.baseSha,stage:report.attempts.at(-1).stage,reason:report.attempts.at(-1).reason,failures:report.attempts.at(-1).failures,tests:report.tests?{passed:report.tests.passed,runs:report.tests.runs.slice(-15).map(row=>({...row,output:row.output.slice(0,1000)}))}:null}:undefined});}catch(error){report.receiptError=scrub(error.message)}
+ const publishedCommit=report.publication?.prUrl&&report.publication.publishedToDefault===false?commitSha:null;
+ report.status=publishedCommit?'committed_unverified':'blocked';report.error=scrub(e.message);console.error(report.status,report.error);
+ if(lease)try{await call('result',{status:report.status,commitSha:publishedCommit,testsPassed,verificationToken:token,message:report.error,repairFeedback:report.attempts?.length?{baseSha:report.baseSha,stage:report.attempts.at(-1).stage,reason:report.attempts.at(-1).reason,failures:report.attempts.at(-1).failures,tests:report.tests?{passed:report.tests.passed,runs:report.tests.runs.slice(-15).map(row=>({...row,output:String(row.output??'').slice(-1000)}))}:null}:undefined});}catch(error){report.receiptError=scrub(error.message)}
  process.exitCode=1;
  }
 }finally{if(lease&&/^[a-f0-9]{40}$/.test(commitSha||report.baseSha||''))try{report.visualEvidence=await archiveScreenshots('repository-receipts',{repository:lease.job.repository||lease.repository,commitSha:commitSha||report.baseSha},call)}catch(e){report.evidenceArchiveError=String(e.message).slice(0,300)}await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/report.json',JSON.stringify(report,null,2));console.log(report.status,report.jobId||'',report.commitSha||'');}
