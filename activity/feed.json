@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T14:28:25.435Z",
+  "generatedAt": "2026-11-07T14:37:14.032Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-7c29d60d23fbfc481054ae20f3ff844d6b1f6a76",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T14:28:58Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/7c29d60d23fbfc481054ae20f3ff844d6b1f6a76",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-fc29792f1d014939cafb26a3b98b0e93ad1bf65d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T14:28:36Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/fc29792f1d014939cafb26a3b98b0e93ad1bf65d",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-58670c1cb3014bf8c4173c14d586ecb2fda81cc2",
       "agent": "greenbeans",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1801",
       "title": "[Agent Job] Oracle reuse: card → Omni-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-b4f2dd4a1184de0dfaf3e0478c739396f1840e76",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T13:19:25Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b4f2dd4a1184de0dfaf3e0478c739396f1840e76",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-86e21c7fdc4052fc5717c9a81c609dbbf09265bc",
@@ -338,18 +350,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T08:28:37Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/ae5cde38b8b94ccbd221e05fa91216cdfbd87f7b",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-c3c4b684cc13c53d8e3ae3efaabc9686a8cf0b14",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T07:28:45Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/c3c4b684cc13c53d8e3ae3efaabc9686a8cf0b14",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
