@@ -12,7 +12,7 @@ const canary={
  productionDeploymentId:BASELINE_DEPLOYMENT,productionVersionId:STABLE_VERSION,
  prodBeforeAfterEqual:true,isolatedD1:true,isolatedDurableObject:true,
  originalTicketsCopied:false,ownerOrWalletWrites:false,liveProductionPromoted:false,
- isolationVerified:true,checked:8,
+ isolationVerified:true,runnerProgressVerified:true,checked:13,
  consentTransport:{reachable:true,httpStatus:401,error:'bridge_runner_not_verified'},
  compatibilityFlags:['global_fetch_strictly_public'],when:new Date(now-1000).toISOString()
 };
@@ -55,7 +55,7 @@ test('only explicit GitHub owner confirmation authorizes a release or rollback',
 });
 test('owner consent does not skip isolated preview receipts and canary age',()=>{
  for(const [key,value] of [
-  ['sourceSha','wrong'],['candidateVersionId',STABLE_VERSION],
+  ['sourceSha','wrong'],['candidateVersionId',STABLE_VERSION],['runnerProgressVerified',false],['checked',12],
   ['prodBeforeAfterEqual',false],['isolatedD1',false],
   ['isolatedDurableObject',false],['ownerOrWalletWrites',true],
   ['originalTicketsCopied',true],['liveProductionPromoted',true],

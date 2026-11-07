@@ -61,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: brain-isolated-preview-receipt
-          run-id: 42186494726
+          run-id: 42320239245
           repository: www-infinity4/Moltnook
           github-token: ${{ github.token }}
           path: canary-proof
@@ -79,8 +79,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git -C quantaphi-source fetch --no-tags origin c59d4659970fdcffc4429ac16a412b73c7c60e54
-          git -C quantaphi-source diff --exit-code c59d4659970fdcffc4429ac16a412b73c7c60e54 HEAD -- \
+          git -C quantaphi-source fetch --no-tags origin 609ae96449043e3ccfb791718584dd39c2e3a15d
+          git -C quantaphi-source diff --exit-code 609ae96449043e3ccfb791718584dd39c2e3a15d HEAD -- \
             workers/infinity-brain-clock workers/bubbles-tools
           test -f canary-proof/brain-isolated-preview-receipt.json
           node --input-type=module <<'NODE'
