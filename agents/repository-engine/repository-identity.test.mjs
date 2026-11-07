@@ -22,5 +22,5 @@ test('production runner verifies API metadata before clone or source review',()=
  const check=source.indexOf('report.repositoryIdentity=verifyRepositoryIdentity(report.repository,repo)');
  assert.ok(check>source.indexOf("const repo=await github('repos/'+report.repository)"));
  assert.ok(check<source.indexOf("command('git',['clone'"));
- assert.ok(check<source.indexOf('await runSourceReview('));
+ assert.ok(check<source.indexOf('runCommand=>runSourceReview('));
 });
