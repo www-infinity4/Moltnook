@@ -56,3 +56,26 @@ test('untrusted routing kinds and traversal do not trigger a direct engineering 
   assert.equal(selectColorPreface(bad,files).lane,'investigate');
  }
 });
+
+
+test('signed repair request naming a checked-in file skips redundant Red and Orange inference',()=>{
+ const result=selectColorPreface({instructions:'Fix coupon-store-readiness.mjs and add a regression test'},files.concat(['coupon-store-readiness.mjs']));
+ assert.equal(result.lane,'green-direct');
+ assert.equal(result.kind,'repair');
+ assert.deepEqual(result.firstRoles,[]);
+});
+test('an investigative or negated instruction cannot trigger the repair shortcut',()=>{
+ for(const instructions of [
+  'Read coupon-store-readiness.mjs and tell me what is broken',
+  'Do not fix coupon-store-readiness.mjs; research first',
+  'Fix an unknown file; no file paths provided',
+  'Fix private/secrets.json'
+ ]){
+  const result=selectColorPreface({instructions},files.concat(['coupon-store-readiness.mjs']));
+  assert.equal(result.lane,'investigate');
+ }
+});
+test('an explicitly invalid typed routing object is not overridden by a file name in the instruction',()=>{
+ const result=selectColorPreface({instructions:'Fix coupon-store-readiness.mjs',routing:{kind:'deploy'}},files.concat(['coupon-store-readiness.mjs']));
+ assert.equal(result.lane,'investigate');
+});
