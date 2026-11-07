@@ -35,6 +35,7 @@ import {evidenceReplanFeedback,authPlanReconsideration,deliveryPlanFeedback,shad
 import {deriveFeatureManifest} from './feature-manifest.mjs';
 import {skillPackets} from './phi-skills.mjs';
 import {COLOR_GPT_MODEL,phaseColorCore,invokeColorCore} from './color-core.mjs';
+import {selectColorPreface,selectColorFollowups} from './color-task-routing.mjs';
 const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
@@ -210,8 +211,15 @@ try{
    phaseCores:{plan:phaseColorCore('plan'),build:phaseColorCore('build'),
     review:phaseColorCore('review'),arbitrate:phaseColorCore('arbitrate')},
    directModelCalls:[],anyToolsExecuted:false};
+  // Use the same authenticated GPT core for all colors, but do not call every
+  // color on every ticket. A pinned, explicitly scoped repair can go straight
+  // into the existing Blue planning / Green building lane. Red investigates
+  // unknown work; Orange resolves real uncertainties; Blue checks source-import
+  // contracts. These model calls request advice, not execution permissions.
+  const colorRoute=selectColorPreface(lease.job,tracked);
+  report.colorIntelligence.routing=colorRoute;
   if(useColorGpt){
-   for(const color of ['red','orange']){
+   async function consultColor(color){
     try{
      const receipt=await invokeColorCore(call,{color,
       task:scopedTask.slice(0,2400),
@@ -221,10 +229,20 @@ try{
       model:receipt.model,anyToolsExecuted:false});
      colorFindings[color]={finding:receipt.finding,nextAction:receipt.nextAction,
       blockers:receipt.blockers,requestedAppendages:receipt.requestedAppendages};
+     return receipt;
     }catch(error){
      report.colorIntelligence.directModelCalls.push({color,status:'unverified',
       reason:scrub(error.message||error).slice(0,200),anyToolsExecuted:false});
+     return null;
     }
+   }
+   let redReceipt=null;
+   for(const color of colorRoute.firstRoles){
+    const receipt=await consultColor(color);
+    if(color==='red')redReceipt=receipt;
+   }
+   for(const color of selectColorFollowups(colorRoute,redReceipt)){
+    await consultColor(color);
    }
   }
 
