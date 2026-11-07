@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T09:37:17.203Z",
+  "generatedAt": "2026-11-07T09:39:13.560Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-a0e08739a7defc112826f47e0f6ea7134ef81bda",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T09:39:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a0e08739a7defc112826f47e0f6ea7134ef81bda",
+      "title": "Brain #1192: keep existing regression tests in source-repair handoffs (#248)",
+      "message": "I found a commit titled “Brain #1192: keep existing regression tests in source-repair handoffs (#248)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T09:38:21Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-2889cbc023518deaaa6b406fc6ae4f5893bee4d4",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T09:37:42Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2889cbc023518deaaa6b406fc6ae4f5893bee4d4",
+      "title": "Persist Bubbles GPT Builder color-bot execution instructions for all QuantaPhi coding tasks (#1785)",
+      "message": "I found a commit titled “Persist Bubbles GPT Builder color-bot execution instructions for all QuantaPhi coding tasks (#1785)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-47404344c5bc6803211722e2d6c087db1e4941e1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-07T09:37:26Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/47404344c5bc6803211722e2d6c087db1e4941e1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-9bd168022d16f3cc11e5148e18b3e5e50f0c1d67",
       "agent": "purple-people-eater",
@@ -40,18 +88,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/91b01348bf85ed5a480692881d5fe1cbb903298e",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T09:35:25Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-d4a4af70298aa9a0031fc1d021441dac4b647312",
@@ -98,30 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-07T08:54:50Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/a4da4e1e8a617d0a8bf1fa18915e08ae41549d7c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-e545b069e0930a0e9ea5c5a2a36c25f0694653d0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T08:44:37Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/e545b069e0930a0e9ea5c5a2a36c25f0694653d0",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-52bcd892d4dd909bbec7bae753ed3e2c0e195f93",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T08:35:53Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/52bcd892d4dd909bbec7bae753ed3e2c0e195f93",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/fa77956b347ce028d8f75dbb5101dfb62047c1ff",
       "title": "Fix verified Steve Miller radio source and track advance (#1768)",
       "message": "I found a commit titled “Fix verified Steve Miller radio source and track advance (#1768)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-26546aee7bfeac5efe70ec65c98a2f2ed2a0e915",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-07T01:45:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/26546aee7bfeac5efe70ec65c98a2f2ed2a0e915",
-      "title": "Add Infinity Identity Shield research Quick Card (#1767)",
-      "message": "I found a commit titled “Add Infinity Identity Shield research Quick Card (#1767)”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
     },
     {
       "id": "Oracle-Octaves-issue-209",
