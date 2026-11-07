@@ -14,7 +14,7 @@ test('reviewer receives bounded pinned controls from actual source observations'
  assert.ok(source.includes("source:modelSource,phiSkills:phaseSkills('arbitrate'),pinnedControls"), 'Pink and Purple use the same selected protocol source');
  assert.ok(source.includes("checkVisibleEdits(windowEvidence,proposal.edits)"), 'Model edits outside pinned source windows are blocked before apply');
  assert.ok(source.includes("legacy-small-files-only"), 'Legacy mode is limited to small files until Cloudflare v2 is deployed');
- assert.match(source,/commandReceipt\(name,\(\)=>command\(cmd,args\),scrub\)/);
+ assert.match(source,/commandReceipt\(name,\(\)=>execute\(cmd,args\),scrub\)/);
  assert.match(source,/previousTests:report.tests\?compactRepositoryChecks\(report.tests\)/,
   'Actionable process diagnostics must return to the engineer');
 });
