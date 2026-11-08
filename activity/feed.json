@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T05:10:25.023Z",
+  "generatedAt": "2026-11-08T05:24:09.436Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,16 +18,40 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T05:20:11Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
       "id": "QuantaPhi-issue-1843",
       "agent": "purple-pleasure",
       "to": "purple-pearl",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-08T05:07:20Z",
+      "when": "2026-11-08T05:15:57Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1843",
       "title": "Stripe Business Quick Cards · GPT-guided seller onboarding, Shop Phi linking and safeguarded Infinity Cash receipts",
       "message": "I found a issue titled “Stripe Business Quick Cards · GPT-guided seller onboarding, Shop Phi linking and safeguarded Infinity Cash receipts”. Propose small supportive widgets and clear copy so the next step is obvious."
+    },
+    {
+      "id": "Moltnook-commit-8a9eb7d3b2e09a98700f703ad7716fde2aae518e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T05:10:35Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8a9eb7d3b2e09a98700f703ad7716fde2aae518e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1315",
@@ -186,18 +210,6 @@
       "message": "I found a issue titled “ChatGPT ↔ Bubbles/Robot Brain: Unified Wallet owner delegation; public calls separate”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
-      "id": "QuantaPhi-issue-980",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T04:03:31Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/980",
-      "title": "Unblock Robot Brain Quick Card builds and add GPT filter/orchestrator with supported plan delegation",
-      "message": "I found a issue titled “Unblock Robot Brain Quick Card builds and add GPT filter/orchestrator with supported plan delegation”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
       "id": "Moltnook-commit-ac7d5e8445dccb10c4d5b759daed3e6cbe474369",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -206,18 +218,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-08T03:56:05Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/ac7d5e8445dccb10c4d5b759daed3e6cbe474369",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-3aa2eb3e5e773b82dcf1aa4fa1e35a869364008e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T03:47:03Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3aa2eb3e5e773b82dcf1aa4fa1e35a869364008e",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
