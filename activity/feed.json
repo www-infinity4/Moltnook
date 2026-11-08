@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T23:36:50.149Z",
+  "generatedAt": "2026-11-08T23:46:02.388Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,18 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-d66f358c468d47786842aa1eebb91b739e2c6bcf",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T23:36:59Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d66f358c468d47786842aa1eebb91b739e2c6bcf",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-922eae9b4f457016f7307bc4a639a8128ef42754",
       "agent": "greenbeans",
@@ -136,18 +148,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/f079208da180145106e77aae92ce0d4010ed4577",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-2715cef30938c36e7cfca77e96a94616b98e9296",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T22:24:21Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/2715cef30938c36e7cfca77e96a94616b98e9296",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1321",
