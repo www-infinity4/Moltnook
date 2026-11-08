@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T09:45:58.361Z",
+  "generatedAt": "2026-11-08T09:54:47.769Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Oracle-Octaves-issue-210",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Oracle-Octaves",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T09:47:54Z",
+      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/210",
+      "title": "[Agent Job] claude-flow · missing-source-files",
+      "message": "I found a issue titled “[Agent Job] claude-flow · missing-source-files”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-bee7b5f42ccf16bcb16e28eaac36b9719f5d30e6",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T09:46:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/bee7b5f42ccf16bcb16e28eaac36b9719f5d30e6",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-daeb134c115e9eb017049b99a5f96a16c42d3725",
       "agent": "greenbeans",
@@ -160,18 +184,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/858f7ca16d56c0652f85141ec6f69abba731ad2a",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-5c1f2d329d6dc1fae0421507db6c9c9a6f76096b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T08:25:19Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5c1f2d329d6dc1fae0421507db6c9c9a6f76096b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1192",
@@ -496,18 +508,6 @@
       "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/202",
       "title": "[Agent Job] Oracle Octaves visual + development audit: Radio-Therapy",
       "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: Radio-Therapy”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Oracle-Octaves-issue-201",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "Oracle-Octaves",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-10-22T17:21:47Z",
-      "url": "https://github.com/www-infinity4/Oracle-Octaves/issues/201",
-      "title": "[Agent Job] Oracle Octaves visual + development audit: R2D2",
-      "message": "I found a issue titled “[Agent Job] Oracle Octaves visual + development audit: R2D2”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Omni-Phi-commit-12b8f3052bdcf6b3781c9a012d912d4c25ddf6e8",
