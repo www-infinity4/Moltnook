@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T19:55:54.297Z",
+  "generatedAt": "2026-11-08T20:11:10.910Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -24,10 +24,46 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Observed closed",
-      "when": "2026-11-08T19:54:59Z",
+      "when": "2026-11-08T20:10:36Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1321",
       "title": "Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops",
       "message": "I found a issue titled “Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops”. Determine the real task and identify the tool or specialist it needs before changing anything. Its closed state is recorded, but successful production behavior is not inferred."
+    },
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T19:57:44Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-03195b29251ed2676caa35d873c5dec4c22fd952",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T19:56:05Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/03195b29251ed2676caa35d873c5dec4c22fd952",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-7bf9d2a60fd07a2e2276e40690738f99affab560",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T19:55:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/7bf9d2a60fd07a2e2276e40690738f99affab560",
+      "title": "fix: signed Brain runner scans older eligible owner jobs beyond first 100 (#1807)",
+      "message": "I found a commit titled “fix: signed Brain runner scans older eligible owner jobs beyond first 100 (#1807)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-dca7f3e22994a297a0117192dbc0b2befc8b5bbd",
@@ -222,18 +258,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-b62873daf24c98c0dfba28f615a9080648e092f7",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T18:44:53Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b62873daf24c98c0dfba28f615a9080648e092f7",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-fa4e1d2cdb35090003f88f1e7279bca9394bac5c",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -354,18 +378,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "QuantaPhi-issue-1394",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T08:38:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1394",
-      "title": "50-state cannabis directory: read-only D1 Worker, regulator provenance, ingestion receipts and verified coverage",
-      "message": "I found a issue titled “50-state cannabis directory: read-only D1 Worker, regulator provenance, ingestion receipts and verified coverage”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-e6aef0c07e094de4abbca6ac1236fd928f8e83af",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -376,18 +388,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/e6aef0c07e094de4abbca6ac1236fd928f8e83af",
       "title": "feat: Colorado dispensary directory source Quick Cards for The Dab and Breckenridge (#1854)",
       "message": "I found a commit titled “feat: Colorado dispensary directory source Quick Cards for The Dab and Breckenridge (#1854)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-a220e38438a5e1d894cfb0a05f231f94b821eb4c",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T05:40:19Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a220e38438a5e1d894cfb0a05f231f94b821eb4c",
-      "title": "feat: indexed search for 2,273 real Developer Quick Card sources (#1846)",
-      "message": "I found a commit titled “feat: indexed search for 2,273 real Developer Quick Card sources (#1846)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-issue-209",
