@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T18:24:32.923Z",
+  "generatedAt": "2026-11-08T18:35:41.669Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-fa4e1d2cdb35090003f88f1e7279bca9394bac5c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T18:28:29Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/fa4e1d2cdb35090003f88f1e7279bca9394bac5c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-8201a581c5f4cfda0315463d906ac068c01ff859",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T18:24:41Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8201a581c5f4cfda0315463d906ac068c01ff859",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-4acf02fdb7f81c1b2790bc6094b571cd99461083",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-08T17:19:39Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/f0014d2dd5dab5bc446dd0a38f9ea13500428338",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-162f4d82ff37be806f91292e530d19e5c3a91c1b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T17:09:45Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/162f4d82ff37be806f91292e530d19e5c3a91c1b",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -208,18 +220,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1859",
       "title": "[Agent Job] Oracle reuse: button → News-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: button → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-b4f8bb7a2952a8555be809f0ec02f79270e21124",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T10:28:49Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/b4f8bb7a2952a8555be809f0ec02f79270e21124",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1321",
