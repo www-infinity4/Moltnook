@@ -19,7 +19,7 @@ on:
         description: Fixed owner-approved acceptance task
         type: choice
         default: none
-        options: [none, site_acceptance, deep_chat, quick_cards]
+        options: [none, site_acceptance, deep_chat, quick_cards, five_day_status, chat_acceptance]
 permissions:
   contents: read
   id-token: write
@@ -43,6 +43,7 @@ jobs:
       - run: node --check scripts/bubbles-oracle-refinement.mjs
       - run: node --check scripts/bubbles-chat-verified-benchmark.mjs
       - run: node --test scripts/bubbles-chat-verified-benchmark.test.mjs scripts/bubbles-github-identity-acceptance.test.mjs
+      - run: node --test scripts/bubbles-five-day-workflow.test.mjs
       - run: node --test agents/repository-engine/oracle-owner-inventory.test.mjs agents/repository-engine/oracle-focus-policy.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
       - run: node --check scripts/bubbles-legacy-cart-smoke.mjs
       - run: node --test scripts/bubbles-legacy-cart-smoke.test.mjs
@@ -114,12 +115,36 @@ jobs:
           console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
           NODE
 
+  five_day_status:
+    # On-demand owner-approved read-only validation. No prompt, work dispatch or writes.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.task == 'five_day_status' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify current signed five-day approval only
+        run: |
+          node --input-type=module <<'NODE'
+          const idurl=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          idurl.searchParams.set('audience','bubbles-owner-message-bridge');
+          const id=await fetch(idurl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!id.ok)throw Error('signed_identity_unavailable');
+          const token=(await id.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const endpoint='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          const res=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const data=await res.json().catch(()=>({}));
+          const verified=res.ok&&data.ok===true&&data.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          const consumer=String(data.consumer?.state||'unavailable').replace(/[^a-z_]/gi,'').slice(0,32);
+          console.log('BUBBLES_FIVE_DAY_STATUS '+JSON.stringify({approvalVerified:verified,consumer,ownerChatVerified:false,workExecuted:false}));
+          if(!verified)throw Error('existing_five_day_approval_not_verified');
+          NODE
+
   chat_acceptance:
     # Allow explicit job retries after the owner renews the existing grant.
     # Every attempt rechecks signed identity and both five-day grants before
     # synthetic public prompts. It creates no owner work ticket or UI consumer.
     # Same-run turn receipts remain deduplicated for their four-minute lifetime.
-    if: ${{ github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021') }}
+    if: ${{ (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021')) || (github.event_name == 'workflow_dispatch' && inputs.task == 'chat_acceptance') }}
     runs-on: ubuntu-latest
     timeout-minutes: 16
     steps:
