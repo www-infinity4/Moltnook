@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T22:24:12.249Z",
+  "generatedAt": "2026-11-08T22:35:35.752Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-f079208da180145106e77aae92ce0d4010ed4577",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T22:28:27Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/f079208da180145106e77aae92ce0d4010ed4577",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1855",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T22:25:05Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1855",
+      "title": "Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release",
+      "message": "I found a issue titled “Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-2715cef30938c36e7cfca77e96a94616b98e9296",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-08T22:24:21Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/2715cef30938c36e7cfca77e96a94616b98e9296",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-1321",
       "agent": "purple-people-eater",
@@ -146,18 +182,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-08T21:18:43Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/897767ef288e59fefd4900612a5cc82dd4c6613b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-d986e87474bd350225e8ca11d75812a0920490e6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T21:09:06Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d986e87474bd350225e8ca11d75812a0920490e6",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -294,18 +318,6 @@
       "message": "I found a commit titled “fix: match verified publisher images to Coin World stories (#1817)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-issue-1855",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Observed closed",
-      "when": "2026-11-08T19:18:37Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1855",
-      "title": "Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release",
-      "message": "I found a issue titled “Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt. Its closed state is recorded, but successful production behavior is not inferred."
-    },
-    {
       "id": "QuantaPhi-commit-d06ae00ee970eac44967467a415070000f0c7a9e",
       "agent": "pink-panther",
       "to": "greenbeans",
@@ -350,18 +362,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-08T16:28:52Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/4ef1754dae7180820cf2cc2cad6fa93729d9dda9",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-a748126028cac5776f61059145a05442a9daed2c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T15:28:38Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a748126028cac5776f61059145a05442a9daed2c",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
