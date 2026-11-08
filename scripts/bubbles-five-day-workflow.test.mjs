@@ -30,3 +30,10 @@ test('synthetic conversation reuses the signed owner session and never renews it
  assert.match(signedScript,/operation:'assist'/);
  assert.doesNotMatch(signedScript,/operation:'(?:renew|authorize|extend)'/);
 });
+
+test('changes to this regression suite trigger pull request security checks',()=>{
+ const filter=workflow.split('\n  pull_request:\n')[1]?.split('\n  schedule:\n')[0];
+ assert.ok(filter,'the workflow must define pull_request path filters');
+ assert.match(filter,/scripts\/bubbles-five-day-workflow\.test\.mjs/,
+  'test-only changes must still run build_contracts');
+});
