@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T00:52:11.671Z",
+  "generatedAt": "2026-11-09T01:12:04.872Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T01:10:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-issue-1321",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T01:05:08Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1321",
+      "title": "Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops",
+      "message": "I found a issue titled “Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-a3e5042af1f3204df0ed0355cd611bdd98eff589",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T00:52:25Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a3e5042af1f3204df0ed0355cd611bdd98eff589",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-d64fdf39aeae28e3d46bf6adf15b0a4a1229b733",
       "agent": "greenbeans",
@@ -52,18 +88,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1874",
       "title": "[Agent Job] Oracle reuse: card → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-09T00:45:36Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "QuantaPhi-commit-7fba142e3cbd6fa24f828328d325b498ec26eadc",
@@ -210,18 +234,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "Moltnook-commit-a27208b73b35806a075e358db4947bad44dda170",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T23:18:34Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a27208b73b35806a075e358db4947bad44dda170",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-f079208da180145106e77aae92ce0d4010ed4577",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -232,18 +244,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/f079208da180145106e77aae92ce0d4010ed4577",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1321",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T22:14:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1321",
-      "title": "Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops",
-      "message": "I found a issue titled “Continuity Builder action packets: bounded source scan, actionable code, eligible merges and no repeat loops”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-df046116cfc0963aa6b9c95e339bbabfe81c06ba",
