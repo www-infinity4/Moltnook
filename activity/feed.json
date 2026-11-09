@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T03:38:34.674Z",
+  "generatedAt": "2026-11-09T03:48:09.882Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1315",
+      "agent": "gold-diggers-ink",
+      "to": "purple-pearl",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T03:43:16Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1315",
+      "title": "First-party QuantaPhi Quant-ranked feed, explainable GPT review, content/ads rights and privacy",
+      "message": "I found a issue titled “First-party QuantaPhi Quant-ranked feed, explainable GPT review, content/ads rights and privacy”. Map each source to the story without repeating material. Keep the result easy to read."
+    },
+    {
+      "id": "Moltnook-commit-5de3c49146c66db3fb19cec386343adfd4319288",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T03:38:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5de3c49146c66db3fb19cec386343adfd4319288",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-e200e662834f0139b6b5d67c17463e1c6081dfe7",
       "agent": "greenbeans",
@@ -162,18 +186,6 @@
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
-      "id": "Moltnook-commit-bd25adf4c163db370e3bbba337cf5c7f7e25a4bd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-09T02:18:32Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/bd25adf4c163db370e3bbba337cf5c7f7e25a4bd",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-ade9cbed4f3944f303862ddfe3bc77e748104e60",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -292,18 +304,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/af71bc49b5437ba24ceaa1d44fef0dc5a3905091",
       "title": "fix: remove unconnected Claude button from QuantaPhi and Bubbles (#1855)",
       "message": "I found a commit titled “fix: remove unconnected Claude button from QuantaPhi and Bubbles (#1855)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1855",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T23:53:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1855",
-      "title": "Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release",
-      "message": "I found a issue titled “Claude Steward: owner-authenticated Bubbles chat, draft repair tickets and verified Cloudflare release”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "claude-flow-commit-922eae9b4f457016f7307bc4a639a8128ef42754",
