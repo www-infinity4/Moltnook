@@ -59,3 +59,51 @@ test('missing real tests or failed ancestry refuses a false receipt',async()=>{
   runTest:()=>assert.fail('unverified test')
  }),/not_an_ancestor/);
 });
+
+
+test('merged-source Pink review runs existing tracked test files that import the changed source',async()=>{
+ const scenarios=[
+  {repository:'www-infinity4/QuantaPhi',changed:'source-quick-cards.mjs',
+   testPath:'test/source-quick-cards.test.mjs',
+   source:"import {findSourceCard} from '../source-quick-cards.mjs';"},
+  {repository:'www-infinity4/TV-Database',changed:'js/youtube-only-catalog.js',
+   testPath:'tests/playback-catalog.test.js',
+   source:'const gate = fs.readFileSync("js/youtube-only-catalog.js","utf8");'}
+ ];
+ for(const c of scenarios){
+  const calls=[];
+  const actualJob={...job,repository:c.repository};
+  const actualReview={...sourceReview,repository:c.repository};
+  const actualPr={...pr,base:{ref:'main',repo:{full_name:c.repository}}};
+  const receipt=await runSourceReview({
+   job:actualJob,sourceReview:actualReview,capability,headSha,
+   trackedTestPaths:[c.testPath,'tests/unrelated.test.js'],
+   github:async url=>url.includes('/files?')?[{filename:c.changed}]:actualPr,
+   readSource:async path=>{
+    calls.push(['read',path]);
+    return path===c.testPath?c.source:"import '../other-module.js';";
+   },
+   verifyAncestry:async sha=>{calls.push(['ancestry',sha]);},
+   runTest:async path=>{calls.push(['test',path]);return 'TAP version 13\n# pass 1';}
+  });
+  assert.equal(receipt.status,'source_verified');
+  assert.deepEqual(receipt.testPaths,[c.testPath]);
+  assert.deepEqual(calls.filter(x=>x[0]==='test'),[['test',c.testPath]]);
+  assert.equal(receipt.productionVerified,false);
+  assert.equal(receipt.mergedNewCode,false);
+  assert.equal(receipt.noRewards,true);
+ }
+});
+test('read-only fallback rejects unrelated, missing, unsafe and untracked tests instead of claiming Pink approval',async()=>{
+ const data={job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')?[{filename:'source-quick-cards.mjs'}]:pr,
+  verifyAncestry:async()=>{},runTest:async()=>assert.fail('test cannot run without a grounded source link')};
+ for(const tc of [
+  {trackedTestPaths:[],source:"import '../source-quick-cards.mjs';"},
+  {trackedTestPaths:['test/unrelated.test.mjs'],source:"import '../unrelated-source.mjs';"},
+  {trackedTestPaths:['../test/source-quick-cards.test.mjs'],source:"import '../source-quick-cards.mjs';"}
+ ]){
+  await assert.rejects(runSourceReview({...data,trackedTestPaths:tc.trackedTestPaths,
+   readSource:async()=>tc.source}),/merged_source_review_test_paths_missing/);
+ }
+});
