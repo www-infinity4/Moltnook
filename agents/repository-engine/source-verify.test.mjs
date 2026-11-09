@@ -136,7 +136,7 @@ test('Pink resolves ESM imports from the test directory and fs.readFileSync from
   'lib/gate.test.mjs':"import './gate.mjs';",
   'tests/legacy/gate.test.mjs':"import '../lib/gate.mjs';",
   'tests/gate-reader.test.mjs':'const gate=fs.readFileSync("lib/gate.mjs","utf8");',
-  'tests/gate-url.test.mjs':"const gate=readFileSync(new URL('../../lib/gate.mjs',import.meta.url),'utf8');"
+  'tests/gate-url.test.mjs':"const gate=readFileSync(new URL('../lib/gate.mjs',import.meta.url),'utf8');"
  };
  const selected=await discoverExistingSourceTests({changedPaths,
   trackedTestPaths:Object.keys(files),
