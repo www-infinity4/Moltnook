@@ -107,3 +107,10 @@ test('read-only fallback rejects unrelated, missing, unsafe and untracked tests 
    readSource:async()=>tc.source}),/merged_source_review_test_paths_missing/);
  }
 });
+
+
+test('production source review supplies the git-tracked test inventory rather than an unverified model list',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const source=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
+ assert.match(source,/trackedTestPaths:\s*git\('ls-files'\)\.split\('\\n'\)/);
+});
