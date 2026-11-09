@@ -3,6 +3,7 @@
  * All repository operations are pinned to the authenticated checkout;
  * the server separately verifies the PR merge, current head and owner ticket.
  */
+import {referencesChangedSource} from './source-test-refs.mjs';
 const SHA=/^[0-9a-f]{40}$/;
 const REPO=/^www-infinity4\/[A-Za-z0-9_.-]+$/;
 const TEST=/^(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:test|spec)\.(?:js|mjs|cjs)$/;
@@ -18,7 +19,7 @@ export function sourceReviewEligibility({job,sourceReview,capability}={}){
   return {eligible:false,reason:'verified_source_review_adapter_unavailable'};
  return {eligible:true,review:sourceReview};
 }
-export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths,headSha}){
+function assertSourceReviewProvenance({job,sourceReview,capability,pr,changedPaths,headSha}){
  const gate=sourceReviewEligibility({job,sourceReview,capability});
  if(!gate.eligible)throw Error(gate.reason);
  if(!pr||pr.merged!==true||pr.merge_commit_sha!==sourceReview.mergeSha||
@@ -27,7 +28,35 @@ export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changed
   !String(pr.title||'').includes(sourceReview.primaryId)||
   !SHA.test(headSha||'')||!Array.isArray(changedPaths)||changedPaths.length>=100)
   throw Error('merged_source_review_provenance_invalid');
- const allowed=changedPaths.filter(safeTestPath).slice(0,8);
+}
+// Only the pinned checkout's git-tracked tests may be considered. They must
+// explicitly reference a changed source path in an import/read expression;
+// being a plausible-looking test filename is not enough evidence.
+export async function discoverExistingSourceTests({changedPaths=[],trackedTestPaths=[],readSource}={}){
+ if(!Array.isArray(changedPaths)||!Array.isArray(trackedTestPaths)||
+  trackedTestPaths.length>2500||typeof readSource!=='function')return [];
+ const paths=changedPaths.filter(p=>typeof p==='string'&&
+  p.split('/').every(part=>part!=='.'&&part!=='..'&&!part.startsWith('.')));
+ if(!paths.length)return [];
+ const candidates=[...new Set(trackedTestPaths.filter(safeTestPath))];
+ const stems=paths.map(p=>p.split('/').at(-1).replace(/\.[^.]+$/,''));
+ candidates.sort((a,b)=>
+  Number(!stems.some(stem=>a.includes(stem)))-Number(!stems.some(stem=>b.includes(stem)))||
+  a.localeCompare(b));
+ const verified=[];
+ for(const path of candidates){
+  if(verified.length>=8)break;
+  const source=await readSource(path);
+  if(typeof source!=='string'||source.length>250000)continue;
+  if(referencesChangedSource(source,path,paths))verified.push(path);
+ }
+ return verified;
+}
+
+export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths,headSha,verifiedExistingTestPaths=[]}){
+ assertSourceReviewProvenance({job,sourceReview,capability,pr,changedPaths,headSha});
+ const allowed=[...new Set([...changedPaths.filter(safeTestPath),
+  ...verifiedExistingTestPaths.filter(safeTestPath)])].slice(0,8);
  if(!allowed.length)throw Error('merged_source_review_test_paths_missing');
  const sourcePaths=changedPaths.filter(path=>typeof path==='string'&&!safeTestPath(path)&&
  path.split('/').every(part=>part!=='.'&&part!=='..'&&!part.startsWith('.')));
@@ -36,7 +65,7 @@ export function verifiedSourceReviewPlan({job,sourceReview,capability,pr,changed
   prNumber:sourceReview.prNumber,testPaths:allowed,sourcePaths,
   productionVerified:false,newCommit:false,sourceReviewOnly:true};
 }
-export async function runSourceReview({job,sourceReview,capability,headSha,github,readSource,verifyAncestry,runTest}){
+export async function runSourceReview({job,sourceReview,capability,headSha,github,readSource,verifyAncestry,runTest,trackedTestPaths=[]}){
  const gate=sourceReviewEligibility({job,sourceReview,capability});
  if(!gate.eligible)throw Error(gate.reason);
  const repo=sourceReview.repository,num=sourceReview.prNumber;
@@ -44,9 +73,14 @@ export async function runSourceReview({job,sourceReview,capability,headSha,githu
   github('repos/'+repo+'/pulls/'+num),
   github('repos/'+repo+'/pulls/'+num+'/files?per_page=100')
  ]);
- const plan=verifiedSourceReviewPlan({job,sourceReview,capability,pr,
-  changedPaths:Array.isArray(changed)?changed.map(x=>x.filename):null,headSha});
- await verifyAncestry(plan.mergeSha);
+ const changedPaths=Array.isArray(changed)?changed.map(x=>x.filename):null;
+ // Check the trusted GitHub PR and repository ancestry BEFORE reading tests.
+ assertSourceReviewProvenance({job,sourceReview,capability,pr,changedPaths,headSha});
+ await verifyAncestry(sourceReview.mergeSha);
+ const verifiedExistingTestPaths=changedPaths.some(safeTestPath)?[]
+  :await discoverExistingSourceTests({changedPaths,trackedTestPaths,readSource});
+ const plan=verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths,
+  headSha,verifiedExistingTestPaths});
  const runs=[];
  for(const path of plan.testPaths){
   const content=await readSource(path);
