@@ -38,7 +38,7 @@ export async function discoverExistingSourceTests({changedPaths=[],trackedTestPa
   p.split('/').every(part=>part!=='.'&&part!=='..'&&!part.startsWith('.')));
  if(!paths.length)return [];
  const candidates=[...new Set(trackedTestPaths.filter(safeTestPath))];
- const stems=paths.map(p=>p.split('/').at(-1).replace(/\\.[^.]+$/,''));
+ const stems=paths.map(p=>p.split('/').at(-1).replace(/\.[^.]+$/,''));
  candidates.sort((a,b)=>
   Number(!stems.some(stem=>a.includes(stem)))-Number(!stems.some(stem=>b.includes(stem)))||
   a.localeCompare(b));
@@ -47,10 +47,10 @@ export async function discoverExistingSourceTests({changedPaths=[],trackedTestPa
   if(verified.length>=8)break;
   const source=await readSource(path);
   if(typeof source!=='string'||source.length>250000)continue;
-  const references=source.split('\\n').some(line=>
-   /\\b(?:import|from|require|readFileSync|new\\s+URL)\\b/.test(line)&&
+  const references=source.split('\n').some(line=>
+   /\b(?:import|from|require|readFileSync|new\s+URL)\b/.test(line)&&
    paths.some(p=>[p,'./'+p,'../'+p,'../../'+p].some(ref=>
-    ["'"+ref+"'",'"'+ref+'"','\\x60'+ref+'\\x60'].some(quoted=>line.includes(quoted)))));
+    ["'"+ref+"'",'"'+ref+'"',String.fromCharCode(96)+ref+String.fromCharCode(96)].some(quoted=>line.includes(quoted)))));
   if(references)verified.push(path);
  }
  return verified;
