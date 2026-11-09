@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T01:57:20.637Z",
+  "generatedAt": "2026-11-09T02:18:23.981Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,6 +18,30 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T02:10:57Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-6019aaccea1b63fdc1dbbbb4c12c6082e7bd9a63",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T01:57:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6019aaccea1b63fdc1dbbbb4c12c6082e7bd9a63",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "Moltnook-commit-41be0cdf207069af4daf0defa3ba4c15201a365a",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -28,18 +52,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/41be0cdf207069af4daf0defa3ba4c15201a365a",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1192",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-09T01:48:10Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
-      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
-      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
       "id": "Moltnook-commit-a2a018828227580855cbbd5a0701cf368a9116b9",
@@ -232,18 +244,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/af71bc49b5437ba24ceaa1d44fef0dc5a3905091",
       "title": "fix: remove unconnected Claude button from QuantaPhi and Bubbles (#1855)",
       "message": "I found a commit titled “fix: remove unconnected Claude button from QuantaPhi and Bubbles (#1855)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-0386682b4b90c212758dff484bf76c3be79f970f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-09T00:13:48Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0386682b4b90c212758dff484bf76c3be79f970f",
-      "title": "fix: signed five-day Bubbles status and chat QA on demand (#1192)",
-      "message": "I found a commit titled “fix: signed five-day Bubbles status and chat QA on demand (#1192)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-1855",
