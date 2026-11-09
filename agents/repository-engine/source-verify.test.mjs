@@ -119,11 +119,11 @@ test('production source review supplies the git-tracked test inventory rather th
 test('Pink never treats comments or unrelated string text as executable source references',async()=>{
  const changedPaths=['lib/gate.mjs'];
  const sample=[
-  "// import '../lib/gate.mjs';",
-  "/* import '../lib/gate.mjs'; */",
-  "const message = \"import '../lib/gate.mjs'\";",
+  "// import '../../lib/gate.mjs';",
+  "/* import '../../lib/gate.mjs'; */",
+  "const message = \"import '../../lib/gate.mjs'\";",
   "const url = 'https://example.test/lib/gate.mjs';",
-  "const url2 = \"// import '../lib/gate.mjs'\";"
+  "const url2 = \"// import '../../lib/gate.mjs'\";"
  ].join('\n');
  const selected=await discoverExistingSourceTests({changedPaths,
   trackedTestPaths:['tests/legacy/fake.test.mjs'],
