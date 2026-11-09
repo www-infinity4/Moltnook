@@ -7,8 +7,8 @@ export const COLOR_GPT_MODEL='@cf/openai/gpt-oss-120b';
 const COLORS={
  red:{layers:['red'],appendages:['architecture-scan','repository-map']},
  yellow:{layers:['yellow'],appendages:['data-extraction','source-reading','research-search']},
- blue:{layers:['blue'],appendages:['schema-check','dependency-map','repository-selector']},
- orange:{layers:['red','yellow'],appendages:['question-explorer','data-extraction','hypothesis-check']},
+ blue:{layers:['blue'],appendages:['schema-check','dependency-map','repository-selector','source-adapter','data-normalization','provenance-record']},
+ orange:{layers:['red','yellow'],appendages:['question-explorer','data-extraction','hypothesis-check','architecture-decision']},
  purple:{layers:['purple','blue','red'],appendages:['role-handoff','capability-discovery','owner-summary']},
  green:{layers:['green','yellow','blue','pink','red','white'],appendages:['repository-source','code-editor','sandbox-tests','dependency-map','data-extraction']},
  pink:{layers:['pink'],appendages:['test-receipts','diff-review','regression-check']},

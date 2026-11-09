@@ -34,3 +34,30 @@ test('color model invocation requires a live authenticated callback and an exact
  await assert.rejects(invokeColorCore(async()=>({...await invoke('color-think',{color:'yellow'}),authorizedOperationsPerformed:true}),{color:'yellow',task:'x'}),/receipt_unverified/);
  await assert.rejects(invokeColorCore(async()=>({...await invoke('color-think',{color:'yellow'}),model:'fake-model'}),{color:'yellow',task:'x'}),/receipt_unverified/);
 });
+
+
+test('Orange and Blue advisory tool labels match the signed Brain without granting any tool execution',async()=>{
+ const cases={
+  orange:['architecture-decision'],
+  blue:['source-adapter','data-normalization','provenance-record']
+ };
+ for(const [color,requests] of Object.entries(cases)){
+  const profile=colorProfile(color);
+  for(const request of requests){
+   assert.ok(profile.appendages.includes(request),color+': '+request);
+   const thought=await invokeColorCore(async(_step,payload)=>({
+    ok:true,status:'model_inference_completed',model:COLOR_GPT_MODEL,
+    color:payload.color,layers:profile.layers,toolRequestsAreNotExecution:true,
+    authorizedOperationsPerformed:false,finding:'Advisory evidence',
+    nextAction:'Use the permitted scoped adapter',blockers:[],toolRequests:[request]
+   }),{color,task:'Evaluate a scoped owner request'});
+   assert.deepEqual(thought.requestedAppendages,[request]);
+   assert.equal(thought.anyToolsExecuted,false);
+   assert.equal(thought.sourceCommitted,false);
+   assert.equal(thought.productionDeployed,false);
+   assert.equal(thought.walletChanged,false);
+  }
+ }
+ assert.equal(colorProfile('orange').credentialAccess,'none');
+ assert.equal(colorProfile('blue').ownerApproval,'not-overridable');
+});
