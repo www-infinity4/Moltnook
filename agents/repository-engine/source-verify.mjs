@@ -3,6 +3,7 @@
  * All repository operations are pinned to the authenticated checkout;
  * the server separately verifies the PR merge, current head and owner ticket.
  */
+import {referencesChangedSource} from './source-test-refs.mjs';
 const SHA=/^[0-9a-f]{40}$/;
 const REPO=/^www-infinity4\/[A-Za-z0-9_.-]+$/;
 const TEST=/^(?:[A-Za-z0-9_.-]+\/)*[A-Za-z0-9_.-]+\.(?:test|spec)\.(?:js|mjs|cjs)$/;
@@ -47,11 +48,7 @@ export async function discoverExistingSourceTests({changedPaths=[],trackedTestPa
   if(verified.length>=8)break;
   const source=await readSource(path);
   if(typeof source!=='string'||source.length>250000)continue;
-  const references=source.split('\n').some(line=>
-   /\b(?:import|from|require|readFileSync|new\s+URL)\b/.test(line)&&
-   paths.some(p=>[p,'./'+p,'../'+p,'../../'+p].some(ref=>
-    ["'"+ref+"'",'"'+ref+'"',String.fromCharCode(96)+ref+String.fromCharCode(96)].some(quoted=>line.includes(quoted)))));
-  if(references)verified.push(path);
+  if(referencesChangedSource(source,path,paths))verified.push(path);
  }
  return verified;
 }
