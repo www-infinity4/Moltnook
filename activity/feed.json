@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T01:12:04.872Z",
+  "generatedAt": "2026-11-09T01:24:39.518Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -24,10 +24,34 @@
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-09T01:10:12Z",
+      "when": "2026-11-09T01:20:22Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
       "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
       "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-0d2e887949d32a6817b42d071f6bfb8ce741ec42",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T01:14:05Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0d2e887949d32a6817b42d071f6bfb8ce741ec42",
+      "title": "fix: stop GPT-OSS internal analysis text leaking into Bubbles replies (#1192)",
+      "message": "I found a commit titled “fix: stop GPT-OSS internal analysis text leaking into Bubbles replies (#1192)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-65b7496d947180d0332a45d9601f9f345116c8fb",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-09T01:12:13Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/65b7496d947180d0332a45d9601f9f345116c8fb",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1321",
@@ -210,18 +234,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-0dc238c8c3632c2fb6abb96922a35a8b7f78ab4c",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T23:27:36Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0dc238c8c3632c2fb6abb96922a35a8b7f78ab4c",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-1869",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -340,18 +352,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1863",
       "title": "PCLA / PicoCELA Japanese mesh-networking stock research Quick Card",
       "message": "I found a issue titled “PCLA / PicoCELA Japanese mesh-networking stock research Quick Card”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade. Its closed state is recorded, but successful production behavior is not inferred."
-    },
-    {
-      "id": "QuantaPhi-commit-815786bfe0136de7113b63daec6dc8aa9751889d",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-08T19:46:04Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/815786bfe0136de7113b63daec6dc8aa9751889d",
-      "title": "feat: Japanese PicoCELA mesh and PCLA market Quick Card in active Oracle carousel (#1864)",
-      "message": "I found a commit titled “feat: Japanese PicoCELA mesh and PCLA market Quick Card in active Oracle carousel (#1864)”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
     },
     {
       "id": "claude-flow-commit-c2f9c8fe72a032ff29c4b90153c5347d6f7cf55e",
