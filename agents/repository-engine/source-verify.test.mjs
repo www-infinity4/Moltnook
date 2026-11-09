@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sourceReviewEligibility,verifiedSourceReviewPlan,runSourceReview} from './source-verify.mjs';
+import {sourceReviewEligibility,verifiedSourceReviewPlan,runSourceReview,discoverExistingSourceTests} from './source-verify.mjs';
 const sourceSha='b'.repeat(40),mergeSha='a'.repeat(40),headSha='c'.repeat(40),repository='www-infinity4/QuantaPhi';
 const job={agent:'pink-panther',repository,instructions:'After TASK-1, independently verify the owner routing'};
 const sourceReview={kind:'source_review_only',repository,mergeSha,sourceCommitSha:sourceSha,
@@ -113,4 +113,41 @@ test('production source review supplies the git-tracked test inventory rather th
  const {readFileSync}=await import('node:fs');
  const source=readFileSync(new URL('./runner.mjs',import.meta.url),'utf8');
  assert.match(source,/trackedTestPaths:\s*git\('ls-files'\)\.split\('\\n'\)/);
+});
+
+
+test('Pink never treats comments or unrelated string text as executable source references',async()=>{
+ const changedPaths=['lib/gate.mjs'];
+ const sample=[
+  "// import '../lib/gate.mjs';",
+  "/* import '../lib/gate.mjs'; */",
+  "const message = \"import '../lib/gate.mjs'\";",
+  "const url = 'https://example.test/lib/gate.mjs';",
+  "const url2 = \"// import '../lib/gate.mjs'\";"
+ ].join('\n');
+ const selected=await discoverExistingSourceTests({changedPaths,
+  trackedTestPaths:['tests/legacy/fake.test.mjs'],
+  readSource:async()=>sample});
+ assert.deepEqual(selected,[]);
+});
+test('Pink resolves ESM imports from the test directory and fs.readFileSync from the working root',async()=>{
+ const changedPaths=['lib/gate.mjs'];
+ const files={
+  'lib/gate.test.mjs':"import './gate.mjs';",
+  'tests/legacy/gate.test.mjs':"import '../lib/gate.mjs';",
+  'tests/gate-reader.test.mjs':'const gate=fs.readFileSync("lib/gate.mjs","utf8");',
+  'tests/gate-url.test.mjs':"const gate=readFileSync(new URL('../../lib/gate.mjs',import.meta.url),'utf8');"
+ };
+ const selected=await discoverExistingSourceTests({changedPaths,
+  trackedTestPaths:Object.keys(files),
+  readSource:async path=>files[path]});
+ assert.deepEqual(selected,[
+  'lib/gate.test.mjs','tests/gate-reader.test.mjs','tests/gate-url.test.mjs'
+ ]);
+});
+test('Pink rejects a file-read URL resolved from another base, not import.meta.url',async()=>{
+ const selected=await discoverExistingSourceTests({changedPaths:['lib/gate.mjs'],
+  trackedTestPaths:['tests/fake.test.mjs'],
+  readSource:async()=>'const text=readFileSync(new URL("../../lib/gate.mjs","https://other.test/base/"))'});
+ assert.deepEqual(selected,[]);
 });
