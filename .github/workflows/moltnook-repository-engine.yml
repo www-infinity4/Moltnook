@@ -42,6 +42,9 @@ jobs:
         run: |
           node --test workers/bot-sandbox/worker.test.mjs agents/repository-engine/rollout-gate.test.mjs agents/repository-engine/evaluate-rollout.test.mjs agents/repository-engine/wallet-contract.test.mjs
           node --test agents/repository-engine/color-task-routing.test.mjs agents/repository-engine/color-core.test.mjs
+          node --check agents/repository-engine/pinned-read-inspection.mjs
+          node --check .github/scripts/run-agent-iterations.mjs
+          node --test agents/repository-engine/parallel-read-dispatch.test.mjs
           node --check agents/repository-engine/color-task-routing.mjs
           node --test agents/repository-engine/dependency-context.test.mjs
           node --check agents/repository-engine/runner.mjs
