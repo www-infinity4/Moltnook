@@ -1,3 +1,4 @@
+import {inspectPinnedPaths} from './pinned-read-inspection.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {dispatchReadJobs} from './parallel-read-dispatch.mjs';
@@ -20,4 +21,29 @@ test('failure is isolated and successful work is retained',async()=>{
 test('rejects duplicate IDs and excess concurrency',async()=>{
  await assert.rejects(dispatchReadJobs([{id:'a',role:'blue'},{id:'a',role:'blue'}],{}));
  await assert.rejects(dispatchReadJobs([],{},{concurrency:99}));
+});
+
+test('actual inspection handoff pins every GitHub source read to the claimed SHA',async()=>{
+ const head='a'.repeat(40),reads=[];
+ const rows=await inspectPinnedPaths({
+  paths:['README.md','src/app.mjs'],commitSha:head,
+  read:async(path,sha)=>{reads.push({path,sha});return {ok:true,sha:'b'.repeat(40)};},
+  sourceUrl:(path,sha)=>'https://github.com/example/repo/blob/'+sha+'/'+path,
+  concurrency:2
+ });
+ assert.equal(reads.length,2);
+ assert.ok(reads.every(r=>r.sha===head));
+ assert.ok(rows.every(r=>r.found&&r.sha==='b'.repeat(40)&&r.url.includes(head)));
+});
+
+test('missing pinned file is not verified and cannot turn read-only into a writer',async()=>{
+ const rows=await inspectPinnedPaths({
+  paths:['README.md','missing.mjs'],commitSha:'a'.repeat(40),
+  read:async path=>path==='README.md'?{ok:true,sha:'b'.repeat(40)}:{ok:false,error:'github_http_404'},
+  sourceUrl:(path,sha)=>'https://github.com/example/repo/blob/'+sha+'/'+path
+ });
+ assert.equal(rows[0].found,true);
+ assert.equal(rows[1].found,false);
+ assert.equal(rows[1].error,'github_http_404');
+ await assert.rejects(inspectPinnedPaths({paths:['../secrets'],commitSha:'a'.repeat(40),read:async()=>({ok:true,sha:'b'.repeat(40)}),sourceUrl:()=>''}));
 });
