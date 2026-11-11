@@ -4,12 +4,16 @@ on:
     paths:
       - 'agents/repository-engine/parallel-read-dispatch.mjs'
       - 'agents/repository-engine/parallel-read-dispatch.test.mjs'
+      - 'agents/repository-engine/pinned-read-inspection.mjs'
+      - '.github/scripts/run-agent-iterations.mjs'
       - '.github/workflows/bubbles-parallel-read-dispatch.yml'
   push:
     branches: [feat/bubbles-bounded-parallel-read-dispatch-20261110]
     paths:
       - 'agents/repository-engine/parallel-read-dispatch.mjs'
       - 'agents/repository-engine/parallel-read-dispatch.test.mjs'
+      - 'agents/repository-engine/pinned-read-inspection.mjs'
+      - '.github/scripts/run-agent-iterations.mjs'
       - '.github/workflows/bubbles-parallel-read-dispatch.yml'
 permissions:
   contents: read
@@ -25,4 +29,6 @@ jobs:
         with:
           node-version: '22'
       - run: node --check agents/repository-engine/parallel-read-dispatch.mjs
+      - run: node --check agents/repository-engine/pinned-read-inspection.mjs
+      - run: node --check .github/scripts/run-agent-iterations.mjs
       - run: node --test agents/repository-engine/parallel-read-dispatch.test.mjs
