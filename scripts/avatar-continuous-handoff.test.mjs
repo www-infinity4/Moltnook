@@ -33,6 +33,10 @@ test('actual signed assist/result for two turns precedes one durable dependent-j
  assert.equal(job.orderId,'avatar-1921-session-02');
  assert.equal(job.sourceSha,sha);
  assert.deepEqual(job.jobs.map(x=>x.dependencies),[[],['TASK-1']]);
+ assert.deepEqual(job.conversationReceipts.map(x=>x.turn),[0,1]);
+ assert.ok(job.conversationReceipts.every(x=>/^[a-f0-9]{64}$/.test(x.outputSha256)));
+ assert.ok(job.conversationReceipts.every(x=>x.toolStatus==='complete'));
+ assert.ok(job.conversationReceipts.every(x=>x.tool==='oracle.chat'));
  assert.equal(out.conversationTurns.length,2);
  assert.equal(out.execution.status,'queued_for_runner');
  assert.ok(!JSON.stringify(out).includes('Bearer '));
@@ -55,4 +59,17 @@ test('bad owner source pin or malformed signed run are rejected before calls',as
  await assert.rejects(runSignedAvatarHandoff({runId:'../',sourceSha:sha,send:async()=>{throw Error('never');}}),/invalid_handoff_scope/);
  await assert.rejects(runSignedAvatarHandoff({runId:'12345',sourceSha:'main',send:async()=>{throw Error('never');}}),/invalid_handoff_scope/);
  assert.equal(h.calls.length,0);
+});
+
+test('Bubbles tool failure is not an owner job authorization',async()=>{
+ const calls=[];
+ await assert.rejects(runSignedAvatarHandoff({runId:'12345',sourceSha:sha,
+  send:async(kind,payload)=>{
+   calls.push({kind,payload});
+   if(kind==='bridge')throw Error('bridge must never be reached');
+   if(payload.operation==='status')return {ok:true,jobId:'chatgpt_runner_12345'};
+   if(payload.operation==='assist')return {ok:true,state:'complete'};
+   return {ok:true,state:'complete',result:{ok:true,output:'Something was said',receipt:{tool:'oracle.chat',status:'failed'}}};
+  }}),/conversation_unverified/);
+ assert.equal(calls.some(x=>x.kind==='bridge'),false);
 });
