@@ -2,6 +2,7 @@
 // owner-work intake. No ChatGPT app impersonation, new key, wallet action,
 // privileged model-tool delegation, or unverified completion receipt.
 import {mkdir,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 
 const CHAT='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
@@ -34,15 +35,18 @@ export async function runSignedAvatarHandoff({runId,sourceSha,send}={}){
   const response=await send('conversation',{operation:'result',turn});
   if(response?.ok!==true||response.state!=='complete'||
       response.result?.ok!==true||typeof response.result.output!=='string'||
-      !response.result.output.trim())
+      !response.result.output.trim()||response.result.receipt?.status!=='complete'||
+      !/^[a-z][a-z0-9._-]{0,79}$/.test(response.result.receipt?.tool||''))
    throw Error('signed_conversation_unverified_'+turn);
   conversationTurns.push({turn,state:'complete',
    tool:safe(response.result.receipt?.tool,70)||null,
-   toolStatus:safe(response.result.receipt?.status,60)||null,
+   toolStatus:safe(response.result.receipt?.status,60),
+   outputSha256:createHash('sha256').update(response.result.output).digest('hex'),
    outputPreview:safe(response.result.output,320)});
  }
  const packet={repository:REPO,request:'Continue the owner-authorized Bubbles GPT continuous Avatar AI job chain in canonical QuantaPhi issue #1921, keeping two dependency-linked engineering stages in the existing signed Brain/D1 runner. No new tickets, unsafe merges or fabricated receipts.',
-  orderId:ORDER_ID,sourceSha,jobs:JOBS};
+  orderId:ORDER_ID,sourceSha,jobs:JOBS,
+  conversationReceipts:conversationTurns.map(({turn,state,tool,toolStatus,outputSha256})=>({turn,state,tool,toolStatus,outputSha256}))};
  const saved=await send('bridge',packet);
  if(saved?.ok!==true||saved?.repository!==REPO||
    saved?.orderId!==ORDER_ID||saved?.sourceSha!==sourceSha||
