@@ -30,7 +30,7 @@ export function planAutomationRecipe(input={}){
  return Object.freeze({
   recipeId:recipe?.id||null,trigger:typeof trigger==='string'?trigger:null,
   dedupeKey:eligible?input.dedupeKey:null,sourceUrl:eligible?input.sourceUrl:null,
-  status:!eligible?'blocked':recipe.externalEffect&&trigger!=='manual'?'approval_required':'ready_for_claim',
+  status:!eligible?'blocked':recipe.externalEffect?'approval_required':'ready_for_claim',
   approvalRequired:recipe?.externalEffect===true,
   approvalGranted:false,executionAuthorized:false,checkpoint:CHECKPOINT,retry:RETRY,
   runner:'existing_signed_lease_bound_runner',durableStateCreated:false,externalEffectPerformed:false
