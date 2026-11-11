@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T00:28:21.547Z",
+  "generatedAt": "2026-11-11T00:47:36.127Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-58064463005877520187ebd04b94f6f65fce7823",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-11T00:43:29Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/58064463005877520187ebd04b94f6f65fce7823",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-3ff1207857e9b1cdbac319c638ba7b94e899dd0b",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-11T00:28:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3ff1207857e9b1cdbac319c638ba7b94e899dd0b",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ba9ac62262bfdd9cf3106e4b4af36b287d02d46a",
       "agent": "greenbeans",
@@ -150,18 +174,6 @@
       "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
-      "id": "Moltnook-commit-b58343f3ed6d2d54dc660522ee085d67b4b78799",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-10T22:54:40Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/b58343f3ed6d2d54dc660522ee085d67b4b78799",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-2cc48f346ebefb30bc881969ef8072b8ccc45055",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -218,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-10T18:29:01Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/df238655c24eb32a3322e36085aacdaf3c87da67",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-86b41b71e481af5ec0b1022034c61916d4a7023b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-10T17:28:56Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/86b41b71e481af5ec0b1022034c61916d4a7023b",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
