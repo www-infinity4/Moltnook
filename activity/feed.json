@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T22:24:01.507Z",
+  "generatedAt": "2026-11-12T22:36:10.819Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-72fafb9f36373a5db1ebe473b4ca29c9bc436227",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-12T22:28:43Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/72fafb9f36373a5db1ebe473b4ca29c9bc436227",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-106ccd1eda417aab9270e05586c69c6579872f30",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-12T22:24:14Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/106ccd1eda417aab9270e05586c69c6579872f30",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-2c7cdae6c7e92c3b052d42451b1fe3a5148355fe",
       "agent": "greenbeans",
@@ -102,18 +126,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-01bf2f770d469ee2c18af2e025a3afc160a154d0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-12T21:10:11Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/01bf2f770d469ee2c18af2e025a3afc160a154d0",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-1406ae6686db94b078b4646c337eb8413f7c60b8",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -182,18 +194,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-12T16:28:42Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/598bcc245f1f40869df0e86e7f7764f7a04347f6",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-091eb8dcd9c8e4cab66f201959349c8ae7e0a048",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-12T15:29:07Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/091eb8dcd9c8e4cab66f201959349c8ae7e0a048",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
