@@ -15,7 +15,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   execute:
-    runs-on: ubuntu-latest
+    # Playwright's Chromium installer rejects ubuntu26.04-x64 on the latest runner.
+    # Use the supported hosted image until the pinned Playwright version supports newer runners.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
