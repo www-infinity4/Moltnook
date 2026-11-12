@@ -165,6 +165,7 @@ try{
    const verified=await withRepositorySandbox(workspace,sandbox=>runSourceReview({
     job:lease.job,sourceReview:lease.job.sourceReview,capability:liveWindowCapability,
     headSha:baseSha,github,readSource:sourceFile,
+    trackedTestPaths:git('ls-files').split('\n'),
     verifyAncestry:sha=>git('merge-base','--is-ancestor',sha,'HEAD'),
     runTest:file=>sandbox('node',['--test',file])
    }));
