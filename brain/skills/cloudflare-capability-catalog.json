@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "kind": "bubbles.cloudflare.skill-catalog",
+  "updated": "2026-10-28",
+  "source": "official Cloudflare developer documentation",
+  "authorization": {
+    "ownerReportedPermissionCount": 403,
+    "verifiedPermissionCount": null,
+    "apiWriteReported": true,
+    "connectorApiVerification": "blocked_http_401_invalid_api_token",
+    "runtimeIdentityVerified": false,
+    "allowProductionMutation": false
+  },
+  "policy": {
+    "noSecretsInCatalog": true,
+    "requireLivePermissionCheck": true,
+    "requireSignedBrainReceipt": true,
+    "requireIndependentSecurityReviewForSensitiveChanges": true
+  },
+  "skills": [
+    {
+      "id": "cloudflare.workers.inspect",
+      "family": "workers",
+      "risk": "read",
+      "intent": "Inspect Worker deployments and bindings without reading secrets",
+      "docs": [
+        "https://developers.cloudflare.com/workers/",
+        "https://developers.cloudflare.com/workers/runtime-apis/bindings/"
+      ],
+      "requiredCapability": "verified Workers read scope",
+      "test": "Read metadata of an explicitly authorized Worker"
+    },
+    {
+      "id": "cloudflare.d1.inspect",
+      "family": "d1",
+      "risk": "read",
+      "intent": "Inspect a bounded database schema and nonsecret metadata",
+      "docs": [
+        "https://developers.cloudflare.com/d1/"
+      ],
+      "requiredCapability": "verified D1 read scope",
+      "test": "Read database metadata; no write SQL"
+    },
+    {
+      "id": "cloudflare.r2.inspect",
+      "family": "r2",
+      "risk": "read",
+      "intent": "Inspect authorized bucket metadata",
+      "docs": [
+        "https://developers.cloudflare.com/r2/"
+      ],
+      "requiredCapability": "verified R2 read scope",
+      "test": "Read bucket metadata without object contents"
+    },
+    {
+      "id": "cloudflare.dns.inspect",
+      "family": "dns",
+      "risk": "read",
+      "intent": "Inspect zone DNS records and proxy flags",
+      "docs": [
+        "https://developers.cloudflare.com/dns/"
+      ],
+      "requiredCapability": "verified DNS read scope",
+      "test": "Read authorized zone record metadata"
+    },
+    {
+      "id": "cloudflare.access.inspect",
+      "family": "access",
+      "risk": "security",
+      "intent": "Inspect Access applications and policy metadata",
+      "docs": [
+        "https://developers.cloudflare.com/cloudflare-one/"
+      ],
+      "requiredCapability": "verified Access read scope",
+      "test": "Read application policy metadata; no token values"
+    },
+    {
+      "id": "cloudflare.analytics.inspect",
+      "family": "analytics",
+      "risk": "read",
+      "intent": "Read bounded date-scoped analytics with provenance",
+      "docs": [
+        "https://developers.cloudflare.com/analytics/graphql-api/"
+      ],
+      "requiredCapability": "verified analytics read scope",
+      "test": "Read a small date range and record freshness"
+    },
+    {
+      "id": "cloudflare.workers.deploy",
+      "family": "workers",
+      "risk": "write",
+      "intent": "Deploy reviewed Worker code while preserving bindings",
+      "docs": [
+        "https://developers.cloudflare.com/workers/wrangler/"
+      ],
+      "requiredCapability": "verified Workers write scope plus release gates",
+      "test": "Isolated test Worker only after approved source and release gates",
+      "enabled": false
+    }
+  ]
+}
