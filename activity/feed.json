@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T03:27:08.574Z",
+  "generatedAt": "2026-11-12T03:37:35.387Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-9b4bb26a2576c728df4e6854b582d9a9f65a2bb1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-12T03:29:39Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/9b4bb26a2576c728df4e6854b582d9a9f65a2bb1",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-590a0efebbb756abc7b1c119252c6bf0c7f38405",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-12T03:27:19Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/590a0efebbb756abc7b1c119252c6bf0c7f38405",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-2bea10bea676af3257c14f574ad7c85ccbb4e724",
       "agent": "greenbeans",
@@ -162,18 +186,6 @@
       "message": "I found a issue titled “Complete Me AI — focused project-to-completion controller on existing Bubbles runner”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-a7eba18c42de05540052b4d4efb42f691884ead9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-12T01:57:17Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a7eba18c42de05540052b4d4efb42f691884ead9",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-issue-1923",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -278,18 +290,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-11T21:29:02Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/7ce9f7a3bf44c24ab9289f955af22c8ec182b344",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-9f916efb78937f3868a545eeb3cad28d46728fb0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-11T21:00:37Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/9f916efb78937f3868a545eeb3cad28d46728fb0",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
