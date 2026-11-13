@@ -1,0 +1,13 @@
+# Universal automation recipes — existing signed-runner integration
+
+Related owner source: [QuantaPhi #1912](https://github.com/www-infinity4/QuantaPhi/issues/1912), [#1913](https://github.com/www-infinity4/QuantaPhi/issues/1913), parent [#1908](https://github.com/www-infinity4/QuantaPhi/issues/1908).
+
+The **only** actual writer remains `agents/repository-engine/runner.mjs` with GitHub Actions OIDC, coordinator claim, lease, exact source SHA and guarded review/merge. The `automation-recipes.mjs` module supplies seven validated domain descriptors to existing `color-task-routing.mjs` when the signed job explicitly contains `automationRecipe` metadata. Neither a chat result, metadata field, recipe, trigger nor inferred owner intent grants an owner lease, execution, privileged provider access, spend rights or deployment.
+
+Inputs for a declarative recipe: `{recipeId, trigger, dedupeKey, sourceUrl}`. Accept only declared `manual`, `event`, `schedule`, `poll` or `webhook` triggers on the respective recipe and an HTTPS source plus bounded stable idempotency key. Outputs: `blocked`, `ready_for_claim` or `approval_required`, plus immutable checkpoint field contract and retry policy. All outputs have `executionAuthorized:false`, `approvalGranted:false` and `durableStateCreated:false`. External-effect recipes require independent authorization on the actual signed runner, not an `autoApprove` field.
+
+Reuse proven patterns: [Microsoft Agent Framework orchestration](https://learn.microsoft.com/en-us/agent-framework/workflows/orchestrations/), [checkpoint/rehydration](https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints/), [human-in-loop approval](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop), [n8n failure handler](https://docs.n8n.io/flow-logic/error-handling/) and [idempotent retry](https://docs.n8n.io/build/understand-workflows/understand-executions/view-all-executions). None of these external frameworks are installed as a new executor.
+
+Verification command: `node --test agents/repository-engine/automation-recipes.test.mjs agents/repository-engine/color-task-routing.test.mjs`. The existing `moltnook-repository-engine.yml` CI step includes the new test. Feature policy must remain non-authorizing even when a malicious job payload says `autoApprove:true`.
+
+Next real integration step, **not completed by recipe metadata**: coordinator persists and resumes triggers/checkpoints using lease fence and idempotency key; a signed runner observes an authorized recipe's factual receipt; test interruption/recovery, exact-head CI and actual release separately.
