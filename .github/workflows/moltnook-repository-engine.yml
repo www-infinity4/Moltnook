@@ -15,7 +15,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   execute:
-    runs-on: ubuntu-latest
+    # Playwright's Chromium installer rejects ubuntu26.04-x64 on the latest runner.
+    # Use the supported hosted image until the pinned Playwright version supports newer runners.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +44,9 @@ jobs:
         run: |
           node --test workers/bot-sandbox/worker.test.mjs agents/repository-engine/rollout-gate.test.mjs agents/repository-engine/evaluate-rollout.test.mjs agents/repository-engine/wallet-contract.test.mjs
           node --test agents/repository-engine/color-task-routing.test.mjs agents/repository-engine/color-core.test.mjs
+          node --check agents/repository-engine/pinned-read-inspection.mjs
+          node --check .github/scripts/run-agent-iterations.mjs
+          node --test agents/repository-engine/parallel-read-dispatch.test.mjs
           node --check agents/repository-engine/color-task-routing.mjs
           node --test agents/repository-engine/dependency-context.test.mjs
           node --check agents/repository-engine/runner.mjs

@@ -5,6 +5,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {routeEvent} from './agent-routing.mjs';
 import {spawnColorChild,selectChildRoles,inspectChild,parentReport,responsibilitiesFor,READ_ONLY_TOOLS} from '../../agents/color-child-bots.mjs';
+import {inspectPinnedPaths} from '../../agents/repository-engine/pinned-read-inspection.mjs';
 const input=JSON.parse(await fs.readFile('agents/jobs.json','utf8'));
 if(!Array.isArray(input.jobs)||!input.jobs.length)throw Error('Empty agent job registry');
 const headers={'Accept':'application/vnd.github+json','User-Agent':'moltnook-infinity-iteration/2.0',
@@ -79,11 +80,29 @@ for(const job of ordered){
  const repo=evidence.get(job.repo),head=repo?.commit;
  const checks=[];
  if(repo){
-   const paths=[...new Set(job.checkPaths||[])].slice(0,6);
-   for(const file of paths){
-    const result=await request(repo.base+'/contents/'+file.split('/').map(encodeURIComponent).join('/')).catch(e=>({ok:false,error:String(e.message||e)}));
-    checks.push({path:file,found:!!result.ok,url:link(job.repo,'/blob/main/'+file),error:result.error||null});
+  const paths=[...new Set(job.checkPaths||[])].slice(0,6);
+  if(head){
+   try{
+    checks.push(...await inspectPinnedPaths({
+     paths,commitSha:head.sha,concurrency:3,
+     read:async(file,sha)=>{
+      const pathname=file.split('/').map(encodeURIComponent).join('/');
+      const result=await request(repo.base+'/contents/'+pathname+'?ref='+encodeURIComponent(sha))
+       .catch(error=>({ok:false,error:String(error.message||error)}));
+      return {ok:result.ok,sha:result.value?.sha,
+       error:result.error||(!result.ok?'github_http_'+(result.status||'unavailable'):null)};
+     },
+     sourceUrl:(file,sha)=>link(job.repo,'/blob/'+sha+'/'+file.split('/').map(encodeURIComponent).join('/'))
+    }));
+   }catch(error){
+    failed.push('Pinned inspection '+job.id+': '+String(error.message||error).slice(0,150));
+    checks.push(...paths.map(file=>({path:file,found:false,
+     url:link(job.repo,'/blob/'+head.sha+'/'+file),error:'pinned_inspection_failed'})));
    }
+  }else{
+   checks.push(...paths.map(file=>({path:file,found:false,
+    url:link(job.repo,'/blob/main/'+file),error:'source_commit_unavailable'})));
+  }
  }
  const found=checks.filter(c=>c.found).length;
  // Existing color desk chooses bounded child roles. Each child is a real scoped
