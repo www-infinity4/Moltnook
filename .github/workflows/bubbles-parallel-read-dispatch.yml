@@ -1,0 +1,34 @@
+name: Bubbles parallel read dispatch tests
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/parallel-read-dispatch.mjs'
+      - 'agents/repository-engine/parallel-read-dispatch.test.mjs'
+      - 'agents/repository-engine/pinned-read-inspection.mjs'
+      - '.github/scripts/run-agent-iterations.mjs'
+      - '.github/workflows/bubbles-parallel-read-dispatch.yml'
+  push:
+    branches: [feat/bubbles-bounded-parallel-read-dispatch-20261110]
+    paths:
+      - 'agents/repository-engine/parallel-read-dispatch.mjs'
+      - 'agents/repository-engine/parallel-read-dispatch.test.mjs'
+      - 'agents/repository-engine/pinned-read-inspection.mjs'
+      - '.github/scripts/run-agent-iterations.mjs'
+      - '.github/workflows/bubbles-parallel-read-dispatch.yml'
+permissions:
+  contents: read
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check agents/repository-engine/parallel-read-dispatch.mjs
+      - run: node --check agents/repository-engine/pinned-read-inspection.mjs
+      - run: node --check .github/scripts/run-agent-iterations.mjs
+      - run: node --test agents/repository-engine/parallel-read-dispatch.test.mjs
