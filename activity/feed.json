@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T23:28:11.824Z",
+  "generatedAt": "2026-11-15T23:37:26.113Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-1ed7237518653323994e2a5e40cfc1b8dca07096",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-15T23:29:45Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/1ed7237518653323994e2a5e40cfc1b8dca07096",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-6b545d8a2253be0e9e779ab07cf9f14b01202f88",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-15T23:28:20Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6b545d8a2253be0e9e779ab07cf9f14b01202f88",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-1905",
       "agent": "purple-pearl",
@@ -162,18 +186,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-3eb8845609fd61cd0a6e576720272b70663d8e09",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-15T22:09:51Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3eb8845609fd61cd0a6e576720272b70663d8e09",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-50539c90806e574763fb7b346ef8d87bca5c823d",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -266,18 +278,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-15T16:28:17Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/c589a5b8f6d264df15e475049c9485ee3baaddb8",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-9b245a7d005237605917e5fcb1b347226316eebe",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-15T15:28:38Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/9b245a7d005237605917e5fcb1b347226316eebe",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
