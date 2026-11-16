@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T23:18:40.505Z",
+  "generatedAt": "2026-11-16T23:28:00.075Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1947",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-16T23:26:38Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1947",
+      "title": "[Agent Job] Oracle reuse: search → Omni-Phi",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: search → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-efb47e0825927daee8d4b2c1820ef59a906cb8bf",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-16T23:18:48Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/efb47e0825927daee8d4b2c1820ef59a906cb8bf",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1330",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-16T23:18:47Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1330",
+      "title": "Infinity Power Chain 003 · voice-selected TV ads, verified multi-merchant checkout and Fast Lane",
+      "message": "I found a issue titled “Infinity Power Chain 003 · voice-selected TV ads, verified multi-merchant checkout and Fast Lane”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
     {
       "id": "QuantaPhi-issue-1919",
       "agent": "naked-gold-digger",
@@ -126,6 +162,18 @@
       "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
     },
     {
+      "id": "QuantaPhi-issue-1906",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-16T23:09:20Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1906",
+      "title": "[Execution] Identity Verification Center and secure Google/GitHub/Cloudflare login",
+      "message": "I found a issue titled “[Execution] Identity Verification Center and secure Google/GitHub/Cloudflare login”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
       "id": "QuantaPhi-issue-1688",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -184,18 +232,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/4ae870ce6f286e8de596b511a7eeb24663423ab9",
       "title": "Merge pull request #1742 from www-infinity4/fix/gary-bfcache-clock-1688-20261106",
       "message": "I found a commit titled “Merge pull request #1742 from www-infinity4/fix/gary-bfcache-clock-1688-20261106”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1196",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T22:59:06Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1196",
-      "title": "Continuity Builds: audit every Quick Card share image and pilot real media previews",
-      "message": "I found a issue titled “Continuity Builds: audit every Quick Card share image and pilot real media previews”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Moltnook-commit-1c5b184dea1758b16433b5a298356cdb90c5829c",
@@ -270,18 +306,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-76a5ef5563cf34eddbf6b27d5a8c950235561c31",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T21:56:50Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/76a5ef5563cf34eddbf6b27d5a8c950235561c31",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-34c800cf1e41a0e73ccb84a95bba94bbcdcd2ef7",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -352,30 +376,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/4f159104c2f4f47afd1d94f486b076efbca0cb80",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1946",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T14:43:24Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1946",
-      "title": "[Agent Job] Oracle reuse: button → News-Phi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1231",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T05:57:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
-      "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
-      "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-210",
