@@ -67,3 +67,14 @@ test('ambiguous timeout is not retried or reported as a successful fork',async()
  assert.equal(result.receipts[0].status,'unconfirmed');
  assert.equal(ctx.requests.filter(x=>x.method==='POST').length,1);
 });
+
+
+test('credentialed fork dispatch is restricted to checked-out main',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const workflow=await readFile(new URL('../../.github/workflows/bubbles-approved-tool-forks.yml',import.meta.url),'utf8');
+ const guard=workflow.match(/fork-approved-source:\n\s+if: ([^\n]+)/)?.[1];
+ assert.ok(guard,'fork job must have an explicit if guard');
+ assert.match(guard,/github\.event_name\s*==\s*'workflow_dispatch'/);
+ assert.match(guard,/github\.actor\s*==\s*'www-infinity4'/);
+ assert.match(guard,/github\.ref\s*==\s*'refs\/heads\/main'/);
+});
