@@ -35,6 +35,7 @@ export function validateLabProposal(input,{nowMs=Date.now()}={}){
 export function summarizeLabEvidence(items,{unknowns=[]}={}){
  if(!Array.isArray(items)||items.length>500||!Array.isArray(unknowns)||unknowns.length>200||
   unknowns.some(x=>typeof x!=='string'||!/^[A-Za-z0-9_.:-]{1,100}$/.test(x)))throw Error('metadata-only evidence shape required');
+ if(new Set(unknowns).size!==unknowns.length)throw Error('duplicate unknown ID');
  const ids=new Set();
  const safe=[];
  for(const item of items){
@@ -48,10 +49,17 @@ export function summarizeLabEvidence(items,{unknowns=[]}={}){
   safe.push(Object.freeze({id:item.id,stage:item.stage,anchor:item.anchor,
    kind:item.kind,count:item.count,testPassed:item.testPassed}));
  }
+ const tested=safe.filter(x=>x.kind==='test-result');
+ const stageBoard=[...STAGE].map(stage=>{
+  const seen=safe.filter(x=>x.stage===stage);
+  return Object.freeze({stage,reportedEvidenceCount:seen.length,
+   status:stage==='signoff'?'requires-independent-review':seen.length?'reported-unverified':'not-observed'});
+ });
  return Object.freeze({status:'unverified-structured-summary',evidenceCount:safe.length,
-  reportedPassingChecks:safe.filter(x=>x.testPassed).length,
-  reportedFailingChecks:safe.filter(x=>!x.testPassed).length,
-  residualUnknowns:unknowns.length,evidence:safe,
+  reportedPassingChecks:tested.filter(x=>x.testPassed).length,
+  reportedFailingChecks:tested.filter(x=>!x.testPassed).length,
+  residualUnknowns:unknowns.length,residualUnknownIds:[...unknowns],
+  stageBoard,evidence:safe,
   // CI, review, source provenance and emulator receipts are verified elsewhere.
   independentReviewVerified:false,releaseReady:false,productionVerified:false});
 }
