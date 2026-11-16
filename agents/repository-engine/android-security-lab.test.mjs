@@ -57,3 +57,22 @@ test('social-post pass counts and missing test receipts cannot turn a summary in
  assert.equal(summary.evidenceCount,0);
  assert.equal(summary.independentReviewVerified,false);
 });
+
+
+test('security evidence board exposes only bounded residual IDs and six reported stages',()=>{
+ const trace={id:'trace-1',stage:'trace',anchor:'fixture/src/Main.java:44',kind:'call-counts',count:12,testPassed:true};
+ const verified={id:'test-1',stage:'verify',anchor:'fixture/tests/Security.test.mjs:20',kind:'test-result',count:1,testPassed:true};
+ const summary=summarizeLabEvidence([trace,verified],{unknowns:['unknown_7','unknown_8']});
+ assert.deepEqual(summary.residualUnknownIds,['unknown_7','unknown_8']);
+ assert.deepEqual(summary.stageBoard.map(x=>x.stage),['scan','trace','build','verify','match','signoff']);
+ assert.equal(summary.stageBoard.find(x=>x.stage==='trace').status,'reported-unverified');
+ assert.equal(summary.stageBoard.find(x=>x.stage==='scan').status,'not-observed');
+ assert.equal(summary.stageBoard.find(x=>x.stage==='signoff').status,'requires-independent-review');
+ assert.equal(summary.reportedPassingChecks,1,'call-counts cannot be called a passing test');
+ assert.equal(summary.independentReviewVerified,false);
+ assert.equal(summary.releaseReady,false);
+});
+test('residual unknown IDs cannot inflate counts or carry raw messages',()=>{
+ assert.throws(()=>summarizeLabEvidence([],{unknowns:['same','same']}),/duplicate unknown/);
+ assert.throws(()=>summarizeLabEvidence([],{unknowns:['token=abc xyz']}),/metadata-only/);
+});
