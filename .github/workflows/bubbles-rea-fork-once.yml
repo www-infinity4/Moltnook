@@ -1,0 +1,53 @@
+name: Bubbles one-time reviewed REA fork dispatch
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/bubbles-rea-fork-once.yml'
+      - 'agents/repository-engine/dispatch-approved-rea-once*'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bubbles-rea-fork-once.yml'
+permissions:
+  contents: read
+concurrency:
+  group: bubbles-rea-once-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prove dispatch authorization and ambiguous-error safety
+        run: |
+          node --check agents/repository-engine/dispatch-approved-rea-once.mjs
+          node --test agents/repository-engine/dispatch-approved-rea-once.test.mjs
+  request-fork-once:
+    if: github.event_name == 'push' && github.actor == 'www-infinity4' && github.repository == 'www-infinity4/Moltnook' && github.ref == 'refs/heads/main' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Request Bubbles approved REA source fork 20261116')
+    needs: source-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Owner-scoped dispatch to existing reviewed fork workflow
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+        run: node agents/repository-engine/dispatch-approved-rea-once.mjs
+      - name: Report dispatch status, not a fake fork result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bubbles-rea-once-dispatch
+          path: repository-receipts/bubbles-rea-once-dispatch.json
+          if-no-files-found: warn
