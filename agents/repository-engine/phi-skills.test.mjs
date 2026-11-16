@@ -106,3 +106,24 @@ test('TAO stages are conditional guidance rather than a claim of installed servi
   assert.ok(!skillPackets({task,phase:'build'}).some(s=>s.id==='nvidia-tao-stage-execution'),task);
  }
 });
+
+
+test('Android Security Lab routing stays source-only for every color-agent phase',()=>{
+ for(const phase of Object.keys(PHASE_COLORS)){
+  const selected=skillPackets({task:'Use REA + Frida for Android Security Lab on an authorized synthetic APK',phase});
+  const lab=selected.find(x=>x.id==='android-security-lab');
+  assert.ok(lab,'missing lab skill for '+phase);
+  assert.equal(lab.source,'www-infinity4/Moltnook/agents/repository-engine/skills/android-security-lab.md');
+  assert.ok(lab.colors.every(c=>PHASE_COLORS[phase].includes(c)));
+  assert.match(lab.instructions,/NOT a connected tool/);
+  assert.match(lab.instructions,/synthetic fixture/);
+  assert.equal('tools' in lab,false);
+  assert.equal('permissions' in lab,false);
+ }
+});
+test('ordinary Android interface repairs do not import Frida tooling',()=>{
+ for(const phase of Object.keys(PHASE_COLORS)){
+  const selected=skillPackets({task:'Fix Android font size and carousel scroll on QuantaPhi',phase});
+  assert.ok(!selected.some(s=>s.id==='android-security-lab'));
+ }
+});
