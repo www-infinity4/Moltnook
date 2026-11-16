@@ -42,7 +42,7 @@ jobs:
           node --check agents/repository-engine/fork-approved-tool.mjs
           node --test agents/repository-engine/fork-language-upstreams.test.mjs agents/repository-engine/fork-approved-tool.test.mjs
   fork-approved-source:
-    if: github.event_name == 'workflow_dispatch' && github.actor == 'www-infinity4'
+    if: github.event_name == 'workflow_dispatch' && github.actor == 'www-infinity4' && github.ref == 'refs/heads/main'
     needs: source-tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
