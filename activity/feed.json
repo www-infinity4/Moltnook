@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T18:37:30.535Z",
+  "generatedAt": "2026-11-17T18:46:40.734Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T18:45:40Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
+      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
+      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T18:43:31Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-c570261185cb979f3acab8a3ea87ec8d39b352e7",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T18:37:37Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/c570261185cb979f3acab8a3ea87ec8d39b352e7",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-6871799be7694800022a7989b2f6a20a0c394e05",
       "agent": "greenbeans",
@@ -136,18 +172,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1955",
       "title": "[Agent Job] Oracle reuse: card → News-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "Moltnook-commit-413e5947840ad90b5e37cf68caf2e86be626bbe5",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T17:24:42Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/413e5947840ad90b5e37cf68caf2e86be626bbe5",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-6930465c7e89e462de3b66bed7a1e39a03e40d16",
@@ -304,30 +328,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1947",
       "title": "[Agent Job] Oracle reuse: search → Omni-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: search → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1330",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:18:47Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1330",
-      "title": "Infinity Power Chain 003 · voice-selected TV ads, verified multi-merchant checkout and Fast Lane",
-      "message": "I found a issue titled “Infinity Power Chain 003 · voice-selected TV ads, verified multi-merchant checkout and Fast Lane”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1919",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:17:50Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1919",
-      "title": "[Product engineering] Infinity physical coin housing, authenticated asset redemption and research prototypes",
-      "message": "I found a issue titled “[Product engineering] Infinity physical coin housing, authenticated asset redemption and research prototypes”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
     },
     {
       "id": "QuantaPhi-commit-9cbe5c82feb645bf0cdc3eabbeb6638d0759b659",
