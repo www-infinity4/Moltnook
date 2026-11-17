@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T15:24:38.299Z",
+  "generatedAt": "2026-11-17T15:36:07.375Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-d138e7ec6575fe3b9918f19a72b79487c1b31e57",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T15:29:06Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/d138e7ec6575fe3b9918f19a72b79487c1b31e57",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-5d4306c374c8340cb5b73ea523c377c26076120a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T15:24:47Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/5d4306c374c8340cb5b73ea523c377c26076120a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-85383a1fe7c567e7335caa93a5057420dc08a6c5",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-17T14:11:36Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/e1b102c88e572284723ca02cbd9700117ab05877",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-7a100650438e3fff65c89b86c50d7fd41dc98143",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T13:55:09Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7a100650438e3fff65c89b86c50d7fd41dc98143",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -196,18 +208,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1953",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-f1219f740496e93fc72fe16e6bf0444d27d3e048",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T08:30:29Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/f1219f740496e93fc72fe16e6bf0444d27d3e048",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1951",
