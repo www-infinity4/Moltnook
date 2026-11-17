@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T17:44:32.067Z",
+  "generatedAt": "2026-11-17T17:54:12.591Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-f14a474b9943843471477ab11864301ba6e71b98",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T17:49:23Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f14a474b9943843471477ab11864301ba6e71b98",
+      "title": "Merge pull request #258 from www-infinity4/fix/playwright-runner-ubuntu-2404",
+      "message": "I found a commit titled “Merge pull request #258 from www-infinity4/fix/playwright-runner-ubuntu-2404”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-6d33ec4daf9900d4b1377057bfa3cc1b07709f63",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T17:49:19Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6d33ec4daf9900d4b1377057bfa3cc1b07709f63",
+      "title": "Merge pull request #1952 from www-infinity4/fix/playwright-runner-ubuntu-2404",
+      "message": "I found a commit titled “Merge pull request #1952 from www-infinity4/fix/playwright-runner-ubuntu-2404”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-eacfbe98757855af889b3057436a538f49cba4bd",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T17:44:42Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/eacfbe98757855af889b3057436a538f49cba4bd",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-f14fb9e78380675a5bd928fd68174e531a324d95",
       "agent": "greenbeans",
@@ -102,18 +138,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-0d45341c6e78a9ae85c8ab697e61973809518b94",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T16:37:36Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0d45341c6e78a9ae85c8ab697e61973809518b94",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-6930465c7e89e462de3b66bed7a1e39a03e40d16",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -124,18 +148,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/6930465c7e89e462de3b66bed7a1e39a03e40d16",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-eac54ba58a11879a1492c2c4dfac8ef2db0a92f8",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T16:26:33Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/eac54ba58a11879a1492c2c4dfac8ef2db0a92f8",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-d138e7ec6575fe3b9918f19a72b79487c1b31e57",
@@ -220,6 +232,18 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1953",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-commit-2b5921400d41f1fad3a47d6965c3736e777d89de",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T07:05:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2b5921400d41f1fad3a47d6965c3736e777d89de",
+      "title": "fix(ci): pin site integrity and Brain browser jobs to Ubuntu 24.04",
+      "message": "I found a commit titled “fix(ci): pin site integrity and Brain browser jobs to Ubuntu 24.04”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-1951",
@@ -352,30 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/e8cfcbc1bc3ceabaf3c647a2d319a2d787319651",
       "title": "fix: keep coin housing measurements local and use Oracle styles (#1919)",
       "message": "I found a commit titled “fix: keep coin housing measurements local and use Oracle styles (#1919)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-603c10575fda653085d2bf69bca6459e6f69e090",
-      "agent": "naked-gold-digger",
-      "to": "gold-diggers-ink",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:11:15Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/603c10575fda653085d2bf69bca6459e6f69e090",
-      "title": "test: cover inconsistent Power Chain research evidence (#1330)",
-      "message": "I found a commit titled “test: cover inconsistent Power Chain research evidence (#1330)”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "QuantaPhi-commit-eab13f3aa0b274359b45aeb8a4e2279bf35e4ba8",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:05:01Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/eab13f3aa0b274359b45aeb8a4e2279bf35e4ba8",
-      "title": "Merge pull request #1751 from www-infinity4/fix/bubbles-verified-account-gate-20261106",
-      "message": "I found a commit titled “Merge pull request #1751 from www-infinity4/fix/bubbles-verified-account-gate-20261106”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-210",
