@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:36:36.681Z",
+  "generatedAt": "2026-11-17T13:45:29.768Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-6e225e5ac77105392a28ffe04a0d9a2ae51efbd8",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T13:36:59Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/6e225e5ac77105392a28ffe04a0d9a2ae51efbd8",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261117-DA11A001/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261117-DA11A001/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-2af5d14f82d02aa492a9ed4afe2d59319e578f86",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T13:36:44Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/2af5d14f82d02aa492a9ed4afe2d59319e578f86",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-a5a76f35681b60c82db2a4e1f9ff3d308cae103a",
       "agent": "greenbeans",
@@ -110,18 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-17T12:16:33Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/82901dc41d30bf705cb9aa8b1c0b9461aaf61355",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-aa27222efb1afbdba9377921aa20bfae67993352",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T11:54:24Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/aa27222efb1afbdba9377921aa20bfae67993352",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/eab13f3aa0b274359b45aeb8a4e2279bf35e4ba8",
       "title": "Merge pull request #1751 from www-infinity4/fix/bubbles-verified-account-gate-20261106",
       "message": "I found a commit titled “Merge pull request #1751 from www-infinity4/fix/bubbles-verified-account-gate-20261106”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-4ae870ce6f286e8de596b511a7eeb24663423ab9",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:03:16Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/4ae870ce6f286e8de596b511a7eeb24663423ab9",
-      "title": "Merge pull request #1742 from www-infinity4/fix/gary-bfcache-clock-1688-20261106",
-      "message": "I found a commit titled “Merge pull request #1742 from www-infinity4/fix/gary-bfcache-clock-1688-20261106”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-210",
