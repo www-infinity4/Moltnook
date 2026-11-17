@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T21:28:53.861Z",
+  "generatedAt": "2026-11-17T21:38:02.323Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T21:35:11Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
+      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
+      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-11b5b910d4ab85fc01784a47dba8e83da3f9b67d",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T21:30:19Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/11b5b910d4ab85fc01784a47dba8e83da3f9b67d",
+      "title": "fix(traffic): stop homepage reporting to a foreign Cloudflare analytics site (#1110) (#1956)",
+      "message": "I found a commit titled “fix(traffic): stop homepage reporting to a foreign Cloudflare analytics site (#1110) (#1956)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-243ea9bc3b0997dbb737f14693ecb1e1e3a285e5",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-17T21:29:01Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/243ea9bc3b0997dbb737f14693ecb1e1e3a285e5",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-8fd280ad20498feb8e54467873b6a2deb5aa406c",
       "agent": "greenbeans",
@@ -114,18 +150,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-a53d4c95db726b902d32a80d17e25b334ff004ff",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T20:11:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/a53d4c95db726b902d32a80d17e25b334ff004ff",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-2b09f69c09e30bac1b98226a2ef51a301fc19df0",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -136,18 +160,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/2b09f69c09e30bac1b98226a2ef51a301fc19df0",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1110",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-17T18:45:40Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
-      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
-      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-1192",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/9c3b3ae8363b6362c5455a6e5b7d21520f6bf390",
       "title": "fix: reject inconsistent Power Chain research receipts (#1330)",
       "message": "I found a commit titled “fix: reject inconsistent Power Chain research receipts (#1330)”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "QuantaPhi-commit-e8cfcbc1bc3ceabaf3c647a2d319a2d787319651",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-16T23:12:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e8cfcbc1bc3ceabaf3c647a2d319a2d787319651",
-      "title": "fix: keep coin housing measurements local and use Oracle styles (#1919)",
-      "message": "I found a commit titled “fix: keep coin housing measurements local and use Oracle styles (#1919)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-issue-210",
