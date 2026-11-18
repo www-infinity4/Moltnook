@@ -1,0 +1,66 @@
+name: Bubbles owner-approved tool forks
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/fork-language-upstreams.mjs'
+      - 'agents/repository-engine/fork-approved-tool*'
+      - '.github/workflows/bubbles-approved-tool-forks.yml'
+      - 'docs/BUBBLES-APPROVED-TOOL-FORKS.md'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/fork-language-upstreams.mjs'
+      - 'agents/repository-engine/fork-approved-tool*'
+      - '.github/workflows/bubbles-approved-tool-forks.yml'
+      - 'docs/BUBBLES-APPROVED-TOOL-FORKS.md'
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: Existing owner-authorized tool source to fork
+        required: true
+        type: choice
+        options:
+          - rea
+permissions:
+  contents: read
+concurrency:
+  group: bubbles-approved-tool-forks-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify existing and approved fork behavior
+        run: |
+          node --check agents/repository-engine/fork-approved-tool.mjs
+          node --test agents/repository-engine/fork-language-upstreams.test.mjs agents/repository-engine/fork-approved-tool.test.mjs
+  fork-approved-source:
+    if: github.event_name == 'workflow_dispatch' && github.actor == 'www-infinity4' && github.ref == 'refs/heads/main'
+    needs: source-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fork only the reviewed allowlisted source
+        env:
+          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+          BUBBLES_FORK_TOOL: ${{ inputs.tool }}
+        run: node agents/repository-engine/fork-approved-tool.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bubbles-approved-fork-receipt
+          path: repository-receipts/bubbles-approved-tool-fork.json
+          if-no-files-found: warn
