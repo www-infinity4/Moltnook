@@ -173,3 +173,43 @@ test('catalog safety policy flags cannot be disabled or omitted before any Cloud
   const a = args(); delete a.catalog.policy;
   assert.equal(authorizeCloudflareSkill(a).reason, 'unsafe_catalog_policy');
 });
+
+
+test('adapter cannot extend the original lease or permission expiry to legitimize a late reply', async () => {
+ for(const which of ['lease','permission']){
+  const a=args();
+  a.clock=()=>Date.parse(which==='lease'?'2026-10-28T19:33:01Z':'2026-10-28T19:32:01Z');
+  a.claimReceipt=async()=>true;
+  const result=await dispatchCloudflareRead({...a,adapter:async decision=>{
+   if(which==='lease')a.runner.leaseExpiresAt='2026-10-28T19:35:00Z';
+   else a.evidence.expiresAt='2026-10-28T19:35:00Z';
+   return {success:true,...decision,receiptId:'late_extended',httpStatus:200};
+  }});
+  assert.equal(result.state,'blocked',which+' original window must remain binding');
+  assert.equal(result.reason,'lease_or_permission_changed_during_execution');
+ }
+});
+
+test('atomically claim each receipt ID once across two otherwise matching dispatches',async()=>{
+ const a=args(),seen=new Set();let guardCalls=0;
+ a.claimReceipt=async({receiptId})=>{
+  guardCalls++;
+  if(seen.has(receiptId))return false;
+  seen.add(receiptId);return true;
+ };
+ const adapter=async decision=>({success:true,...decision,receiptId:'same_read_receipt',httpStatus:200});
+ const first=await dispatchCloudflareRead({...a,adapter});
+ const replay=await dispatchCloudflareRead({...a,adapter});
+ assert.equal(first.state,'completed');
+ assert.equal(replay.state,'blocked','a second dispatch must reject an already claimed receipt');
+ assert.equal(replay.reason,'receipt_replay_or_unverified');
+ assert.equal(guardCalls,2);
+});
+
+test('a missing trusted atomic receipt claim gate cannot complete a Cloudflare operation',async()=>{
+ const a=args();let calls=0;
+ const result=await dispatchCloudflareRead({...a,adapter:async decision=>{calls++;return {success:true,...decision,receiptId:'no_claim_gate',httpStatus:200};}});
+ assert.equal(result.state,'blocked');
+ assert.equal(result.reason,'missing_atomic_receipt_guard');
+ assert.equal(calls,0,'fail closed before a live API call when no durable receipt ledger exists');
+});
