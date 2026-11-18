@@ -1,0 +1,37 @@
+name: Immutable edit and retry feedback regressions
+
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/patch.mjs'
+      - 'agents/repository-engine/patch.test.mjs'
+      - 'agents/repository-engine/repair-feedback.mjs'
+      - 'agents/repository-engine/repair-feedback.test.mjs'
+      - '.github/workflows/immutable-edit-feedback.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/patch.mjs'
+      - 'agents/repository-engine/patch.test.mjs'
+      - 'agents/repository-engine/repair-feedback.mjs'
+      - 'agents/repository-engine/repair-feedback.test.mjs'
+      - '.github/workflows/immutable-edit-feedback.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  immutable-edit-feedback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse immutable-edit and feedback modules
+        run: |
+          node --check agents/repository-engine/patch.mjs
+          node --check agents/repository-engine/repair-feedback.mjs
+      - name: Run exact-source patch and typed retry regression tests
+        run: node --test agents/repository-engine/patch.test.mjs agents/repository-engine/repair-feedback.test.mjs

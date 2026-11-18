@@ -10,7 +10,7 @@ on:
     branches: [main]
     paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-memory-lab*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs', 'scripts/bubbles-github-identity-acceptance*']
   pull_request:
-    paths: ['scripts/bubbles-memory-lab*', '.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*', 'scripts/bubbles-github-identity-acceptance*', 'agents/repository-engine/oracle-owner-inventory*', 'agents/repository-engine/oracle-focus-policy*', 'agents/repository-engine/auto-promote-reviewed*']
+    paths: ['scripts/bubbles-memory-lab*', '.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*', 'scripts/bubbles-github-identity-acceptance*', 'scripts/bubbles-five-day-workflow.test.mjs', 'agents/repository-engine/oracle-owner-inventory*', 'agents/repository-engine/oracle-focus-policy*', 'agents/repository-engine/auto-promote-reviewed*']
   schedule:
     - cron: '41 16 * * *'
   workflow_dispatch:
@@ -19,7 +19,7 @@ on:
         description: Fixed owner-approved acceptance task
         type: choice
         default: none
-        options: [none, site_acceptance, deep_chat, quick_cards]
+        options: [none, site_acceptance, deep_chat, quick_cards, five_day_status, chat_acceptance]
 permissions:
   contents: read
   id-token: write
@@ -43,6 +43,7 @@ jobs:
       - run: node --check scripts/bubbles-oracle-refinement.mjs
       - run: node --check scripts/bubbles-chat-verified-benchmark.mjs
       - run: node --test scripts/bubbles-chat-verified-benchmark.test.mjs scripts/bubbles-github-identity-acceptance.test.mjs
+      - run: node --test scripts/bubbles-five-day-workflow.test.mjs
       - run: node --test agents/repository-engine/oracle-owner-inventory.test.mjs agents/repository-engine/oracle-focus-policy.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
       - run: node --check scripts/bubbles-legacy-cart-smoke.mjs
       - run: node --test scripts/bubbles-legacy-cart-smoke.test.mjs
@@ -114,10 +115,36 @@ jobs:
           console.log('BUBBLES_OWNER_WORK_RECEIPT '+JSON.stringify({ticketId:receipt.ticketId,repository:receipt.repository,status:receipt.status,deduplicated:receipt.deduplicated===true,execution:{status:receipt.execution?.status||'unverified'},completed:false,productionVerified:false}));
           NODE
 
+  five_day_status:
+    # On-demand owner-approved read-only validation. No prompt, work dispatch or writes.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.task == 'five_day_status' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify current signed five-day approval only
+        run: |
+          node --input-type=module <<'NODE'
+          const idurl=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          idurl.searchParams.set('audience','bubbles-owner-message-bridge');
+          const id=await fetch(idurl,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!id.ok)throw Error('signed_identity_unavailable');
+          const token=(await id.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_identity_missing');
+          const endpoint='https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner';
+          const res=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const data=await res.json().catch(()=>({}));
+          const verified=res.ok&&data.ok===true&&data.jobId==='chatgpt_runner_'+process.env.GITHUB_RUN_ID;
+          const consumer=String(data.consumer?.state||'unavailable').replace(/[^a-z_]/gi,'').slice(0,32);
+          console.log('BUBBLES_FIVE_DAY_STATUS '+JSON.stringify({approvalVerified:verified,consumer,ownerChatVerified:false,workExecuted:false}));
+          if(!verified)throw Error('existing_five_day_approval_not_verified');
+          NODE
+
   chat_acceptance:
-    # Run exactly once for the reviewed synthetic-chat test merge. Never submit
-    # another owner work ticket or impersonate a live owner-page consumer.
-    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021') }}
+    # Allow explicit job retries after the owner renews the existing grant.
+    # Every attempt rechecks signed identity and both five-day grants before
+    # synthetic public prompts. It creates no owner work ticket or UI consumer.
+    # Same-run turn receipts remain deduplicated for their four-minute lifetime.
+    if: ${{ (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'Run signed Bubbles conversation acceptance 20261021')) || (github.event_name == 'workflow_dispatch' && inputs.task == 'chat_acceptance') }}
     runs-on: ubuntu-latest
     timeout-minutes: 16
     steps:
@@ -841,4 +868,32 @@ jobs:
           const confirmed=response.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.ticketId.trim()&&receipt.repository==='www-infinity4/QuantaPhi'&&receipt.completed===false;
           console.log('APK_PARCEL_INTAKE '+JSON.stringify({parcel:process.env.PARCEL_ID,httpStatus:response.status,ticketConfirmed:Boolean(confirmed),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
           if(!confirmed)throw Error('apk_parcel_intake_unverified');
+          NODE
+
+  verified_read_summary_repair:
+    # One owner-authorized source repair; retries cannot submit another ticket.
+    if: ${{ github.event_name == 'push' && github.run_attempt == 1 && startsWith(github.event.head_commit.message, 'Build Bubbles verified-read summary repair 20261031') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify existing owner grants and submit the bounded source repair
+        run: |
+          node --input-type=module <<'NODE'
+          const u=new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          u.searchParams.set('audience','bubbles-owner-message-bridge');
+          const identity=await fetch(u,{headers:{Authorization:'Bearer '+process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!identity.ok)throw Error('signed_owner_identity_unavailable');
+          const token=(await identity.json()).value;
+          if(typeof token!=='string'||!token)throw Error('signed_owner_identity_missing');
+          const headers={Authorization:'Bearer '+token,'Content-Type':'application/json'};
+          const approval=await fetch('https://bubbles-cloud-browser.marvaseater.workers.dev/v1/browser/chatgpt/runner',{method:'POST',headers,body:JSON.stringify({operation:'status'}),redirect:'error',signal:AbortSignal.timeout(15000)});
+          const proof=await approval.json().catch(()=>({}));
+          if(!approval.ok||proof.ok!==true||proof.jobId!=='chatgpt_runner_'+process.env.GITHUB_RUN_ID)throw Error('existing_owner_approval_unverified');
+          const request="Repair Bubbles GitHub summary fallback using current QuantaPhi source 0f84ccb7467f3c7bf47909d36a474d6b82d6f866. Live public root and README reads now BOTH return complete tool receipts, but finishSearchReply's generic fallback says only snippets were found and full pages were not read. Implement an evidence-aware fallback for actual verified GitHub read sequences: identify which root/files were read, preserve bounded real source evidence and any observed commit, and say explanation pending when model synthesis fails. Never invent a summary, hidden file read, write or completed analysis. Inspect actual receipt/step schemas first. Target existing workers/bubbles-tools/worker.mjs and focused test/bubbles-read-agent.test.mjs or test/bubbles-search-completion.test.mjs, not a parallel implementation. Add executable regressions for summary timeout/rejection, successful root-plus-README observations, failed substeps and unverified sources. Keep owner-auth denial before anonymous fallback, source URLs, and truthful partial status. No wallet, consent, credentials, provider or production Cloudflare changes in this source slice. Use the existing repository engine to implement source, run real tests, obtain independent review, open the PR and complete target CI under the normal authorized merge policy. A ticket or model answer is not completed work. Return real ticket, test, commit and PR receipts; keep deployment and browser acceptance separate.";
+          if(request.length>1800)throw Error('bounded_owner_request_invalid');
+          const response=await fetch('https://infinity-brain-clock.marvaseater.workers.dev/owner/bridge-work',{method:'POST',headers,body:JSON.stringify({repository:'www-infinity4/QuantaPhi',request}),redirect:'error',signal:AbortSignal.timeout(90000)});
+          const receipt=await response.json().catch(()=>({}));
+          const verified=response.ok&&receipt.ok===true&&typeof receipt.ticketId==='string'&&receipt.ticketId.trim()&&receipt.repository==='www-infinity4/QuantaPhi'&&receipt.completed===false;
+          console.log('BUBBLES_VERIFIED_READ_REPAIR '+JSON.stringify({httpStatus:response.status,ticketVerified:Boolean(verified),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
+          if(!verified)throw Error('owner_repair_intake_not_verified');
           NODE

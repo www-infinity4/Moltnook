@@ -243,9 +243,37 @@ export function evidenceReplanFeedback({plan,task='',ownerRequest='',linkFacts=[
    matchedCodes.push('source_only_deploy');continue;
   }
  }
+ // A positive repair plan should not strand Green without its existing
+ // regression test. The source tree is an observation, NOT permission to
+ // silently add a new editable path; Blue must author the revised plan.
+ if(!blockers.length&&writeScope?.reportedPushPermission===true&&
+    /^www-infinity4\/[A-Za-z0-9_.-]+$/.test(writeScope.repository||'')&&
+    /\b(?:fix|repair|correct|patch|restore|regression|bug)\b/i.test(request)&&
+    !/\b(?:do not|don't|never)\s+(?:fix|repair|patch|edit|modify)\b/i.test(request)){
+  const planned=Array.isArray(plan?.files)?plan.files.filter(x=>typeof x==='string'):[];
+  const isTest=p=>/(?:^|\/)(?:test|tests)\/|\.(?:test|spec)\.[cm]?[jt]sx?$/i.test(p);
+  if(planned.length&&!planned.some(isTest)){
+   const stems=planned.filter(p=>/\.(?:[cm]?js|jsx|tsx?)$/i.test(p)&&!isTest(p))
+    .map(p=>p.split('/').at(-1).replace(/\.(?:[cm]?js|jsx|tsx?)$/i,'').toLowerCase())
+    .filter(stem=>stem.length>=5&&!['index','main','app','worker','config','utils'].includes(stem));
+   const candidates=(Array.isArray(sourceTree)?sourceTree:[])
+    .filter(p=>typeof p==='string'&&p.length<180&&isTest(p)&&!p.startsWith('/')&&
+     !p.split('/').some(x=>x==='..'||/^(?:\.git|\.env|node_modules|secrets?|credentials?)$/i.test(x))&&
+     stems.some(stem=>{const name=p.split('/').at(-1).toLowerCase();return name.startsWith(stem+'.')||name.startsWith(stem+'-');}))
+    .sort((a,b)=>a.length-b.length||a.localeCompare(b)).slice(0,4);
+   if(candidates.length){
+    facts.push('The pinned repository contains relevant existing regression tests: '+candidates.join(', ')+
+     '. The positive reader plan omitted these test paths. Blue should select the applicable test before Green runs a behavioral repair. No additional file is automatically authorized.');
+    matchedCodes.push('existing_test_missing_from_plan');
+   }
+  }
+ }
  return {retry:matchedCodes.length>0,categories:[...new Set(matchedCodes)],
-  instruction:matchedCodes.length?'Re-evaluate ONLY the blockers contradicted by the concrete evidence below. Produce a fresh complete JSON plan with real editable source files, subtasks, and tests only if independently implementable. Preserve other genuine blockers, all excluded-path restrictions, and any explicit owner acceptance requirements. Do not invent a new destination, deploy, privileged access, or treat the public browser as proof of a new release.':'',
-  facts:facts.slice(0,6),originalBlockers:blockers.map(b=>({code:b.code,reason:trim(b.reason)})).slice(0,12)};
+  instruction:matchedCodes.length?(blockers.length?
+   'Re-evaluate ONLY the blockers contradicted by the concrete evidence below. Produce a fresh complete JSON plan with real editable source files, subtasks, and tests only if independently implementable. Preserve other genuine blockers, all excluded-path restrictions, and any explicit owner acceptance requirements. Do not invent a new destination, deploy, privileged access, or treat the public browser as proof of a new release.':
+   'This source-repair plan omitted a planned existing test path from the pinned repository. Return a fresh complete plan that includes the relevant existing test for Green to inspect and, when needed, edit; or give an evidence-grounded reason the test is not applicable. Preserve the assigned repository, original acceptance, immutable source and write permissions. No path is automatically authorized or test claimed passing.'):'',
+  facts:facts.slice(0,6),originalBlockers:blockers.map(b=>({code:b.code,reason:trim(b.reason)})).slice(0,12),
+  permissionsExpanded:false};
 }
 
 

@@ -1,0 +1,31 @@
+name: Immutable edit path-policy regression
+
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/patch.mjs'
+      - 'agents/repository-engine/patch.test.mjs'
+      - '.github/workflows/immutable-edit-path-policy.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/patch.mjs'
+      - 'agents/repository-engine/patch.test.mjs'
+      - '.github/workflows/immutable-edit-path-policy.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  path-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate source syntax
+        run: node --check agents/repository-engine/patch.mjs
+      - name: Test immutable patch and protected path policy
+        run: node --test agents/repository-engine/patch.test.mjs

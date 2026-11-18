@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {reviewCandidate,TARGETS,runAutoPromotion} from './auto-promote-reviewed.mjs';
+import {reviewCandidate,TARGETS,runAutoPromotion,discoverOpenPullRequests} from './auto-promote-reviewed.mjs';
 const sha='a'.repeat(40);
 function candidate(){
  return {state:'open',draft:false,mergeable:true,mergeable_state:'clean',
@@ -50,4 +50,116 @@ test('owner explicitly reviews card registry and host changes even after target 
  other.base.repo={name:'WidgetPhi',full_name:'www-infinity4/WidgetPhi'};
  other.head.repo={full_name:'www-infinity4/WidgetPhi'};
  assert.equal(reviewCandidate(other,[{status:'added',filename:'bubbles-card-catalog.mjs'}],checks,[]).ready,true);
+});
+
+const fullPage=()=>Array.from({length:100},(_,i)=>({number:i+1,head:{ref:'feature/new-'+i}}));
+test('oldest-first discovery reaches page two and deduplicates overlapping pages',async()=>{
+ const routes=[];
+ const inventory=await discoverOpenPullRequests('www-infinity4/QuantaPhi',async route=>{
+  routes.push(route);
+  return routes.length===1?fullPage():[{number:100},{number:101,head:{ref:'robot/TASK-1/388200123'}}];
+ });
+ assert.equal(inventory.complete,true);
+ assert.equal(inventory.pagesRead,2);
+ assert.equal(inventory.duplicateCount,1);
+ assert.equal(inventory.pullRequests.length,101);
+ assert.equal(inventory.pullRequests.at(-1).number,101);
+ assert.match(routes[0],/sort=created&direction=asc&per_page=100&page=1$/);
+ assert.match(routes[1],/page=2$/);
+});
+
+test('inventory cap and a failed later page retain explicit partial coverage',async()=>{
+ let requests=0;
+ const capped=await discoverOpenPullRequests('www-infinity4/QuantaPhi',async()=>{
+  requests++;return fullPage();
+ });
+ assert.equal(requests,5,'bounded to five pages, even when upstream repeats them');
+ assert.equal(capped.complete,false);
+ assert.equal(capped.reason,'pr_inventory_limit_reached');
+ assert.equal(capped.nextPage,6);
+ assert.equal(capped.pullRequests.length,100);
+ let page=0;
+ const failed=await discoverOpenPullRequests('www-infinity4/QuantaPhi',async()=>{
+  if(++page===2)throw Error('unavailable');
+  return fullPage();
+ });
+ assert.equal(failed.complete,false);
+ assert.equal(failed.reason,'pr_listing_unavailable');
+ assert.equal(failed.pagesRead,1);
+ assert.equal(failed.nextPage,2);
+ assert.equal(failed.pullRequests.length,100);
+});
+
+test('malformed pages and invalid inventory limits never count as complete',async()=>{
+ for(const rows of [{error:'denied'},[{number:0}],Array(101).fill({number:1})]){
+  const inventory=await discoverOpenPullRequests('www-infinity4/QuantaPhi',async()=>rows);
+  assert.equal(inventory.complete,false);
+  assert.equal(inventory.reason,'pr_inventory_invalid');
+  assert.equal(inventory.pagesRead,0);
+ }
+ await assert.rejects(discoverOpenPullRequests('other/QuantaPhi',async()=>[]),/invalid_pr_inventory/);
+ await assert.rejects(discoverOpenPullRequests('www-infinity4/QuantaPhi',async()=>[],{maxPages:6}),/invalid_pr_inventory/);
+});
+
+function promotionFixture({checkResult={total_count:1,check_runs:checks},listingPages=[fullPage(),Array.from({length:6},(_,i)=>({
+ number:101+i,head:{ref:'robot/TASK-1/388200123'}
+}))]}={}){
+ const calls=[],merges=[],runnerCalls=[];
+ const readGithub=async(route,options)=>{
+  calls.push(route);
+  if(route.startsWith('user/repos?'))return [];
+  if(route.includes('/pulls?state=open')){
+   if(!route.startsWith('repos/www-infinity4/QuantaPhi/'))return [];
+   return listingPages[Number(new URLSearchParams(route.split('?')[1]).get('page'))-1]||[];
+  }
+  const number=Number(route.match(/\/pulls\/(\d+)/)?.[1]);
+  if(route.endsWith('/merge')){
+   assert.equal(options.method,'PUT');
+   assert.equal(options.body.sha,sha,'GitHub must enforce the exact inspected head');
+   assert.equal(options.body.merge_method,'squash');
+   merges.push(number);return {merged:true,sha:'b'.repeat(40)};
+  }
+  if(route.endsWith('/files?per_page=100'))return files;
+  if(route.endsWith('/check-runs?per_page=100'))return checkResult;
+  if(route.endsWith('/status'))return {statuses:[]};
+  if(number)return {...candidate(),number,html_url:'https://github.com/www-infinity4/QuantaPhi/pull/'+number};
+  throw Error('unexpected_test_route');
+ };
+ const callRunner=async(step,body)=>{runnerCalls.push({step,body});return {candidates:[],status:'merged_verified'};};
+ return {calls,merges,runnerCalls,options:{token:'test-only',readGithub,callRunner}};
+}
+
+test('promotion processes page-two candidates and retains the four-merge cap',async()=>{
+ const fixture=promotionFixture();
+ const report=await runAutoPromotion(fixture.options);
+ assert.deepEqual(fixture.merges,[101,102,103,104]);
+ assert.equal(report.merged.length,4);
+ assert.equal(report.prInventories[0].complete,true);
+ assert.equal(report.prInventories[0].observed,106);
+ assert.equal(fixture.runnerCalls.filter(call=>call.step==='merge-result').length,4);
+});
+
+test('partial or malformed check inventories cannot hide a failed or missing check',async()=>{
+ for(const checkResult of [{total_count:2,check_runs:checks},{total_count:101,check_runs:checks},
+  {check_runs:checks},{total_count:-1,check_runs:checks},{total_count:1,check_runs:null}]){
+  const fixture=promotionFixture({checkResult,listingPages:[[{number:1,head:{ref:'robot/TASK-1/388200123'}}]]});
+  const report=await runAutoPromotion(fixture.options);
+  assert.equal(fixture.merges.length,0);
+  assert.ok(report.deferred.some(row=>row.pr===1&&row.reason==='target_check_inventory_incomplete'));
+ }
+});
+
+test('promotion reports a failed inventory page without claiming full coverage',async()=>{
+ const fixture=promotionFixture({listingPages:[fullPage()]});
+ const read=fixture.options.readGithub;
+ fixture.options.readGithub=async(route,options)=>{
+  if(route.startsWith('repos/www-infinity4/QuantaPhi/pulls?')&&route.endsWith('page=2'))throw Error('unavailable');
+  return read(route,options);
+ };
+ const report=await runAutoPromotion(fixture.options);
+ assert.equal(report.prInventories[0].complete,false);
+ assert.equal(report.prInventories[0].pagesRead,1);
+ assert.equal(report.prInventories[0].observed,100);
+ assert.ok(report.deferred.some(row=>row.repository==='QuantaPhi'&&row.reason==='pr_listing_unavailable'&&row.nextPage===2));
+ assert.equal(fixture.merges.length,0);
 });

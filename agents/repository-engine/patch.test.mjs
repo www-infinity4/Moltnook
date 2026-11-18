@@ -6,12 +6,56 @@ test('source edits cannot traverse paths or mutate credentials ',()=>{
  assert.equal(safePath('.github/workflows/run.yml'),'.github/workflows/run.yml');
  assert.equal(inside('/tmp/repo','src/page.js'),'/tmp/repo/src/page.js');
 });
+test('nested credential dotfiles and control characters never become edit targets or diagnostics',()=>{
+ const protectedPaths=[
+  'src/.env','src/.env.production','config/deep/.git/config',
+  'pkg/.npmrc','pkg/.netrc','pkg/.pypirc','team/.envrc',
+  'team/.ssh/id_ed25519','team/.aws/credentials',
+  'src/.ENV','src/.Env.Production','config/deep/.GIT/config',
+  'pkg/.NPMRC','pkg/.NETRC','pkg/.PYPIRC','team/.EnvRc',
+  'team/.SSH/id_ed25519','team/.AWS/credentials',
+  'src/bad\nname.js','src/bad\rname.js','src/bad\0name.js'
+ ];
+ for(const file of protectedPaths){
+  assert.throws(()=>safePath(file),/outside writer policy/,JSON.stringify(file));
+  assert.throws(()=>inside('/tmp/repo',file),/outside writer policy/,JSON.stringify(file));
+  assert.throws(()=>applyEdits({[file]:'safe'},[{path:file,before:'safe',after:'changed'}]),/outside writer policy/,JSON.stringify(file));
+ }
+ assert.equal(safePath('src/.gitignore'),'src/.gitignore');
+ assert.equal(safePath('.github/workflows/check.yml'),'.github/workflows/check.yml');
+});
 test('engine binds edits to unique source and explicit new files',()=>{
  assert.deepEqual(applyEdits({'src/a.js':'const value=1;','src/new.js':null},[{path:'src/a.js',before:'value=1',after:'value=2'},{path:'src/new.js',before:null,after:'export default 2;'}]),{'src/a.js':'const value=2;','src/new.js':'export default 2;'});
  assert.throws(()=>applyEdits({'a.js':'same same'},[{path:'a.js',before:'same',after:'other'}]));
  assert.throws(()=>applyEdits({'a.js':'exists'},[{path:'a.js',before:null,after:'replacement'}]));
  assert.throws(()=>applyEdits({'a.js':'unchanged'},[{path:'a.js',before:'unchanged',after:'unchanged'}]));
  assert.throws(()=>applyEdits({'a.js':'old'},[{path:'a.js',before:'missing',after:'new'}]));
+});
+
+test('existing-file edits preserve literal JavaScript replacement tokens and shell dollars',()=>{
+ const tokens=['$$','$&','$'+String.fromCharCode(96),"$'",'$1','$<name>','$(pwd)','${HOME}'];
+ for(const token of tokens){
+  const original='prefix\nPLACEHOLDER\nsuffix\n';
+  const after='literal '+token+'\nnext line';
+  const patched=applyEdits({'scripts/example.sh':original},[
+   {path:'scripts/example.sh',before:'PLACEHOLDER',after}
+  ]);
+  assert.equal(patched['scripts/example.sh'],'prefix\n'+after+'\nsuffix\n',token);
+ }
+});
+
+test('sequential script edits and new files keep the exact same literal bytes',()=>{
+ const shell='#!/bin/sh\nprintf "%s\\n" "$$" "$&" "$(pwd)"\n';
+ const source='head\nFIRST\nSECOND\ntail\n';
+ const edits=[
+  {path:'scripts/run.sh',before:'FIRST',after:shell},
+  {path:'scripts/run.sh',before:'SECOND',after:"sed 's/a/b&c/' input\n# $& $$"},
+  {path:'scripts/new.sh',before:null,after:shell}
+ ];
+ const patched=applyEdits({'scripts/run.sh':source,'scripts/new.sh':null},edits);
+ assert.equal(patched['scripts/run.sh'],'head\n'+shell+"\nsed 's/a/b&c/' input\n# $& $$\ntail\n");
+ assert.equal(patched['scripts/new.sh'],shell);
+ assert.equal(source,'head\nFIRST\nSECOND\ntail\n');
 });
 
 
@@ -33,4 +77,25 @@ test('real new source behavior and unrelated repeated structural lines are not b
  ]),{'routes.js':meaningful});
  const repeatedMarkup="function render(){\n return '<div></div>';\n}\n";
  assert.equal(duplicateOnlyObjectEntries(repeatedMarkup,repeatedMarkup+" return '<div></div>';\n"),false);
+});
+
+test('immutable edit mismatch identifies source path and count without exposing source text',()=>{
+ const cases=[
+  {original:{'src/one.js':'const TOP_SECRET_FIXTURE=1;'},edit:{path:'src/one.js',before:'not present',after:'x'},matches:0,source:'present'},
+  {original:{'src/two.js':'repeat repeat'},edit:{path:'src/two.js',before:'repeat',after:'x'},matches:2,source:'present'},
+  {original:{'src/missing.js':null},edit:{path:'src/missing.js',before:'needle',after:'x'},matches:0,source:'missing'}
+ ];
+ for(const {original,edit,matches,source} of cases){
+  assert.throws(()=>applyEdits(original,[edit]),error=>{
+   assert.equal(error.code,'immutable_edit_match_count');
+   assert.equal(error.sourcePath,edit.path);
+   assert.equal(error.matchCount,matches);
+   assert.match(error.message,/Edit must match immutable source exactly once/);
+   assert.ok(error.message.includes('path='+JSON.stringify(edit.path)));
+   assert.ok(error.message.includes('matches='+matches+', source='+source));
+   assert.ok(!error.message.includes('TOP_SECRET_FIXTURE'));
+   assert.ok(!error.message.includes('needle'));
+   return true;
+  });
+ }
 });

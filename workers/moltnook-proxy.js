@@ -16,14 +16,16 @@ addEventListener('fetch',event=>event.respondWith((async()=>{
    png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',webp:'image/webp',ico:'image/x-icon'
  }[extension]||'application/octet-stream';
  const text=['html','js','css','json','txt','svg'].includes(extension);
- const upstream=text?'https://raw.githubusercontent.com/www-infinity4/Moltnook/main/'+suffix+
-   '?moltnookFresh='+Date.now():'https://www-infinity4.github.io/Moltnook/'+suffix;
+ const evidence=/^activity\/(?:feed|iterations|tool-status)\.json$/.test(suffix);
+ const ttl=evidence?15:extension==='html'?60:extension==='json'?30:extension==='js'||extension==='css'?600:extension==='svg'||extension==='txt'?300:3600;
+ const upstream=text?'https://raw.githubusercontent.com/www-infinity4/Moltnook/main/'+suffix:
+   'https://www-infinity4.github.io/Moltnook/'+suffix;
  let response;
- try{response=await fetch(upstream,{redirect:'follow',signal:AbortSignal.timeout(12000)});}
+ try{response=await fetch(upstream,{redirect:'follow',signal:AbortSignal.timeout(12000),cf:{cacheEverything:true,cacheTtlByStatus:{'200-299':ttl,'300-399':-1,'400-599':-1}}});}
  catch(error){return new Response('Moltnook source temporarily unavailable',{status:503,headers:{'Cache-Control':'no-store'}})}
  if(!response.ok)return new Response(response.status===404?'File not found':'Moltnook source unavailable',{status:response.status===404?404:502,headers:{'Cache-Control':'no-store'}});
  const headers=new Headers(response.headers);
- headers.set('Content-Type',mime);headers.set('Cache-Control',text?'no-store, max-age=0':'public, max-age=180');
+ headers.set('Content-Type',mime);headers.set('Cache-Control','public, max-age='+ttl+', s-maxage='+ttl);
  headers.set('X-Content-Type-Options','nosniff');
  headers.delete('content-security-policy');headers.delete('content-security-policy-report-only');headers.delete('x-frame-options');
  headers.delete('set-cookie');headers.delete('content-encoding');headers.delete('content-length');

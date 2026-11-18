@@ -15,7 +15,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   execute:
-    runs-on: ubuntu-latest
+    # Playwright's Chromium installer rejects ubuntu26.04-x64 on the latest runner.
+    # Use the supported hosted image until the pinned Playwright version supports newer runners.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +31,7 @@ jobs:
           python-version: '3.12'
       - uses: ./.github/actions/bubbles-python-tools
       - name: Verify owner credential bridge
-        run: node --test agents/repository-engine/repository-identity.test.mjs agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
+        run: node --test agents/repository-engine/github-client.test.mjs agents/repository-engine/repository-identity.test.mjs agents/repository-engine/credential-bridge.test.mjs agents/repository-engine/runner-oidc-bridge.test.mjs agents/repository-engine/runner-idle-claim.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
       - name: Connect existing owner GitHub key to Bubbles
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
@@ -41,6 +43,11 @@ jobs:
       - name: Validate immutable patch and path policy
         run: |
           node --test workers/bot-sandbox/worker.test.mjs agents/repository-engine/rollout-gate.test.mjs agents/repository-engine/evaluate-rollout.test.mjs agents/repository-engine/wallet-contract.test.mjs
+          node --test agents/repository-engine/color-task-routing.test.mjs agents/repository-engine/color-core.test.mjs agents/repository-engine/automation-recipes.test.mjs
+          node --check agents/repository-engine/pinned-read-inspection.mjs
+          node --check .github/scripts/run-agent-iterations.mjs
+          node --test agents/repository-engine/parallel-read-dispatch.test.mjs
+          node --check agents/repository-engine/color-task-routing.mjs
           node --test agents/repository-engine/dependency-context.test.mjs
           node --check agents/repository-engine/runner.mjs
           node --check agents/repository-engine/source-verify.mjs

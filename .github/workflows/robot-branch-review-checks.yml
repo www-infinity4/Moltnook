@@ -31,7 +31,7 @@ jobs:
           node --check agents/repository-engine/auto-ticket-sweep.mjs
       - name: Exercise branch-only publishing, pinned Python tools and real ticket dedup
         run: |
-          node --test agents/repository-engine/publish-reviewed.test.mjs
+          node --test agents/repository-engine/github-client.test.mjs agents/repository-engine/publish-reviewed.test.mjs
           node --test agents/repository-engine/python-toolbox.test.mjs
           node --test agents/repository-engine/auto-ticket-sweep.test.mjs
           node --test agents/repository-engine/oracle-review-gate.test.mjs agents/repository-engine/oracle-owner-inventory.test.mjs
@@ -57,6 +57,10 @@ jobs:
           node --test agents/repository-engine/dependency-context.test.mjs agents/repository-engine/evidence-replan.test.mjs
           node --check agents/repository-engine/color-core.mjs
           node --test agents/repository-engine/color-core.test.mjs
+          node --check agents/repository-engine/color-task-routing.mjs
+          node --test agents/repository-engine/color-task-routing.test.mjs
+          node --check agents/repository-engine/automation-recipes.mjs
+          node --test agents/repository-engine/automation-recipes.test.mjs
           node --test agents/tests/color-child-bots.test.mjs
           node --check agents/repository-engine/green-build-recovery.mjs
           node --test agents/repository-engine/green-build-recovery.test.mjs
@@ -68,3 +72,7 @@ jobs:
           node --check agent-iteration-card.js
           node --test agents/tests/routing.test.mjs agents/tests/color-child-bots.test.mjs
           node -e "const fs=require('fs'); const s=fs.readFileSync('agent-room.css','utf8'); if(!s.includes('#f7f4f0')||!s.includes('#b83b32')||!s.includes('min-height:44px'))process.exit(1)"
+      - name: Verify repository checks cannot reach the authenticated controller
+        env:
+          BUBBLES_TEST_DOCKER: '1'
+        run: node --test agents/repository-engine/execution-sandbox.test.mjs agents/repository-engine/runtime-baseline.test.mjs

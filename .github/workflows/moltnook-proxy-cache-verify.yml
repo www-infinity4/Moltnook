@@ -1,0 +1,26 @@
+name: Moltnook proxy cache and freshness regression
+on:
+  pull_request:
+    paths:
+      - "workers/moltnook-proxy.js"
+      - "agents/tests/moltnook-proxy-cache.test.mjs"
+      - ".github/workflows/moltnook-proxy-cache-verify.yml"
+  push:
+    branches: [main]
+    paths:
+      - "workers/moltnook-proxy.js"
+      - "agents/tests/moltnook-proxy-cache.test.mjs"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Validate Worker syntax and edge cache semantics
+        run: |
+          node --check workers/moltnook-proxy.js
+          node --test agents/tests/moltnook-proxy-cache.test.mjs

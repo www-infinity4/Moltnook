@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {singleDeployment,validatePreview} from './verify-brain-preview.mjs';
+import {existsSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {restorePreviewRouting,singleDeployment,validatePreview} from './verify-brain-preview.mjs';
 const deployId='8ec9e28e-badc-4a2f-8d48-4951e2e79931';
 const stable='bb324bd0-d25f-4684-bd43-5abc1e06b667';
 const payload={success:true,result:{deployments:[{
@@ -12,7 +14,7 @@ const clean={ok:true,mode:'isolated_preview_only',ticketCount:0,
  distinctClockReady:true,productionTrafficTouched:false,
  ownerOrWalletOperationsAllowed:false,
  mergedSourceRecognized:true,reviewReceiptSafe:true,
- generatedRepairSuperseded:true,ownerBlockPreserved:true};
+ generatedRepairSuperseded:true,ownerBlockPreserved:true,runnerProgressVerified:true};
 
 test('actual Cloudflare deployed singleton must remain an exact 100-percent stable version',()=>{
  assert.deepEqual(singleDeployment(payload),{id:deployId,versionId:stable,percentage:100});
@@ -27,8 +29,8 @@ test('actual Cloudflare deployed singleton must remain an exact 100-percent stab
  ])assert.throws(()=>singleDeployment(change),/unexpected_production_state/);
 });
 test('preview gate requires real synthetic admission, isolated DO and an empty dedicated D1',()=>{
- assert.deepEqual(validatePreview(clean),{isolationVerified:true,checked:12});
- for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved']){
+ assert.deepEqual(validatePreview(clean),{isolationVerified:true,runnerProgressVerified:true,checked:13});
+ for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified']){
   assert.throws(()=>validatePreview({...clean,[key]:false}),new RegExp('isolated_preview_check_failed'));
  }
  for(const key of ['productionTrafficTouched','ownerOrWalletOperationsAllowed'])
@@ -46,5 +48,24 @@ test('temporary public Preview routing always gets disabled and production-bound
  assert.match(source,/preview_environment_uses_production_bindings/);
  assert.match(workflow,/name: Ensure public Preview URLs are disabled after test or failure/);
  assert.match(workflow,/if: always\(\)/);
+ assert.match(workflow,/verify-brain-preview\.mjs cleanup/);
  assert.doesNotMatch(workflow,/wrangler@latest versions deploy|wrangler@latest deploy /);
+});
+
+test('cleanup acts only after a Preview enable attempt and preserves the current production hostname switch',async t=>{
+ const dir=mkdtempSync(join(tmpdir(),'brain-preview-cleanup-'));
+ t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const marker=join(dir,'attempted');
+ const route='/subdomain';
+ await restorePreviewRouting(()=>assert.fail('cleanup without an enable attempt'),route,marker);
+ writeFileSync(marker,'attempted');
+ const calls=[];
+ const current={enabled:false,previews_enabled:true};
+ await restorePreviewRouting(async (url,method='GET',body)=>{
+  assert.equal(url,route);calls.push([method,body]);
+  if(method==='POST')Object.assign(current,body);
+  return {...current};
+ },route,marker);
+ assert.deepEqual(calls,[['GET',undefined],['POST',{enabled:false,previews_enabled:false}],['GET',undefined]]);
+ assert.equal(existsSync(marker),false);
 });

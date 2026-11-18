@@ -1,6 +1,14 @@
 import path from 'node:path';
 export function safePath(value){
- if(typeof value!=='string'||value.length>240||value.includes('\\')||value.startsWith('/')||value.split('/').some(x=>!x||x==='.'||x==='..')||/^(?:\.git)(?:\/|$)|^\.env(?:[.\/]|$)/.test(value)||/(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
+ if(typeof value!=='string'||value.length>240||value.includes('\\')||/[\u0000-\u001f\u007f]/.test(value)||value.startsWith('/'))throw Error('Source path is outside writer policy');
+ // Case-insensitive denylist: source checkouts can move between filesystems.
+ // Never let a case-variant credential path bypass the writer policy.
+ const parts=value.toLowerCase().split('/');
+ // Reject sensitive dotfiles in ANY directory, not just at repository root.
+ // Preserve ordinary .github workflows and .gitignore source files.
+ if(parts.some(x=>!x||x==='.'||x==='..'||x==='.git'||x==='.env'||x.startsWith('.env.')||
+  ['.envrc','.npmrc','.netrc','.pypirc','.ssh','.aws'].includes(x))||
+  /(?:^|\/)(?:credentials|secrets?)(?:\.|\/|$)/i.test(value))throw Error('Source path is outside writer policy');
  return value;
 }
 
@@ -36,7 +44,22 @@ export function applyEdits(original,edits){
  for(const e of edits){safePath(e.path);if(typeof e.after!=='string')throw Error('Patch content missing');size+=(e.before?.length||0)+e.after.length;if(size>60000)throw Error('Patch exceeds per-iteration size');
   const prior=Object.hasOwn(patched,e.path)?patched[e.path]:original[e.path];
   if(e.before===null){if(prior!==null)throw Error('New file already exists');patched[e.path]=e.after;}
-  else {if(typeof prior!=='string'||typeof e.before!=='string'||!e.before||prior.split(e.before).length!==2)throw Error('Edit must match immutable source exactly once');patched[e.path]=prior.replace(e.before,e.after);}
+  else {
+   // A failed immutable match must identify the failing *path* and match
+   // count. Never include the source text, the proposed edit, or credentials.
+   const matches=typeof prior==='string'&&typeof e.before==='string'&&e.before
+    ?prior.split(e.before).length-1:0;
+   if(typeof prior!=='string'||typeof e.before!=='string'||!e.before||matches!==1){
+    const error=new Error('Edit must match immutable source exactly once: path='+JSON.stringify(e.path)+', matches='+matches+', source='+(typeof prior==='string'?'present':'missing'));
+    error.code='immutable_edit_match_count';
+    error.sourcePath=e.path;
+    error.matchCount=matches;
+    throw error;
+   }
+   // Source is literal data: string replacements expand $$, $&, $` and $'.
+   // A callback preserves generated shell/JavaScript bytes exactly.
+   patched[e.path]=prior.replace(e.before,()=>e.after);
+  }
  }
  if(!Object.keys(patched).some(p=>patched[p]!==original[p]))throw Error('Patch made no source change');
  for(const [file,after] of Object.entries(patched)){
