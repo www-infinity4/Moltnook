@@ -4,6 +4,7 @@
  * page text. This chooses which GPT specialists are useful; it cannot grant a
  * writer lease, import unverified offers, approve a patch, merge, or deploy.
  */
+import {planAutomationRecipe} from './automation-recipes.mjs';
 const KINDS=new Set(['repair','import','decision']);
 const safePath=p=>typeof p==='string'&&p.length<180&&
  /^[a-zA-Z0-9_.\/-]+$/.test(p)&&!p.startsWith('/')&&
@@ -35,7 +36,8 @@ export function selectColorPreface(job={},sourcePaths=[]){
   firstRoles:direct?[]:['red'],
   // Every downstream source write still requires a claimed lease, isolated
   // Green patch, Pink checks, Purple arbitration and target CI/merge gates.
-  executionAuthorized:false,importPerformed:false,mergeAuthorized:false});
+  executionAuthorized:false,importPerformed:false,mergeAuthorized:false,
+  ...(job?.automationRecipe?{automationPlan:planAutomationRecipe(job.automationRecipe)}:{})});
 }
 
 export function selectColorFollowups(plan,redReceipt){

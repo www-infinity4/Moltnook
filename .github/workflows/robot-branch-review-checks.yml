@@ -59,6 +59,8 @@ jobs:
           node --test agents/repository-engine/color-core.test.mjs
           node --check agents/repository-engine/color-task-routing.mjs
           node --test agents/repository-engine/color-task-routing.test.mjs
+          node --check agents/repository-engine/automation-recipes.mjs
+          node --test agents/repository-engine/automation-recipes.test.mjs
           node --test agents/tests/color-child-bots.test.mjs
           node --check agents/repository-engine/green-build-recovery.mjs
           node --test agents/repository-engine/green-build-recovery.test.mjs

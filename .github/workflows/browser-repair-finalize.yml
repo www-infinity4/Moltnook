@@ -24,7 +24,7 @@ concurrency:
 jobs:
   finalize:
     if: github.event_name != 'schedule' || vars.REPAIR_DISPATCH_ENABLED == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # Compatible with Playwright 1.56.1.
     timeout-minutes: 15
     env:
       REPAIR_READ_TOKEN: ${{ github.token }}
