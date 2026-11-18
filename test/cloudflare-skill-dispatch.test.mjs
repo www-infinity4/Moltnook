@@ -7,11 +7,11 @@ const request = { skillId: 'cloudflare.workers.inspect', resourceId: 'worker_123
 const runner = { jobId: 'job1', leaseId: 'lease1', fence: 2, signed: true, sourceRevision: 'a'.repeat(40), runtimeIdentity: 'bubbles-runtime', leaseStartedAt: '2026-10-28T19:29:00Z', leaseExpiresAt: '2026-10-28T19:33:00Z' };
 const evidence = { permissionId: 'perm_1', status: 'verified', skillId: request.skillId, grantedTo: runner.runtimeIdentity, resourceId: request.resourceId, risk: 'read', verifiedAt: '2026-10-28T19:29:00Z', expiresAt: '2026-10-28T19:32:00Z' };
 const catalog = { schemaVersion: 1, kind: 'bubbles.cloudflare.skill-catalog', authorization: { allowProductionMutation: false, connectorApiVerification: 'verified', runtimeIdentityVerified: true, verifiedPermissionCount: 403 }, policy: { noSecretsInCatalog: true, requireLivePermissionCheck: true, requireSignedBrainReceipt: true, requireIndependentSecurityReviewForSensitiveChanges: true }, skills: [{ id: request.skillId, risk: 'read' }, { id: 'cloudflare.workers.deploy', risk: 'write', enabled: false }] };
-const args = () => ({ catalog: structuredClone(catalog), request: structuredClone(request), runner: structuredClone(runner), evidence: structuredClone(evidence), now, clock: () => now });
+const args = () => ({ catalog: structuredClone(catalog), request: structuredClone(request), runner: structuredClone(runner), evidence: structuredClone(evidence), now, clock: () => now, claimReceipt: async () => true });
 
 test('verified signed scoped read produces only a sanitized receipt', async () => {
   let calls = 0;
-  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, skillId: input.skillId, resourceId: input.resourceId, jobId: input.jobId, leaseId: input.leaseId, fence: input.fence, permissionId: input.permissionId, runtimeIdentity: input.runtimeIdentity, sourceRevision: input.sourceRevision, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
+  const result = await dispatchCloudflareRead({ ...args(), adapter: async input => { calls++; assert.equal(input.permissionId, 'perm_1'); assert.equal(Object.isFrozen(input), true); return { success: true, skillId: input.skillId, resourceId: input.resourceId, jobId: input.jobId, leaseId: input.leaseId, fence: input.fence, permissionId: input.permissionId, runtimeIdentity: input.runtimeIdentity, sourceRevision: input.sourceRevision, dispatchId: input.dispatchId, receiptId: 'cf_read_1', httpStatus: 200, secret: 'never_return' }; } });
   assert.equal(calls, 1);
   assert.deepEqual(result, { state: 'completed', skillId: request.skillId, resourceId: request.resourceId, jobId: 'job1', fence: 2, receiptId: 'cf_read_1', httpStatus: 200 });
 });
@@ -207,7 +207,7 @@ test('atomically claim each receipt ID once across two otherwise matching dispat
 });
 
 test('a missing trusted atomic receipt claim gate cannot complete a Cloudflare operation',async()=>{
- const a=args();let calls=0;
+ const a=args();delete a.claimReceipt;let calls=0;
  const result=await dispatchCloudflareRead({...a,adapter:async decision=>{calls++;return {success:true,...decision,receiptId:'no_claim_gate',httpStatus:200};}});
  assert.equal(result.state,'blocked');
  assert.equal(result.reason,'missing_atomic_receipt_guard');
