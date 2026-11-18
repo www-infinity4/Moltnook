@@ -8,9 +8,9 @@ name: Bubbles owner-approved message
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-memory-lab*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs', 'scripts/bubbles-github-identity-acceptance*']
+    paths: ['.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-signed-chat-acceptance.mjs', 'scripts/avatar-continuous-handoff.mjs', 'scripts/avatar-continuous-handoff.test.mjs', 'scripts/bubbles-site-acceptance*', 'scripts/bubbles-memory-lab*', 'scripts/bubbles-organic-computation.mjs', 'scripts/bubbles-memory-pilot.mjs', 'scripts/bubbles-memory-pilot.test.mjs', 'scripts/bubbles-oracle-refinement.mjs', 'scripts/bubbles-oracle-refinement.test.mjs', 'scripts/bubbles-legacy-cart-smoke.mjs', 'scripts/bubbles-legacy-cart-smoke.test.mjs', 'scripts/bubbles-chat-verified-benchmark.mjs', 'scripts/bubbles-chat-verified-benchmark.test.mjs', 'scripts/bubbles-github-identity-acceptance*']
   pull_request:
-    paths: ['scripts/bubbles-memory-lab*', '.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*', 'scripts/bubbles-github-identity-acceptance*', 'scripts/bubbles-five-day-workflow.test.mjs', 'agents/repository-engine/oracle-owner-inventory*', 'agents/repository-engine/oracle-focus-policy*', 'agents/repository-engine/auto-promote-reviewed*']
+    paths: ['scripts/avatar-continuous-handoff*', 'scripts/bubbles-memory-lab*', '.github/workflows/bubbles-owner-message.yml', 'scripts/bubbles-site-acceptance*', 'agents/repository-engine/phi-skills*', 'agents/repository-engine/skills/**', 'scripts/bubbles-memory-pilot*', 'scripts/bubbles-oracle-refinement*', 'scripts/bubbles-legacy-cart-smoke*', 'scripts/mongoose_cart_inventory.py', 'scripts/test_mongoose_cart_inventory.py', 'agents/repository-engine/verified-fork-registry.json', 'scripts/bubbles-chat-verified-benchmark*', 'scripts/bubbles-github-identity-acceptance*', 'scripts/bubbles-five-day-workflow.test.mjs', 'agents/repository-engine/oracle-owner-inventory*', 'agents/repository-engine/oracle-focus-policy*', 'agents/repository-engine/auto-promote-reviewed*']
   schedule:
     - cron: '41 16 * * *'
   workflow_dispatch:
@@ -19,7 +19,7 @@ on:
         description: Fixed owner-approved acceptance task
         type: choice
         default: none
-        options: [none, site_acceptance, deep_chat, quick_cards, five_day_status, chat_acceptance]
+        options: [none, site_acceptance, deep_chat, quick_cards, five_day_status, chat_acceptance, avatar_handoff]
 permissions:
   contents: read
   id-token: write
@@ -37,6 +37,8 @@ jobs:
         with:
           node-version: '22'
       - run: node --check scripts/bubbles-site-acceptance.mjs
+      - run: node --check scripts/avatar-continuous-handoff.mjs
+      - run: node --test scripts/avatar-continuous-handoff.test.mjs
       - run: node --test scripts/bubbles-gpt-card-owner-inline.test.mjs
       - run: node --test scripts/bubbles-memory-lab.test.mjs
       - run: node --check scripts/bubbles-memory-pilot.mjs
@@ -897,3 +899,34 @@ jobs:
           console.log('BUBBLES_VERIFIED_READ_REPAIR '+JSON.stringify({httpStatus:response.status,ticketVerified:Boolean(verified),ticketId:receipt.ticketId||null,status:receipt.status||null,executionStatus:receipt.execution?.status||null,deduplicated:receipt.deduplicated===true,error:receipt.error||null,completed:false}));
           if(!verified)throw Error('owner_repair_intake_not_verified');
           NODE
+
+  avatar_handoff:
+    # Explicitly invoked owner-authorized #1921 work. Existing Brain schedule
+    # continues dependent D1 tickets; this workflow never claims a writer lease.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.task == 'avatar_handoff' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    concurrency:
+      group: avatar-handoff-1921
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify signed handoff regression and contract
+        run: |
+          node --check scripts/avatar-continuous-handoff.mjs
+          node --test scripts/avatar-continuous-handoff.test.mjs
+      - name: Audit live grant and send signed Bubbles turns to existing owner D1 bridge
+        run: node scripts/avatar-continuous-handoff.mjs
+      - name: Save actual grant, handoff and blocked receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: avatar-signed-handoff-1921
+          path: repository-receipts/avatar-handoff-1921.json
+          if-no-files-found: warn
+          retention-days: 14
