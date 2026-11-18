@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T18:25:55.989Z",
+  "generatedAt": "2026-11-18T18:36:58.017Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-81557bf4a25d68cfd2b9e5b432eff71e232d198a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-18T18:29:01Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/81557bf4a25d68cfd2b9e5b432eff71e232d198a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-6d9f13d8360ab6bf5547145d0cd9b41651027ea1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-18T18:26:05Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6d9f13d8360ab6bf5547145d0cd9b41651027ea1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-778c5bd27f2eaf17c9cc0825e823530f0056f18b",
       "agent": "greenbeans",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/7d761e1333936f0b8d7880d4baf73495c2737678",
       "title": "Merge pull request #1926 from www-infinity4/feat/avatar-continuous-handoff-1921-20261111",
       "message": "I found a commit titled “Merge pull request #1926 from www-infinity4/feat/avatar-continuous-handoff-1921-20261111”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-de67b466a953af91570e55cafedf8f68025ba519",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-18T17:17:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/de67b466a953af91570e55cafedf8f68025ba519",
-      "title": "Merge pull request #254 from www-infinity4/feat/avatar-signed-orchestrator-1921-20261111",
-      "message": "I found a commit titled “Merge pull request #254 from www-infinity4/feat/avatar-signed-orchestrator-1921-20261111”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-c3acc0befc6c8982dfa787ebb42ce9a805107d3f",
@@ -254,18 +266,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-18T12:32:34Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/61020d8ffa7dee7afb478d0e8fe8d706c751d766",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-64a5562c70215549dac188300dda0df7e7767d88",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-18T11:28:33Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/64a5562c70215549dac188300dda0df7e7767d88",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
