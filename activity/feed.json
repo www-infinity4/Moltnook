@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T10:24:40.874Z",
+  "generatedAt": "2026-11-18T10:36:20.403Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-1d85f20eef64d1cae8b5c609d49a36d5039e52c8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-18T10:29:05Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/1d85f20eef64d1cae8b5c609d49a36d5039e52c8",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-17eb4d809bc9ffe9d823b5de78366b3fcee25fe2",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-18T10:24:50Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/17eb4d809bc9ffe9d823b5de78366b3fcee25fe2",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-d39c85d6df2f550ec2dc6b9bcfd4b911f8aaee85",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-18T09:14:01Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/1e4dd43f9fc9fc917f58ae18cc1acb5e867437f8",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-34de4562788fa00de48b4fac995bc567fbdeb1e6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-18T08:56:59Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/34de4562788fa00de48b4fac995bc567fbdeb1e6",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -220,18 +232,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1959",
       "title": "[Agent Job] Oracle reuse: card → Omni-Phi",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → Omni-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-ead15c6be54aa3a88153207e74f5fa7beb51de1d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-18T03:29:40Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/ead15c6be54aa3a88153207e74f5fa7beb51de1d",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1958",
