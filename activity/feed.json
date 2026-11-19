@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T14:24:49.281Z",
+  "generatedAt": "2026-11-19T14:36:02.752Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-532f4dcb592b85f7a97f0125222352749e9598ff",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T14:29:01Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/532f4dcb592b85f7a97f0125222352749e9598ff",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-7f5b212f498ddce254c25363e2cdd6ab23b1a836",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T14:24:56Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/7f5b212f498ddce254c25363e2cdd6ab23b1a836",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-1974",
       "agent": "purple-people-eater",
@@ -126,18 +150,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-790f9f83c70b97970760128c34007a9e40d42fe3",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T12:54:09Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/790f9f83c70b97970760128c34007a9e40d42fe3",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-62aa70dd658f868b3a49e08ee8ebe8fdd7509353",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -218,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-19T08:30:59Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/936e79f87658b28ef21efd8bd2c3ad3304b7f5e5",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-d88d90e1a76dc64eac1e1d29d7dd5f030188954f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T07:29:14Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/d88d90e1a76dc64eac1e1d29d7dd5f030188954f",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
