@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T13:54:12.520Z",
+  "generatedAt": "2026-11-19T14:12:00.000Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1977",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T14:08:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1977",
+      "title": "Elena Cardone source-linked post database and categorized Quick Cards",
+      "message": "I found a issue titled “Elena Cardone source-linked post database and categorized Quick Cards”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-56704aec26826a4279157d1477a797b271d26cf4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T13:54:22Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/56704aec26826a4279157d1477a797b271d26cf4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-51ed173eab31e6f917452b4180a339ea6fb0ec0a",
       "agent": "greenbeans",
@@ -148,18 +172,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/a886c4fc6b42b2cad58ccad126825f219a73e6e3",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-548e5453f617d26ff4c4b1fb04f9c33291b261ff",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T12:30:28Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/548e5453f617d26ff4c4b1fb04f9c33291b261ff",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-5cd6f21823b886f99dcd0e212a9b6b947b163b28",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1968",
       "title": "[Agent Job] Oracle reuse: card → C13b0",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: card → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-issue-1284",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T00:00:53Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1284",
-      "title": "Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search",
-      "message": "I found a issue titled “Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-commit-ff6a3242bcdbd75ba15511d9a3d846dda1a6631e",
