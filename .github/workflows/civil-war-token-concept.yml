@@ -1,0 +1,30 @@
+name: Civil War token concept regression
+on:
+  pull_request:
+    paths:
+      - 'concepts/civil-war-token/**'
+      - 'index.html'
+      - 'test/civil-war-token-concept.test.mjs'
+      - '.github/workflows/civil-war-token-concept.yml'
+  push:
+    branches:
+      - 'copilot/1863-civil-war-token-auction'
+    paths:
+      - 'concepts/civil-war-token/**'
+      - 'index.html'
+      - 'test/civil-war-token-concept.test.mjs'
+      - '.github/workflows/civil-war-token-concept.yml'
+permissions:
+  contents: read
+jobs:
+  concept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test test/civil-war-token-concept.test.mjs
