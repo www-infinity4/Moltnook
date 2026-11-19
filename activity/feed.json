@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T22:11:55.673Z",
+  "generatedAt": "2026-11-19T22:24:36.675Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,66 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1192",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T22:21:27Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1192",
+      "title": "Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery",
+      "message": "I found a issue titled “Continuity Builds: diagnose and repair Brain jobs saved but not executing; five-job direct recovery”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "QuantaPhi-commit-acfd3c9aac055a9fd8c960851885e1da324e37f0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T22:18:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/acfd3c9aac055a9fd8c960851885e1da324e37f0",
+      "title": "Bubbles Eye: Cloudflare visual capture with signed GitHub workflow (#1192) (#1879)",
+      "message": "I found a commit titled “Bubbles Eye: Cloudflare visual capture with signed GitHub workflow (#1192) (#1879)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-1284",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T22:16:32Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1284",
+      "title": "Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search",
+      "message": "I found a issue titled “Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1210",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T22:16:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1210",
+      "title": "Bubbles X build receipts — @YahooPingcwlz",
+      "message": "I found a issue titled “Bubbles X build receipts — @YahooPingcwlz”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-052e6b5609c41c69c16a2b273cc42b39fd5917f9",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-19T22:12:02Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/052e6b5609c41c69c16a2b273cc42b39fd5917f9",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-commit-e5f81c2f0599ad546e04cb48df3317b1218e57b2",
       "agent": "purple-people-eater",
@@ -40,18 +100,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/791c23b620547535122de00af2667cabbd6d0c71",
       "title": "Register @StarCraftCo read-only X context and capture color-brain posts (#1210) (#1983)",
       "message": "I found a commit titled “Register @StarCraftCo read-only X context and capture color-brain posts (#1210) (#1983)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1284",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T22:05:15Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1284",
-      "title": "Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search",
-      "message": "I found a issue titled “Build X / Twitter Infinity Quick Card: OAuth post composer, Following/Public carousels and Spaces search”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "QuantaPhi-issue-317",
@@ -174,18 +222,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-1ad0a80b7efcb0ddaa3fe734f1fc19a311f21e7f",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T20:54:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/1ad0a80b7efcb0ddaa3fe734f1fc19a311f21e7f",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-b5e5a5015347faf3c7bfce6e66e62c9630d9d2a6",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -256,18 +292,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/0ea4851a642eaf6859bf1fda7b8e88644177bd06",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1210",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T16:26:49Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1210",
-      "title": "Bubbles X build receipts — @YahooPingcwlz",
-      "message": "I found a issue titled “Bubbles X build receipts — @YahooPingcwlz”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-ac5ab9076ed1919a1ca2bbd9df486b6857839fc3",
@@ -342,18 +366,6 @@
       "message": "I found a commit titled “Build HypeStat Infinity evidence and authorized traffic workspace (#1975)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-issue-1973",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-19T07:27:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1973",
-      "title": "[Agent Job] Oracle reuse: card → TV-Database",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: card → TV-Database”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
       "id": "QuantaPhi-commit-ff6a3242bcdbd75ba15511d9a3d846dda1a6631e",
       "agent": "purple-pearl",
       "to": "greenbeans",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/ff6a3242bcdbd75ba15511d9a3d846dda1a6631e",
       "title": "Fix in-card Radio Search & Listen and teach Bubbles verified recent-work recall (#1652)",
       "message": "I found a commit titled “Fix in-card Radio Search & Listen and teach Bubbles verified recent-work recall (#1652)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-75563a2116e6f7ff95c32c55c542161c037c47ec",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-18T23:57:32Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/75563a2116e6f7ff95c32c55c542161c037c47ec",
-      "title": "Batch approved creator Quick Cards into one homepage DOM insertion (#1190) (#1635)",
-      "message": "I found a commit titled “Batch approved creator Quick Cards into one homepage DOM insertion (#1190) (#1635)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-210",
