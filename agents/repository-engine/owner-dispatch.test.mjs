@@ -74,3 +74,23 @@ test('worker result cannot claim completion unless independently verified and bo
  assert.equal(checkWorkerResult(claim,{id:'a',leaseId:'wrong',baseSha:sha,status:'tested'},true).status,'rejected');
  assert.equal(checkWorkerResult(claim,{id:'a',leaseId:'lease-a',baseSha:sha,status:'tested',commitSha:'b'.repeat(40)},true).status,'verified_source_result');
 });
+
+
+test('active direct slots subtract capacity and preserve live write-path locks',()=>{
+ const active=[job('live',{tier:'direct',targetPaths:['src/shared.mjs']})];
+ const plan=planOwnerDispatch([job('busy',{targetPaths:['src/other.mjs']}),job('conflict',{targetPaths:['src/shared.mjs']})],{directCapacity:1,active});
+ assert.deepEqual(plan.direct,[]);
+ assert.equal(plan.waiting.find(x=>x.id==='busy').reason,'capacity_reached');
+ assert.equal(plan.waiting.find(x=>x.id==='conflict').reason,'write_path_conflict');
+});
+test('active overflow leases reduce remaining read slots',()=>{
+ const active=[job('reader',{tier:'read-only-overflow',access:'read'})];
+ const plan=planOwnerDispatch([job('writer',{priority:'high'}),job('reader2',{access:'read'})],{directCapacity:1,overflowCapacity:1,allowReadOverflow:true,active});
+ assert.deepEqual(plan.direct.map(x=>x.id),['writer']);
+ assert.equal(plan.overflow.length,0);
+ assert.equal(plan.waiting.find(x=>x.id==='reader2').reason,'capacity_reached');
+});
+test('invalid or duplicated active leases are rejected, not silently oversubscribed',()=>{
+ assert.throws(()=>planOwnerDispatch([],{active:[job('one',{tier:'unknown'})]}),/active/);
+ assert.throws(()=>planOwnerDispatch([job('one')],{active:[job('one',{tier:'direct'})]}),/duplicate/);
+});
