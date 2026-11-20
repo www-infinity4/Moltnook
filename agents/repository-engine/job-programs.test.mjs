@@ -8,7 +8,7 @@ const ticket=(program,input={})=>({...base,program,input,trigger:'owner_signed'}
 const signedScope=async t=>({verified:true,jobId:t.jobId,program:t.program,ownerHash:t.ownerHash,
  repository:t.repository,sourceSha:t.sourceSha,leaseId:t.leaseId,fence:t.fence,
  inputHash:await jobHash(t.input),expiresAt:new Date(Date.now()+60000).toISOString()});
-const ctx=(overrides={})=>({verifyLease:signedScope,verifyInvoice:async()=>true,pool:{capacity:async()=>2},store:{enqueue:async jobs=>jobs.length,findStalled:async()=>[],requeue:async()=>true,saveRaw:async v=>v,insertQuant:async()=>({inserted:true}),saveSnapshot:async v=>v,appendProof:async v=>v},runner:{executeAtomic:async()=>({commitSha:sha,branch:'job/JOB-1907-01',testsPassed:true}),stagePR:async()=>({prUrl:'https://github.com/www-infinity4/Moltnook/pull/300',headSha:sha})},sources:{readPinned:async()=>({source:'https://example.org/',contentHash:'c'.repeat(64),observedAt:'2026-11-19T00:00:00Z'})},qa:{run:async()=>({unit:true,security:true,syntax:true})},wallet:{settle:async()=>({transactionId:'wallet-1',verified:true})},crypto:{sign:async()=>('signed-proof')},...overrides});
+const ctx=(overrides={})=>({verifyLease:signedScope,verifyInvoice:async()=>true,pool:{capacity:async()=>2},store:{enqueue:async jobs=>jobs.length,findStalled:async()=>[],requeue:async()=>true,saveRaw:async v=>v,insertQuant:async()=>({inserted:true}),saveSnapshot:async v=>v,appendProof:async v=>v},runner:{executeAtomic:async job=>({commitSha:sha,branch:job.branch,testsPassed:true}),stagePR:async()=>({prUrl:'https://github.com/www-infinity4/Moltnook/pull/300',headSha:sha})},sources:{readPinned:async()=>({source:'https://example.org/',contentHash:'c'.repeat(64),observedAt:'2026-11-19T00:00:00Z'})},qa:{run:async()=>({unit:true,security:true,syntax:true})},wallet:{settle:async()=>({transactionId:'wallet-1',verified:true})},crypto:{sign:async()=>('signed-proof')},...overrides});
 
 test('all twelve named programs exist',()=>{
  assert.equal(PROGRAM_NAMES.length,12);
@@ -33,7 +33,7 @@ test('orange parcels approved atomic tasks',async()=>{
 });
 test('clone worker never executes unsafe paths',async()=>{
  const r=await executeProgram(ticket('stateless_branch_executor',{path:'agents/jobs.json',changeId:'safe-step'}),ctx());
- assert.equal(r.receipt.branch,'job/JOB-1907-01');
+ assert.match(r.receipt.branch,/^job\/JOB-1907-01-[a-f0-9]{12}$/);
  await assert.rejects(()=>executeProgram(ticket('stateless_branch_executor',{path:'../.env',changeId:'x'}),ctx()),/unsafe_path/);
 });
 test('red retries only idempotent jobs, not permission failures',async()=>{
