@@ -43,6 +43,11 @@ jobs:
           node --test scripts/repair-finalize.test.mjs scripts/repair-draft-dispatch.test.mjs scripts/repair-finalize-edge-preflight.test.mjs
       - name: Read-only candidate scan
         run: node scripts/repair-finalize.mjs --dry-run
+      - name: Record live Worker version drift on PR (read only)
+        if: github.event_name == 'pull_request'
+        env:
+          EDGE_PREFLIGHT_MODE: scheduled
+        run: node scripts/repair-finalize-edge-preflight.mjs
       - name: Check live Worker compatibility before writer grant
         id: edge-preflight
         if: github.ref == 'refs/heads/main' && vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true)
