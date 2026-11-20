@@ -10,7 +10,8 @@ const pr={merged:true,merge_commit_sha:mergeSha,head:{sha:sourceSha},
  base:{ref:'main',repo:{full_name:repository}},title:'Robot review: IW-20261016-706B1494/TASK-1'};
 const changedPaths=['bubbles-brain-actions.js','test/bubbles-brain-actions.test.cjs'];
 test('existing merged Green source routes independently to Pink, with source-only proof',()=>{
- const plan=verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths,headSha});
+ const plan=verifiedSourceReviewPlan({job,sourceReview,capability,pr,changedPaths,headSha,
+  verifiedExistingTestPaths:['test/bubbles-brain-actions.test.cjs']});
  assert.equal(plan.prNumber,418);
  assert.deepEqual(plan.testPaths,['test/bubbles-brain-actions.test.cjs']);
  assert.equal(plan.sourceReviewOnly,true);
@@ -31,14 +32,15 @@ test('no capability, scope, foreign repository, missing merge or fraudulent test
 test('source review checks trusted ancestry before it runs focused repository tests',async()=>{
  const calls=[];
  const receipt=await runSourceReview({
-  job,sourceReview,capability,headSha,
+  job,sourceReview,capability,headSha,trackedTestPaths:changedPaths,
   github:async path=>{calls.push(['github',path]);return path.endsWith('/files?per_page=100')
    ?changedPaths.map(filename=>({filename})):pr},
-  readSource:async path=>{calls.push(['read',path]);return 'test code'},
+  readSource:async path=>{calls.push(['read',path]);return "require('../bubbles-brain-actions.js');"},
   verifyAncestry:async sha=>{calls.push(['ancestry',sha]);},
   runTest:async path=>{calls.push(['test',path]);return 'TAP version 13\n# pass 4';}
  });
- assert.deepEqual(calls.slice(2),[['ancestry',mergeSha],['read','test/bubbles-brain-actions.test.cjs'],['test','test/bubbles-brain-actions.test.cjs']]);
+ assert.deepEqual(calls.slice(2),[['ancestry',mergeSha],['read','test/bubbles-brain-actions.test.cjs'],
+  ['read','test/bubbles-brain-actions.test.cjs'],['test','test/bubbles-brain-actions.test.cjs']]);
  assert.equal(receipt.status,'source_verified');
  assert.equal(receipt.testsPassed,true);
  assert.equal(receipt.noNewSourceWrites,true);
@@ -48,12 +50,12 @@ test('source review checks trusted ancestry before it runs focused repository te
 });
 test('missing real tests or failed ancestry refuses a false receipt',async()=>{
  await assert.rejects(runSourceReview({
-  job,sourceReview,capability,headSha,
+  job,sourceReview,capability,headSha,trackedTestPaths:changedPaths,
   github:async url=>url.endsWith('/files?per_page=100')?changedPaths.map(filename=>({filename})):pr,
   readSource:async()=>'',verifyAncestry:async()=>{},runTest:()=>assert.fail('missing test')
- }),/test_source_missing/);
+ }),/test_paths_missing/);
  await assert.rejects(runSourceReview({
-  job,sourceReview,capability,headSha,
+  job,sourceReview,capability,headSha,trackedTestPaths:changedPaths,
   github:async url=>url.endsWith('/files?per_page=100')?changedPaths.map(filename=>({filename})):pr,
   readSource:()=>assert.fail('unverified source'),verifyAncestry:async()=>{throw Error('not_an_ancestor');},
   runTest:()=>assert.fail('unverified test')
@@ -150,4 +152,55 @@ test('Pink rejects a file-read URL resolved from another base, not import.meta.u
   trackedTestPaths:['tests/fake.test.mjs'],
   readSource:async()=>'const text=readFileSync(new URL("../../lib/gate.mjs","https://other.test/base/"))'});
  assert.deepEqual(selected,[]);
+});
+
+test('Pink skips unrelated changed tests and falls back to relevant tracked tests',async()=>{
+ const files={
+  'tests/unrelated.test.mjs':"import '../lib/other.mjs';",
+  'tests/gate.test.mjs':"import '../lib/gate.mjs';"
+ };
+ const ran=[];
+ const receipt=await runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/unrelated.test.mjs'}]:pr,
+  trackedTestPaths:Object.keys(files),readSource:async path=>files[path],
+  verifyAncestry:async()=>{},runTest:async path=>{ran.push(path);return 'passed';}
+ });
+ assert.deepEqual(receipt.testPaths,['tests/gate.test.mjs']);
+ assert.deepEqual(ran,['tests/gate.test.mjs']);
+});
+
+test('every changed test needs a real link to changed non-test source before execution',async()=>{
+ const files={
+  'tests/gate.test.mjs':"import '../lib/gate.mjs';",
+  'tests/other.test.mjs':"// import '../lib/gate.mjs';\nimport './gate.test.mjs';"
+ };
+ const ran=[];
+ const receipt=await runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?['lib/gate.mjs',...Object.keys(files)].map(filename=>({filename})):pr,
+  trackedTestPaths:Object.keys(files),readSource:async path=>files[path],
+  verifyAncestry:async()=>{},runTest:async path=>{ran.push(path);return 'passed';}
+ });
+ assert.deepEqual(receipt.testPaths,['tests/gate.test.mjs']);
+ assert.deepEqual(ran,['tests/gate.test.mjs']);
+});
+
+test('a changed test without relevant pinned source cannot produce a verification receipt',async()=>{
+ await assert.rejects(runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/other.test.mjs'}]:pr,
+  trackedTestPaths:['tests/other.test.mjs'],
+  readSource:async()=>"import '../lib/other.mjs';",verifyAncestry:async()=>{},
+  runTest:async()=>assert.fail('unrelated test must not execute')
+ }),/merged_source_review_test_paths_missing/);
+});
+
+test('deleted and untracked changed tests are excluded from the pinned checkout',async()=>{
+ await assert.rejects(runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/removed.test.mjs'}]:pr,
+  trackedTestPaths:[],readSource:async()=>assert.fail('untracked file must not be read'),
+  verifyAncestry:async()=>{},runTest:async()=>assert.fail('untracked test must not run')
+ }),/merged_source_review_test_paths_missing/);
 });
