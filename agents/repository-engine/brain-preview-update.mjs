@@ -8,8 +8,8 @@ import {pathToFileURL} from 'node:url';
 
 export const PRODUCTION_DEPLOYMENT='edca44f0-a72d-41ee-a1a0-b4bee2ca0e3f';
 export const PRODUCTION_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
-export const CANDIDATE_VERSION='1bc385c4-2f00-4ce4-93b9-0e85b5060673';
-export const SOURCE_SHA='609ae96449043e3ccfb791718584dd39c2e3a15d';
+export const CANDIDATE_VERSION='6936c7ed-9f78-48b6-b19f-1a430a1f365a';
+export const SOURCE_SHA='acfd3c9aac055a9fd8c960851885e1da324e37f0';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
 export const PREVIEW_ID='b5ad542188964721a0ab59319c1f0b3a';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
@@ -54,7 +54,7 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  const list=deployments?.items||deployments;
  const latest=Array.isArray(list)?list[0]:null,env=latest?.env||{};
  if(!latest||latest.main_module!==candidateName||
-   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba','715b0ef','c59d465',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
+   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba','715b0ef','c59d465','609ae96',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
    JSON.stringify(Object.keys(env).sort())!==
      JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
    env.BRAIN_CANARY_MODE?.text!=='isolated'||
