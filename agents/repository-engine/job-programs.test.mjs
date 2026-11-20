@@ -116,3 +116,9 @@ test('enqueue adapter must return a bounded verified count',async()=>{
  const c=ctx({store:{enqueue:async()=>999}});
  await assert.rejects(()=>executeProgram(ticket('ingress_task_parceler',{atomicJobs:[{id:'a',instructions:'Check repo'}]}),c),/invalid_enqueue_receipt/);
 });
+
+
+test('a bare Boolean lease approval is not an immutable scope receipt',async()=>{
+ const raw=ticket('spec_to_ticket_compiler',{tasks:[{id:'one',dependsOn:[]}]});
+ await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async()=>true})),/invalid_signed_lease/);
+});
