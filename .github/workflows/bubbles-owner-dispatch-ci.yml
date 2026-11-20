@@ -1,0 +1,35 @@
+name: Bubbles owner dispatch source checks
+on:
+  pull_request:
+    paths:
+      - 'agents/repository-engine/owner-dispatch.mjs'
+      - 'agents/repository-engine/owner-dispatch.test.mjs'
+      - 'agents/repository-engine/runner.mjs'
+      - '.github/workflows/bubbles-owner-dispatch-ci.yml'
+  push:
+    branches:
+      - 'feat/bubbles-owner-dispatch-1907-20261119'
+    paths:
+      - 'agents/repository-engine/owner-dispatch.mjs'
+      - 'agents/repository-engine/owner-dispatch.test.mjs'
+      - 'agents/repository-engine/runner.mjs'
+      - '.github/workflows/bubbles-owner-dispatch-ci.yml'
+permissions:
+  contents: read
+jobs:
+  dispatch-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check dispatcher syntax and runner integration
+        run: |
+          node --check agents/repository-engine/owner-dispatch.mjs
+          node --check agents/repository-engine/runner.mjs
+      - name: Test dispatcher and existing color routing
+        run: |
+          node --test agents/repository-engine/owner-dispatch.test.mjs
+          node --test agents/repository-engine/color-task-routing.test.mjs

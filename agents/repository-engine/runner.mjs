@@ -1,6 +1,7 @@
 import {verifyRepositoryIdentity} from './repository-identity.mjs';
 import {createGithubClient} from './github-client.mjs';
 import {parseRunnerIdle} from './runner-idle-claim.mjs';
+import {planOwnerDispatch} from './owner-dispatch.mjs';
 import {sourceDraftRetry,retainSourceExactDrafts,mergeSourceDrafts} from './source-drafts.mjs';
 import {checkCandidateModuleSyntax} from './module-syntax.mjs';
 import {collectDependencyContext} from './dependency-context.mjs';
@@ -11,6 +12,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {applyEdits,safePath,inside} from './patch.mjs';
 import {sourceWindows,recalculateBounds,checkVisibleEdits,normalizeVisibleEdits,visibleEditAnchors,visibleEditFeedback,rejectedEditFacts,patchDigests,boundedPatched} from './context-windows.mjs';
 import {inspectionEvents,submitInspectionEvents} from './transition-stream/bot-adapter.mjs';
@@ -159,6 +161,29 @@ try{
   workspace=await fs.mkdtemp(path.join(os.tmpdir(),'infinity-engine-'));
   command('git',['clone','--single-branch','--branch',repo.default_branch,'https://github.com/'+report.repository+'.git','.'],{env:credentialEnv()});
   const baseSha=git('rev-parse','HEAD');report.baseSha=baseSha;
+  // Only the existing OIDC Brain claim authorizes execution. This advisory
+  // triage records the already claimed job, not a global queue snapshot or
+  // permission to create clone workers. Do not publish the raw lease ID.
+  try{
+   const proposedPaths=lease.job.routing?.targetPaths;
+   const safeTargets=Array.isArray(proposedPaths)?proposedPaths.slice(0,16):[];
+   const priority=['critical','high','normal','low'].includes(lease.job.priority)?lease.job.priority:'normal';
+   const kind=/(?:security|credential|authentication)/i.test(scopedTask)?'security':/(?:schema|database|runner|workflow|infrastructure)/i.test(scopedTask)?'infrastructure':'other';
+   const leaseDigest='sha256-'+createHash('sha256').update(String(lease.leaseId)).digest('hex').slice(0,32);
+   const planned=planOwnerDispatch([{
+    id:'claimed-'+createHash('sha256').update(report.jobId).digest('hex').slice(0,24),
+    repository:report.repository,baseSha,leaseId:leaseDigest,priority,kind,
+    access:lease.job.sourceReview?.kind==='source_review_only'?'read':'write',
+    targetPaths:safeTargets,dependencies:[]
+   }],{directCapacity:1,overflowCapacity:0,allowReadOverflow:false});
+   report.ownerDispatch={status:'advisory_only',...planned,onlyClaimedLease:true,
+    globalQueueInspected:false,cloneWorkersStarted:false,workerPermissionGranted:false};
+  }catch(error){
+   report.ownerDispatch={status:'unverified',reason:scrub(error.message||error).slice(0,180),
+    globalQueueInspected:false,cloneWorkersStarted:false};
+  }
+  await fs.writeFile('repository-receipts/owner-dispatch-advisory.json',JSON.stringify(report.ownerDispatch,null,2));
+
   if(lease.job.sourceReview?.kind==='source_review_only'&&liveWindowCapability.sourceReviewV1===true){
    // Signed Brain selected already merged Green source: no new patch or payout.
    await event('pink-panther','Reviewing merged source for '+report.jobId+' with an independent read-only runner.');
