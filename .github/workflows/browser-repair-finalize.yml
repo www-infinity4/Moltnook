@@ -39,7 +39,7 @@ jobs:
         run: |
           node --check scripts/repair-finalize.mjs
           node --check scripts/repair-finalize-browser.mjs
-          node --test scripts/repair-finalize.test.mjs scripts/repair-draft-dispatch.test.mjs
+          node --test scripts/repair-finalize.test.mjs scripts/repair-draft-dispatch.test.mjs scripts/repair-finalize-edge-preflight.test.mjs
       - name: Read-only candidate scan
         run: node scripts/repair-finalize.mjs --dry-run
       - name: Install isolated browser
