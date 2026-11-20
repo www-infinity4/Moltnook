@@ -1,0 +1,26 @@
+name: Bubbles twelve-program runbook contract
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/job-programs.*'
+      - '.github/workflows/bubbles-job-programs.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/job-programs.*'
+      - '.github/workflows/bubbles-job-programs.yml'
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check agents/repository-engine/job-programs.mjs
+      - run: node --test agents/repository-engine/job-programs.test.mjs
+      - run: node -e "JSON.parse(require('node:fs').readFileSync('agents/repository-engine/job-programs.contract.json','utf8'))"
