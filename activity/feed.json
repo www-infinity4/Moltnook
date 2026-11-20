@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T04:17:57.802Z",
+  "generatedAt": "2026-11-20T04:19:14.885Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,16 +18,40 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-commit-8662bc8bbe8fa6409e10ae1a620e884c1d47c134",
+      "id": "Moltnook-commit-6ca4c59631bbf3dc729176223634556953d60bce",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-20T04:19:01Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6ca4c59631bbf3dc729176223634556953d60bce",
+      "title": "Reuse target CI for Oracle robot PR promotion; retire extra GPT merge gate (#271)",
+      "message": "I found a commit titled “Reuse target CI for Oracle robot PR promotion; retire extra GPT merge gate (#271)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-1907",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-20T04:18:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-f301535a9e8e3c85fdaede4f6c9778faa77773ef",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
       "kind": "commit",
       "phase": "Proposed routing",
-      "when": "2026-11-20T04:17:46Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8662bc8bbe8fa6409e10ae1a620e884c1d47c134",
-      "title": "HypeStat: add privacy-bounded site observation history (#2000)",
-      "message": "I found a commit titled “HypeStat: add privacy-bounded site observation history (#2000)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+      "when": "2026-11-20T04:18:05Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/f301535a9e8e3c85fdaede4f6c9778faa77773ef",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-9fe43d2ef53a1261b9d3b99d73e5276996b67bfa",
@@ -40,6 +64,18 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/9fe43d2ef53a1261b9d3b99d73e5276996b67bfa",
       "title": "Merge gated Bubbles twelve-program adapter runbooks (#268)",
       "message": "I found a commit titled “Merge gated Bubbles twelve-program adapter runbooks (#268)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-8662bc8bbe8fa6409e10ae1a620e884c1d47c134",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-20T04:17:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8662bc8bbe8fa6409e10ae1a620e884c1d47c134",
+      "title": "HypeStat: add privacy-bounded site observation history (#2000)",
+      "message": "I found a commit titled “HypeStat: add privacy-bounded site observation history (#2000)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Moltnook-commit-04e55f74470b7bb65b053ab3d4b37544ebcb372e",
@@ -90,30 +126,6 @@
       "message": "I found a commit titled “test: execute additive D1 migration and verify append-only owner-isolated receipts (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-131d6f4a3b9b348c89269af7abc1c18c5f6da2e0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T04:15:13Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/131d6f4a3b9b348c89269af7abc1c18c5f6da2e0",
-      "title": "test: align worker fixture with collision-resistant isolated branch naming (#1907)",
-      "message": "I found a commit titled “test: align worker fixture with collision-resistant isolated branch naming (#1907)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-5b2d95b5284599751836c2275f990fb2cbd751b2",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T04:15:03Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5b2d95b5284599751836c2275f990fb2cbd751b2",
-      "title": "fix: derive collision-safe branch names for signed job program builders (#1907)",
-      "message": "I found a commit titled “fix: derive collision-safe branch names for signed job program builders (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-1974",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -148,18 +160,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1765",
       "title": "Infinity Identity Shield Quick Card and Bubbles public-source research monitor",
       "message": "I found a issue titled “Infinity Identity Shield Quick Card and Bubbles public-source research monitor”. Collect independent, attributable sources before the writer drafts anything. Research does not publish or trade."
-    },
-    {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T04:03:18Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-46abbd590f30662a05e04156242eddbbf6ec1082",
