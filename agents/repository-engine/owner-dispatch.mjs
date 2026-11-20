@@ -45,6 +45,17 @@ function cycleIds(jobsById,completed){
  for(const id of jobsById.keys())visit(id);
  return cycles;
 }
+// A context packet can be sent to a model; verified provenance does not
+// mean source text is free of credentials. Redact known patterns in both
+// human notes and pinned source excerpts. Upstream secret-scanning remains
+// mandatory; this is defense in depth, not a complete secret detector.
+function redactModelEvidence(value){
+ return String(value??'')
+  .replace(/\b(authorization\s*[:=]\s*(?:bearer|basic|token)\s+)[^\s"']+/gi,'$1[redacted]')
+  .replace(/\b((?:password|secret|token|api[_-]?key|client[_-]?secret)\s*[:=]\s*)["']?[^\s"',;]+["']?/gi,'$1[redacted]')
+  .replace(/\b(?:github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9_]{12,}|sk-[A-Za-z0-9_-]{12,})\b/g,'[redacted]');
+}
+
 function conflicts(a,b){
  if(a.repository!==b.repository||a.access==='read'&&b.access==='read')return false;
  // Empty/unspecified write footprints serialize at repository scope.
@@ -95,10 +106,10 @@ export function buildWorkerContext(job,evidence={}){
  validateJob(job);
  const source=Array.isArray(evidence.source)?evidence.source:[];
  const prior=Array.isArray(evidence.prior)?evidence.prior:[];
- const notes=typeof evidence.notes==='string'?evidence.notes.slice(0,1200).replace(/(token|password|secret|api[_-]?key)\s*[:=]\s*\S+/gi,'$1=[redacted]'):'';
+ const notes=typeof evidence.notes==='string'?redactModelEvidence(evidence.notes.slice(0,1200)):'';
  return Object.freeze({schemaVersion:1,jobId:job.id,repository:job.repository,baseSha:job.baseSha,leaseId:job.leaseId,
   dependencies:[...job.dependencies],targetPaths:[...job.targetPaths],
-  source:source.filter(s=>s?.verified===true&&validPath(s.path)&&SHA.test(s.commitSha||'')).slice(0,8).map(s=>({path:s.path,commitSha:s.commitSha,excerpt:String(s.excerpt||'').slice(0,1200)})),
+  source:source.filter(s=>s?.verified===true&&validPath(s.path)&&SHA.test(s.commitSha||'')).slice(0,8).map(s=>({path:s.path,commitSha:s.commitSha,excerpt:redactModelEvidence(String(s.excerpt||'').slice(0,1200))})),
   prior:prior.filter(p=>p?.verified===true&&['source_read','checks_passed','checks_failed','pr_opened','merge_verified','deployment_verified','blocked'].includes(p.event)&&typeof p.url==='string'&&/^https:\/\/github\.com\/www-infinity4\//.test(p.url)).slice(0,12).map(p=>({event:p.event,url:p.url})),
   notes,writeAuthorized:false,mergeAuthorized:false});
 }
