@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {COLOR_GPT_MODEL,colorProfile,phaseColorCore,invokeColorCore} from './color-core.mjs';
+import {COLOR_GPT_MODEL,colorProfile,phaseColorCore,invokeColorCore,composeWhiteEvidence,assimilatePinkEvidence} from './color-core.mjs';
 test('all colors share one actual GPT gateway model; appendages never grant privileges',()=>{
  const spectrum={red:['red'],yellow:['yellow'],blue:['blue'],orange:['red','yellow'],
   purple:['purple','blue','red'],green:['green','yellow','blue','pink','red','white'],
@@ -60,4 +60,56 @@ test('Orange and Blue advisory tool labels match the signed Brain without granti
  }
  assert.equal(colorProfile('orange').credentialAccess,'none');
  assert.equal(colorProfile('blue').ownerApproval,'not-overridable');
+});
+
+
+test('White composes bounded multi-color sources without elevating claims to approvals',()=>{
+ const red={sourceId:'red:coin',sourceUrl:'https://example.org/coin',color:'red',note:'Indexed coin listing'};
+ const yellow={sourceId:'yellow:views',sourceUrl:'https://example.org/analytics',color:'yellow',note:'Reported view count'};
+ const blue={sourceId:'blue:schema',sourceUrl:'https://example.org/schema',color:'blue',note:'Import shape reviewed'};
+ const compiled=composeWhiteEvidence([red,yellow,blue,red]);
+ assert.equal(compiled.role,'white');
+ assert.equal(compiled.status,'source_collation_only');
+ assert.equal(compiled.sources.length,3);
+ assert.equal(compiled.duplicateCount,1);
+ assert.deepEqual(compiled.colors,['red','yellow','blue']);
+ assert.deepEqual(compiled.conflicts,[]);
+ assert.equal(compiled.conclusion,null);
+ assert.equal(compiled.authorizedOperationsPerformed,false);
+ assert.equal(compiled.anyToolsExecuted,false);
+ assert.equal(compiled.mergeAuthorized,false);
+ assert.equal(compiled.walletChanged,false);
+ assert.deepEqual(compiled.sources[0],red);
+ assert.ok(colorProfile('white').appendages.includes('repository-map'));
+ assert.ok(colorProfile('white').appendages.includes('source-adapter'));
+});
+test('White preserves duplicate-ID source disagreements as conflicts rather than silently choosing a fact',()=>{
+ const base={sourceId:'red:coin',sourceUrl:'https://example.org/coin',color:'red',note:'Listed'};
+ const compiled=composeWhiteEvidence([base,{...base,note:'Not listed'}]);
+ assert.equal(compiled.sources.length,1);
+ assert.deepEqual(compiled.conflicts,[{sourceId:'red:coin',reason:'conflicting_source_records'}]);
+ assert.equal(compiled.conclusion,null);
+});
+test('Pink blends indexed Red evidence with Pink review evidence without inheriting execution authority',()=>{
+ const red={sourceId:'red:coin',sourceUrl:'https://example.org/coin',color:'red',note:'Coin index record'};
+ const review={sourceId:'pink:test',sourceUrl:'https://example.org/test',color:'pink',note:'Review notes for that source'};
+ const blended=assimilatePinkEvidence([red],[review]);
+ assert.equal(blended.role,'pink');
+ assert.equal(blended.status,'review_candidate_not_approved');
+ assert.deepEqual(blended.redSources,[red]);
+ assert.deepEqual(blended.reviewSources,[review]);
+ assert.equal(blended.conclusion,null);
+ assert.equal(blended.anyToolsExecuted,false);
+ assert.equal(blended.mergeAuthorized,false);
+ assert.ok(colorProfile('pink').appendages.includes('provenance-record'));
+ assert.ok(colorProfile('pink').appendages.includes('data-normalization'));
+});
+test('White and Pink reject unsafe provenance, missing source sectors, and excessive fanout',()=>{
+ const red={sourceId:'red:coin',sourceUrl:'https://example.org/coin',color:'red',note:'Listed'};
+ assert.throws(()=>composeWhiteEvidence([{...red,sourceUrl:'javascript:alert(1)'}]),/source_invalid/);
+ assert.throws(()=>composeWhiteEvidence([{...red,sourceUrl:'https://user:pass@example.org/coin'}]),/source_invalid/);
+ assert.throws(()=>composeWhiteEvidence([{...red,note:'x'.repeat(1000)}]),/source_invalid/);
+ assert.throws(()=>composeWhiteEvidence(Array(65).fill(red)),/source_limit/);
+ assert.throws(()=>assimilatePinkEvidence([],[{...red,color:'pink'}]),/requires_red/);
+ assert.throws(()=>assimilatePinkEvidence([red],[red]),/requires_pink/);
 });
