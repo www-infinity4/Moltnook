@@ -151,3 +151,54 @@ test('Pink rejects a file-read URL resolved from another base, not import.meta.u
   readSource:async()=>'const text=readFileSync(new URL("../../lib/gate.mjs","https://other.test/base/"))'});
  assert.deepEqual(selected,[]);
 });
+
+test('Pink skips unrelated changed tests and falls back to relevant tracked tests',async()=>{
+ const files={
+  'tests/unrelated.test.mjs':"import '../lib/other.mjs';",
+  'tests/gate.test.mjs':"import '../lib/gate.mjs';"
+ };
+ const ran=[];
+ const receipt=await runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/unrelated.test.mjs'}]:pr,
+  trackedTestPaths:Object.keys(files),readSource:async path=>files[path],
+  verifyAncestry:async()=>{},runTest:async path=>{ran.push(path);return 'passed';}
+ });
+ assert.deepEqual(receipt.testPaths,['tests/gate.test.mjs']);
+ assert.deepEqual(ran,['tests/gate.test.mjs']);
+});
+
+test('every changed test needs a real link to changed non-test source before execution',async()=>{
+ const files={
+  'tests/gate.test.mjs':"import '../lib/gate.mjs';",
+  'tests/other.test.mjs':"// import '../lib/gate.mjs';\nimport './gate.test.mjs';"
+ };
+ const ran=[];
+ const receipt=await runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?['lib/gate.mjs',...Object.keys(files)].map(filename=>({filename})):pr,
+  trackedTestPaths:Object.keys(files),readSource:async path=>files[path],
+  verifyAncestry:async()=>{},runTest:async path=>{ran.push(path);return 'passed';}
+ });
+ assert.deepEqual(receipt.testPaths,['tests/gate.test.mjs']);
+ assert.deepEqual(ran,['tests/gate.test.mjs']);
+});
+
+test('a changed test without relevant pinned source cannot produce a verification receipt',async()=>{
+ await assert.rejects(runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/other.test.mjs'}]:pr,
+  trackedTestPaths:['tests/other.test.mjs'],
+  readSource:async()=>"import '../lib/other.mjs';",verifyAncestry:async()=>{},
+  runTest:async()=>assert.fail('unrelated test must not execute')
+ }),/merged_source_review_test_paths_missing/);
+});
+
+test('deleted and untracked changed tests are excluded from the pinned checkout',async()=>{
+ await assert.rejects(runSourceReview({job,sourceReview,capability,headSha,
+  github:async url=>url.includes('/files?')
+   ?[{filename:'lib/gate.mjs'},{filename:'tests/removed.test.mjs'}]:pr,
+  trackedTestPaths:[],readSource:async()=>assert.fail('untracked file must not be read'),
+  verifyAncestry:async()=>{},runTest:async()=>assert.fail('untracked test must not run')
+ }),/merged_source_review_test_paths_missing/);
+});
