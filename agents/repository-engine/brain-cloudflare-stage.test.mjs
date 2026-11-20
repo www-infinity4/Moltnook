@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {safeBindingDigests,live100Percent,compareStaged,REQUIRED_BINDINGS} from './brain-cloudflare-stage.mjs';
+import * as stage from './brain-cloudflare-stage.mjs';
 const id1='bb324bd0-d25f-4684-bd43-5abc1e06b667',id2='facda43e-23ea-4476-a12b-bbdee07e69cd';
 const deployId='8ec9e28e-badc-4a2f-8d48-4951e2e79931';
 const commit='a'.repeat(40);
@@ -84,4 +85,35 @@ test('preflight rejects version substitution, source mismatches and production t
   expectedCommit:commit,candidateId:id1}),/no_new_immutable_candidate/);
  assert.throws(()=>compareStaged({before,activeAfter:deployed,candidate:good,
   expectedCommit:commit,candidateId:'foo'}),/no_new_immutable_candidate/);
+});
+
+test('stage records the exact upload ID rather than the first item in a stale version listing',async()=>{
+ const output='Uploaded infinity-brain-clock (1.31 sec)\nWorker Version ID: '+id2+'\n';
+ const versionId=stage.parseUploadedVersion(output),reads=[];
+ const candidate=await stage.readUploadedCandidate({versionId,readVersion:async route=>{
+  reads.push(route);
+  // A list may still show an older source. The immutable upload ID is authoritative.
+  return route.startsWith('/versions?')?{items:[{id:id1}]}:candidateVersion(resources);
+ }});
+ assert.equal(versionId,id2);
+ assert.deepEqual(reads,['/versions/'+id2]);
+ assert.equal(compareStaged({before:baseline(),activeAfter:deployed,candidate,
+  expectedCommit:commit,candidateId:versionId}).bindingIdentitiesVerified,true);
+});
+
+test('missing, ambiguous and malformed upload IDs fail closed instead of selecting another version',async()=>{
+ for(const output of ['', 'Worker Version ID: invalid',
+  'Worker Version ID: '+id1+'\nWorker Version ID: '+id2,
+  'Worker Version ID: '+id2+'\nWorker Version ID: '+id2,
+  'Diagnostic message: Worker Version ID: '+id2])
+  assert.throws(()=>stage.parseUploadedVersion(output),/upload_version_id_unverified/);
+ for(const versionId of [undefined,'',id2+'/content','invalid'])
+  await assert.rejects(stage.readUploadedCandidate({versionId,
+   readVersion:async()=>assert.fail('invalid ID must not reach the API')}),/candidate_version_invalid/);
+});
+
+test('upload ID accepts terminal formatting but a mismatched immutable readback is rejected',async()=>{
+ assert.equal(stage.parseUploadedVersion('\u001b[32mWorker Version ID: '+id2+'\u001b[0m\r\n'),id2);
+ await assert.rejects(stage.readUploadedCandidate({versionId:id2,
+  readVersion:async()=>candidateVersion(resources,id1)}),/candidate_version_readback_mismatch/);
 });

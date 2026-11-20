@@ -141,9 +141,18 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ef25728c096c6ba92cf510caa2058003
         run: |
+          set -euo pipefail
           npx --yes wrangler@4 versions upload \
             --config workers/infinity-brain-clock/wrangler.toml \
-            --message "Verified Brain source from QuantaPhi commit $TARGET_SHA; owner-scoped Bubbles repair progress"
+            --message "Verified Brain source from QuantaPhi commit $TARGET_SHA; owner-scoped Bubbles repair progress" \
+            | tee /tmp/moltnook-brain-upload.log
+          node --input-type=module <<'NODE'
+          import {appendFileSync,readFileSync} from 'node:fs';
+          import {parseUploadedVersion} from '../agents/repository-engine/brain-cloudflare-stage.mjs';
+          const versionId=parseUploadedVersion(readFileSync('/tmp/moltnook-brain-upload.log','utf8'));
+          appendFileSync(process.env.GITHUB_ENV,'STAGED_VERSION_ID='+versionId+'\n');
+          console.log('Pinned this upload for independent immutable-version readback: '+versionId);
+          NODE
 
       - name: Prove no production traffic changed and no binding identity changed
         env:

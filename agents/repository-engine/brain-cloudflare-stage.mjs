@@ -22,6 +22,21 @@ const STAGED='/tmp/moltnook-brain-cloudflare-before.json';
 const RECEIPT='repository-receipts/moltnook-brain-stage.json';
 const SCRIPT='infinity-brain-clock';
 const sha256=value=>createHash('sha256').update(value).digest('hex');
+export function parseUploadedVersion(output){
+ if(typeof output!=='string'||Buffer.byteLength(output)>1_000_000)
+  throw Error('upload_version_id_unverified');
+ const lines=output.replace(/\u001b\[[0-?]*[ -/]*[@-~]/g,'').split(/\r?\n/)
+  .map(line=>line.trim()).filter(line=>line.startsWith('Worker Version ID:'));
+ const versionId=lines.length===1?lines[0].slice('Worker Version ID:'.length).trim():'';
+ if(!UUID.test(versionId))throw Error('upload_version_id_unverified');
+ return versionId;
+}
+export async function readUploadedCandidate({versionId,readVersion}){
+ if(!UUID.test(versionId||''))throw Error('candidate_version_invalid');
+ const candidate=await readVersion('/versions/'+versionId);
+ if(candidate?.id!==versionId)throw Error('candidate_version_readback_mismatch');
+ return candidate;
+}
 function stable(value){
  if(Array.isArray(value))return value.map(stable);
  if(value&&typeof value==='object')
@@ -101,12 +116,10 @@ async function run(mode,{request=fetch}={}){
  }
  const before=JSON.parse(readFileSync(STAGED,'utf8'));
  const activeAfter=live100Percent(await api('/deployments'));
- const versions=await api('/versions?per_page=5');
- const items=versions?.items||versions;
- if(!Array.isArray(items)||items.length<1)throw Error('candidate_versions_missing');
- const candidateId=items[0]?.id;
- if(!UUID.test(candidateId||''))throw Error('candidate_version_invalid');
- const candidate=await api('/versions/'+candidateId);
+ // Version lists can lag a successful upload or contain unrelated candidates.
+ // Verify only the immutable ID returned by THIS workflow's upload step.
+ const candidateId=process.env.STAGED_VERSION_ID;
+ const candidate=await readUploadedCandidate({versionId:candidateId,readVersion:api});
  const receipt=compareStaged({
   before,activeAfter,candidate,expectedCommit:process.env.TARGET_SHA,candidateId
  });
