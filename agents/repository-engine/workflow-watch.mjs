@@ -3,7 +3,9 @@
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 const TRACKER='www-infinity4/Oracle-Octaves';
-const REPOS=['Moltnook','QuantaPhi','WidgetPhi','claude-flow'];
+// The verified five-minute scope is Moltnook and QuantaPhi. Expand only after
+// a separately evidenced repository-permission and workflow inventory check.
+const REPOS=['Moltnook','QuantaPhi'];
 const IGNORE=new Set(['robot-brain-auto-tickets.yml','workflow-watch.yml']);
 const AGE_MS=86400000;
 const SAFE_SHA=/^[a-f0-9]{40}$/;
