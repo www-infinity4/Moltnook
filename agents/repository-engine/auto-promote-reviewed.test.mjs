@@ -25,6 +25,24 @@ test('only pinned owner-created bot changes with completed target checks qualify
  assert.equal(reviewCandidate({...candidate(),mergeable_state:'behind'},files,checks,[]).ready,false);
  assert.equal(reviewCandidate({...candidate(),base:{ref:'main',repo:{name:'Other',full_name:'other/Other'}}},files,checks,[]).ready,false);
 });
+
+test('routine owner robot PR can promote after exact-head CI without optional reviewer wording',()=>{
+ const pr=candidate();
+ pr.body='Staged source commit: '+sha;
+ assert.deepEqual(reviewCandidate(pr,files,checks,[]),{ready:true,reason:'eligible'});
+});
+
+test('sensitive workflow, credential and payment changes retain extra evidence requirements',()=>{
+ const pr=candidate();
+ pr.body='Staged source commit: '+sha;
+ for(const filename of ['.github/workflows/build.yml','agents/repository-engine/credential-bridge.mjs','payments/payout.mjs']){
+  const verdict=reviewCandidate(pr,[{status:'modified',filename}],checks,[]);
+  assert.equal(verdict.ready,false,filename);
+  assert.equal(verdict.reason,'sensitive_change_review_evidence_missing',filename);
+ }
+ assert.equal(reviewCandidate(pr,files,checks,[]).ready,true);
+});
+
 test('no token means zero merges and no simulated result',async()=>{
  const report=await runAutoPromotion({token:''});
  assert.equal(report.mode,'blocked_missing_writer_credential');

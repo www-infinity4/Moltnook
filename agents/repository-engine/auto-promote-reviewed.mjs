@@ -16,11 +16,18 @@ export function reviewCandidate(pr,files,checks,statuses){
  if(pr.user?.login!==OWNER||!(direct?String(pr.title||'').startsWith('Bubbles direct: '):String(pr.title||'').startsWith('Robot review: ')))
   return {ready:false,reason:'not_owner_robot_pr'};
  const body=String(pr.body||''),sha=String(pr.head?.sha||'');
- if(!/^[a-f0-9]{40}$/.test(sha)||!body.includes('Staged source commit: '+sha)
-  ||!body.includes('independent Pink review')||!body.includes('GPT Purple arbitration'))
+ if(!/^[a-f0-9]{40}$/.test(sha)||!body.includes('Staged source commit: '+sha))
   return {ready:false,reason:'missing_pinned_bot_evidence'};
  if(!Array.isArray(files)||files.length<1||files.length>12||files.some(f=>f.status!=='modified'&&f.status!=='added'||!safePath(f.filename)))
   return {ready:false,reason:'unsafe_changed_paths'};
+ // Routine owner-authored robot changes need pinned provenance and exact-head CI,
+ // but no unrelated external GPT-review text in their PR descriptions.
+ // Keep a separate source-review evidence check on permission/CI/money surfaces,
+ // where CI by itself may be altered by the same patch being promoted.
+ const sensitivePath=/(?:^|\/)(?:auth(?:entication|orization)?|oauth|credential(?:s)?|secret(?:s)?|security|permission(?:s)?|payment(?:s)?|payout(?:s)?|wallet(?:s)?|billing|token(?:s)?)(?:[.\/_-]|$)/i;
+ const highRisk=files.some(f=>f.filename.startsWith('.github/')||f.filename.startsWith('workers/')||sensitivePath.test(f.filename));
+ if(highRisk&&(!body.includes('independent Pink review')||!body.includes('GPT Purple arbitration')))
+  return {ready:false,reason:'sensitive_change_review_evidence_missing'};
  // New/modified QuantaPhi card registry and host surfaces require explicit
  // owner review; generic robot CI approval may not silently publish a card.
  if(pr.base.repo.name==='QuantaPhi'&&files.some(f=>/^(?:bubbles-card-catalog\.mjs|bubbles-card-host(?:\.mjs|\.html)|bubbles-card-workspace\.mjs|bubbles-card-surface\.mjs)$/.test(f.filename)))
