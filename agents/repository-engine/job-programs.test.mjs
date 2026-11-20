@@ -84,3 +84,35 @@ test('credit settlement cannot forge monetary value or self-verify invoices',asy
 test('digest deterministic',async()=>{
  assert.equal(await jobHash({a:1,b:2}),await jobHash({a:1,b:2}));
 });
+
+
+test('overflow child packets cannot inherit the intake writer lease or fence',async()=>{
+ let submitted=null;
+ const c=ctx({store:{enqueue:async jobs=>{submitted=jobs;return jobs.length;}}});
+ const r=await executeProgram(ticket('ingress_task_parceler',{atomicJobs:[{id:'safe-child',instructions:'Inspect source'}]}),c);
+ assert.equal(r.status,'queued');
+ assert.equal(submitted.length,1);
+ assert.equal(submitted[0].leaseId,null);
+ assert.equal(submitted[0].fence,null);
+ assert.equal(submitted[0].authorized,false);
+ assert.equal(submitted[0].claimStatus,'awaiting_independent_claim');
+});
+test('ticket input is snapshotted before asynchronous lease checking',async()=>{
+ const raw=ticket('state_continuity_compiler',{sources:[{id:'original',hash:'c'.repeat(64)}]});
+ let allow;
+ const permit=new Promise(resolve=>{allow=resolve});
+ let persisted;
+ const c=ctx({verifyLease:async()=>{await permit;return true},store:{saveSnapshot:async v=>{persisted=v;return v}}});
+ const operation=executeProgram(raw,c);
+ raw.input.sources[0].id='tampered';
+ allow();
+ await operation;
+ assert.equal(persisted.sources[0].id,'original');
+});
+test('unexpected ticket properties are rejected as the public contract declares',()=>{
+ assert.throws(()=>validateTicket({...ticket('spec_to_ticket_compiler',{tasks:[]}),untrustedScope:'owner-anywhere'}),/invalid_ticket_fields/);
+});
+test('enqueue adapter must return a bounded verified count',async()=>{
+ const c=ctx({store:{enqueue:async()=>999}});
+ await assert.rejects(()=>executeProgram(ticket('ingress_task_parceler',{atomicJobs:[{id:'a',instructions:'Check repo'}]}),c),/invalid_enqueue_receipt/);
+});
