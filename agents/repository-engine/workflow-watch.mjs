@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 const TRACKER='www-infinity4/Oracle-Octaves';
-const REPOS=['Moltnook','QuantaPhi'];
+const REPOS=['Moltnook','QuantaPhi','WidgetPhi','claude-flow'];
 const IGNORE=new Set(['robot-brain-auto-tickets.yml','workflow-watch.yml']);
 const AGE_MS=86400000;
 const SAFE_SHA=/^[a-f0-9]{40}$/;
