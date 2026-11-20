@@ -51,9 +51,9 @@ function cycleIds(jobsById,completed){
 // mandatory; this is defense in depth, not a complete secret detector.
 function redactModelEvidence(value){
  return String(value??'')
-  .replace(/\b(authorization\s*[:=]\s*(?:bearer|basic|token)\s+)[^\s"']+/gi,'$1[redacted]')
-  .replace(/\b((?:password|secret|token|api[_-]?key|client[_-]?secret)\s*[:=]\s*)["']?[^\s"',;]+["']?/gi,'$1[redacted]')
-  .replace(/\b(?:github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9_]{12,}|sk-[A-Za-z0-9_-]{12,})\b/g,'[redacted]');
+  .replace(/(authorization\s*[:=]\s*(?:bearer|basic|token)\s+)[^\s"']+/gi,'$1[redacted]')
+  .replace(/((?:password|secret|token|api[_-]?key|client[_-]?secret)\s*[:=]\s*)["']?[^\s"',;]+["']?/gi,'$1[redacted]')
+  .replace(/(?:github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9_]{12,}|sk-[A-Za-z0-9_-]{12,})\b/g,'[redacted]');
 }
 
 function conflicts(a,b){
