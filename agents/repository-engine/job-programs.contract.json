@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bubbles signed program job v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "jobId",
+    "program",
+    "trigger",
+    "ownerHash",
+    "repository",
+    "sourceSha",
+    "sourceUrl",
+    "leaseId",
+    "fence",
+    "authorized",
+    "input"
+  ],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]{1,128}$"
+    },
+    "program": {
+      "enum": [
+        "ingress_task_parceler",
+        "stateless_branch_executor",
+        "deadlock_queue_sweeper",
+        "telemetry_quant_harvester",
+        "schema_wallet_binder",
+        "state_continuity_compiler",
+        "spec_to_ticket_compiler",
+        "deterministic_code_writer",
+        "dynamic_card_synthesizer",
+        "sandbox_gate_enforcer",
+        "immutable_ip_notary",
+        "compute_settlement_router"
+      ]
+    },
+    "trigger": {
+      "const": "owner_signed"
+    },
+    "ownerHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^www-infinity4/[A-Za-z0-9_.-]{1,100}$"
+    },
+    "sourceSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1000
+    },
+    "leaseId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "fence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "authorized": {
+      "const": true
+    },
+    "input": {
+      "type": "object"
+    }
+  },
+  "description": "Only internal signed adapters may set authorized. Every handler also requires verifyLease; this flag itself grants no permission."
+}
