@@ -132,3 +132,19 @@ test('the scoped lease must match the program, input digest and expiry',async()=
  await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async t=>({...await signedScope(t),inputHash:'0'.repeat(64)})})),/invalid_signed_lease/);
  await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async t=>({...await signedScope(t),expiresAt:'2020-01-01T00:00:00Z'})})),/invalid_signed_lease/);
 });
+
+
+test('branch refs are Git-safe and collision-resistant for scoped job IDs',async()=>{
+ const raw={...ticket('stateless_branch_executor',{path:'agents/safe.mjs',changeId:'edit'}),jobId:'ticket:10.2'};
+ let given;
+ const worker=ctx({runner:{executeAtomic:async data=>{
+  given=data.branch;
+  return {commitSha:sha,branch:data.branch,testsPassed:true};
+ }}});
+ const r=await executeProgram(raw,worker);
+ assert.match(given,/^job\/[A-Za-z0-9_-]+$/);
+ assert.equal(r.receipt.branch,given);
+ const similar={...raw,jobId:'ticket.10:2'};
+ const r2=await executeProgram(similar,worker);
+ assert.notEqual(r2.receipt.branch,r.receipt.branch);
+});
