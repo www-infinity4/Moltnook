@@ -16,8 +16,8 @@ concurrency:
   group: infinity-public-browser-observer
   cancel-in-progress: false
 jobs:
+  # Playwright 1.56.1 does not support Chromium installation on ubuntu26.04.
   observe:
-    # Playwright 1.56.1 does not support Chromium installation on ubuntu26.04.
     runs-on: ubuntu-24.04
     timeout-minutes: 18
     steps:
