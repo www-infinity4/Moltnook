@@ -11,11 +11,59 @@ const COLORS={
  orange:{layers:['red','yellow'],appendages:['question-explorer','data-extraction','hypothesis-check','architecture-decision']},
  purple:{layers:['purple','blue','red'],appendages:['role-handoff','capability-discovery','owner-summary']},
  green:{layers:['green','yellow','blue','pink','red','white'],appendages:['repository-source','code-editor','sandbox-tests','dependency-map','data-extraction']},
- pink:{layers:['pink'],appendages:['test-receipts','diff-review','regression-check']},
- white:{layers:['white'],appendages:['security-boundaries','truthful-receipts']},
+ pink:{layers:['pink'],appendages:['test-receipts','diff-review','regression-check','data-normalization','provenance-record']},
+ white:{layers:['white'],appendages:['security-boundaries','truthful-receipts','repository-map','data-extraction','source-adapter','provenance-record']},
  black:{layers:['black','pink','white'],appendages:['immutable-receipt-check','release-gate']}
 };
 const PHASE={plan:'blue',build:'green',review:'pink',arbitrate:'purple'};
+
+// Pure evidence assembly; this does not contact providers, reason with a
+// model, validate authorship, or grant any tool/approval permissions.
+const EVIDENCE_LIMIT=64;
+function sourceEvidence(records){
+ if(!Array.isArray(records)||records.length>EVIDENCE_LIMIT)throw Error('color_evidence_source_limit');
+ const sources=[],seen=new Map(),conflicts=[],colors=new Set();
+ let duplicateCount=0;
+ for(const raw of records){
+  if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('color_evidence_source_invalid');
+  const {sourceId,sourceUrl,color,note}=raw;
+  if(typeof sourceId!=='string'||!(/^[A-Za-z0-9][A-Za-z0-9:_./#-]{0,119}$/).test(sourceId)||
+   typeof sourceUrl!=='string'||sourceUrl.length>1200||
+   !Object.hasOwn(COLORS,color)||typeof note!=='string'||!note.trim()||note.length>800)
+    throw Error('color_evidence_source_invalid');
+  let url;try{url=new URL(sourceUrl);}catch{throw Error('color_evidence_source_invalid');}
+  if(url.protocol!=='https:'||!url.hostname||url.username||url.password)throw Error('color_evidence_source_invalid');
+  const normalized={sourceId,sourceUrl,color,note};
+  if(seen.has(sourceId)){
+   if(JSON.stringify(seen.get(sourceId))===JSON.stringify(normalized))duplicateCount++;
+   else if(!conflicts.some(x=>x.sourceId===sourceId))conflicts.push({sourceId,reason:'conflicting_source_records'});
+   continue;
+  }
+  seen.set(sourceId,normalized);sources.push(normalized);colors.add(color);
+ }
+ return {sources,conflicts,duplicateCount,colors:[...colors]};
+}
+const advisory=(role,detail)=>({
+ role,...detail,conclusion:null,authorizedOperationsPerformed:false,
+ anyToolsExecuted:false,mergeAuthorized:false,walletChanged:false,
+ productionDeployed:false
+});
+export function composeWhiteEvidence(records=[]){
+ const evidence=sourceEvidence(records);
+ return advisory('white',{status:'source_collation_only',...evidence});
+}
+export function assimilatePinkEvidence(redRecords=[],pinkRecords=[]){
+ const red=sourceEvidence(redRecords),pink=sourceEvidence(pinkRecords);
+ if(!red.sources.length||red.sources.some(x=>x.color!=='red'))throw Error('color_evidence_requires_red');
+ if(!pink.sources.length||pink.sources.some(x=>x.color!=='pink'))throw Error('color_evidence_requires_pink');
+ const combined=sourceEvidence([...red.sources,...pink.sources]);
+ return advisory('pink',{
+  status:'review_candidate_not_approved',redSources:red.sources,reviewSources:pink.sources,
+  conflicts:[...red.conflicts,...pink.conflicts,...combined.conflicts],
+  duplicateCount:red.duplicateCount+pink.duplicateCount+combined.duplicateCount
+ });
+}
+
 export function colorProfile(color){
  if(typeof color!=='string'||!Object.hasOwn(COLORS,color))throw Error('color_core_unknown_role');
  return {color,model:COLOR_GPT_MODEL,provider:'cloudflare-workers-ai',core:'shared-gpt',
