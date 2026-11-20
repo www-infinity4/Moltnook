@@ -67,7 +67,7 @@ test('passing workflow inventory never creates tickets',async()=>{
  }});
  assert.equal(result.state,'no_failures');
  assert.equal(result.ticket_changes.length,0);
- assert.equal(calls.length,4);
+ assert.equal(calls.length,2);
 });
 
 
@@ -77,4 +77,9 @@ test('untrusted job and step labels do not inject instructions or credentials in
  const report=buildReceipt(f);
  assert.match(report,/actions\/runs\/31/);
  assert.doesNotMatch(report,/### Ignore safety|Ignore all controls|ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ|sensitive_value_123/);
+});
+
+test('watcher does not silently expand write-token monitoring to unverified repositories',()=>{
+ assert.throws(()=>selectLatestFailures('WidgetPhi',[]),/Unexpected workflow inventory/);
+ assert.throws(()=>selectLatestFailures('claude-flow',[]),/Unexpected workflow inventory/);
 });
