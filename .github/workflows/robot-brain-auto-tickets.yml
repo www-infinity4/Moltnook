@@ -1,12 +1,14 @@
 name: Robot Brain evidence-to-ticket sweep
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'agents/repository-engine/auto-ticket-sweep.mjs'
+      - 'agents/repository-engine/workflow-watch.mjs'
+      - 'agents/repository-engine/workflow-watch.test.mjs'
       - '.github/workflows/robot-brain-auto-tickets.yml'
 permissions:
   contents: read
@@ -15,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   create-evidence-tickets:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -24,15 +26,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate ticket derivation and deduplication
+      - name: Validate source-ticket derivation and deduplication
         run: node --test agents/repository-engine/auto-ticket-sweep.test.mjs
-      - name: Create tickets only for actual recent measured failures
+      - name: Create tickets only for measured source failures
         env:
-          REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
+          REPOSITORY_WRITE_TOKEN: \${{ secrets.GHP }}
         run: node agents/repository-engine/auto-ticket-sweep.mjs
-      - name: Preserve GitHub issue creation receipts
+      - name: Validate recent workflow failure selection and deduplication
+        run: |
+          node --check agents/repository-engine/workflow-watch.mjs
+          node --test agents/repository-engine/workflow-watch.test.mjs
+      - name: Inspect recent Moltnook and QuantaPhi CI; advance existing repair tickets
+        env:
+          REPOSITORY_WRITE_TOKEN: \${{ secrets.GHP }}
+        run: node agents/repository-engine/workflow-watch.mjs
+      - name: Preserve factual source inspection receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: robot-brain-auto-ticket-receipts
           path: repository-receipts/created-brain-tickets.json
+          if-no-files-found: warn
+      - name: Preserve exact-head failure watcher receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-brain-workflow-watch-receipts
+          path: repository-receipts/workflow-watch.json
+          if-no-files-found: warn
