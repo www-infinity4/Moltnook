@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {PROGRAM_NAMES, validateTicket, executeProgram, jobHash} from './job-programs.mjs';
 
 const sha='a'.repeat(40);
@@ -147,4 +149,26 @@ test('branch refs are Git-safe and collision-resistant for scoped job IDs',async
  const similar={...raw,jobId:'ticket.10:2'};
  const r2=await executeProgram(similar,worker);
  assert.notEqual(r2.receipt.branch,r.receipt.branch);
+});
+
+
+test('additive D1 receipt schema parses and preserves append-only evidence isolation',()=>{
+ const schema=readFileSync(new URL('./job-programs-schema.sql',import.meta.url),'utf8');
+ const program=String.raw`
+import sqlite3,sys
+db=sqlite3.connect(':memory:')
+db.executescript(sys.stdin.read())
+tables={x[0] for x in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+assert tables=={'bubbles_program_receipts','bubbles_raw_quant_staging','bubbles_context_proposals'}
+row=('a'*64,'b'*64,'ticket-1','spec_to_ticket_compiler','c'*40,'lease-1',1,'tested','d'*64,'{}')
+db.execute("INSERT INTO bubbles_program_receipts (receipt_id,owner_hash,job_id,program,source_sha,lease_id,fence,status,content_sha256,receipt_json) VALUES (?,?,?,?,?,?,?,?,?,?)",row)
+for change in ("UPDATE bubbles_program_receipts SET status='changed' WHERE receipt_id=?", "DELETE FROM bubbles_program_receipts WHERE receipt_id=?"):
+ try: db.execute(change,('a'*64,))
+ except sqlite3.IntegrityError: pass
+ else: raise AssertionError('receipt was mutable')
+db.execute("INSERT INTO bubbles_raw_quant_staging (quant_hash,owner_hash,kind,source_url,observed_at,payload_json) VALUES (?,?,?,?,?,?)",('e'*64,'b'*64,'code','https://example.org','2026-11-19T00:00:00Z','{}'))
+db.execute("INSERT INTO bubbles_raw_quant_staging (quant_hash,owner_hash,kind,source_url,observed_at,payload_json) VALUES (?,?,?,?,?,?)",('e'*64,'f'*64,'code','https://example.org','2026-11-19T00:00:00Z','{}'))
+assert db.execute("SELECT count(*) FROM bubbles_raw_quant_staging").fetchone()[0]==2
+`;
+ execFileSync('python3',['-c',program],{input:schema,encoding:'utf8',timeout:10000});
 });
