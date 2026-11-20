@@ -120,7 +120,7 @@ export async function executeProgram(raw,ctx={}){
  case 'immutable_ip_notary':{
   if(!sha64.test(i.artifactSha||'')||!sha40.test(i.parentSha||'')||!Number.isFinite(Date.parse(i.observedAt||'')))fail('invalid_notary_artifact');
   present(ctx.crypto,'sign');present(ctx.store,'appendProof');
-  const proof={artifactSha:i.artifactSha,parentSha:i.parentSha,agentId:t.jobId,observedAt:i.observedAt};
+  const proof={artifactSha:i.artifactSha,parentSha:i.parentSha,agentId:t.jobId,claimedObservedAt:i.observedAt,signedAt:new Date().toISOString()};
   const hash=await jobHash(proof),signature=await ctx.crypto.sign(hash);
   if(typeof signature!=='string'||!signature)fail('signature_unavailable');
   await ctx.store.appendProof({ownerHash:t.ownerHash,hash,signature,proof});
