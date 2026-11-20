@@ -1,7 +1,7 @@
 // Scheduled public browser smoke; independent of any writer lease or wallet identity.
 import fs from 'node:fs/promises';
 import {verifyLiveBrowser} from './live-browser.mjs';
-import {inspectServiceFeatures} from './service-feature-checks.mjs';
+import {inspectServiceFeatureReport} from './service-feature-checks.mjs';
 import {assessBrowserObservations} from './browser-observation-gate.mjs';
 const sites=[
  {repository:'www-infinity4/QuantaPhi',linkFacts:[{id:'shoplcShirtButton',href:'https://quantaphi.org/shoplc/',sourcePath:'index.html'}]},
@@ -16,11 +16,13 @@ for(const site of sites){
  console.log(site.repository+': '+result.status+' ('+result.targets.map(t=>t.url).join(', ')+')');
 }
 const assessment=assessBrowserObservations(checks,sites);
-const serviceFailures=await inspectServiceFeatures();
-assessment.failures.push(...serviceFailures);if(serviceFailures.length){assessment.status='public_browser_failed';assessment.passed=false;}
+const service=await inspectServiceFeatureReport();
+assessment.failures.push(...service.failures);if(service.failures.length){assessment.status='public_browser_failed';assessment.passed=false;}
 for(const problem of assessment.failures)console.error('Live observer failed: '+problem.repository+' '+(problem.selector||'page')+' '+(problem.device||'')+' '+problem.reason);
+for(const dependency of service.deferred)console.warn('Live service deferred: '+dependency.repository+' '+dependency.selector+' '+dependency.reason+'; video is NOT verified');
 const report={schemaVersion:1,when:new Date().toISOString(),status:assessment.status,assessment,checks,
- note:'Anonymous GET/HEAD-only browser checks. Source version, publisher identity, wallet transactions, AI responses and real user acceptance are not verified.'};
+ deferredDependencies:service.deferred,videoAcceptanceVerified:false,
+ note:'Anonymous GET/HEAD-only browser checks. Unconfigured optional renderers remain explicitly deferred, not verified. Source version, publisher identity, wallet transactions, AI responses and real user acceptance are not verified.'};
 await fs.mkdir('repository-receipts',{recursive:true});
 await fs.writeFile('repository-receipts/public-live-browser.json',JSON.stringify(report,null,2));
 if(report.status!=='public_browser_passed')process.exitCode=1;
