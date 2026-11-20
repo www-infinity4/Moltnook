@@ -172,3 +172,12 @@ assert db.execute("SELECT count(*) FROM bubbles_raw_quant_staging").fetchone()[0
 `;
  execFileSync('python3',['-c',program],{input:schema,encoding:'utf8',timeout:10000});
 });
+
+
+test('QA receipts omit diagnostic secrets returned by adapter',async()=>{
+ const c=ctx({qa:{run:async()=>({unit:true,security:true,syntax:true,privateKey:'super-sensitive-credential',stdout:'Bearer secret-stuff'})}});
+ const r=await executeProgram(ticket('sandbox_gate_enforcer',{headSha:sha}),c);
+ assert.equal(r.status,'tests_passed');
+ assert.equal(r.receipt.checks.unit,true);
+ assert.doesNotMatch(JSON.stringify(r),/super-sensitive|secret-stuff/);
+});
