@@ -1,17 +1,18 @@
-name: Independent GPT reviewer and safe Oracle style promotion
+name: Oracle style promotion via shared target CI
+# Legacy independent GPT review removed. The scheduled repository engine already
+# checks routine owner robot PRs every five minutes with the shared merge gate.
 on:
-  schedule:
-    - cron: '*/15 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'agents/repository-engine/oracle-review-*.mjs'
+      - 'agents/repository-engine/oracle-review-promoter.mjs'
+      - 'agents/repository-engine/oracle-review-promoter.test.mjs'
       - '.github/workflows/oracle-reviewed-pr-promotion.yml'
 permissions:
   contents: read
 concurrency:
-  group: independent-oracle-pr-promoter
+  group: infinity-oracle-compatibility-promotion
   cancel-in-progress: false
 jobs:
   source-review:
@@ -24,21 +25,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify bounded tests and exact-source promotion gate
+      - name: Verify exact-head CI and branch-scope promotion policy
         run: |
-          node --check agents/repository-engine/oracle-review-gate.mjs
           node --check agents/repository-engine/oracle-review-promoter.mjs
-          node --test agents/repository-engine/oracle-review-gate.test.mjs
-      - name: Independently review bot CSS PRs and merge only passing source
+          node --test agents/repository-engine/oracle-review-promoter.test.mjs agents/repository-engine/auto-promote-reviewed.test.mjs
+      - name: Delegate to shared, owner-scoped GitHub merger
         env:
           REPOSITORY_WRITE_TOKEN: ${{ secrets.GHP }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || 'ef25728c096c6ba92cf510caa2058003' }}
         run: node agents/repository-engine/oracle-review-promoter.mjs
-      - name: Publish reviewer decisions and blockers
+      - name: Preserve GitHub merge and blocker receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: independent-oracle-gpt-review
+          name: oracle-shared-ci-promotion
           path: repository-receipts/oracle-promotion-review.json
           retention-days: 14
