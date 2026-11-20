@@ -60,19 +60,30 @@ export function planOwnerDispatch(jobs,options={}){
  if(!Array.isArray(completedIds)||completedIds.length>64||completedIds.some(x=>!ID.test(x||'')))throw new TypeError('invalid completedIds');
  const completed=new Set(completedIds),map=new Map();
  for(const job of jobs){validateJob(job);if(map.has(job.id))throw new TypeError('duplicate job id');map.set(job.id,job)}
+ const active=options.active??[];
+ if(!Array.isArray(active)||active.length>32)throw new TypeError('invalid active jobs');
+ const seen=new Set(map.keys());
+ for(const job of active){
+  validateJob(job);
+  if(!['direct','read-only-overflow'].includes(job.tier)||job.tier==='read-only-overflow'&&job.access!=='read')throw new TypeError('invalid active worker tier');
+  if(seen.has(job.id))throw new TypeError('duplicate active job id');
+  seen.add(job.id);
+ }
  const cycles=cycleIds(map,completed);
  const blocked=[],waiting=[],direct=[],overflow=[];
  const sorted=[...jobs].sort((a,b)=>
   PRIORITY_SCORE[b.priority]+KIND_SCORE[b.kind]-(PRIORITY_SCORE[a.priority]+KIND_SCORE[a.kind])||a.id.localeCompare(b.id));
- const chosen=[];
+ const chosen=[...active];
+ const availableDirect=Math.max(0,directCapacity-active.filter(x=>x.tier==='direct').length);
+ const availableOverflow=Math.max(0,overflowCapacity-active.filter(x=>x.tier==='read-only-overflow').length);
  for(const job of sorted){
   const metadata={id:job.id,repository:job.repository,baseSha:job.baseSha,leaseId:job.leaseId,kind:job.kind,priority:job.priority,access:job.access};
   if(cycles.has(job.id)){blocked.push({...metadata,reason:'dependency_cycle'});continue;}
   if(job.dependencies.some(dep=>!completed.has(dep)&&!map.has(dep))){blocked.push({...metadata,reason:'unknown_dependency'});continue;}
   if(job.dependencies.some(dep=>!completed.has(dep))){waiting.push({...metadata,reason:'dependency_incomplete'});continue;}
   if(chosen.some(other=>conflicts(job,other))){waiting.push({...metadata,reason:'write_path_conflict'});continue;}
-  if(direct.length<directCapacity){direct.push({...metadata,tier:'direct',requiresIndependentClaim:false});chosen.push(job);continue;}
-  if(options.allowReadOverflow===true&&job.access==='read'&&overflow.length<overflowCapacity){
+  if(direct.length<availableDirect){direct.push({...metadata,tier:'direct',requiresIndependentClaim:false});chosen.push(job);continue;}
+  if(options.allowReadOverflow===true&&job.access==='read'&&overflow.length<availableOverflow){
    overflow.push({...metadata,tier:'read-only-overflow',requiresIndependentClaim:true});chosen.push(job);continue;
   }
   waiting.push({...metadata,reason:job.access==='write'&&options.allowReadOverflow===true?'independent_write_lease_required':'capacity_reached'});
