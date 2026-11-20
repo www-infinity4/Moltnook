@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'agents/repository-engine/workflow-watch.mjs'
+      - 'agents/repository-engine/workflow-watch.test.mjs'
+      - '.github/workflows/robot-brain-auto-tickets.yml'
   push:
     branches: [main]
     paths:
@@ -16,7 +22,23 @@ concurrency:
   group: robot-brain-auto-tickets
   cancel-in-progress: false
 jobs:
+  check-workflow-watch:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run watcher regression tests without write credentials
+        run: |
+          node --check agents/repository-engine/workflow-watch.mjs
+          node --test agents/repository-engine/workflow-watch.test.mjs
   create-evidence-tickets:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
