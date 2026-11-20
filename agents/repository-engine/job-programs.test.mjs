@@ -5,7 +5,10 @@ import {PROGRAM_NAMES, validateTicket, executeProgram, jobHash} from './job-prog
 const sha='a'.repeat(40);
 const base={jobId:'JOB-1907-01',ownerHash:'b'.repeat(64),repository:'www-infinity4/Moltnook',sourceSha:sha,sourceUrl:'https://github.com/www-infinity4/Moltnook/issues/252',leaseId:'lease-1',fence:1,authorized:true};
 const ticket=(program,input={})=>({...base,program,input,trigger:'owner_signed'});
-const ctx=(overrides={})=>({verifyLease:async()=>true,verifyInvoice:async()=>true,pool:{capacity:async()=>2},store:{enqueue:async jobs=>jobs.length,findStalled:async()=>[],requeue:async()=>true,saveRaw:async v=>v,insertQuant:async()=>({inserted:true}),saveSnapshot:async v=>v,appendProof:async v=>v},runner:{executeAtomic:async()=>({commitSha:sha,branch:'job/JOB-1907-01',testsPassed:true}),stagePR:async()=>({prUrl:'https://github.com/www-infinity4/Moltnook/pull/300',headSha:sha})},sources:{readPinned:async()=>({source:'https://example.org/',contentHash:'c'.repeat(64),observedAt:'2026-11-19T00:00:00Z'})},qa:{run:async()=>({unit:true,security:true,syntax:true})},wallet:{settle:async()=>({transactionId:'wallet-1',verified:true})},crypto:{sign:async()=>('signed-proof')},...overrides});
+const signedScope=async t=>({verified:true,jobId:t.jobId,program:t.program,ownerHash:t.ownerHash,
+ repository:t.repository,sourceSha:t.sourceSha,leaseId:t.leaseId,fence:t.fence,
+ inputHash:await jobHash(t.input),expiresAt:new Date(Date.now()+60000).toISOString()});
+const ctx=(overrides={})=>({verifyLease:signedScope,verifyInvoice:async()=>true,pool:{capacity:async()=>2},store:{enqueue:async jobs=>jobs.length,findStalled:async()=>[],requeue:async()=>true,saveRaw:async v=>v,insertQuant:async()=>({inserted:true}),saveSnapshot:async v=>v,appendProof:async v=>v},runner:{executeAtomic:async()=>({commitSha:sha,branch:'job/JOB-1907-01',testsPassed:true}),stagePR:async()=>({prUrl:'https://github.com/www-infinity4/Moltnook/pull/300',headSha:sha})},sources:{readPinned:async()=>({source:'https://example.org/',contentHash:'c'.repeat(64),observedAt:'2026-11-19T00:00:00Z'})},qa:{run:async()=>({unit:true,security:true,syntax:true})},wallet:{settle:async()=>({transactionId:'wallet-1',verified:true})},crypto:{sign:async()=>('signed-proof')},...overrides});
 
 test('all twelve named programs exist',()=>{
  assert.equal(PROGRAM_NAMES.length,12);
@@ -102,7 +105,7 @@ test('ticket input is snapshotted before asynchronous lease checking',async()=>{
  let allow;
  const permit=new Promise(resolve=>{allow=resolve});
  let persisted;
- const c=ctx({verifyLease:async()=>{await permit;return true},store:{saveSnapshot:async v=>{persisted=v;return v}}});
+ const c=ctx({verifyLease:async t=>{await permit;return signedScope(t)},store:{saveSnapshot:async v=>{persisted=v;return v}}});
  const operation=executeProgram(raw,c);
  raw.input.sources[0].id='tampered';
  allow();
@@ -121,4 +124,11 @@ test('enqueue adapter must return a bounded verified count',async()=>{
 test('a bare Boolean lease approval is not an immutable scope receipt',async()=>{
  const raw=ticket('spec_to_ticket_compiler',{tasks:[{id:'one',dependsOn:[]}]});
  await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async()=>true})),/invalid_signed_lease/);
+});
+
+test('the scoped lease must match the program, input digest and expiry',async()=>{
+ const raw=ticket('spec_to_ticket_compiler',{tasks:[{id:'a',dependsOn:[]}]});
+ await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async t=>({...await signedScope(t),program:'compute_settlement_router'})})),/invalid_signed_lease/);
+ await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async t=>({...await signedScope(t),inputHash:'0'.repeat(64)})})),/invalid_signed_lease/);
+ await assert.rejects(()=>executeProgram(raw,ctx({verifyLease:async t=>({...await signedScope(t),expiresAt:'2020-01-01T00:00:00Z'})})),/invalid_signed_lease/);
 });
