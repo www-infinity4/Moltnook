@@ -26,13 +26,30 @@ export function selectLatestFailures(repo,runs,{now=Date.now(),max=12}={}){
   }
   return out;
 }
+// GitHub Actions job and step labels are repository-authored data, not
+// instructions to the repair agent. Drop extra lines, markdown directives,
+// and recognizable credentials before copying labels into issue tickets.
+function safeLabel(value,max=140){
+  const first=String(value??'unknown').split(/\r|\n|\\r|\\n/)[0];
+  const redacted=first
+    .replace(/(?:github_pat_[A-Za-z0-9_]{12,}|gh[pousr]_[A-Za-z0-9_]{12,}|sk-[A-Za-z0-9_-]{12,})/g,'redacted')
+    .replace(/((?:api[_-]?key|password|secret|token)\s*[:=]\s*)["']?[^\s"',;]+/gi,'$1redacted')
+    .replace(/[^A-Za-z0-9 .,;:()/_-]/g,' ')
+    .replace(/\s+/g,' ').trim();
+  return redacted.slice(0,max)||'unknown';
+}
+function safeJobUrl(f,url){
+  const expected='https://github.com/www-infinity4/'+f.repo+'/actions/runs/'+f.run_id+'/job/';
+  return typeof url==='string'&&url.startsWith(expected)&&/^[1-9][0-9]*$/.test(url.slice(expected.length));
+}
 export function buildReceipt(f){
-  const jobs=(f.job_failures||[]).slice(0,4).map(j=>'- '+j.name+': '+j.url+'; failed step: '+j.step).join('\n');
+  const jobs=(f.job_failures||[]).filter(j=>safeJobUrl(f,j?.url)).slice(0,4)
+    .map(j=>'- '+safeLabel(j.name)+': '+j.url+'; failed step: '+safeLabel(j.step)).join('\n');
   return [
     '<!-- workflow-watch:'+f.repo+':'+f.run_id+' -->',
     '**New verified CI failure. Not repaired.**',
     'Repository: www-infinity4/'+f.repo,
-    'Workflow: '+f.workflow+'; branch: '+f.branch,
+    'Workflow: '+safeLabel(f.workflow)+'; branch: '+safeLabel(f.branch),
     'Exact head: '+f.sha,
     'Run evidence: '+f.run_url,
     jobs||'Failed job details unavailable (inspect run before repair).',
