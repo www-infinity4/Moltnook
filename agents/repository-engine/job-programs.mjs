@@ -56,7 +56,20 @@ const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 export async function executeProgram(raw,ctx={}){
  const t=validateTicket(raw),i=t.input;
  // User-supplied authorization flags are not proof of a signed lease.
- present(ctx,'verifyLease');if(await ctx.verifyLease(t)!==true)fail('invalid_signed_lease');
+ present(ctx,'verifyLease');
+ const proof=await ctx.verifyLease(t);
+ // Only an authenticated coordinator can issue this proof. Neither the
+ // ticket's authorized field nor a Boolean from an unrelated lease check
+ // conveys scope. Bind the issued grant to the exact job, program, pinned
+ // source, owner partition, fencing generation and immutable input digest.
+ const inputHash=await jobHash(t.input);
+ if(!isObject(proof)||proof.verified!==true||proof.jobId!==t.jobId||
+  proof.program!==t.program||proof.ownerHash!==t.ownerHash||
+  proof.repository!==t.repository||proof.sourceSha!==t.sourceSha||
+  proof.leaseId!==t.leaseId||proof.fence!==t.fence||
+  proof.inputHash!==inputHash||typeof proof.expiresAt!=='string'||
+  !Number.isFinite(Date.parse(proof.expiresAt))||
+  Date.parse(proof.expiresAt)<=Date.now())fail('invalid_signed_lease');
  switch(t.program){
  case 'ingress_task_parceler':{
   const js=i.atomicJobs;if(!Array.isArray(js)||!js.length||js.length>16||js.some(j=>!safeId(j.id)||typeof j.instructions!=='string'||j.instructions.length>5000))fail('approved_atomic_jobs_required');
