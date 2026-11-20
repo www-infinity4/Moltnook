@@ -104,11 +104,14 @@ export async function runWatch({token=process.env.REPOSITORY_WRITE_TOKEN,api=gh,
     for(const f of selectLatestFailures(repo,runs,{now,max:6})){
       try{
         const detail=await api(token,'repos/www-infinity4/'+repo+'/actions/runs/'+f.run_id+'/jobs?per_page=100');
-        f.job_failures=(detail.jobs||[]).filter(j=>j.conclusion==='failure').slice(0,4).map(j=>({
-          name:String(j.name||'unknown').slice(0,120),
-          url:'https://github.com/www-infinity4/'+repo+'/actions/runs/'+f.run_id+'/job/'+j.id,
-          step:String((j.steps||[]).find(s=>s.conclusion==='failure')?.name||'unknown').slice(0,160)
-        }));
+        if(!Array.isArray(detail.jobs))throw Error('Actions jobs inventory missing');
+        f.job_failures=detail.jobs.filter(j=>j?.conclusion==='failure'&&Number.isSafeInteger(j.id)&&j.id>0)
+          .slice(0,4).map(j=>({
+            // The persisted artifact is also shared evidence: sanitize BEFORE storage.
+            name:safeLabel(j.name,120),
+            url:'https://github.com/www-infinity4/'+repo+'/actions/runs/'+f.run_id+'/job/'+j.id,
+            step:safeLabel(Array.isArray(j.steps)?j.steps.find(s=>s?.conclusion==='failure')?.name:'unknown',160)
+          }));
       }catch{f.job_failures=[];}
       all.push(f);
     }
