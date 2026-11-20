@@ -45,7 +45,7 @@ jobs:
         run: node scripts/repair-finalize.mjs --dry-run
       - name: Check live Worker compatibility before writer grant
         id: edge-preflight
-        if: if: github.ref == 'refs/heads/main' && vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true)
+        if: github.ref == 'refs/heads/main' && vars.REPAIR_DISPATCH_ENABLED == 'true' && (github.event_name == 'schedule' || inputs.apply == true)
         env:
           EDGE_PREFLIGHT_MODE: ${{ github.event_name == 'schedule' && 'scheduled' || 'apply' }}
         run: node scripts/repair-finalize-edge-preflight.mjs
