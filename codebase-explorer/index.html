@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bubbles Brain · Codebase Explorer | Moltnook</title>
+  <meta name="description" content="Inspect pinned public GitHub source trees for Moltnook, QuantaPhi and Makepad with a navigable read-only map.">
+  <style>
+    :root{color-scheme:light;--paper:#f7f4f0;--ink:#312722;--red:#b83b32;--quiet:#62564e;--line:#ddd0c3}
+    *{box-sizing:border-box}html{font-size:16px}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,Arial,sans-serif;letter-spacing:.015em}
+    main{max-width:1050px;margin:auto;padding:18px 14px 50px}
+    a{color:#9e342c}a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #246ea0;outline-offset:3px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .brand{font-weight:800;font-size:1.1rem;text-decoration:none}h1{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.2;margin:20px 0 10px}
+    h2{font-size:1.15rem;margin:0 0 8px}.intro{max-width:72ch;color:var(--quiet)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:16px;box-shadow:0 7px 22px #462e1610}
+    .tag{display:inline-block;color:#9e342c;background:#f9e9e6;border:1px solid #ecc8c1;border-radius:20px;padding:3px 12px;font-size:.83rem;font-weight:700}
+    label{font-weight:700;display:block;margin-bottom:5px}.controls{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+    select,input,button{font:inherit;min-height:48px;border-radius:12px;padding:10px 12px}
+    select,input{width:100%;border:1px solid #b7a99f;background:#fff;color:var(--ink)}
+    button{cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}button:hover{border-color:var(--red)}button:disabled{opacity:.55;cursor:progress}
+    .load{background:var(--red);color:#fff;border-color:var(--red);font-weight:700;padding-inline:20px}
+    #status{margin:12px 0 0;color:var(--quiet);min-height:24px}#status[data-kind="error"]{color:#a31b1b}#status[data-kind="ok"]{color:#286438}
+    #meta,#more{color:var(--quiet);font-size:.91rem}#treemap{display:block;width:100%;height:300px;border-radius:12px;border:1px solid var(--line);margin:10px 0 14px}
+    #directory{display:flex;flex-wrap:wrap;gap:5px}#directory button{min-height:44px;border-radius:10px;padding:5px 10px}
+    #file-list{list-style:none;margin:12px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#file-list button{width:100%;text-align:left;overflow-wrap:anywhere;min-height:50px;font-size:.94rem}
+    .hint{font-size:.89rem;color:var(--quiet)}.foot{font-size:.9rem;margin-top:20px}
+    @media(max-width:630px){.controls{grid-template-columns:1fr}.card{padding:13px}#file-list{grid-template-columns:1fr}main{padding-inline:12px}}
+  </style>
+</head>
+<body>
+<main>
+  <header><a class="brand" href="../index.html">∞ Moltnook / Bubbles</a><a href="https://github.com/www-infinity4/Moltnook" rel="noopener noreferrer" target="_blank">Source on GitHub</a></header>
+  <h1>Bubbles Brain · Codebase Explorer</h1>
+  <span class="tag">Read-only · pinned GitHub source</span>
+  <p class="intro">Explore how Bubbles Brain, QuantaPhi and the open-source Makepad framework are organized. This lightweight directory map is <strong>not</strong> Makepad Scope's private 3D visualizer, an AI model import, or a source-code execution tool.</p>
+  <section class="card" aria-labelledby="choose-title">
+    <h2 id="choose-title">Choose a public codebase</h2>
+    <div class="controls">
+      <div><label for="repository">Repository</label><select id="repository"></select></div>
+      <div><label for="search">Filter file paths</label><input id="search" type="search" placeholder="e.g. runner, card, test" autocomplete="off"></div>
+      <button class="load" id="load" type="button">Refresh GitHub map</button>
+    </div>
+    <p id="status" role="status" aria-live="polite">Ready to inspect public source.</p>
+    <p id="meta"></p>
+  </section>
+  <section class="card" aria-labelledby="map-title">
+    <h2 id="map-title">Repository structure</h2>
+    <p class="hint">Block area indicates file size in bytes, not code quality or lines of code. Browse folders below; files open their exact GitHub revision.</p>
+    <canvas id="treemap" height="300" aria-label="Read-only visual directory map; use the accessible file list below to navigate" role="img"></canvas>
+    <nav id="directory" aria-label="Directory breadcrumbs"></nav>
+    <ul id="file-list" aria-label="Source folders and files"></ul>
+    <p id="more" aria-live="polite"></p>
+  </section>
+  <p class="foot">Source: public GitHub REST metadata. No API key, paid service, background agent, private repository access or installation. Framework reference: <a href="https://github.com/makepad/makepad" rel="noopener noreferrer" target="_blank">Makepad (MIT)</a>. This page does not reproduce proprietary Makepad Scope code.</p>
+</main>
+<script type="module" src="./explorer-ui.mjs"></script>
+</body>
+</html>
