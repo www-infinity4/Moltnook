@@ -40,6 +40,9 @@ export function validateTicket(t){
   leaseId:t.leaseId,fence:t.fence,authorized:true,input});
 }
 const receipt=(status,details)=>({status,receipt:{...details,at:new Date().toISOString(),simulation:false}});
+// Git refs forbid ':' and several other chars accepted by human job IDs.
+// Keep the readable prefix but append a digest to prevent slug collisions.
+const jobBranch=async id=>'job/'+id.replace(/[^A-Za-z0-9_-]/g,'-').slice(0,48)+'-'+(await jobHash(id)).slice(0,12);
 function orderDAG(tasks){
  if(!Array.isArray(tasks)||tasks.length<1||tasks.length>32)fail('invalid_tasks');
  const byId=new Map();for(const t of tasks){if(!safeId(t.id)||!Array.isArray(t.dependsOn)||t.dependsOn.length>32||byId.has(t.id))fail('invalid_task_id');byId.set(t.id,t)}
@@ -92,8 +95,9 @@ export async function executeProgram(raw,ctx={}){
  case 'stateless_branch_executor':{
   if(!safePath(i.path)||!safeId(i.changeId))fail('unsafe_path_or_change');
   present(ctx.runner,'executeAtomic');
-  const result=await ctx.runner.executeAtomic({...t,branch:'job/'+t.jobId,path:i.path,changeId:i.changeId});
-  if(!sha40.test(result?.commitSha||'')||result.branch!=='job/'+t.jobId||result.testsPassed!==true)fail('invalid_executor_receipt');
+  const branch=await jobBranch(t.jobId);
+  const result=await ctx.runner.executeAtomic({...t,branch,path:i.path,changeId:i.changeId});
+  if(!sha40.test(result?.commitSha||'')||result.branch!==branch||result.testsPassed!==true)fail('invalid_executor_receipt');
   return receipt('source_committed',{branch:result.branch,commitSha:result.commitSha,testsPassed:true,merged:false});
  }
  case 'deadlock_queue_sweeper':{
@@ -133,7 +137,8 @@ export async function executeProgram(raw,ctx={}){
  }
  case 'deterministic_code_writer':{
   if(!safePath(i.path)||!safeId(i.changeId))fail('unsafe_path_or_change');
-  present(ctx.runner,'stagePR');const r=await ctx.runner.stagePR({...t,path:i.path,changeId:i.changeId,branch:'job/'+t.jobId});
+  present(ctx.runner,'stagePR');const branch=await jobBranch(t.jobId);
+  const r=await ctx.runner.stagePR({...t,path:i.path,changeId:i.changeId,branch});
   if(!safeUrl(r?.prUrl)||!sha40.test(r.headSha||''))fail('invalid_pr_receipt');
   return receipt('pr_staged',{prUrl:r.prUrl,headSha:r.headSha,merged:false,reviewPending:true});
  }
