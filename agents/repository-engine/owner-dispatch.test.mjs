@@ -94,3 +94,18 @@ test('invalid or duplicated active leases are rejected, not silently oversubscri
  assert.throws(()=>planOwnerDispatch([],{active:[job('one',{tier:'unknown'})]}),/active/);
  assert.throws(()=>planOwnerDispatch([job('one')],{active:[job('one',{tier:'direct'})]}),/duplicate/);
 });
+
+test('verified source excerpts and notes cannot forward recognizable credentials to model context',()=>{
+ const exposed='ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+ const packet=buildWorkerContext(job('credential-scope'),{
+  source:[{path:'src/example.mjs',commitSha:sha,verified:true,
+   excerpt:'safe excerpt\\nAuthorization: Bearer bearer-token-123456789\\napi_key = "private_api_key_123"\\n'+exposed}],
+  notes:'password = "local-password-123" and harmless note'
+ });
+ const text=JSON.stringify(packet);
+ for(const secret of ['bearer-token-123456789','private_api_key_123',exposed,'local-password-123']){
+  assert.equal(text.includes(secret),false,'context leaked '+secret);
+ }
+ assert.match(packet.source[0].excerpt,/safe excerpt/);
+ assert.match(packet.notes,/harmless note/);
+});
