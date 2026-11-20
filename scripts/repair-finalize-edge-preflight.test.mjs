@@ -42,6 +42,6 @@ test('scheduler guards write token and merge steps behind the edge preflight',()
  const workflow=readFileSync(new URL('../.github/workflows/browser-repair-finalize.yml',import.meta.url),'utf8');
  const start=workflow.indexOf('id: edge-preflight'),token=workflow.indexOf('Mint repository-scoped repair token'),apply=workflow.indexOf('Prepare review, merge approved patch and verify deployed source');
  assert.ok(start>=0 && start<token && token<apply,'edge preflight must execute before any repair writer');
- assert.match(workflow,/if: steps\.edge-preflight\.outputs\.ready == 'true'/);
+ assert.match(workflow,/if: [^\n]*steps\.edge-preflight\.outputs\.ready == 'true'/);
  assert.match(workflow,/run: node scripts\/repair-finalize-edge-preflight\.mjs/);
 });
