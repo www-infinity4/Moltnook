@@ -21,6 +21,25 @@ Import executeProgram(ticket, adapters) from job-programs.mjs. All 12 program na
 | immutable_ip_notary | Verified merge/asset event | Signed hash and audit append; not legal IP ownership |
 | compute_settlement_router | Signed billed event | Independently verified WORK_CREDIT metering via existing wallet, not cash minting |
 
+## Signed grants, child claims and private diagnostics
+
+The `verifyLease(ticket)` callback must return a **trusted, active scope receipt**, not
+a Boolean: `{ verified: true, jobId, program, ownerHash, repository, sourceSha,
+leaseId, fence, inputHash, expiresAt }`. The program and its complete JSON input
+SHA-256 must match the scope the existing Brain Clock granted; expiration
+must be in the future. A client-supplied `authorized: true` is never authority.
+
+The intake program enqueues *unclaimed* child packets with `leaseId: null`,
+`fence: null`, `authorized: false` and `claimStatus: awaiting_independent_claim`.
+Do not reuse parent grants. Queue deduplication and atomic child admission belong
+to the existing authenticated coordinator. All isolated Git branch names are
+derived from Git-safe slugs and collision-resistant hashes.
+
+QA receipts expose only `unit`, `security` and `syntax` Booleans, never raw
+adapter logs. The Node tests execute the additive evidence D1 SQL in isolated
+SQLite to check append-only triggers and owner partition uniqueness. This
+does not deploy a D1 migration or grant wallet API access.
+
 ## Staged release and Cloudflare wiring
 
 The additive job-programs-schema.sql is optional evidence-only D1 schema to be migration-reviewed for the existing authorized WORK_DB. Do not recreate work_tickets, change the existing Durable Object migration or write monetary balances here.
