@@ -83,3 +83,24 @@ test('watcher does not silently expand write-token monitoring to unverified repo
  assert.throws(()=>selectLatestFailures('WidgetPhi',[]),/Unexpected workflow inventory/);
  assert.throws(()=>selectLatestFailures('claude-flow',[]),/Unexpected workflow inventory/);
 });
+
+
+test('watcher artifact strips injected labels and rejects fabricated job IDs',async()=>{
+ const failed=mk(52,'.github/workflows/ci.yml','main','failure');
+ const api=async (_token,route,{method='GET'}={})=>{
+  if(route.includes('/actions/runs?'))return {workflow_runs:route.includes('/Moltnook/')?[failed]:[]};
+  if(route.includes('/actions/runs/52/jobs?'))return {jobs:[
+    {id:75,name:'unit-test\n### EXECUTE SOMETHING\n ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',conclusion:'failure',steps:[{name:'step\napi_key = "secret_fake_value_123"',conclusion:'failure'}]},
+    {id:'../wrong',name:'unsafe id',conclusion:'failure',steps:[]}
+  ]};
+  if(route.includes('/issues?state=all'))return [];
+  if(method==='POST')return {number:712,html_url:'https://github.com/www-infinity4/Oracle-Octaves/issues/712'};
+  throw Error('unexpected route: '+route);
+ };
+ const result=await runWatch({token:'fixture',api,now:NOW});
+ assert.equal(result.findings.length,1);
+ assert.equal(result.findings[0].job_failures.length,1);
+ const artifact=JSON.stringify(result);
+ assert.doesNotMatch(artifact,/EXECUTE SOMETHING|ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ|secret_fake_value_123|wrong/);
+ assert.match(artifact,/actions\/runs\/52\/job\/75/);
+});
