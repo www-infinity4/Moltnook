@@ -1,9 +1,26 @@
-// Feature evidence feeds the existing browser-repair dispatcher. No model reply is proof of repair.
+// Feature evidence feeds the existing browser-repair dispatcher.
+// A missing optional renderer is an explicit external dependency, not a page
+// regression or a video acceptance result. Actual broken APIs/controls still fail.
 import fs from 'node:fs/promises';
-export async function inspectServiceFeatures({launchBrowser}={}){
- const failures=[],records=[];let browser;
+
+export function classifyVideoRendererConfig(responseOk,config){
+ if(!responseOk||!config||config.ok!==true||!Array.isArray(config.engines))
+  return {status:'failed',videoVerified:false,reason:'Video configuration API failed or returned invalid data'};
+ if(config.configured===true||config.engines.some(e=>e&&e.ready===true))
+  return {status:'configured',videoVerified:false,reason:'Video provider reported configured; no actual rendered video verified'};
+ return {status:'deferred_external_renderer',videoVerified:false,
+  reason:'Moving-video renderer not connected; requires an authorized GPU host/workflow or optional Imagine provider credentials'};
+}
+
+async function saveReceipt(payload){
+ await fs.mkdir('repository-receipts',{recursive:true});
+ await fs.writeFile('repository-receipts/service-features.json',JSON.stringify(payload,null,2));
+}
+
+export async function inspectServiceFeatureReport({launchBrowser,writeReceipt=saveReceipt}={}){
+ const failures=[],deferred=[],records=[];let browser;
  try{
-  const launch=launchBrowser|| (async()=>{const {chromium}=await import('playwright');return chromium.launch({headless:true})});
+  const launch=launchBrowser||(async()=>{const {chromium}=await import('playwright');return chromium.launch({headless:true})});
   browser=await launch();
   for(const spec of [
    {name:'Bubbles',path:'/bubbles/',repository:'www-infinity4/QuantaPhi',sourcePath:'bubbles-ai.js',selectors:['#bubblesAICard','.ba-launcher']},
@@ -25,13 +42,33 @@ export async function inspectServiceFeatures({launchBrowser}={}){
     if(spec.name==='Moving video'){
      const response=await context.request.get('https://quantaphi.org/api/video/config');
      const config=await response.json();
-     if(!response.ok()||(!(config.engines||[]).some(e=>e.ready)&&!config.configured))throw Error('No connected moving-video renderer. Configure an existing GPU host/workflow; source changes alone cannot supply GPU compute.');
+     const verdict=classifyVideoRendererConfig(response.ok(),config);
+     row.videoVerified=false;
+     if(verdict.status==='failed')throw Error(verdict.reason);
+     if(verdict.status==='deferred_external_renderer'){
+      row.status=verdict.status;row.reason=verdict.reason;
+      deferred.push({repository:spec.repository,sourcePath:spec.sourcePath,
+       selector:spec.selectors[0],device:'mobile',status:row.status,
+       reason:row.reason,videoVerified:false});
+      continue;
+     }
     }
-    row.status=row.uploadPreviewVerified?'upload_preview_passed':'controls_present';row.acceptance='Code upload uses a disposable local PNG; adding to saved sites, microphone hardware, AI output and authenticated repair execution need separate evidence.';
-   }catch(error){row.status='failed';row.reason=String(error.message||error).slice(0,300);failures.push({repository:spec.repository,sourcePath:spec.sourcePath,selector:spec.selectors[0],device:'mobile',reason:row.reason})}
-   finally{await context.close()}
+    row.status=row.uploadPreviewVerified?'upload_preview_passed':'controls_present';
+    row.acceptance='Code upload uses a disposable local PNG; saved sites, microphone hardware, generated AI video and authenticated repair execution need separate evidence.';
+   }catch(error){
+    row.status='failed';row.reason=String(error.message||error).slice(0,300);
+    failures.push({repository:spec.repository,sourcePath:spec.sourcePath,selector:spec.selectors[0],device:'mobile',reason:row.reason});
+   }finally{await context.close()}
   }
  }catch(error){failures.push({repository:'www-infinity4/QuantaPhi',reason:'Service browser unavailable: '+String(error.message||error).slice(0,200)})}
- finally{if(browser)await browser.close();await fs.mkdir('repository-receipts',{recursive:true});await fs.writeFile('repository-receipts/service-features.json',JSON.stringify({when:new Date().toISOString(),records,failures},null,2))}
- return failures;
+ finally{
+  if(browser)await browser.close();
+  await writeReceipt({when:new Date().toISOString(),records,failures,deferred,
+   videoAcceptanceVerified:false,note:'Unconnected optional provider is not page failure or a video-render receipt'});
+ }
+ return {failures,deferred,records};
+}
+// Preserve the original return contract for existing read-only consumers.
+export async function inspectServiceFeatures(options){
+ return (await inspectServiceFeatureReport(options)).failures;
 }
