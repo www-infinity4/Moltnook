@@ -6,6 +6,7 @@ export const PROGRAM_NAMES=Object.freeze([
  'sandbox_gate_enforcer','immutable_ip_notary','compute_settlement_router'
 ]);
 const names=new Set(PROGRAM_NAMES),sha40=/^[a-f0-9]{40}$/i,sha64=/^[a-f0-9]{64}$/i;
+const TICKET_FIELDS=new Set(['jobId','program','trigger','ownerHash','repository','sourceSha','sourceUrl','leaseId','fence','authorized','input']);
 const safeId=s=>typeof s==='string'&&s.length>0&&s.length<=128&&/^[A-Za-z0-9._:-]+$/.test(s);
 const safeUrl=s=>{try{const u=new URL(s);return u.protocol==='https:'&&!u.username&&!u.password&&!!u.hostname&&s.length<=1000}catch{return false}};
 const safePath=s=>typeof s==='string'&&s.length<=240&&/^[A-Za-z0-9_./-]+$/.test(s)&&!s.startsWith('/')&&!s.split('/').some(p=>!p||p==='.'||p==='..'||/^\.(?:git|env)/i.test(p)||/^(?:secrets?|credentials?|node_modules)$/i.test(p));
@@ -20,14 +21,23 @@ export async function jobHash(value){
 }
 export function validateTicket(t){
  if(!isObject(t)||!names.has(t.program))fail('invalid_program');
+ if(Object.keys(t).some(key=>!TICKET_FIELDS.has(key)))fail('invalid_ticket_fields');
  if(t.authorized!==true||!safeId(t.leaseId)||!Number.isSafeInteger(t.fence)||t.fence<1||t.trigger!=='owner_signed')fail('invalid_authorization');
  if(!safeId(t.jobId)||!sha64.test(t.ownerHash||''))fail('invalid_job_identity');
  if(!/^www-infinity4\/[A-Za-z0-9_.-]{1,100}$/.test(t.repository||''))fail('invalid_repository');
  if(!sha40.test(t.sourceSha||''))fail('invalid_source_sha');
  if(!safeUrl(t.sourceUrl))fail('invalid_source_url');
  if(!isObject(t.input))fail('invalid_program_input');
- if(JSON.stringify(t.input).length>125000)fail('oversized_job');
- return Object.freeze({...t,input:{...t.input}});
+ // A signed intake request may still be mutated by its original caller while
+ // verifyLease awaits network readback. Copy the entire JSON input before
+ // handing anything to that asynchronous verifier; a shallow copy is unsafe.
+ let input;
+ try{input=JSON.parse(JSON.stringify(t.input));}catch{fail('invalid_program_input')}
+ if(!isObject(input))fail('invalid_program_input');
+ if(JSON.stringify(input).length>125000)fail('oversized_job');
+ return Object.freeze({jobId:t.jobId,program:t.program,trigger:t.trigger,ownerHash:t.ownerHash,
+  repository:t.repository,sourceSha:t.sourceSha,sourceUrl:t.sourceUrl,
+  leaseId:t.leaseId,fence:t.fence,authorized:true,input});
 }
 const receipt=(status,details)=>({status,receipt:{...details,at:new Date().toISOString(),simulation:false}});
 function orderDAG(tasks){
@@ -54,9 +64,17 @@ export async function executeProgram(raw,ctx={}){
   present(ctx.pool,'capacity');present(ctx.store,'enqueue');
   const capacity=await ctx.pool.capacity(t.repository);
   if(!Number.isInteger(capacity)||capacity<0)fail('unknown_pool_capacity');
-  const jobs=js.map((j,n)=>({id:j.id,instructions:j.instructions,program:'stateless_branch_executor',ownerHash:t.ownerHash,repository:t.repository,sourceSha:t.sourceSha,sourceUrl:t.sourceUrl,leaseId:t.leaseId,fence:t.fence,ordinal:n,approvalRequired:true}));
+  // A child queue packet is NOT a signed ticket. The parent lease is never
+  // copied into a child, even if the same owner and repository are requested.
+  // The canonical coordinator must atomically claim and fence each child.
+  const jobs=js.map((j,n)=>({id:j.id,instructions:j.instructions,program:'stateless_branch_executor',
+   ownerHash:t.ownerHash,repository:t.repository,sourceSha:t.sourceSha,sourceUrl:t.sourceUrl,
+   leaseId:null,fence:null,authorized:false,claimStatus:'awaiting_independent_claim',
+   ordinal:n,approvalRequired:true}));
   const stored=await ctx.store.enqueue(jobs,{dedupeKey:t.jobId,capacity});
-  return receipt('queued',{queued:stored,capacity,executedInline:false,spawned:false});
+  if(!Number.isSafeInteger(stored)||stored<0||stored>jobs.length)fail('invalid_enqueue_receipt');
+  return receipt('queued',{queued:stored,capacity,executedInline:false,spawned:false,
+   childrenRequireIndependentClaims:true});
  }
  case 'stateless_branch_executor':{
   if(!safePath(i.path)||!safeId(i.changeId))fail('unsafe_path_or_change');
