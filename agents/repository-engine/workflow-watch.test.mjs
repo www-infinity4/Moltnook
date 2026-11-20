@@ -67,5 +67,5 @@ test('passing workflow inventory never creates tickets',async()=>{
  }});
  assert.equal(result.state,'no_failures');
  assert.equal(result.ticket_changes.length,0);
- assert.equal(calls.length,2);
+ assert.equal(calls.length,4);
 });
