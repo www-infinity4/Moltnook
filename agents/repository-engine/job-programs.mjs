@@ -150,8 +150,11 @@ export async function executeProgram(raw,ctx={}){
  case 'sandbox_gate_enforcer':{
   if(!sha40.test(i.headSha||''))fail('invalid_head_sha');present(ctx.qa,'run');
   const checks=await ctx.qa.run({repository:t.repository,headSha:i.headSha,leaseId:t.leaseId});
-  const passed=checks?.unit===true&&checks?.security===true&&checks?.syntax===true;
-  return receipt(passed?'tests_passed':'rejected',{headSha:i.headSha,testsPassed:passed,merged:false,independentApproval:false,checks});
+  // Adapter logs can contain private source or credentials. Never put
+  // raw QA output in a model-visible receipt; include only typed status flags.
+  const safeChecks={unit:checks?.unit===true,security:checks?.security===true,syntax:checks?.syntax===true};
+  const passed=safeChecks.unit&&safeChecks.security&&safeChecks.syntax;
+  return receipt(passed?'tests_passed':'rejected',{headSha:i.headSha,testsPassed:passed,merged:false,independentApproval:false,checks:safeChecks});
  }
  case 'immutable_ip_notary':{
   if(!sha64.test(i.artifactSha||'')||!sha40.test(i.parentSha||'')||!Number.isFinite(Date.parse(i.observedAt||'')))fail('invalid_notary_artifact');
