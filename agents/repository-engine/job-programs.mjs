@@ -108,7 +108,7 @@ export async function executeProgram(raw,ctx={}){
  }
  case 'dynamic_card_synthesizer':{
   if(typeof i.title!=='string'||i.title.length>160||typeof i.description!=='string'||i.description.length>3000||!safeUrl(i.sourceUrl))fail('invalid_card_source');
-  const html='<article class="infinity-quick-card" style="border-radius:18px;padding:20px;font-size:18px;line-height:1.45"><h2>'+escapeHtml(i.title)+'</h2><p>'+escapeHtml(i.description)+'</p><a href="'+escapeHtml(i.sourceUrl)+'" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:44px">View verified source</a></article>';
+  const html='<article class="infinity-quick-card" style="border-radius:18px;padding:20px;font-size:18px;line-height:1.45"><h2>'+escapeHtml(i.title)+'</h2><p>'+escapeHtml(i.description)+'</p><a href="'+escapeHtml(i.sourceUrl)+'" rel="noopener noreferrer" style="display:inline-flex;align-items:center;min-height:44px">View source</a></article>';
   return receipt('component_generated',{html,sourceUrl:i.sourceUrl,liveEndpointBound:false,productionDeployed:false});
  }
  case 'sandbox_gate_enforcer':{
