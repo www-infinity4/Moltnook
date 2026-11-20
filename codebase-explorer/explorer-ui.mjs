@@ -72,7 +72,7 @@ async function getJSON(url){
 }
 async function load(){
  if(pending)return;
- pending=true;$('load').disabled=true;
+ pending=true;$('load').disabled=true;chooser.disabled=true;
  repoKey=chooser.value;
  prefix='';search.value='';report('Reading public GitHub source metadata…');
  list.replaceChildren();more.textContent='';meta.textContent='';
@@ -80,7 +80,9 @@ async function load(){
   const repo=selectRepository(repoKey).fullName;
   const commit=await getJSON(`https://api.github.com/repos/${repo}/commits/main`);
   if(!/^[a-f0-9]{40}$/i.test(commit.sha))throw new Error('GitHub returned an invalid commit revision.');
-  const tree=await getJSON(`https://api.github.com/repos/${repo}/git/trees/${commit.sha}?recursive=1`);
+  const treeSha=commit.commit?.tree?.sha;
+  if(!/^[a-f0-9]{40}$/i.test(treeSha))throw new Error('GitHub returned an invalid tree revision.');
+  const tree=await getJSON(`https://api.github.com/repos/${repo}/git/trees/${treeSha}?recursive=1`);
   revision=commit.sha;
   active=normalizeTree({...tree,sha:revision});
   report(`Loaded ${selectRepository(repoKey).label} from GitHub. Read-only explorer.`,'ok');
@@ -89,11 +91,10 @@ async function load(){
   active=null;revision=null;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   report(error instanceof Error?error.message:'Could not read repository source.','error');
- }finally{pending=false;$('load').disabled=false;}
+ }finally{pending=false;$('load').disabled=false;chooser.disabled=false;}
 }
 $('load').addEventListener('click',load);
 chooser.addEventListener('change',()=>{active=null;load();});
 search.addEventListener('input',()=>{if(active)render();});
 window.addEventListener('resize',()=>{if(active)render();});
 load();
-
