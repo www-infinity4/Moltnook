@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T12:14:35.260Z",
+  "generatedAt": "2026-11-21T12:27:52.883Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-8db10c12f1bc0d931bfcb2ae41bf9c85414d2f9b",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T12:18:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/8db10c12f1bc0d931bfcb2ae41bf9c85414d2f9b",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261121-DA11A001/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261121-DA11A001/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-317a20c3934080dd2c0910df0afef9d2996d91a5",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T12:14:41Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/317a20c3934080dd2c0910df0afef9d2996d91a5",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-ac68803e1efd4f417d510415552520871ae32cc1",
       "agent": "greenbeans",
@@ -234,18 +258,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-8c586a4af77ba157c44cbb67034ca3242fef989b",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-21T10:55:44Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/8c586a4af77ba157c44cbb67034ca3242fef989b",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-f0d6d7e6ab352fc3d975e4d0649bb98635c80638",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -400,18 +412,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/8467feab04f3557ed183b1fc8eac8aa263c2b773",
       "title": "feat(media): AbbeCAdventures YouTube public video Quick Cards (#2007)",
       "message": "I found a commit titled “feat(media): AbbeCAdventures YouTube public video Quick Cards (#2007)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-770c6fb7ed07f28c7e924c9100c31c566516a62d",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T05:01:26Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/770c6fb7ed07f28c7e924c9100c31c566516a62d",
-      "title": "feat(bubbles-x): verified StarCraftCo TinyFish references in Quick Card (#1210)",
-      "message": "I found a commit titled “feat(bubbles-x): verified StarCraftCo TinyFish references in Quick Card (#1210)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-issue-210",
