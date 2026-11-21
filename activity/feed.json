@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T03:55:28.355Z",
+  "generatedAt": "2026-11-21T04:12:42.695Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-e51b985a2550f8fc31d9b17fec802fae33255db3",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T04:09:19Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/e51b985a2550f8fc31d9b17fec802fae33255db3",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261121-53AFCF81/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261121-53AFCF81/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-736ba21fe6005788a88fdd31e6dbc81cdbb45987",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T03:55:34Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/736ba21fe6005788a88fdd31e6dbc81cdbb45987",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-76798b683f00d165132714a2eef39b86d3e99e75",
       "agent": "greenbeans",
@@ -110,18 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-21T02:46:31Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/bfa7eae77cdf9e5eb36d507ac334ad6ab0d379b7",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-0c5fec9b6cad42bba50ce05d04713ae050e5f4c1",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-21T02:37:12Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0c5fec9b6cad42bba50ce05d04713ae050e5f4c1",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -400,18 +412,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/8662bc8bbe8fa6409e10ae1a620e884c1d47c134",
       "title": "HypeStat: add privacy-bounded site observation history (#2000)",
       "message": "I found a commit titled “HypeStat: add privacy-bounded site observation history (#2000)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-3fe60b4f645fdf447f1afe678620dc9bbe8e894f",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T04:06:38Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3fe60b4f645fdf447f1afe678620dc9bbe8e894f",
-      "title": "Align Bubbles merge instructions with CI-based routine promotion (#2001)",
-      "message": "I found a commit titled “Align Bubbles merge instructions with CI-based routine promotion (#2001)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-210",
