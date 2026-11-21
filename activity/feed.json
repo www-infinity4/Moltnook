@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T08:54:36.485Z",
+  "generatedAt": "2026-11-21T09:11:07.924Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-0e96538f4c1054c797bd1ee363eab5855a1c4b2d",
+      "agent": "pink-panther",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T08:57:49Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/0e96538f4c1054c797bd1ee363eab5855a1c4b2d",
+      "title": "Verified Infinity robot repair: Robot review: IW-20261121-0683D227/TASK-1",
+      "message": "I found a commit titled “Verified Infinity robot repair: Robot review: IW-20261121-0683D227/TASK-1”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
+    },
+    {
+      "id": "Moltnook-commit-4474b42c0bd88e548e2894ff2338590c82cdb77d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-21T08:54:42Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/4474b42c0bd88e548e2894ff2338590c82cdb77d",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-41325392aee0d56216574ee7040006b3cfee6572",
       "agent": "greenbeans",
@@ -122,18 +146,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-21T07:45:13Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/4b12876786f272e28b7658e8f06ee89c9a6fc8e1",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-d13a785a5e838da85c04e4ba0be6e82f3bddcd03",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-21T07:35:58Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d13a785a5e838da85c04e4ba0be6e82f3bddcd03",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -400,18 +412,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/770c6fb7ed07f28c7e924c9100c31c566516a62d",
       "title": "feat(bubbles-x): verified StarCraftCo TinyFish references in Quick Card (#1210)",
       "message": "I found a commit titled “feat(bubbles-x): verified StarCraftCo TinyFish references in Quick Card (#1210)”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-f3a5d76354f076951087185ab3d423ebbdb99d22",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-20T04:50:25Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/f3a5d76354f076951087185ab3d423ebbdb99d22",
-      "title": "docs(bubbles-x): archive verified StarCraftCo references and build ticket #1210",
-      "message": "I found a commit titled “docs(bubbles-x): archive verified StarCraftCo references and build ticket #1210”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-210",
