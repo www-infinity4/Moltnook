@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T01:24:19.263Z",
+  "generatedAt": "2026-11-22T01:38:43.664Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-c46b595a43eb9347f4dd4795c3dc3c25f8d2af3f",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-22T01:28:32Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/c46b595a43eb9347f4dd4795c3dc3c25f8d2af3f",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-48bca21c0fcafbef8529c4f9450e799d0143fd89",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-22T01:24:26Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/48bca21c0fcafbef8529c4f9450e799d0143fd89",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-9b2d6451510c4a61a5ab477bce663dd0eb4fab23",
       "agent": "greenbeans",
@@ -162,18 +186,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-6a979b319003d08c3e3d99b0bf42c85abdd80c37",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-21T23:28:24Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/6a979b319003d08c3e3d99b0bf42c85abdd80c37",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-1210744e9f4f3f40807849d98c019510454e4f3b",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -242,18 +254,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-21T19:28:45Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/7dcf12d0ed652c15eb70ad95fe731b93405127ce",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-54ab1830c3e8162789e016a0a04f7cebae25ffcb",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-21T18:28:51Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/54ab1830c3e8162789e016a0a04f7cebae25ffcb",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
