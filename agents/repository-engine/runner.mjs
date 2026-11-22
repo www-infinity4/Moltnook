@@ -33,6 +33,7 @@ import {collectLinkFacts} from './source-links.mjs';
 import {readWorkflowEvidence} from './workflow-evidence.mjs';
 import {discoverScopedCapabilities} from './scoped-capabilities.mjs';
 import {retryStructuredModelCall} from './model-format-retry.mjs';
+import {budgetModelEvidence} from './model-evidence-budget.mjs';
 import {evidenceReplanFeedback,authPlanReconsideration,deliveryPlanFeedback,shadowSourcePlanFeedback,collectPinnedTaskBriefs} from './evidence-replan.mjs';
 import {deriveFeatureManifest} from './feature-manifest.mjs';
 import {skillPackets} from './phi-skills.mjs';
@@ -56,8 +57,15 @@ async function github(resource,options={}){
  return githubClient(resource,options);
 }
 async function call(step,body={}){
+ // Bound only optional model context. Exact source, proposed edits, tests and
+ // signed lease scope remain unchanged; large immutable jobs fail explicitly.
+ const bounded=body.evidence?budgetModelEvidence(body.evidence):null;
+ if(bounded?.evidenceBudget){
+  report.boundedEvidence=[...(report.boundedEvidence||[]),{step,...bounded.evidenceBudget}];
+ }
+ const payload=body.evidence?{...body,evidence:bounded}:body;
  const value=await fetchRunnerOidcIdentity();
- const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...body,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
+ const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
  const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
  if(step==='result'){
   if(body.status==='source_verified'){

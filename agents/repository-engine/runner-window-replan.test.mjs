@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {repairWithFeedback} from './repair-feedback.mjs';
+// Include signed Brain evidence-budget regressions in existing required PR CI.
+import './model-evidence-budget.test.mjs';
 import {sourceWindows,recalculateBounds,checkVisibleEdits,visibleEditFeedback,sha256} from './context-windows.mjs';
 
 test('the actual three-attempt repair loop retries an empty Green response using refreshed pinned source',async()=>{
