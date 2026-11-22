@@ -6,10 +6,10 @@
 import {readFileSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 
-export const PRODUCTION_DEPLOYMENT='edca44f0-a72d-41ee-a1a0-b4bee2ca0e3f';
-export const PRODUCTION_VERSION='4cb6d94d-df8a-4dcf-9923-9fd99cea32a5';
-export const CANDIDATE_VERSION='6936c7ed-9f78-48b6-b19f-1a430a1f365a';
-export const SOURCE_SHA='acfd3c9aac055a9fd8c960851885e1da324e37f0';
+export const PRODUCTION_DEPLOYMENT='72a4d7d7-148e-49fd-b8c6-a6b3141f004a';
+export const PRODUCTION_VERSION='6936c7ed-9f78-48b6-b19f-1a430a1f365a';
+export const CANDIDATE_VERSION='c8998a57-b7ba-4b3b-89e1-f17fbe4ba3bf';
+export const SOURCE_SHA='d8a8893cb50d4db8ed37d24d926204adcca4f40d';
 export const PREVIEW_SLUG='brain-candidate-26518e96';
 export const PREVIEW_ID='b5ad542188964721a0ab59319c1f0b3a';
 const ACCOUNT='ef25728c096c6ba92cf510caa2058003';
@@ -54,7 +54,7 @@ export function checkPreviewPatchPreflight({production,productionVersion,stagedV
  const list=deployments?.items||deployments;
  const latest=Array.isArray(list)?list[0]:null,env=latest?.env||{};
  if(!latest||latest.main_module!==candidateName||
-   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba','715b0ef','c59d465','609ae96',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
+   !['bbf3a91','19510f5','ca40684','92c0e39','0206dba','715b0ef','c59d465','609ae96','acfd3c9',SOURCE_SHA.slice(0,7)].includes(latest.annotations?.['workers/tag'])||
    JSON.stringify(Object.keys(env).sort())!==
      JSON.stringify(['BRAIN_CANARY_MODE','CLOCK','WORK_DB'])||
    env.BRAIN_CANARY_MODE?.text!=='isolated'||
@@ -74,7 +74,7 @@ export function buildPatch({js,sourceSha=SOURCE_SHA}){
    Buffer.byteLength(js)>3_000_000||
    !js.includes('__preview__/admission')||
    !js.includes('ownerBlockPreserved')||!js.includes('mergedSourceRecognized')||
-   !js.includes('source_review_only')||!js.includes('runnerProgressVerified'))
+   !js.includes('source_review_only')||!js.includes('runnerProgressVerified')||!js.includes('githubReadTransportVerified'))
   throw Error('bundled_synthetic_pink_probe_missing_or_invalid');
  return {compatibility_date:'2026-10-10',compatibility_flags:['global_fetch_strictly_public'],modules:[{name:candidateName,content_type:'application/javascript+module',
    content_base64:Buffer.from(js,'utf8').toString('base64')}],
