@@ -3,6 +3,7 @@ import {filterActiveTickets} from './ticket-selector.mjs';
 import {sourceRecoveryEligibility} from './deferred-recovery.mjs';
 import {pinnedPinkReview,prioritizeReadOnlyPinkReviews,validatePinkSourceReceipt,completePinkReviewInContext} from './source-review.mjs';
 import {appendRunnerStep} from './runner-progress.mjs';
+import {githubReadNoRedirect} from './github-read-transport.mjs';
 export {BrainClock};
 
 // Transient CI-only Preview wrapper. Nothing is forwarded to live owner,
@@ -32,6 +33,16 @@ export default {
     error:body?.error==='bridge_runner_not_verified'?'bridge_runner_not_verified':/1042/.test(raw)?'worker_transport_1042':'unrecognized_response',
     reachable:probe.status===401&&body?.error==='bridge_runner_not_verified'};
   }catch(error){consentTransport.error=/1042/.test(String(error))?'worker_transport_1042':/redirect/i.test(String(error))?'unsupported_redirect_mode':/timeout|abort/i.test(String(error))?'transport_timeout':'transport_failed';}
+  // Exercise the repaired transport in the actual Cloudflare runtime against
+  // one immutable PUBLIC source commit. No owner token or write is involved.
+  let githubReadTransportVerified=false;
+  try{
+   const sha='d8a8893cb50d4db8ed37d24d926204adcca4f40d';
+   const result=await githubReadNoRedirect('https://api.github.com/repos/www-infinity4/QuantaPhi/commits/'+sha,{
+    headers:{Accept:'application/vnd.github+json','User-Agent':'Infinity-Isolated-Brain-Canary'},
+    signal:AbortSignal.timeout(10000)});
+   githubReadTransportVerified=result.ok&&(await result.json()).sha===sha;
+  }catch{}
   const now=Date.now();
   const legacy={ticket:{id:'LEGACY',created_at:now-4*86400000},job:{
    id:'TASK-4',repository:'www-infinity4/QuantaPhi',
@@ -108,7 +119,7 @@ export default {
 
   const ok=ownerDecisionProtected&&currentWorkSelected&&
    sourceRecovery.eligible===true&&clockReady&&mergedSourceRecognized&&
-   reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved&&runnerProgressVerified===true;
+   reviewReceiptSafe&&generatedRepairSuperseded&&ownerBlockPreserved&&runnerProgressVerified===true&&githubReadTransportVerified===true;
   return Response.json({ok,mode:'isolated_preview_only',ticketCount:row.total,
    consentTransport,
    sourceDecisionVerified:ownerDecisionProtected,
@@ -118,7 +129,7 @@ export default {
    productionTrafficTouched:false,
    ownerOrWalletOperationsAllowed:false,
    mergedSourceRecognized,reviewReceiptSafe,generatedRepairSuperseded,ownerBlockPreserved,
-   runnerProgressVerified
+   runnerProgressVerified,githubReadTransportVerified
   },{status:ok?200:503,headers:{'Cache-Control':'no-store'}});
  }
 };

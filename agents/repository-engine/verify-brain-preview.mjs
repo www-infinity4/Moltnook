@@ -21,14 +21,14 @@ export function singleDeployment(payload){
 export function validatePreview(probe){
  const expected=['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible',
   'distinctClockReady','productionTrafficTouched','ownerOrWalletOperationsAllowed',
-  'mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified'];
+  'mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified','githubReadTransportVerified'];
  if(probe?.ok!==true||probe.mode!=='isolated_preview_only'||probe.ticketCount!==0)
   throw Error('isolated_preview_admission_failed');
  for(const k of expected){
   const wanted=['productionTrafficTouched','ownerOrWalletOperationsAllowed'].includes(k)?false:true;
   if(probe[k]!==wanted)throw Error('isolated_preview_check_failed: '+k);
  }
- return {isolationVerified:true,runnerProgressVerified:true,checked:expected.length+2};
+ return {isolationVerified:true,runnerProgressVerified:true,githubReadTransportVerified:true,checked:expected.length+2};
 }
 async function deployment(request=fetch){
  const token=process.env.CLOUDFLARE_API_TOKEN;

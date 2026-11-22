@@ -14,7 +14,8 @@ const clean={ok:true,mode:'isolated_preview_only',ticketCount:0,
  distinctClockReady:true,productionTrafficTouched:false,
  ownerOrWalletOperationsAllowed:false,
  mergedSourceRecognized:true,reviewReceiptSafe:true,
- generatedRepairSuperseded:true,ownerBlockPreserved:true,runnerProgressVerified:true};
+ generatedRepairSuperseded:true,ownerBlockPreserved:true,runnerProgressVerified:true,
+ githubReadTransportVerified:true};
 
 test('actual Cloudflare deployed singleton must remain an exact 100-percent stable version',()=>{
  assert.deepEqual(singleDeployment(payload),{id:deployId,versionId:stable,percentage:100});
@@ -29,14 +30,15 @@ test('actual Cloudflare deployed singleton must remain an exact 100-percent stab
  ])assert.throws(()=>singleDeployment(change),/unexpected_production_state/);
 });
 test('preview gate requires real synthetic admission, isolated DO and an empty dedicated D1',()=>{
- assert.deepEqual(validatePreview(clean),{isolationVerified:true,runnerProgressVerified:true,checked:13});
- for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified']){
+ assert.deepEqual(validatePreview(clean),{isolationVerified:true,runnerProgressVerified:true,githubReadTransportVerified:true,checked:14});
+ for(const key of ['sourceDecisionVerified','ownerPriorityVerified','recoveryEligible','distinctClockReady','mergedSourceRecognized','reviewReceiptSafe','generatedRepairSuperseded','ownerBlockPreserved','runnerProgressVerified','githubReadTransportVerified']){
   assert.throws(()=>validatePreview({...clean,[key]:false}),new RegExp('isolated_preview_check_failed'));
  }
  for(const key of ['productionTrafficTouched','ownerOrWalletOperationsAllowed'])
   assert.throws(()=>validatePreview({...clean,[key]:true}),/isolated_preview_check_failed/);
  assert.throws(()=>validatePreview({...clean,ticketCount:1}),/isolated_preview_admission_failed/);
  assert.throws(()=>validatePreview({...clean,ok:false}),/isolated_preview_admission_failed/);
+ assert.throws(()=>validatePreview({...clean,githubReadTransportVerified:undefined}),/isolated_preview_check_failed/);
 });
 
 test('temporary public Preview routing always gets disabled and production-bound credentials are never copied',()=>{
