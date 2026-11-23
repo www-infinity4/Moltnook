@@ -47,3 +47,6 @@ test('missing pinned file is not verified and cannot turn read-only into a write
  assert.equal(rows[1].error,'github_http_404');
  await assert.rejects(inspectPinnedPaths({paths:['../secrets'],commitSha:'a'.repeat(40),read:async()=>({ok:true,sha:'b'.repeat(40)}),sourceUrl:()=>''}));
 });
+
+// PR-triggered reader checks also exercise the source-inspection valuation ledger.
+import '../tests/iteration-valuation.test.mjs';
