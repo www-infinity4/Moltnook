@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T05:16:00.930Z",
+  "generatedAt": "2026-11-23T05:27:56.988Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-2125",
+      "agent": "blueberry",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-23T05:25:04Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2125",
+      "title": "[Agent Job] Oracle daily card, wallet and security repairs",
+      "message": "I found a issue titled “[Agent Job] Oracle daily card, wallet and security repairs”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
+    },
+    {
+      "id": "Moltnook-commit-6d1ca49d79a2567bc58c0a5c0fa328d85ae7d73c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-23T05:16:07Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/6d1ca49d79a2567bc58c0a5c0fa328d85ae7d73c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-8360d67d48d938621e86f9b0b90b00b1fd710c4f",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-23T03:54:06Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/9c8c2728fd07cdcbe81ea7eba54bd4e525499202",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-734cfd90b4ca9d3ee9d42180ca7f200a210f21f2",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-23T03:40:25Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/734cfd90b4ca9d3ee9d42180ca7f200a210f21f2",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -388,18 +400,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1231",
       "title": "Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance",
       "message": "I found a issue titled “Bubbles + Android APK production readiness: unify chat, voice, identity, Brain and real-device acceptance”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-2102",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-22T13:49:33Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2102",
-      "title": "[Bubbles] Real subscription cancellation and charge-investigation agent with verifiable receipts",
-      "message": "I found a issue titled “[Bubbles] Real subscription cancellation and charge-investigation agent with verifiable receipts”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Oracle-Octaves-issue-211",
