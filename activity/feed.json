@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T06:20:49.797Z",
+  "generatedAt": "2026-11-24T06:42:56.056Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-769b5710016303979027962340d8af7487569877",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-24T06:37:15Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/769b5710016303979027962340d8af7487569877",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-04ddcae29caa0616d4ed2d3e617dede4147212fb",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-24T06:20:56Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/04ddcae29caa0616d4ed2d3e617dede4147212fb",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-90e33bf59e9f63401bca3690fc7b01b10826a17d",
       "agent": "greenbeans",
@@ -110,18 +134,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-24T04:55:59Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/bdf992ae5652031177dc7de031049b8bca20a9c8",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-9352bd5762a625ab3545497794fd7c3410a495dc",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-24T04:47:14Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/9352bd5762a625ab3545497794fd7c3410a495dc",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -232,18 +244,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2126",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-a0ed1875252813fa3fc84bdb1a965f0f645b3ef0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-23T23:28:39Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/a0ed1875252813fa3fc84bdb1a965f0f645b3ef0",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-c773e65d26ac299c6288d990cb8ca41d2d4496d8",
