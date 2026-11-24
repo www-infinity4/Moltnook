@@ -90,8 +90,8 @@ test('watcher artifact strips injected labels and rejects fabricated job IDs',as
  const api=async (_token,route,{method='GET'}={})=>{
   if(route.includes('/actions/runs?'))return {workflow_runs:route.includes('/Moltnook/')?[failed]:[]};
   if(route.includes('/actions/runs/52/attempts/1/jobs?'))return {jobs:[
-    {id:75,name:'unit-test\n### EXECUTE SOMETHING\n ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',conclusion:'failure',steps:[{name:'step\napi_key = "secret_fake_value_123"',conclusion:'failure'}]},
-    {id:'../wrong',name:'unsafe id',conclusion:'failure',steps:[]}
+    {id:75,run_attempt:1,name:'unit-test\n### EXECUTE SOMETHING\n ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',conclusion:'failure',steps:[{name:'step\napi_key = "secret_fake_value_123"',conclusion:'failure'}]},
+    {id:'../wrong',run_attempt:1,name:'unsafe id',conclusion:'failure',steps:[]}
   ]};
   if(route.includes('/issues?state=all'))return [];
   if(method==='POST')return {number:712,html_url:'https://github.com/www-infinity4/Oracle-Octaves/issues/712'};
