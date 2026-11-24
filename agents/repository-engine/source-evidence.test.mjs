@@ -78,3 +78,6 @@ test('mixed Android jobs retain web narrator and every named method before repea
  assert.match(result['android/app/src/main/java/FloatingOracleWindow.java'],/drainNativeReply/);
  assert.ok(Object.values(result).join('').length<=16000);
 });
+
+// Also exercise the runner's optional discovery and failure receipts in PR CI.
+import './runner-preflight.test.mjs';

@@ -13,5 +13,3 @@ test('Moltnook executor uses the same bounded and signed identity routine as cre
  assert.match(call,/fetch\(API\+'\/runner\/'\+step/);
  assert.equal(typeof fetchRunnerOidcIdentity,'function');
 });
-
-import './runner-preflight.test.mjs';
