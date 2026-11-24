@@ -9,11 +9,16 @@ const REPOS=['Moltnook','QuantaPhi'];
 const IGNORE=new Set(['robot-brain-auto-tickets.yml','workflow-watch.yml']);
 const AGE_MS=86400000;
 const SAFE_SHA=/^[a-f0-9]{40}$/;
+const validAttempt=value=>Number.isSafeInteger(value)&&value>0;
+const marker=f=>'<!-- workflow-watch:'+f.repo+':'+f.run_id+':'+f.run_attempt+' -->';
+const legacyMarker=f=>'<!-- workflow-watch:'+f.repo+':'+f.run_id+' -->';
 const SAFE_WORKFLOW=/^\.github\/workflows\/[\w.-]+\.ya?ml$/;
 export function selectLatestFailures(repo,runs,{now=Date.now(),max=12}={}){
   if(!REPOS.includes(repo)||!Array.isArray(runs))throw Error('Unexpected workflow inventory');
   const seen=new Set(),out=[];
-  for(const r of [...runs].sort((a,b)=>Date.parse(b?.created_at)-Date.parse(a?.created_at))){
+  for(const r of [...runs].sort((a,b)=>Date.parse(b?.created_at)-Date.parse(a?.created_at)||
+    (Number.isSafeInteger(b?.id)?b.id:0)-(Number.isSafeInteger(a?.id)?a.id:0)||
+    (validAttempt(b?.run_attempt)?b.run_attempt:0)-(validAttempt(a?.run_attempt)?a.run_attempt:0))){
     if(!r||!SAFE_WORKFLOW.test(r.path||'')||typeof r.head_branch!=='string'||!r.head_branch||r.head_branch.length>140)continue;
     if(IGNORE.has(r.path.split('/').at(-1)))continue;
     const key=r.path+'@'+r.head_branch;
@@ -22,8 +27,8 @@ export function selectLatestFailures(repo,runs,{now=Date.now(),max=12}={}){
     const age=now-Date.parse(r.created_at);
     if(!(age>=0&&age<=AGE_MS)||r.status!=='completed'||r.conclusion!=='failure'||!SAFE_SHA.test(r.head_sha||''))continue;
     const expected='https://github.com/www-infinity4/'+repo+'/actions/runs/'+r.id;
-    if(!Number.isSafeInteger(r.id)||r.id<=0||r.html_url!==expected)continue;
-    out.push({repo,workflow:r.path,branch:r.head_branch,sha:r.head_sha,run_id:r.id,run_url:expected,job_failures:[]});
+    if(!Number.isSafeInteger(r.id)||r.id<=0||!validAttempt(r.run_attempt)||r.html_url!==expected)continue;
+    out.push({repo,workflow:r.path,branch:r.head_branch,sha:r.head_sha,run_id:r.id,run_attempt:r.run_attempt,run_url:expected,job_failures:[]});
     if(out.length>=max)break;
   }
   return out;
@@ -48,12 +53,12 @@ export function buildReceipt(f){
   const jobs=(f.job_failures||[]).filter(j=>safeJobUrl(f,j?.url)).slice(0,4)
     .map(j=>'- '+safeLabel(j.name)+': '+j.url+'; failed step: '+safeLabel(j.step)).join('\n');
   return [
-    '<!-- workflow-watch:'+f.repo+':'+f.run_id+' -->',
+    marker(f),
     '**New verified CI failure. Not repaired.**',
     'Repository: www-infinity4/'+f.repo,
     'Workflow: '+safeLabel(f.workflow)+'; branch: '+safeLabel(f.branch),
     'Exact head: '+f.sha,
-    'Run evidence: '+f.run_url,
+    'Run evidence: '+f.run_url+'; Attempt: '+f.run_attempt,
     jobs||'Failed job details unavailable (inspect run before repair).',
     'Repair: Red reproduces at this SHA, Green patches through existing signed owner repository engine, Pink tests exact-head CI; independent security review and permitted merge; separate deployment verification.',
     'Do not bypass existing branch, reviewer, network-isolation or owner scope gates.'
@@ -63,7 +68,7 @@ export function planTicketChanges(findings,issues){
   if(!Array.isArray(findings)||!Array.isArray(issues))throw Error('Ticket evidence unavailable');
   const grouped=new Map();
   for(const f of findings){
-    if(!REPOS.includes(f.repo))continue;
+    if(!REPOS.includes(f.repo)||!validAttempt(f.run_attempt))continue;
     const arr=grouped.get(f.repo)||[];
     if(arr.length<4)arr.push(f);
     grouped.set(f.repo,arr);
@@ -73,7 +78,9 @@ export function planTicketChanges(findings,issues){
     const title='[Agent Job] '+repo+' · failed-workflow';
     const existing=issues.find(issue=>issue.title===title&&Number.isInteger(issue.number));
     const original=existing?.body||'';
-    const news=items.filter(f=>!original.includes('<!-- workflow-watch:'+f.repo+':'+f.run_id+' -->'));
+    // Old run-only markers can cover the first attempt, never suppress a rerun.
+    const seen=new Set();
+    const news=items.filter(f=>{const key=marker(f);if(seen.has(key)||original.includes(key)||(f.run_attempt===1&&original.includes(legacyMarker(f))))return false;seen.add(key);return true;});
     if(!news.length)continue;
     const body=[original||'Evidence-backed recurring GitHub Actions failure tracker. Not proof of repair.',...news.map(buildReceipt)].join('\n\n---\n\n');
     if(body.length>60000)continue;
@@ -103,9 +110,9 @@ export async function runWatch({token=process.env.REPOSITORY_WRITE_TOKEN,api=gh,
     }
     for(const f of selectLatestFailures(repo,runs,{now,max:6})){
       try{
-        const detail=await api(token,'repos/www-infinity4/'+repo+'/actions/runs/'+f.run_id+'/jobs?per_page=100');
+        const detail=await api(token,'repos/www-infinity4/'+repo+'/actions/runs/'+f.run_id+'/attempts/'+f.run_attempt+'/jobs?per_page=100');
         if(!Array.isArray(detail.jobs))throw Error('Actions jobs inventory missing');
-        f.job_failures=detail.jobs.filter(j=>j?.conclusion==='failure'&&Number.isSafeInteger(j.id)&&j.id>0)
+        f.job_failures=detail.jobs.filter(j=>j?.conclusion==='failure'&&j.run_attempt===f.run_attempt&&Number.isSafeInteger(j.id)&&j.id>0)
           .slice(0,4).map(j=>({
             // The persisted artifact is also shared evidence: sanitize BEFORE storage.
             name:safeLabel(j.name,120),
