@@ -23,6 +23,7 @@ import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs'
 import {runSourceReview} from './source-verify.mjs';
 import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
+import {readOptionalRootReadme,trackRunnerRequest} from './runner-preflight.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage,repositoryNodeTests,commandReceipt,compactRepositoryChecks} from './runtime-baseline.mjs';
 import {withRepositorySandbox} from './execution-sandbox.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -64,9 +65,14 @@ async function call(step,body={}){
   report.boundedEvidence=[...(report.boundedEvidence||[]),{step,...bounded.evidenceBudget}];
  }
  const payload=body.evidence?{...body,evidence:bounded}:body;
- const value=await fetchRunnerOidcIdentity();
- const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
- const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
+ const result=await trackRunnerRequest(report,step,async trace=>{
+  const value=await fetchRunnerOidcIdentity();
+  trace.phase='transport';
+  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
+  trace.phase='response';trace.httpStatus=r.status;
+  const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
+  return result;
+ });
  if(step==='result'){
   if(body.status==='source_verified'){
    const proof=await call('source-review-receipt');
@@ -94,7 +100,7 @@ async function event(agent,message,step){
  await call('event',row);
 }
 async function sourceFile(file,maxBytes=400000){safePath(file);const absolute=inside(workspace,file);try{
- const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Error('Writer refuses symlink source');}
+ const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Object.assign(Error('Writer refuses symlink source'),{code:'writer_symlink_source'});}
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function checks(patched,focusedTests){
@@ -219,7 +225,7 @@ try{
   const dependencyContext=await collectDependencyContext({task:scopedTask,target:report.repository,github});
   report.dependencyContext=dependencyContext;
   await fs.writeFile('repository-receipts/dependency-context.json',JSON.stringify(dependencyContext,null,2));
-  const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
+  const tracked=git('ls-files').split('\n');const readme=await readOptionalRootReadme(sourceFile,report),agents=await sourceFile('AGENTS.md');
   const taskBriefs=await collectPinnedTaskBriefs({task:scopedTask,sourceTree:tracked,baseSha,read:sourceFile});
   report.taskBriefs=taskBriefs;
   // Read actual safe source snippets before declaring a link or target absent.
