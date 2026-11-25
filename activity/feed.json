@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T14:26:03.283Z",
+  "generatedAt": "2026-11-25T14:37:12.369Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-e6577305c4c9077c76ae5066d90880a47e033b7c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T14:28:45Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/e6577305c4c9077c76ae5066d90880a47e033b7c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-8ad1836d9967c672acf2f7e2ba09d9fcc4a2b1d1",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T14:26:12Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8ad1836d9967c672acf2f7e2ba09d9fcc4a2b1d1",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-0245f0db0096634669ab732405668d91fcea69ba",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-25T13:12:20Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/1d55e38788098d20d4730b1c1b96d8f5b9eab222",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-7838bcb0143c963b8f65d5e2191270239d58b235",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T12:54:34Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/7838bcb0143c963b8f65d5e2191270239d58b235",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -280,18 +292,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/7fd7badfa44833b3e0dfb8bfdbe32007647c2bc4",
       "title": "Fix Cloudflare sign-in requesting full project scopes (#1906) (#2131)",
       "message": "I found a commit titled “Fix Cloudflare sign-in requesting full project scopes (#1906) (#2131)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-d6f67c6d5a9a80e7cbad26e56a7073d13c70baf0",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T07:30:15Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/d6f67c6d5a9a80e7cbad26e56a7073d13c70baf0",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-2125",
