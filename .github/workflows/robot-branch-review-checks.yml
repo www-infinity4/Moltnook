@@ -73,6 +73,8 @@ jobs:
           node --test agents/repository-engine/oracle-style-contract.test.mjs
       - name: Verify isolated SwaT runtime diagnostics (no GPU or provider calls)
         run: node --test agents/repository-engine/swat-preflight.test.mjs
+      - name: Verify native Bubbles context handoff (offline)
+        run: node --test agents/repository-engine/native-context.test.mjs
       - name: Assert Oracle surface and functional JavaScript syntax
         run: |
           node --check agent-room.js
