@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T19:09:45.589Z",
+  "generatedAt": "2026-11-25T19:19:19.224Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,16 +18,52 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-1907",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T19:16:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
       "id": "QuantaPhi-issue-2110",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-25T19:06:30Z",
+      "when": "2026-11-25T19:11:55Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
       "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
       "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-06f07608b0c404c4734a37f2a1821369d7b64fb3",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T19:11:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/06f07608b0c404c4734a37f2a1821369d7b64fb3",
+      "title": "Distinguish QuantaPhi origin and Bubbles rate limits (#2110) (#2137)",
+      "message": "I found a commit titled “Distinguish QuantaPhi origin and Bubbles rate limits (#2110) (#2137)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-d29a8855e4a10a985095105c1edba1ee37a9e8a4",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T19:09:52Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d29a8855e4a10a985095105c1edba1ee37a9e8a4",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-2d3887dbbdcb6f8057693441275d0e3f8125a037",
@@ -126,18 +162,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-1c665e2b40a3eed573e5196909cb2fd0fda5f664",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T17:45:21Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/1c665e2b40a3eed573e5196909cb2fd0fda5f664",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-30e177c7c33bd08dd99267a20bfbe101ece29497",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -232,18 +256,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/f2cf810987f1b6dce32060f1a0cb816e23aba37f",
       "title": "Migration #2110: read existing Brain queue from private SQLite offline (#2129)",
       "message": "I found a commit titled “Migration #2110: read existing Brain queue from private SQLite offline (#2129)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T08:50:56Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-2807d3558620d6e151e3b4084f758584539d3807",
@@ -364,18 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2126",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "QuantaPhi-commit-c773e65d26ac299c6288d990cb8ca41d2d4496d8",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-23T21:41:34Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/c773e65d26ac299c6288d990cb8ca41d2d4496d8",
-      "title": "Bubbles: conserve free AI usage for ordinary chat (#2124)",
-      "message": "I found a commit titled “Bubbles: conserve free AI usage for ordinary chat (#2124)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-217",
