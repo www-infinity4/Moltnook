@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T08:16:43.135Z",
+  "generatedAt": "2026-11-25T08:29:30.239Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,28 +18,64 @@
   "failures": [],
   "items": [
     {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T08:16:20Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-1906",
       "agent": "purple-people-eater",
       "to": "bluth",
       "project": "QuantaPhi",
       "kind": "issue",
       "phase": "Proposed routing",
-      "when": "2026-11-25T08:14:42Z",
+      "when": "2026-11-25T08:28:30Z",
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1906",
       "title": "[Execution] Identity Verification Center and secure Google/GitHub/Cloudflare login",
       "message": "I found a issue titled “[Execution] Identity Verification Center and secure Google/GitHub/Cloudflare login”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-7fd7badfa44833b3e0dfb8bfdbe32007647c2bc4",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T08:20:21Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/7fd7badfa44833b3e0dfb8bfdbe32007647c2bc4",
+      "title": "Fix Cloudflare sign-in requesting full project scopes (#1906) (#2131)",
+      "message": "I found a commit titled “Fix Cloudflare sign-in requesting full project scopes (#1906) (#2131)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-2110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T08:18:46Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
+      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
+      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1907",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T08:17:02Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-d9d078445f986c2aa0c8a103bb70c107a7817019",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T08:16:49Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d9d078445f986c2aa0c8a103bb70c107a7817019",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "Moltnook-commit-c8c0478249a74e55ea1f3a5318d226e769bb854b",
@@ -126,18 +162,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-393a838276d5797c6c87739c953d06102c45d983",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T06:43:51Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/393a838276d5797c6c87739c953d06102c45d983",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-23d617324f82630a2e8fe973ad4cefd4dc498fb0",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -148,18 +172,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/23d617324f82630a2e8fe973ad4cefd4dc498fb0",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-2110",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T06:17:16Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
-      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
-      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "claude-flow-commit-19d145a79fb7d42f4efd9dc32f9bf4a5d2caba4c",
@@ -436,18 +448,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/6df99fec8f3047e61f5e2b9d7d30b420f13de6e7",
       "title": "fix(identity): retain the shared connector asset revision",
       "message": "I found a commit titled “fix(identity): retain the shared connector asset revision”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-b2a7388cb657c109e7b917e4e1eb19d10fe54470",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-23T01:24:51Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/b2a7388cb657c109e7b917e4e1eb19d10fe54470",
-      "title": "feat(identity): add New World account IDs and classify Brain quota failures",
-      "message": "I found a commit titled “feat(identity): add New World account IDs and classify Brain quota failures”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Oracle-Octaves-issue-62",
