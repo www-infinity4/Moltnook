@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T20:24:23.528Z",
+  "generatedAt": "2026-11-25T20:36:02.704Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-20b90e4ccef42bdd800a24740c9473ba1efad59d",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T20:28:20Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/20b90e4ccef42bdd800a24740c9473ba1efad59d",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-9c918d49c96c17e3689b197cc2da871d9a5e53c7",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-25T20:24:32Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9c918d49c96c17e3689b197cc2da871d9a5e53c7",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "QuantaPhi-issue-1907",
       "agent": "purple-people-eater",
@@ -100,18 +124,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/b54ddac6f2c7115ba723a3fa417f623d324c1826",
       "title": "SwaT: isolated owner-host runtime preflight (#1907) (#282)",
       "message": "I found a commit titled “SwaT: isolated owner-host runtime preflight (#1907) (#282)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-df8bad9eaf89d94f610efff658c690f35b465057",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T19:46:49Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/df8bad9eaf89d94f610efff658c690f35b465057",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-commit-fe5ec99583e8e0d0e61e6160ba36c9a60f8b0914",
@@ -230,18 +242,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-25T14:28:45Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/e6577305c4c9077c76ae5066d90880a47e033b7c",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-d841921a844c224f12eca1ae367c1248bc8d03fa",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T13:28:27Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/d841921a844c224f12eca1ae367c1248bc8d03fa",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
