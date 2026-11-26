@@ -113,3 +113,22 @@ test('White and Pink reject unsafe provenance, missing source sectors, and exces
  assert.throws(()=>assimilatePinkEvidence([],[{...red,color:'pink'}]),/requires_red/);
  assert.throws(()=>assimilatePinkEvidence([red],[red]),/requires_pink/);
 });
+
+
+test('authenticated alternate inference receipts retain the actual provider without granting execution',async()=>{
+ const input={color:'green',task:'Inspect pinned fixture'};
+ const receipt={ok:true,status:'model_inference_completed',color:'green',layers:colorProfile('green').layers,
+  provider:'gemini',model:'gemini-2.5-flash',toolRequestsAreNotExecution:true,
+  authorizedOperationsPerformed:false,finding:'Synthetic fixture',nextAction:'Review source',blockers:[],toolRequests:[]};
+ const observed=await invokeColorCore(async()=>receipt,input);
+ assert.equal(observed.provider,'gemini');
+ assert.equal(observed.model,'gemini-2.5-flash');
+ assert.equal(observed.anyToolsExecuted,false);
+ assert.equal(observed.ownerApprovalGranted,false);
+ for(const changed of [{provider:'cloudflare-workers-ai'},{provider:undefined},{model:COLOR_GPT_MODEL},{provider:'unknown'}]){
+  await assert.rejects(invokeColorCore(async()=>({...receipt,...changed}),input),/receipt_unverified/);
+ }
+ const legacy=await invokeColorCore(async()=>({...receipt,provider:undefined,model:COLOR_GPT_MODEL}),input);
+ assert.equal(legacy.model,COLOR_GPT_MODEL);
+ assert.equal(legacy.provider,null);
+});
