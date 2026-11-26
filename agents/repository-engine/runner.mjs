@@ -23,6 +23,7 @@ import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs'
 import {runSourceReview} from './source-verify.mjs';
 import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
+import {readOptionalRootReadme} from './runner-preflight.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage,repositoryNodeTests,commandReceipt,compactRepositoryChecks} from './runtime-baseline.mjs';
 import {withRepositorySandbox} from './execution-sandbox.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -130,7 +131,7 @@ async function event(agent,message,step){
  await call('event',row);
 }
 async function sourceFile(file,maxBytes=400000){safePath(file);const absolute=inside(workspace,file);try{
- const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Error('Writer refuses symlink source');}
+ const parts=file.split('/');let current=workspace;for(const part of parts){current=path.join(current,part);const st=await fs.lstat(current);if(st.isSymbolicLink())throw Object.assign(Error('Writer refuses symlink source'),{code:'writer_symlink_source'});}
  const s=await fs.readFile(absolute,'utf8');if(Buffer.byteLength(s)>maxBytes)throw Error('Source requires a smaller task: '+file);return s;
  }catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function checks(patched,focusedTests){
@@ -255,7 +256,7 @@ try{
   const dependencyContext=await collectDependencyContext({task:scopedTask,target:report.repository,github});
   report.dependencyContext=dependencyContext;
   await fs.writeFile('repository-receipts/dependency-context.json',JSON.stringify(dependencyContext,null,2));
-  const tracked=git('ls-files').split('\n');const readme=await sourceFile('README.md'),agents=await sourceFile('AGENTS.md');
+  const tracked=git('ls-files').split('\n');const readme=await readOptionalRootReadme(sourceFile,report),agents=await sourceFile('AGENTS.md');
   const taskBriefs=await collectPinnedTaskBriefs({task:scopedTask,sourceTree:tracked,baseSha,read:sourceFile});
   report.taskBriefs=taskBriefs;
   // Read actual safe source snippets before declaring a link or target absent.
