@@ -111,3 +111,14 @@ test('OIDC HTML success fails closed before Brain POST',async()=>withActionsIden
  await assert.rejects(connectExistingCredential({token:'fixture-key',request:async()=>{calls++;return new Response('<!DOCTYPE html>private-body',{status:200});}}),{message:'github_runner_identity_invalid_json_http_200'});
  assert.equal(calls,1);
 }));
+
+test('credential bridge rejects non-boolean success flag',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(connectExistingCredential({token:'fixture',request:async()=>++calls===1?Response.json({value:'oidc'}):Response.json({ok:'false',status:'connected'})}),{message:'github_credential_bridge_failed'});
+ assert.equal(calls,2);
+}));
+test('Brain operation rejects non-boolean success flag',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(runnerCall('quant-audit',{},async()=>++calls===1?Response.json({value:'oidc'}):Response.json({ok:'false'})),{message:'brain_runner_call_failed'});
+ assert.equal(calls,2);
+}));
