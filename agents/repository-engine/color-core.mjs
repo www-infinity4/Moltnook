@@ -83,8 +83,13 @@ export async function invokeColorCore(invoke,{color,task,evidence={}}){
  const profile=colorProfile(color);
  if(typeof task!=='string'||!task.trim()||task.length>2400)throw Error('color_core_task_invalid');
  const result=await invoke('color-think',{color,task,evidence});
+ // Only the authenticated server reply identifies the actual model. This
+ // validates receipts, not a request to select or enable another provider.
+ const validIdentity=(result?.model===COLOR_GPT_MODEL&&
+   (result.provider===undefined||result.provider==='cloudflare-workers-ai'))||
+  (result?.model==='gemini-2.5-flash'&&result.provider==='gemini');
  if(!result||result.ok!==true||result.status!=='model_inference_completed'||
-   result.model!==profile.model||result.color!==color||
+   !validIdentity||result.color!==color||
    JSON.stringify(result.layers)!==JSON.stringify(profile.layers)||
    result.toolRequestsAreNotExecution!==true||result.authorizedOperationsPerformed!==false)
   throw Error('color_core_model_receipt_unverified');
@@ -92,7 +97,7 @@ export async function invokeColorCore(invoke,{color,task,evidence={}}){
  if(typeof result.finding!=='string'||typeof result.nextAction!=='string'||
    !Array.isArray(result.blockers)||!Array.isArray(result.toolRequests))
   throw Error('color_core_result_invalid');
- return {color,model:profile.model,status:'model_inference_completed',layers:profile.layers,
+ return {color,model:result.model,provider:result.provider??null,status:'model_inference_completed',layers:profile.layers,
   finding:result.finding.slice(0,1500),nextAction:result.nextAction.slice(0,1500),
   blockers:result.blockers.slice(0,6),requestedAppendages:result.toolRequests.slice(0,6),
   anyToolsExecuted:false,sourceCommitted:false,productionDeployed:false,
