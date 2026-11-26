@@ -95,3 +95,30 @@ test('regular authenticated Brain operations share bounded OIDC retry, without r
  assert.equal(identity,1);
  assert.equal(brain,1);
 }));
+
+test('Brain HTTP 429 is explicit without repeating credential POST',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(connectExistingCredential({token:'fixture-key',request:async()=>++calls===1?Response.json({value:'fixture-oidc'}):new Response('error code: 1027',{status:429})}),{message:'brain_runner_rate_limited_http_429'});
+ assert.equal(calls,2);
+}));
+test('Brain HTML errors preserve status without exposing response body',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(runnerCall('quant-audit',{},async()=>++calls===1?Response.json({value:'fixture-oidc'}):new Response('<!DOCTYPE html>private-body',{status:503})),{message:'brain_runner_invalid_json_http_503'});
+ assert.equal(calls,2);
+}));
+test('OIDC HTML success fails closed before Brain POST',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(connectExistingCredential({token:'fixture-key',request:async()=>{calls++;return new Response('<!DOCTYPE html>private-body',{status:200});}}),{message:'github_runner_identity_invalid_json_http_200'});
+ assert.equal(calls,1);
+}));
+
+test('credential bridge rejects non-boolean success flag',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(connectExistingCredential({token:'fixture',request:async()=>++calls===1?Response.json({value:'oidc'}):Response.json({ok:'false',status:'connected'})}),{message:'github_credential_bridge_failed'});
+ assert.equal(calls,2);
+}));
+test('Brain operation rejects non-boolean success flag',async()=>withActionsIdentity(async()=>{
+ let calls=0;
+ await assert.rejects(runnerCall('quant-audit',{},async()=>++calls===1?Response.json({value:'oidc'}):Response.json({ok:'false'})),{message:'brain_runner_call_failed'});
+ assert.equal(calls,2);
+}));

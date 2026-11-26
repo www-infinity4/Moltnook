@@ -1,5 +1,13 @@
 import {pathToFileURL} from 'node:url';
 
+async function readJson(response,source){
+ if(source==='brain_runner'&&response.status===429)throw Error('brain_runner_rate_limited_http_429');
+ let data;
+ try{data=await response.json();}catch{throw Error(source+'_invalid_json_http_'+response.status);}
+ if(!data||typeof data!=='object'||Array.isArray(data))throw Error(source+'_invalid_json_http_'+response.status);
+ return data;
+}
+
 // The identity request itself sometimes times out before the Brain worker is
 // contacted. Retry only temporary GitHub OIDC transport/service errors, never
 // credentials, claims, 401/403 or an unverified Brain response. No token logs.
@@ -21,7 +29,7 @@ export async function fetchRunnerOidcIdentity({
     signal:AbortSignal.timeout(15000)
    });
    if(response.ok){
-    const data=await response.json();
+    const data=await readJson(response,'github_runner_identity');
     if(typeof data?.value!=='string'||!data.value)
      throw Error('github_runner_identity_empty_token');
     return data.value;
@@ -47,8 +55,8 @@ export async function runnerCall(step,body={},request=fetch){
   headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},
   body:JSON.stringify(body),signal:AbortSignal.timeout(90000)
  });
- const result=await response.json();
- if(!response.ok||!result.ok)throw Error(result.error||'brain_runner_call_failed');
+ const result=await readJson(response,'brain_runner');
+ if(!response.ok||result.ok!==true)throw Error(result.error||'brain_runner_call_failed');
  return result;
 }
 export async function connectExistingCredential({token=process.env.REPOSITORY_WRITE_TOKEN||'',request=fetch,wait}={}){
@@ -59,8 +67,8 @@ export async function connectExistingCredential({token=process.env.REPOSITORY_WR
   headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},
   body:JSON.stringify({token}),signal:AbortSignal.timeout(30000)
  });
- const result=await response.json();
- if(!response.ok||!result.ok)throw Error(result.error||'github_credential_bridge_failed');
+ const result=await readJson(response,'brain_runner');
+ if(!response.ok||result.ok!==true)throw Error(result.error||'github_credential_bridge_failed');
  // Never include the repository token or GitHub OIDC identity in logs/artifacts.
  return {ok:true,status:result.status,login:result.login,source:result.source,verifiedAt:result.verifiedAt};
 }
