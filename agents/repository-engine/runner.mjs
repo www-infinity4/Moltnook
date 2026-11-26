@@ -79,8 +79,22 @@ async function call(step,body={}){
   trace.httpStatus=r.status;
   trace.phase='decode';
   result=await r.json();
+  if(
+   result===null||
+   typeof result!=='object'||
+   Array.isArray(result)||
+   typeof result.ok!=='boolean'
+  ){
+   throw Error('invalid runner response envelope');
+  }
   trace.phase='remote';
-  if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
+  if(!r.ok||result.ok!==true){
+   throw Error(
+    typeof result.error==='string'&&result.error
+     ?result.error
+     :'Robot brain HTTP '+r.status
+   );
+  }
   trace.phase='complete';
   trace.outcome='success';
  }catch(error){

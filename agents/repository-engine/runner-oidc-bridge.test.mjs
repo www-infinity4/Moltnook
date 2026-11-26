@@ -227,3 +227,83 @@ test('successful calls preserve prior failure and bound trace storage',async()=>
  );
 
 });
+
+test('C13B0-013 rejects invalid runner response envelopes',async()=>{
+ for(const invalid of [
+  null,
+  [],
+  {},
+  {ok:"true"},
+  {ok:1},
+  {ok:null}
+ ]){
+  const h=await traceHarness(
+   async()=> 'synthetic-private-token',
+   async()=>Response.json(invalid)
+  );
+
+  await assert.rejects(
+   h.call('capability'),
+   /invalid runner response envelope/
+  );
+
+  assert.equal(
+   h.report.lastRunnerFailure.phase,
+   'decode'
+  );
+
+  assert.equal(
+   h.report.lastRunnerFailure.outcome,
+   'failed'
+  );
+
+  assert.doesNotMatch(
+   JSON.stringify([h.report,h.logs]),
+   /synthetic-private-token/
+  );
+ }
+});
+
+test('C13B0-013 preserves valid remote rejection',async()=>{
+ const h=await traceHarness(
+  async()=> 'synthetic-token',
+  async()=>Response.json(
+   {ok:false,error:'runner_operation_unavailable'},
+   {status:503}
+  )
+ );
+
+ await assert.rejects(
+  h.call('claim'),
+  /runner_operation_unavailable/
+ );
+
+ assert.equal(
+  h.report.lastRunnerFailure.phase,
+  'remote'
+ );
+
+ assert.equal(
+  h.report.lastRunnerFailure.httpStatus,
+  503
+ );
+});
+
+test('C13B0-013 accepts valid success envelope',async()=>{
+ const h=await traceHarness(
+  async()=> 'synthetic-token',
+  async()=>Response.json(
+   {ok:true,sourceWindowsV2:true}
+  )
+ );
+
+ assert.deepEqual(
+  await h.call('capability'),
+  {ok:true,sourceWindowsV2:true}
+ );
+
+ assert.equal(
+  h.report.runnerCallTrace.at(-1).outcome,
+  'success'
+ );
+});
