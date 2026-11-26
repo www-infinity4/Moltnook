@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T09:27:25.461Z",
+  "generatedAt": "2026-11-26T09:37:34.254Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-746e6c7609f69331b550dd0b86a925d6facea117",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T09:29:46Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/746e6c7609f69331b550dd0b86a925d6facea117",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-32f8e5fdf9bdd294a431b6614533ac3c9d94e48e",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T09:27:31Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/32f8e5fdf9bdd294a431b6614533ac3c9d94e48e",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-079f0b812a64c2a19c0154aad14d192d1f0977e0",
       "agent": "greenbeans",
@@ -162,18 +186,6 @@
       "message": "I found a commit titled “Contain malformed Brain ticket graphs during signed claim”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-0d56d2aee9d58e99366acedd16557d21dd8cc2ac",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T07:55:43Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0d56d2aee9d58e99366acedd16557d21dd8cc2ac",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-e585323eb565106d49fd56874343ced52934e020",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -302,18 +314,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-26T03:30:54Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/c65ccc129ad26a3bbda38ec2685ac7ae8bcce025",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-fcc2fe4956a6b7c88faf79209556cb8aa6539ada",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T02:31:16Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/fcc2fe4956a6b7c88faf79209556cb8aa6539ada",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
