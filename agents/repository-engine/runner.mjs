@@ -64,9 +64,45 @@ async function call(step,body={}){
   report.boundedEvidence=[...(report.boundedEvidence||[]),{step,...bounded.evidenceBudget}];
  }
  const payload=body.evidence?{...body,evidence:bounded}:body;
- const value=await fetchRunnerOidcIdentity();
- const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
- const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
+ const trace={
+  step:typeof step==='string'&&/^[a-z-]{1,40}$/.test(step)?step:'unknown',
+  phase:'identity',
+  outcome:'pending'
+ };
+ report.runnerCallTrace=(report.runnerCallTrace||[]).slice(-31);
+ report.runnerCallTrace.push(trace);
+ let result;
+ try{
+  const value=await fetchRunnerOidcIdentity();
+  trace.phase='transport';
+  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
+  trace.httpStatus=r.status;
+  trace.phase='decode';
+  result=await r.json();
+  if(
+   result===null||
+   typeof result!=='object'||
+   Array.isArray(result)||
+   typeof result.ok!=='boolean'
+  ){
+   throw Error('invalid runner response envelope');
+  }
+  trace.phase='remote';
+  if(!r.ok||result.ok!==true){
+   throw Error(
+    typeof result.error==='string'&&result.error
+     ?result.error
+     :'Robot brain HTTP '+r.status
+   );
+  }
+  trace.phase='complete';
+  trace.outcome='success';
+ }catch(error){
+  trace.outcome='failed';
+  report.lastRunnerFailure={...trace};
+  console.error('BRAIN_RUNNER_CALL_FAILED '+JSON.stringify(trace));
+  throw error;
+ }
  if(step==='result'){
   if(body.status==='source_verified'){
    const proof=await call('source-review-receipt');
