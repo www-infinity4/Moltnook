@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T11:24:25.801Z",
+  "generatedAt": "2026-11-26T11:36:10.584Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-93310605c82e42620670c342ef57fc7afe994ca8",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T11:28:25Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/93310605c82e42620670c342ef57fc7afe994ca8",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-d320ef70c99b38de8cad03d9b6152c643ca8f8a7",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T11:24:33Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d320ef70c99b38de8cad03d9b6152c643ca8f8a7",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-e562897702caa8bd695e3ca42c1eb039579d6f0e",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-26T10:13:42Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/c2ed7fe0dfb4813022d9b239c13ad9c55d183011",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-14826d64f94581ba06a3b5b9a617d2323bab5752",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T09:56:29Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/14826d64f94581ba06a3b5b9a617d2323bab5752",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2125",
       "title": "[Agent Job] Oracle daily card, wallet and security repairs",
       "message": "I found a issue titled “[Agent Job] Oracle daily card, wallet and security repairs”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "claude-flow-commit-26692f9acf55d4892b7f5fed1d33a54884081c86",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T04:30:01Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/26692f9acf55d4892b7f5fed1d33a54884081c86",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1904",
