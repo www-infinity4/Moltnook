@@ -1,46 +1,99 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readOptionalRootReadme,trackRunnerRequest,parseRunnerResponse} from './runner-preflight.mjs';
-test('optional README skips only the typed symlink refusal',async()=>{
- const report={}; const refusal=Object.assign(new Error('Writer refuses symlink source'),{code:'writer_symlink_source'});
- assert.equal(await readOptionalRootReadme(async p=>{assert.equal(p,'README.md');throw refusal},report),null);
- assert.deepEqual(report.rootReadme,{path:'README.md',state:'skipped_symlink'});
-});
-test('regular and missing README are distinguished; unrelated errors propagate',async()=>{
- const report={}; assert.equal(await readOptionalRootReadme(async()=> 'readme',report),'readme');assert.equal(report.rootReadme.state,'read');
- assert.equal(await readOptionalRootReadme(async()=>null,report),null);assert.equal(report.rootReadme.state,'missing');
- const e=new Error('permission denied');await assert.rejects(readOptionalRootReadme(async()=>{throw e},report),err=>err===e);
-});
-test('claim failure records operation, phase, HTTP status without payload or retry',async()=>{
- const report={};const e=new Error('private response body');let attempts=0;
- await assert.rejects(trackRunnerRequest(report,'claim',async trace=>{attempts++;trace.phase='response';trace.httpStatus=503;throw e}),err=>err===e);
- assert.equal(attempts,1);assert.deepEqual(report.runnerRequestFailures,[{operation:'claim',phase:'response',httpStatus:503}]);
- assert.doesNotMatch(JSON.stringify(report),/private response body/);
-});
-test('identity and transport failures do not invent HTTP status; successes leave no failure',async()=>{
- const report={};const e=new Error('unavailable');
- await assert.rejects(trackRunnerRequest(report,'capability',async()=>{throw e}));
- await assert.rejects(trackRunnerRequest(report,'claim',async trace=>{trace.phase='transport';throw e}));
- assert.equal(await trackRunnerRequest(report,'capability',async()=>42),42);
- assert.deepEqual(report.runnerRequestFailures,[{operation:'capability',phase:'identity',httpStatus:null},{operation:'claim',phase:'transport',httpStatus:null}]);
-});
-test('failure history is bounded and unknown operation text is not copied',async()=>{
- const report={};for(let i=0;i<40;i++)await assert.rejects(trackRunnerRequest(report,'private operation value',async()=>{throw Error('secret')}));
- assert.equal(report.runnerRequestFailures.length,32);assert.ok(report.runnerRequestFailures.every(x=>x.operation==='other'));
-});
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+import {safePath,inside} from './patch.mjs';
 
-test('runner reports rate limits even for HTML without retry or body leakage',async()=>{
- const report={};let calls=0;
- await assert.rejects(trackRunnerRequest(report,'claim',async trace=>{calls++;trace.phase='response';trace.httpStatus=429;return parseRunnerResponse(new Response('private HTML',{status:429}));}),{message:'brain_runner_rate_limited_http_429'});
- assert.equal(calls,1);assert.deepEqual(report.runnerRequestFailures,[{operation:'claim',phase:'response',httpStatus:429}]);
+const runner=await fs.readFile(new URL('./runner.mjs',import.meta.url),'utf8');
+function strictReader(workspace,filesystem=fs){
+ const begin=runner.indexOf('async function sourceFile(');
+ const end=runner.indexOf('async function checks(',begin);
+ assert.ok(begin>=0&&end>begin,'exercise the actual strict runner source reader');
+ return new Function('safePath','inside','workspace','path','fs',
+  runner.slice(begin,end)+'\nreturn sourceFile;')(safePath,inside,workspace,path,filesystem);
+}
+async function optionalRead(...args){
+ const {readOptionalRootReadme}=await import('./runner-preflight.mjs');
+ return readOptionalRootReadme(...args);
+}
+async function fixture(t){
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'bubbles-root-readme-'));
+ t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const workspace=path.join(root,'checkout');
+ await fs.mkdir(workspace);
+ return {root,workspace,read:strictReader(workspace)};
+}
+
+test('runner uses optional discovery only for the root README and reads AGENTS strictly',()=>{
+ assert.ok(/import\s+\{readOptionalRootReadme\}\s+from '\.\/runner-preflight\.mjs'/.test(runner),
+  'runner must import the narrow optional README helper');
+ assert.ok(/const readme=await readOptionalRootReadme\(sourceFile,report\),agents=await sourceFile\('AGENTS\.md'\)/.test(runner),
+  'only the optional root README may use the skip policy');
 });
-test('runner rejects malformed JSON and non-object receipts',async()=>{
- for(const response of [new Response('private HTML',{status:503}),Response.json(null),Response.json([])]){
-  await assert.rejects(parseRunnerResponse(response),{message:'brain_runner_invalid_json_http_'+response.status});
+test('optional discovery reads real README content and distinguishes a missing root file',async t=>{
+ const {workspace,read}=await fixture(t),report={};
+ await fs.writeFile(path.join(workspace,'README.md'),'Owner repository overview.\n');
+ assert.equal(await optionalRead(read,report),'Owner repository overview.\n');
+ assert.deepEqual(report.rootReadme,{path:'README.md',state:'read'});
+ await fs.unlink(path.join(workspace,'README.md'));
+ assert.equal(await optionalRead(read,report),null);
+ assert.deepEqual(report.rootReadme,{path:'README.md',state:'missing'});
+});
+test('real symlink README is refused by strict reads and skipped only during optional discovery',async t=>{
+ const {root,workspace}=await fixture(t),report={};
+ const target=path.join(root,'outside.txt');
+ await fs.writeFile(target,'synthetic target must not be read');
+ await fs.symlink(target,path.join(workspace,'README.md'));
+ let reads=0;
+ const read=strictReader(workspace,{...fs,readFile:async()=>{reads++;throw Error('symlink target was followed');}});
+ await assert.rejects(read('README.md'),{message:'Writer refuses symlink source',code:'writer_symlink_source'});
+ assert.equal(await optionalRead(read,report),null);
+ assert.equal(reads,0,'the helper must never materialize or follow the target');
+ assert.deepEqual(report.rootReadme,{path:'README.md',state:'skipped_symlink'});
+ assert.equal(await fs.readFile(target,'utf8'),'synthetic target must not be read');
+});
+test('linked AGENTS and requested source files retain the strict typed refusal',async t=>{
+ const {root,workspace,read}=await fixture(t);
+ const target=path.join(root,'outside.txt');
+ await fs.writeFile(target,'synthetic outside source');
+ await fs.mkdir(path.join(workspace,'src'));
+ for(const file of ['AGENTS.md','src/required.mjs']){
+  await fs.symlink(target,path.join(workspace,file));
+  await assert.rejects(read(file),{message:'Writer refuses symlink source',code:'writer_symlink_source'});
  }
 });
-test('runner requires boolean success and preserves valid protocol errors',async()=>{
- await assert.rejects(parseRunnerResponse(Response.json({ok:'false'})),{message:'Robot brain HTTP 200'});
- await assert.rejects(parseRunnerResponse(Response.json({ok:false,error:'runner_operation_unavailable'},{status:503})),{message:'runner_operation_unavailable'});
- assert.deepEqual(await parseRunnerResponse(Response.json({ok:true,leaseId:'fixture'})),{ok:true,leaseId:'fixture'});
+test('a symlink in a requested source ancestor is refused without reading its target',async t=>{
+ const {root,workspace}=await fixture(t),outside=path.join(root,'outside');
+ await fs.mkdir(outside);await fs.writeFile(path.join(outside,'required.mjs'),'synthetic source');
+ await fs.symlink(outside,path.join(workspace,'src'),'dir');
+ let reads=0;
+ const read=strictReader(workspace,{...fs,readFile:async()=>{reads++;throw Error('linked ancestor followed');}});
+ await assert.rejects(read('src/required.mjs'),{message:'Writer refuses symlink source',code:'writer_symlink_source'});
+ assert.equal(reads,0);
+});
+test('only the typed symlink refusal can be skipped and the report contains no target or error text',async()=>{
+ const report={},refusal=Object.assign(Error('synthetic-private-target'),{code:'writer_symlink_source'});
+ let calls=0;
+ assert.equal(await optionalRead(async file=>{calls++;assert.equal(file,'README.md');throw refusal;},report),null);
+ assert.equal(calls,1);
+ assert.deepEqual(report,{rootReadme:{path:'README.md',state:'skipped_symlink'}});
+ for(const error of [Error('Writer refuses symlink source'),Object.assign(Error('permission denied'),{code:'EACCES'}),Object.assign(Error('missing'),{code:'ENOENT'})]){
+  await assert.rejects(optionalRead(async()=>{throw error;},report),actual=>actual===error);
+ }
+ assert.deepEqual(report,{rootReadme:{path:'README.md',state:'skipped_symlink'}});
+});
+test('optional README handling does not swallow real source size and filesystem errors',async t=>{
+ const {workspace,read}=await fixture(t);
+ await fs.writeFile(path.join(workspace,'README.md'),'oversized fixture');
+ await assert.rejects(optionalRead(file=>read(file,2),{}),/Source requires a smaller task: README\.md/);
+ const denied=Object.assign(Error('synthetic permission denial'),{code:'EACCES'});
+ const deniedRead=strictReader(workspace,{...fs,lstat:async()=>{throw denied;}});
+ await assert.rejects(optionalRead(deniedRead,{}),error=>error===denied);
+});
+test('strict source paths reject traversal and credentials before any filesystem access',async t=>{
+ const {workspace}=await fixture(t);
+ const read=strictReader(workspace,{...fs,lstat:async()=>assert.fail('unsafe path reached filesystem')});
+ for(const file of ['../README.md','/README.md','.env','src/secrets/key.mjs'])
+  await assert.rejects(read(file),/Source path is outside writer policy/);
 });

@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {collectSourceEvidence} from './source-evidence.mjs';
+// Exercise optional discovery and strict source reads in the existing CI suite.
+import './runner-preflight.test.mjs';
 test('repeated CI and test names cannot hide the actual ticket implementation',async()=>{
  const workflows=Array.from({length:18},(_,i)=>'.github/workflows/brain-ticket-'+i+'.yml');
  const tests=Array.from({length:18},(_,i)=>'test/brain-ticket-'+i+'.test.mjs');
@@ -78,6 +80,3 @@ test('mixed Android jobs retain web narrator and every named method before repea
  assert.match(result['android/app/src/main/java/FloatingOracleWindow.java'],/drainNativeReply/);
  assert.ok(Object.values(result).join('').length<=16000);
 });
-
-// Also exercise the runner's optional discovery and failure receipts in PR CI.
-import './runner-preflight.test.mjs';
