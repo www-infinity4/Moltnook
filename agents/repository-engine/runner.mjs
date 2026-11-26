@@ -23,7 +23,7 @@ import {requireGreenEdits,greenReplanDecision} from './green-build-recovery.mjs'
 import {runSourceReview} from './source-verify.mjs';
 import {isDeferredPinkReviewRace} from './pink-review-race.mjs';
 import {fetchRunnerOidcIdentity} from './credential-bridge.mjs';
-import {readOptionalRootReadme,trackRunnerRequest} from './runner-preflight.mjs';
+import {readOptionalRootReadme,trackRunnerRequest,parseRunnerResponse} from './runner-preflight.mjs';
 import {inspectRuntime,focusedTestCommand,missingAcceptanceAdapterMessage,repositoryNodeTests,commandReceipt,compactRepositoryChecks} from './runtime-baseline.mjs';
 import {withRepositorySandbox} from './execution-sandbox.mjs';
 import {observeLiveSource} from './live-source.mjs';
@@ -70,8 +70,7 @@ async function call(step,body={}){
   trace.phase='transport';
   const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
   trace.phase='response';trace.httpStatus=r.status;
-  const result=await r.json();if(!r.ok||!result.ok)throw Error(result.error||'Robot brain HTTP '+r.status);
-  return result;
+  return parseRunnerResponse(r);
  });
  if(step==='result'){
   if(body.status==='source_verified'){

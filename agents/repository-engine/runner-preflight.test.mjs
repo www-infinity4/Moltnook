@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readOptionalRootReadme,trackRunnerRequest} from './runner-preflight.mjs';
+import {readOptionalRootReadme,trackRunnerRequest,parseRunnerResponse} from './runner-preflight.mjs';
 test('optional README skips only the typed symlink refusal',async()=>{
  const report={}; const refusal=Object.assign(new Error('Writer refuses symlink source'),{code:'writer_symlink_source'});
  assert.equal(await readOptionalRootReadme(async p=>{assert.equal(p,'README.md');throw refusal},report),null);
@@ -27,4 +27,20 @@ test('identity and transport failures do not invent HTTP status; successes leave
 test('failure history is bounded and unknown operation text is not copied',async()=>{
  const report={};for(let i=0;i<40;i++)await assert.rejects(trackRunnerRequest(report,'private operation value',async()=>{throw Error('secret')}));
  assert.equal(report.runnerRequestFailures.length,32);assert.ok(report.runnerRequestFailures.every(x=>x.operation==='other'));
+});
+
+test('runner reports rate limits even for HTML without retry or body leakage',async()=>{
+ const report={};let calls=0;
+ await assert.rejects(trackRunnerRequest(report,'claim',async trace=>{calls++;trace.phase='response';trace.httpStatus=429;return parseRunnerResponse(new Response('private HTML',{status:429}));}),{message:'brain_runner_rate_limited_http_429'});
+ assert.equal(calls,1);assert.deepEqual(report.runnerRequestFailures,[{operation:'claim',phase:'response',httpStatus:429}]);
+});
+test('runner rejects malformed JSON and non-object receipts',async()=>{
+ for(const response of [new Response('private HTML',{status:503}),Response.json(null),Response.json([])]){
+  await assert.rejects(parseRunnerResponse(response),{message:'brain_runner_invalid_json_http_'+response.status});
+ }
+});
+test('runner requires boolean success and preserves valid protocol errors',async()=>{
+ await assert.rejects(parseRunnerResponse(Response.json({ok:'false'})),{message:'Robot brain HTTP 200'});
+ await assert.rejects(parseRunnerResponse(Response.json({ok:false,error:'runner_operation_unavailable'},{status:503})),{message:'runner_operation_unavailable'});
+ assert.deepEqual(await parseRunnerResponse(Response.json({ok:true,leaseId:'fixture'})),{ok:true,leaseId:'fixture'});
 });

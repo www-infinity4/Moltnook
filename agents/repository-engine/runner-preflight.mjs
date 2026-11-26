@@ -23,3 +23,11 @@ export async function trackRunnerRequest(report,operation,execute){
   throw error;
  }
 }
+export async function parseRunnerResponse(r){
+ if(r.status===429)throw Error('brain_runner_rate_limited_http_429');
+ let result;
+ try{result=await r.json();}catch{throw Error('brain_runner_invalid_json_http_'+r.status);}
+ if(!result||typeof result!=='object'||Array.isArray(result))throw Error('brain_runner_invalid_json_http_'+r.status);
+ if(!r.ok||result.ok!==true)throw Error(typeof result.error==='string'&&result.error?result.error:'Robot brain HTTP '+r.status);
+ return result;
+}
