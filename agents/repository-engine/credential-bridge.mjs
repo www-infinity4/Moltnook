@@ -56,7 +56,7 @@ export async function runnerCall(step,body={},request=fetch){
   body:JSON.stringify(body),signal:AbortSignal.timeout(90000)
  });
  const result=await readJson(response,'brain_runner');
- if(!response.ok||!result.ok)throw Error(result.error||'brain_runner_call_failed');
+ if(!response.ok||result.ok!==true)throw Error(result.error||'brain_runner_call_failed');
  return result;
 }
 export async function connectExistingCredential({token=process.env.REPOSITORY_WRITE_TOKEN||'',request=fetch,wait}={}){
@@ -68,7 +68,7 @@ export async function connectExistingCredential({token=process.env.REPOSITORY_WR
   body:JSON.stringify({token}),signal:AbortSignal.timeout(30000)
  });
  const result=await readJson(response,'brain_runner');
- if(!response.ok||!result.ok)throw Error(result.error||'github_credential_bridge_failed');
+ if(!response.ok||result.ok!==true)throw Error(result.error||'github_credential_bridge_failed');
  // Never include the repository token or GitHub OIDC identity in logs/artifacts.
  return {ok:true,status:result.status,login:result.login,source:result.source,verifiedAt:result.verifiedAt};
 }
