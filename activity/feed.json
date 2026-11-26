@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T06:43:26.727Z",
+  "generatedAt": "2026-11-26T06:54:12.933Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,42 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-commit-ad2526af305d505de02a4bc002ba1b7c4e04b06e",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T06:49:16Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ad2526af305d505de02a4bc002ba1b7c4e04b06e",
+      "title": "Merge pull request #2143 from www-infinity4/fix/bubbles-queue-json-1192-20f1f3b3b1b5",
+      "message": "I found a commit titled “Merge pull request #2143 from www-infinity4/fix/bubbles-queue-json-1192-20f1f3b3b1b5”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-bbc459619117fe3ad2a6f582e1de62ebc8b618fa",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T06:47:21Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/bbc459619117fe3ad2a6f582e1de62ebc8b618fa",
+      "title": "Fix Bubbles signed queue malformed JSON failure (#1192)",
+      "message": "I found a commit titled “Fix Bubbles signed queue malformed JSON failure (#1192)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-d03f00a20be70c1e43a89bce5a53e6e4c7647fe0",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-26T06:43:34Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/d03f00a20be70c1e43a89bce5a53e6e4c7647fe0",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-8a17e4d62eeea80455da098dd3635ab0f8bac2ce",
       "agent": "greenbeans",
@@ -134,18 +170,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-26T05:13:34Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/092d051380583ba822f42aa8760534210fcdfe64",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-cdf753882286e57d5a384f76e27cd744bb777b4a",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T04:55:59Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/cdf753882286e57d5a384f76e27cd744bb777b4a",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -292,30 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/f2cf810987f1b6dce32060f1a0cb816e23aba37f",
       "title": "Migration #2110: read existing Brain queue from private SQLite offline (#2129)",
       "message": "I found a commit titled “Migration #2110: read existing Brain queue from private SQLite offline (#2129)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-2807d3558620d6e151e3b4084f758584539d3807",
-      "agent": "pink-panther",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T08:50:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/2807d3558620d6e151e3b4084f758584539d3807",
-      "title": "Repair #1907: contain signed claim failures without releasing fences (#2128)",
-      "message": "I found a commit titled “Repair #1907: contain signed claim failures without releasing fences (#2128)”. Can we reproduce this and identify the affected commit? A fix needs a test and a release receipt."
-    },
-    {
-      "id": "QuantaPhi-commit-73e228e6e1b66a372a2089f9c7af779718707498",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-25T08:49:07Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/73e228e6e1b66a372a2089f9c7af779718707498",
-      "title": "Separate verified Bubbles wallet from optional provider errors (#1906) (#2135)",
-      "message": "I found a commit titled “Separate verified Bubbles wallet from optional provider errors (#1906) (#2135)”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "QuantaPhi-issue-1906",
