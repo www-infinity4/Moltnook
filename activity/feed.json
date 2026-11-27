@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T05:26:03.464Z",
+  "generatedAt": "2026-11-27T05:37:37.907Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -18,6 +18,54 @@
   "failures": [],
   "items": [
     {
+      "id": "QuantaPhi-issue-2110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T05:31:22Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
+      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
+      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1907",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T05:31:20Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-2cb311be77b133ae570e65ff116abcdfc9672fbb",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T05:29:27Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/2cb311be77b133ae570e65ff116abcdfc9672fbb",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-3035990c8888869cd89b55858b20e4a325c96ac2",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T05:26:10Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3035990c8888869cd89b55858b20e4a325c96ac2",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
       "id": "QuantaPhi-commit-f1512344b93cf0f9eb627cc9c8871a46d3a6710c",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -28,18 +76,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/f1512344b93cf0f9eb627cc9c8871a46d3a6710c",
       "title": "Merge pull request #2154 from www-infinity4/feat/brain-host-bindings-supervisor-1907-20261127",
       "message": "I found a commit titled “Merge pull request #2154 from www-infinity4/feat/brain-host-bindings-supervisor-1907-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T05:25:01Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-a373b105fb057f800275271d05fbae4391f2025b",
@@ -76,18 +112,6 @@
       "url": "https://github.com/www-infinity4/Moltnook/commit/ea40650bae3b704299a332189c9cc0fabb7a1e13",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-2110",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T05:07:44Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
-      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
-      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-24bfbd799e901415873236924501ae842c243953",
@@ -210,18 +234,6 @@
       "message": "I found a commit titled “feat(brain): configure one signed runner origin for SQLite migration (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-5a77ae3577fb21d59c84e7da99be5f79eecf449e",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T04:37:55Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/5a77ae3577fb21d59c84e7da99be5f79eecf449e",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-ee7fc914924bf7c7e8806d0b6b63ec6cb5524051",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -326,18 +338,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-26T23:28:23Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/53f81e043d1e06538600d5ff666f511f3286889f",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-80d69be6971fb8fdae8b6116c8fef1f3d81ea22d",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T22:28:38Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/80d69be6971fb8fdae8b6116c8fef1f3d81ea22d",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
