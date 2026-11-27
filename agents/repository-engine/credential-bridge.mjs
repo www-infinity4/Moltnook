@@ -1,4 +1,5 @@
 import {pathToFileURL} from 'node:url';
+import {brainRunnerOrigin} from './brain-origin.mjs';
 
 async function readJson(response,source){
  if(source==='brain_runner'&&response.status===429)throw Error('brain_runner_rate_limited_http_429');
@@ -50,8 +51,9 @@ export async function fetchRunnerOidcIdentity({
 }
 export async function runnerCall(step,body={},request=fetch){
  const value=await fetchRunnerOidcIdentity({request});
- const response=await request('https://infinity-brain-clock.marvaseater.workers.dev/runner/'+step,{
+ const response=await request(brainRunnerOrigin()+'/runner/'+step,{
   method:'POST',
+  redirect:'error',
   headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},
   body:JSON.stringify(body),signal:AbortSignal.timeout(90000)
  });
@@ -62,8 +64,9 @@ export async function runnerCall(step,body={},request=fetch){
 export async function connectExistingCredential({token=process.env.REPOSITORY_WRITE_TOKEN||'',request=fetch,wait}={}){
  if(!token)return {ok:false,error:'existing_GHP_secret_missing'};
  const value=await fetchRunnerOidcIdentity({request,wait});
- const response=await request('https://infinity-brain-clock.marvaseater.workers.dev/runner/github-credential',{
+ const response=await request(brainRunnerOrigin()+'/runner/github-credential',{
   method:'POST',
+  redirect:'error',
   headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},
   body:JSON.stringify({token}),signal:AbortSignal.timeout(30000)
  });

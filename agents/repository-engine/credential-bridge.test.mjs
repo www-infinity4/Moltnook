@@ -1,4 +1,5 @@
 import test from 'node:test';
+import './brain-origin.test.mjs';
 import assert from 'node:assert/strict';
 import {connectExistingCredential,fetchRunnerOidcIdentity,runnerCall} from './credential-bridge.mjs';
 
@@ -29,6 +30,34 @@ test('bridge uses existing Actions identity and sends the key only to the authen
  assert.equal(calls[1].options.headers.Authorization,'Bearer test-oidc');
  assert.equal(JSON.parse(calls[1].options.body).token,token);
  assert.ok(!JSON.stringify(result).includes(token));
+}));
+test('configured owner host receives credential and operations without redirects or Cloudflare fallback',async()=>withActionsIdentity(async()=>{
+ const before=process.env.BRAIN_RUNNER_ORIGIN;
+ process.env.BRAIN_RUNNER_ORIGIN='https://owner-brain.example.org';
+ const requests=[];
+ const request=async(url,options)=>{
+  const address=String(url);requests.push({address,options});
+  if(address.startsWith('https://identity.test/'))return Response.json({value:'test-oidc'});
+  assert.ok(address.startsWith('https://owner-brain.example.org/runner/'));
+  assert.equal(options.redirect,'error');
+  assert.equal(options.headers.Authorization,'Bearer test-oidc');
+  return Response.json({ok:true,status:'connected'});
+ };
+ try{
+  await connectExistingCredential({token:'test-existing-owner-key',request});
+  await runnerCall('claim',{},request);
+  assert.deepEqual(requests.filter(x=>!x.address.startsWith('https://identity.test/')).map(x=>x.address),[
+   'https://owner-brain.example.org/runner/github-credential','https://owner-brain.example.org/runner/claim'
+  ]);
+  let posts=0;
+  await assert.rejects(runnerCall('claim',{},async(url,options)=>{
+   if(String(url).startsWith('https://identity.test/'))return Response.json({value:'test-oidc'});
+   posts++;assert.equal(options.redirect,'error');throw TypeError('redirect rejected');
+  }),/redirect rejected/);
+  assert.equal(posts,1,'an uncertain claim must never switch to a second authority');
+ }finally{
+  if(before===undefined)delete process.env.BRAIN_RUNNER_ORIGIN;else process.env.BRAIN_RUNNER_ORIGIN=before;
+ }
 }));
 test('transient 15-second OIDC timeout retries and connects without any extra Brain writes',async()=>withActionsIdentity(async()=>{
  let attempts=0,posts=0;const delays=[];
