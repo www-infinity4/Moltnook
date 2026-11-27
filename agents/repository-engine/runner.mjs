@@ -1,4 +1,5 @@
 import {verifyRepositoryIdentity} from './repository-identity.mjs';
+import {brainRunnerOrigin} from './brain-origin.mjs';
 import {createGithubClient} from './github-client.mjs';
 import {parseRunnerIdle} from './runner-idle-claim.mjs';
 import {planOwnerDispatch} from './owner-dispatch.mjs';
@@ -40,7 +41,7 @@ import {deriveFeatureManifest} from './feature-manifest.mjs';
 import {skillPackets} from './phi-skills.mjs';
 import {COLOR_GPT_MODEL,phaseColorCore,invokeColorCore} from './color-core.mjs';
 import {selectColorPreface,selectColorFollowups} from './color-task-routing.mjs';
-const API='https://infinity-brain-clock.marvaseater.workers.dev',OWNER='www-infinity4';
+const API=brainRunnerOrigin(),OWNER='www-infinity4';
 const token=process.env.REPOSITORY_WRITE_TOKEN||'';
 const report={schemaVersion:1,when:new Date().toISOString(),status:'starting',events:[],credentials:{configured:!!token,valuesExposed:false}};
 let lease,workspace,commitSha,testsPassed=false;
@@ -76,7 +77,7 @@ async function call(step,body={}){
  try{
   const value=await fetchRunnerOidcIdentity();
   trace.phase='transport';
-  const r=await fetch(API+'/runner/'+step,{method:'POST',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
+  const r=await fetch(API+'/runner/'+step,{method:'POST',redirect:'error',headers:{Authorization:'Bearer '+value,'Content-Type':'application/json'},body:JSON.stringify({...payload,key:lease?.key,leaseId:lease?.leaseId}),signal:AbortSignal.timeout(180000)});
   trace.httpStatus=r.status;
   trace.phase='decode';
   result=await r.json();

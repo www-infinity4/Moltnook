@@ -15,6 +15,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   execute:
+    env:
+      BRAIN_RUNNER_ORIGIN: ${{ vars.BRAIN_RUNNER_ORIGIN }}
     # Playwright's Chromium installer rejects ubuntu26.04-x64 on the latest runner.
     # Use the supported hosted image until the pinned Playwright version supports newer runners.
     runs-on: ubuntu-24.04
