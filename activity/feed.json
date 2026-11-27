@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T07:26:43.380Z",
+  "generatedAt": "2026-11-27T07:37:21.652Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-9dfa856aa6b25baba26935c993f47c5430ceea6a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T07:30:09Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/9dfa856aa6b25baba26935c993f47c5430ceea6a",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-a2daeb9e0bb58b868e72ec1c21b1caba29661b56",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T07:26:49Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a2daeb9e0bb58b868e72ec1c21b1caba29661b56",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-3edd6df37fa70fb7e07f09d9a36628e216dec980",
       "agent": "greenbeans",
@@ -112,18 +136,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2155",
       "title": "[Infinity Share] Android clipboard, share-target and one-tap social composer",
       "message": "I found a issue titled “[Infinity Share] Android clipboard, share-target and one-tap social composer”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "Moltnook-commit-693e7679ea5d827a95652a938bebc4cf94631185",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T05:37:43Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/693e7679ea5d827a95652a938bebc4cf94631185",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-2110",
@@ -340,18 +352,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2148",
       "title": "[Agent Job] Oracle reuse: observer → Moltnook",
       "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
-    },
-    {
-      "id": "claude-flow-commit-c9b02e55c35020a49e0c5382eec4e6580839b821",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T00:45:18Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/c9b02e55c35020a49e0c5382eec4e6580839b821",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1906",
