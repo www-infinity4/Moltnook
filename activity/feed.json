@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T02:44:09.081Z",
+  "generatedAt": "2026-11-27T02:53:53.779Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-2110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T02:53:30Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
+      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
+      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-e5171b72c28270ebcd2eab4947745800f6dbe28f",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T02:44:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/e5171b72c28270ebcd2eab4947745800f6dbe28f",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-f56f4b418b9c1ce1cefe7a4eae93599e6aed52a4",
       "agent": "greenbeans",
@@ -146,18 +170,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-27T01:25:16Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/9785d0630def9d47af9439d16d9bc48828416a9a",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-003aff37aeb65c47194fe4857b69d2b1a3df80b6",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T01:11:53Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/003aff37aeb65c47194fe4857b69d2b1a3df80b6",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/3906575683a7f7497ec5bbbbf5e5f8002ba6a2e3",
       "title": "Fix stale Bubbles skill-catalog assertions and record verified recovery (#1907)",
       "message": "I found a commit titled “Fix stale Bubbles skill-catalog assertions and record verified recovery (#1907)”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-2110",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T08:37:48Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2110",
-      "title": "[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles",
-      "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-commit-8c3895d68bcd4629a6657872880e9f7d27888d90",
