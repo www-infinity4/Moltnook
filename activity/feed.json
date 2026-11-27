@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T10:36:07.687Z",
+  "generatedAt": "2026-11-27T10:44:51.435Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -15,10 +15,20 @@
     "claude-flow",
     "501"
   ],
-  "failures": [
-    "Omni-Phi: issues unavailable"
-  ],
+  "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-8922603fcc94d2368b04e8b22f298c499f908057",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T10:36:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/8922603fcc94d2368b04e8b22f298c499f908057",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "claude-flow-commit-dd620338af4dc578b629a43ade984fc5f8ce2963",
       "agent": "greenbeans",
@@ -112,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-27T09:27:17Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/0a7fe77145dadb22c6a6623907307e488cd979d4",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-d332104ae93badd048643349079b5874dc83db58",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T09:15:27Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/d332104ae93badd048643349079b5874dc83db58",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
