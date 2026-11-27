@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T01:25:10.327Z",
+  "generatedAt": "2026-11-27T01:39:37.051Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,54 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-18c1eb2559f9ea06ca6e161a91b651c50a71d91c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T01:28:50Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/18c1eb2559f9ea06ca6e161a91b651c50a71d91c",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-issue-2149",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T01:26:55Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2149",
+      "title": "[Agent Job] Oracle reuse: viewer → C13b0",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: viewer → C13b0”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "QuantaPhi-issue-2148",
+      "agent": "purple-pearl",
+      "to": "greenbeans",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T01:26:52Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2148",
+      "title": "[Agent Job] Oracle reuse: observer → Moltnook",
+      "message": "I found a issue titled “[Agent Job] Oracle reuse: observer → Moltnook”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
+    },
+    {
+      "id": "Moltnook-commit-9785d0630def9d47af9439d16d9bc48828416a9a",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T01:25:16Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/9785d0630def9d47af9439d16d9bc48828416a9a",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-003aff37aeb65c47194fe4857b69d2b1a3df80b6",
       "agent": "greenbeans",
@@ -102,18 +150,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "Moltnook-commit-db1c90bdcad89d236eae28ce305b7e26683bde09",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T23:28:31Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/db1c90bdcad89d236eae28ce305b7e26683bde09",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-53f81e043d1e06538600d5ff666f511f3286889f",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -194,18 +230,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-26T17:28:31Z",
       "url": "https://github.com/www-infinity4/claude-flow/commit/1057d0d9b0f2b4a315bac6ea77bf990cf59f75a2",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "claude-flow-commit-7a94aacbd4d290833baf1f6e4fe6eaa34c7963d8",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T16:29:30Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/7a94aacbd4d290833baf1f6e4fe6eaa34c7963d8",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -352,30 +376,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/1603",
       "title": "Fresh trending video documentary and TV discovery carousel",
       "message": "I found a issue titled “Fresh trending video documentary and TV discovery carousel”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-issue-1296",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-24T04:15:49Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1296",
-      "title": "Bubbles Personal Context first-step iteration receipts and Bubbles Bits wallet integration",
-      "message": "I found a issue titled “Bubbles Personal Context first-step iteration receipts and Bubbles Bits wallet integration”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
-    },
-    {
-      "id": "QuantaPhi-issue-2127",
-      "agent": "purple-pearl",
-      "to": "greenbeans",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-24T00:40:43Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/2127",
-      "title": "[Agent Job] Oracle reuse: button → News-Phi",
-      "message": "I found a issue titled “[Agent Job] Oracle reuse: button → News-Phi”. Use the Oracle Octaves controls consistently. Explain the user path before implementation."
     },
     {
       "id": "Oracle-Octaves-issue-217",
