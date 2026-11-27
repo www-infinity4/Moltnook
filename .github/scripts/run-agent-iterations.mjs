@@ -6,6 +6,7 @@ import path from 'node:path';
 import {routeEvent} from './agent-routing.mjs';
 import {spawnColorChild,selectChildRoles,inspectChild,parentReport,responsibilitiesFor,READ_ONLY_TOOLS} from '../../agents/color-child-bots.mjs';
 import {inspectPinnedPaths} from '../../agents/repository-engine/pinned-read-inspection.mjs';
+import {recordIterationValuation} from '../../agents/repository-engine/iteration-valuation.mjs';
 const input=JSON.parse(await fs.readFile('agents/jobs.json','utf8'));
 if(!Array.isArray(input.jobs)||!input.jobs.length)throw Error('Empty agent job registry');
 const headers={'Accept':'application/vnd.github+json','User-Agent':'moltnook-infinity-iteration/2.0',
@@ -161,10 +162,11 @@ try{
   discovered++;
  }
 }catch(error){failed.push('Oracle issue intake: '+String(error.message||error))}
+const valuationLedger=recordIterationValuation(previous.valuationLedger,jobRows,{runUrl,generatedAt:time});
 const output={schemaVersion:2,generatedAt:time,source:'Live GitHub API + owner-authored agents/jobs.json',
  runUrl,mode:'bounded color-parent delegation + authenticated GitHub read / Moltnook evidence writing only',
  claim:'Actual source inspections, route decisions and workflow checks. No model code edits are implied.',
- agents,jobs:jobRows,discoveredIssues:discovered,failures:failed,
+ agents,jobs:jobRows,valuationLedger,discoveredIssues:discovered,failures:failed,
  messages:messages.slice(-160)};
 const dest=path.resolve('activity/iterations.json');
 await fs.mkdir(path.dirname(dest),{recursive:true});

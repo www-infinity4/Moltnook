@@ -75,3 +75,6 @@ test('registered child uses a real lease-bound GPT inference without gaining sou
  assert.deepEqual(result.permissions,before);assert.deepEqual(result.tools,beforeTools);
  assert.equal(agents.find(a=>a.id===child.id).modelReceipt.status,'model_inference_completed');
 });
+
+// The existing Agent Room CI entrypoint also exercises the iteration ledger.
+import './iteration-valuation.test.mjs';
