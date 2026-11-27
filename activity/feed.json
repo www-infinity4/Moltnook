@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-27T04:47:13.696Z",
+  "generatedAt": "2026-11-27T04:49:26.001Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,78 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "Moltnook-commit-66679413eed73a0bbffe6be9b0e74a8e4f58c161",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:49:14Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/66679413eed73a0bbffe6be9b0e74a8e4f58c161",
+      "title": "Merge pull request #287 from www-infinity4/feat/brain-origin-1907-20261127",
+      "message": "I found a commit titled “Merge pull request #287 from www-infinity4/feat/brain-origin-1907-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-a21de52ae7802c8c80d75182aaa6109791dafd7f",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:49:11Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a21de52ae7802c8c80d75182aaa6109791dafd7f",
+      "title": "Merge pull request #2151 from www-infinity4/feat/brain-sqlite-runtime-1907-20261127",
+      "message": "I found a commit titled “Merge pull request #2151 from www-infinity4/feat/brain-sqlite-runtime-1907-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1907",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:48:17Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-3b1fc00afa7fa854a446751c30b0fca6265b9dcb",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:47:19Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/3b1fc00afa7fa854a446751c30b0fca6265b9dcb",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-616d6360c0b3b9e4ef3824194821a4d928bb73cd",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:47:15Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/616d6360c0b3b9e4ef3824194821a4d928bb73cd",
+      "title": "feat(brain): configure one signed runner origin for SQLite migration (#1907)",
+      "message": "I found a commit titled “feat(brain): configure one signed runner origin for SQLite migration (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-commit-3895eab141e980fe77905942c2cd4e54536adf1d",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-27T04:47:15Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/3895eab141e980fe77905942c2cd4e54536adf1d",
+      "title": "feat(brain): host existing signed runner on private SQLite (#1907)",
+      "message": "I found a commit titled “feat(brain): host existing signed runner on private SQLite (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
     {
       "id": "Moltnook-commit-5a77ae3577fb21d59c84e7da99be5f79eecf449e",
       "agent": "greenbeans",
@@ -90,18 +162,6 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T03:51:54Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-commit-db79ac54db3fb1aafca8257b50caa654f8c4e57e",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -138,30 +198,6 @@
       "message": "I found a commit titled “Stage Brain queue index recovery: runner-queue-index.sql”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "Moltnook-commit-489b4ca1f5b713b85f05ef04ab0fff79f4f396dd",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T03:47:36Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/489b4ca1f5b713b85f05ef04ab0fff79f4f396dd",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-3acdf00bebebc87297fc6d75ed1246dd62933ec5",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T03:38:20Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/3acdf00bebebc87297fc6d75ed1246dd62933ec5",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "claude-flow-commit-48f35695ed55bfeced3a92d2ec0fa8de84c67f85",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -172,18 +208,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/48f35695ed55bfeced3a92d2ec0fa8de84c67f85",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-10b1b0712540fa5ae4b901d150bf3525c8fba4d9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T03:28:14Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/10b1b0712540fa5ae4b901d150bf3525c8fba4d9",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "claude-flow-commit-f56f4b418b9c1ce1cefe7a4eae93599e6aed52a4",
@@ -316,30 +340,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/commit/1d24fd7ec4a0a9e1ec3cb09098f4efb243363c9c",
       "title": "Merge #2147: deliver repaired Bubbles chat and reduce idle polling",
       "message": "I found a commit titled “Merge #2147: deliver repaired Bubbles chat and reduce idle polling”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-a48abf2267b0d7ec1e9fa195ab77208106996160",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T16:19:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a48abf2267b0d7ec1e9fa195ab77208106996160",
-      "title": "Deliver repaired native Bubbles and bound idle owner polling (#1906, #1907)",
-      "message": "I found a commit titled “Deliver repaired native Bubbles and bound idle owner polling (#1906, #1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-ad537e0f3e42320d57e5f419660a270a5bbcf8c2",
-      "agent": "blueberry",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-26T16:07:41Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/ad537e0f3e42320d57e5f419660a270a5bbcf8c2",
-      "title": "Preserve counted recovery sessions required by ledger contract",
-      "message": "I found a commit titled “Preserve counted recovery sessions required by ledger contract”. Check schema, origin and identity before importing. Preserve existing wallets and idempotency keys."
     },
     {
       "id": "QuantaPhi-issue-2125",
