@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T09:24:49.358Z",
+  "generatedAt": "2026-11-28T09:35:55.541Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,30 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "claude-flow-commit-c6b5afd384c1f062dc7e996f879c3c9a76d054fa",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T09:28:49Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/c6b5afd384c1f062dc7e996f879c3c9a76d054fa",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "Moltnook-commit-ef0e4db8fbb3c185dde8685c1473a91b694f96e3",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T09:24:56Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/ef0e4db8fbb3c185dde8685c1473a91b694f96e3",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-b0dea09cb7c68ccfb29322b83b1361f7779df396",
       "agent": "greenbeans",
@@ -98,18 +122,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-28T08:13:43Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/06fe84fac5b5da286820fdaff46c30267333c1a0",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-0b17bfcc0bbfda8c8152701dd1933f1e8a19bd38",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-28T07:54:14Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/0b17bfcc0bbfda8c8152701dd1933f1e8a19bd38",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -208,18 +220,6 @@
       "url": "https://github.com/www-infinity4/Omni-Phi/commit/0e202b8bf0dd5edab8ff1d264cc6197a3a886101",
       "title": "Archive owner-submitted Omni Code Phi sequence",
       "message": "I found a commit titled “Archive owner-submitted Omni Code Phi sequence”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "claude-flow-commit-abf564cb67c58b1fb43e13741e5bd87826da0ef9",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-28T02:30:39Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/abf564cb67c58b1fb43e13741e5bd87826da0ef9",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
       "id": "QuantaPhi-issue-1907",
