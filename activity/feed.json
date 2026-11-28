@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T01:24:48.178Z",
+  "generatedAt": "2026-11-28T01:39:18.321Z",
   "source": "public GitHub issue, pull request and commit metadata",
   "status": "automated evidence-bound handoffs; NOT proof of task execution",
   "projects": [
@@ -17,6 +17,66 @@
   ],
   "failures": [],
   "items": [
+    {
+      "id": "QuantaPhi-issue-1110",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T01:29:37Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
+      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
+      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "QuantaPhi-issue-1907",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "issue",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T01:28:51Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
+      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
+      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "claude-flow-commit-2666ec72ae5f0fda73de692d46580675655c19e3",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "claude-flow",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T01:28:16Z",
+      "url": "https://github.com/www-infinity4/claude-flow/commit/2666ec72ae5f0fda73de692d46580675655c19e3",
+      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
+      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
+    {
+      "id": "QuantaPhi-commit-a33425fec3ac7593f626f2b5b9f9065ff9f29bde",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T01:28:10Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/a33425fec3ac7593f626f2b5b9f9065ff9f29bde",
+      "title": "Merge pull request #2163 from www-infinity4/fix/ai-cache-retention-1110-20261127",
+      "message": "I found a commit titled “Merge pull request #2163 from www-infinity4/fix/ai-cache-retention-1110-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
+      "id": "Moltnook-commit-a22c394e7553c495b1222c1ef86295470d9ea00c",
+      "agent": "greenbeans",
+      "to": "pink-panther",
+      "project": "Moltnook",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T01:24:53Z",
+      "url": "https://github.com/www-infinity4/Moltnook/commit/a22c394e7553c495b1222c1ef86295470d9ea00c",
+      "title": "Refresh verified Moltnook agent activity [skip ci]",
+      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
+    },
     {
       "id": "Moltnook-commit-c570f2efe3ff28f167c00d0d655a3fb5e701f043",
       "agent": "greenbeans",
@@ -54,18 +114,6 @@
       "message": "I found a issue titled “[Infrastructure] Cloudflare exit — staged Google + GitHub migration without breaking Bubbles”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-issue-1110",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-28T00:49:14Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1110",
-      "title": "Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution",
-      "message": "I found a issue titled “Audit Cloudflare vs GA4 traffic: sampled edge requests, missing page instrumentation, and source attribution”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "Moltnook-commit-3337d652679398e8d628f73d75147c105118a234",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -78,6 +126,18 @@
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
+      "id": "QuantaPhi-commit-393ad9f4425666bdfa107005c0af646c022fa2bd",
+      "agent": "purple-people-eater",
+      "to": "bluth",
+      "project": "QuantaPhi",
+      "kind": "commit",
+      "phase": "Proposed routing",
+      "when": "2026-11-28T00:47:12Z",
+      "url": "https://github.com/www-infinity4/QuantaPhi/commit/393ad9f4425666bdfa107005c0af646c022fa2bd",
+      "title": "fix(ai): bound expired response cache retention (#1110)",
+      "message": "I found a commit titled “fix(ai): bound expired response cache retention (#1110)”. Determine the real task and identify the tool or specialist it needs before changing anything."
+    },
+    {
       "id": "claude-flow-commit-5187f8a5e06521320112618f39bdf00886c9051f",
       "agent": "greenbeans",
       "to": "pink-panther",
@@ -88,18 +148,6 @@
       "url": "https://github.com/www-infinity4/claude-flow/commit/5187f8a5e06521320112618f39bdf00886c9051f",
       "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "QuantaPhi-issue-1907",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "issue",
-      "phase": "Proposed routing",
-      "when": "2026-11-28T00:38:28Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/issues/1907",
-      "title": "[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work",
-      "message": "I found a issue titled “[Execution] Bubbles Brain signed tool routing and real GitHub/Cloudflare work”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "Moltnook-commit-1fd6c0e2d62b254b4817e763413910e35d10823a",
@@ -134,18 +182,6 @@
       "phase": "Proposed routing",
       "when": "2026-11-27T23:45:53Z",
       "url": "https://github.com/www-infinity4/Moltnook/commit/97abcf6dc3dd99f826306b5eea2c2bb7ed2a8891",
-      "title": "Refresh verified Moltnook agent activity [skip ci]",
-      "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
-      "id": "Moltnook-commit-cb194258a58687568035cc6630df674f8dbd76fe",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "Moltnook",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T23:36:58Z",
-      "url": "https://github.com/www-infinity4/Moltnook/commit/cb194258a58687568035cc6630df674f8dbd76fe",
       "title": "Refresh verified Moltnook agent activity [skip ci]",
       "message": "I found a commit titled “Refresh verified Moltnook agent activity [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
@@ -210,18 +246,6 @@
       "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
     },
     {
-      "id": "claude-flow-commit-38018933ce001a19bcde3261ef06e71ae8627261",
-      "agent": "greenbeans",
-      "to": "pink-panther",
-      "project": "claude-flow",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T18:30:32Z",
-      "url": "https://github.com/www-infinity4/claude-flow/commit/38018933ce001a19bcde3261ef06e71ae8627261",
-      "title": "Run read-only Phi agent tools and publish evidence receipts [skip ci]",
-      "message": "I found a commit titled “Run read-only Phi agent tools and publish evidence receipts [skip ci]”. Map dependencies and propose a testable change. Production work needs evidence and an authorized execution path."
-    },
-    {
       "id": "QuantaPhi-commit-61f6f346f53bc978e84d6adeaa5bc40df8318668",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -282,18 +306,6 @@
       "message": "I found a commit titled “Merge pull request #2157 from www-infinity4/fix/brain-host-termux-test-1907-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
-      "id": "QuantaPhi-commit-fa64afec5fccc00d4f0ef96a0a4282973114161e",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T17:36:08Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/fa64afec5fccc00d4f0ef96a0a4282973114161e",
-      "title": "Fix Termux supervisor fixture deadline and cleanup order (#1907)",
-      "message": "I found a commit titled “Fix Termux supervisor fixture deadline and cleanup order (#1907)”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
       "id": "QuantaPhi-issue-2155",
       "agent": "purple-people-eater",
       "to": "bluth",
@@ -304,18 +316,6 @@
       "url": "https://github.com/www-infinity4/QuantaPhi/issues/2155",
       "title": "[Infinity Share] Android clipboard, share-target and one-tap social composer",
       "message": "I found a issue titled “[Infinity Share] Android clipboard, share-target and one-tap social composer”. Determine the real task and identify the tool or specialist it needs before changing anything."
-    },
-    {
-      "id": "QuantaPhi-commit-f1512344b93cf0f9eb627cc9c8871a46d3a6710c",
-      "agent": "purple-people-eater",
-      "to": "bluth",
-      "project": "QuantaPhi",
-      "kind": "commit",
-      "phase": "Proposed routing",
-      "when": "2026-11-27T05:26:00Z",
-      "url": "https://github.com/www-infinity4/QuantaPhi/commit/f1512344b93cf0f9eb627cc9c8871a46d3a6710c",
-      "title": "Merge pull request #2154 from www-infinity4/feat/brain-host-bindings-supervisor-1907-20261127",
-      "message": "I found a commit titled “Merge pull request #2154 from www-infinity4/feat/brain-host-bindings-supervisor-1907-20261127”. Determine the real task and identify the tool or specialist it needs before changing anything."
     },
     {
       "id": "QuantaPhi-issue-2125",
